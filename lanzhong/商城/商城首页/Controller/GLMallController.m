@@ -8,8 +8,9 @@
 
 #import "GLMallController.h"
 #import "GLClassifyCell.h"
+#import "GLMall_DetailController.h"
 
-#define sizeScaleimageH  (285/349)
+#define sizeScaleimageH  (285.0/349.0)
 @interface GLMallController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectioview;
@@ -43,7 +44,10 @@ static NSString *ID = @"GLClassifyCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    
+    self.hidesBottomBarWhenPushed = YES;
+    GLMall_DetailController *vc =[[GLMall_DetailController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
     
 }
 
@@ -54,6 +58,7 @@ static NSString *ID = @"GLClassifyCell";
     layout.itemSize = CGSizeMake((kSCREEN_WIDTH - 30) /2 - 0.5,((kSCREEN_WIDTH - 30) /2 - 0.5) * sizeScaleimageH + 65);
     layout.minimumLineSpacing = 10;
     layout.minimumInteritemSpacing = 10;
+    layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
     self.collectioview.collectionViewLayout = layout;
 
 }
