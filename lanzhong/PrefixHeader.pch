@@ -1,0 +1,38 @@
+//
+//  PrefixHeader.pch
+//  lanzhong
+//
+//  Created by 龚磊 on 2017/9/25.
+//  Copyright © 2017年 三君科技有限公司. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import "UIView+Extension.h"
+//#import "MBProgressHUD+LB.h"
+//#import "predicateModel.h"
+//#import "NetworkManager.h"
+//#import "LoadWaitView.h"
+//#import "NodataView.h"
+#import "UserModel.h"
+#import "usermodelachivar.h"
+
+
+
+#define YYSRGBColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
+
+#define TABBARTITLE_COLOR YYSRGBColor(120, 161, 255 , 1.0) //导航栏颜色
+#define MAIN_COLOR YYSRGBColor(233, 76, 137, 1.0) //主颜色
+#define autoSizeScaleX (kSCREEN_WIDTH/320.f)
+#define autoSizeScaleY (kSCREEN_HEIGHT/568.f)
+
+#define kSCREEN_WIDTH  [UIScreen mainScreen].bounds.size.width
+#define kSCREEN_HEIGHT  [UIScreen mainScreen].bounds.size.height
+
+//占位图
+#define PlaceHolderImage @"头像1"
+#define LUNBO_PlaceHolder @"轮播暂位图"
+
+
+#endif /* PrefixHeader_pch */
