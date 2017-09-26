@@ -7,17 +7,55 @@
 //
 
 #import "GLMallController.h"
+#import "GLClassifyCell.h"
 
-@interface GLMallController ()
+#define sizeScaleimageH  (285/349)
+@interface GLMallController ()<UICollectionViewDelegate,UICollectionViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UICollectionView *collectioview;
 
 @end
+
+static NSString *ID = @"GLClassifyCell";
 
 @implementation GLMallController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+     self.view.backgroundColor = [UIColor whiteColor];
     
-     self.view.backgroundColor = [UIColor blueColor];
+    [self initializationCollection];//初始化
+    
+     [self.collectioview registerNib:[UINib nibWithNibName:ID bundle:nil] forCellWithReuseIdentifier:ID];
+    
+}
+
+#pragma UICollectionDelegate UICollectionDataSource
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return 10;
+}
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    GLClassifyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ID forIndexPath:indexPath];
+    
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    
+}
+
+
+
+-(void)initializationCollection{
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.itemSize = CGSizeMake((kSCREEN_WIDTH - 30) /2 - 0.5,((kSCREEN_WIDTH - 30) /2 - 0.5) * sizeScaleimageH + 65);
+    layout.minimumLineSpacing = 10;
+    layout.minimumInteritemSpacing = 10;
+    self.collectioview.collectionViewLayout = layout;
+
 }
 
 - (void)viewWillAppear:(BOOL)animated{
