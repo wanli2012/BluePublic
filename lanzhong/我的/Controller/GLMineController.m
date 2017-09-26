@@ -50,7 +50,7 @@
     
     self.visualEffectView.frame = CGRectMake(0, 0, kSCREEN_WIDTH, self.bgimageV.height);
     
-    self.visualEffectView.alpha = 0.8;
+    self.visualEffectView.alpha = 0.95;
     
     [self.bgimageV addSubview:self.visualEffectView];
     
