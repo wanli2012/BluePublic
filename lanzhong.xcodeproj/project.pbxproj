@@ -73,6 +73,8 @@
 		4AF10A051F78E27C00CB51FA /* tabbar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AF10A041F78E27C00CB51FA /* tabbar.xcassets */; };
 		4AF10A091F78E97500CB51FA /* GLHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF10A071F78E97500CB51FA /* GLHomeCell.m */; };
 		4AF10A0A1F78E97500CB51FA /* GLHomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AF10A081F78E97500CB51FA /* GLHomeCell.xib */; };
+		F9BB80111F7A283700867514 /* GLClassifyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BB800F1F7A283700867514 /* GLClassifyCell.m */; };
+		F9BB80121F7A283700867514 /* GLClassifyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9BB80101F7A283700867514 /* GLClassifyCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -197,6 +199,9 @@
 		4AF10A061F78E97500CB51FA /* GLHomeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLHomeCell.h; sourceTree = "<group>"; };
 		4AF10A071F78E97500CB51FA /* GLHomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLHomeCell.m; sourceTree = "<group>"; };
 		4AF10A081F78E97500CB51FA /* GLHomeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLHomeCell.xib; sourceTree = "<group>"; };
+		F9BB800E1F7A283700867514 /* GLClassifyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLClassifyCell.h; sourceTree = "<group>"; };
+		F9BB800F1F7A283700867514 /* GLClassifyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLClassifyCell.m; sourceTree = "<group>"; };
+		F9BB80101F7A283700867514 /* GLClassifyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLClassifyCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,9 +218,9 @@
 		4A53E8241F7A23AD0021D9E0 /* 商城首页 */ = {
 			isa = PBXGroup;
 			children = (
+				F9BB800C1F7A283700867514 /* model */,
+				F9BB800D1F7A283700867514 /* view */,
 				4A53E8251F7A23AD0021D9E0 /* Controller */,
-				4A53E8291F7A23AD0021D9E0 /* Model */,
-				4A53E82A1F7A23AD0021D9E0 /* View */,
 			);
 			path = "商城首页";
 			sourceTree = "<group>";
@@ -228,20 +233,6 @@
 				4A53E8281F7A23AD0021D9E0 /* GLMallController.xib */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		4A53E8291F7A23AD0021D9E0 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		4A53E82A1F7A23AD0021D9E0 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		4A53E82D1F7A23D50021D9E0 /* 商品详情 */ = {
@@ -721,6 +712,23 @@
 			path = "图片资源";
 			sourceTree = "<group>";
 		};
+		F9BB800C1F7A283700867514 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		F9BB800D1F7A283700867514 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				F9BB800E1F7A283700867514 /* GLClassifyCell.h */,
+				F9BB800F1F7A283700867514 /* GLClassifyCell.m */,
+				F9BB80101F7A283700867514 /* GLClassifyCell.xib */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -783,6 +791,7 @@
 				4A53E83A1F7A24830021D9E0 /* GLMall_DetailSpecCell.xib in Resources */,
 				4AF109291F78DBB500CB51FA /* PopMenuTableViewCell.xib in Resources */,
 				4AF109C41F78DBEA00CB51FA /* GLHomeController.xib in Resources */,
+				F9BB80121F7A283700867514 /* GLClassifyCell.xib in Resources */,
 				4AF109D31F78DC6F00CB51FA /* GLMineController.xib in Resources */,
 				4AF10A051F78E27C00CB51FA /* tabbar.xcassets in Resources */,
 				4AF10A021F78E1B300CB51FA /* GLPublishController.xib in Resources */,
@@ -854,6 +863,7 @@
 				4AF109371F78DBB500CB51FA /* WXSTransitionManager+SystermAnimation.m in Sources */,
 				4AF1092D1F78DBB500CB51FA /* UIViewController+WXSTransitionProperty.m in Sources */,
 				4A53E8221F79FF640021D9E0 /* GLMineCell.m in Sources */,
+				F9BB80111F7A283700867514 /* GLClassifyCell.m in Sources */,
 				4AF10A011F78E1B300CB51FA /* GLPublishController.m in Sources */,
 				4AF1093D1F78DBB500CB51FA /* XBScrollPageController.m in Sources */,
 			);
