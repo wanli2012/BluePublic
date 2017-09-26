@@ -7,8 +7,13 @@
 //
 
 #import "GLMall_DetailController.h"
+#import "GLMall_DetailSpecCell.h"
 
-@interface GLMall_DetailController ()
+@interface GLMall_DetailController ()<UITableViewDelegate,UITableViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *headerView;//透视图
+@property (weak, nonatomic) IBOutlet UIView *navView;//导航栏View
 
 @end
 
@@ -16,7 +21,25 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"GLMall_DetailSpecCell" bundle:nil] forCellReuseIdentifier:@"GLMall_DetailSpecCell"];
+    
 }
 
+#pragma mark - UITableViewDelegate UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 3;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    GLMall_DetailSpecCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMall_DetailSpecCell"];
+    cell.selectionStyle = 0;
+    
+    return cell;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 180;
+}
 @end
