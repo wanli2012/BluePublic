@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A53E8221F79FF640021D9E0 /* GLMineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A53E8201F79FF640021D9E0 /* GLMineCell.m */; };
+		4A53E8231F79FF640021D9E0 /* GLMineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A53E8211F79FF640021D9E0 /* GLMineCell.xib */; };
 		4AF107051F78D5AC00CB51FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF107041F78D5AC00CB51FA /* main.m */; };
 		4AF107081F78D5AC00CB51FA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF107071F78D5AC00CB51FA /* AppDelegate.m */; };
 		4AF1070B1F78D5AC00CB51FA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF1070A1F78D5AC00CB51FA /* ViewController.m */; };
@@ -70,6 +72,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A53E81F1F79FF640021D9E0 /* GLMineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMineCell.h; sourceTree = "<group>"; };
+		4A53E8201F79FF640021D9E0 /* GLMineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMineCell.m; sourceTree = "<group>"; };
+		4A53E8211F79FF640021D9E0 /* GLMineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMineCell.xib; sourceTree = "<group>"; };
 		4AF107001F78D5AC00CB51FA /* lanzhong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lanzhong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AF107041F78D5AC00CB51FA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4AF107061F78D5AC00CB51FA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -384,6 +389,9 @@
 		4AF1074A1F78DB0D00CB51FA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4A53E81F1F79FF640021D9E0 /* GLMineCell.h */,
+				4A53E8201F79FF640021D9E0 /* GLMineCell.m */,
+				4A53E8211F79FF640021D9E0 /* GLMineCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -727,6 +735,7 @@
 				4AF1070E1F78D5AC00CB51FA /* Main.storyboard in Resources */,
 				4AF10A0A1F78E97500CB51FA /* GLHomeCell.xib in Resources */,
 				4AF109CE1F78DC6200CB51FA /* GLMallController.xib in Resources */,
+				4A53E8231F79FF640021D9E0 /* GLMineCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -784,6 +793,7 @@
 				4AF1093F1F78DBB500CB51FA /* XBPageCell.m in Sources */,
 				4AF109371F78DBB500CB51FA /* WXSTransitionManager+SystermAnimation.m in Sources */,
 				4AF1092D1F78DBB500CB51FA /* UIViewController+WXSTransitionProperty.m in Sources */,
+				4A53E8221F79FF640021D9E0 /* GLMineCell.m in Sources */,
 				4AF10A011F78E1B300CB51FA /* GLPublishController.m in Sources */,
 				4AF1093D1F78DBB500CB51FA /* XBScrollPageController.m in Sources */,
 			);
