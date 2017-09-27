@@ -9,11 +9,15 @@
 #import "GLMallController.h"
 #import "GLClassifyCell.h"
 #import "GLMall_DetailController.h"
+#import "LBSetFillet.h"
+#import "MenuScreeningView.h"
+#import "GLShoppingCartController.h"
 
 #define sizeScaleimageH  (285.0/349.0)
 @interface GLMallController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectioview;
+@property (nonatomic, strong) MenuScreeningView *menuScreeningView;  //条件选择器
 
 @end
 
@@ -26,8 +30,9 @@ static NSString *ID = @"GLClassifyCell";
      self.view.backgroundColor = [UIColor whiteColor];
     
     [self initializationCollection];//初始化
-    
      [self.collectioview registerNib:[UINib nibWithNibName:ID bundle:nil] forCellWithReuseIdentifier:ID];
+    
+    [self.view addSubview:self.menuScreeningView];
     
 }
 
@@ -38,12 +43,24 @@ static NSString *ID = @"GLClassifyCell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     GLClassifyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ID forIndexPath:indexPath];
+    cell.layer.mask = [LBSetFillet setFilletRoundedRect:cell.bounds cornerRadii:CGSizeMake(4, 4)];
     
     return cell;
+}
+//设置圆角
+-(void)setFillet{
+
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
+    if (indexPath.row == 0 ) {
+        self.hidesBottomBarWhenPushed = YES;
+        GLShoppingCartController *vc =[[GLShoppingCartController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+        self.hidesBottomBarWhenPushed = NO;
+        return;
+    }
     self.hidesBottomBarWhenPushed = YES;
     GLMall_DetailController *vc =[[GLMall_DetailController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
@@ -68,6 +85,15 @@ static NSString *ID = @"GLClassifyCell";
     self.navigationController.navigationBar.hidden = YES;
 }
 
+-(MenuScreeningView*)menuScreeningView{
 
+    if (!_menuScreeningView) {
+        _menuScreeningView = [[MenuScreeningView alloc] initWithFrame:CGRectMake(0, 20,kSCREEN_WIDTH , 50)];
+         _menuScreeningView.backgroundColor = [UIColor whiteColor];
+    }
+    
+    return _menuScreeningView;
+
+}
 
 @end
