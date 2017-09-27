@@ -46,7 +46,6 @@
         self.oneLinkageDropMenu.delegate = self;
         
         
-        
         self.twoLinkageButton = [UIButton buttonWithType:UIButtonTypeCustom];
         self.twoLinkageButton.frame = CGRectMake(kWidth/3, 0, kWidth/3, 50);
         [self setUpButton:self.twoLinkageButton withText:@"二级"];
@@ -136,9 +135,6 @@
     
     }
 }
-
-
-
 
 
 #pragma mark - 设置Button

@@ -30,7 +30,7 @@ static NSString *ID = @"GLClassifyCell";
      self.view.backgroundColor = [UIColor whiteColor];
     
     [self initializationCollection];//初始化
-     [self.collectioview registerNib:[UINib nibWithNibName:ID bundle:nil] forCellWithReuseIdentifier:ID];
+    [self.collectioview registerNib:[UINib nibWithNibName:ID bundle:nil] forCellWithReuseIdentifier:ID];
     
     [self.view addSubview:self.menuScreeningView];
     
@@ -38,6 +38,7 @@ static NSString *ID = @"GLClassifyCell";
 
 #pragma UICollectionDelegate UICollectionDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    
     return 10;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{

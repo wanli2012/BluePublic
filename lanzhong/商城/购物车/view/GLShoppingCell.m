@@ -10,16 +10,20 @@
 
 
 @interface GLShoppingCell ()
+@property (weak, nonatomic) IBOutlet UIView *bgViewLayerView;
 
-@property (weak, nonatomic) IBOutlet UILabel *goodsNamelabel;
-@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
-@property (weak, nonatomic) IBOutlet UILabel *amountLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *imageV;
-@property (weak, nonatomic) IBOutlet UILabel *detailLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *xiajiaImageV;
-@property (weak, nonatomic) IBOutlet UILabel *typeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *specLabel;
-@property (weak, nonatomic) IBOutlet UIView *typeview;
+@property (weak, nonatomic) IBOutlet UIView *bgView;
+
+@property (weak, nonatomic) IBOutlet UIImageView *imageV;//商品图片
+@property (weak, nonatomic) IBOutlet UILabel *goodsNamelabel;//商品名称
+@property (weak, nonatomic) IBOutlet UILabel *priceLabel;//价格
+@property (weak, nonatomic) IBOutlet UILabel *amountLabel;//数量
+@property (weak, nonatomic) IBOutlet UILabel *detailLabel;//描述
+@property (weak, nonatomic) IBOutlet UILabel *specLabel;//规格
+
+//@property (weak, nonatomic) IBOutlet UIImageView *xiajiaImageV;
+//@property (weak, nonatomic) IBOutlet UILabel *typeLabel;
+//@property (weak, nonatomic) IBOutlet UIView *typeview;
 
 @end
 
@@ -27,38 +31,34 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
- 
+    self.bgView.layer.cornerRadius = 5.f;
+    self.bgViewLayerView.layer.cornerRadius = 5.f;
+
+    self.bgView.layer.shadowOpacity = 0.1f;
+    self.bgView.layer.shadowOffset = CGSizeMake(0.0f, 2.0f);
+    self.bgView.layer.shadowRadius = 5.0f;
+
+    self.bgViewLayerView.layer.shadowOpacity = 0.1f;
+    self.bgViewLayerView.layer.shadowOffset = CGSizeMake(0.0f, 2.0f);
+    self.bgViewLayerView.layer.shadowRadius = 5.0f;
+
     self.goodsNamelabel.font = [UIFont systemFontOfSize:15];
-    self.typeview.backgroundColor = YYSRGBColor(0, 0, 0, 0.3);
 
 }
 - (void)setModel:(GLShoppingCartModel *)model {
     _model = model;
-    //[_imageV sd_setImageWithURL:[NSURL URLWithString:model.thumb] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+//    [_imageV sd_setImageWithURL:[NSURL URLWithString:model.thumb] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    
     _goodsNamelabel.text = model.goods_name;
     _amountLabel.text =[NSString stringWithFormat:@"x%@",model.num];
     _detailLabel.text = model.info;
 
     _priceLabel.text = [NSString stringWithFormat:@"¥%@",model.goods_price];
     
-//    if (_imageV.image == nil) {
-//        _imageV.image = [UIImage imageNamed:@"XRPlaceholder"];
-//    }
-    //判断是否下架
-    if([model.status integerValue] == 2){
-        
-        self.xiajiaImageV.hidden = NO;
-    }else{
-        self.xiajiaImageV.hidden = YES;
+    if (_imageV.image == nil) {
+        _imageV.image = [UIImage imageNamed:PlaceHolderImage];
     }
-    
-    if ([model.goods_type integerValue] == 1) {
-        self.typeLabel.text = @"奖励商品";
-    }else{
-        self.typeLabel.text = @"米券商品";
-        self.specLabel.text = [NSString stringWithFormat:@"规格:%@",model.spec];
-    }
+
     if (model.isSelect == NO) {
         
         [self.selectedBtn setImage:[UIImage imageNamed:@"未选中"] forState:UIControlStateNormal];

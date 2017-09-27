@@ -52,6 +52,11 @@ static NSString *ID = @"GLShoppingCell";
     [self postRequest];
     
 }
+- (IBAction)back:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
 
 - (void)postRequest {
     
@@ -60,30 +65,26 @@ static NSString *ID = @"GLShoppingCell";
 //去结算
 - (void)clearingMore:(UIButton *)sender{
 
-    NSMutableArray *tempArr = [NSMutableArray array];
-    NSMutableArray *tempArr2 = [NSMutableArray array];
-    NSMutableArray *tempArr3 = [NSMutableArray array];
-    NSMutableArray *tempArr4 = [NSMutableArray array];
+//    NSMutableArray *tempArr = [NSMutableArray array];
+//    NSMutableArray *tempArr2 = [NSMutableArray array];
+//    NSMutableArray *tempArr3 = [NSMutableArray array];
+//    NSMutableArray *tempArr4 = [NSMutableArray array];
+//    
+//    for (int i = 0; i < self.models.count; i ++) {
+//        GLShoppingCartModel *model = self.models[i];
+//        if (model.isSelect) {
+//            
+//            [tempArr addObject:model.goods_id];
+//            [tempArr2 addObject:model.num];
+//            [tempArr3 addObject:model.cart_id];
+//            [tempArr4 addObject:model.spec_id];
+//        }
+//    }
+//    if (tempArr.count == 0) {
+//       // [MBProgressHUD showError:@"还未选择商品"];
+//        return;
+//    }
     
-    for (int i = 0; i < self.models.count; i ++) {
-        GLShoppingCartModel *model = self.models[i];
-        if (model.isSelect) {
-            
-            [tempArr addObject:model.goods_id];
-            [tempArr2 addObject:model.num];
-            [tempArr3 addObject:model.cart_id];
-            [tempArr4 addObject:model.spec_id];
-            
-        }
-    }
-    
-    if (tempArr.count == 0) {
-       // [MBProgressHUD showError:@"还未选择商品"];
-        return;
-    }
-    
-    
-
 }
 
 //全选
@@ -140,7 +141,7 @@ static NSString *ID = @"GLShoppingCell";
             
         }else{
             num = num + [model.goods_price floatValue] * [model.num floatValue];
-//            [self.selectArr addObject:model];
+            [self.selectArr addObject:model];
         }
     }
     
@@ -188,15 +189,16 @@ static NSString *ID = @"GLShoppingCell";
     GLShoppingCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.index = indexPath.row;
-   
-
+    cell.model = self.models.count == 0 ? nil:self.models[indexPath.row];
+    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    GLShoppingCartModel *model = self.models[indexPath.row];
-//    model.isSelect = !model.isSelect;
-//    [self changeStatus:indexPath.row];
+    
+    GLShoppingCartModel *model = self.models[indexPath.row];
+    model.isSelect = !model.isSelect;
+    [self changeStatus:indexPath.row];
     
 }
 
@@ -206,7 +208,7 @@ static NSString *ID = @"GLShoppingCell";
 
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return   UITableViewCellEditingStyleDelete;
+    return  UITableViewCellEditingStyleDelete;
 }
 
 //先要设Cell可编辑
@@ -229,7 +231,7 @@ static NSString *ID = @"GLShoppingCell";
         }]];
         [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
 
-            GLShoppingCartModel *model = self.models[indexPath.row];
+//            GLShoppingCartModel *model = self.models[indexPath.row];
             
         }]];
         
@@ -268,6 +270,23 @@ static NSString *ID = @"GLShoppingCell";
 - (NSMutableArray *)models{
     if (!_models) {
         _models = [NSMutableArray array];
+        
+        for (int i = 0; i < 5; i ++) {
+            GLShoppingCartModel *model = [[GLShoppingCartModel alloc] init];
+            model.goods_name = [NSString stringWithFormat:@"我是商品名%zd",i];
+            model.goods_price = [NSString stringWithFormat:@"%zd",i+100];
+            model.info = [NSString stringWithFormat:@"我是商品描述%zd",i+100];
+            model.num = [NSString stringWithFormat:@"%zd",i+100];
+            model.send_price = [NSString stringWithFormat:@"%zd",i+100];
+            model.thumb = [NSString stringWithFormat:@"%zd",i+100];
+            model.cart_id = [NSString stringWithFormat:@"%zd",i+100];
+//            model.goods_type = [NSString stringWithFormat:@"%zd",i+100];
+//            model.status = [NSString stringWithFormat:@"%zd",i+100];
+            model.spec = [NSString stringWithFormat:@"红色%zd",i+100];
+            model.spec_id = [NSString stringWithFormat:@"%zd",i+100];
+            
+            [_models addObject:model];
+        }
     }
     return _models;
 }

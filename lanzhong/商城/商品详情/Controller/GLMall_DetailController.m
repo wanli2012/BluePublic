@@ -13,6 +13,7 @@
 #import "GLMall_DetailCommentCell.h"
 #import "GLMall_DetailFooterView.h"
 #import <SDCycleScrollView/SDCycleScrollView.h>
+#import "GLShoppingCartController.h"
 
 
 #define headerImageHeight 64
@@ -86,6 +87,10 @@
 //去购物车
 - (IBAction)toCart:(id)sender {
     NSLog(@"跳转到购物车");
+    self.hidesBottomBarWhenPushed = YES;
+    GLShoppingCartController *cartVC = [[GLShoppingCartController alloc] init];
+    [self.navigationController pushViewController:cartVC animated:YES];
+    
 }
 
 - (IBAction)pop:(id)sender {
@@ -109,6 +114,7 @@
 
 #pragma mark - UIWebViewDelegate
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
+    //http://news.163.com/17/0921/09/CURK48U10001875N.html
     
     CGFloat webViewHeight = [webView.scrollView contentSize].height;
     CGRect newFrame = webView.frame;
@@ -253,6 +259,7 @@
 - (GLMall_DetailFooterView *)footerView{
     if (!_footerView) {
         _footerView = [[GLMall_DetailFooterView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 300)];
+        
     }
     
     return _footerView;

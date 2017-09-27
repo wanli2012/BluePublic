@@ -93,11 +93,12 @@
             [tableView reloadData];
         }
         
-        
+        UIWindow * window=[[[UIApplication sharedApplication] delegate] window];
+        CGRect rect=[view convertRect:view.bounds toView:window];
         
         // 初始位置 设置
         CGFloat x = 0.f;
-        CGFloat y = view.frame.origin.y + view.frame.size.height;
+        CGFloat y = rect.origin.y + rect.size.height;
         CGFloat w = kWidth;
         CGFloat h = kHeight - y;
         
