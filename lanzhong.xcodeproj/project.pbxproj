@@ -75,6 +75,18 @@
 		4AF10A0A1F78E97500CB51FA /* GLHomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AF10A081F78E97500CB51FA /* GLHomeCell.xib */; };
 		F9BB80111F7A283700867514 /* GLClassifyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BB800F1F7A283700867514 /* GLClassifyCell.m */; };
 		F9BB80121F7A283700867514 /* GLClassifyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9BB80101F7A283700867514 /* GLClassifyCell.xib */; };
+		F9BB80151F7A38A000867514 /* LBSetFillet.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BB80141F7A38A000867514 /* LBSetFillet.m */; };
+		F9BB801D1F7A3F2C00867514 /* NSTimer+addition.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BB80181F7A3F2C00867514 /* NSTimer+addition.m */; };
+		F9BB801E1F7A3F2C00867514 /* TGWebProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BB801A1F7A3F2C00867514 /* TGWebProgressLayer.m */; };
+		F9BB801F1F7A3F2C00867514 /* TGWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BB801C1F7A3F2C00867514 /* TGWebViewController.m */; };
+		F9BB80241F7A440100867514 /* DropMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BB80211F7A440100867514 /* DropMenuView.m */; };
+		F9BB80251F7A440100867514 /* MenuScreeningView.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BB80231F7A440100867514 /* MenuScreeningView.m */; };
+		F9BB80271F7A447E00867514 /* ShoppingMall.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9BB80261F7A447E00867514 /* ShoppingMall.xcassets */; };
+		F9BB802F1F7A57C400867514 /* GLShoppingCartController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BB802D1F7A57C400867514 /* GLShoppingCartController.m */; };
+		F9BB80301F7A57C400867514 /* GLShoppingCartController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9BB802E1F7A57C400867514 /* GLShoppingCartController.xib */; };
+		F9BB80331F7A584800867514 /* GLShoppingCartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BB80321F7A584800867514 /* GLShoppingCartModel.m */; };
+		F9BB80371F7A585000867514 /* GLShoppingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BB80351F7A585000867514 /* GLShoppingCell.m */; };
+		F9BB80381F7A585000867514 /* GLShoppingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9BB80361F7A585000867514 /* GLShoppingCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -202,6 +214,27 @@
 		F9BB800E1F7A283700867514 /* GLClassifyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLClassifyCell.h; sourceTree = "<group>"; };
 		F9BB800F1F7A283700867514 /* GLClassifyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLClassifyCell.m; sourceTree = "<group>"; };
 		F9BB80101F7A283700867514 /* GLClassifyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLClassifyCell.xib; sourceTree = "<group>"; };
+		F9BB80131F7A38A000867514 /* LBSetFillet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBSetFillet.h; sourceTree = "<group>"; };
+		F9BB80141F7A38A000867514 /* LBSetFillet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBSetFillet.m; sourceTree = "<group>"; };
+		F9BB80171F7A3F2C00867514 /* NSTimer+addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+addition.h"; sourceTree = "<group>"; };
+		F9BB80181F7A3F2C00867514 /* NSTimer+addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+addition.m"; sourceTree = "<group>"; };
+		F9BB80191F7A3F2C00867514 /* TGWebProgressLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGWebProgressLayer.h; sourceTree = "<group>"; };
+		F9BB801A1F7A3F2C00867514 /* TGWebProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGWebProgressLayer.m; sourceTree = "<group>"; };
+		F9BB801B1F7A3F2C00867514 /* TGWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TGWebViewController.h; sourceTree = "<group>"; };
+		F9BB801C1F7A3F2C00867514 /* TGWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TGWebViewController.m; sourceTree = "<group>"; };
+		F9BB80201F7A440100867514 /* DropMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropMenuView.h; sourceTree = "<group>"; };
+		F9BB80211F7A440100867514 /* DropMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropMenuView.m; sourceTree = "<group>"; };
+		F9BB80221F7A440100867514 /* MenuScreeningView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuScreeningView.h; sourceTree = "<group>"; };
+		F9BB80231F7A440100867514 /* MenuScreeningView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuScreeningView.m; sourceTree = "<group>"; };
+		F9BB80261F7A447E00867514 /* ShoppingMall.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ShoppingMall.xcassets; sourceTree = "<group>"; };
+		F9BB802C1F7A57C400867514 /* GLShoppingCartController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLShoppingCartController.h; sourceTree = "<group>"; };
+		F9BB802D1F7A57C400867514 /* GLShoppingCartController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLShoppingCartController.m; sourceTree = "<group>"; };
+		F9BB802E1F7A57C400867514 /* GLShoppingCartController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLShoppingCartController.xib; sourceTree = "<group>"; };
+		F9BB80311F7A584800867514 /* GLShoppingCartModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLShoppingCartModel.h; sourceTree = "<group>"; };
+		F9BB80321F7A584800867514 /* GLShoppingCartModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLShoppingCartModel.m; sourceTree = "<group>"; };
+		F9BB80341F7A585000867514 /* GLShoppingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLShoppingCell.h; sourceTree = "<group>"; };
+		F9BB80351F7A585000867514 /* GLShoppingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLShoppingCell.m; sourceTree = "<group>"; };
+		F9BB80361F7A585000867514 /* GLShoppingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLShoppingCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -331,6 +364,7 @@
 			children = (
 				4A53E8241F7A23AD0021D9E0 /* 商城首页 */,
 				4A53E82D1F7A23D50021D9E0 /* 商品详情 */,
+				F9BB80281F7A568D00867514 /* 购物车 */,
 			);
 			path = "商城";
 			sourceTree = "<group>";
@@ -501,6 +535,7 @@
 		4AF1075B1F78DBB400CB51FA /* 三方库 */ = {
 			isa = PBXGroup;
 			children = (
+				F9BB80161F7A3F2C00867514 /* TGWebController */,
 				4AF1079A1F78DBB500CB51FA /* PopMenuTableViewCell.h */,
 				4AF1079B1F78DBB500CB51FA /* PopMenuTableViewCell.m */,
 				4AF1079C1F78DBB500CB51FA /* PopMenuTableViewCell.xib */,
@@ -666,6 +701,8 @@
 				4AF109E61F78E07A00CB51FA /* UILabel+UILabel_ChangeLineSpaceAndWordSpace.m */,
 				4AF109E71F78E07A00CB51FA /* UIView+Extension.h */,
 				4AF109E81F78E07A00CB51FA /* UIView+Extension.m */,
+				F9BB80131F7A38A000867514 /* LBSetFillet.h */,
+				F9BB80141F7A38A000867514 /* LBSetFillet.m */,
 			);
 			path = "Tool(工具类)";
 			sourceTree = "<group>";
@@ -708,6 +745,7 @@
 			isa = PBXGroup;
 			children = (
 				4AF10A041F78E27C00CB51FA /* tabbar.xcassets */,
+				F9BB80261F7A447E00867514 /* ShoppingMall.xcassets */,
 			);
 			path = "图片资源";
 			sourceTree = "<group>";
@@ -725,8 +763,64 @@
 				F9BB800E1F7A283700867514 /* GLClassifyCell.h */,
 				F9BB800F1F7A283700867514 /* GLClassifyCell.m */,
 				F9BB80101F7A283700867514 /* GLClassifyCell.xib */,
+				F9BB80201F7A440100867514 /* DropMenuView.h */,
+				F9BB80211F7A440100867514 /* DropMenuView.m */,
+				F9BB80221F7A440100867514 /* MenuScreeningView.h */,
+				F9BB80231F7A440100867514 /* MenuScreeningView.m */,
 			);
 			path = view;
+			sourceTree = "<group>";
+		};
+		F9BB80161F7A3F2C00867514 /* TGWebController */ = {
+			isa = PBXGroup;
+			children = (
+				F9BB80171F7A3F2C00867514 /* NSTimer+addition.h */,
+				F9BB80181F7A3F2C00867514 /* NSTimer+addition.m */,
+				F9BB80191F7A3F2C00867514 /* TGWebProgressLayer.h */,
+				F9BB801A1F7A3F2C00867514 /* TGWebProgressLayer.m */,
+				F9BB801B1F7A3F2C00867514 /* TGWebViewController.h */,
+				F9BB801C1F7A3F2C00867514 /* TGWebViewController.m */,
+			);
+			path = TGWebController;
+			sourceTree = "<group>";
+		};
+		F9BB80281F7A568D00867514 /* 购物车 */ = {
+			isa = PBXGroup;
+			children = (
+				F9BB80291F7A56BF00867514 /* model */,
+				F9BB802A1F7A56BF00867514 /* view */,
+				F9BB802B1F7A56BF00867514 /* controller */,
+			);
+			path = "购物车";
+			sourceTree = "<group>";
+		};
+		F9BB80291F7A56BF00867514 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				F9BB80311F7A584800867514 /* GLShoppingCartModel.h */,
+				F9BB80321F7A584800867514 /* GLShoppingCartModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		F9BB802A1F7A56BF00867514 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				F9BB80341F7A585000867514 /* GLShoppingCell.h */,
+				F9BB80351F7A585000867514 /* GLShoppingCell.m */,
+				F9BB80361F7A585000867514 /* GLShoppingCell.xib */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		F9BB802B1F7A56BF00867514 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				F9BB802C1F7A57C400867514 /* GLShoppingCartController.h */,
+				F9BB802D1F7A57C400867514 /* GLShoppingCartController.m */,
+				F9BB802E1F7A57C400867514 /* GLShoppingCartController.xib */,
+			);
+			path = controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -790,6 +884,7 @@
 			files = (
 				4A53E83A1F7A24830021D9E0 /* GLMall_DetailSpecCell.xib in Resources */,
 				4AF109291F78DBB500CB51FA /* PopMenuTableViewCell.xib in Resources */,
+				F9BB80301F7A57C400867514 /* GLShoppingCartController.xib in Resources */,
 				4AF109C41F78DBEA00CB51FA /* GLHomeController.xib in Resources */,
 				F9BB80121F7A283700867514 /* GLClassifyCell.xib in Resources */,
 				4AF109D31F78DC6F00CB51FA /* GLMineController.xib in Resources */,
@@ -803,6 +898,8 @@
 				4AF10A0A1F78E97500CB51FA /* GLHomeCell.xib in Resources */,
 				4A53E82C1F7A23AD0021D9E0 /* GLMallController.xib in Resources */,
 				4A53E8231F79FF640021D9E0 /* GLMineCell.xib in Resources */,
+				F9BB80381F7A585000867514 /* GLShoppingCell.xib in Resources */,
+				F9BB80271F7A447E00867514 /* ShoppingMall.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -813,10 +910,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9BB80151F7A38A000867514 /* LBSetFillet.m in Sources */,
 				4A53E8391F7A24830021D9E0 /* GLMall_DetailSpecCell.m in Sources */,
 				4AF109BA1F78DBB500CB51FA /* usermodelachivar.m in Sources */,
 				4AF109D21F78DC6F00CB51FA /* GLMineController.m in Sources */,
+				F9BB801D1F7A3F2C00867514 /* NSTimer+addition.m in Sources */,
 				4AF109C81F78DC4400CB51FA /* GLBusinessCircleController.m in Sources */,
+				F9BB80371F7A585000867514 /* GLShoppingCell.m in Sources */,
 				4AF1070B1F78D5AC00CB51FA /* ViewController.m in Sources */,
 				4AF107081F78D5AC00CB51FA /* AppDelegate.m in Sources */,
 				4AF1092C1F78DBB500CB51FA /* UIViewController+WXSTransition.m in Sources */,
@@ -834,6 +934,7 @@
 				4AF109EC1F78E07A00CB51FA /* GetLabelBounds.m in Sources */,
 				4AF109BF1F78DBB500CB51FA /* DWTabBar.m in Sources */,
 				4AF1092B1F78DBB500CB51FA /* UINavigationController+WXSTransition.m in Sources */,
+				F9BB80251F7A440100867514 /* MenuScreeningView.m in Sources */,
 				4AF109F41F78E07A00CB51FA /* UIView+Extension.m in Sources */,
 				4AF109F01F78E07A00CB51FA /* predicateModel.m in Sources */,
 				4AF109F21F78E07A00CB51FA /* UIButton+SetEdgeInsets.m in Sources */,
@@ -844,13 +945,17 @@
 				4AF1093C1F78DBB500CB51FA /* UIView+XBExtension.m in Sources */,
 				4AF1093B1F78DBB500CB51FA /* WXSTransitionProperty.m in Sources */,
 				4AF109401F78DBB500CB51FA /* XBTagTitleCell.m in Sources */,
+				F9BB802F1F7A57C400867514 /* GLShoppingCartController.m in Sources */,
 				4AF10A091F78E97500CB51FA /* GLHomeCell.m in Sources */,
 				4AF109281F78DBB500CB51FA /* PopMenuTableViewCell.m in Sources */,
 				4AF109BC1F78DBB500CB51FA /* DWTabBarController.m in Sources */,
 				4AF107051F78D5AC00CB51FA /* main.m in Sources */,
 				4AF109391F78DBB500CB51FA /* WXSTransitionManager+ViewMoveAnimation.m in Sources */,
+				F9BB80241F7A440100867514 /* DropMenuView.m in Sources */,
 				4AF109ED1F78E07A00CB51FA /* LWLabel.m in Sources */,
+				F9BB80331F7A584800867514 /* GLShoppingCartModel.m in Sources */,
 				4A53E82B1F7A23AD0021D9E0 /* GLMallController.m in Sources */,
+				F9BB801F1F7A3F2C00867514 /* TGWebViewController.m in Sources */,
 				4AF109BD1F78DBB500CB51FA /* LBLoginNavigationViewController.m in Sources */,
 				4AF109BE1F78DBB500CB51FA /* DWPublishButton.m in Sources */,
 				4A53E8341F7A240F0021D9E0 /* GLMall_DetailController.m in Sources */,
@@ -861,6 +966,7 @@
 				4AF109331F78DBB500CB51FA /* WXSTransitionManager+FragmentAnimation.m in Sources */,
 				4AF1093F1F78DBB500CB51FA /* XBPageCell.m in Sources */,
 				4AF109371F78DBB500CB51FA /* WXSTransitionManager+SystermAnimation.m in Sources */,
+				F9BB801E1F7A3F2C00867514 /* TGWebProgressLayer.m in Sources */,
 				4AF1092D1F78DBB500CB51FA /* UIViewController+WXSTransitionProperty.m in Sources */,
 				4A53E8221F79FF640021D9E0 /* GLMineCell.m in Sources */,
 				F9BB80111F7A283700867514 /* GLClassifyCell.m in Sources */,
@@ -989,6 +1095,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/lanzhong/PrefixHeader.pch";
 				INFOPLIST_FILE = lanzhong/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sanjun.lanzhong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1003,6 +1110,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/lanzhong/PrefixHeader.pch";
 				INFOPLIST_FILE = lanzhong/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sanjun.lanzhong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
