@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol GLMall_DetailSpecCellDelegate <NSObject>
+
+- (void)changeNum:(BOOL)isAdd;
+
+@end
+
 @interface GLMall_DetailSpecCell : UITableViewCell
+
+@property (nonatomic, weak)id <GLMall_DetailSpecCellDelegate>delegate;
 
 @end

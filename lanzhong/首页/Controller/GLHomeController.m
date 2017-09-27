@@ -42,7 +42,9 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.headerView.height = 250;
-    self.segment.selectedSegmentIndex = 0;
+    
+    self.segment.selectedSegmentIndex = 1;
+    
     self.noticeView.layer.cornerRadius = 5.f;
     self.noticeLayerView.layer.cornerRadius = 5.f;
     
