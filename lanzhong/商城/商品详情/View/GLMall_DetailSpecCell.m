@@ -12,6 +12,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *reduceBtn;
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;
+@property (weak, nonatomic) IBOutlet UIView *specView;
+
 
 @end
 
@@ -20,6 +22,13 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(specChoose)];
+    [self.specView addGestureRecognizer:tap];
+}
+- (void)specChoose {
+    if ([self.delegate respondsToSelector:@selector(specChoose)]) {
+        [self.delegate specChoose];
+    }
 }
 
 - (IBAction)changeNum:(UIButton *)sender {

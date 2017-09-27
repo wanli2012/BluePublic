@@ -1,0 +1,6 @@
+framework module Pods_lanzhong {
+  umbrella header "Pods-lanzhong-umbrella.h"
+
+  export *
+  module * { export * }
+}

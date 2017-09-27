@@ -11,6 +11,7 @@
 @protocol GLMall_DetailSpecCellDelegate <NSObject>
 
 - (void)changeNum:(BOOL)isAdd;
+- (void)specChoose;
 
 @end
 

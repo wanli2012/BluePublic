@@ -81,11 +81,13 @@
 		4AF10A051F78E27C00CB51FA /* tabbar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AF10A041F78E27C00CB51FA /* tabbar.xcassets */; };
 		4AF10A091F78E97500CB51FA /* GLHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF10A071F78E97500CB51FA /* GLHomeCell.m */; };
 		4AF10A0A1F78E97500CB51FA /* GLHomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AF10A081F78E97500CB51FA /* GLHomeCell.xib */; };
+		6982E3A60C2A1ECE784BC35D /* Pods_lanzhong.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19A11FB975C44A94E569750A /* Pods_lanzhong.framework */; };
 		F9BB80111F7A283700867514 /* GLClassifyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BB800F1F7A283700867514 /* GLClassifyCell.m */; };
 		F9BB80121F7A283700867514 /* GLClassifyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9BB80101F7A283700867514 /* GLClassifyCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		19A11FB975C44A94E569750A /* Pods_lanzhong.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lanzhong.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A53E81F1F79FF640021D9E0 /* GLMineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMineCell.h; sourceTree = "<group>"; };
 		4A53E8201F79FF640021D9E0 /* GLMineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMineCell.m; sourceTree = "<group>"; };
 		4A53E8211F79FF640021D9E0 /* GLMineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMineCell.xib; sourceTree = "<group>"; };
@@ -219,6 +221,8 @@
 		4AF10A061F78E97500CB51FA /* GLHomeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLHomeCell.h; sourceTree = "<group>"; };
 		4AF10A071F78E97500CB51FA /* GLHomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLHomeCell.m; sourceTree = "<group>"; };
 		4AF10A081F78E97500CB51FA /* GLHomeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLHomeCell.xib; sourceTree = "<group>"; };
+		7451D5B0290BCE80E2B11756 /* Pods-lanzhong.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lanzhong.debug.xcconfig"; path = "Pods/Target Support Files/Pods-lanzhong/Pods-lanzhong.debug.xcconfig"; sourceTree = "<group>"; };
+		DC90251775A1E99EE4FC964D /* Pods-lanzhong.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lanzhong.release.xcconfig"; path = "Pods/Target Support Files/Pods-lanzhong/Pods-lanzhong.release.xcconfig"; sourceTree = "<group>"; };
 		F9BB800E1F7A283700867514 /* GLClassifyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLClassifyCell.h; sourceTree = "<group>"; };
 		F9BB800F1F7A283700867514 /* GLClassifyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLClassifyCell.m; sourceTree = "<group>"; };
 		F9BB80101F7A283700867514 /* GLClassifyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLClassifyCell.xib; sourceTree = "<group>"; };
@@ -229,6 +233,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6982E3A60C2A1ECE784BC35D /* Pods_lanzhong.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +314,8 @@
 			children = (
 				4AF107021F78D5AC00CB51FA /* lanzhong */,
 				4AF107011F78D5AC00CB51FA /* Products */,
+				8B61B5FD690BFE929AA5CBBA /* Pods */,
+				BBF1CC57678E9E178E929D0C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -744,6 +751,23 @@
 			path = "图片资源";
 			sourceTree = "<group>";
 		};
+		8B61B5FD690BFE929AA5CBBA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7451D5B0290BCE80E2B11756 /* Pods-lanzhong.debug.xcconfig */,
+				DC90251775A1E99EE4FC964D /* Pods-lanzhong.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		BBF1CC57678E9E178E929D0C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				19A11FB975C44A94E569750A /* Pods_lanzhong.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F9BB800C1F7A283700867514 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -768,9 +792,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4AF107171F78D5AC00CB51FA /* Build configuration list for PBXNativeTarget "lanzhong" */;
 			buildPhases = (
+				491FCE9BF6F7309B0BEB2533 /* [CP] Check Pods Manifest.lock */,
 				4AF106FC1F78D5AC00CB51FA /* Sources */,
 				4AF106FD1F78D5AC00CB51FA /* Frameworks */,
 				4AF106FE1F78D5AC00CB51FA /* Resources */,
+				56D84F4AFA01501C3B6561B4 /* [CP] Embed Pods Frameworks */,
+				0587F089F9ADF235EA4949E0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -843,6 +870,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0587F089F9ADF235EA4949E0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-lanzhong/Pods-lanzhong-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		491FCE9BF6F7309B0BEB2533 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		56D84F4AFA01501C3B6561B4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-lanzhong/Pods-lanzhong-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4AF106FC1F78D5AC00CB51FA /* Sources */ = {
@@ -1023,6 +1098,7 @@
 		};
 		4AF107181F78D5AC00CB51FA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7451D5B0290BCE80E2B11756 /* Pods-lanzhong.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = GCU762TQ3E;
@@ -1037,6 +1113,7 @@
 		};
 		4AF107191F78D5AC00CB51FA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DC90251775A1E99EE4FC964D /* Pods-lanzhong.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = GCU762TQ3E;
