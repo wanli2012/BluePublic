@@ -15,6 +15,14 @@
 		4A53E8351F7A240F0021D9E0 /* GLMall_DetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A53E8331F7A240F0021D9E0 /* GLMall_DetailController.xib */; };
 		4A53E8391F7A24830021D9E0 /* GLMall_DetailSpecCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A53E8371F7A24830021D9E0 /* GLMall_DetailSpecCell.m */; };
 		4A53E83A1F7A24830021D9E0 /* GLMall_DetailSpecCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A53E8381F7A24830021D9E0 /* GLMall_DetailSpecCell.xib */; };
+		4A53E83E1F7A3AEA0021D9E0 /* GLMall_DetailAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A53E83C1F7A3AEA0021D9E0 /* GLMall_DetailAddressCell.m */; };
+		4A53E83F1F7A3AEA0021D9E0 /* GLMall_DetailAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A53E83D1F7A3AEA0021D9E0 /* GLMall_DetailAddressCell.xib */; };
+		4A53E84A1F7A4B5C0021D9E0 /* GLMall_DetailSelecteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A53E8481F7A4B5C0021D9E0 /* GLMall_DetailSelecteCell.m */; };
+		4A53E84B1F7A4B5C0021D9E0 /* GLMall_DetailSelecteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A53E8491F7A4B5C0021D9E0 /* GLMall_DetailSelecteCell.xib */; };
+		4A53E84F1F7A4BE20021D9E0 /* GLMall_DetailCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A53E84D1F7A4BE20021D9E0 /* GLMall_DetailCommentCell.m */; };
+		4A53E8501F7A4BE20021D9E0 /* GLMall_DetailCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A53E84E1F7A4BE20021D9E0 /* GLMall_DetailCommentCell.xib */; };
+		4A53E8531F7A59710021D9E0 /* GLMall_DetailFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A53E8521F7A59710021D9E0 /* GLMall_DetailFooterView.m */; };
+		4A53E8551F7A59880021D9E0 /* GLMall_DetailFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A53E8541F7A59880021D9E0 /* GLMall_DetailFooterView.xib */; };
 		4AF107051F78D5AC00CB51FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF107041F78D5AC00CB51FA /* main.m */; };
 		4AF107081F78D5AC00CB51FA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF107071F78D5AC00CB51FA /* AppDelegate.m */; };
 		4AF1070B1F78D5AC00CB51FA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF1070A1F78D5AC00CB51FA /* ViewController.m */; };
@@ -90,6 +98,18 @@
 		4A53E8361F7A24830021D9E0 /* GLMall_DetailSpecCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMall_DetailSpecCell.h; sourceTree = "<group>"; };
 		4A53E8371F7A24830021D9E0 /* GLMall_DetailSpecCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMall_DetailSpecCell.m; sourceTree = "<group>"; };
 		4A53E8381F7A24830021D9E0 /* GLMall_DetailSpecCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMall_DetailSpecCell.xib; sourceTree = "<group>"; };
+		4A53E83B1F7A3AEA0021D9E0 /* GLMall_DetailAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMall_DetailAddressCell.h; sourceTree = "<group>"; };
+		4A53E83C1F7A3AEA0021D9E0 /* GLMall_DetailAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMall_DetailAddressCell.m; sourceTree = "<group>"; };
+		4A53E83D1F7A3AEA0021D9E0 /* GLMall_DetailAddressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMall_DetailAddressCell.xib; sourceTree = "<group>"; };
+		4A53E8471F7A4B5C0021D9E0 /* GLMall_DetailSelecteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMall_DetailSelecteCell.h; sourceTree = "<group>"; };
+		4A53E8481F7A4B5C0021D9E0 /* GLMall_DetailSelecteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMall_DetailSelecteCell.m; sourceTree = "<group>"; };
+		4A53E8491F7A4B5C0021D9E0 /* GLMall_DetailSelecteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMall_DetailSelecteCell.xib; sourceTree = "<group>"; };
+		4A53E84C1F7A4BE20021D9E0 /* GLMall_DetailCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMall_DetailCommentCell.h; sourceTree = "<group>"; };
+		4A53E84D1F7A4BE20021D9E0 /* GLMall_DetailCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMall_DetailCommentCell.m; sourceTree = "<group>"; };
+		4A53E84E1F7A4BE20021D9E0 /* GLMall_DetailCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMall_DetailCommentCell.xib; sourceTree = "<group>"; };
+		4A53E8511F7A59710021D9E0 /* GLMall_DetailFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMall_DetailFooterView.h; sourceTree = "<group>"; };
+		4A53E8521F7A59710021D9E0 /* GLMall_DetailFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMall_DetailFooterView.m; sourceTree = "<group>"; };
+		4A53E8541F7A59880021D9E0 /* GLMall_DetailFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMall_DetailFooterView.xib; sourceTree = "<group>"; };
 		4AF107001F78D5AC00CB51FA /* lanzhong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lanzhong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AF107041F78D5AC00CB51FA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4AF107061F78D5AC00CB51FA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -268,6 +288,18 @@
 				4A53E8361F7A24830021D9E0 /* GLMall_DetailSpecCell.h */,
 				4A53E8371F7A24830021D9E0 /* GLMall_DetailSpecCell.m */,
 				4A53E8381F7A24830021D9E0 /* GLMall_DetailSpecCell.xib */,
+				4A53E83B1F7A3AEA0021D9E0 /* GLMall_DetailAddressCell.h */,
+				4A53E83C1F7A3AEA0021D9E0 /* GLMall_DetailAddressCell.m */,
+				4A53E83D1F7A3AEA0021D9E0 /* GLMall_DetailAddressCell.xib */,
+				4A53E8471F7A4B5C0021D9E0 /* GLMall_DetailSelecteCell.h */,
+				4A53E8481F7A4B5C0021D9E0 /* GLMall_DetailSelecteCell.m */,
+				4A53E8491F7A4B5C0021D9E0 /* GLMall_DetailSelecteCell.xib */,
+				4A53E84C1F7A4BE20021D9E0 /* GLMall_DetailCommentCell.h */,
+				4A53E84D1F7A4BE20021D9E0 /* GLMall_DetailCommentCell.m */,
+				4A53E84E1F7A4BE20021D9E0 /* GLMall_DetailCommentCell.xib */,
+				4A53E8511F7A59710021D9E0 /* GLMall_DetailFooterView.h */,
+				4A53E8521F7A59710021D9E0 /* GLMall_DetailFooterView.m */,
+				4A53E8541F7A59880021D9E0 /* GLMall_DetailFooterView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -792,6 +824,8 @@
 				4AF109291F78DBB500CB51FA /* PopMenuTableViewCell.xib in Resources */,
 				4AF109C41F78DBEA00CB51FA /* GLHomeController.xib in Resources */,
 				F9BB80121F7A283700867514 /* GLClassifyCell.xib in Resources */,
+				4A53E8551F7A59880021D9E0 /* GLMall_DetailFooterView.xib in Resources */,
+				4A53E84B1F7A4B5C0021D9E0 /* GLMall_DetailSelecteCell.xib in Resources */,
 				4AF109D31F78DC6F00CB51FA /* GLMineController.xib in Resources */,
 				4AF10A051F78E27C00CB51FA /* tabbar.xcassets in Resources */,
 				4AF10A021F78E1B300CB51FA /* GLPublishController.xib in Resources */,
@@ -800,8 +834,10 @@
 				4AF107101F78D5AC00CB51FA /* Assets.xcassets in Resources */,
 				4AF109C91F78DC4400CB51FA /* GLBusinessCircleController.xib in Resources */,
 				4AF1070E1F78D5AC00CB51FA /* Main.storyboard in Resources */,
+				4A53E8501F7A4BE20021D9E0 /* GLMall_DetailCommentCell.xib in Resources */,
 				4AF10A0A1F78E97500CB51FA /* GLHomeCell.xib in Resources */,
 				4A53E82C1F7A23AD0021D9E0 /* GLMallController.xib in Resources */,
+				4A53E83F1F7A3AEA0021D9E0 /* GLMall_DetailAddressCell.xib in Resources */,
 				4A53E8231F79FF640021D9E0 /* GLMineCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -837,6 +873,7 @@
 				4AF109F41F78E07A00CB51FA /* UIView+Extension.m in Sources */,
 				4AF109F01F78E07A00CB51FA /* predicateModel.m in Sources */,
 				4AF109F21F78E07A00CB51FA /* UIButton+SetEdgeInsets.m in Sources */,
+				4A53E84A1F7A4B5C0021D9E0 /* GLMall_DetailSelecteCell.m in Sources */,
 				4AF109EB1F78E07A00CB51FA /* formattime.m in Sources */,
 				4AF109C31F78DBEA00CB51FA /* GLHomeController.m in Sources */,
 				4AF1092F1F78DBB500CB51FA /* WXSTransitionManager+BoomAnimation.m in Sources */,
@@ -845,9 +882,11 @@
 				4AF1093B1F78DBB500CB51FA /* WXSTransitionProperty.m in Sources */,
 				4AF109401F78DBB500CB51FA /* XBTagTitleCell.m in Sources */,
 				4AF10A091F78E97500CB51FA /* GLHomeCell.m in Sources */,
+				4A53E83E1F7A3AEA0021D9E0 /* GLMall_DetailAddressCell.m in Sources */,
 				4AF109281F78DBB500CB51FA /* PopMenuTableViewCell.m in Sources */,
 				4AF109BC1F78DBB500CB51FA /* DWTabBarController.m in Sources */,
 				4AF107051F78D5AC00CB51FA /* main.m in Sources */,
+				4A53E8531F7A59710021D9E0 /* GLMall_DetailFooterView.m in Sources */,
 				4AF109391F78DBB500CB51FA /* WXSTransitionManager+ViewMoveAnimation.m in Sources */,
 				4AF109ED1F78E07A00CB51FA /* LWLabel.m in Sources */,
 				4A53E82B1F7A23AD0021D9E0 /* GLMallController.m in Sources */,
@@ -862,6 +901,7 @@
 				4AF1093F1F78DBB500CB51FA /* XBPageCell.m in Sources */,
 				4AF109371F78DBB500CB51FA /* WXSTransitionManager+SystermAnimation.m in Sources */,
 				4AF1092D1F78DBB500CB51FA /* UIViewController+WXSTransitionProperty.m in Sources */,
+				4A53E84F1F7A4BE20021D9E0 /* GLMall_DetailCommentCell.m in Sources */,
 				4A53E8221F79FF640021D9E0 /* GLMineCell.m in Sources */,
 				F9BB80111F7A283700867514 /* GLClassifyCell.m in Sources */,
 				4AF10A011F78E1B300CB51FA /* GLPublishController.m in Sources */,

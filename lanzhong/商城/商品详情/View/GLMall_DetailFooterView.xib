@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D30" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="GLMall_DetailFooterView">
+            <rect key="frame" x="0.0" y="0.0" width="362" height="356"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pfW-I4-CCQ">
+                    <rect key="frame" x="0.0" y="0.0" width="362" height="356"/>
+                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </webView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="pfW-I4-CCQ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="4rn-wg-i5l"/>
+                <constraint firstAttribute="bottom" secondItem="pfW-I4-CCQ" secondAttribute="bottom" id="61g-bs-NQZ"/>
+                <constraint firstAttribute="trailing" secondItem="pfW-I4-CCQ" secondAttribute="trailing" id="Eta-vS-eq5"/>
+                <constraint firstItem="pfW-I4-CCQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="MDZ-Sp-vGS"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="webView" destination="pfW-I4-CCQ" id="SoX-iw-WIf"/>
+            </connections>
+            <point key="canvasLocation" x="-19" y="-34"/>
+        </view>
+    </objects>
+</document>
