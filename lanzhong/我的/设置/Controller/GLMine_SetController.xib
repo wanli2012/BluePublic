@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D30" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GLMine_SetController">
+            <connections>
+                <outlet property="exitBtn" destination="cyf-Qb-og2" id="ZJV-bz-aWh"/>
+                <outlet property="tableView" destination="cEF-tp-bRa" id="Tac-bc-Nlb"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cEF-tp-bRa">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="300" id="eMP-en-13J"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Rbu-gb-0QH"/>
+                        <outlet property="delegate" destination="-1" id="tda-xI-tWb"/>
+                    </connections>
+                </tableView>
+                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cyf-Qb-og2">
+                    <rect key="frame" x="87.5" y="330" width="200" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="0TM-Ha-AVO"/>
+                        <constraint firstAttribute="height" constant="40" id="Jzw-id-zj8"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="退出登录">
+                        <color key="titleColor" red="0.00149723934" green="0.492005527" blue="0.99493986369999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="quit:" destination="-1" eventType="touchUpInside" id="C8d-Zz-1qU"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="cEF-tp-bRa" secondAttribute="trailing" id="112-5B-azQ"/>
+                <constraint firstItem="cEF-tp-bRa" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Ba3-TZ-Z7w"/>
+                <constraint firstItem="cyf-Qb-og2" firstAttribute="top" secondItem="cEF-tp-bRa" secondAttribute="bottom" constant="30" id="Mdd-Oe-oVv"/>
+                <constraint firstItem="cyf-Qb-og2" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Xyt-Ig-an5"/>
+                <constraint firstItem="cEF-tp-bRa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="sJN-PZ-DSs"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+</document>

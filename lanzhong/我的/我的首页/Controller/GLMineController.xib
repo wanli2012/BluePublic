@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -71,6 +70,7 @@
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="XIr-Qb-SVG" firstAttribute="centerY" secondItem="I3d-mg-Ztg" secondAttribute="centerY" id="AGX-3m-YvC"/>
                                     <constraint firstItem="XIr-Qb-SVG" firstAttribute="leading" secondItem="I3d-mg-Ztg" secondAttribute="leading" constant="15" id="CG4-W8-xHj"/>
@@ -81,6 +81,9 @@
                                     <constraint firstItem="rY5-bW-3dz" firstAttribute="top" secondItem="XIr-Qb-SVG" secondAttribute="top" constant="15" id="otw-Aq-Vze"/>
                                     <constraint firstItem="KqU-bC-Num" firstAttribute="leading" secondItem="XIr-Qb-SVG" secondAttribute="trailing" constant="10" id="waI-vt-9Yd"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="G0s-Uc-tMj" appends="YES" id="rlx-hE-Lwi"/>
+                                </connections>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T9W-Sy-uZz">
                                 <rect key="frame" x="10" y="140" width="318" height="70"/>
@@ -223,6 +226,11 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="80" y="-155"/>
         </view>
+        <tapGestureRecognizer id="G0s-Uc-tMj" userLabel="个人信息">
+            <connections>
+                <action selector="personInfo:" destination="-1" id="gh9-20-gU3"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="timg" width="1024" height="640"/>

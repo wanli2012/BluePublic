@@ -11,5 +11,8 @@
 @interface GLMineCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *valueLabel;
+
+@property (nonatomic, assign)NSInteger status;
 
 @end

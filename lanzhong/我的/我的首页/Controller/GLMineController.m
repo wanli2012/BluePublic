@@ -8,6 +8,8 @@
 
 #import "GLMineController.h"
 #import "GLMineCell.h"
+#import "GLMine_SetController.h"//设置
+#import "GLMine_PersonInfoController.h"//个人信息
 
 @interface GLMineController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -58,6 +60,16 @@
 
 }
 
+//个人信息
+- (IBAction)personInfo:(id)sender {
+    
+    self.hidesBottomBarWhenPushed = YES;
+    GLMine_PersonInfoController *personVC = [[GLMine_PersonInfoController alloc] init];
+    [self.navigationController pushViewController:personVC animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
+    
+}
+
 
 - (void)viewWillAppear:(BOOL)animated{
     
@@ -101,9 +113,12 @@
     NSArray *arr = self.dataSource[indexPath.section];
     cell.titleLabel.text = arr[indexPath.row];
     
+    cell.status = 3;
+    
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    self.hidesBottomBarWhenPushed = YES;
     switch (indexPath.section) {
         case 0:
         {
@@ -164,6 +179,8 @@
                 case 2:
                 {
                     NSLog(@"%@",self.dataSource[indexPath.section][indexPath.row]);
+                    GLMine_SetController *setVC = [[GLMine_SetController alloc] init];
+                    [self.navigationController pushViewController:setVC animated:YES];
                 }
                     break;
                     
@@ -176,6 +193,7 @@
         default:
             break;
     }
+    self.hidesBottomBarWhenPushed = NO;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 44;

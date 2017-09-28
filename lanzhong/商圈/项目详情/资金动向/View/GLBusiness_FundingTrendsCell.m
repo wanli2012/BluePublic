@@ -1,14 +1,14 @@
 //
-//  GLBusiness_DetailProjectCell.m
+//  GLBusiness_FundingTrendsCell.m
 //  lanzhong
 //
-//  Created by 龚磊 on 2017/9/27.
+//  Created by 龚磊 on 2017/9/28.
 //  Copyright © 2017年 三君科技有限公司. All rights reserved.
 //
 
-#import "GLBusiness_DetailProjectCell.h"
+#import "GLBusiness_FundingTrendsCell.h"
 
-@implementation GLBusiness_DetailProjectCell
+@implementation GLBusiness_FundingTrendsCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
