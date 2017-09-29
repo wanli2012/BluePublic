@@ -76,6 +76,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="moneyLabel" destination="TFC-AA-H4F" id="Nx1-aS-Xgm"/>
                 <outlet property="picImageV" destination="KKh-QR-DGE" id="49S-lw-9LO"/>
             </connections>
             <point key="canvasLocation" x="31.5" y="-86"/>

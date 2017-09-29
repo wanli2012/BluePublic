@@ -97,7 +97,7 @@
     
     if (!_cycleScrollView) {
         
-        _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 50, kSCREEN_WIDTH, 150 * autoSizeScaleY)
+        _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 50, kSCREEN_WIDTH, 150)
                                                               delegate:self
                                                       placeholderImage:[UIImage imageNamed:LUNBO_PlaceHolder]];
         

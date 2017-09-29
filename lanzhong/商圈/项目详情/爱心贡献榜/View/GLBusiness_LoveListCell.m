@@ -11,6 +11,7 @@
 @interface GLBusiness_LoveListCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *picImageV;
+@property (weak, nonatomic) IBOutlet UILabel *moneyLabel;
 
 @end
 
@@ -20,6 +21,14 @@
     [super awakeFromNib];
     
     self.picImageV.layer.cornerRadius = self.picImageV.height / 2;
+    
+    NSString *str = [NSString stringWithFormat:@"%@",@"800"];
+    
+    NSMutableAttributedString *hintString=[[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@元",str]];
+    
+    [hintString addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(0,str.length)];
+    
+    self.moneyLabel.attributedText = hintString;
 }
 
 

@@ -15,9 +15,9 @@
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIView *contentViewLayerView;
 
-@property (weak, nonatomic) IBOutlet UIImageView *firstImageV;
-@property (weak, nonatomic) IBOutlet UIImageView *secondImageV;
-@property (weak, nonatomic) IBOutlet UIImageView *thirdImageV;
+@property (weak, nonatomic) IBOutlet UIButton *firstBtn;
+@property (weak, nonatomic) IBOutlet UIButton *secondBtn;
+@property (weak, nonatomic) IBOutlet UIButton *thirdBtn;
 
 @property (weak, nonatomic) IBOutlet UILabel *firstMoneyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *secondMoneyLabel;
@@ -38,17 +38,17 @@
     self.contentViewLayerView.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
     self.contentViewLayerView.layer.shadowRadius = 2.f;
     
-    self.firstImageV.layer.cornerRadius = self.firstImageV.height / 2;
-    self.secondImageV.layer.cornerRadius = self.secondImageV.height / 2;
-    self.thirdImageV.layer.cornerRadius = self.thirdImageV.height / 2;
+    self.firstBtn.layer.cornerRadius = self.firstBtn.height / 2;
+    self.secondBtn.layer.cornerRadius = self.secondBtn.height / 2;
+    self.thirdBtn.layer.cornerRadius = self.thirdBtn.height / 2;
     
     [self.tableView registerNib:[UINib nibWithNibName:@"GLBusiness_LoveListCell" bundle:nil] forCellReuseIdentifier:@"GLBusiness_LoveListCell"];
     
-    NSString *str = [NSString stringWithFormat:@"%@元",@"800"];
+    NSString *str = [NSString stringWithFormat:@"%@",@"800"];
     
-    NSMutableAttributedString *hintString=[[NSMutableAttributedString alloc]initWithString:str];
+    NSMutableAttributedString *hintString=[[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@元",str]];
     
-    [hintString addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(0,str.length)];
+    [hintString addAttribute:NSForegroundColorAttributeName value:MAIN_COLOR range:NSMakeRange(0,str.length)];
        
     self.firstMoneyLabel.attributedText = hintString;
     self.secondMoneyLabel.attributedText = hintString;

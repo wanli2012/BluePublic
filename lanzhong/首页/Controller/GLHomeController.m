@@ -9,6 +9,8 @@
 #import "GLHomeController.h"
 #import "GLHomeCell.h"
 
+#import "GLPay_ChooseController.h"//支付选择
+
 @interface GLHomeController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -117,16 +119,26 @@
 
 #pragma mark - UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
     return 3;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     GLHomeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLHomeCell"];
     cell.selectionStyle = 0;
 
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     return 180;
 }
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    self.hidesBottomBarWhenPushed = YES;
+    GLPay_ChooseController *payVC = [[GLPay_ChooseController alloc] init];
+    [self.navigationController pushViewController:payVC animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
+    
+}
 @end

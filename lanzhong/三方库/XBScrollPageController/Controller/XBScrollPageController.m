@@ -92,10 +92,12 @@
 - (void)setupDefaultProperties
 {
     self.normalTitleFont = [UIFont systemFontOfSize:13];
-    self.selectedTitleFont = [UIFont systemFontOfSize:16];
+    self.selectedTitleFont = [UIFont systemFontOfSize:13];
     self.normalTitleColor = [UIColor darkGrayColor];
-    self.selectedTitleColor = [UIColor redColor];
-    self.selectedIndicatorColor = [UIColor redColor];
+    self.selectedTitleColor = YYSRGBColor(0, 126, 255, 1);
+    self.selectedIndicatorColor = YYSRGBColor(0, 126, 255, 1);
+//    self.tagItemSize = CGSizeMake(10, 10);
+
     self.tagItemSize = CGSizeZero;
 //    self.tagItemGap = 10.f;
     self.selectedIndex = -1;
@@ -233,19 +235,6 @@
         }
         else if(self.selectionIndicator.centerX != cell.centerX) {
             
-            // [UIView animateKeyframesWithDuration:0.2 delay:0 options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
-            //     [UIView addKeyframeWithRelativeStartTime:0 relativeDuration:0.5 animations:^{
-            //         self.selectionIndicator.x = cell.x;
-            //     }];
-                
-            //     [UIView addKeyframeWithRelativeStartTime:0.5 relativeDuration:0.5 animations:^{
-            //         self.selectionIndicator.width = cell.width;
-            //     }];
-                
-            // } completion:^(BOOL finished) {
-                
-            // }];
-            
         }
         
         [collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
@@ -257,10 +246,10 @@
 }
 - (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self isTagView:collectionView]) {          //tag
+    if ([self isTagView:collectionView]) {  //tag
 
     }
-    else{                                               //page
+    else{   //page
         //从缓存中取出instaceController
         UIViewController *cachedViewController = [self getCachedVCByIndexPath:indexPath];
         
@@ -468,7 +457,7 @@
 {
     if (!_selectionIndicator) {
         _selectionIndicator = [[UIView alloc]init];
-        _selectionIndicator.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        _selectionIndicator.backgroundColor = [UIColor clearColor];
         
         //1.使用固定的tagItemSize
         if (![self isZeroSize:self.tagItemSize]) {
@@ -498,7 +487,7 @@
         
         
         UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.tagViewHeight - self.selectedIndicatorSize.height, kSCREEN_WIDTH, 8)];
-        bottomView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        bottomView.backgroundColor = [UIColor clearColor];
         
         [self.tagCollectionView addSubview:bottomView];
         [self.tagCollectionView addSubview:_selectionIndicator];
