@@ -41,6 +41,10 @@
 - (IBAction)ensure:(id)sender {
     NSLog(@"确定");
 }
+- (IBAction)address:(id)sender {
+    
+    
+}
 
 
 @end

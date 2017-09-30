@@ -195,6 +195,7 @@
                                         </view>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <gestureRecognizers/>
                                     <constraints>
                                         <constraint firstItem="qxj-Hi-q9j" firstAttribute="centerY" secondItem="SHv-bt-8zh" secondAttribute="centerY" id="JGp-jT-j22"/>
                                         <constraint firstItem="XQr-N0-4tn" firstAttribute="leading" secondItem="zQR-bv-AVy" secondAttribute="trailing" constant="10" id="PC8-RI-Gdi"/>
@@ -207,6 +208,9 @@
                                         <constraint firstItem="Y2H-dL-GCC" firstAttribute="top" secondItem="SHv-bt-8zh" secondAttribute="top" id="q6c-Id-ghy"/>
                                         <constraint firstItem="zQR-bv-AVy" firstAttribute="centerY" secondItem="SHv-bt-8zh" secondAttribute="centerY" id="qJJ-U5-WZn"/>
                                     </constraints>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="2fE-y6-QdV" appends="YES" id="tMa-h1-zFK"/>
+                                    </connections>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="11k-Ni-UqM">
                                     <rect key="frame" x="0.0" y="290" width="375" height="50"/>
@@ -347,6 +351,11 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-18.5" y="-22.5"/>
         </view>
+        <tapGestureRecognizer id="2fE-y6-QdV" userLabel="收货地址">
+            <connections>
+                <action selector="address:" destination="-1" id="2FJ-LC-Vqv"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="timg" width="1024" height="640"/>

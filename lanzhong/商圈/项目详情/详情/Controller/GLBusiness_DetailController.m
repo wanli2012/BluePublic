@@ -13,6 +13,7 @@
 #import "GLBusiness_ChooseCell.h"//资金动向和官方认证
 #import "GLBusiness_CertificationController.h"//官方认证
 #import "GLBusiness_LoveListController.h"
+#import "GLBusiness_FundTrendController.h"//资金动向
 
 @interface GLBusiness_DetailController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,GLBusiness_ChooseCellDelegate>
 {
@@ -120,6 +121,8 @@
         case 1:
         {
             NSLog(@"资金动向");
+            GLBusiness_FundTrendController *fundVC = [[GLBusiness_FundTrendController alloc] init];
+            [self.navigationController pushViewController:fundVC animated:YES];
         }
             break;
             

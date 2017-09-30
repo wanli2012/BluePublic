@@ -93,6 +93,7 @@
     return _menuScreeningView;
     
 }
+
 - (SDCycleScrollView *)cycleScrollView{
     
     if (!_cycleScrollView) {

@@ -8,18 +8,11 @@
 
 #import "GLPublishController.h"
 
-#import "GLPublish_InReviewController.h"//审核中
-#import "GLPublish_AuditedController.h"//审核成功
-#import "GLPublish_AuditFailureController.h"//审核失败
-#import "GLPublish_FundraisingController.h"//筹款中
-#import "GLPublish_FundraisingSuccessController.h"//筹款失败
-#import "GLPublish_ProjectInProgressController.h"//项目进行中
-#import "GLPublish_ProjectPauseController.h"//项目暂停
-#import "GLPublish_ProjectCompletedController.h"//项目完成
 
 @interface GLPublishController ()
 
-@property (nonatomic,assign) NSInteger index;
+@property (weak, nonatomic) IBOutlet UIView *bgView;
+
 
 @end
 
@@ -30,10 +23,11 @@
     
     self.navigationController.navigationBar.hidden = NO;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    [self addviewcontrol];
 
-    self.hidesBottomBarWhenPushed=YES;
+    self.bgView.layer.cornerRadius = 5.f;
+    self.bgView.layer.shadowOpacity = 0.1f;
+    self.bgView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+    self.bgView.layer.shadowRadius = 1.f;
     
 }
 
@@ -42,55 +36,6 @@
     self.navigationController.navigationBar.hidden = YES;
 }
 
-//返回
-- (IBAction)pop:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-//重载init方法
-- (instancetype)init
-{
-    if (self = [super initWithTagViewHeight:40])
-    {
-        self.yFloat = 64;
-    }
-    return self;
-}
-
-
--(void)addviewcontrol{
-    
-    //设置自定义属性
-    self.tagItemSize = CGSizeMake(kSCREEN_WIDTH / 4.5, 40);
-    
-    NSArray *titleArray = @[
-                            @"审核中",
-                            @"审核成功",
-                            @"审核失败",
-                            @"筹款中",
-                            @"筹款成功",
-                            @"项目进行中",
-                            @"项目暂停",
-                            @"项目完成",
-                            ];
-    
-    NSArray *classNames = @[
-                            [GLPublish_InReviewController class],
-                            [GLPublish_AuditedController class],
-                            [GLPublish_AuditFailureController class],
-                            [GLPublish_FundraisingController class],
-                            [GLPublish_FundraisingSuccessController class],
-                            [GLPublish_ProjectInProgressController class],
-                            [GLPublish_ProjectPauseController class],
-                            [GLPublish_ProjectCompletedController class],
-                            ];
-    
-    self.normalTitleColor = [UIColor darkGrayColor];
-    self.selectedTitleColor = YYSRGBColor(0, 126, 255, 1);
-    self.selectedIndicatorColor = YYSRGBColor(0, 126, 255, 1);
-    
-    [self reloadDataWith:titleArray andSubViewdisplayClasses:classNames withParams:nil];
-    
-}
 
 
 @end

@@ -10,6 +10,8 @@
 #import "GLMineCell.h"
 #import "GLMine_SetController.h"//设置
 #import "GLMine_PersonInfoController.h"//个人信息
+#import "GLMine_MyProjectController.h"//我的项目
+#import "GLShoppingCartController.h"//购物车
 
 @interface GLMineController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -125,7 +127,9 @@
             switch (indexPath.row) {
                 case 0:
                 {
-                    NSLog(@"%@",self.dataSource[indexPath.section][indexPath.row]);
+
+                    GLMine_MyProjectController *myProjectVC = [[GLMine_MyProjectController alloc] init];
+                    [self.navigationController pushViewController:myProjectVC animated:YES];
                 }
                     break;
                 case 1:
@@ -149,7 +153,9 @@
                     break;
                 case 1:
                 {
-                     NSLog(@"%@",self.dataSource[indexPath.section][indexPath.row]);
+                    
+                    GLShoppingCartController *cartVC = [[GLShoppingCartController alloc] init];
+                    [self.navigationController pushViewController:cartVC animated:YES];
                 }
                     break;
                 case 2:
