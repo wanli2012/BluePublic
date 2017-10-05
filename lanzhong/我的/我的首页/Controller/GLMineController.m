@@ -12,6 +12,8 @@
 #import "GLMine_PersonInfoController.h"//个人信息
 #import "GLMine_MyProjectController.h"//我的项目
 #import "GLShoppingCartController.h"//购物车
+#import "GLMine_NoticeController.h"//我的消息,公告详情
+#import "GLMine_WalletController.h"//钱包
 
 @interface GLMineController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -160,7 +162,10 @@
                     break;
                 case 2:
                 {
-                    NSLog(@"%@",self.dataSource[indexPath.section][indexPath.row]);
+                    
+                    GLMine_WalletController *walletVC = [[GLMine_WalletController alloc] init];
+                    [self.navigationController pushViewController:walletVC animated:YES];
+
                 }
                     break;
                     
@@ -174,17 +179,20 @@
             switch (indexPath.row) {
                 case 0:
                 {
-                     NSLog(@"%@",self.dataSource[indexPath.section][indexPath.row]);
+                    NSLog(@"%@",self.dataSource[indexPath.section][indexPath.row]);
+                    
                 }
                     break;
                 case 1:
                 {
-                     NSLog(@"%@",self.dataSource[indexPath.section][indexPath.row]);
+
+                    GLMine_NoticeController *noticeVC = [[GLMine_NoticeController alloc] init];
+                    [self.navigationController pushViewController:noticeVC animated:YES];
+                    
                 }
                     break;
                 case 2:
                 {
-                    NSLog(@"%@",self.dataSource[indexPath.section][indexPath.row]);
                     GLMine_SetController *setVC = [[GLMine_SetController alloc] init];
                     [self.navigationController pushViewController:setVC animated:YES];
                 }

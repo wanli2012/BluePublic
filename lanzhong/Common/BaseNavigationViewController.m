@@ -24,12 +24,8 @@
 }
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
-    // viewController.hidesBottomBarWhenPushed = YES; //隐藏底部标签栏
     
     [super pushViewController:viewController animated:animated];
-    
-//    UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:nil action:nil];
-//    self.visibleViewController.navigationItem.backBarButtonItem = backButtonItem;
     
     [self.visibleViewController.navigationItem setHidesBackButton:YES];
     
