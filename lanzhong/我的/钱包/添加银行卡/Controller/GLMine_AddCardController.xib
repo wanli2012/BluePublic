@@ -10,7 +10,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GLMine_AddCardController">
             <connections>
+                <outlet property="addressTF" destination="gMK-Ye-UWl" id="ZX0-Ql-pzm"/>
+                <outlet property="bankNameTF" destination="O60-PO-Dk0" id="OhV-0U-z8U"/>
+                <outlet property="cardNumTF" destination="DRG-dI-P6z" id="V0P-ZL-mlf"/>
                 <outlet property="ensureBtn" destination="8h6-kx-g1y" id="mYY-Dp-aeq"/>
+                <outlet property="nameTF" destination="E7f-Zy-fZ6" id="eCX-vQ-hVB"/>
+                <outlet property="switchBtn" destination="o6C-sd-KpO" id="8Rd-jb-EfP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

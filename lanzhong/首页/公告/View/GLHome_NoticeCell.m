@@ -6,9 +6,9 @@
 //  Copyright © 2017年 三君科技有限公司. All rights reserved.
 //
 
-#import "GLMine_NoticeCell.h"
+#import "GLHome_NoticeCell.h"
 
-@implementation GLMine_NoticeCell
+@implementation GLHome_NoticeCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

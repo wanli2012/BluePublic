@@ -10,4 +10,7 @@
 
 @interface GLMine_WalletCardChooseCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *bankNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *bankNumLabel;
+
 @end

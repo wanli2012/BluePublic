@@ -12,7 +12,7 @@
 #import "GLMine_PersonInfoController.h"//个人信息
 #import "GLMine_MyProjectController.h"//我的项目
 #import "GLShoppingCartController.h"//购物车
-#import "GLMine_NoticeController.h"//我的消息,公告详情
+#import "GLMine_MyMessageController.h"//我的消息
 #import "GLMine_WalletController.h"//钱包
 
 @interface GLMineController ()<UITableViewDelegate,UITableViewDataSource>
@@ -183,11 +183,11 @@
                     
                 }
                     break;
-                case 1:
+                case 1://我的消息
                 {
 
-                    GLMine_NoticeController *noticeVC = [[GLMine_NoticeController alloc] init];
-                    [self.navigationController pushViewController:noticeVC animated:YES];
+                    GLMine_MyMessageController *myMessageVC = [[GLMine_MyMessageController alloc] init];
+                    [self.navigationController pushViewController:myMessageVC animated:YES];
                     
                 }
                     break;

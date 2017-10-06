@@ -15,6 +15,8 @@
 //#import "GLFriendController.h"
 //#import "GLMineController.h"
 
+#import "GLLoginController.h"
+
 #import "yindaotuViewController.h"
 
 @interface AppDelegate ()
@@ -23,21 +25,19 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen]bounds]];
     
-    
-    //    BaseNavigationViewController *loginNav = [[BaseNavigationViewController alloc] initWithRootViewController:[[GLLoginController alloc] init]];
-    //    self.window.rootViewController = loginNav;
-    
+    BaseNavigationViewController *loginNav = [[BaseNavigationViewController alloc] initWithRootViewController:[[GLLoginController alloc] init]];
+    self.window.rootViewController = loginNav;
     
     [self.window makeKeyAndVisible];
     
 //    if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"isdirect1"] isEqualToString:@"YES"]) {
 //        
         self.window.rootViewController = [[DWTabBarController alloc]init];
+//    self.window.rootViewController = loginNav;
 //    }else{
 //        self.window.rootViewController = [[yindaotuViewController alloc]init];
 //    }

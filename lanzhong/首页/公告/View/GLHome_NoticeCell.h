@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GLMine_NoticeCell : UITableViewCell
+@interface GLHome_NoticeCell : UITableViewCell
 
 @end

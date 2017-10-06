@@ -8,6 +8,7 @@
 
 #import "GLMine_SetController.h"
 #import "GLMineCell.h"
+#import "GLMine_Set_modifyPwdController.h"//修改密码
 
 @interface GLMine_SetController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -91,15 +92,21 @@
     
     return cell;
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    self.hidesBottomBarWhenPushed = YES;
+    
     switch (indexPath.section) {
         case 0:
         {
             switch (indexPath.row) {
                 case 0:
                 {
-                    NSLog(@"密码修改");
+                    GLMine_Set_modifyPwdController *modifyVC = [[GLMine_Set_modifyPwdController alloc] init];
+                    [self.navigationController pushViewController:modifyVC animated:YES];
+                
                 }
+
                     break;
                 case 1:
                 {

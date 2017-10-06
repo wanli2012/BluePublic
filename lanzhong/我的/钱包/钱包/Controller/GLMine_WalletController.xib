@@ -20,6 +20,9 @@
                 <outlet property="contentViewWidth" destination="YHB-h5-U7U" id="E1V-JA-Gfq"/>
                 <outlet property="ensureExchangeBtn" destination="ihb-1Q-W8z" id="hD3-UC-EmZ"/>
                 <outlet property="ensurePayBtn" destination="n1r-NT-NTp" id="j3T-vY-6pa"/>
+                <outlet property="exchangeTextF" destination="JDP-kK-nAk" id="no2-Le-her"/>
+                <outlet property="moneyTextF" destination="B0B-cH-yR9" id="KZZ-b5-uvZ"/>
+                <outlet property="passwordTextF" destination="9Og-9D-Sfw" id="4B8-i7-lFK"/>
                 <outlet property="rechargeView" destination="ryV-wt-pVO" id="PCZ-2O-ckj"/>
                 <outlet property="topBgView" destination="KzH-bS-pMT" id="Gbk-9t-Mcm"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -196,7 +199,10 @@
                                             </constraints>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="next"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="-1" id="eOZ-dW-ojU"/>
+                                            </connections>
                                         </textField>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I3u-to-kAL">
                                             <rect key="frame" x="83" y="34.5" width="170" height="1"/>
@@ -235,7 +241,10 @@
                                             </constraints>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="-1" id="76j-la-5gj"/>
+                                            </connections>
                                         </textField>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7aY-s9-6HL">
                                             <rect key="frame" x="83" y="34.5" width="170" height="1"/>
@@ -280,8 +289,8 @@
                                         <constraint firstAttribute="trailing" secondItem="ihb-1Q-W8z" secondAttribute="trailing" constant="50" id="dLc-UA-ud3"/>
                                     </constraints>
                                 </view>
-                                <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ryV-wt-pVO" userLabel="rechargeView">
-                                    <rect key="frame" x="0.0" y="566" width="353" height="52"/>
+                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ryV-wt-pVO" userLabel="rechargeView">
+                                    <rect key="frame" x="0.0" y="238" width="353" height="380"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jwx-Hu-nxK">
                                             <rect key="frame" x="50" y="0.0" width="253" height="40"/>
@@ -299,7 +308,10 @@
                                                     </constraints>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="-1" id="tOz-24-rDo"/>
+                                                    </connections>
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XmY-Xn-9fV">
                                                     <rect key="frame" x="83" y="34.5" width="150" height="1"/>
