@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GLHomeModel.h"
 
 @interface GLHomeCell : UITableViewCell
+
+@property (nonatomic, strong)GLHome_groom_itemModel *model;
 
 @end

@@ -7,15 +7,14 @@
 //
 
 #import "GLClassifyCell.h"
-
-
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface GLClassifyCell()
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageV;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
-
+@property (weak, nonatomic) IBOutlet UILabel *countLabel;
 
 @end
 
@@ -24,7 +23,14 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
 
-    
+}
+
+- (void)setModel:(GLmall_guess_goodsModel *)model{
+    _model = model;
+    [self.imageV sd_setImageWithURL:[NSURL URLWithString:model.must_thumb] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    self.nameLabel.text = model.goods_name;
+    self.priceLabel.text = [NSString stringWithFormat:@"¥%@",model.goods_discount];
+    self.countLabel.text = [NSString stringWithFormat:@"已售:%@",model.salenum];
 }
 
 @end

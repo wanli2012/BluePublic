@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "GLMallModel.h"
 
 @interface GLClassifyCell : UICollectionViewCell
 
+@property (nonatomic, strong)GLmall_guess_goodsModel *model;
 
 @end

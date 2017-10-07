@@ -10,6 +10,12 @@
 
 @interface MenuScreeningView : UIView
 
+@property (nonatomic, copy)NSArray *dataArr1;
+@property (nonatomic, copy)NSArray *dataArr2;
+@property (nonatomic, copy)NSArray *dataArr3;
+
 -(void)menuScreeningViewDismiss;
+
+- (instancetype)initWithFrame:(CGRect)frame WithTitles:(NSArray *)titles;
 
 @end

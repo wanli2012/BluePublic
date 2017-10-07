@@ -22,43 +22,34 @@
 @property (nonatomic, strong) DropMenuView *twoLinkageDropMenu;
 @property (nonatomic, strong) DropMenuView *threeLinkageDropMenu;
 
-@property (nonatomic, strong) NSArray *addressArr;
-@property (nonatomic, strong) NSArray *categoriesArr;
-@property (nonatomic, strong) NSArray *sortsArr;
-
-
 @end
-
 
 @implementation MenuScreeningView
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame WithTitles:(NSArray *)titles
 {
     self = [super initWithFrame:frame];
     if (self) {
         
         self.oneLinkageButton = [UIButton buttonWithType:UIButtonTypeCustom];
         self.oneLinkageButton.frame = CGRectMake(0, 0, kWidth/3, 50);
-        [self setUpButton:self.oneLinkageButton withText:@"一级"];
+        [self setUpButton:self.oneLinkageButton withText:titles[0]];
         
         self.oneLinkageDropMenu = [[DropMenuView alloc] init];
         self.oneLinkageDropMenu.arrowView = self.oneLinkageButton.imageView;
         self.oneLinkageDropMenu.delegate = self;
         
-        
         self.twoLinkageButton = [UIButton buttonWithType:UIButtonTypeCustom];
         self.twoLinkageButton.frame = CGRectMake(kWidth/3, 0, kWidth/3, 50);
-        [self setUpButton:self.twoLinkageButton withText:@"二级"];
+        [self setUpButton:self.twoLinkageButton withText:titles[1]];
         
         self.twoLinkageDropMenu = [[DropMenuView alloc] init];
         self.twoLinkageDropMenu.arrowView = self.twoLinkageButton.imageView;
         self.twoLinkageDropMenu.delegate = self;
         
-        
-        
         self.threeLinkageButton = [UIButton buttonWithType:UIButtonTypeCustom];
         self.threeLinkageButton.frame = CGRectMake(2 * kWidth/3, 0,  kWidth/3, 50);
-        [self setUpButton:self.threeLinkageButton withText:@"三级"];
+        [self setUpButton:self.threeLinkageButton withText:titles[2]];
         
         self.threeLinkageDropMenu = [[DropMenuView alloc] init];
         self.threeLinkageDropMenu.arrowView = self.threeLinkageButton.imageView;
@@ -86,21 +77,21 @@
         [self.twoLinkageDropMenu dismiss];
         [self.threeLinkageDropMenu dismiss];
         
-        [self.oneLinkageDropMenu creatDropView:self withShowTableNum:1 withData:self.sortsArr];
+        [self.oneLinkageDropMenu creatDropView:self withShowTableNum:1 withData:self.dataArr1];
         
     }else if (button == self.twoLinkageButton){
         
         [self.oneLinkageDropMenu dismiss];
         [self.threeLinkageDropMenu dismiss];
     
-        [self.twoLinkageDropMenu creatDropView:self withShowTableNum:1 withData:self.categoriesArr];
+        [self.twoLinkageDropMenu creatDropView:self withShowTableNum:1 withData:self.dataArr2];
     
     }else if (button == self.threeLinkageButton){
         
         [self.oneLinkageDropMenu dismiss];
         [self.twoLinkageDropMenu dismiss];
         
-        [self.threeLinkageDropMenu creatDropView:self withShowTableNum:1 withData:self.addressArr];
+        [self.threeLinkageDropMenu creatDropView:self withShowTableNum:1 withData:self.dataArr3];
     }
 }
 
@@ -161,40 +152,6 @@
     [button setTitleEdgeInsets:UIEdgeInsetsMake(0, -button.imageView.bounds.size.width + 2, 0, button.imageView.bounds.size.width + 10)];
     [button setImageEdgeInsets:UIEdgeInsetsMake(0, button.titleLabel.bounds.size.width + 10, 0, -button.titleLabel.bounds.size.width + 2)];
     
-}
-
-
-
-
-#pragma mark - 懒加载
--(NSArray *)addressArr{
-
-    if (_addressArr == nil) {
-        
-        _addressArr = @[@"1",@"2",@"3",@"4"];
-    }
-    
-    return _addressArr;
-}
-
--(NSArray *)categoriesArr{
-
-    if (_categoriesArr == nil) {
-        
-        _categoriesArr = @[@"2",@"2",@"3"];
-    }
-    
-    return _categoriesArr;
-}
-
--(NSArray *)sortsArr{
-
-    if (_sortsArr == nil) {
-        
-        _sortsArr = @[@"3",@"2"];
-    }
-    
-    return _sortsArr;
 }
 
 

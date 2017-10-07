@@ -37,7 +37,7 @@
 //    if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"isdirect1"] isEqualToString:@"YES"]) {
 //        
         self.window.rootViewController = [[DWTabBarController alloc]init];
-//    self.window.rootViewController = loginNav;
+
 //    }else{
 //        self.window.rootViewController = [[yindaotuViewController alloc]init];
 //    }

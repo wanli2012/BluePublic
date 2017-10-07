@@ -11,19 +11,21 @@
 
 #import "UIView+Extension.h"
 #import "MBProgressHUD+LB.h"
-//#import "predicateModel.h"
-//#import "NetworkManager.h"
-//#import "LoadWaitView.h"
-//#import "NodataView.h"
+#import "predicateModel.h"
+#import "NetworkManager.h"
+#import "LoadWaitView.h"
+#import "NodataView.h"
 #import "UserModel.h"
 #import "usermodelachivar.h"
+#import <MJRefresh/MJRefresh.h>
+#import <MJExtension/MJExtension.h>
 
 
 
 #define YYSRGBColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
 
 #define TABBARTITLE_COLOR YYSRGBColor(120, 161, 255 , 1.0) //导航栏颜色
-#define MAIN_COLOR YYSRGBColor(233, 76, 137, 1.0) //主颜色
+#define MAIN_COLOR YYSRGBColor(22, 129, 255, 1.0) //主颜色
 #define autoSizeScaleX (kSCREEN_WIDTH/320.f)
 #define autoSizeScaleY (kSCREEN_HEIGHT/568.f)
 
@@ -34,5 +36,13 @@
 #define PlaceHolderImage @"头像1"
 #define LUNBO_PlaceHolder @"轮播暂位图"
 
+
+#define URL_Base @"http://192.168.1.186/Raise/index.php/Api/"
+#define kGETCODE_URL @"Common/sms"//获取验证码
+#define kREGISTER_URL @"User/user_enroll"//注册
+#define kLOGIN_URL @"User/user_login"//登录
+#define kFORGET_PWD_URL @""//找回密码
+#define kHOME_URL @"Item/index"//首页
+#define kMALL_HOME_URL @"Shop/shop_index"//商城首页
 
 #endif /* PrefixHeader_pch */

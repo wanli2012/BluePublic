@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+
 //#import "GLSet_QuitView.h"
 
 @interface GLSet_MaskVeiw : UIView

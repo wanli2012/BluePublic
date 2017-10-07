@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +14,7 @@
             <rect key="frame" x="0.0" y="0.0" width="355" height="226"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="355" height="226"/>
+                <rect key="frame" x="0.0" y="0.0" width="355" height="225"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ctw-ak-Twv" userLabel="bgView">
@@ -132,6 +131,12 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="bgView" destination="ctw-ak-Twv" id="mhz-12-6zH"/>
+                <outlet property="moneyLabel" destination="HLL-LY-4ka" id="yXz-qT-bZn"/>
+                <outlet property="personNumLabel" destination="i0t-gB-UJ2" id="3te-Jq-FOn"/>
+                <outlet property="picImageV" destination="sGo-OA-4td" id="6Ws-7y-tqS"/>
+                <outlet property="publishLabel" destination="g4I-dN-Bvj" id="uya-9R-DpH"/>
+                <outlet property="statusLabel" destination="UvX-1v-CzV" id="Kgx-Au-nMQ"/>
+                <outlet property="titleLabel" destination="YrN-Ua-3SK" id="52z-1s-Ynq"/>
             </connections>
             <point key="canvasLocation" x="105.5" y="40"/>
         </tableViewCell>

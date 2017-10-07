@@ -26,10 +26,9 @@
     [super viewDidLoad];
     
     self.logoImageV.layer.cornerRadius = self.logoImageV.height/2;
-    self.logoImageV.layer.borderColor = [UIColor blueColor].CGColor;
-    self.logoImageV.layer.borderWidth = 1.f;
-    
-    
+//    self.logoImageV.layer.borderColor = [UIColor blueColor].CGColor;
+//    self.logoImageV.layer.borderWidth = 1.f;
+//    
     self.bgView.layer.cornerRadius = 5.f;
     self.bgView.layer.shadowOpacity = 0.2f;
     self.bgView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
@@ -54,15 +53,23 @@
 
 //注册
 - (IBAction)register:(id)sender {
+    
     NSLog(@"注册");
+    
     GLRegisterController *registerVC = [[GLRegisterController alloc] init];
-//    [self presentViewController:registerVC animated:YES completion:nil];
+
     [self.navigationController pushViewController:registerVC animated:YES];
+    
 }
 
 //登录
 - (IBAction)login:(id)sender {
     NSLog(@"登录");
+}
+- (IBAction)back:(id)sender {
+    
+    NSLog(@"返回");
+    
 }
 
 @end

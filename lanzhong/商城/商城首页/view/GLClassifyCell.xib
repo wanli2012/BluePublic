@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D30" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -73,6 +72,7 @@
             </constraints>
             <size key="customSize" width="163" height="153"/>
             <connections>
+                <outlet property="countLabel" destination="mcA-de-I1i" id="L8z-dy-OwY"/>
                 <outlet property="imageV" destination="OSw-Sz-rWm" id="J55-dN-3Oh"/>
                 <outlet property="nameLabel" destination="cGC-GI-VmR" id="qGq-Qi-dgV"/>
                 <outlet property="priceLabel" destination="Yll-ig-TFb" id="Afp-EF-rMy"/>

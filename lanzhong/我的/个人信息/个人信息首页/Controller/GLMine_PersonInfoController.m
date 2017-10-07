@@ -7,6 +7,7 @@
 //
 
 #import "GLMine_PersonInfoController.h"
+#import "GLMine_PersonInfo_AddressChooseController.h"//地址选择
 
 @interface GLMine_PersonInfoController ()
 
@@ -43,7 +44,9 @@
 }
 - (IBAction)address:(id)sender {
     
-    
+    self.hidesBottomBarWhenPushed = YES;
+    GLMine_PersonInfo_AddressChooseController *addressVC = [[GLMine_PersonInfo_AddressChooseController alloc] init];
+    [self.navigationController pushViewController:addressVC animated:YES];
 }
 
 

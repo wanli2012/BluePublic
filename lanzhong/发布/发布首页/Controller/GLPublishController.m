@@ -35,6 +35,11 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
 }
+- (IBAction)dismiss:(id)sender {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+}
 
 
 

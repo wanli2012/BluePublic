@@ -29,9 +29,9 @@
     
     [self.visibleViewController.navigationItem setHidesBackButton:YES];
     
-    UIButton *button=[[UIButton alloc]initWithFrame:CGRectMake( 0, 0, 50, 44)];
+    UIButton *button=[[UIButton alloc]initWithFrame:CGRectMake( 0, 0, 60, 44)];
     button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;//左对齐
-    [button setImage:[UIImage imageNamed:@"返回"] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"return"] forState:UIControlStateNormal];
     [button setImageEdgeInsets:UIEdgeInsetsMake(0 ,10, 0, 0)];
     // 让返回按钮内容继续向左边偏移10
     button.contentEdgeInsets = UIEdgeInsetsMake(0, -17, 0, 0);
