@@ -42,39 +42,31 @@
     
     NSString *urlStr1 = [NSString stringWithFormat:@"%@%@",URL_Base,urlStr];
     
-    
     [manager POST:urlStr1 parameters:paramDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         finish(responseObject);
-//        switch ([responseObject[@"code"] integerValue]) {
-//            case 100:
-//                finish(responseObject);
-//                break;
-//            case 101:
-//                [MBProgressHUD showSuccess:@"登录失败,账号密码错误"];
-//                break;
-//            case 102:
+        switch ([responseObject[@"code"] integerValue]) {
+            case SUCCESS_CODE:
+                finish(responseObject);
+                break;
+            case PAGE_ERROR_CODE:
+                [MBProgressHUD showError:@"没有更多数据了"];
+                break;
+            case ERROR_CODE:
 //                [MBProgressHUD showSuccess:@"token错误"];
-//                break;
-//            case 104:
-//                finish(responseObject);
-//                break;
-//            case 105:
+                finish(responseObject);
+                break;
+            case LOGIC_ERROR_CODE:
+                finish(responseObject);
+                break;
+            case OVERDUE_CODE:
 //                [MBProgressHUD showSuccess:@"未登录请登录账户返回"];
-//                break;
-//            case 106:
-//                [MBProgressHUD showSuccess:@"服务器错误"];
-//                break;
-//            case 107:
-//                [MBProgressHUD showSuccess:@"用户被拉黑"];
-//                break;
-//            case 108:
-//                finish(responseObject);
-//                break;
-//                
-//            default:
-//                break;
-//        }
+                finish(responseObject);
+                break;
+                
+            default:
+                break;
+        }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

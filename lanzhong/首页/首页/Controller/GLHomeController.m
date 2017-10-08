@@ -15,6 +15,9 @@
 
 @interface GLHomeController ()<UITableViewDataSource,UITableViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UILabel *noticeLabel;
+
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UIView *noticeView;
@@ -43,11 +46,34 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    [self setUI];
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"GLHomeCell" bundle:nil] forCellReuseIdentifier:@"GLHomeCell"];
+    
+    __weak __typeof(self) weakSelf = self;
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [weakSelf postRequest];
+        
+    }];
+    // 设置文字
+    [header setTitle:@"快扯我，快点" forState:MJRefreshStateIdle];
+    
+    [header setTitle:@"数据要来啦" forState:MJRefreshStatePulling];
+    
+    [header setTitle:@"服务器正在狂奔..." forState:MJRefreshStateRefreshing];
+    
+    self.tableView.mj_header = header;
+    
+    [self postRequest];//请求数据
+    
+}
+- (void)setUI{
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.headerView.height = 250;
+    self.headerView.height = 260;
     
     self.segment.selectedSegmentIndex = 0;
     
@@ -63,27 +89,6 @@
     self.middleViewLayerView.layer.shadowOpacity = 0.1f;
     self.middleViewLayerView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
     self.middleViewLayerView.layer.shadowRadius = 1.f;
-    
-    [self.tableView registerNib:[UINib nibWithNibName:@"GLHomeCell" bundle:nil] forCellReuseIdentifier:@"GLHomeCell"];
-    
-    __weak __typeof(self) weakSelf = self;
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        
-        [weakSelf postRequest];
-        
-    }];
-    
-    // 设置文字
-    [header setTitle:@"快扯我，快点" forState:MJRefreshStateIdle];
-    
-    [header setTitle:@"数据要来啦" forState:MJRefreshStatePulling];
-    
-    [header setTitle:@"服务器正在狂奔..." forState:MJRefreshStateRefreshing];
-    
-    self.tableView.mj_header = header;
-    
-    [self postRequest];//请求数据
-    
 }
 
 - (void)postRequest{
@@ -94,10 +99,12 @@
         [_loadV removeloadview];
         [self endRefresh];
         
-        if ([responseObject[@"code"] integerValue] == 200){
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             if([responseObject[@"data"] count] != 0){
                 
                 self.model = [GLHomeModel mj_objectWithKeyValues:responseObject[@"data"]];
+
+                self.noticeLabel.text = self.model.new_notice.title;
                 
                 [self switchSelected:nil];
             }
@@ -137,6 +144,7 @@
 - (IBAction)notice:(id)sender {
     
     NSLog(@"公告详情");
+    
 }
 
 - (IBAction)switchSelected:(id)sender {
@@ -159,7 +167,6 @@
             break;
         case 1:
         {
-            
             self.titleLabel.text = @"爱心大数据";
             self.label.text = @"爱心人数";
             self.label2.text = @"帮扶项目";
@@ -167,9 +174,7 @@
             self.label4.text = [NSString stringWithFormat:@"%@人",self.model.ai_man_num];
             self.label5.text = [NSString stringWithFormat:@"%@个",self.model.ai_item_num ];
             self.label6.text = [NSString stringWithFormat:@"%@元",self.model.ai_over_num ];
-           
         }
-            
             break;
             
         default:
@@ -201,6 +206,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     self.hidesBottomBarWhenPushed = YES;
+    
     if (indexPath.row == 0) {
         
         GLPay_ChooseController *payVC = [[GLPay_ChooseController alloc] init];

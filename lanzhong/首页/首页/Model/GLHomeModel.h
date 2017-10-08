@@ -18,8 +18,16 @@
 @property (nonatomic, copy)NSString *classify;//完成金额
 @property (nonatomic, copy)NSString *draw_money;//后台评估金额
 @property (nonatomic, copy)NSString *admin_money;//1:爱心项目 2:创客项目
-@property (nonatomic, copy)NSString *stop;//项目运行状态  1正常   2禁止   3完成
+@property (nonatomic, copy)NSString *stop;//项目运行状态  1正常 2禁止 3完成
 @property (nonatomic, copy)NSString *invest_count;//人数
+@property (nonatomic, copy)NSString *issue;//发布方
+
+@end
+
+@interface GLHome_newNoticeModel : NSObject
+
+@property (nonatomic, copy)NSString *news_id;//公告id
+@property (nonatomic, copy)NSString *title;//公告title
 
 @end
 
@@ -31,6 +39,7 @@
 @property (nonatomic, copy)NSString *c_item_num;//创客项目数量
 @property (nonatomic, copy)NSString *c_over_num;//完成金额
 @property (nonatomic, copy)NSString *c_man_num;//参与人数
+@property (nonatomic, strong, getter = theNew_notice)GLHome_newNoticeModel *new_notice;//公告
 @property (nonatomic, copy)NSArray <GLHome_groom_itemModel *>*groom_item;
 
 @end

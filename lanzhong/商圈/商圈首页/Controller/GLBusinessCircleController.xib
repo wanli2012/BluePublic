@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -56,58 +55,9 @@
                     <rect key="frame" x="0.0" y="64" width="387" height="527"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <view key="tableHeaderView" contentMode="scaleToFill" id="gdd-tk-5hK" userLabel="headerView">
-                        <rect key="frame" x="0.0" y="0.0" width="387" height="139"/>
+                        <rect key="frame" x="0.0" y="0.0" width="387" height="191"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kmP-qE-YmZ">
-                                <rect key="frame" x="0.0" y="0.0" width="387" height="50"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uzc-Pp-2ev">
-                                        <rect key="frame" x="0.0" y="0.0" width="129" height="50"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="建筑行业">
-                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXb-54-I0z">
-                                        <rect key="frame" x="258" y="0.0" width="129" height="50"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="完成进度">
-                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hqf-OL-tvR">
-                                        <rect key="frame" x="129" y="0.0" width="129" height="50"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" title="官方发布">
-                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="hqf-OL-tvR" firstAttribute="width" secondItem="Uzc-Pp-2ev" secondAttribute="width" id="0OE-LZ-CuY"/>
-                                    <constraint firstItem="Uzc-Pp-2ev" firstAttribute="width" secondItem="kmP-qE-YmZ" secondAttribute="width" multiplier="1/3" id="78a-Qk-Hbo"/>
-                                    <constraint firstAttribute="trailing" secondItem="gXb-54-I0z" secondAttribute="trailing" id="CCe-1P-A5R"/>
-                                    <constraint firstItem="gXb-54-I0z" firstAttribute="leading" secondItem="hqf-OL-tvR" secondAttribute="trailing" id="CWf-3O-ZIv"/>
-                                    <constraint firstItem="Uzc-Pp-2ev" firstAttribute="leading" secondItem="kmP-qE-YmZ" secondAttribute="leading" id="Imz-Kf-fxU"/>
-                                    <constraint firstAttribute="bottom" secondItem="Uzc-Pp-2ev" secondAttribute="bottom" id="Req-QV-z6t"/>
-                                    <constraint firstItem="hqf-OL-tvR" firstAttribute="top" secondItem="kmP-qE-YmZ" secondAttribute="top" id="X3J-dM-1GF"/>
-                                    <constraint firstAttribute="height" constant="50" id="aqn-1s-21d"/>
-                                    <constraint firstItem="Uzc-Pp-2ev" firstAttribute="top" secondItem="kmP-qE-YmZ" secondAttribute="top" id="h4W-e9-BpH"/>
-                                    <constraint firstItem="hqf-OL-tvR" firstAttribute="leading" secondItem="Uzc-Pp-2ev" secondAttribute="trailing" id="lp0-IJ-8gE"/>
-                                    <constraint firstItem="gXb-54-I0z" firstAttribute="top" secondItem="kmP-qE-YmZ" secondAttribute="top" id="q6q-zz-BpL"/>
-                                    <constraint firstAttribute="bottom" secondItem="gXb-54-I0z" secondAttribute="bottom" id="rmi-GP-Sca"/>
-                                    <constraint firstAttribute="bottom" secondItem="hqf-OL-tvR" secondAttribute="bottom" id="vJz-hr-qA9"/>
-                                </constraints>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="kmP-qE-YmZ" firstAttribute="top" secondItem="gdd-tk-5hK" secondAttribute="top" id="Tam-wz-RUi"/>
-                            <constraint firstAttribute="trailing" secondItem="kmP-qE-YmZ" secondAttribute="trailing" id="ksF-HI-5pi"/>
-                            <constraint firstItem="kmP-qE-YmZ" firstAttribute="leading" secondItem="gdd-tk-5hK" secondAttribute="leading" id="t8W-gD-xJy"/>
-                        </constraints>
                     </view>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="vQ8-WD-GK4"/>

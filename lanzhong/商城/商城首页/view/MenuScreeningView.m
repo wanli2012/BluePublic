@@ -30,6 +30,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.titles = titles;
         
         self.oneLinkageButton = [UIButton buttonWithType:UIButtonTypeCustom];
         self.oneLinkageButton.frame = CGRectMake(0, 0, kWidth/3, 50);
@@ -66,8 +67,6 @@
     return self;
 }
 
-
-
 #pragma mark - 按钮点击推出菜单 (并且其他的菜单收起)
 -(void)clickButton:(UIButton *)button{
 
@@ -95,8 +94,6 @@
     }
 }
 
-
-
 #pragma mark - 筛选菜单消失
 -(void)menuScreeningViewDismiss{
     
@@ -105,28 +102,28 @@
     [self.threeLinkageDropMenu dismiss];
 }
 
-
 #pragma mark - 协议实现
--(void)dropMenuView:(DropMenuView *)view didSelectName:(NSString *)str{
-
+-(void)dropMenuView:(DropMenuView *)view didSelectName:(NSString *)str selectIndex:(NSInteger)selectIndex{
+    
     if (view == self.oneLinkageDropMenu) {
      
         [self.oneLinkageButton setTitle:str forState:UIControlStateNormal];
         [self buttonEdgeInsets:self.oneLinkageButton];
-        
+        self.block(0,selectIndex);
     }else if (view == self.twoLinkageDropMenu){
     
         [self.twoLinkageButton setTitle:str forState:UIControlStateNormal];
+        [self.threeLinkageButton setTitle:self.titles[2] forState:UIControlStateNormal];
         [self buttonEdgeInsets:self.twoLinkageButton];
-    
+        self.block(1,selectIndex);
     }else if (view == self.threeLinkageDropMenu){
     
         [self.threeLinkageButton setTitle:str forState:UIControlStateNormal];
+        [self.twoLinkageButton setTitle:self.titles[1] forState:UIControlStateNormal];
         [self buttonEdgeInsets:self.threeLinkageButton];
-    
+        self.block(2,selectIndex);
     }
 }
-
 
 #pragma mark - 设置Button
 -(void)setUpButton:(UIButton *)button withText:(NSString *)str{

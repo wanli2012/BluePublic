@@ -39,8 +39,6 @@
     self.getCodeBtn.layer.cornerRadius = 5.f;
     
     self.imageV.layer.cornerRadius = self.imageV.height/2;
-//    self.imageV.layer.borderColor = [UIColor blueColor].CGColor;
-//    self.imageV.layer.borderWidth = 1.f;
     
     self.bgView.layer.cornerRadius = 5.f;
     self.bgView.layer.shadowOpacity = 0.2f;
@@ -51,11 +49,13 @@
     self.registerBtn.layer.cornerRadius = 5.f;
     
 }
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBar.hidden = YES;
 }
+
 //返回
 - (IBAction)back:(id)sender {
     NSLog(@"返回");
@@ -67,67 +67,74 @@
 
 //注册
 - (IBAction)register:(id)sender {
-//    if (self.phoneTF.text.length <=0 ) {
-//        [MBProgressHUD showError:@"请输入手机号码"];
-//        return;
-//    }else{
-//        if (![predicateModel valiMobile:self.phoneTF.text]) {
-//            [MBProgressHUD showError:@"手机号格式不对"];
-//            return;
-//        }
-//    }
-//    
-//    if (self.passwordTF.text.length <= 0) {
-//        [MBProgressHUD showError:@"密码不能为空"];
-//        return;
-//    }
-//    if (self.passwordTF.text.length < 6 || self.passwordTF.text.length > 12) {
-//        [MBProgressHUD showError:@"请输入6-20位密码"];
-//        return;
-//    }
-//    
-//    if ([predicateModel checkIsHaveNumAndLetter:self.passwordTF.text] != 3) {
-//        
-//        [MBProgressHUD showError:@"密码须包含数字和字母"];
-//        return;
-//    }
-//    
-//    if (self.ensurePwdTF.text.length <= 0) {
-//        [MBProgressHUD showError:@"请输入确认密码"];
-//        return;
-//    }
-//    
-//    if (![self.passwordTF.text isEqualToString:self.ensurePwdTF.text]) {
-//        [MBProgressHUD showError:@"两次输入的密码不一致"];
-//        return;
-//    }
-//    
-//    if (self.codeTF.text.length <= 0) {
-//        [MBProgressHUD showError:@"请输入验证码"];
-//        return;
-//    }
-//    
-//    _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
-//    [NetworkManager requestPOSTWithURLStr:kREGISTER_URL paramDic:@{@"uid":self.recomendId.text} finish:^(id responseObject) {
-//        [_loadV removeloadview];
-//        if ([responseObject[@"code"] integerValue]==1) {
-//            
-//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示"
-//                                                                message:[NSString stringWithFormat:@"您的推荐人为%@",responseObject[@"data"][@"count"]]
-//                                                               delegate:self
-//                                                      cancelButtonTitle:@"取消"
-//                                                      otherButtonTitles:@"立即注册", nil];
-//            
-//            [alertView show];
-//            
-//        }else{
-//            [MBProgressHUD showError:responseObject[@"message"]];
-//        }
-//    } enError:^(NSError *error) {
-//        [_loadV removeloadview];
-//        [MBProgressHUD showError:error.localizedDescription];
-//        
-//    }];
+    
+    if (self.phoneTF.text.length <=0 ) {
+        [MBProgressHUD showError:@"请输入手机号码"];
+        return;
+    }else{
+        if (![predicateModel valiMobile:self.phoneTF.text]) {
+            [MBProgressHUD showError:@"手机号格式不对"];
+            return;
+        }
+    }
+    
+    if (self.passwordTF.text.length <= 0) {
+        [MBProgressHUD showError:@"密码不能为空"];
+        return;
+    }
+    if (self.passwordTF.text.length < 6 || self.passwordTF.text.length > 12) {
+        [MBProgressHUD showError:@"请输入6-12位密码"];
+        return;
+    }
+    
+    if ([predicateModel checkIsHaveNumAndLetter:self.passwordTF.text] != 3) {
+        
+        [MBProgressHUD showError:@"密码须包含数字和字母"];
+        return;
+    }
+    
+    if (self.ensurePwdTF.text.length <= 0) {
+        [MBProgressHUD showError:@"请输入确认密码"];
+        return;
+    }
+    
+    if (![self.passwordTF.text isEqualToString:self.ensurePwdTF.text]) {
+        [MBProgressHUD showError:@"两次输入的密码不一致"];
+        return;
+    }
+    
+    if (self.codeTF.text.length <= 0) {
+        [MBProgressHUD showError:@"请输入验证码"];
+        return;
+    }
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"phone"] = self.phoneTF.text;
+    dict[@"upwd"] = self.passwordTF.text;
+    dict[@"phone_code"] = self.codeTF.text;
+    dict[@"reg_port"] = @"3";
+    
+    _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+    [NetworkManager requestPOSTWithURLStr:kREGISTER_URL paramDic:dict finish:^(id responseObject) {
+        [_loadV removeloadview];
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+            
+            [MBProgressHUD showSuccess:@"注册成功"];
+            
+            [UIView animateWithDuration:0.3 animations:^{
+                
+                [self.navigationController popViewControllerAnimated:YES];
+            }];
+            
+        }else{
+            [MBProgressHUD showError:responseObject[@"message"]];
+        }
+        
+    } enError:^(NSError *error) {
+        [_loadV removeloadview];
+        [MBProgressHUD showError:error.localizedDescription];
+        
+    }];
 }
 
 - (IBAction)login:(id)sender {
@@ -150,7 +157,7 @@
     
     [self startTime];//获取倒计时
     [NetworkManager requestPOSTWithURLStr:kGETCODE_URL paramDic:@{@"phone":self.phoneTF.text} finish:^(id responseObject) {
-        if ([responseObject[@"code"] integerValue] == 200) {
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
             
         }else{
             

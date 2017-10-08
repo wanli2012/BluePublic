@@ -324,7 +324,7 @@
         
         [self saveSelects];
         [self dismiss];
-        [_delegate dropMenuView:self didSelectName:self.dataArr[indexPath.row]];
+        [_delegate dropMenuView:self didSelectName:self.dataArr[indexPath.row] selectIndex:indexPath.row];
         
         
     }else if (self.tableCount == 2){
@@ -344,7 +344,7 @@
 
              NSInteger firstSelectRow = ((UITableView *)self.tableViewArr[0]).indexPathForSelectedRow.row;
             
-             [_delegate dropMenuView:self didSelectName:self.dataArr[firstSelectRow]];
+            [_delegate dropMenuView:self didSelectName:self.dataArr[firstSelectRow] selectIndex:indexPath.row];
         }
         
     }else if (self.tableCount == 3){
@@ -375,7 +375,7 @@
             
             [self saveSelects];
             [self dismiss];
-            [_delegate dropMenuView:self didSelectName:self.dataArr[firstSelectRow]];
+            [_delegate dropMenuView:self didSelectName:self.dataArr[firstSelectRow] selectIndex:indexPath.row];
            
         }
     }

@@ -210,6 +210,8 @@
 		4AF109F31F78E07A00CB51FA /* UILabel+UILabel_ChangeLineSpaceAndWordSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF109E61F78E07A00CB51FA /* UILabel+UILabel_ChangeLineSpaceAndWordSpace.m */; };
 		4AF109F41F78E07A00CB51FA /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF109E81F78E07A00CB51FA /* UIView+Extension.m */; };
 		4AF10A051F78E27C00CB51FA /* tabbar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AF10A041F78E27C00CB51FA /* tabbar.xcassets */; };
+		4AFF4FA71F8A191A00CE6D79 /* 首页.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AFF4FA61F8A191A00CE6D79 /* 首页.xcassets */; };
+		4AFF4FAD1F8A30C700CE6D79 /* GLBusinessCircleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AFF4FAC1F8A30C700CE6D79 /* GLBusinessCircleModel.m */; };
 		6982E3A60C2A1ECE784BC35D /* Pods_lanzhong.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19A11FB975C44A94E569750A /* Pods_lanzhong.framework */; };
 		F9BB80111F7A283700867514 /* GLClassifyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BB800F1F7A283700867514 /* GLClassifyCell.m */; };
 		F9BB80121F7A283700867514 /* GLClassifyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9BB80101F7A283700867514 /* GLClassifyCell.xib */; };
@@ -559,6 +561,9 @@
 		4AF109E71F78E07A00CB51FA /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		4AF109E81F78E07A00CB51FA /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		4AF10A041F78E27C00CB51FA /* tabbar.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = tabbar.xcassets; sourceTree = "<group>"; };
+		4AFF4FA61F8A191A00CE6D79 /* 首页.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "首页.xcassets"; sourceTree = "<group>"; };
+		4AFF4FAB1F8A30C700CE6D79 /* GLBusinessCircleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLBusinessCircleModel.h; sourceTree = "<group>"; };
+		4AFF4FAC1F8A30C700CE6D79 /* GLBusinessCircleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLBusinessCircleModel.m; sourceTree = "<group>"; };
 		7451D5B0290BCE80E2B11756 /* Pods-lanzhong.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lanzhong.debug.xcconfig"; path = "Pods/Target Support Files/Pods-lanzhong/Pods-lanzhong.debug.xcconfig"; sourceTree = "<group>"; };
 		DC90251775A1E99EE4FC964D /* Pods-lanzhong.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lanzhong.release.xcconfig"; path = "Pods/Target Support Files/Pods-lanzhong/Pods-lanzhong.release.xcconfig"; sourceTree = "<group>"; };
 		F9BB800E1F7A283700867514 /* GLClassifyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLClassifyCell.h; sourceTree = "<group>"; };
@@ -1200,6 +1205,8 @@
 		4A5A78541F7B9B0E004FB15A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4AFF4FAB1F8A30C700CE6D79 /* GLBusinessCircleModel.h */,
+				4AFF4FAC1F8A30C700CE6D79 /* GLBusinessCircleModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1229,7 +1236,6 @@
 			isa = PBXGroup;
 			children = (
 				4A6AD1B61F7F73AD00E6084E /* Controller */,
-				4A6AD1B71F7F73AD00E6084E /* Model */,
 				4A6AD1B81F7F73AD00E6084E /* View */,
 			);
 			path = "经典案例";
@@ -1243,13 +1249,6 @@
 				4A6AD1C91F7F73EE00E6084E /* GLHome_CasesController.xib */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		4A6AD1B71F7F73AD00E6084E /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		4A6AD1B81F7F73AD00E6084E /* View */ = {
@@ -2442,6 +2441,7 @@
 				4AF10A041F78E27C00CB51FA /* tabbar.xcassets */,
 				F9BB80261F7A447E00867514 /* ShoppingMall.xcassets */,
 				4ADDD1691F88635200C95F9C /* 登录注册.xcassets */,
+				4AFF4FA61F8A191A00CE6D79 /* 首页.xcassets */,
 			);
 			path = "图片资源";
 			sourceTree = "<group>";
@@ -2602,6 +2602,7 @@
 			files = (
 				4ADDD16A1F88635200C95F9C /* 登录注册.xcassets in Resources */,
 				4ADEBAFC1F7DDC7200C50087 /* GLPublishController.xib in Resources */,
+				4AFF4FA71F8A191A00CE6D79 /* 首页.xcassets in Resources */,
 				4A6B9F351F7CF100009386C8 /* GLBusiness_DetailProjectCell.xib in Resources */,
 				4A509BA01F875DCE00D794FB /* GLBuyBackChooseBankView.xib in Resources */,
 				4A6AD1E41F7F86D300E6084E /* GLBusiness_FundTrendController.xib in Resources */,
@@ -2828,6 +2829,7 @@
 				4A53E8531F7A59710021D9E0 /* GLMall_DetailFooterView.m in Sources */,
 				4A509BAE1F877C2B00D794FB /* GLForgetPasswordController.m in Sources */,
 				4AF109391F78DBB500CB51FA /* WXSTransitionManager+ViewMoveAnimation.m in Sources */,
+				4AFF4FAD1F8A30C700CE6D79 /* GLBusinessCircleModel.m in Sources */,
 				F9BB80241F7A440100867514 /* DropMenuView.m in Sources */,
 				4AF109ED1F78E07A00CB51FA /* LWLabel.m in Sources */,
 				F9BB80331F7A584800867514 /* GLShoppingCartModel.m in Sources */,

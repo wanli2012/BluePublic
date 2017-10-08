@@ -8,11 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^MenuScreeningViewBlock)(NSInteger itemIndex,NSInteger index2);
+
 @interface MenuScreeningView : UIView
 
 @property (nonatomic, copy)NSArray *dataArr1;
 @property (nonatomic, copy)NSArray *dataArr2;
 @property (nonatomic, copy)NSArray *dataArr3;
+
+@property (nonatomic, copy)NSArray *titles;
+
+@property (nonatomic, copy)MenuScreeningViewBlock block;
 
 -(void)menuScreeningViewDismiss;
 

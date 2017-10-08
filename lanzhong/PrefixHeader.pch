@@ -36,13 +36,23 @@
 #define PlaceHolderImage @"头像1"
 #define LUNBO_PlaceHolder @"轮播暂位图"
 
+#define SUCCESS_CODE 200
+#define PAGE_ERROR_CODE 204
+#define ERROR_CODE 400
+#define OVERDUE_CODE 401
+#define LOGIC_ERROR_CODE 412
 
 #define URL_Base @"http://192.168.1.186/Raise/index.php/Api/"
+
+
+
 #define kGETCODE_URL @"Common/sms"//获取验证码
 #define kREGISTER_URL @"User/user_enroll"//注册
 #define kLOGIN_URL @"User/user_login"//登录
-#define kFORGET_PWD_URL @""//找回密码
+#define kFORGET_PWD_URL @"User/forget_pwd"//找回密码
 #define kHOME_URL @"Item/index"//首页
+#define kHOME_ALL_CLASSIC_URL @"Item/more_item"//所有经典项目
 #define kMALL_HOME_URL @"Shop/shop_index"//商城首页
+#define kCIRCLE_HOME_URL @"Shop/shop_index"//商圈首页
 
 #endif /* PrefixHeader_pch */

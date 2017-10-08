@@ -15,7 +15,7 @@
 
 #import "DWTabBar.h"
 //#import "LBSessionListViewController.h"
-//#import "GLLoginController.h"
+#import "GLLoginController.h"
 
 #define DWColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0] //用10进制表示颜色，例如（255,255,255）黑色
 #define DWRandomColor DWColor(arc4random_uniform(255), arc4random_uniform(255), arc4random_uniform(255))
@@ -73,20 +73,20 @@
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
     
-//    if (viewController == [tabBarController.viewControllers objectAtIndex:3] ) {
-//    
-//        if ([UserModel defaultUser].loginstatus == YES) {
-//            
-//            return YES;
-//        }
-//        
-//        GLLoginController *loginVC = [[GLLoginController alloc] init];
-//        BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginVC];
-//        nav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-//        [self presentViewController:nav animated:YES completion:nil];
-//        return NO;
-//        
-//    }
+    if (viewController == [tabBarController.viewControllers objectAtIndex:3] ) {
+    
+        if ([UserModel defaultUser].loginstatus == YES) {
+            
+            return YES;
+        }
+        
+        GLLoginController *loginVC = [[GLLoginController alloc] init];
+        BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginVC];
+        nav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:nav animated:YES completion:nil];
+        return NO;
+        
+    }
 
     return YES;
 }

@@ -31,7 +31,7 @@
 {
     if([key isEqualToString:@"id"]){
         
-        self.userId = value;
+//        self.userId = value;
     }
 }
 

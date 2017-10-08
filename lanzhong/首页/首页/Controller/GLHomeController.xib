@@ -20,6 +20,7 @@
                 <outlet property="label6" destination="XAF-VE-07n" id="C8M-wr-shG"/>
                 <outlet property="middleView" destination="cZf-aA-U0J" id="xl6-CZ-BJF"/>
                 <outlet property="middleViewLayerView" destination="a0i-0n-gL9" id="L5f-WC-7RR"/>
+                <outlet property="noticeLabel" destination="eR3-vj-WwG" id="GWc-2q-zwY"/>
                 <outlet property="noticeLayerView" destination="OEw-SQ-OVZ" id="b3S-Wf-VxB"/>
                 <outlet property="noticeView" destination="dXE-lE-CSX" id="cST-Hn-BdS"/>
                 <outlet property="segment" destination="sLU-lN-hsa" id="S47-3J-HK2"/>
@@ -47,33 +48,33 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dXE-lE-CSX">
                                 <rect key="frame" x="15" y="10" width="345" height="40"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TSP-8W-mrC">
-                                        <rect key="frame" x="15" y="7.5" width="25" height="25"/>
-                                        <color key="backgroundColor" red="0.50196081400000003" green="0.25098040700000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notice" translatesAutoresizingMaskIntoConstraints="NO" id="TSP-8W-mrC">
+                                        <rect key="frame" x="15" y="9" width="22" height="22"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="79L-C0-kom"/>
-                                            <constraint firstAttribute="width" constant="25" id="Hme-Js-KoD"/>
+                                            <constraint firstAttribute="height" constant="22" id="79L-C0-kom"/>
+                                            <constraint firstAttribute="width" constant="22" id="Hme-Js-KoD"/>
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vuR-65-Ea3">
-                                        <rect key="frame" x="55" y="7.5" width="1" height="25"/>
+                                        <rect key="frame" x="52" y="9" width="1" height="22"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="1" id="s7m-JT-qcb"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2分钟前新增蓝众项目一个:兰州拉面馆" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eR3-vj-WwG">
-                                        <rect key="frame" x="66" y="14" width="229" height="13.5"/>
+                                        <rect key="frame" x="63" y="14" width="249.5" height="13.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XOD-Ty-eeu">
-                                        <rect key="frame" x="305" y="7" width="25" height="25"/>
-                                        <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_return" translatesAutoresizingMaskIntoConstraints="NO" id="XOD-Ty-eeu">
+                                        <rect key="frame" x="322.5" y="12" width="7.5" height="15"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="25" id="3DK-Yd-lHs"/>
-                                            <constraint firstAttribute="height" constant="25" id="sDe-Yd-zlf"/>
+                                            <constraint firstAttribute="width" constant="7.5" id="3DK-Yd-lHs"/>
+                                            <constraint firstAttribute="height" constant="15" id="sDe-Yd-zlf"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
@@ -241,24 +242,24 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vAO-Uw-ZwY">
-                                        <rect key="frame" x="82.5" y="10.5" width="20" height="20"/>
-                                        <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="classiccase" translatesAutoresizingMaskIntoConstraints="NO" id="vAO-Uw-ZwY">
+                                        <rect key="frame" x="82.5" y="13" width="15" height="15"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="20" id="N4c-NR-gqY"/>
-                                            <constraint firstAttribute="height" constant="20" id="Y8i-CG-5Uc"/>
+                                            <constraint firstAttribute="width" constant="15" id="N4c-NR-gqY"/>
+                                            <constraint firstAttribute="height" constant="15" id="Y8i-CG-5Uc"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XaF-N0-bAT">
-                                        <rect key="frame" x="340" y="10" width="20" height="20"/>
-                                        <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="more" translatesAutoresizingMaskIntoConstraints="NO" id="XaF-N0-bAT">
+                                        <rect key="frame" x="344" y="12" width="16" height="16"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="20" id="Olk-Mn-fiQ"/>
-                                            <constraint firstAttribute="height" constant="20" id="Y8S-rK-2df"/>
+                                            <constraint firstAttribute="width" constant="16" id="Olk-Mn-fiQ"/>
+                                            <constraint firstAttribute="height" constant="16" id="Y8S-rK-2df"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="更多" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VEu-KJ-O6r">
-                                        <rect key="frame" x="303" y="12.5" width="27" height="16"/>
+                                        <rect key="frame" x="307" y="12.5" width="27" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -331,4 +332,10 @@
             </connections>
         </tapGestureRecognizer>
     </objects>
+    <resources>
+        <image name="classiccase" width="15" height="15"/>
+        <image name="home_return" width="7" height="15"/>
+        <image name="more" width="16" height="16"/>
+        <image name="notice" width="22" height="22"/>
+    </resources>
 </document>

@@ -10,6 +10,9 @@
 
 @implementation GLHome_groom_itemModel
 
+@end
+
+@implementation GLHome_newNoticeModel
 
 @end
 
