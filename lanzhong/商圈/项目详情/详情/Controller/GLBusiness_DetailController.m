@@ -14,6 +14,7 @@
 #import "GLBusiness_CertificationController.h"//官方认证
 #import "GLBusiness_LoveListController.h"
 #import "GLBusiness_FundTrendController.h"//资金动向
+#import "GLBusiness_DetailModel.h"
 
 @interface GLBusiness_DetailController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,GLBusiness_ChooseCellDelegate>
 {
@@ -33,6 +34,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageV2;
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageV3;
 
+
+@property (nonatomic, strong)GLBusiness_DetailModel *model;
+@property (nonatomic, strong)LoadWaitView *loadV;
+
 @end
 
 @implementation GLBusiness_DetailController
@@ -46,7 +51,71 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"GLBusiness_DetailProjectCell" bundle:nil] forCellReuseIdentifier:@"GLBusiness_DetailProjectCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"GLBusiness_ChooseCell" bundle:nil] forCellReuseIdentifier:@"GLBusiness_ChooseCell"];
     
+    __weak __typeof(self) weakSelf = self;
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [weakSelf postRequest:YES];
+
+        
+    }];
+
+    // 设置文字
+    [header setTitle:@"快扯我，快点" forState:MJRefreshStateIdle];
+    
+    [header setTitle:@"数据要来啦" forState:MJRefreshStatePulling];
+    
+    [header setTitle:@"服务器正在狂奔..." forState:MJRefreshStateRefreshing];
+    
+    self.tableView.mj_header = header;
+    
+    [self postRequest:YES];
+ 
+    
 }
+
+- (void)postRequest:(BOOL)isRefresh{
+
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    
+    dic[@"item_id"] = self.item_id;
+    
+    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+    [NetworkManager requestPOSTWithURLStr:kCIRCLE_HOME_URL paramDic:dic finish:^(id responseObject) {
+        
+        [_loadV removeloadview];
+        [self endRefresh];
+        
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+            if([responseObject[@"data"] count] != 0){
+                
+//                for (NSDictionary *dict in responseObject[@"data"]) {
+//                    GLCircle_item_dataModel *model = [GLCircle_item_dataModel mj_objectWithKeyValues:dict];
+//                    [self.models addObject:model];
+//                }
+            }
+        }else{
+            
+            [MBProgressHUD showError:responseObject[@"message"]];
+        }
+        
+        [self.tableView reloadData];
+        
+    } enError:^(NSError *error) {
+        [_loadV removeloadview];
+        [self endRefresh];
+        [self.tableView reloadData];
+        
+    }];
+    
+}
+
+
+- (void)endRefresh {
+    
+    [self.tableView.mj_header endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
+}
+
 
 - (void)setUI{
     
@@ -83,7 +152,7 @@
 
 //爱心贡献榜
 - (IBAction)contributionList:(id)sender {
-    NSLog(@"爱心贡献榜");
+    
     self.hidesBottomBarWhenPushed = YES;
     GLBusiness_LoveListController *lovelistVC = [[GLBusiness_LoveListController alloc] init];
     [self.navigationController pushViewController:lovelistVC animated:YES];
@@ -130,29 +199,6 @@
             break;
     }
 }
-
-//- (void)selectedItem:(NSInteger)selectedSegmentIndex{
-//
-//    switch (selectedSegmentIndex) {
-//        case 0:
-//        {
-//            
-//        }
-//            break;
-//        case 1:
-//        {
-//            
-//        }
-//            break;
-//        default:
-//            break;
-//    }
-//    
-//    NSIndexPath *indexPathA = [NSIndexPath indexPathForRow:1 inSection:0]; //刷新第0段第2行
-//    
-//    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPathA,nil] withRowAnimation:UITableViewRowAnimationNone];
-//
-//}
 
 #pragma mark - UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

@@ -15,7 +15,15 @@
 
 @end
 
-@interface GLmall_guess_goodsModel : NSObject 
+@interface GLMall_categoryModel : NSObject
+
+@property (nonatomic, copy)NSArray <GLmall_goods_detailsModel *>* money;
+@property (nonatomic, copy)NSArray <GLmall_goods_detailsModel *>* salenum;
+@property (nonatomic, copy)NSArray <GLmall_goods_detailsModel *>* cate;
+
+@end
+
+@interface GLMallModel : NSObject
 
 @property (nonatomic, copy)NSString *goods_id;
 @property (nonatomic, copy)NSString *goods_name;
@@ -25,12 +33,5 @@
 @property (nonatomic, copy)NSString *goods_num;
 @property (nonatomic, copy)NSString *addtime;
 @property (nonatomic, copy)NSString *salenum;
-
-@end
-
-@interface GLMallModel : NSObject
-
-@property (nonatomic, copy)NSArray <GLmall_goods_detailsModel *>* goods_details;
-@property (nonatomic, copy)NSArray <GLmall_guess_goodsModel *>* guess_goods;
 
 @end

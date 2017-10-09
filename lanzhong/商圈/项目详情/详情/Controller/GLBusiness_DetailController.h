@@ -10,4 +10,6 @@
 
 @interface GLBusiness_DetailController : UIViewController
 
+@property (nonatomic, copy)NSString *item_id;
+
 @end

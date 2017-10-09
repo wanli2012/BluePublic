@@ -133,10 +133,16 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bgProgressView" destination="IDy-2M-Ok4" id="3tG-9c-yyv"/>
+                <outlet property="dateLabel" destination="UQq-Wq-94M" id="Bzg-xQ-eNs"/>
                 <outlet property="examineLabel" destination="79b-Cx-Xpn" id="XXs-fy-7el"/>
                 <outlet property="imageV" destination="k4b-UD-vqW" id="bWY-sn-lbP"/>
+                <outlet property="participationLabel" destination="Mrw-lJ-wHE" id="xsu-Yt-i7H"/>
+                <outlet property="pesentLabel" destination="saH-jr-SzV" id="xKk-8h-IMK"/>
                 <outlet property="progressView" destination="ezl-J7-WcQ" id="dTW-7g-2lb"/>
                 <outlet property="publishLabel" destination="i4r-ak-vVF" id="ZUb-7P-GCR"/>
+                <outlet property="raisedMoneyLabel" destination="SPX-Q3-CKu" id="PQL-xq-eKA"/>
+                <outlet property="targetMoneyLabel" destination="nn7-aC-cMP" id="iOh-KK-j5R"/>
                 <outlet property="titleLabel" destination="Yiv-Ma-6ka" id="BZq-JY-0x6"/>
             </connections>
             <point key="canvasLocation" x="-27.5" y="-10"/>

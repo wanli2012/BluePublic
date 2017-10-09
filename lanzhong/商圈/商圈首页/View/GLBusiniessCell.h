@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GLBusinessCircleModel.h"
+
 
 @interface GLBusiniessCell : UITableViewCell
+
+@property (nonatomic, strong)GLCircle_item_dataModel *model;
 
 @end

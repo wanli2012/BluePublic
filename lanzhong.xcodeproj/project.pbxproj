@@ -162,6 +162,8 @@
 		4ADEBAFC1F7DDC7200C50087 /* GLPublishController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ADEBAF81F7DDC7200C50087 /* GLPublishController.xib */; };
 		4ADEBB651F7E487200C50087 /* GLPay_ChooseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADEBB631F7E487200C50087 /* GLPay_ChooseController.m */; };
 		4ADEBB661F7E487200C50087 /* GLPay_ChooseController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ADEBB641F7E487200C50087 /* GLPay_ChooseController.xib */; };
+		4AEA23641F8B1216002A73D4 /* GLBusinessCircle_MenuScreeningView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AEA23631F8B1216002A73D4 /* GLBusinessCircle_MenuScreeningView.m */; };
+		4AEA23671F8B75E5002A73D4 /* GLBusiness_DetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AEA23661F8B75E5002A73D4 /* GLBusiness_DetailModel.m */; };
 		4AF107051F78D5AC00CB51FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF107041F78D5AC00CB51FA /* main.m */; };
 		4AF107081F78D5AC00CB51FA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF107071F78D5AC00CB51FA /* AppDelegate.m */; };
 		4AF1070B1F78D5AC00CB51FA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF1070A1F78D5AC00CB51FA /* ViewController.m */; };
@@ -467,6 +469,10 @@
 		4ADEBB621F7E487200C50087 /* GLPay_ChooseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLPay_ChooseController.h; sourceTree = "<group>"; };
 		4ADEBB631F7E487200C50087 /* GLPay_ChooseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLPay_ChooseController.m; sourceTree = "<group>"; };
 		4ADEBB641F7E487200C50087 /* GLPay_ChooseController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLPay_ChooseController.xib; sourceTree = "<group>"; };
+		4AEA23621F8B1216002A73D4 /* GLBusinessCircle_MenuScreeningView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLBusinessCircle_MenuScreeningView.h; sourceTree = "<group>"; };
+		4AEA23631F8B1216002A73D4 /* GLBusinessCircle_MenuScreeningView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLBusinessCircle_MenuScreeningView.m; sourceTree = "<group>"; };
+		4AEA23651F8B75E5002A73D4 /* GLBusiness_DetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLBusiness_DetailModel.h; sourceTree = "<group>"; };
+		4AEA23661F8B75E5002A73D4 /* GLBusiness_DetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLBusiness_DetailModel.m; sourceTree = "<group>"; };
 		4AF107001F78D5AC00CB51FA /* lanzhong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lanzhong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AF107041F78D5AC00CB51FA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4AF107061F78D5AC00CB51FA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1217,6 +1223,8 @@
 				4A5A78561F7B9B0E004FB15A /* GLBusiniessCell.h */,
 				4A5A78571F7B9B0E004FB15A /* GLBusiniessCell.m */,
 				4A5A78581F7B9B0E004FB15A /* GLBusiniessCell.xib */,
+				4AEA23621F8B1216002A73D4 /* GLBusinessCircle_MenuScreeningView.h */,
+				4AEA23631F8B1216002A73D4 /* GLBusinessCircle_MenuScreeningView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1757,6 +1765,8 @@
 		4A6B9F171F7CF100009386C8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4AEA23651F8B75E5002A73D4 /* GLBusiness_DetailModel.h */,
+				4AEA23661F8B75E5002A73D4 /* GLBusiness_DetailModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2769,6 +2779,7 @@
 				4AF109361F78DBB500CB51FA /* WXSTransitionManager+SpreadAnimation.m in Sources */,
 				4AF109B91F78DBB500CB51FA /* UserModel.m in Sources */,
 				4A6AD2461F7F95DF00E6084E /* GLMine_MyProjectController.m in Sources */,
+				4AEA23671F8B75E5002A73D4 /* GLBusiness_DetailModel.m in Sources */,
 				4AF1073A1F78DA6F00CB51FA /* yindaotuViewController.m in Sources */,
 				4A6AD23B1F7F953600E6084E /* GLPublish_ProjectInProgressController.m in Sources */,
 				4AF109F31F78E07A00CB51FA /* UILabel+UILabel_ChangeLineSpaceAndWordSpace.m in Sources */,
@@ -2835,6 +2846,7 @@
 				F9BB80331F7A584800867514 /* GLShoppingCartModel.m in Sources */,
 				4A53E82B1F7A23AD0021D9E0 /* GLMallController.m in Sources */,
 				4A6B9EFA1F7CC92E009386C8 /* GLMineController.m in Sources */,
+				4AEA23641F8B1216002A73D4 /* GLBusinessCircle_MenuScreeningView.m in Sources */,
 				4A0EA9D91F8630C4006A1CF5 /* GLMine_WalletCardChooseController.m in Sources */,
 				4ADEBAFB1F7DDC7200C50087 /* GLPublishController.m in Sources */,
 				F9BB801F1F7A3F2C00867514 /* TGWebViewController.m in Sources */,

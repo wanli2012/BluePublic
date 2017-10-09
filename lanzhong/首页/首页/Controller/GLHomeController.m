@@ -93,6 +93,7 @@
 
 - (void)postRequest{
     
+    self.model = nil;
     _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
     [NetworkManager requestPOSTWithURLStr:kHOME_URL paramDic:@{} finish:^(id responseObject) {
         
@@ -100,14 +101,12 @@
         [self endRefresh];
         
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
-            if([responseObject[@"data"] count] != 0){
-                
-                self.model = [GLHomeModel mj_objectWithKeyValues:responseObject[@"data"]];
-
-                self.noticeLabel.text = self.model.new_notice.title;
-                
-                [self switchSelected:nil];
-            }
+  
+            self.model = [GLHomeModel mj_objectWithKeyValues:responseObject[@"data"]];
+            
+            self.noticeLabel.text = self.model.new_notice.title;
+            
+            [self switchSelected:nil];
         }
         
         [self.tableView reloadData];

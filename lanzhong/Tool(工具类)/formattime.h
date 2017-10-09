@@ -18,4 +18,6 @@
 
 + (NSString *)formateTimeOfDate2:(NSString *)time;//dd/MM月
 
++ (NSString *)formateTimeOfDate3:(NSString *)time;//YYYY.MM.dd
+
 @end

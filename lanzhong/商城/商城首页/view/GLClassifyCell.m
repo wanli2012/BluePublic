@@ -25,7 +25,7 @@
 
 }
 
-- (void)setModel:(GLmall_guess_goodsModel *)model{
+- (void)setModel:(GLMallModel *)model{
     _model = model;
     [self.imageV sd_setImageWithURL:[NSURL URLWithString:model.must_thumb] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     self.nameLabel.text = model.goods_name;

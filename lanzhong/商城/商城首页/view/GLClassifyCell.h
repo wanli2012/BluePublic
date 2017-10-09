@@ -11,6 +11,6 @@
 
 @interface GLClassifyCell : UICollectionViewCell
 
-@property (nonatomic, strong)GLmall_guess_goodsModel *model;
+@property (nonatomic, strong)GLMallModel *model;
 
 @end

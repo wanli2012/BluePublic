@@ -11,16 +11,18 @@
 @implementation GLmall_goods_detailsModel
 
 @end
-@implementation GLmall_guess_goodsModel
 
+@implementation GLMall_categoryModel
+
++ (NSDictionary *)mj_objectClassInArray {
+    
+    return @{@"money":@"GLmall_goods_detailsModel",
+             @"salenum":@"GLmall_goods_detailsModel",
+             @"cate":@"GLmall_goods_detailsModel"};
+}
 @end
 
 @implementation GLMallModel
 
-+ (NSDictionary *)mj_objectClassInArray {
-    
-    return @{@"goods_details":@"GLmall_goods_detailsModel",
-             @"guess_goods":@"GLmall_guess_goodsModel"};
-}
 
 @end

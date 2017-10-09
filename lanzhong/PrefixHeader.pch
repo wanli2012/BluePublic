@@ -20,8 +20,6 @@
 #import <MJRefresh/MJRefresh.h>
 #import <MJExtension/MJExtension.h>
 
-
-
 #define YYSRGBColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
 
 #define TABBARTITLE_COLOR YYSRGBColor(120, 161, 255 , 1.0) //导航栏颜色
@@ -33,7 +31,7 @@
 #define kSCREEN_HEIGHT  [UIScreen mainScreen].bounds.size.height
 
 //占位图
-#define PlaceHolderImage @"头像1"
+#define PlaceHolderImage @"timg"
 #define LUNBO_PlaceHolder @"轮播暂位图"
 
 #define SUCCESS_CODE 200
@@ -44,8 +42,6 @@
 
 #define URL_Base @"http://192.168.1.186/Raise/index.php/Api/"
 
-
-
 #define kGETCODE_URL @"Common/sms"//获取验证码
 #define kREGISTER_URL @"User/user_enroll"//注册
 #define kLOGIN_URL @"User/user_login"//登录
@@ -53,6 +49,12 @@
 #define kHOME_URL @"Item/index"//首页
 #define kHOME_ALL_CLASSIC_URL @"Item/more_item"//所有经典项目
 #define kMALL_HOME_URL @"Shop/shop_index"//商城首页
-#define kCIRCLE_HOME_URL @"Shop/shop_index"//商圈首页
+#define kMALL_FITER_URL @"Shop/term"//商城筛选
+
+
+#define kCIRCLE_HOME_URL @"Item/item_pen"//商圈首页
+#define kCIRCLE_FITER_URL @"Item/item_screen"//商圈筛选条件
+#define kCIRCLE_DETAIL_URL @"Item/myitem_details"//商圈_项目详情
+
 
 #endif /* PrefixHeader_pch */

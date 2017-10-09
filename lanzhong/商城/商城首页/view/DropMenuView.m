@@ -104,6 +104,7 @@
         
         self.frame = CGRectMake(x, y, w, h);
         self.cancelButton.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+        self.cancelButton.backgroundColor = YYSRGBColor(0, 0, 0, 0.2);
         
         if (arr.count < 8) {
             self.tableViewUnderView.frame = CGRectMake(0, 0, self.frame.size.width, self.rowHeightNum * arr.count);
@@ -249,29 +250,18 @@
             
         }
     
-
     }
-    
-
 }
-
-
-
-
-
 
 /** 自定义cell */
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DropCell"];
     cell.textLabel.font = [UIFont systemFontOfSize:14];
-    
 
     if (self.tableCount == 1) {
         
-        
         cell.textLabel.text = self.dataArr[indexPath.row];
-        
         
     }else if (self.tableCount == 2){
         
@@ -306,12 +296,8 @@
         }
     }
 
-
     return cell;
-    
-    
 }
-
 
 /** 点击 */
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -350,7 +336,7 @@
     }else if (self.tableCount == 3){
         
         NSInteger firstSelectRow = ((UITableView *)self.tableViewArr[0]).indexPathForSelectedRow.row;
-        NSInteger secondSelectRow = ((UITableView *)self.tableViewArr[1]).indexPathForSelectedRow.row;
+//        NSInteger secondSelectRow = ((UITableView *)self.tableViewArr[1]).indexPathForSelectedRow.row;
         
         if (tableView == self.tableViewArr[0]) {
 
@@ -382,13 +368,6 @@
     
 }
 
-
-
-
-
-
-
-
 #pragma mark - 记录 选择状态
 -(void)saveSelects{
     
@@ -398,8 +377,6 @@
     }];
 }
 
-
-
 #pragma mark - 视图消失
 - (void)dismiss{
     
@@ -408,7 +385,6 @@
         self.show = !self.show;
         
         [self endEditing:YES];
-        
         
         self.alpha = .0f;
         [self.tableViewUnderView.subviews enumerateObjectsUsingBlock:^(UIView *obj, NSUInteger idx, BOOL *stop) {

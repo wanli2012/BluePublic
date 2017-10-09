@@ -1,18 +1,19 @@
 //
-//  MenuScreeningView.m
-//  LinkageMenu
+//  GLBusinessCircle_MenuScreeningView.m
+//  lanzhong
 //
-//  Created by mango on 2017/3/4.
-//  Copyright © 2017年 mango. All rights reserved.
+//  Created by 龚磊 on 2017/10/9.
+//  Copyright © 2017年 三君科技有限公司. All rights reserved.
 //
 
-#import "MenuScreeningView.h"
+#import "GLBusinessCircle_MenuScreeningView.h"
 #import "DropMenuView.h"
 
 #define kWidth [UIScreen mainScreen].bounds.size.width
 #define kHeight [UIScreen mainScreen].bounds.size.height
 
-@interface MenuScreeningView ()<DropMenuViewDelegate>
+
+@interface GLBusinessCircle_MenuScreeningView ()<DropMenuViewDelegate>
 
 @property (nonatomic, strong) UIButton *oneLinkageButton;
 @property (nonatomic, strong) UIButton *twoLinkageButton;
@@ -24,7 +25,7 @@
 
 @end
 
-@implementation MenuScreeningView
+@implementation GLBusinessCircle_MenuScreeningView
 
 - (instancetype)initWithFrame:(CGRect)frame WithTitles:(NSArray *)titles
 {
@@ -67,7 +68,7 @@
 
 #pragma mark - 按钮点击推出菜单 (并且其他的菜单收起)
 -(void)clickButton:(UIButton *)button{
-   
+    
     if (button == self.oneLinkageButton) {
         
         [self.twoLinkageDropMenu dismiss];
@@ -79,9 +80,9 @@
         
         [self.oneLinkageDropMenu dismiss];
         [self.threeLinkageDropMenu dismiss];
-    
+        
         [self.twoLinkageDropMenu creatDropView:self withShowTableNum:1 withData:self.dataArr2];
-    
+        
     }else if (button == self.threeLinkageButton){
         
         [self.oneLinkageDropMenu dismiss];
@@ -103,20 +104,20 @@
 -(void)dropMenuView:(DropMenuView *)view didSelectName:(NSString *)str selectIndex:(NSInteger)selectIndex{
     
     if (view == self.oneLinkageDropMenu) {
-     
+        
         [self.oneLinkageButton setTitle:str forState:UIControlStateNormal];
         [self buttonEdgeInsets:self.oneLinkageButton];
         self.block(0,selectIndex);
     }else if (view == self.twoLinkageDropMenu){
-    
+        
         [self.twoLinkageButton setTitle:str forState:UIControlStateNormal];
-        [self.threeLinkageButton setTitle:self.titles[2] forState:UIControlStateNormal];
+
         [self buttonEdgeInsets:self.twoLinkageButton];
         self.block(1,selectIndex);
     }else if (view == self.threeLinkageDropMenu){
-    
+        
         [self.threeLinkageButton setTitle:str forState:UIControlStateNormal];
-        [self.twoLinkageButton setTitle:self.titles[1] forState:UIControlStateNormal];
+
         [self buttonEdgeInsets:self.threeLinkageButton];
         self.block(2,selectIndex);
     }
@@ -147,7 +148,6 @@
     [button setImageEdgeInsets:UIEdgeInsetsMake(0, button.titleLabel.bounds.size.width + 10, 0, -button.titleLabel.bounds.size.width + 2)];
     
 }
-
 
 
 @end

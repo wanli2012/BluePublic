@@ -21,7 +21,8 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectioview;
 @property (nonatomic, strong) MenuScreeningView *menuScreeningView;  //条件选择器
 
-@property (nonatomic, strong)GLMallModel *model;
+@property (nonatomic, strong)GLMall_categoryModel *categoryModel;
+@property (nonatomic, strong)NSMutableArray *models;
 @property (nonatomic, strong)LoadWaitView *loadV;
 @property (nonatomic, assign)NSInteger page;
 
@@ -51,27 +52,19 @@ static NSString *ID = @"GLClassifyCell";
             case 0:
             {
            
-                weakSelf.cate_id = weakSelf.model.goods_details[index].cate_id;
+                weakSelf.cate_id = weakSelf.categoryModel.cate[index].cate_id;
                 
             }
                 break;
             case 1:
             {
-                if (index == 0) {
-                    weakSelf.order_money = @"1";
-                }else{
-                    weakSelf.order_money = @"-1";
-                }
+                weakSelf.order_money = weakSelf.categoryModel.money[index].cate_id;
                 weakSelf.order_salenum = nil;
             }
                 break;
             case 2:
             {
-                if (index == 0) {
-                    weakSelf.order_salenum = @"2";
-                }else{
-                    weakSelf.order_salenum = @"-2";
-                }
+                weakSelf.order_salenum = weakSelf.categoryModel.salenum[index].cate_id;
                 weakSelf.order_money = nil;
             }
                 break;
@@ -87,6 +80,7 @@ static NSString *ID = @"GLClassifyCell";
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         [weakSelf postRequest:YES];
+        [self postRequest_Category];
         
     }];
     MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
@@ -109,6 +103,7 @@ static NSString *ID = @"GLClassifyCell";
     self.order_salenum = @"2";
     
     [self postRequest:YES];
+    [self postRequest_Category];
     
 }
 
@@ -116,6 +111,7 @@ static NSString *ID = @"GLClassifyCell";
     
     if (isRefresh) {
         self.page = 1;
+        [self.models removeAllObjects];
     }else{
         self.page ++ ;
     }
@@ -135,17 +131,11 @@ static NSString *ID = @"GLClassifyCell";
         
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             if([responseObject[@"data"] count] != 0){
-                NSMutableArray *arrM = [NSMutableArray array];
                 
-                self.model = [GLMallModel mj_objectWithKeyValues:responseObject[@"data"]];
-                
-                for (GLmall_goods_detailsModel *model in self.model.goods_details) {
-                    [arrM addObject:model.catename];
+                for (NSDictionary *dict in responseObject[@"data"]) {
+                    GLMallModel *model = [GLMallModel mj_objectWithKeyValues:dict];
+                    [self.models addObject:model];
                 }
-                
-                self.menuScreeningView.dataArr1 = arrM;
-                self.menuScreeningView.dataArr2 = @[@"价格升序",@"价格降序"];
-                self.menuScreeningView.dataArr3 = @[@"销量升序",@"销量降序"];
             }
             
         }else{
@@ -159,10 +149,52 @@ static NSString *ID = @"GLClassifyCell";
         [_loadV removeloadview];
         [self endRefresh];
         [self.collectioview reloadData];
+    }];
+}
+
+- (void)postRequest_Category {
+    
+    [NetworkManager requestPOSTWithURLStr:kMALL_FITER_URL paramDic:@{} finish:^(id responseObject) {
+        
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+            if([responseObject[@"data"] count] != 0){
+                
+                self.categoryModel = [GLMall_categoryModel mj_objectWithKeyValues:responseObject[@"data"]];
+                
+                NSMutableArray *arrM = [NSMutableArray array];
+                NSMutableArray *arrM2 = [NSMutableArray array];
+                NSMutableArray *arrM3 = [NSMutableArray array];
+                
+                for (GLmall_goods_detailsModel *cate in self.categoryModel.cate) {
+                    [arrM addObject:cate.catename];
+                }
+                for (GLmall_goods_detailsModel *money in self.categoryModel.money) {
+                    [arrM2 addObject:money.catename];
+                }
+                for (GLmall_goods_detailsModel *sale in self.categoryModel.salenum) {
+                    [arrM3 addObject:sale.catename];
+                }
+                
+                self.menuScreeningView.dataArr1 = arrM;
+                self.menuScreeningView.dataArr2 = arrM2;
+                self.menuScreeningView.dataArr3 = arrM3;
+            }
+            
+        }else{
+            
+            [MBProgressHUD showError:responseObject[@"message"]];
+        }
+        
+        [self.collectioview reloadData];
+        
+    } enError:^(NSError *error) {
+        
+        [self.collectioview reloadData];
         
     }];
     
 }
+
 - (void)endRefresh {
     
     [self.collectioview.mj_header endRefreshing];
@@ -172,21 +204,16 @@ static NSString *ID = @"GLClassifyCell";
 #pragma UICollectionDelegate UICollectionDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
-    return self.model.guess_goods.count;
+    return self.models.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     GLClassifyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ID forIndexPath:indexPath];
     cell.layer.mask = [LBSetFillet setFilletRoundedRect:cell.bounds cornerRadii:CGSizeMake(4, 4)];
-    cell.model = self.model.guess_goods[indexPath.row];
+    cell.model = self.models[indexPath.row];
     return cell;
 }
-
-//设置圆角
-//-(void)setFillet{
-//
-//}
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -233,4 +260,10 @@ static NSString *ID = @"GLClassifyCell";
 
 }
 
+- (NSMutableArray *)models{
+    if (!_models) {
+        _models = [NSMutableArray array];
+    }
+    return _models;
+}
 @end
