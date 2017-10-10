@@ -7,6 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A05EDEA1F8C5E780095DBCF /* 发布.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A05EDE91F8C5E780095DBCF /* 发布.xcassets */; };
+		4A05EE8A1F8C97380095DBCF /* HXAlbumListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE4A1F8C97380095DBCF /* HXAlbumListView.m */; };
+		4A05EE8B1F8C97380095DBCF /* HXAlbumModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE4C1F8C97380095DBCF /* HXAlbumModel.m */; };
+		4A05EE8C1F8C97380095DBCF /* HXAlbumTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE4E1F8C97380095DBCF /* HXAlbumTitleButton.m */; };
+		4A05EE8D1F8C97380095DBCF /* HXCameraPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE501F8C97380095DBCF /* HXCameraPreviewViewController.m */; };
+		4A05EE8E1F8C97380095DBCF /* HXCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE521F8C97380095DBCF /* HXCameraViewController.m */; };
+		4A05EE8F1F8C97380095DBCF /* HXCircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE541F8C97380095DBCF /* HXCircleProgressView.m */; };
+		4A05EE901F8C97380095DBCF /* HXCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE561F8C97380095DBCF /* HXCollectionView.m */; };
+		4A05EE911F8C97380095DBCF /* HXFullScreenCameraPlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE581F8C97380095DBCF /* HXFullScreenCameraPlayView.m */; };
+		4A05EE921F8C97380095DBCF /* HXFullScreenCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE5A1F8C97380095DBCF /* HXFullScreenCameraViewController.m */; };
+		4A05EE931F8C97380095DBCF /* HXPhoto3DTouchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE5C1F8C97380095DBCF /* HXPhoto3DTouchViewController.m */; };
+		4A05EE941F8C97380095DBCF /* HXPhotoCustomNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE5E1F8C97380095DBCF /* HXPhotoCustomNavigationBar.m */; };
+		4A05EE951F8C97380095DBCF /* HXPhotoEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE601F8C97380095DBCF /* HXPhotoEditView.m */; };
+		4A05EE961F8C97380095DBCF /* HXPhotoEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE621F8C97380095DBCF /* HXPhotoEditViewController.m */; };
+		4A05EE971F8C97380095DBCF /* HXPhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE641F8C97380095DBCF /* HXPhotoManager.m */; };
+		4A05EE981F8C97380095DBCF /* HXPhotoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE661F8C97380095DBCF /* HXPhotoModel.m */; };
+		4A05EE991F8C97380095DBCF /* HXPhotoPreviewViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE681F8C97380095DBCF /* HXPhotoPreviewViewCell.m */; };
+		4A05EE9A1F8C97380095DBCF /* HXPhotoPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE6A1F8C97380095DBCF /* HXPhotoPreviewViewController.m */; };
+		4A05EE9B1F8C97380095DBCF /* HXPhotoResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE6C1F8C97380095DBCF /* HXPhotoResultModel.m */; };
+		4A05EE9C1F8C97380095DBCF /* HXPhotoSubViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE6E1F8C97380095DBCF /* HXPhotoSubViewCell.m */; };
+		4A05EE9D1F8C97380095DBCF /* HXPhotoTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE701F8C97380095DBCF /* HXPhotoTools.m */; };
+		4A05EE9E1F8C97380095DBCF /* HXPhotoUIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE721F8C97380095DBCF /* HXPhotoUIManager.m */; };
+		4A05EE9F1F8C97380095DBCF /* HXPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE741F8C97380095DBCF /* HXPhotoView.m */; };
+		4A05EEA01F8C97380095DBCF /* HXPhotoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE761F8C97380095DBCF /* HXPhotoViewCell.m */; };
+		4A05EEA11F8C97380095DBCF /* HXPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE781F8C97380095DBCF /* HXPhotoViewController.m */; };
+		4A05EEA21F8C97380095DBCF /* HXPresentTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE7A1F8C97380095DBCF /* HXPresentTransition.m */; };
+		4A05EEA31F8C97380095DBCF /* HXTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE7C1F8C97380095DBCF /* HXTransition.m */; };
+		4A05EEA41F8C97380095DBCF /* HXVideoPresentTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE7E1F8C97380095DBCF /* HXVideoPresentTransition.m */; };
+		4A05EEA51F8C97380095DBCF /* HXVideoPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE801F8C97380095DBCF /* HXVideoPreviewViewController.m */; };
+		4A05EEA61F8C97380095DBCF /* HXWeiboPhotoPicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4A05EE811F8C97380095DBCF /* HXWeiboPhotoPicker.bundle */; };
+		4A05EEA71F8C97380095DBCF /* NSBundle+HXWeiboPhotoPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE831F8C97380095DBCF /* NSBundle+HXWeiboPhotoPicker.m */; };
+		4A05EEA81F8C97380095DBCF /* UIButton+HXExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE851F8C97380095DBCF /* UIButton+HXExtension.m */; };
+		4A05EEA91F8C97380095DBCF /* UIImage+HXExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE871F8C97380095DBCF /* UIImage+HXExtension.m */; };
+		4A05EEAA1F8C97380095DBCF /* UIView+HXExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE891F8C97380095DBCF /* UIView+HXExtension.m */; };
+		4A05EEAE1F8CA1CB0095DBCF /* GLSimpleSelectionPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EEAC1F8CA1CB0095DBCF /* GLSimpleSelectionPickerController.m */; };
+		4A05EEAF1F8CA1CB0095DBCF /* GLSimpleSelectionPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A05EEAD1F8CA1CB0095DBCF /* GLSimpleSelectionPickerController.xib */; };
+		4A05EEB41F8CA5950095DBCF /* HWCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EEB11F8CA5950095DBCF /* HWCalendar.m */; };
+		4A05EEB51F8CA5950095DBCF /* HWOptionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EEB31F8CA5950095DBCF /* HWOptionButton.m */; };
 		4A0EA9D91F8630C4006A1CF5 /* GLMine_WalletCardChooseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0EA9D71F8630C4006A1CF5 /* GLMine_WalletCardChooseController.m */; };
 		4A0EA9DA1F8630C4006A1CF5 /* GLMine_WalletCardChooseController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A0EA9D81F8630C4006A1CF5 /* GLMine_WalletCardChooseController.xib */; };
 		4A0EA9E31F86325D006A1CF5 /* GLMine_WalletCardChooseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0EA9E11F86325D006A1CF5 /* GLMine_WalletCardChooseCell.m */; };
@@ -233,6 +271,79 @@
 
 /* Begin PBXFileReference section */
 		19A11FB975C44A94E569750A /* Pods_lanzhong.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lanzhong.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A05EDE91F8C5E780095DBCF /* 发布.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "发布.xcassets"; sourceTree = "<group>"; };
+		4A05EE491F8C97380095DBCF /* HXAlbumListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXAlbumListView.h; sourceTree = "<group>"; };
+		4A05EE4A1F8C97380095DBCF /* HXAlbumListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXAlbumListView.m; sourceTree = "<group>"; };
+		4A05EE4B1F8C97380095DBCF /* HXAlbumModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXAlbumModel.h; sourceTree = "<group>"; };
+		4A05EE4C1F8C97380095DBCF /* HXAlbumModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXAlbumModel.m; sourceTree = "<group>"; };
+		4A05EE4D1F8C97380095DBCF /* HXAlbumTitleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXAlbumTitleButton.h; sourceTree = "<group>"; };
+		4A05EE4E1F8C97380095DBCF /* HXAlbumTitleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXAlbumTitleButton.m; sourceTree = "<group>"; };
+		4A05EE4F1F8C97380095DBCF /* HXCameraPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXCameraPreviewViewController.h; sourceTree = "<group>"; };
+		4A05EE501F8C97380095DBCF /* HXCameraPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXCameraPreviewViewController.m; sourceTree = "<group>"; };
+		4A05EE511F8C97380095DBCF /* HXCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXCameraViewController.h; sourceTree = "<group>"; };
+		4A05EE521F8C97380095DBCF /* HXCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXCameraViewController.m; sourceTree = "<group>"; };
+		4A05EE531F8C97380095DBCF /* HXCircleProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXCircleProgressView.h; sourceTree = "<group>"; };
+		4A05EE541F8C97380095DBCF /* HXCircleProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXCircleProgressView.m; sourceTree = "<group>"; };
+		4A05EE551F8C97380095DBCF /* HXCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXCollectionView.h; sourceTree = "<group>"; };
+		4A05EE561F8C97380095DBCF /* HXCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXCollectionView.m; sourceTree = "<group>"; };
+		4A05EE571F8C97380095DBCF /* HXFullScreenCameraPlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXFullScreenCameraPlayView.h; sourceTree = "<group>"; };
+		4A05EE581F8C97380095DBCF /* HXFullScreenCameraPlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXFullScreenCameraPlayView.m; sourceTree = "<group>"; };
+		4A05EE591F8C97380095DBCF /* HXFullScreenCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXFullScreenCameraViewController.h; sourceTree = "<group>"; };
+		4A05EE5A1F8C97380095DBCF /* HXFullScreenCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXFullScreenCameraViewController.m; sourceTree = "<group>"; };
+		4A05EE5B1F8C97380095DBCF /* HXPhoto3DTouchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXPhoto3DTouchViewController.h; sourceTree = "<group>"; };
+		4A05EE5C1F8C97380095DBCF /* HXPhoto3DTouchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXPhoto3DTouchViewController.m; sourceTree = "<group>"; };
+		4A05EE5D1F8C97380095DBCF /* HXPhotoCustomNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXPhotoCustomNavigationBar.h; sourceTree = "<group>"; };
+		4A05EE5E1F8C97380095DBCF /* HXPhotoCustomNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXPhotoCustomNavigationBar.m; sourceTree = "<group>"; };
+		4A05EE5F1F8C97380095DBCF /* HXPhotoEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXPhotoEditView.h; sourceTree = "<group>"; };
+		4A05EE601F8C97380095DBCF /* HXPhotoEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXPhotoEditView.m; sourceTree = "<group>"; };
+		4A05EE611F8C97380095DBCF /* HXPhotoEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXPhotoEditViewController.h; sourceTree = "<group>"; };
+		4A05EE621F8C97380095DBCF /* HXPhotoEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXPhotoEditViewController.m; sourceTree = "<group>"; };
+		4A05EE631F8C97380095DBCF /* HXPhotoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXPhotoManager.h; sourceTree = "<group>"; };
+		4A05EE641F8C97380095DBCF /* HXPhotoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXPhotoManager.m; sourceTree = "<group>"; };
+		4A05EE651F8C97380095DBCF /* HXPhotoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXPhotoModel.h; sourceTree = "<group>"; };
+		4A05EE661F8C97380095DBCF /* HXPhotoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXPhotoModel.m; sourceTree = "<group>"; };
+		4A05EE671F8C97380095DBCF /* HXPhotoPreviewViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXPhotoPreviewViewCell.h; sourceTree = "<group>"; };
+		4A05EE681F8C97380095DBCF /* HXPhotoPreviewViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXPhotoPreviewViewCell.m; sourceTree = "<group>"; };
+		4A05EE691F8C97380095DBCF /* HXPhotoPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXPhotoPreviewViewController.h; sourceTree = "<group>"; };
+		4A05EE6A1F8C97380095DBCF /* HXPhotoPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXPhotoPreviewViewController.m; sourceTree = "<group>"; };
+		4A05EE6B1F8C97380095DBCF /* HXPhotoResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXPhotoResultModel.h; sourceTree = "<group>"; };
+		4A05EE6C1F8C97380095DBCF /* HXPhotoResultModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXPhotoResultModel.m; sourceTree = "<group>"; };
+		4A05EE6D1F8C97380095DBCF /* HXPhotoSubViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXPhotoSubViewCell.h; sourceTree = "<group>"; };
+		4A05EE6E1F8C97380095DBCF /* HXPhotoSubViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXPhotoSubViewCell.m; sourceTree = "<group>"; };
+		4A05EE6F1F8C97380095DBCF /* HXPhotoTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXPhotoTools.h; sourceTree = "<group>"; };
+		4A05EE701F8C97380095DBCF /* HXPhotoTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXPhotoTools.m; sourceTree = "<group>"; };
+		4A05EE711F8C97380095DBCF /* HXPhotoUIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXPhotoUIManager.h; sourceTree = "<group>"; };
+		4A05EE721F8C97380095DBCF /* HXPhotoUIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXPhotoUIManager.m; sourceTree = "<group>"; };
+		4A05EE731F8C97380095DBCF /* HXPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXPhotoView.h; sourceTree = "<group>"; };
+		4A05EE741F8C97380095DBCF /* HXPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXPhotoView.m; sourceTree = "<group>"; };
+		4A05EE751F8C97380095DBCF /* HXPhotoViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXPhotoViewCell.h; sourceTree = "<group>"; };
+		4A05EE761F8C97380095DBCF /* HXPhotoViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXPhotoViewCell.m; sourceTree = "<group>"; };
+		4A05EE771F8C97380095DBCF /* HXPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXPhotoViewController.h; sourceTree = "<group>"; };
+		4A05EE781F8C97380095DBCF /* HXPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXPhotoViewController.m; sourceTree = "<group>"; };
+		4A05EE791F8C97380095DBCF /* HXPresentTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXPresentTransition.h; sourceTree = "<group>"; };
+		4A05EE7A1F8C97380095DBCF /* HXPresentTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXPresentTransition.m; sourceTree = "<group>"; };
+		4A05EE7B1F8C97380095DBCF /* HXTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXTransition.h; sourceTree = "<group>"; };
+		4A05EE7C1F8C97380095DBCF /* HXTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXTransition.m; sourceTree = "<group>"; };
+		4A05EE7D1F8C97380095DBCF /* HXVideoPresentTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXVideoPresentTransition.h; sourceTree = "<group>"; };
+		4A05EE7E1F8C97380095DBCF /* HXVideoPresentTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXVideoPresentTransition.m; sourceTree = "<group>"; };
+		4A05EE7F1F8C97380095DBCF /* HXVideoPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXVideoPreviewViewController.h; sourceTree = "<group>"; };
+		4A05EE801F8C97380095DBCF /* HXVideoPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXVideoPreviewViewController.m; sourceTree = "<group>"; };
+		4A05EE811F8C97380095DBCF /* HXWeiboPhotoPicker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HXWeiboPhotoPicker.bundle; sourceTree = "<group>"; };
+		4A05EE821F8C97380095DBCF /* NSBundle+HXWeiboPhotoPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+HXWeiboPhotoPicker.h"; sourceTree = "<group>"; };
+		4A05EE831F8C97380095DBCF /* NSBundle+HXWeiboPhotoPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+HXWeiboPhotoPicker.m"; sourceTree = "<group>"; };
+		4A05EE841F8C97380095DBCF /* UIButton+HXExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+HXExtension.h"; sourceTree = "<group>"; };
+		4A05EE851F8C97380095DBCF /* UIButton+HXExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+HXExtension.m"; sourceTree = "<group>"; };
+		4A05EE861F8C97380095DBCF /* UIImage+HXExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+HXExtension.h"; sourceTree = "<group>"; };
+		4A05EE871F8C97380095DBCF /* UIImage+HXExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+HXExtension.m"; sourceTree = "<group>"; };
+		4A05EE881F8C97380095DBCF /* UIView+HXExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HXExtension.h"; sourceTree = "<group>"; };
+		4A05EE891F8C97380095DBCF /* UIView+HXExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HXExtension.m"; sourceTree = "<group>"; };
+		4A05EEAB1F8CA1CB0095DBCF /* GLSimpleSelectionPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLSimpleSelectionPickerController.h; sourceTree = "<group>"; };
+		4A05EEAC1F8CA1CB0095DBCF /* GLSimpleSelectionPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLSimpleSelectionPickerController.m; sourceTree = "<group>"; };
+		4A05EEAD1F8CA1CB0095DBCF /* GLSimpleSelectionPickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLSimpleSelectionPickerController.xib; sourceTree = "<group>"; };
+		4A05EEB01F8CA5950095DBCF /* HWCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWCalendar.h; sourceTree = "<group>"; };
+		4A05EEB11F8CA5950095DBCF /* HWCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWCalendar.m; sourceTree = "<group>"; };
+		4A05EEB21F8CA5950095DBCF /* HWOptionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWOptionButton.h; sourceTree = "<group>"; };
+		4A05EEB31F8CA5950095DBCF /* HWOptionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWOptionButton.m; sourceTree = "<group>"; };
 		4A0EA9D61F8630C4006A1CF5 /* GLMine_WalletCardChooseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_WalletCardChooseController.h; sourceTree = "<group>"; };
 		4A0EA9D71F8630C4006A1CF5 /* GLMine_WalletCardChooseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_WalletCardChooseController.m; sourceTree = "<group>"; };
 		4A0EA9D81F8630C4006A1CF5 /* GLMine_WalletCardChooseController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMine_WalletCardChooseController.xib; sourceTree = "<group>"; };
@@ -610,6 +721,78 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A05EE481F8C97380095DBCF /* HXWeiboPhotoPicker */ = {
+			isa = PBXGroup;
+			children = (
+				4A05EE491F8C97380095DBCF /* HXAlbumListView.h */,
+				4A05EE4A1F8C97380095DBCF /* HXAlbumListView.m */,
+				4A05EE4B1F8C97380095DBCF /* HXAlbumModel.h */,
+				4A05EE4C1F8C97380095DBCF /* HXAlbumModel.m */,
+				4A05EE4D1F8C97380095DBCF /* HXAlbumTitleButton.h */,
+				4A05EE4E1F8C97380095DBCF /* HXAlbumTitleButton.m */,
+				4A05EE4F1F8C97380095DBCF /* HXCameraPreviewViewController.h */,
+				4A05EE501F8C97380095DBCF /* HXCameraPreviewViewController.m */,
+				4A05EE511F8C97380095DBCF /* HXCameraViewController.h */,
+				4A05EE521F8C97380095DBCF /* HXCameraViewController.m */,
+				4A05EE531F8C97380095DBCF /* HXCircleProgressView.h */,
+				4A05EE541F8C97380095DBCF /* HXCircleProgressView.m */,
+				4A05EE551F8C97380095DBCF /* HXCollectionView.h */,
+				4A05EE561F8C97380095DBCF /* HXCollectionView.m */,
+				4A05EE571F8C97380095DBCF /* HXFullScreenCameraPlayView.h */,
+				4A05EE581F8C97380095DBCF /* HXFullScreenCameraPlayView.m */,
+				4A05EE591F8C97380095DBCF /* HXFullScreenCameraViewController.h */,
+				4A05EE5A1F8C97380095DBCF /* HXFullScreenCameraViewController.m */,
+				4A05EE5B1F8C97380095DBCF /* HXPhoto3DTouchViewController.h */,
+				4A05EE5C1F8C97380095DBCF /* HXPhoto3DTouchViewController.m */,
+				4A05EE5D1F8C97380095DBCF /* HXPhotoCustomNavigationBar.h */,
+				4A05EE5E1F8C97380095DBCF /* HXPhotoCustomNavigationBar.m */,
+				4A05EE5F1F8C97380095DBCF /* HXPhotoEditView.h */,
+				4A05EE601F8C97380095DBCF /* HXPhotoEditView.m */,
+				4A05EE611F8C97380095DBCF /* HXPhotoEditViewController.h */,
+				4A05EE621F8C97380095DBCF /* HXPhotoEditViewController.m */,
+				4A05EE631F8C97380095DBCF /* HXPhotoManager.h */,
+				4A05EE641F8C97380095DBCF /* HXPhotoManager.m */,
+				4A05EE651F8C97380095DBCF /* HXPhotoModel.h */,
+				4A05EE661F8C97380095DBCF /* HXPhotoModel.m */,
+				4A05EE671F8C97380095DBCF /* HXPhotoPreviewViewCell.h */,
+				4A05EE681F8C97380095DBCF /* HXPhotoPreviewViewCell.m */,
+				4A05EE691F8C97380095DBCF /* HXPhotoPreviewViewController.h */,
+				4A05EE6A1F8C97380095DBCF /* HXPhotoPreviewViewController.m */,
+				4A05EE6B1F8C97380095DBCF /* HXPhotoResultModel.h */,
+				4A05EE6C1F8C97380095DBCF /* HXPhotoResultModel.m */,
+				4A05EE6D1F8C97380095DBCF /* HXPhotoSubViewCell.h */,
+				4A05EE6E1F8C97380095DBCF /* HXPhotoSubViewCell.m */,
+				4A05EE6F1F8C97380095DBCF /* HXPhotoTools.h */,
+				4A05EE701F8C97380095DBCF /* HXPhotoTools.m */,
+				4A05EE711F8C97380095DBCF /* HXPhotoUIManager.h */,
+				4A05EE721F8C97380095DBCF /* HXPhotoUIManager.m */,
+				4A05EE731F8C97380095DBCF /* HXPhotoView.h */,
+				4A05EE741F8C97380095DBCF /* HXPhotoView.m */,
+				4A05EE751F8C97380095DBCF /* HXPhotoViewCell.h */,
+				4A05EE761F8C97380095DBCF /* HXPhotoViewCell.m */,
+				4A05EE771F8C97380095DBCF /* HXPhotoViewController.h */,
+				4A05EE781F8C97380095DBCF /* HXPhotoViewController.m */,
+				4A05EE791F8C97380095DBCF /* HXPresentTransition.h */,
+				4A05EE7A1F8C97380095DBCF /* HXPresentTransition.m */,
+				4A05EE7B1F8C97380095DBCF /* HXTransition.h */,
+				4A05EE7C1F8C97380095DBCF /* HXTransition.m */,
+				4A05EE7D1F8C97380095DBCF /* HXVideoPresentTransition.h */,
+				4A05EE7E1F8C97380095DBCF /* HXVideoPresentTransition.m */,
+				4A05EE7F1F8C97380095DBCF /* HXVideoPreviewViewController.h */,
+				4A05EE801F8C97380095DBCF /* HXVideoPreviewViewController.m */,
+				4A05EE811F8C97380095DBCF /* HXWeiboPhotoPicker.bundle */,
+				4A05EE821F8C97380095DBCF /* NSBundle+HXWeiboPhotoPicker.h */,
+				4A05EE831F8C97380095DBCF /* NSBundle+HXWeiboPhotoPicker.m */,
+				4A05EE841F8C97380095DBCF /* UIButton+HXExtension.h */,
+				4A05EE851F8C97380095DBCF /* UIButton+HXExtension.m */,
+				4A05EE861F8C97380095DBCF /* UIImage+HXExtension.h */,
+				4A05EE871F8C97380095DBCF /* UIImage+HXExtension.m */,
+				4A05EE881F8C97380095DBCF /* UIView+HXExtension.h */,
+				4A05EE891F8C97380095DBCF /* UIView+HXExtension.m */,
+			);
+			path = HXWeiboPhotoPicker;
+			sourceTree = "<group>";
+		};
 		4A0EA9D21F863092006A1CF5 /* 选择银行卡 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2014,6 +2197,9 @@
 				4ADEBAF61F7DDC7200C50087 /* GLPublishController.h */,
 				4ADEBAF71F7DDC7200C50087 /* GLPublishController.m */,
 				4ADEBAF81F7DDC7200C50087 /* GLPublishController.xib */,
+				4A05EEAB1F8CA1CB0095DBCF /* GLSimpleSelectionPickerController.h */,
+				4A05EEAC1F8CA1CB0095DBCF /* GLSimpleSelectionPickerController.m */,
+				4A05EEAD1F8CA1CB0095DBCF /* GLSimpleSelectionPickerController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2028,6 +2214,10 @@
 		4ADEBAFA1F7DDC7200C50087 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4A05EEB01F8CA5950095DBCF /* HWCalendar.h */,
+				4A05EEB11F8CA5950095DBCF /* HWCalendar.m */,
+				4A05EEB21F8CA5950095DBCF /* HWOptionButton.h */,
+				4A05EEB31F8CA5950095DBCF /* HWOptionButton.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2263,6 +2453,7 @@
 		4AF1075B1F78DBB400CB51FA /* 三方库 */ = {
 			isa = PBXGroup;
 			children = (
+				4A05EE481F8C97380095DBCF /* HXWeiboPhotoPicker */,
 				F9BB80161F7A3F2C00867514 /* TGWebController */,
 				4AF1079A1F78DBB500CB51FA /* PopMenuTableViewCell.h */,
 				4AF1079B1F78DBB500CB51FA /* PopMenuTableViewCell.m */,
@@ -2452,6 +2643,7 @@
 				F9BB80261F7A447E00867514 /* ShoppingMall.xcassets */,
 				4ADDD1691F88635200C95F9C /* 登录注册.xcassets */,
 				4AFF4FA61F8A191A00CE6D79 /* 首页.xcassets */,
+				4A05EDE91F8C5E780095DBCF /* 发布.xcassets */,
 			);
 			path = "图片资源";
 			sourceTree = "<group>";
@@ -2616,6 +2808,7 @@
 				4A6B9F351F7CF100009386C8 /* GLBusiness_DetailProjectCell.xib in Resources */,
 				4A509BA01F875DCE00D794FB /* GLBuyBackChooseBankView.xib in Resources */,
 				4A6AD1E41F7F86D300E6084E /* GLBusiness_FundTrendController.xib in Resources */,
+				4A05EEAF1F8CA1CB0095DBCF /* GLSimpleSelectionPickerController.xib in Resources */,
 				4ADDD1881F88702600C95F9C /* GLMine_PersonInfo_AddressCell.xib in Resources */,
 				4A53E83A1F7A24830021D9E0 /* GLMall_DetailSpecCell.xib in Resources */,
 				4A6AD2501F7F9D0D00E6084E /* GLMine_AddressController.xib in Resources */,
@@ -2659,6 +2852,7 @@
 				4A509B8C1F872C6300D794FB /* GLMine_MyMessage_ExchangeController.xib in Resources */,
 				4AF107101F78D5AC00CB51FA /* Assets.xcassets in Resources */,
 				4AF1070E1F78D5AC00CB51FA /* Main.storyboard in Resources */,
+				4A05EEA61F8C97380095DBCF /* HXWeiboPhotoPicker.bundle in Resources */,
 				4A6B9F331F7CF100009386C8 /* GLBusiness_DetailCommentCell.xib in Resources */,
 				4A6AD2301F7F953600E6084E /* GLPublish_AuditedController.xib in Resources */,
 				4ADEBB661F7E487200C50087 /* GLPay_ChooseController.xib in Resources */,
@@ -2690,6 +2884,7 @@
 				4A509BAF1F877C2B00D794FB /* GLForgetPasswordController.xib in Resources */,
 				4A6B9EFB1F7CC92E009386C8 /* GLMineController.xib in Resources */,
 				4A509BBB1F87870500D794FB /* GLMine_SetController.xib in Resources */,
+				4A05EDEA1F8C5E780095DBCF /* 发布.xcassets in Resources */,
 				4A6B9EFD1F7CC92E009386C8 /* GLMineCell.xib in Resources */,
 				4A509BA51F87643C00D794FB /* GLLoginController.xib in Resources */,
 				4A0EA9E41F86325D006A1CF5 /* GLMine_WalletCardChooseCell.xib in Resources */,
@@ -2754,6 +2949,7 @@
 			files = (
 				4A509B361F8722B000D794FB /* MBProgressHUD+LB.m in Sources */,
 				4ADDD16E1F88652100C95F9C /* NetworkManager.m in Sources */,
+				4A05EEA81F8C97380095DBCF /* UIButton+HXExtension.m in Sources */,
 				F9BB80151F7A38A000867514 /* LBSetFillet.m in Sources */,
 				4A53E8391F7A24830021D9E0 /* GLMall_DetailSpecCell.m in Sources */,
 				4AF109BA1F78DBB500CB51FA /* usermodelachivar.m in Sources */,
@@ -2772,8 +2968,11 @@
 				4ADDD17D1F886F4D00C95F9C /* GLMine_PersonInfoController.m in Sources */,
 				4A6AD1E31F7F86D300E6084E /* GLBusiness_FundTrendController.m in Sources */,
 				4AF1092C1F78DBB500CB51FA /* UIViewController+WXSTransition.m in Sources */,
+				4A05EE981F8C97380095DBCF /* HXPhotoModel.m in Sources */,
 				4A509B6D1F8729DA00D794FB /* GLMine_MyMessageController.m in Sources */,
+				4A05EEA21F8C97380095DBCF /* HXPresentTransition.m in Sources */,
 				4AF109341F78DBB500CB51FA /* WXSTransitionManager+InsideThenPushAnimation.m in Sources */,
+				4A05EEA91F8C97380095DBCF /* UIImage+HXExtension.m in Sources */,
 				4AF1093E1F78DBB500CB51FA /* XBTagTitleModel.m in Sources */,
 				4A509BA91F8771D400D794FB /* GLRegisterController.m in Sources */,
 				4AF109361F78DBB500CB51FA /* WXSTransitionManager+SpreadAnimation.m in Sources */,
@@ -2784,11 +2983,14 @@
 				4A6AD23B1F7F953600E6084E /* GLPublish_ProjectInProgressController.m in Sources */,
 				4AF109F31F78E07A00CB51FA /* UILabel+UILabel_ChangeLineSpaceAndWordSpace.m in Sources */,
 				4AF109BB1F78DBB500CB51FA /* BaseNavigationViewController.m in Sources */,
+				4A05EE9B1F8C97380095DBCF /* HXPhotoResultModel.m in Sources */,
 				4AF109311F78DBB500CB51FA /* WXSTransitionManager+CoverAnimation.m in Sources */,
 				4AF1092A1F78DBB500CB51FA /* QQPopMenuView.m in Sources */,
 				4A165C1E1F85FDF600D0C34B /* GLMine_WalletDetailCell.m in Sources */,
 				4ADEBB651F7E487200C50087 /* GLPay_ChooseController.m in Sources */,
 				4AF109381F78DBB500CB51FA /* WXSTransitionManager+TypeTool.m in Sources */,
+				4A05EE941F8C97380095DBCF /* HXPhotoCustomNavigationBar.m in Sources */,
+				4A05EE8E1F8C97380095DBCF /* HXCameraViewController.m in Sources */,
 				4AF109321F78DBB500CB51FA /* WXSTransitionManager+FlipAnimation.m in Sources */,
 				4AF109EC1F78E07A00CB51FA /* GetLabelBounds.m in Sources */,
 				4AF109BF1F78DBB500CB51FA /* DWTabBar.m in Sources */,
@@ -2797,44 +2999,65 @@
 				4A509B861F872BC200D794FB /* GLMine_MyMessage_SupportController.m in Sources */,
 				4AF1092B1F78DBB500CB51FA /* UINavigationController+WXSTransition.m in Sources */,
 				4ADDD1A11F88A8C900C95F9C /* GLMall_LogisticsCell.m in Sources */,
+				4A05EEA01F8C97380095DBCF /* HXPhotoViewCell.m in Sources */,
 				4ADDD1871F88702600C95F9C /* GLMine_PersonInfo_AddressCell.m in Sources */,
 				F9BB80251F7A440100867514 /* MenuScreeningView.m in Sources */,
 				4AF109F41F78E07A00CB51FA /* UIView+Extension.m in Sources */,
+				4A05EEAA1F8C97380095DBCF /* UIView+HXExtension.m in Sources */,
 				4A509B411F87266600D794FB /* GLHome_NoticeController.m in Sources */,
 				4ADDD1951F88A45500C95F9C /* editorMaskPresentationController.m in Sources */,
 				4A5A785F1F7B9B0E004FB15A /* GLBusiniessCell.m in Sources */,
 				4AF109F01F78E07A00CB51FA /* predicateModel.m in Sources */,
+				4A05EE951F8C97380095DBCF /* HXPhotoEditView.m in Sources */,
+				4A05EEA51F8C97380095DBCF /* HXVideoPreviewViewController.m in Sources */,
+				4A05EEB51F8CA5950095DBCF /* HWOptionButton.m in Sources */,
+				4A05EE8B1F8C97380095DBCF /* HXAlbumModel.m in Sources */,
 				4AF109F21F78E07A00CB51FA /* UIButton+SetEdgeInsets.m in Sources */,
+				4A05EE961F8C97380095DBCF /* HXPhotoEditViewController.m in Sources */,
 				4A53E84A1F7A4B5C0021D9E0 /* GLMall_DetailSelecteCell.m in Sources */,
 				4AF109EB1F78E07A00CB51FA /* formattime.m in Sources */,
+				4A05EEA11F8C97380095DBCF /* HXPhotoViewController.m in Sources */,
 				4AF1092F1F78DBB500CB51FA /* WXSTransitionManager+BoomAnimation.m in Sources */,
+				4A05EE8A1F8C97380095DBCF /* HXAlbumListView.m in Sources */,
 				4AF109351F78DBB500CB51FA /* WXSTransitionManager+PageAnimation.m in Sources */,
 				4AF1093C1F78DBB500CB51FA /* UIView+XBExtension.m in Sources */,
 				4A509BBA1F87870500D794FB /* GLMine_SetController.m in Sources */,
 				4A509B971F872F0000D794FB /* GLMine_MyMessageCell.m in Sources */,
 				4AF1093B1F78DBB500CB51FA /* WXSTransitionProperty.m in Sources */,
 				4A165C251F860FA500D0C34B /* GLMine_WalletRechargeController.m in Sources */,
+				4A05EE9C1F8C97380095DBCF /* HXPhotoSubViewCell.m in Sources */,
 				4A6AD1A91F7F2E8800E6084E /* GLPay_CompletedController.m in Sources */,
+				4A05EE971F8C97380095DBCF /* HXPhotoManager.m in Sources */,
 				4A6AD1CA1F7F73EE00E6084E /* GLHome_CasesController.m in Sources */,
 				4A6B9EFC1F7CC92E009386C8 /* GLMineCell.m in Sources */,
+				4A05EE901F8C97380095DBCF /* HXCollectionView.m in Sources */,
 				4A509B9F1F875DCE00D794FB /* GLBuyBackChooseBankView.m in Sources */,
 				4A6AD2331F7F953600E6084E /* GLPublish_FundraisingCell.m in Sources */,
 				4A6AD2291F7F953600E6084E /* GLPublish_InReviewController.m in Sources */,
 				4AF109401F78DBB500CB51FA /* XBTagTitleCell.m in Sources */,
+				4A05EEAE1F8CA1CB0095DBCF /* GLSimpleSelectionPickerController.m in Sources */,
 				F9BB802F1F7A57C400867514 /* GLShoppingCartController.m in Sources */,
+				4A05EE991F8C97380095DBCF /* HXPhotoPreviewViewCell.m in Sources */,
 				4A6B9F3A1F7CF100009386C8 /* GLBusiness_trendCell.m in Sources */,
 				4ADDD1B61F88D05600C95F9C /* GLMallModel.m in Sources */,
+				4A05EEA71F8C97380095DBCF /* NSBundle+HXWeiboPhotoPicker.m in Sources */,
 				4A53E83E1F7A3AEA0021D9E0 /* GLMall_DetailAddressCell.m in Sources */,
 				4AF109281F78DBB500CB51FA /* PopMenuTableViewCell.m in Sources */,
 				4A6AD22D1F7F953600E6084E /* GLPublish_AuditFailureController.m in Sources */,
 				4A6B9F521F7CF902009386C8 /* GLBusiness_LoveListController.m in Sources */,
+				4A05EE8C1F8C97380095DBCF /* HXAlbumTitleButton.m in Sources */,
+				4A05EE8F1F8C97380095DBCF /* HXCircleProgressView.m in Sources */,
 				4A6AD24F1F7F9D0D00E6084E /* GLMine_AddressController.m in Sources */,
 				4AF109BC1F78DBB500CB51FA /* DWTabBarController.m in Sources */,
 				4A6B9F571F7D00CA009386C8 /* GLBusiness_LoveListCell.m in Sources */,
+				4A05EEA41F8C97380095DBCF /* HXVideoPresentTransition.m in Sources */,
 				4A509B501F8726F900D794FB /* GLHomeCell.m in Sources */,
+				4A05EE8D1F8C97380095DBCF /* HXCameraPreviewViewController.m in Sources */,
 				4ADDD1AF1F88B1E900C95F9C /* NodataView.m in Sources */,
 				4A6AD22B1F7F953600E6084E /* GLPublish_ReviewCell.m in Sources */,
 				4A5A785D1F7B9B0E004FB15A /* GLBusinessCircleController.m in Sources */,
+				4A05EEB41F8CA5950095DBCF /* HWCalendar.m in Sources */,
+				4A05EE9D1F8C97380095DBCF /* HXPhotoTools.m in Sources */,
 				4AF107051F78D5AC00CB51FA /* main.m in Sources */,
 				4A6AD2391F7F953600E6084E /* GLPublish_ProjectPauseController.m in Sources */,
 				4A53E8531F7A59710021D9E0 /* GLMall_DetailFooterView.m in Sources */,
@@ -2858,7 +3081,9 @@
 				4ADDD1821F886F7200C95F9C /* GLMine_PersonInfo_AddressChooseController.m in Sources */,
 				4ADDD19C1F88A7A400C95F9C /* GLMall_LogisticsController.m in Sources */,
 				4A6B9F381F7CF100009386C8 /* GLBusiness_tradeSubCell.m in Sources */,
+				4A05EE9F1F8C97380095DBCF /* HXPhotoView.m in Sources */,
 				4ADDD1AC1F88B1E900C95F9C /* GLSet_MaskVeiw.m in Sources */,
+				4A05EE911F8C97380095DBCF /* HXFullScreenCameraPlayView.m in Sources */,
 				4A53E8341F7A240F0021D9E0 /* GLMall_DetailController.m in Sources */,
 				4AF109411F78DBB500CB51FA /* XBConst.m in Sources */,
 				4A509B431F87266600D794FB /* GLHome_NoticeCell.m in Sources */,
@@ -2866,13 +3091,17 @@
 				4AF1092E1F78DBB500CB51FA /* WXSPercentDrivenInteractiveTransition.m in Sources */,
 				4A165C321F86241800D0C34B /* GLMine_AddCardController.m in Sources */,
 				4A165C221F860F9000D0C34B /* GLMine_WalletExchangeController.m in Sources */,
+				4A05EE921F8C97380095DBCF /* HXFullScreenCameraViewController.m in Sources */,
+				4A05EEA31F8C97380095DBCF /* HXTransition.m in Sources */,
 				4A509B811F872B9C00D794FB /* GLMine_MyMessage_NoticeController.m in Sources */,
 				4A509B8B1F872C6300D794FB /* GLMine_MyMessage_ExchangeController.m in Sources */,
 				4A6AD23D1F7F953600E6084E /* GLPublish_ProjectCell.m in Sources */,
 				4A6B9F341F7CF100009386C8 /* GLBusiness_DetailProjectCell.m in Sources */,
 				4A6B9F2E1F7CF100009386C8 /* GLBusiness_DetailController.m in Sources */,
 				4A6AD1E51F7F86D300E6084E /* GLBusiness_FundTrendCell.m in Sources */,
+				4A05EE931F8C97380095DBCF /* HXPhoto3DTouchViewController.m in Sources */,
 				4AF1093A1F78DBB500CB51FA /* WXSTransitionManager.m in Sources */,
+				4A05EE9E1F8C97380095DBCF /* HXPhotoUIManager.m in Sources */,
 				4ADDD1AD1F88B1E900C95F9C /* LoadWaitView.m in Sources */,
 				4AF109331F78DBB500CB51FA /* WXSTransitionManager+FragmentAnimation.m in Sources */,
 				4A6B9F361F7CF100009386C8 /* GLBusiness_ProjectCollectionCell.m in Sources */,
@@ -2884,6 +3113,7 @@
 				4A6B9F301F7CF100009386C8 /* GLBusiness_ChooseCell.m in Sources */,
 				4A0EA9E31F86325D006A1CF5 /* GLMine_WalletCardChooseCell.m in Sources */,
 				4AF1092D1F78DBB500CB51FA /* UIViewController+WXSTransitionProperty.m in Sources */,
+				4A05EE9A1F8C97380095DBCF /* HXPhotoPreviewViewController.m in Sources */,
 				4ADDD1B31F88B64700C95F9C /* GLHomeModel.m in Sources */,
 				4A53E84F1F7A4BE20021D9E0 /* GLMall_DetailCommentCell.m in Sources */,
 				F9BB80111F7A283700867514 /* GLClassifyCell.m in Sources */,

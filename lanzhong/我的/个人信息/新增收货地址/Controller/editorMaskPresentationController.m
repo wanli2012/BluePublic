@@ -11,6 +11,7 @@
 @interface editorMaskPresentationController ()
 
 @property (nonatomic,strong)UIView *maskView;
+
 @end
 
 @implementation editorMaskPresentationController
@@ -70,8 +71,10 @@
     return _maskView;
     
 }
+
 //点击maskview 退出
 -(void)tapgestureevent{
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
+
 @end

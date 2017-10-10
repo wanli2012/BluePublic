@@ -55,6 +55,6 @@
 #define kCIRCLE_HOME_URL @"Item/item_pen"//商圈首页
 #define kCIRCLE_FITER_URL @"Item/item_screen"//商圈筛选条件
 #define kCIRCLE_DETAIL_URL @"Item/myitem_details"//商圈_项目详情
-
+#define kPUBLISH_PROJECT_URL @"Item/add_item"//用户发布项目
 
 #endif /* PrefixHeader_pch */

@@ -14,6 +14,7 @@
 {
     BOOL      _ishidecotr;//判断是否隐藏弹出控制器
 }
+
 @end
 
 @implementation GLMine_AddressAddController
