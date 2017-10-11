@@ -10,4 +10,6 @@
 
 @interface GLBusiness_ProjectCollectionCell : UICollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *imageV;
+
 @end

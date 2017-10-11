@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,26 +15,29 @@
                 <outlet property="buyNowBtn" destination="Wd6-pr-xjD" id="5pF-qS-Rhz"/>
                 <outlet property="cartBtn" destination="os3-4y-Boh" id="qGb-vk-Ve5"/>
                 <outlet property="headerView" destination="I1z-9W-2JR" id="4oR-Lx-BKF"/>
+                <outlet property="infoLabel" destination="qfZ-iX-xbP" id="jHP-Cv-GCy"/>
                 <outlet property="navTitleLabel" destination="QKZ-IM-Ak1" id="rmK-6Z-xsG"/>
                 <outlet property="navView" destination="drr-Zd-NRi" id="R9y-Eb-srz"/>
+                <outlet property="priceLabel" destination="KC6-J3-g6d" id="gaN-0j-5Sh"/>
+                <outlet property="saleNumLabel" destination="hFY-hY-Yyy" id="4jx-Jb-vb1"/>
                 <outlet property="tableView" destination="hNU-zY-0EG" id="iJb-KC-zAc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="345" height="560"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hNU-zY-0EG">
-                    <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                    <rect key="frame" x="0.0" y="20" width="345" height="491"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <view key="tableHeaderView" contentMode="scaleToFill" id="I1z-9W-2JR" userLabel="headerView">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="322"/>
+                        <rect key="frame" x="0.0" y="0.0" width="345" height="322"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LJA-4q-0TH">
-                                <rect key="frame" x="0.0" y="170" width="375" height="152"/>
+                                <rect key="frame" x="0.0" y="170" width="345" height="152"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥ 3000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KC6-J3-g6d">
                                         <rect key="frame" x="15" y="15" width="56.5" height="21"/>
@@ -44,19 +46,20 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="总销量:1234件" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFY-hY-Yyy">
-                                        <rect key="frame" x="279" y="19" width="81" height="14.5"/>
+                                        <rect key="frame" x="249" y="19" width="81" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[蓝众]  精品心印项链[蓝众]  精品心印项链[蓝众]  精品心印项链[蓝众]  精品心印项链" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qfZ-iX-xbP">
-                                        <rect key="frame" x="15" y="46" width="345" height="36"/>
+                                        <rect key="frame" x="15" y="46" width="315" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timg" translatesAutoresizingMaskIntoConstraints="NO" id="ToP-iV-8oC">
-                                        <rect key="frame" x="0.0" y="92" width="375" height="60"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ToP-iV-8oC">
+                                        <rect key="frame" x="0.0" y="92" width="345" height="60"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="Svi-Rl-M5M"/>
                                         </constraints>
@@ -91,21 +94,22 @@
                     </connections>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="drr-Zd-NRi">
-                    <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="20" width="345" height="44"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DWg-bl-e8N">
-                            <rect key="frame" x="10" y="0.0" width="44" height="44"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DWg-bl-e8N">
+                            <rect key="frame" x="0.0" y="0.0" width="80" height="44"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="44" id="h8k-pc-qN8"/>
+                                <constraint firstAttribute="width" constant="80" id="h8k-pc-qN8"/>
                                 <constraint firstAttribute="height" constant="44" id="lvl-w2-IJi"/>
                             </constraints>
-                            <state key="normal" title="返回"/>
+                            <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" image="return"/>
                             <connections>
                                 <action selector="pop:" destination="-1" eventType="touchUpInside" id="Lg9-se-ka1"/>
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品详情" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QKZ-IM-Ak1">
-                            <rect key="frame" x="157" y="13" width="61.5" height="18"/>
+                            <rect key="frame" x="142" y="13" width="61.5" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -116,29 +120,29 @@
                         <constraint firstItem="QKZ-IM-Ak1" firstAttribute="centerY" secondItem="drr-Zd-NRi" secondAttribute="centerY" id="5dT-Vx-t27"/>
                         <constraint firstAttribute="height" constant="44" id="NFo-jb-lhk"/>
                         <constraint firstItem="DWg-bl-e8N" firstAttribute="centerY" secondItem="drr-Zd-NRi" secondAttribute="centerY" id="d5Q-7T-Onb"/>
-                        <constraint firstItem="DWg-bl-e8N" firstAttribute="leading" secondItem="drr-Zd-NRi" secondAttribute="leading" constant="10" id="oGY-q1-Xtn"/>
+                        <constraint firstItem="DWg-bl-e8N" firstAttribute="leading" secondItem="drr-Zd-NRi" secondAttribute="leading" id="oGY-q1-Xtn"/>
                         <constraint firstItem="QKZ-IM-Ak1" firstAttribute="centerX" secondItem="drr-Zd-NRi" secondAttribute="centerX" id="pQP-dg-h5v"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5nY-1c-vU8">
-                    <rect key="frame" x="0.0" y="618" width="375" height="49"/>
+                    <rect key="frame" x="0.0" y="511" width="345" height="49"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="os3-4y-Boh">
-                            <rect key="frame" x="0.0" y="0.0" width="125" height="49"/>
-                            <state key="normal" title="Button"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="os3-4y-Boh">
+                            <rect key="frame" x="0.0" y="0.0" width="115" height="49"/>
+                            <state key="normal" title="Button" image="shoppingcart"/>
                             <connections>
                                 <action selector="toCart:" destination="-1" eventType="touchUpInside" id="NAo-Ig-2Ha"/>
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gzs-a5-RnG">
-                            <rect key="frame" x="125" y="10" width="1" height="29"/>
+                            <rect key="frame" x="115" y="10" width="1" height="29"/>
                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="1" id="is0-bu-rMj"/>
                             </constraints>
                         </view>
                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Go5-HV-Jvu">
-                            <rect key="frame" x="146" y="10" width="115" height="29"/>
+                            <rect key="frame" x="136" y="10" width="105" height="29"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="加入购物车">
                                 <color key="titleColor" red="1" green="0.52201360464096069" blue="0.20566916465759277" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -148,7 +152,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wd6-pr-xjD">
-                            <rect key="frame" x="281" y="10" width="84" height="29"/>
+                            <rect key="frame" x="261" y="10" width="74" height="29"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="立即购买">
                                 <color key="titleColor" red="0.052515827119350433" green="0.36203587055206299" blue="0.90829825401306152" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -194,10 +198,11 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="34.5" y="54.5"/>
+            <point key="canvasLocation" x="19.5" y="1"/>
         </view>
     </objects>
     <resources>
-        <image name="timg" width="1024" height="640"/>
+        <image name="return" width="22" height="22"/>
+        <image name="shoppingcart" width="22" height="21"/>
     </resources>
 </document>

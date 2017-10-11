@@ -8,6 +8,21 @@
 
 #import "GLBusiness_DetailModel.h"
 
+@implementation GLBusiness_HeartModel
+
+@end
+
+@implementation GLBusiness_CommentModel
+
+@end
+
 @implementation GLBusiness_DetailModel
+
++ (NSDictionary *)mj_objectClassInArray {
+    
+    return @{@"invest_10":@"GLBusiness_HeartModel",
+             @"invest_list":@"GLBusiness_CommentModel"
+             };
+}
 
 @end

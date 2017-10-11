@@ -50,7 +50,7 @@
 #define kHOME_ALL_CLASSIC_URL @"Item/more_item"//所有经典项目
 #define kMALL_HOME_URL @"Shop/shop_index"//商城首页
 #define kMALL_FITER_URL @"Shop/term"//商城筛选
-
+#define kGOODS_DETAIL_URL @"Shop/goods_data"//商品详情
 
 #define kCIRCLE_HOME_URL @"Item/item_pen"//商圈首页
 #define kCIRCLE_FITER_URL @"Item/item_screen"//商圈筛选条件

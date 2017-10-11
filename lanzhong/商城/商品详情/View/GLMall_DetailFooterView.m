@@ -10,6 +10,12 @@
 
 @implementation GLMall_DetailFooterView
 
+- (void)awakeFromNib{
+    [super awakeFromNib];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.baidu.com"]];
+    [self.webView loadRequest:request];
 
+}
 
 @end

@@ -14,7 +14,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;
 @property (weak, nonatomic) IBOutlet UIView *specView;
 
-
 @end
 
 @implementation GLMall_DetailSpecCell
@@ -25,6 +24,7 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(specChoose)];
     [self.specView addGestureRecognizer:tap];
 }
+
 - (void)specChoose {
     if ([self.delegate respondsToSelector:@selector(specChoose)]) {
         [self.delegate specChoose];

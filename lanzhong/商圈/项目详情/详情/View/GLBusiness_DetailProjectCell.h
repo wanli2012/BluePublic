@@ -10,4 +10,8 @@
 
 @interface GLBusiness_DetailProjectCell : UITableViewCell
 
+//@property (nonatomic, copy)NSString *detailStr;
+@property (nonatomic, strong)NSArray *dataSourceArr;
+@property (weak, nonatomic) IBOutlet UILabel *detailLabel;
+
 @end

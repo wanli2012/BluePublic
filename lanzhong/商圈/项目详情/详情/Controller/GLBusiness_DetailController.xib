@@ -11,16 +11,22 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GLBusiness_DetailController">
             <connections>
+                <outlet property="bgProgressView" destination="Eiq-Ap-n1i" id="xNx-hN-luc"/>
                 <outlet property="headerView" destination="Uij-uS-o7T" id="HQa-f0-tuX"/>
                 <outlet property="iconImageV" destination="aNl-et-AtZ" id="TFf-9W-wlT"/>
                 <outlet property="iconImageV2" destination="liE-to-TPB" id="ou3-a3-pcE"/>
                 <outlet property="iconImageV3" destination="Sar-hn-KrN" id="r5G-co-q4P"/>
                 <outlet property="imageV" destination="zem-2Z-ttd" id="8WM-lk-ih7"/>
+                <outlet property="listNumLabel" destination="KhQ-mY-rrd" id="V5j-qn-GXf"/>
                 <outlet property="middleView" destination="G50-bK-tQn" id="rGk-68-hAe"/>
                 <outlet property="middleViewLayerView" destination="UsG-yK-xOy" id="L1u-KS-wa4"/>
+                <outlet property="personNameLabel" destination="9zw-up-bBx" id="XyA-I3-t48"/>
                 <outlet property="progressSignView" destination="Km1-V6-hG6" id="lQc-n6-rtd"/>
+                <outlet property="progressView" destination="mDL-UG-ebO" id="0GD-Jl-HAb"/>
+                <outlet property="raisedLabel" destination="5xu-ZG-oPu" id="ILW-Zr-GNW"/>
                 <outlet property="supportBtn" destination="Ueq-ys-cYZ" id="Udo-K1-eca"/>
                 <outlet property="tableView" destination="z44-gL-KZw" id="V9f-tz-UaA"/>
+                <outlet property="targetMoneyLabel" destination="Ja1-Kp-ifI" id="udw-8x-4ge"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -33,26 +39,28 @@
                     <rect key="frame" x="0.0" y="524" width="375" height="50"/>
                     <subviews>
                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ueq-ys-cYZ">
-                            <rect key="frame" x="197.5" y="10" width="167.5" height="30"/>
+                            <rect key="frame" x="135" y="10" width="230" height="30"/>
                             <color key="backgroundColor" red="0.00149723934" green="0.492005527" blue="0.99493986369999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="支持他"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q93-3d-x4r">
-                            <rect key="frame" x="94" y="0.0" width="93.5" height="50"/>
-                            <color key="backgroundColor" red="1" green="0.52201360460000001" blue="0.20566916469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <rect key="frame" x="62.5" y="0.0" width="62.5" height="50"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <state key="normal" image="comment"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4PZ-iZ-AKk">
-                            <rect key="frame" x="0.0" y="0.0" width="93.5" height="50"/>
-                            <color key="backgroundColor" red="1" green="0.52201360460000001" blue="0.20566916469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <rect key="frame" x="0.0" y="0.0" width="62.5" height="50"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <state key="normal" image="share"/>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="Q93-3d-x4r" firstAttribute="width" secondItem="oJ5-rE-2hD" secondAttribute="width" multiplier="1/4" id="1jO-n6-LXB"/>
+                        <constraint firstItem="Q93-3d-x4r" firstAttribute="width" secondItem="oJ5-rE-2hD" secondAttribute="width" multiplier="1/6" id="1jO-n6-LXB"/>
                         <constraint firstItem="4PZ-iZ-AKk" firstAttribute="top" secondItem="oJ5-rE-2hD" secondAttribute="top" id="3bD-Ib-8cd"/>
                         <constraint firstAttribute="bottom" secondItem="Q93-3d-x4r" secondAttribute="bottom" id="B6o-EZ-jok"/>
-                        <constraint firstItem="Ueq-ys-cYZ" firstAttribute="width" secondItem="oJ5-rE-2hD" secondAttribute="width" multiplier="1/2" constant="-20" id="VLZ-WV-nub"/>
+                        <constraint firstItem="Ueq-ys-cYZ" firstAttribute="width" secondItem="oJ5-rE-2hD" secondAttribute="width" multiplier="2/3" constant="-20" id="VLZ-WV-nub"/>
                         <constraint firstItem="4PZ-iZ-AKk" firstAttribute="leading" secondItem="oJ5-rE-2hD" secondAttribute="leading" id="WqA-kX-d2C"/>
                         <constraint firstItem="Ueq-ys-cYZ" firstAttribute="leading" secondItem="Q93-3d-x4r" secondAttribute="trailing" constant="10" id="dPF-qA-Bp1"/>
                         <constraint firstAttribute="height" constant="50" id="e1X-x6-eTD"/>
@@ -184,16 +192,16 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f15-NA-l9d">
                                         <rect key="frame" x="0.0" y="134" width="355" height="46"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="p8k-zk-dFc">
-                                                <rect key="frame" x="15" y="13" width="20" height="20"/>
-                                                <color key="backgroundColor" red="0.00149723934" green="0.492005527" blue="0.99493986369999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="商圈_矢量智能对象" translatesAutoresizingMaskIntoConstraints="NO" id="p8k-zk-dFc">
+                                                <rect key="frame" x="15" y="14" width="15" height="18"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="20" id="FEG-67-CPO"/>
-                                                    <constraint firstAttribute="height" constant="20" id="Hii-zg-Nwe"/>
+                                                    <constraint firstAttribute="width" constant="15" id="FEG-67-CPO"/>
+                                                    <constraint firstAttribute="height" constant="18" id="Hii-zg-Nwe"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="爱心贡献榜" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i85-vp-W6M">
-                                                <rect key="frame" x="50" y="12.5" width="61.5" height="20"/>
+                                                <rect key="frame" x="45" y="12.5" width="61.5" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="Pnr-aD-uia"/>
                                                 </constraints>
@@ -201,30 +209,30 @@
                                                 <color key="textColor" white="0.0" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ilc-tQ-Do9">
-                                                <rect key="frame" x="330" y="15.5" width="10" height="15"/>
-                                                <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="return2" translatesAutoresizingMaskIntoConstraints="NO" id="ilc-tQ-Do9">
+                                                <rect key="frame" x="331" y="15.5" width="9" height="15"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="AUk-Rb-xG3"/>
-                                                    <constraint firstAttribute="width" constant="10" id="xxJ-Xv-HLR"/>
+                                                    <constraint firstAttribute="width" constant="9" id="xxJ-Xv-HLR"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timg" translatesAutoresizingMaskIntoConstraints="NO" id="aNl-et-AtZ">
-                                                <rect key="frame" x="290" y="8" width="30" height="30"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="third" translatesAutoresizingMaskIntoConstraints="NO" id="aNl-et-AtZ">
+                                                <rect key="frame" x="291" y="8" width="30" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="NVJ-mq-Qho"/>
                                                     <constraint firstAttribute="width" constant="30" id="qce-mo-p5P"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timg" translatesAutoresizingMaskIntoConstraints="NO" id="liE-to-TPB">
-                                                <rect key="frame" x="250" y="8" width="30" height="30"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="second" translatesAutoresizingMaskIntoConstraints="NO" id="liE-to-TPB">
+                                                <rect key="frame" x="251" y="8" width="30" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="5Vs-xv-76N"/>
                                                     <constraint firstAttribute="width" constant="30" id="gSL-Oh-INJ"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timg" translatesAutoresizingMaskIntoConstraints="NO" id="Sar-hn-KrN">
-                                                <rect key="frame" x="210" y="8" width="30" height="30"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="first" translatesAutoresizingMaskIntoConstraints="NO" id="Sar-hn-KrN">
+                                                <rect key="frame" x="211" y="8" width="30" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="MX6-vj-5pI"/>
                                                     <constraint firstAttribute="width" constant="30" id="lwb-Ei-KEu"/>
@@ -330,6 +338,13 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
+        <image name="comment" width="23" height="22"/>
+        <image name="first" width="38" height="37"/>
+        <image name="return2" width="8" height="15"/>
+        <image name="second" width="38" height="37"/>
+        <image name="share" width="22" height="22"/>
+        <image name="third" width="37" height="37"/>
         <image name="timg" width="1024" height="640"/>
+        <image name="商圈_矢量智能对象" width="14" height="18"/>
     </resources>
 </document>

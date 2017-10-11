@@ -57,14 +57,14 @@
 @property (nonatomic, copy)NSString *phone;//项目联系电话
 @property (nonatomic, copy)NSString *photo;//后台使用图片路径  不用管
 @property (nonatomic, copy)NSString *classify;//项目类型   1:爱心项目  2:创客项目
-@property (nonatomic, copy)NSString *sev_photo;//项目展示图片   APP使用
+@property (nonatomic, copy)NSArray *sev_photo;//项目展示图片   APP使用
 @property (nonatomic, copy)NSString *need_time;//项目截止时间
-@property (nonatomic, copy)NSString *money_trend;//
 
-@property (nonatomic, copy)NSArray *trend_time;//
-@property (nonatomic, copy)NSArray *trend_info;//
-@property (nonatomic, copy)NSArray *invest_10;//
-@property (nonatomic, copy)NSArray *invest_list;//
+@property (nonatomic, copy)NSString *user_info_pic;//头像
+@property (nonatomic, copy)NSString *invest_count;//榜单人数
+
+@property (nonatomic, copy)NSArray <GLBusiness_HeartModel *>*invest_10;//爱心排行榜
+@property (nonatomic, copy)NSArray <GLBusiness_CommentModel *>*invest_list;//支持评论列表
 
 
 @end

@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -51,34 +50,34 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p4P-9F-fhK">
                         <rect key="frame" x="0.0" y="80" width="373" height="40"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RZ7-YG-5GP">
-                                <rect key="frame" x="15" y="12.5" width="15" height="15"/>
-                                <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="goodsDetail_ensure" translatesAutoresizingMaskIntoConstraints="NO" id="RZ7-YG-5GP">
+                                <rect key="frame" x="15" y="15" width="10" height="10"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="15" id="c4M-lR-SZE"/>
-                                    <constraint firstAttribute="height" constant="15" id="tI9-UJ-Yjg"/>
+                                    <constraint firstAttribute="width" constant="10" id="c4M-lR-SZE"/>
+                                    <constraint firstAttribute="height" constant="10" id="tI9-UJ-Yjg"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正品保障" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fol-xI-33Y">
-                                <rect key="frame" x="35" y="13.5" width="49.5" height="14.5"/>
+                                <rect key="frame" x="30" y="13.5" width="49.5" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ws4-AZ-Zqf">
-                                <rect key="frame" x="139.5" y="13" width="15" height="15"/>
-                                <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="goodsDetail_ensure" translatesAutoresizingMaskIntoConstraints="NO" id="ws4-AZ-Zqf">
+                                <rect key="frame" x="144.5" y="15.5" width="10" height="10"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="15" id="Cs1-eJ-eu5"/>
-                                    <constraint firstAttribute="width" constant="15" id="Ro4-A6-Mcf"/>
+                                    <constraint firstAttribute="height" constant="10" id="Cs1-eJ-eu5"/>
+                                    <constraint firstAttribute="width" constant="10" id="Ro4-A6-Mcf"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zL6-ts-nWZ">
-                                <rect key="frame" x="301" y="12.5" width="15" height="15"/>
-                                <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="goodsDetail_ensure" translatesAutoresizingMaskIntoConstraints="NO" id="zL6-ts-nWZ">
+                                <rect key="frame" x="306" y="15" width="10" height="10"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="15" id="E8t-f0-skP"/>
-                                    <constraint firstAttribute="width" constant="15" id="Jco-hs-o7P"/>
+                                    <constraint firstAttribute="height" constant="10" id="E8t-f0-skP"/>
+                                    <constraint firstAttribute="width" constant="10" id="Jco-hs-o7P"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支持七天退货" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6wF-7i-W64">
@@ -142,4 +141,7 @@
             <point key="canvasLocation" x="24" y="67"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="goodsDetail_ensure" width="10" height="10"/>
+    </resources>
 </document>

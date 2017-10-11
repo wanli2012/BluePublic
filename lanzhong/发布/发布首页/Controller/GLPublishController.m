@@ -251,74 +251,95 @@ static const CGFloat kPhotoViewMargin = 25;
     dic[@"trade_id"] = self.trade_id;
     dic[@"need_time"] = self.need_time;
 
-    dic[@"photo"] = self.imageArr;
     
-    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
-    [NetworkManager requestPOSTWithURLStr:kPUBLISH_PROJECT_URL paramDic:dic finish:^(id responseObject) {
-        
-        [_loadV removeloadview];
-        
-        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
-           
-        }else{
-            
-            [MBProgressHUD showError:responseObject[@"message"]];
-        }
-        
-    } enError:^(NSError *error) {
-        [_loadV removeloadview];
-        
-    }];
-    
-    
-//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];//响应
-//    manager.requestSerializer.timeoutInterval = 20;
-//    // 加上这行代码，https ssl 验证。
-//    [manager setSecurityPolicy:[NetworkManager customSecurityPolicy]];
-//    [manager POST:[NSString stringWithFormat:@"%@User/openOne",URL_Base] parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-//        //将图片以表单形式上传
-//        
-//        for (int i = 0; i < self.imageArr.count; i ++) {
-//            
-//            NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
-//            formatter.dateFormat=@"yyyyMMddHHmmss";
-//            NSString *str=[formatter stringFromDate:[NSDate date]];
-//            NSString *fileName=[NSString stringWithFormat:@"%@%d.png",str,i];
-//            [formData appendPartWithFileData:imageViewArr[i] name:titleArr[i] fileName:fileName mimeType:@"image/png"];
-//        }
-//        
-//    }progress:^(NSProgress *uploadProgress){
+//    for (int i = 0; i < self.imageArr.count; i ++) {
 //
-//        [SVProgressHUD showProgress:uploadProgress.fractionCompleted status:[NSString stringWithFormat:@"上传中%.0f%%",(uploadProgress.fractionCompleted * 100)]];
-//        
-//        if (uploadProgress.fractionCompleted == 1.0) {
-//            [SVProgressHUD dismiss];
-//            
-//            //            self.submit.userInteractionEnabled = YES;
-//        }
-//        
-//    }success:^(NSURLSessionDataTask *task, id responseObject) {
-//        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-//        NSLog(@"%@",dic);
-//        if ([dic[@"code"]integerValue]==1) {
-//            
-//            [MBProgressHUD showError:dic[@"message"]];
-//            [self.navigationController popToRootViewControllerAnimated:YES];
+//        NSData *data = nil;
+//        if(!UIImagePNGRepresentation(self.imageArr[i])) {
+//            data =UIImageJPEGRepresentation(self.imageArr[i],0.1);
 //        }else{
-//            [MBProgressHUD showError:dic[@"message"]];
-//            self.submit.userInteractionEnabled = YES;
-//            self.submit.backgroundColor = TABBARTITLE_COLOR;
+//            data =UIImagePNGRepresentation(self.imageArr[i]);
 //        }
+//        dic[[NSString stringWithFormat:@"photo[%zd]",i]] = data;
+//    }
+//    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+//    [NetworkManager requestPOSTWithURLStr:kPUBLISH_PROJECT_URL paramDic:dic finish:^(id responseObject) {
 //        
 //        [_loadV removeloadview];
 //        
-//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//        self.submit.userInteractionEnabled = YES;
-//        self.submit.backgroundColor = TABBARTITLE_COLOR;
-//        [MBProgressHUD showError:error.localizedDescription];
+//        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+//           
+//        }else{
+//            
+//            [MBProgressHUD showError:responseObject[@"message"]];
+//        }
+//        
+//    } enError:^(NSError *error) {
+//        [_loadV removeloadview];
 //        
 //    }];
+    
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];//响应
+    manager.requestSerializer.timeoutInterval = 20;
+    // 加上这行代码，https ssl 验证。
+    [manager setSecurityPolicy:[NetworkManager customSecurityPolicy]];
+    [manager POST:[NSString stringWithFormat:@"%@%@",URL_Base,kPUBLISH_PROJECT_URL] parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        //将图片以表单形式上传
+        
+        for (int i = 0; i < self.imageArr.count; i ++) {
+            
+            NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+            formatter.dateFormat=@"yyyyMMddHHmmss";
+            NSString *str=[formatter stringFromDate:[NSDate date]];
+            NSString *fileName=[NSString stringWithFormat:@"%@%d.png",str,i];
+            NSString *title = [NSString stringWithFormat:@"photo[%zd]",i];
+            
+            NSData *data = nil;
+            if(!UIImagePNGRepresentation(self.imageArr[i])) {
+                data =UIImageJPEGRepresentation(self.imageArr[i],0.1);
+            }else{
+                data =UIImagePNGRepresentation(self.imageArr[i]);
+            }
+            
+            [formData appendPartWithFileData:data name:title fileName:fileName mimeType:@"image/png"];
+        }
+        
+    }progress:^(NSProgress *uploadProgress){
+
+        [SVProgressHUD showProgress:uploadProgress.fractionCompleted status:[NSString stringWithFormat:@"上传中%.0f%%",(uploadProgress.fractionCompleted * 100)]];
+        
+        if (uploadProgress.fractionCompleted == 1.0) {
+            [SVProgressHUD dismiss];
+            
+//            self.submit.userInteractionEnabled = YES;
+        }
+        
+    }success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        NSLog(@"%@",dic);
+        
+        if ([dic[@"code"]integerValue]==1) {
+            
+            [MBProgressHUD showError:dic[@"message"]];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }else{
+            [MBProgressHUD showError:dic[@"message"]];
+//            self.submit.userInteractionEnabled = YES;
+//            self.submit.backgroundColor = TABBARTITLE_COLOR;
+        }
+        
+        [_loadV removeloadview];
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//        self.submit.userInteractionEnabled = YES;
+//        self.submit.backgroundColor = TABBARTITLE_COLOR;
+        [MBProgressHUD showError:error.localizedDescription];
+        
+    }];
 
 }
 
@@ -466,16 +487,66 @@ static const CGFloat kPhotoViewMargin = 25;
 #pragma mark-
 #pragma mark HXPhotoViewDelegate
 - (void)photoView:(HXPhotoView *)photoView changeComplete:(NSArray<HXPhotoModel *> *)allList photos:(NSArray<HXPhotoModel *> *)photos videos:(NSArray<HXPhotoModel *> *)videos original:(BOOL)isOriginal {
-    
-    //    NSSLog(@"所有:%ld - 照片:%ld - 视频:%ld",allList.count,photos.count,videos.count);
-    
+
     [self.imageArr removeAllObjects];
     
     for (HXPhotoModel *model in photos) {
-        NSString *aPath3=[NSString stringWithFormat:@"%@/Documents/%@.jpg",NSHomeDirectory(),[NSString stringWithFormat:@"%@",model.fullSizeImageURL]];
+        PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+        // 同步获得图片, 只会返回1张图片
+        options.synchronous = YES;
 
-        UIImage *img = [[UIImage alloc] initWithContentsOfFile:aPath3];
-//        [self.imageArr addObject:UIImagePNGRepresentation(img)];
+        BOOL original = YES;
+        // 是否要原图
+        CGSize size = original ? CGSizeMake(model.asset.pixelWidth, model.asset.pixelHeight) : CGSizeZero;
+        
+        // 从asset中获得图片
+        [[PHImageManager defaultManager] requestImageForAsset:model.asset targetSize:size contentMode:PHImageContentModeDefault options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+
+            [self.imageArr addObject:result];
+            
+        }];
+    }
+
+//    
+//    // 获得所有的自定义相簿
+//    PHFetchResult<PHAssetCollection *> *assetCollections = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
+//    // 遍历所有的自定义相簿
+//    for (PHAssetCollection *assetCollection in assetCollections) {
+//        [self enumerateAssetsInAssetCollection:assetCollection original:YES];
+//    }
+//    
+//    // 获得相机胶卷
+//    PHAssetCollection *cameraRoll = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary options:nil].lastObject;
+//    // 遍历相机胶卷,获取大图
+//    [self enumerateAssetsInAssetCollection:cameraRoll original:YES];
+//    
+
+}
+
+/**
+ *  遍历相簿中的所有图片
+ *  @param assetCollection 相簿
+ *  @param original        是否要原图
+ */
+- (void)enumerateAssetsInAssetCollection:(PHAssetCollection *)assetCollection original:(BOOL)original
+{
+    NSLog(@"相簿名:%@", assetCollection.localizedTitle);
+    
+    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+    // 同步获得图片, 只会返回1张图片
+    options.synchronous = YES;
+    
+    // 获得某个相簿中的所有PHAsset对象
+    PHFetchResult<PHAsset *> *assets = [PHAsset fetchAssetsInAssetCollection:assetCollection options:nil];
+    for (PHAsset *asset in assets) {
+        // 是否要原图
+        CGSize size = original ? CGSizeMake(asset.pixelWidth, asset.pixelHeight) : CGSizeZero;
+        
+        // 从asset中获得图片
+        [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeDefault options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+            NSLog(@"%@", result);
+            UIImage *img = result;
+        }];
     }
 }
 

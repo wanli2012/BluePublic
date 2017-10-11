@@ -72,6 +72,7 @@
             <connections>
                 <outlet property="collectionView" destination="euh-Xh-cYs" id="XQc-lF-ZZZ"/>
                 <outlet property="collectionViewHeight" destination="YGG-fB-l0e" id="n70-cC-CcD"/>
+                <outlet property="detailLabel" destination="Iy6-TY-0ZW" id="Hax-BI-CkG"/>
             </connections>
             <point key="canvasLocation" x="26" y="-64"/>
         </tableViewCell>

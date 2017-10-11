@@ -9,7 +9,7 @@
 #import "GLBusiness_ProjectCollectionCell.h"
 
 @interface GLBusiness_ProjectCollectionCell ()
-@property (weak, nonatomic) IBOutlet UIImageView *imageV;
+
 
 @end
 

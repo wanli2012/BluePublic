@@ -14,11 +14,17 @@
 #import "GLMall_DetailFooterView.h"
 #import <SDCycleScrollView/SDCycleScrollView.h>
 #import "GLShoppingCartController.h"
+#import "GLMall_DetailModel.h"
+#import "GLMall_DetailWebCell.h"
 
 
 #define headerImageHeight 64
 @interface GLMall_DetailController ()<UITableViewDelegate,UITableViewDataSource,GLMall_DetailSpecCellDelegate,GLMall_DetailAddressCellDelegate,GLMall_DetailSelecteCellDelegate,UIWebViewDelegate,SDCycleScrollViewDelegate>
 
+{
+    BOOL _isDetail;//是否是商品详情
+    CGFloat _detailHeight;//商品详情高度
+}
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *headerView;//透视图
@@ -36,6 +42,16 @@
 @property (weak, nonatomic) IBOutlet UIButton *buyNowBtn;//立即购买Btn
 @property (weak, nonatomic) IBOutlet UIButton *addCartBtn;//加入购物车
 @property (weak, nonatomic) IBOutlet UIButton *cartBtn;//去购物车
+
+@property (nonatomic, strong)NSMutableArray *commentModels;
+@property (nonatomic, strong)LoadWaitView *loadV;
+@property (nonatomic, assign)NSInteger page;
+@property (nonatomic, strong)GLMall_DetailModel *model;
+
+@property (weak, nonatomic) IBOutlet UILabel *priceLabel;//价格label
+@property (weak, nonatomic) IBOutlet UILabel *saleNumLabel;//销量
+@property (weak, nonatomic) IBOutlet UILabel *infoLabel;//描述
+
 
 @end
 
@@ -60,15 +76,104 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMall_DetailAddressCell" bundle:nil] forCellReuseIdentifier:@"GLMall_DetailAddressCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMall_DetailSelecteCell" bundle:nil] forCellReuseIdentifier:@"GLMall_DetailSelecteCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMall_DetailCommentCell" bundle:nil] forCellReuseIdentifier:@"GLMall_DetailCommentCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"GLMall_DetailWebCell" bundle:nil] forCellReuseIdentifier:@"GLMall_DetailWebCell"];
     
     self.footerView.webView.delegate = self;
     
     [self.headerView addSubview:self.cycleScrollView];
-    self.tableView.tableFooterView = self.footerView;
+    
+//    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.baidu.com"]];
+//    [self.footerView.webView loadRequest:request];
+//    self.tableView.tableFooterView = self.footerView;
     [self selectedFunc:YES];
+    
+    __weak __typeof(self) weakSelf = self;
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [weakSelf postRequest:YES];
+        
+    }];
+    
+    
+    // 设置文字
+    [header setTitle:@"快扯我，快点" forState:MJRefreshStateIdle];
+    
+    [header setTitle:@"数据要来啦" forState:MJRefreshStatePulling];
+    
+    [header setTitle:@"服务器正在狂奔..." forState:MJRefreshStateRefreshing];
+    
+    self.tableView.mj_header = header;
+    
+    [self postRequest:YES];
+//    [self.tableView.mj_header beginRefreshing];
+    
+    _isDetail = YES;
     
 }
 
+- (void)postRequest:(BOOL)isRefresh{
+    
+    if (isRefresh) {
+        self.page = 1;
+        [self.commentModels removeAllObjects];
+    }else{
+        self.page ++ ;
+    }
+    
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    
+    self.goods_id = @"8";
+    
+    dic[@"goods_id"] = self.goods_id;
+    
+    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+    [NetworkManager requestPOSTWithURLStr:kGOODS_DETAIL_URL paramDic:dic finish:^(id responseObject) {
+        
+        [_loadV removeloadview];
+        [self endRefresh];
+        
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+            if([responseObject[@"data"] count] != 0){
+                
+                self.model = [GLMall_DetailModel mj_objectWithKeyValues:responseObject[@"data"]];
+                
+//                for (GLDetail_comment_data *model in self.model.comment_data) {
+//                    
+//                    [self.commentModels addObject:model];
+//                }
+                self.model.goods_details = @"http://www.jianshu.com/p/69d338f8b67d";
+                
+                self.cycleScrollView.imageURLStringsGroup = self.model.goods_data.must_thumb_url;
+                
+                
+//                UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, -10, kSCREEN_WIDTH, 10)];
+//                webView.delegate = self;
+//                NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.jianshu.com/p/69d338f8b67d"]];
+//                [webView loadRequest:request];
+//                [self.view addSubview:webView];
+                
+            }
+            
+        }else{
+            
+            [MBProgressHUD showError:responseObject[@"message"]];
+        }
+        
+        [self.tableView reloadData];
+        
+    } enError:^(NSError *error) {
+        [_loadV removeloadview];
+        [self endRefresh];
+        [self.tableView reloadData];
+        
+    }];
+    
+}
+
+- (void)endRefresh {
+    
+    [self.tableView.mj_header endRefreshing];
+}
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
@@ -112,17 +217,6 @@
     }
 }
 
-#pragma mark - UIWebViewDelegate
-- (void)webViewDidFinishLoad:(UIWebView *)webView{
-    //http://news.163.com/17/0921/09/CURK48U10001875N.html
-    
-    CGFloat webViewHeight = [webView.scrollView contentSize].height;
-    CGRect newFrame = webView.frame;
-    newFrame.size.height = webViewHeight;
-    
-    self.footerView.frame = CGRectMake(0, 0, kSCREEN_WIDTH, newFrame.size.height + 10);
-}
-
 #pragma mark - GLMall_DetailSpecCellDelegate 规格 数量
 - (void)changeNum:(BOOL)isAdd{
     
@@ -153,89 +247,148 @@
     if (isDetail) {
         
         NSLog(@"商品详情");
-        self.footerView.hidden = NO;
-                
-        for (int i = 0; i <2; i++) {
-            [self.dataSource addObject:@(i)];
-        }
-        
-        [self.tableView reloadData];
-        
+//        self.footerView.hidden = NO;
+        _isDetail = YES;
+
+
     }else{
         
         NSLog(@"用户评论");
-        self.footerView.hidden = YES;
-        
-        for (int i = 0; i < 8; i++) {
-            [self.dataSource addObject:@(i)];
-        }
+//        self.footerView.hidden = YES;
+        _isDetail = NO;
+//        [self.commentModels removeAllObjects];
+//
+//        for (GLDetail_comment_data *model in self.model.comment_data) {
+//
+//            [self.commentModels addObject:model];
+//        }
 
-        [self.tableView reloadData];
     }
  
+    NSIndexSet *indexSet=[[NSIndexSet alloc] initWithIndex:1];
+    
+    [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 #pragma mark - UITableViewDelegate UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 2;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.dataSource.count;
+    if(section == 0){
+        return 2;
+    }else{
+        
+        return 1;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    switch (indexPath.row) {
-        case 0:
-        {
-            GLMall_DetailSpecCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMall_DetailSpecCell"];
+    if (indexPath.section == 0) {
+        
+        switch (indexPath.row) {
+            case 0:
+            {
+                GLMall_DetailSpecCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMall_DetailSpecCell"];
+                cell.selectionStyle = 0;
+                cell.delegate = self;
+                return cell;
+                
+            }
+                break;
+                
+            case 1:
+            {
+                GLMall_DetailSelecteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMall_DetailSelecteCell"];
+                cell.selectionStyle = 0;
+                cell.delegate = self;
+                return cell;
+                
+            }
+                break;
+                
+            default:
+            {
+                GLMall_DetailCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMall_DetailCommentCell"];
+                cell.selectionStyle = 0;
+                return cell;
+                
+            }
+                break;
+        }
+        
+    }else{
+        
+        if (_isDetail) {
+            
+            GLMall_DetailWebCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMall_DetailWebCell"];
             cell.selectionStyle = 0;
-            cell.delegate = self;
+
+            cell.url = self.model.goods_details;
+            
             return cell;
             
-        }
-            break;
-
-        case 1:
-        {
-            GLMall_DetailSelecteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMall_DetailSelecteCell"];
-            cell.selectionStyle = 0;
-            cell.delegate = self;
-            return cell;
+        }else{
             
-        }
-            break;
-
-        default:
-        {
             GLMall_DetailCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMall_DetailCommentCell"];
             cell.selectionStyle = 0;
-//            cell.delegate = self;
-            return cell;
+        
+            //            cell.delegate = self;
             
+            if (self.commentModels.count != 0) {
+                
+                cell.model = self.commentModels[indexPath.row];
+            }
+            return cell;
         }
-            break;
+
     }
 }
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    switch (indexPath.row) {
-        case 0:
-            return 175;
-            break;
-        case 1:
-        {
-            return 50;
+    if(indexPath.section == 0){
+        
+        switch (indexPath.row) {
+            case 0:
+                return 175;
+                break;
+            case 1:
+            {
+                return 50;
+            }
+                break;
+            default:
+            {
+                tableView.rowHeight = UITableViewAutomaticDimension;
+                tableView.estimatedRowHeight = 44;
+                return tableView.rowHeight;
+            }
+                break;
         }
-            break;
-        default:
-        {
-            tableView.rowHeight = UITableViewAutomaticDimension;
-            tableView.estimatedRowHeight = 44;
-            return tableView.rowHeight;
-        }
-            break;
+        
+    }else{
+        
+        tableView.rowHeight = UITableViewAutomaticDimension;
+        tableView.estimatedRowHeight = 44;
+        return tableView.rowHeight;
     }
 }
+
+
+//#pragma mark - UIWebViewDelegate
+//- (void)webViewDidFinishLoad:(UIWebView *)webView{
+//    
+//    CGFloat webViewHeight = [webView.scrollView contentSize].height;
+//    CGRect newFrame = webView.frame;
+//    newFrame.size.height = webViewHeight;
+//    
+//    self.footerView.frame = CGRectMake(0, 0, kSCREEN_WIDTH, newFrame.size.height + 10);
+//    _detailHeight = webViewHeight;
+//    
+//    NSIndexSet *indexSet=[[NSIndexSet alloc] initWithIndex:1];
+//    [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+//}
 
 #pragma mark - SDCycleScrollViewDelegate 点击看大图
 /** 点击图片回调 */
@@ -277,7 +430,7 @@
     
     if (!_cycleScrollView) {
 
-        _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 170 *autoSizeScaleY)
+        _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 170)
                                                               delegate:self
                                                       placeholderImage:[UIImage imageNamed:LUNBO_PlaceHolder]];
         
@@ -294,4 +447,13 @@
     }
     return _cycleScrollView;
 }
+
+- (NSMutableArray *)commentModels{
+    if (!_commentModels) {
+        _commentModels = [NSMutableArray array];
+    }
+    return _commentModels;
+}
+
+
 @end

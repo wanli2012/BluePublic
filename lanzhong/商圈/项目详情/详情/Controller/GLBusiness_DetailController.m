@@ -15,6 +15,7 @@
 #import "GLBusiness_LoveListController.h"
 #import "GLBusiness_FundTrendController.h"//资金动向
 #import "GLBusiness_DetailModel.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface GLBusiness_DetailController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,GLBusiness_ChooseCellDelegate>
 {
@@ -23,8 +24,16 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageV;//项目图
+@property (weak, nonatomic) IBOutlet UILabel *personNameLabel;//发起人名
+@property (weak, nonatomic) IBOutlet UILabel *targetMoneyLabel;//目标金额
+@property (weak, nonatomic) IBOutlet UILabel *raisedLabel;//已筹金额
+@property (weak, nonatomic) IBOutlet UIView *bgProgressView;//进度条背景
+@property (weak, nonatomic) IBOutlet UIView *progressView;//进度条
+@property (weak, nonatomic) IBOutlet UIView *progressSignView;//百分比 球
+@property (weak, nonatomic) IBOutlet UILabel *listNumLabel;//榜单人数
+
+
 @property (weak, nonatomic) IBOutlet UIButton *supportBtn;
-@property (weak, nonatomic) IBOutlet UIView *progressSignView;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @property (weak, nonatomic) IBOutlet UIView *middleView;
@@ -56,7 +65,6 @@
         
         [weakSelf postRequest:YES];
 
-        
     }];
 
     // 设置文字
@@ -69,7 +77,6 @@
     self.tableView.mj_header = header;
     
     [self postRequest:YES];
- 
     
 }
 
@@ -77,22 +84,24 @@
 
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     
+    self.item_id = @"36";
+    
     dic[@"item_id"] = self.item_id;
     
     _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
-    [NetworkManager requestPOSTWithURLStr:kCIRCLE_HOME_URL paramDic:dic finish:^(id responseObject) {
+    [NetworkManager requestPOSTWithURLStr:kCIRCLE_DETAIL_URL paramDic:dic finish:^(id responseObject) {
         
         [_loadV removeloadview];
         [self endRefresh];
         
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             if([responseObject[@"data"] count] != 0){
+        
+                self.model = [GLBusiness_DetailModel mj_objectWithKeyValues:responseObject[@"data"]];
+                [self headerViewFuzhi];
                 
-//                for (NSDictionary *dict in responseObject[@"data"]) {
-//                    GLCircle_item_dataModel *model = [GLCircle_item_dataModel mj_objectWithKeyValues:dict];
-//                    [self.models addObject:model];
-//                }
             }
+            
         }else{
             
             [MBProgressHUD showError:responseObject[@"message"]];
@@ -104,11 +113,23 @@
         [_loadV removeloadview];
         [self endRefresh];
         [self.tableView reloadData];
-        
     }];
-    
 }
 
+//为头视图赋值
+- (void)headerViewFuzhi {
+    
+    [self.imageV sd_setImageWithURL:[NSURL URLWithString:self.model.user_info_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    self.personNameLabel.text = self.model.linkman;
+    self.targetMoneyLabel.text = [NSString stringWithFormat:@"%@元",self.model.admin_money];
+    self.raisedLabel.text = [NSString stringWithFormat:@"%@元",self.model.draw_money];
+    self.listNumLabel.text = [NSString stringWithFormat:@"榜单:%@人",self.model.invest_count];
+    if (self.model.sev_photo.count == 3) {
+        [self.iconImageV3 sd_setImageWithURL:[NSURL URLWithString:self.model.invest_10[0].must_user_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+        [self.iconImageV2 sd_setImageWithURL:[NSURL URLWithString:self.model.invest_10[1].must_user_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+        [self.iconImageV sd_setImageWithURL:[NSURL URLWithString:self.model.invest_10[2].must_user_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    }
+}
 
 - (void)endRefresh {
     
@@ -194,6 +215,13 @@
             [self.navigationController pushViewController:fundVC animated:YES];
         }
             break;
+        case 2:
+        {
+            NSLog(@"全部评论");
+//            GLBusiness_FundTrendController *fundVC = [[GLBusiness_FundTrendController alloc] init];
+//            [self.navigationController pushViewController:fundVC animated:YES];
+        }
+            break;
             
         default:
             break;
@@ -214,7 +242,7 @@
             break;
         case 1:
         {
-            return 5;
+            return self.model.invest_list.count;
         }
             break;
             
@@ -257,6 +285,10 @@
             if (indexPath.row == 0) {
                 GLBusiness_DetailProjectCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLBusiness_DetailProjectCell"];
                 cell.selectionStyle = 0;
+                
+//                cell.detailStr = self.model.details;
+                cell.dataSourceArr = self.model.sev_photo;
+                cell.detailLabel.text = self.model.info;
                 return cell;
                 
             }else if(indexPath.row == 1){
@@ -275,6 +307,10 @@
         {
             GLBusiness_DetailCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLBusiness_DetailCommentCell"];
             cell.selectionStyle = 0;
+            
+            
+            cell.model = self.model.invest_list[indexPath.row];
+            
             return cell;
 
         }

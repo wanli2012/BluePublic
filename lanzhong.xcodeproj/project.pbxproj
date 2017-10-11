@@ -172,6 +172,10 @@
 		4A6B9F531F7CF902009386C8 /* GLBusiness_LoveListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A6B9F511F7CF902009386C8 /* GLBusiness_LoveListController.xib */; };
 		4A6B9F571F7D00CA009386C8 /* GLBusiness_LoveListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B9F551F7D00CA009386C8 /* GLBusiness_LoveListCell.m */; };
 		4A6B9F581F7D00CA009386C8 /* GLBusiness_LoveListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A6B9F561F7D00CA009386C8 /* GLBusiness_LoveListCell.xib */; };
+		4A6FE1831F8DEA8900860503 /* GLMall_DetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6FE1821F8DEA8900860503 /* GLMall_DetailModel.m */; };
+		4A6FE1871F8E09D300860503 /* GLMall_DetailWebCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6FE1851F8E09D300860503 /* GLMall_DetailWebCell.m */; };
+		4A6FE1881F8E09D300860503 /* GLMall_DetailWebCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A6FE1861F8E09D300860503 /* GLMall_DetailWebCell.xib */; };
+		4A6FE18A1F8E2D9B00860503 /* 商圈.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A6FE1891F8E2D9B00860503 /* 商圈.xcassets */; };
 		4ADDD16A1F88635200C95F9C /* 登录注册.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4ADDD1691F88635200C95F9C /* 登录注册.xcassets */; };
 		4ADDD16E1F88652100C95F9C /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADDD16D1F88652100C95F9C /* NetworkManager.m */; };
 		4ADDD17D1F886F4D00C95F9C /* GLMine_PersonInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADDD1721F886F4D00C95F9C /* GLMine_PersonInfoController.m */; };
@@ -536,6 +540,12 @@
 		4A6B9F541F7D00CA009386C8 /* GLBusiness_LoveListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLBusiness_LoveListCell.h; sourceTree = "<group>"; };
 		4A6B9F551F7D00CA009386C8 /* GLBusiness_LoveListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLBusiness_LoveListCell.m; sourceTree = "<group>"; };
 		4A6B9F561F7D00CA009386C8 /* GLBusiness_LoveListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLBusiness_LoveListCell.xib; sourceTree = "<group>"; };
+		4A6FE1811F8DEA8900860503 /* GLMall_DetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMall_DetailModel.h; sourceTree = "<group>"; };
+		4A6FE1821F8DEA8900860503 /* GLMall_DetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMall_DetailModel.m; sourceTree = "<group>"; };
+		4A6FE1841F8E09D300860503 /* GLMall_DetailWebCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMall_DetailWebCell.h; sourceTree = "<group>"; };
+		4A6FE1851F8E09D300860503 /* GLMall_DetailWebCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMall_DetailWebCell.m; sourceTree = "<group>"; };
+		4A6FE1861F8E09D300860503 /* GLMall_DetailWebCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMall_DetailWebCell.xib; sourceTree = "<group>"; };
+		4A6FE1891F8E2D9B00860503 /* 商圈.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "商圈.xcassets"; sourceTree = "<group>"; };
 		4ADDD1691F88635200C95F9C /* 登录注册.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "登录注册.xcassets"; sourceTree = "<group>"; };
 		4ADDD16C1F88652100C95F9C /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
 		4ADDD16D1F88652100C95F9C /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
@@ -1345,6 +1355,8 @@
 		4A53E82F1F7A23D50021D9E0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4A6FE1811F8DEA8900860503 /* GLMall_DetailModel.h */,
+				4A6FE1821F8DEA8900860503 /* GLMall_DetailModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1367,6 +1379,9 @@
 				4A53E8511F7A59710021D9E0 /* GLMall_DetailFooterView.h */,
 				4A53E8521F7A59710021D9E0 /* GLMall_DetailFooterView.m */,
 				4A53E8541F7A59880021D9E0 /* GLMall_DetailFooterView.xib */,
+				4A6FE1841F8E09D300860503 /* GLMall_DetailWebCell.h */,
+				4A6FE1851F8E09D300860503 /* GLMall_DetailWebCell.m */,
+				4A6FE1861F8E09D300860503 /* GLMall_DetailWebCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1957,15 +1972,15 @@
 		4A6B9F181F7CF100009386C8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4A6B9F1F1F7CF100009386C8 /* GLBusiness_DetailProjectCell.h */,
+				4A6B9F201F7CF100009386C8 /* GLBusiness_DetailProjectCell.m */,
+				4A6B9F211F7CF100009386C8 /* GLBusiness_DetailProjectCell.xib */,
 				4A6B9F191F7CF100009386C8 /* GLBusiness_ChooseCell.h */,
 				4A6B9F1A1F7CF100009386C8 /* GLBusiness_ChooseCell.m */,
 				4A6B9F1B1F7CF100009386C8 /* GLBusiness_ChooseCell.xib */,
 				4A6B9F1C1F7CF100009386C8 /* GLBusiness_DetailCommentCell.h */,
 				4A6B9F1D1F7CF100009386C8 /* GLBusiness_DetailCommentCell.m */,
 				4A6B9F1E1F7CF100009386C8 /* GLBusiness_DetailCommentCell.xib */,
-				4A6B9F1F1F7CF100009386C8 /* GLBusiness_DetailProjectCell.h */,
-				4A6B9F201F7CF100009386C8 /* GLBusiness_DetailProjectCell.m */,
-				4A6B9F211F7CF100009386C8 /* GLBusiness_DetailProjectCell.xib */,
 				4A6B9F221F7CF100009386C8 /* GLBusiness_ProjectCollectionCell.h */,
 				4A6B9F231F7CF100009386C8 /* GLBusiness_ProjectCollectionCell.m */,
 				4A6B9F241F7CF100009386C8 /* GLBusiness_ProjectCollectionCell.xib */,
@@ -2644,6 +2659,7 @@
 				4ADDD1691F88635200C95F9C /* 登录注册.xcassets */,
 				4AFF4FA61F8A191A00CE6D79 /* 首页.xcassets */,
 				4A05EDE91F8C5E780095DBCF /* 发布.xcassets */,
+				4A6FE1891F8E2D9B00860503 /* 商圈.xcassets */,
 			);
 			path = "图片资源";
 			sourceTree = "<group>";
@@ -2848,6 +2864,7 @@
 				4A6AD2361F7F953600E6084E /* GLPublish_FundraisingSuccessController.xib in Resources */,
 				4A53E8351F7A240F0021D9E0 /* GLMall_DetailController.xib in Resources */,
 				4A509B441F87266600D794FB /* GLHome_NoticeCell.xib in Resources */,
+				4A6FE18A1F8E2D9B00860503 /* 商圈.xcassets in Resources */,
 				4AF107131F78D5AC00CB51FA /* LaunchScreen.storyboard in Resources */,
 				4A509B8C1F872C6300D794FB /* GLMine_MyMessage_ExchangeController.xib in Resources */,
 				4AF107101F78D5AC00CB51FA /* Assets.xcassets in Resources */,
@@ -2876,6 +2893,7 @@
 				4A165C1A1F85DDA500D0C34B /* GLMine_WalletDetailController.xib in Resources */,
 				4A6AD22E1F7F953600E6084E /* GLPublish_AuditFailureController.xib in Resources */,
 				4A6AD22A1F7F953600E6084E /* GLPublish_InReviewController.xib in Resources */,
+				4A6FE1881F8E09D300860503 /* GLMall_DetailWebCell.xib in Resources */,
 				4ADDD1921F88818D00C95F9C /* LBMineCenterChooseAreaViewController.xib in Resources */,
 				4A6AD1AA1F7F2E8800E6084E /* GLPay_CompletedController.xib in Resources */,
 				4A5A78601F7B9B0E004FB15A /* GLBusiniessCell.xib in Resources */,
@@ -2975,6 +2993,7 @@
 				4A05EEA91F8C97380095DBCF /* UIImage+HXExtension.m in Sources */,
 				4AF1093E1F78DBB500CB51FA /* XBTagTitleModel.m in Sources */,
 				4A509BA91F8771D400D794FB /* GLRegisterController.m in Sources */,
+				4A6FE1871F8E09D300860503 /* GLMall_DetailWebCell.m in Sources */,
 				4AF109361F78DBB500CB51FA /* WXSTransitionManager+SpreadAnimation.m in Sources */,
 				4AF109B91F78DBB500CB51FA /* UserModel.m in Sources */,
 				4A6AD2461F7F95DF00E6084E /* GLMine_MyProjectController.m in Sources */,
@@ -3006,6 +3025,7 @@
 				4A05EEAA1F8C97380095DBCF /* UIView+HXExtension.m in Sources */,
 				4A509B411F87266600D794FB /* GLHome_NoticeController.m in Sources */,
 				4ADDD1951F88A45500C95F9C /* editorMaskPresentationController.m in Sources */,
+				4A6FE1831F8DEA8900860503 /* GLMall_DetailModel.m in Sources */,
 				4A5A785F1F7B9B0E004FB15A /* GLBusiniessCell.m in Sources */,
 				4AF109F01F78E07A00CB51FA /* predicateModel.m in Sources */,
 				4A05EE951F8C97380095DBCF /* HXPhotoEditView.m in Sources */,

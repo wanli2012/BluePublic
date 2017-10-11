@@ -8,6 +8,7 @@
 
 #import "GLBusiness_DetailProjectCell.h"
 #import "GLBusiness_ProjectCollectionCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 
 @interface GLBusiness_DetailProjectCell ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
@@ -22,22 +23,39 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     self.collectionView.collectionViewLayout = layout;
-    self.collectionViewHeight.constant = 200;
+    if (self.dataSourceArr.count<= 3) {
+       self.collectionViewHeight.constant = 100;
+    }else if(self.dataSourceArr.count <= 6 && self.dataSourceArr.count > 3){
+        
+        self.collectionViewHeight.constant = 200;
+    }else if(self.dataSourceArr.count <= 9 && self.dataSourceArr.count > 6){
+        self.collectionViewHeight.constant = 300;
+    }
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"GLBusiness_ProjectCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"GLBusiness_ProjectCollectionCell"];
 }
 
+- (void)setDataSourceArr:(NSArray *)dataSourceArr{
+    _dataSourceArr = dataSourceArr;
+    
+    [self.collectionView reloadData];
+}
+
 #pragma mark - UICollectionViewDelegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 6;
+    return self.dataSourceArr.count;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     GLBusiness_ProjectCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GLBusiness_ProjectCollectionCell" forIndexPath:indexPath];
+    
+    NSString *urlStr = self.dataSourceArr[indexPath.row];
+    [cell.imageV sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    
     return cell;
 }
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     return CGSizeMake((kSCREEN_WIDTH - 10)/3, 100);
