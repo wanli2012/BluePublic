@@ -16,8 +16,9 @@
 #import "GLBusiness_FundTrendController.h"//资金动向
 #import "GLBusiness_DetailModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "GLBusiness_Detail_heartCommentController.h"//更多评论
 
-@interface GLBusiness_DetailController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,GLBusiness_ChooseCellDelegate>
+@interface GLBusiness_DetailController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,GLBusiness_ChooseCellDelegate,GLBusiness_DetailCommentCellDelegate>
 {
     CGRect _rect;
 }
@@ -29,9 +30,15 @@
 @property (weak, nonatomic) IBOutlet UILabel *raisedLabel;//已筹金额
 @property (weak, nonatomic) IBOutlet UIView *bgProgressView;//进度条背景
 @property (weak, nonatomic) IBOutlet UIView *progressView;//进度条
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *progressLeftConstrait;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *progressViewWidth;
+
 @property (weak, nonatomic) IBOutlet UIView *progressSignView;//百分比 球
 @property (weak, nonatomic) IBOutlet UILabel *listNumLabel;//榜单人数
+@property (weak, nonatomic) IBOutlet UILabel *progressLabel;//百分比
 
+@property (weak, nonatomic) IBOutlet UILabel *needTimeLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *supportBtn;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
@@ -124,11 +131,69 @@
     self.targetMoneyLabel.text = [NSString stringWithFormat:@"%@元",self.model.admin_money];
     self.raisedLabel.text = [NSString stringWithFormat:@"%@元",self.model.draw_money];
     self.listNumLabel.text = [NSString stringWithFormat:@"榜单:%@人",self.model.invest_count];
-    if (self.model.sev_photo.count == 3) {
+    
+    if (self.model.sev_photo.count == 1) {
+        
         [self.iconImageV3 sd_setImageWithURL:[NSURL URLWithString:self.model.invest_10[0].must_user_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
-        [self.iconImageV2 sd_setImageWithURL:[NSURL URLWithString:self.model.invest_10[1].must_user_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
-        [self.iconImageV sd_setImageWithURL:[NSURL URLWithString:self.model.invest_10[2].must_user_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+        if (self.model.sev_photo.count == 2) {
+            
+            [self.iconImageV2 sd_setImageWithURL:[NSURL URLWithString:self.model.invest_10[1].must_user_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+            if (self.model.sev_photo.count == 3) {
+                
+                [self.iconImageV sd_setImageWithURL:[NSURL URLWithString:self.model.invest_10[2].must_user_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+            }
+        }
     }
+   
+    CGFloat raisedMoney = [self.model.draw_money floatValue];
+    CGFloat targetMoney = [self.model.admin_money floatValue];
+    
+    self.progressViewWidth.constant = self.bgProgressView.width * (raisedMoney / targetMoney);
+    self.progressLeftConstrait.constant = self.bgProgressView.width * (raisedMoney / targetMoney);
+    self.progressLabel.text = [NSString stringWithFormat:@"%.2f%%",raisedMoney/targetMoney * 100];
+    
+    NSDate *date = [NSDate date];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString *DateTime = [formatter stringFromDate:date];
+    
+    
+    NSTimeInterval time=[self.model.need_time doubleValue];//因为时差问题要加8小时 == 28800 sec
+    
+    NSDate *detaildate=[NSDate dateWithTimeIntervalSince1970:time];
+
+    //实例化一个NSDateFormatter对象
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //设定时间格式,这里可以设置成自己需要的格式
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString *endDateStr = [dateFormatter stringFromDate: detaildate];
+
+    NSInteger dayCount = [self getTheCountOfTwoDaysWithBeginDate:DateTime endDate:endDateStr];
+    
+    self.needTimeLabel.text = [NSString stringWithFormat:@"剩余时间%zd天",dayCount];
+}
+/**任意两天相差天数*/
+- (NSInteger)getTheCountOfTwoDaysWithBeginDate:(NSString *)beginDate endDate:(NSString *)endDate{
+    
+    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+    [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    [inputFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSDate *startD =[inputFormatter dateFromString:beginDate];
+    NSDate *endD = [inputFormatter dateFromString:endDate];
+    // 当前日历
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    // 需要对比的时间数据
+    NSCalendarUnit unit = NSCalendarUnitYear | NSCalendarUnitMonth
+    | NSCalendarUnitDay;
+    // 对比时间差
+    NSDateComponents *dateCom = [calendar components:unit fromDate:startD toDate:endD options:0];
+    
+    return dateCom.day;
 }
 
 - (void)endRefresh {
@@ -136,7 +201,6 @@
     [self.tableView.mj_header endRefreshing];
     [self.tableView.mj_footer endRefreshing];
 }
-
 
 - (void)setUI{
     
@@ -176,8 +240,13 @@
     
     self.hidesBottomBarWhenPushed = YES;
     GLBusiness_LoveListController *lovelistVC = [[GLBusiness_LoveListController alloc] init];
+    lovelistVC.dataSourceArr = self.model.invest_10;
     [self.navigationController pushViewController:lovelistVC animated:YES];
     
+}
+
+- (IBAction)share:(id)sender {
+    NSLog(@"分享");
 }
 
 #pragma mark - UIWebViewDelegate
@@ -204,28 +273,40 @@
         {
 
             GLBusiness_CertificationController *cerVC = [[GLBusiness_CertificationController alloc] init];
+            cerVC.item_id = self.item_id;
             [self.navigationController pushViewController:cerVC animated:YES];
             
         }
             break;
         case 1:
         {
-            NSLog(@"资金动向");
+          
             GLBusiness_FundTrendController *fundVC = [[GLBusiness_FundTrendController alloc] init];
+            fundVC.item_id = self.item_id;
+            
             [self.navigationController pushViewController:fundVC animated:YES];
         }
             break;
         case 2:
         {
             NSLog(@"全部评论");
+            GLBusiness_Detail_heartCommentController *commentVC = [[GLBusiness_Detail_heartCommentController alloc] init];
+            commentVC.item_id = self.item_id;
+            
 //            GLBusiness_FundTrendController *fundVC = [[GLBusiness_FundTrendController alloc] init];
-//            [self.navigationController pushViewController:fundVC animated:YES];
+            [self.navigationController pushViewController:commentVC animated:YES];
         }
             break;
             
         default:
             break;
     }
+}
+#pragma mark - GLBusiness_DetailCommentCellDelegate
+- (void)personInfo{
+    
+    NSLog(@"个人信息");
+    
 }
 
 #pragma mark - UITableViewDelegate
@@ -308,7 +389,7 @@
             GLBusiness_DetailCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLBusiness_DetailCommentCell"];
             cell.selectionStyle = 0;
             
-            
+            cell.delegate = self;
             cell.model = self.model.invest_list[indexPath.row];
             
             return cell;
@@ -331,6 +412,8 @@
     
     tableView.rowHeight = UITableViewAutomaticDimension;
     tableView.estimatedRowHeight = 44;
+    
+//      return self.model.invest_list[indexPath.row].cellHeight;
     
     return tableView.rowHeight;
 }

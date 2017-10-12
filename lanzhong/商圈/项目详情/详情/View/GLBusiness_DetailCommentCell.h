@@ -9,8 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "GLBusiness_DetailModel.h"
 
+@protocol GLBusiness_DetailCommentCellDelegate <NSObject>
+
+- (void)personInfo;
+
+@end
+
 @interface GLBusiness_DetailCommentCell : UITableViewCell
 
 @property (nonatomic, strong)GLBusiness_CommentModel *model;
+
+//@property (nonatomic, copy)NSString *replyName;
+
+@property (nonatomic, assign)NSInteger index;
+
+@property (nonatomic, weak)id <GLBusiness_DetailCommentCellDelegate>delegate;
 
 @end

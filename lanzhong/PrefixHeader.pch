@@ -55,6 +55,12 @@
 #define kCIRCLE_HOME_URL @"Item/item_pen"//商圈首页
 #define kCIRCLE_FITER_URL @"Item/item_screen"//商圈筛选条件
 #define kCIRCLE_DETAIL_URL @"Item/myitem_details"//商圈_项目详情
+#define kCIRCLE_FUNDTREND_URL @"Item/item_dynamic"//商圈_资金动向
+#define kCIRCLE_MORECOMMENT_URL @"Item/more_comment"//商圈_更多评论
+
+#define kMINE_MYPROJECT_URL @"User/myitem"//我的项目
+
+
 #define kPUBLISH_PROJECT_URL @"Item/add_item"//用户发布项目
 
 #endif /* PrefixHeader_pch */

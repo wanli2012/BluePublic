@@ -85,7 +85,7 @@
 //    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.baidu.com"]];
 //    [self.footerView.webView loadRequest:request];
 //    self.tableView.tableFooterView = self.footerView;
-    [self selectedFunc:YES];
+    [self selectedFunc:NO];
     
     __weak __typeof(self) weakSelf = self;
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -107,7 +107,7 @@
     [self postRequest:YES];
 //    [self.tableView.mj_header beginRefreshing];
     
-    _isDetail = YES;
+    _isDetail = NO;
     
 }
 

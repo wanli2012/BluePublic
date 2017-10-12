@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GLBusiness_DetailModel.h"
 
 @interface GLBusiness_LoveListCell : UITableViewCell
+
+@property (nonatomic, strong)GLBusiness_HeartModel *model;
+
+@property (nonatomic, assign)NSInteger index;
 
 @end

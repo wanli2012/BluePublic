@@ -7,10 +7,13 @@
 //
 
 #import "GLBusiness_FundTrendCell.h"
+#import "formattime.h"
 
 @interface GLBusiness_FundTrendCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *ballImageV;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 
 @end
 
@@ -28,6 +31,11 @@
     self.middleImageV.image = [self drawLineByImageView:self.middleImageV];
     self.bottomImageV.image = [self drawVerticalLineByImageView:self.bottomImageV];
 
+}
+- (void)setModel:(GLBusiness_FundTrendModel *)model{
+    _model = model;
+    self.dateLabel.text = [NSString stringWithFormat:@"%@ -- %@",[formattime formateTimeOfDate3:model.starttime],[formattime formateTimeOfDate3:model.endtime]];
+    self.contentLabel.text = model.content;
 }
 
 // 返回虚线image的方法

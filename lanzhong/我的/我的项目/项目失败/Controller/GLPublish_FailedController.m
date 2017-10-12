@@ -1,26 +1,26 @@
 //
-//  GLPublish_FundraisingController.m
+//  GLPublish_FailedController.m
 //  lanzhong
 //
-//  Created by 龚磊 on 2017/9/29.
+//  Created by 龚磊 on 2017/10/12.
 //  Copyright © 2017年 三君科技有限公司. All rights reserved.
 //
 
-#import "GLPublish_FundraisingController.h"
-#import "GLPublish_FundraisingCell.h"
+#import "GLPublish_FailedController.h"
+#import "GLPublish_ReviewCell.h"
 
-@interface GLPublish_FundraisingController ()
+@interface GLPublish_FailedController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
-@implementation GLPublish_FundraisingController
+@implementation GLPublish_FailedController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"GLPublish_FundraisingCell" bundle:nil] forCellReuseIdentifier:@"GLPublish_FundraisingCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"GLPublish_ReviewCell" bundle:nil] forCellReuseIdentifier:@"GLPublish_ReviewCell"];
 }
 
 #pragma mark - UITableViewDelegate
@@ -29,7 +29,7 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    GLPublish_FundraisingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLPublish_FundraisingCell"];
+    GLPublish_ReviewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLPublish_ReviewCell"];
     
     cell.selectionStyle = 0;
     
@@ -37,7 +37,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 130;
+    return 110;
 }
 
 @end

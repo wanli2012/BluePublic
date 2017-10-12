@@ -241,6 +241,22 @@ static const CGFloat kPhotoViewMargin = 25;
         return;
     }
   
+    self.submitBtn.userInteractionEnabled = NO;
+    self.submitBtn.backgroundColor = [UIColor lightGrayColor];
+    
+    NSMutableArray *imgDataArr = [NSMutableArray array];
+    
+    for (int i = 0; i < self.imageArr.count; i ++) {
+        NSData *data = nil;
+        if(!UIImagePNGRepresentation(self.imageArr[i])) {
+            data =UIImageJPEGRepresentation(self.imageArr[i],0.1);
+        }else{
+            data =UIImagePNGRepresentation(self.imageArr[i]);
+        }
+        
+        [imgDataArr addObject:data];
+    }
+    
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     
     dic[@"token"] = [UserModel defaultUser].token;
@@ -251,35 +267,6 @@ static const CGFloat kPhotoViewMargin = 25;
     dic[@"trade_id"] = self.trade_id;
     dic[@"need_time"] = self.need_time;
 
-    
-//    for (int i = 0; i < self.imageArr.count; i ++) {
-//
-//        NSData *data = nil;
-//        if(!UIImagePNGRepresentation(self.imageArr[i])) {
-//            data =UIImageJPEGRepresentation(self.imageArr[i],0.1);
-//        }else{
-//            data =UIImagePNGRepresentation(self.imageArr[i]);
-//        }
-//        dic[[NSString stringWithFormat:@"photo[%zd]",i]] = data;
-//    }
-//    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
-//    [NetworkManager requestPOSTWithURLStr:kPUBLISH_PROJECT_URL paramDic:dic finish:^(id responseObject) {
-//        
-//        [_loadV removeloadview];
-//        
-//        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
-//           
-//        }else{
-//            
-//            [MBProgressHUD showError:responseObject[@"message"]];
-//        }
-//        
-//    } enError:^(NSError *error) {
-//        [_loadV removeloadview];
-//        
-//    }];
-    
-    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];//响应
     manager.requestSerializer.timeoutInterval = 20;
@@ -295,15 +282,8 @@ static const CGFloat kPhotoViewMargin = 25;
             NSString *str=[formatter stringFromDate:[NSDate date]];
             NSString *fileName=[NSString stringWithFormat:@"%@%d.png",str,i];
             NSString *title = [NSString stringWithFormat:@"photo[%zd]",i];
-            
-            NSData *data = nil;
-            if(!UIImagePNGRepresentation(self.imageArr[i])) {
-                data =UIImageJPEGRepresentation(self.imageArr[i],0.1);
-            }else{
-                data =UIImagePNGRepresentation(self.imageArr[i]);
-            }
-            
-            [formData appendPartWithFileData:data name:title fileName:fileName mimeType:@"image/png"];
+      
+            [formData appendPartWithFileData:imgDataArr[i] name:title fileName:fileName mimeType:@"image/png"];
         }
         
     }progress:^(NSProgress *uploadProgress){
@@ -312,31 +292,31 @@ static const CGFloat kPhotoViewMargin = 25;
         
         if (uploadProgress.fractionCompleted == 1.0) {
             [SVProgressHUD dismiss];
-            
-//            self.submit.userInteractionEnabled = YES;
+        
         }
         
     }success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         
-        NSLog(@"%@",dic);
+//        NSLog(@"%@",dic);
         
-        if ([dic[@"code"]integerValue]==1) {
+        if ([dic[@"code"] integerValue] == SUCCESS_CODE) {
             
             [MBProgressHUD showError:dic[@"message"]];
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            [self dismissViewControllerAnimated:YES completion:nil];
+            
         }else{
+            
             [MBProgressHUD showError:dic[@"message"]];
-//            self.submit.userInteractionEnabled = YES;
-//            self.submit.backgroundColor = TABBARTITLE_COLOR;
         }
-        
+        self.submitBtn.userInteractionEnabled = YES;
+        self.submitBtn.backgroundColor = MAIN_COLOR;
         [_loadV removeloadview];
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//        self.submit.userInteractionEnabled = YES;
-//        self.submit.backgroundColor = TABBARTITLE_COLOR;
+        self.submitBtn.userInteractionEnabled = YES;
+        self.submitBtn.backgroundColor = MAIN_COLOR;
         [MBProgressHUD showError:error.localizedDescription];
         
     }];

@@ -44,13 +44,13 @@
     
     [manager POST:urlStr1 parameters:paramDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        finish(responseObject);
         switch ([responseObject[@"code"] integerValue]) {
             case SUCCESS_CODE:
                 finish(responseObject);
                 break;
             case PAGE_ERROR_CODE:
-                [MBProgressHUD showError:@"没有更多数据了"];
+                finish(responseObject);
+//                [MBProgressHUD showError:@"没有更多数据了"];
                 break;
             case ERROR_CODE:
 //                [MBProgressHUD showSuccess:@"token错误"];

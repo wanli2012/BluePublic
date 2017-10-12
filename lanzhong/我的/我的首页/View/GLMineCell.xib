@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的项目" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q4c-dz-6Hf">
-                        <rect key="frame" x="15" y="14" width="53.5" height="16"/>
+                        <rect key="frame" x="42" y="14" width="53.5" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -44,17 +44,26 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="zhang" translatesAutoresizingMaskIntoConstraints="NO" id="MgI-UH-7v8">
+                        <rect key="frame" x="10" y="10.5" width="22" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="O7G-n8-6wl"/>
+                            <constraint firstAttribute="width" constant="22" id="ghc-b0-T7Q"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="JUj-Ho-wcM" secondAttribute="trailing" constant="30" id="0if-SF-GlB"/>
-                    <constraint firstItem="Q4c-dz-6Hf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="2t6-8Z-MQR"/>
                     <constraint firstAttribute="trailing" secondItem="F3p-Lw-iAN" secondAttribute="trailing" id="3Nq-f4-I6f"/>
                     <constraint firstItem="F3p-Lw-iAN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="774-YF-wvW"/>
+                    <constraint firstItem="MgI-UH-7v8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="IuY-uc-gMp"/>
+                    <constraint firstItem="Q4c-dz-6Hf" firstAttribute="leading" secondItem="MgI-UH-7v8" secondAttribute="trailing" constant="10" id="OEY-N2-6LW"/>
                     <constraint firstAttribute="bottom" secondItem="F3p-Lw-iAN" secondAttribute="bottom" id="TuX-P6-IaW"/>
                     <constraint firstAttribute="trailing" secondItem="eoE-E4-r5N" secondAttribute="trailing" constant="15" id="ULr-wk-Vq9"/>
                     <constraint firstItem="JUj-Ho-wcM" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="UaC-5y-GYS"/>
                     <constraint firstItem="eoE-E4-r5N" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="fqn-ec-zXV"/>
                     <constraint firstItem="Q4c-dz-6Hf" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="oix-d0-e7N"/>
+                    <constraint firstItem="MgI-UH-7v8" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="tO4-6x-8PE"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -66,4 +75,7 @@
             <point key="canvasLocation" x="20" y="-26"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="zhang" width="22" height="22"/>
+    </resources>
 </document>

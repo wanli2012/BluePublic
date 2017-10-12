@@ -34,7 +34,7 @@
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017.06.12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4A5-N8-esb">
                         <rect key="frame" x="10" y="89" width="120" height="30"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -194,11 +194,16 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="ballView" destination="6Cy-x0-ijm" id="2fc-dW-APb"/>
+                <outlet property="dateLabel" destination="4A5-N8-esb" id="wKq-dp-ifn"/>
+                <outlet property="invest_countLabel" destination="9CE-YO-ZzL" id="2p2-gK-8Kb"/>
                 <outlet property="persentLabel" destination="rWL-Je-P0n" id="pw8-tW-F6B"/>
                 <outlet property="picImageV" destination="7E1-Pa-Dlb" id="fHw-bu-INu"/>
                 <outlet property="progressBgView" destination="eaj-qi-Azj" id="f3s-fE-Iyq"/>
                 <outlet property="progressView" destination="cxT-NP-Are" id="1Vb-ct-GWy"/>
                 <outlet property="progressViewWidth" destination="c5B-xP-phP" id="rFM-nH-4y3"/>
+                <outlet property="raisedMoneyLabel" destination="I19-q7-QDa" id="eAb-QC-o7W"/>
+                <outlet property="targetMoneyLabel" destination="17B-8n-7Do" id="aen-Z6-gle"/>
+                <outlet property="titleLabel" destination="ryD-g0-hqD" id="nel-CL-uAq"/>
             </connections>
             <point key="canvasLocation" x="36" y="37"/>
         </tableViewCell>

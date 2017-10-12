@@ -32,6 +32,10 @@
     
     GLPublish_ProjectCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLPublish_ProjectCell"];
     
+    cell.fundTrendBtn.hidden = YES;
+    cell.numberLabel.hidden = NO;
+    cell.arrowImageV.hidden = YES;
+    
     cell.selectionStyle = 0;
     
     return cell;

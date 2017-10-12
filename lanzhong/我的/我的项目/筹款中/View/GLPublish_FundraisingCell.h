@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GLPublish_InReViewModel.h"
 
 @interface GLPublish_FundraisingCell : UITableViewCell
+
+@property (nonatomic, strong)GLPublish_InReViewModel *model;
 
 @end

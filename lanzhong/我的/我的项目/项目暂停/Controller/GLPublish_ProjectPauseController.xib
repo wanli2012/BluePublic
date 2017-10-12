@@ -20,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jPG-zv-1I2">
-                    <rect key="frame" x="0.0" y="0.0" width="327" height="297"/>
+                    <rect key="frame" x="0.0" y="0.0" width="327" height="361"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="jsK-Dw-osL"/>
@@ -31,7 +31,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="jPG-zv-1I2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="UCo-j5-ltt"/>
-                <constraint firstAttribute="bottom" secondItem="jPG-zv-1I2" secondAttribute="bottom" constant="64" id="mcM-v1-2T7"/>
+                <constraint firstAttribute="bottom" secondItem="jPG-zv-1I2" secondAttribute="bottom" id="mcM-v1-2T7"/>
                 <constraint firstAttribute="trailing" secondItem="jPG-zv-1I2" secondAttribute="trailing" id="pwV-Jb-fvV"/>
                 <constraint firstItem="jPG-zv-1I2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="uRl-lf-RBI"/>
             </constraints>

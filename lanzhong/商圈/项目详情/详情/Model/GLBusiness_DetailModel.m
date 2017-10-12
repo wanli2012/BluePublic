@@ -14,6 +14,16 @@
 
 @implementation GLBusiness_CommentModel
 
+- (CGFloat)cellHeight{
+    
+  
+   CGSize replySize = [self.reply boundingRectWithSize:CGSizeMake(kSCREEN_WIDTH - 80, kSCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil].size;
+    CGSize commentSize = [self.comment boundingRectWithSize:CGSizeMake(kSCREEN_WIDTH - 70, kSCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil].size;
+
+    
+    return 70 + replySize.height + commentSize.height;
+}
+
 @end
 
 @implementation GLBusiness_DetailModel

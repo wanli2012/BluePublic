@@ -8,36 +8,36 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GLPublish_FundraisingController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GLPublish_FailedController">
             <connections>
-                <outlet property="tableView" destination="GEx-4E-Vt9" id="66A-zq-vco"/>
+                <outlet property="tableView" destination="Y68-kg-UCb" id="Y8b-z7-AJ0"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="280" height="365"/>
+            <rect key="frame" x="0.0" y="0.0" width="222" height="344"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GEx-4E-Vt9">
-                    <rect key="frame" x="0.0" y="0.0" width="280" height="301"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Y68-kg-UCb">
+                    <rect key="frame" x="0.0" y="0.0" width="222" height="344"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="s6Y-e4-dSL"/>
-                        <outlet property="delegate" destination="-1" id="uwa-1Y-hjV"/>
+                        <outlet property="dataSource" destination="-1" id="mwA-aD-v5F"/>
+                        <outlet property="delegate" destination="-1" id="eKT-Ex-3Ka"/>
                     </connections>
                 </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="GEx-4E-Vt9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="6eQ-SF-rZU"/>
-                <constraint firstAttribute="trailing" secondItem="GEx-4E-Vt9" secondAttribute="trailing" id="Fbg-fG-lnB"/>
-                <constraint firstItem="GEx-4E-Vt9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="HjT-cY-E3O"/>
-                <constraint firstAttribute="bottom" secondItem="GEx-4E-Vt9" secondAttribute="bottom" constant="64" id="Ubv-H3-WiQ"/>
+                <constraint firstAttribute="trailing" secondItem="Y68-kg-UCb" secondAttribute="trailing" id="1wi-wa-5to"/>
+                <constraint firstAttribute="bottom" secondItem="Y68-kg-UCb" secondAttribute="bottom" id="8q3-gZ-NSb"/>
+                <constraint firstItem="Y68-kg-UCb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Rv7-9D-xJ2"/>
+                <constraint firstItem="Y68-kg-UCb" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="VGu-Qr-I1n"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="49" y="53"/>
+            <point key="canvasLocation" x="46" y="-11"/>
         </view>
     </objects>
 </document>

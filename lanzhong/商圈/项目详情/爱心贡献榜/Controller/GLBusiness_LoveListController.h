@@ -10,4 +10,6 @@
 
 @interface GLBusiness_LoveListController : UIViewController
 
+@property (nonatomic, strong)NSArray *dataSourceArr;
+
 @end

@@ -10,4 +10,10 @@
 
 @interface GLPublish_ProjectCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *moneyLabel;//资金数
+@property (weak, nonatomic) IBOutlet UIButton *fundTrendBtn;//资金动向
+@property (weak, nonatomic) IBOutlet UILabel *numberLabel;//人数Label
+@property (weak, nonatomic) IBOutlet UIImageView *arrowImageV;//箭头
+
+
 @end

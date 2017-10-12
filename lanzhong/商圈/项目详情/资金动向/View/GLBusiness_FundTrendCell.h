@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GLBusiness_FundTrendModel.h"
 
 @interface GLBusiness_FundTrendCell : UITableViewCell
+
+@property (nonatomic, strong)GLBusiness_FundTrendModel *model;
 
 @property (weak, nonatomic) IBOutlet UIImageView *topImageV;
 @property (weak, nonatomic) IBOutlet UIImageView *middleImageV;

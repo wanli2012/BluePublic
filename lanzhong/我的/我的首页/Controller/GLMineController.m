@@ -126,23 +126,9 @@
     switch (indexPath.section) {
         case 0:
         {
-            switch (indexPath.row) {
-                case 0:
-                {
-
-                    GLMine_MyProjectController *myProjectVC = [[GLMine_MyProjectController alloc] init];
-                    [self.navigationController pushViewController:myProjectVC animated:YES];
-                }
-                    break;
-                case 1:
-                {
-                     NSLog(@"%@",self.dataSource[indexPath.section][indexPath.row]);
-                }
-                    break;
-                    
-                default:
-                    break;
-            }
+            GLMine_MyProjectController *myProjectVC = [[GLMine_MyProjectController alloc] initWithSignIndex:indexPath.row];
+//            myProjectVC.signIndex = indexPath.row;
+            [self.navigationController pushViewController:myProjectVC animated:YES];
         }
             break;
         case 1:
@@ -150,7 +136,7 @@
             switch (indexPath.row) {
                 case 0:
                 {
-                     NSLog(@"%@",self.dataSource[indexPath.section][indexPath.row]);
+                     NSLog(@"%@%zd",self.dataSource[indexPath.section][indexPath.row],indexPath.row);
                 }
                     break;
                 case 1:
@@ -228,13 +214,15 @@
     if (!_dataSource) {
         _dataSource = [NSMutableArray array];
         
-        NSArray *arr = @[@"我的项目",@"项目发布"];
-        NSArray *arr2 = @[@"分享权益",@"购物车",@"钱包"];
-        NSArray *arr3 = @[@"收藏",@"我的消息",@"设置"];
+        NSArray *arr = @[@"我的审核",@"我的筹款",@"我的项目"];
+        NSArray *arr2 = @[@"参与项目"];
+        NSArray *arr3 = @[@"购物车",@"订单",@"钱包"];
+        NSArray *arr4 = @[@"分享权益",@"我的消息",@"设置"];
         
         [_dataSource addObject:arr];
         [_dataSource addObject:arr2];
         [_dataSource addObject:arr3];
+        [_dataSource addObject:arr4];
         
     }
     return _dataSource;

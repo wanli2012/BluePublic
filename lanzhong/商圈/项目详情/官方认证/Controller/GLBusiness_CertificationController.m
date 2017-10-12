@@ -9,6 +9,7 @@
 #import "GLBusiness_CertificationController.h"
 
 @interface GLBusiness_CertificationController ()<UIWebViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end
@@ -19,11 +20,15 @@
     [super viewDidLoad];
     self.navigationItem.title = @"官方认证";
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    NSString *url = [NSString stringWithFormat:@"http://192.168.1.186/Raise/index.php/Api/Item/item_content?item_id=%@",self.item_id];
 
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://www.baidu.com"]];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
     [self.webView loadRequest:request];
+                             
 //    self.webView.scrollView.scrollEnabled = NO;
 //    self.webView.scrollView;
+    
 }
 
 #pragma mark - UIWebViewDelegate

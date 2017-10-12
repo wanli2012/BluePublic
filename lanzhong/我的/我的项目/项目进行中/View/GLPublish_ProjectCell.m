@@ -13,11 +13,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *picImageV;
 @property (weak, nonatomic) IBOutlet UIView *bgView;//蒙版
 @property (weak, nonatomic) IBOutlet UILabel *signLabel;//标志label
-@property (weak, nonatomic) IBOutlet UILabel *numberLabel;//人数Label
-@property (weak, nonatomic) IBOutlet UILabel *moneyLabel;//资金数
 
-@property (weak, nonatomic) IBOutlet UIImageView *arrowImageV;//箭头
-@property (weak, nonatomic) IBOutlet UIButton *fundTrendBtn;//资金动向
+
+
+
 
 @end
 

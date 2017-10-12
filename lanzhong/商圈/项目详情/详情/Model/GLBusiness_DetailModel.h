@@ -23,7 +23,7 @@
 
 @property (nonatomic, copy)NSString *id;//项目id
 @property (nonatomic, copy)NSString *uid;//项目id
-@property (nonatomic, copy)NSString *money;//项目id
+@property (nonatomic, copy)NSString *money;//支持金额
 @property (nonatomic, copy)NSString *addtime;//支持时间
 @property (nonatomic, copy)NSString *comment;//评论内容
 @property (nonatomic, copy)NSString *c_time;//评论时间
@@ -32,6 +32,8 @@
 @property (nonatomic, copy)NSString *uname;//用户名
 @property (nonatomic, copy)NSString *must_user_pic;//头像
 @property (nonatomic, copy)NSString *nickname;//昵称
+@property (nonatomic, copy)NSString *linkman;//
+@property (nonatomic, assign)CGFloat cellHeight;
 
 @end
 

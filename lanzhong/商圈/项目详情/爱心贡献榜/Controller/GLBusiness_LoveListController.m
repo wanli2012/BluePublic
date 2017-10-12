@@ -8,6 +8,7 @@
 
 #import "GLBusiness_LoveListController.h"
 #import "GLBusiness_LoveListCell.h"
+#import <SDWebImage/UIButton+WebCache.h>
 
 @interface GLBusiness_LoveListController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -23,6 +24,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *secondMoneyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *thirdMoneyLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *firstNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *secondNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *thirdNameLabel;
+
+
+
 @end
 
 @implementation GLBusiness_LoveListController
@@ -31,6 +38,21 @@
     [super viewDidLoad];
 
     self.navigationItem.title = @"爱心排行行";
+    [self.tableView registerNib:[UINib nibWithNibName:@"GLBusiness_LoveListCell" bundle:nil] forCellReuseIdentifier:@"GLBusiness_LoveListCell"];
+    
+    [self setUI];
+//    NSString *str = [NSString stringWithFormat:@"%@",@"800"];
+//    
+//    NSMutableAttributedString *hintString=[[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@元",str]];
+//    
+//    [hintString addAttribute:NSForegroundColorAttributeName value:MAIN_COLOR range:NSMakeRange(0,str.length)];
+//       
+//    self.firstMoneyLabel.attributedText = hintString;
+//    self.secondMoneyLabel.attributedText = hintString;
+//    self.thirdMoneyLabel.attributedText = hintString;
+    
+}
+- (void)setUI{
     
     self.contentView.layer.cornerRadius = 5.f;
     self.contentViewLayerView.layer.cornerRadius = 5.f;
@@ -42,31 +64,64 @@
     self.secondBtn.layer.cornerRadius = self.secondBtn.height / 2;
     self.thirdBtn.layer.cornerRadius = self.thirdBtn.height / 2;
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"GLBusiness_LoveListCell" bundle:nil] forCellReuseIdentifier:@"GLBusiness_LoveListCell"];
+    if (self.dataSourceArr.count > 1) {
+        
+        GLBusiness_HeartModel *model = self.dataSourceArr[0];
+        
+        self.firstNameLabel.text = model.uname;
+        self.firstMoneyLabel.attributedText = [self attributedTextWithString:model.money];
+        [self.firstBtn sd_setImageWithURL:[NSURL URLWithString:model.must_user_pic] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     
-    NSString *str = [NSString stringWithFormat:@"%@",@"800"];
+        if (self.dataSourceArr.count >= 2) {
+            
+            GLBusiness_HeartModel *model1 = self.dataSourceArr[1];
+            
+            self.secondNameLabel.text = model1.uname;
+            self.secondMoneyLabel.attributedText = [self attributedTextWithString:model1.money];
+            [self.secondBtn sd_setImageWithURL:[NSURL URLWithString:model1.must_user_pic] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+            
+            if (self.dataSourceArr.count >= 3) {
+                
+                GLBusiness_HeartModel *model2 = self.dataSourceArr[2];
+                
+                self.thirdNameLabel.text = model2.uname;
+                self.thirdMoneyLabel.attributedText = [self attributedTextWithString:model2.money];
+                [self.thirdBtn sd_setImageWithURL:[NSURL URLWithString:model2.must_user_pic] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+            }
+        }
+        
+    }
+    
+}
+
+- (NSMutableAttributedString *)attributedTextWithString:(NSString *)string{
+    NSString *str = [NSString stringWithFormat:@"%@",string];
     
     NSMutableAttributedString *hintString=[[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@元",str]];
     
-    [hintString addAttribute:NSForegroundColorAttributeName value:MAIN_COLOR range:NSMakeRange(0,str.length)];
-       
-    self.firstMoneyLabel.attributedText = hintString;
-    self.secondMoneyLabel.attributedText = hintString;
-    self.thirdMoneyLabel.attributedText = hintString;
-    
+    [hintString addAttribute:NSForegroundColorAttributeName value:YYSRGBColor(255, 105, 0, 1) range:NSMakeRange(0,str.length)];
+    return hintString;
 }
 
 #pragma mark - UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    
+    if (self.dataSourceArr.count <= 3) {
+        return 0;
+    }else{
+        return self.dataSourceArr.count - 3;
+    }
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     GLBusiness_LoveListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLBusiness_LoveListCell"];
     cell.selectionStyle = 0;
-    
+    cell.index = indexPath.row;
+    cell.model = self.dataSourceArr[indexPath.row + 3];
     return cell;
+    
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 60;

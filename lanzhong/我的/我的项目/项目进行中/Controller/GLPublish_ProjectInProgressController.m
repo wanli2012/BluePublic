@@ -10,6 +10,7 @@
 #import "GLPublish_ProjectCell.h"
 
 @interface GLPublish_ProjectInProgressController ()
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end

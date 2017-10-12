@@ -10,4 +10,6 @@
 
 @interface GLBusiness_CertificationController : UIViewController
 
+@property (nonatomic, copy)NSString *item_id;
+
 @end

@@ -14,7 +14,7 @@
             <rect key="frame" x="0.0" y="0.0" width="323" height="74"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="323" height="74"/>
+                <rect key="frame" x="0.0" y="0.0" width="323" height="73"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4333" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3xZ-E7-SkO">
@@ -76,8 +76,11 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="dateLabel" destination="rd0-ff-1r1" id="DRt-5U-q1J"/>
                 <outlet property="moneyLabel" destination="TFC-AA-H4F" id="Nx1-aS-Xgm"/>
+                <outlet property="nameLabel" destination="o8K-P4-exs" id="e9t-IR-AGD"/>
                 <outlet property="picImageV" destination="KKh-QR-DGE" id="49S-lw-9LO"/>
+                <outlet property="rankingLabel" destination="3xZ-E7-SkO" id="BMY-ua-ymx"/>
             </connections>
             <point key="canvasLocation" x="31.5" y="-86"/>
         </tableViewCell>

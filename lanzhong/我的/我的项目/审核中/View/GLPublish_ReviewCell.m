@@ -7,13 +7,14 @@
 //
 
 #import "GLPublish_ReviewCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface GLPublish_ReviewCell ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *picImageV;
-@property (weak, nonatomic) IBOutlet UIView *bgView;//蒙版
-@property (weak, nonatomic) IBOutlet UIImageView *signImageV;//标志iamgeV
-@property (weak, nonatomic) IBOutlet UILabel *signLabel;//标志label
+@property (weak, nonatomic) IBOutlet UIImageView *picImageV;//项目图
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;//标题
+@property (weak, nonatomic) IBOutlet UILabel *detailLabel;//详情
+@property (weak, nonatomic) IBOutlet UILabel *priceLabel;//价格
 
 @end
 
@@ -24,6 +25,16 @@
     
     self.picImageV.layer.cornerRadius = 5.f;
     self.bgView.layer.cornerRadius = 5.f;
+    
+}
+
+- (void)setModel:(GLPublish_InReViewModel *)model{
+    _model = model;
+    
+    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:model.sev_photo] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    self.titleLabel.text = model.title;
+    self.detailLabel.text = model.info;
+    self.priceLabel.text = model.admin_money;
     
 }
 

@@ -20,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="n87-MX-Fvf">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="idd-B3-6ZW"/>
@@ -33,7 +33,7 @@
                 <constraint firstItem="n87-MX-Fvf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="9HR-wY-B0n"/>
                 <constraint firstItem="n87-MX-Fvf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="AR7-p8-feS"/>
                 <constraint firstAttribute="trailing" secondItem="n87-MX-Fvf" secondAttribute="trailing" id="Li3-iB-IIc"/>
-                <constraint firstAttribute="bottom" secondItem="n87-MX-Fvf" secondAttribute="bottom" constant="64" id="Qpb-y3-JNY"/>
+                <constraint firstAttribute="bottom" secondItem="n87-MX-Fvf" secondAttribute="bottom" id="Qpb-y3-JNY"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

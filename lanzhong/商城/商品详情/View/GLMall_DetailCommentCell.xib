@@ -68,7 +68,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="contentLabel" destination="IpL-4y-Xa5" id="ZZr-9W-6gL"/>
-                <outlet property="dateLabel" destination="n4d-zJ-gNp" id="R5Z-t6-mLE"/>
+                <outlet property="dateLabel" destination="n4d-zJ-gNp" id="V1q-bb-sp7"/>
                 <outlet property="nameLabel" destination="zNy-K2-w1g" id="97W-Lj-CbC"/>
                 <outlet property="picImageV" destination="NWz-Ey-UoX" id="osX-3w-51w"/>
             </connections>
