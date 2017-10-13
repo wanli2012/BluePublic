@@ -15,6 +15,23 @@
     BOOL      _ishidecotr;//判断是否隐藏弹出控制器
 }
 
+@property (strong, nonatomic)LoadWaitView *loadV;
+@property (nonatomic, strong)NSMutableArray *dataArr;
+@property (weak, nonatomic) IBOutlet UITextField *addressTF;
+@property (weak, nonatomic) IBOutlet UITextField *nameTF;
+@property (weak, nonatomic) IBOutlet UITextField *phoneTF;
+@property (weak, nonatomic) IBOutlet UITextField *detailAddressTF;
+
+@property (strong, nonatomic)NSString *adressID;
+@property (strong, nonatomic)NSString *provinceStrId;
+@property (strong, nonatomic)NSString *cityStrId;
+@property (strong, nonatomic)NSString *countryStrId;
+
+@property (assign, nonatomic)NSInteger  isdeualt;//默认为0 不设为默认
+@property (weak, nonatomic) IBOutlet UIImageView *isDefaultImage;
+@property (weak, nonatomic) IBOutlet UIImageView *isdeualtImageOne;
+
+
 @end
 
 @implementation GLMine_AddressAddController
@@ -36,10 +53,157 @@
     [btn addTarget:self action:@selector(ensure) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     
+    self.isdeualt = 0;
+    
+    [self getPickerData];
+    [self updateInfo];
+    
 }
+
+- (void)updateInfo{
+    if (self.isEdit) {
+        
+        self.nameTF.text = self.model.collect_name;
+        self.phoneTF.text = self.model.phone;
+        self.detailAddressTF.text = self.model.address;
+        self.addressTF.text = [NSString stringWithFormat:@"%@%@%@",self.model.province_name,self.model.city_name,self.model.area_name];
+        
+        self.provinceStrId = self.model.province;
+        self.cityStrId = self.model.city;
+        self.countryStrId = self.model.area;
+    }
+}
+
+- (void)getPickerData {
+    //城市列表
+    _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:[UIApplication sharedApplication].keyWindow];
+    [NetworkManager requestPOSTWithURLStr:kCITYLIST_URL paramDic:@{} finish:^(id responseObject) {
+        [_loadV removeloadview];
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+            self.dataArr = responseObject[@"data"];
+        }
+        
+    } enError:^(NSError *error) {
+        [_loadV removeloadview];
+        [MBProgressHUD showError:error.localizedDescription];
+        
+    }];
+
+}
+-(void)initProvinceCityArea{
+    
+//    if (self.isEdit == YES) {
+//        self.navigationItem.title = @"修改收货地址";
+//        self.nameTf.text = [NSString stringWithFormat:@"%@",self.dataDic[@"collect_name"]];
+//        self.phoneTf.text = [NSString stringWithFormat:@"%@",self.dataDic[@"s_phone"]];
+//        self.provinceTf.text = [NSString stringWithFormat:@"%@",self.dataDic[@"areas"]];
+//        self.adressTf.text = [NSString stringWithFormat:@"%@",self.dataDic[@"s_address"]];
+//        
+//        if ([self.dataDic[@"is_default"] integerValue]==1) {
+//            self.isDefaultImage.image = [UIImage imageNamed:@"支付未选中"];
+//            self.isdeualtImageOne.image = [UIImage imageNamed:@"支付选中"];
+//            self.isdeualt = 1;
+//        }else{
+//            self.isDefaultImage.image = [UIImage imageNamed:@"支付选中"];
+//            self.isdeualtImageOne.image = [UIImage imageNamed:@"支付未选中"];
+//            self.isdeualt = 0;
+//            
+//        }
+//    }
+    
+}
+- (IBAction)setupEventNot:(id)sender {
+    self.isdeualt = 0;
+    self.isDefaultImage.image = [UIImage imageNamed:@"address_choice"];
+    self.isdeualtImageOne.image = [UIImage imageNamed:@"address_nochoice"];
+}
+- (IBAction)setupEventYes:(id)sender {
+    self.isdeualt =1;
+    self.isDefaultImage.image = [UIImage imageNamed:@"address_nochoice"];
+    self.isdeualtImageOne.image = [UIImage imageNamed:@"address_choice"];
+}
+
 
 - (void)ensure{
     NSLog(@"确定");
+    if (self.nameTF.text.length <= 0) {
+        [MBProgressHUD showError:@"请输入收货人姓名"];
+        return;
+    }
+    if (self.phoneTF.text.length <= 0) {
+        [MBProgressHUD showError:@"请输入电话号码"];
+        return;
+    }
+    if (![predicateModel valiMobile:self.phoneTF.text]) {
+        [MBProgressHUD showError:@"请输入正确的电话号码"];
+        return;
+    }
+    if (self.addressTF.text.length <= 0) {
+        [MBProgressHUD showError:@"请输入省市区"];
+        return;
+    }
+    if (self.detailAddressTF.text.length <= 0) {
+        [MBProgressHUD showError:@"请输入详细地址"];
+        return;
+    }
+    
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    dic[@"token"] = [UserModel defaultUser].token;
+    dic[@"uid"] = [UserModel defaultUser].uid;
+    dic[@"collect_name"] = self.nameTF.text;
+    dic[@"address"] = self.detailAddressTF.text;
+    dic[@"phone"] = self.phoneTF.text;
+    dic[@"is_default"] = @(self.isdeualt);
+    dic[@"province"] = self.provinceStrId;
+    dic[@"city"] = self.cityStrId;
+    dic[@"area"] = self.countryStrId;
+
+    
+    if (self.isEdit == YES) {//编辑address_id
+        
+        dic[@"address_id"] = self.model.address_id;
+        
+        _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+        [NetworkManager requestPOSTWithURLStr:kUPDATE_ADDRESS_URL paramDic:dic finish:^(id responseObject) {
+            [_loadV removeloadview];
+            if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+                
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"refreshReceivingAddress" object:nil];
+                [MBProgressHUD showError:responseObject[@"message"]];
+                [self.navigationController popViewControllerAnimated:YES];
+                
+            }else{
+                
+                [MBProgressHUD showError:responseObject[@"message"]];
+                
+            }
+        } enError:^(NSError *error) {
+            [_loadV removeloadview];
+            [MBProgressHUD showError:error.localizedDescription];
+            
+        }];
+        
+    }else{//添加
+        
+        _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+        [NetworkManager requestPOSTWithURLStr:kADD_ADDRESS_URL paramDic:dic finish:^(id responseObject) {
+            [_loadV removeloadview];
+            if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+                
+                [[NSNotificationCenter defaultCenter]postNotificationName:@"refreshReceivingAddress" object:nil];
+                [MBProgressHUD showError:responseObject[@"message"]];
+                [self.navigationController popViewControllerAnimated:YES];
+                
+            }else{
+                [MBProgressHUD showError:responseObject[@"message"]];
+                
+            }
+        } enError:^(NSError *error) {
+            [_loadV removeloadview];
+            [MBProgressHUD showError:error.localizedDescription];
+            
+        }];
+    }
 }
 
 //省市区选择
@@ -47,18 +211,18 @@
     
     LBMineCenterChooseAreaViewController *vc=[[LBMineCenterChooseAreaViewController alloc]init];
     
-//    vc.dataArr = self.dataArr;
+    vc.dataArr = self.dataArr;
     vc.transitioningDelegate=self;
     vc.modalPresentationStyle=UIModalPresentationCustom;
     
     [self presentViewController:vc animated:YES completion:nil];
-//    __weak typeof(self) weakself = self;
+    __weak typeof(self) weakself = self;
     vc.returnreslut = ^(NSString *str,NSString *strid,NSString *provinceid,NSString *cityd,NSString *areaid){
-//        weakself.adressID = strid;
-//        weakself.provinceTf.text = str;
-//        weakself.provinceStrId = provinceid;
-//        weakself.cityStrId = cityd;
-//        weakself.countryStrId = areaid;
+        weakself.adressID = strid;
+        weakself.addressTF.text = str;
+        weakself.provinceStrId = provinceid;
+        weakself.cityStrId = cityd;
+        weakself.countryStrId = areaid;
     };
 }
 - (nullable UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(UIViewController *)presenting sourceViewController:(UIViewController *)source{

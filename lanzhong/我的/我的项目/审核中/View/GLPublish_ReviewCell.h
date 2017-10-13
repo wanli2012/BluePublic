@@ -16,5 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIView *bgView;//蒙版
 @property (weak, nonatomic) IBOutlet UIImageView *signImageV;//标志iamgeV
 @property (weak, nonatomic) IBOutlet UILabel *signLabel;//标志label
+@property (weak, nonatomic) IBOutlet UILabel *targetLabel;
+@property (weak, nonatomic) IBOutlet UILabel *priceLabel;//价格
 
 @end

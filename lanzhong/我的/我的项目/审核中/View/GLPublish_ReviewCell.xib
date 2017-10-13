@@ -60,7 +60,7 @@
                     </view>
                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="12K-Us-qxj">
                         <rect key="frame" x="20" y="20" width="40" height="40"/>
-                        <color key="backgroundColor" red="2.38126886e-05" green="0.49598097800000002" blue="0.99889487030000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="RgE-6H-5yc"/>
                             <constraint firstAttribute="height" constant="40" id="uz7-fB-tY6"/>
@@ -107,6 +107,7 @@
                 <outlet property="priceLabel" destination="Iun-Wx-LKQ" id="kXy-CG-J4X"/>
                 <outlet property="signImageV" destination="12K-Us-qxj" id="qyY-JU-oka"/>
                 <outlet property="signLabel" destination="BMO-dH-B0M" id="SZ7-ue-Aws"/>
+                <outlet property="targetLabel" destination="moQ-tj-K4H" id="ywP-Ze-EHR"/>
                 <outlet property="titleLabel" destination="ydc-lg-CGD" id="zXR-X0-LSw"/>
             </connections>
             <point key="canvasLocation" x="-83" y="11.5"/>

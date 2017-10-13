@@ -10,6 +10,7 @@
 
 @interface GLMineCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *picImageV;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *valueLabel;
 

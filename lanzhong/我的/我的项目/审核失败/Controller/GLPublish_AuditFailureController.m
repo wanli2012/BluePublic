@@ -116,10 +116,7 @@
     cell.model = self.models[indexPath.row];
     
     cell.selectionStyle = 0;
-    cell.bgView.hidden = NO;
-    cell.signLabel.hidden = NO;
-    cell.signImageV.hidden = YES;
-    
+      
     //18380468763  1234567
     
     return cell;

@@ -86,8 +86,8 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z2s-v4-gwn">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fxH-jq-0GO">
-                            <rect key="frame" x="275" y="70" width="100" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fxH-jq-0GO">
+                            <rect key="frame" x="265" y="70" width="100" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="100" id="3O4-Fx-Vv4"/>
                                 <constraint firstAttribute="height" constant="30" id="qIk-m6-5hP"/>
@@ -95,10 +95,9 @@
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <inset key="titleEdgeInsets" minX="22" minY="0.0" maxX="0.0" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="全选" image="未选中">
+                            <state key="normal" title="全选" image="nochoice1">
                                 <color key="titleColor" red="0.40214681629999999" green="0.59420973060000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
-                            <state key="selected" image="选中"/>
                             <connections>
                                 <action selector="selectAll:" destination="-1" eventType="touchUpInside" id="qrZ-ga-tjK"/>
                             </connections>
@@ -106,14 +105,15 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7tB-O6-Xa6">
                             <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A0Z-UH-4sX">
-                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A0Z-UH-4sX">
+                                    <rect key="frame" x="0.0" y="0.0" width="80" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="n1M-HC-pW1"/>
-                                        <constraint firstAttribute="width" constant="44" id="wlP-wQ-J9p"/>
+                                        <constraint firstAttribute="width" constant="80" id="wlP-wQ-J9p"/>
                                     </constraints>
                                     <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    <state key="normal" title="返回"/>
+                                    <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <state key="normal" title="返回" image="return"/>
                                     <connections>
                                         <action selector="back:" destination="-1" eventType="touchUpInside" id="B3r-0a-6og"/>
                                     </connections>
@@ -153,7 +153,7 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="7tB-O6-Xa6" secondAttribute="trailing" id="7Fc-Ib-AcC"/>
                         <constraint firstAttribute="bottom" secondItem="fxH-jq-0GO" secondAttribute="bottom" id="7u7-Af-Vz3"/>
-                        <constraint firstAttribute="trailing" secondItem="fxH-jq-0GO" secondAttribute="trailing" id="YSJ-fD-Lqw"/>
+                        <constraint firstAttribute="trailing" secondItem="fxH-jq-0GO" secondAttribute="trailing" constant="10" id="YSJ-fD-Lqw"/>
                         <constraint firstItem="7tB-O6-Xa6" firstAttribute="leading" secondItem="z2s-v4-gwn" secondAttribute="leading" id="bNS-bP-QWN"/>
                         <constraint firstItem="7tB-O6-Xa6" firstAttribute="top" secondItem="z2s-v4-gwn" secondAttribute="top" constant="20" id="odY-Xd-mlD"/>
                         <constraint firstAttribute="height" constant="100" id="wIJ-aa-vJw"/>
@@ -179,7 +179,7 @@
         </view>
     </objects>
     <resources>
-        <image name="未选中" width="13" height="13"/>
-        <image name="选中" width="13" height="13"/>
+        <image name="nochoice1" width="17" height="17"/>
+        <image name="return" width="22" height="22"/>
     </resources>
 </document>

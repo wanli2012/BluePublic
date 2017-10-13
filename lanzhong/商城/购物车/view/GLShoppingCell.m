@@ -51,21 +51,20 @@
     
     _goodsNamelabel.text = model.goods_name;
     _amountLabel.text =[NSString stringWithFormat:@"x%@",model.num];
-    _detailLabel.text = model.info;
+    _detailLabel.text = model.goods_info;
 
-    _priceLabel.text = [NSString stringWithFormat:@"¥%@",model.goods_price];
-    
+    _priceLabel.text = [NSString stringWithFormat:@"¥%@",model.marketprice];
+    _specLabel.text = model.title;
     if (_imageV.image == nil) {
         _imageV.image = [UIImage imageNamed:PlaceHolderImage];
     }
 
     if (model.isSelect == NO) {
         
-        [self.selectedBtn setImage:[UIImage imageNamed:@"未选中"] forState:UIControlStateNormal];
+        [self.selectedBtn setImage:[UIImage imageNamed:@"nochoice1"] forState:UIControlStateNormal];
     }else{
         
-        [self.selectedBtn setImage:[UIImage imageNamed:@"选中"] forState:UIControlStateNormal];
-        
+        [self.selectedBtn setImage:[UIImage imageNamed:@"mine_choice"] forState:UIControlStateNormal];
     }
 
 }

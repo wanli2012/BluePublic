@@ -32,5 +32,19 @@
     }
 }
 
+- (void)setModel:(GLMine_AddressModel *)model{
+    _model = model;
+    self.nameLabel.text = model.collect_name;
+    self.phoneLabel.text = model.phone;
+    self.addressLabel.text = [NSString stringWithFormat:@"%@%@%@%@",model.province_name,model.city_name,model.area_name,model.address];
+    
+    if ([model.is_default integerValue] == 0) {
+        
+        self.imageV.image = [UIImage imageNamed:@"address_nochoice"];
+    }else{
+        self.imageV.image = [UIImage imageNamed:@"address_choice"];
+    }
+    
+}
 
 @end

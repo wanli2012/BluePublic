@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GLPublish_InReViewModel.h"
 
 @interface GLPublish_ProjectCell : UITableViewCell
 
@@ -15,5 +16,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *numberLabel;//人数Label
 @property (weak, nonatomic) IBOutlet UIImageView *arrowImageV;//箭头
 
+@property (weak, nonatomic) IBOutlet UIImageView *iconImageV;//标志
+@property (weak, nonatomic) IBOutlet UILabel *signLabel;//标志label
+
+@property (nonatomic, strong)GLPublish_InReViewModel *model;
 
 @end

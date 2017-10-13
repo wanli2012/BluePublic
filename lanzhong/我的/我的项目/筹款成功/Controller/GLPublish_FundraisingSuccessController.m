@@ -7,7 +7,7 @@
 //
 
 #import "GLPublish_FundraisingSuccessController.h"
-#import "GLPublish_ReviewCell.h"
+#import "GLPublish_ProjectCell.h"
 
 @interface GLPublish_FundraisingSuccessController ()
 
@@ -24,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"GLPublish_ReviewCell" bundle:nil] forCellReuseIdentifier:@"GLPublish_ReviewCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"GLPublish_ProjectCell" bundle:nil] forCellReuseIdentifier:@"GLPublish_ProjectCell"];
     __weak __typeof(self) weakSelf = self;
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
@@ -110,14 +110,11 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    GLPublish_ReviewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLPublish_ReviewCell"];
+    GLPublish_ProjectCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLPublish_ProjectCell"];
     
     cell.model = self.models[indexPath.row];
     
     cell.selectionStyle = 0;
-    cell.bgView.hidden = NO;
-    cell.signLabel.hidden = NO;
-    cell.signImageV.hidden = YES;
     
     //18380468763  1234567
     

@@ -23,12 +23,13 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eoE-E4-r5N">
-                        <rect key="frame" x="295" y="14" width="10" height="15"/>
-                        <color key="backgroundColor" red="0.99961632489999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="return2" translatesAutoresizingMaskIntoConstraints="NO" id="eoE-E4-r5N">
+                        <rect key="frame" x="298" y="15.5" width="7" height="12"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="10" id="ClK-By-GYK"/>
-                            <constraint firstAttribute="height" constant="15" id="naw-9p-1HU"/>
+                            <constraint firstAttribute="width" constant="7" id="ClK-By-GYK"/>
+                            <constraint firstAttribute="height" constant="12" id="naw-9p-1HU"/>
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F3p-Lw-iAN">
@@ -68,14 +69,16 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="arrowImageV" destination="eoE-E4-r5N" id="ecm-Wa-Eso"/>
+                <outlet property="picImageV" destination="MgI-UH-7v8" id="3oo-P0-Uh4"/>
                 <outlet property="titleLabel" destination="Q4c-dz-6Hf" id="9Q9-c7-4Oe"/>
                 <outlet property="valueLabel" destination="JUj-Ho-wcM" id="9bO-Yy-jda"/>
                 <outlet property="valueLabeltrailing" destination="0if-SF-GlB" id="6If-Xa-Szi"/>
             </connections>
-            <point key="canvasLocation" x="20" y="-26"/>
+            <point key="canvasLocation" x="-80" y="-33"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="return2" width="8" height="15"/>
         <image name="zhang" width="22" height="22"/>
     </resources>
 </document>

@@ -14,25 +14,21 @@
 
 @property (nonatomic, copy)NSString *goods_id;
 
-@property (nonatomic, copy)NSString *goods_price;
-
-@property (nonatomic, copy)NSString *info;
+@property (nonatomic, copy)NSString *marketprice;
 
 @property (nonatomic, copy)NSString *num;
 
-@property (nonatomic, copy)NSString *send_price;
-
-@property (nonatomic, copy)NSString *thumb;
+@property (nonatomic, copy)NSString *must_thumb;
 
 @property (nonatomic, copy)NSString *cart_id;
 
-@property (nonatomic, copy)NSString *goods_type;
+@property (nonatomic, copy)NSString *title;
 
-@property (nonatomic, copy)NSString *status;
-
-@property (nonatomic, copy)NSString *spec;
+@property (nonatomic, copy)NSString *goods_info;
 
 @property (nonatomic, copy)NSString *spec_id;
+@property (nonatomic, copy)NSString *addtime;
+@property (nonatomic, copy)NSString *uid;
 
 @property (nonatomic, assign)BOOL isSelect;//是否被选
 

@@ -23,4 +23,5 @@
 @property (nonatomic, copy)NSString *need_time;//截止时间
 @property (nonatomic, copy)NSString *time;//发布时间
 
+
 @end

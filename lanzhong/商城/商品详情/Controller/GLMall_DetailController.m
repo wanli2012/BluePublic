@@ -7,8 +7,8 @@
 //
 
 #import "GLMall_DetailController.h"
-#import "GLMall_DetailSpecCell.h"
-#import "GLMall_DetailAddressCell.h"
+//#import "GLMall_DetailSpecCell.h"
+//#import "GLMall_DetailAddressCell.h"
 #import "GLMall_DetailSelecteCell.h"
 #import "GLMall_DetailCommentCell.h"
 #import "GLMall_DetailFooterView.h"
@@ -17,9 +17,11 @@
 #import "GLMall_DetailModel.h"
 #import "GLMall_DetailWebCell.h"
 
+#import "MHActionSheet.h"
+#import "GLConfirmOrderController.h"
 
 #define headerImageHeight 64
-@interface GLMall_DetailController ()<UITableViewDelegate,UITableViewDataSource,GLMall_DetailSpecCellDelegate,GLMall_DetailAddressCellDelegate,GLMall_DetailSelecteCellDelegate,UIWebViewDelegate,SDCycleScrollViewDelegate>
+@interface GLMall_DetailController ()<UITableViewDelegate,UITableViewDataSource,GLMall_DetailSelecteCellDelegate,UIWebViewDelegate,SDCycleScrollViewDelegate>
 
 {
     BOOL _isDetail;//是否是商品详情
@@ -47,11 +49,18 @@
 @property (nonatomic, strong)LoadWaitView *loadV;
 @property (nonatomic, assign)NSInteger page;
 @property (nonatomic, strong)GLMall_DetailModel *model;
+@property (nonatomic, strong)NSDictionary *goods_infoDic;
+
+@property (nonatomic, copy)NSString *spec_id;//规格id
+@property (nonatomic, assign)NSInteger sum;//购买数量
 
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;//价格label
 @property (weak, nonatomic) IBOutlet UILabel *saleNumLabel;//销量
 @property (weak, nonatomic) IBOutlet UILabel *infoLabel;//描述
-
+@property (weak, nonatomic) IBOutlet UILabel *specLabel;//规格
+@property (weak, nonatomic) IBOutlet UITextField *countTF;//购买数量
+@property (weak, nonatomic) IBOutlet UIButton *reduceBtn;//购买数量 减
+@property (weak, nonatomic) IBOutlet UIButton *addBtn;//购买数量 加
 
 @end
 
@@ -72,8 +81,8 @@
     self.addCartBtn.layer.borderWidth = 1.f;
     
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"GLMall_DetailSpecCell" bundle:nil] forCellReuseIdentifier:@"GLMall_DetailSpecCell"];
-    [self.tableView registerNib:[UINib nibWithNibName:@"GLMall_DetailAddressCell" bundle:nil] forCellReuseIdentifier:@"GLMall_DetailAddressCell"];
+//    [self.tableView registerNib:[UINib nibWithNibName:@"GLMall_DetailSpecCell" bundle:nil] forCellReuseIdentifier:@"GLMall_DetailSpecCell"];
+//    [self.tableView registerNib:[UINib nibWithNibName:@"GLMall_DetailAddressCell" bundle:nil] forCellReuseIdentifier:@"GLMall_DetailAddressCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMall_DetailSelecteCell" bundle:nil] forCellReuseIdentifier:@"GLMall_DetailSelecteCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMall_DetailCommentCell" bundle:nil] forCellReuseIdentifier:@"GLMall_DetailCommentCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMall_DetailWebCell" bundle:nil] forCellReuseIdentifier:@"GLMall_DetailWebCell"];
@@ -81,10 +90,7 @@
     self.footerView.webView.delegate = self;
     
     [self.headerView addSubview:self.cycleScrollView];
-    
-//    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.baidu.com"]];
-//    [self.footerView.webView loadRequest:request];
-//    self.tableView.tableFooterView = self.footerView;
+
     [self selectedFunc:NO];
     
     __weak __typeof(self) weakSelf = self;
@@ -108,6 +114,7 @@
 //    [self.tableView.mj_header beginRefreshing];
     
     _isDetail = NO;
+    self.sum = 1;
     
 }
 
@@ -136,22 +143,12 @@
             if([responseObject[@"data"] count] != 0){
                 
                 self.model = [GLMall_DetailModel mj_objectWithKeyValues:responseObject[@"data"]];
-                
-//                for (GLDetail_comment_data *model in self.model.comment_data) {
-//                    
-//                    [self.commentModels addObject:model];
-//                }
+
                 self.model.goods_details = @"http://www.jianshu.com/p/69d338f8b67d";
+                self.goods_infoDic = responseObject[@"data"][@"goods_data"];
                 
                 self.cycleScrollView.imageURLStringsGroup = self.model.goods_data.must_thumb_url;
-                
-                
-//                UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, -10, kSCREEN_WIDTH, 10)];
-//                webView.delegate = self;
-//                NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.jianshu.com/p/69d338f8b67d"]];
-//                [webView loadRequest:request];
-//                [self.view addSubview:webView];
-                
+                [self setHeaderValue];//为头视图赋值
             }
             
         }else{
@@ -178,16 +175,98 @@
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBar.hidden = YES;
+}
+
+//头视图赋值
+- (void)setHeaderValue{
+    
+    self.priceLabel.text = [NSString stringWithFormat:@"%@",self.goods_infoDic[@"goods_discount"]];
+    self.saleNumLabel.text = [NSString stringWithFormat:@"总销量:%@件",self.goods_infoDic[@"salenum"]];
+    self.infoLabel.text = [NSString stringWithFormat:@"%@",self.goods_infoDic[@"goods_info"]];
     
 }
 
+- (IBAction)numChange:(UIButton *)sender {
+    
+    if(sender == self.addBtn){
+        self.sum += 1;
+    }else{
+        
+        if (self.sum == 1) {
+            self.sum = 1;
+        }else{
+            
+            self.sum -= 1;
+        }
+    }
+    
+    self.countTF.text = [NSString stringWithFormat:@"%zd",self.sum];
+}
+
+#pragma mark - 立即购买  加入购物车
 //立即购买
 - (IBAction)buyNow:(id)sender {
     NSLog(@"立即购买");
+    self.hidesBottomBarWhenPushed = YES;
+   
+    if ([UserModel defaultUser].loginstatus == NO) {
+        [MBProgressHUD showError:@"请先登录"];
+        return;
+    }
+    
+//    if ([UserModel defaultUser].isSetTwoPwd == 0) {
+//        [MBProgressHUD showError:@"请先在设置中设置支付密码"];
+//        return;
+//    }
+
+    if (self.spec_id.length <= 0) {
+        [MBProgressHUD showError:@"还未选择规格"];
+        return;
+    }
+    GLConfirmOrderController *vc=[[GLConfirmOrderController alloc]init];
+    vc.goods_id = self.goods_id;
+    vc.goods_count = self.countTF.text;
+    vc.orderType = 2; //订单类型
+    vc.goods_spec = self.spec_id;
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 //添加到购物车
 - (IBAction)addToCart:(id)sender {
-    NSLog(@"加入购物车");
+    
+    if (self.spec_id.length == 0) {
+        [MBProgressHUD showError:@"请选择规格"];
+        return;
+    }
+    
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    
+    self.goods_id = @"8";
+    
+    dic[@"uid"] = [UserModel defaultUser].uid;
+    dic[@"token"] = [UserModel defaultUser].token;
+    dic[@"goods_id"] = self.goods_id;
+    dic[@"num"] = @(self.sum);
+    dic[@"spec_id"] = self.spec_id;
+    
+    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+    [NetworkManager requestPOSTWithURLStr:kADD_TOCART_URL paramDic:dic finish:^(id responseObject) {
+        
+        [_loadV removeloadview];
+        
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+             [MBProgressHUD showError:responseObject[@"message"]];
+        }else{
+            
+            [MBProgressHUD showError:responseObject[@"message"]];
+        }
+        
+    } enError:^(NSError *error) {
+        [_loadV removeloadview];
+        
+    }];
+
+    
 }
 //去购物车
 - (IBAction)toCart:(id)sender {
@@ -217,26 +296,36 @@
     }
 }
 
-#pragma mark - GLMall_DetailSpecCellDelegate 规格 数量
-- (void)changeNum:(BOOL)isAdd{
+//#pragma mark - GLMall_DetailSpecCellDelegate 规格 数量
+//- (void)changeNum:(BOOL)isAdd{
+//    
+//    if (isAdd) {
+//        NSLog(@"加法");
+//    }else{
+//        NSLog(@"减法");
+//    }
+//}
+
+- (IBAction)chooseSpec:(id)sender {
+  
+    NSMutableArray *specTitles = [NSMutableArray array];
     
-    if (isAdd) {
-        NSLog(@"加法");
-    }else{
-        NSLog(@"减法");
+    for (GLDetail_spec *spec in self.model.spec) {
+        [specTitles addObject:spec.title];
     }
+    MHActionSheet *actionSheet = [[MHActionSheet alloc] initSheetWithTitle:@"规格选择" style:MHSheetStyleDefault itemTitles:specTitles];
+    __weak typeof(self) weakSelf = self;
+    [actionSheet didFinishSelectIndex:^(NSInteger index, NSString *title) {
+//        NSString *text = [NSString stringWithFormat:@"第%ld行,%@",index, title];
+        weakSelf.specLabel.text = title;
+        
+        weakSelf.priceLabel.text = [NSString stringWithFormat:@"¥ %@",self.model.spec[index].marketprice];
+        weakSelf.spec_id = self.model.spec[index].id;
+
+    }];
+
 }
 
-- (void)specChoose{
-    NSLog(@"规格选择");
-}
-
-#pragma mark - GLMall_DetailAddressCellDelegate 地址选择
-- (void)addressChoose{
-    
-    NSLog(@"地址选择");
-    
-}
 
 #pragma mark - GLMall_DetailSelecteCellDelegate 商品详情 评价
 
@@ -247,22 +336,14 @@
     if (isDetail) {
         
         NSLog(@"商品详情");
-//        self.footerView.hidden = NO;
         _isDetail = YES;
 
 
     }else{
         
         NSLog(@"用户评论");
-//        self.footerView.hidden = YES;
-        _isDetail = NO;
-//        [self.commentModels removeAllObjects];
-//
-//        for (GLDetail_comment_data *model in self.model.comment_data) {
-//
-//            [self.commentModels addObject:model];
-//        }
 
+        _isDetail = NO;
     }
  
     NSIndexSet *indexSet=[[NSIndexSet alloc] initWithIndex:1];
@@ -274,12 +355,18 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if(section == 0){
-        return 2;
-    }else{
-        
         return 1;
+    }else{
+         if (_isDetail) {
+             
+             return 1;
+         }else{
+             
+             return self.model.comment_data.count;
+         }
     }
 }
 
@@ -288,17 +375,8 @@
     if (indexPath.section == 0) {
         
         switch (indexPath.row) {
+                
             case 0:
-            {
-                GLMall_DetailSpecCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMall_DetailSpecCell"];
-                cell.selectionStyle = 0;
-                cell.delegate = self;
-                return cell;
-                
-            }
-                break;
-                
-            case 1:
             {
                 GLMall_DetailSelecteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMall_DetailSelecteCell"];
                 cell.selectionStyle = 0;
@@ -333,13 +411,10 @@
             
             GLMall_DetailCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMall_DetailCommentCell"];
             cell.selectionStyle = 0;
-        
-            //            cell.delegate = self;
             
-            if (self.commentModels.count != 0) {
-                
-                cell.model = self.commentModels[indexPath.row];
-            }
+            
+            cell.model = self.model.comment_data[indexPath.row];
+            
             return cell;
         }
 
@@ -350,10 +425,8 @@
     if(indexPath.section == 0){
         
         switch (indexPath.row) {
+
             case 0:
-                return 175;
-                break;
-            case 1:
             {
                 return 50;
             }
@@ -375,20 +448,6 @@
     }
 }
 
-
-//#pragma mark - UIWebViewDelegate
-//- (void)webViewDidFinishLoad:(UIWebView *)webView{
-//    
-//    CGFloat webViewHeight = [webView.scrollView contentSize].height;
-//    CGRect newFrame = webView.frame;
-//    newFrame.size.height = webViewHeight;
-//    
-//    self.footerView.frame = CGRectMake(0, 0, kSCREEN_WIDTH, newFrame.size.height + 10);
-//    _detailHeight = webViewHeight;
-//    
-//    NSIndexSet *indexSet=[[NSIndexSet alloc] initWithIndex:1];
-//    [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
-//}
 
 #pragma mark - SDCycleScrollViewDelegate 点击看大图
 /** 点击图片回调 */
@@ -454,6 +513,5 @@
     }
     return _commentModels;
 }
-
 
 @end

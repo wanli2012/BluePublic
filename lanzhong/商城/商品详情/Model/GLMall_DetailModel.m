@@ -8,7 +8,7 @@
 
 #import "GLMall_DetailModel.h"
 
-@implementation GLDetail_goodsModel
+@implementation GLDetail_GoodsDetail
 
 @end
 

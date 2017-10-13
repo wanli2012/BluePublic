@@ -60,12 +60,12 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sis-Br-rgV">
-                                        <rect key="frame" x="293" y="60" width="30" height="30"/>
-                                        <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="into" translatesAutoresizingMaskIntoConstraints="NO" id="sis-Br-rgV">
+                                        <rect key="frame" x="313" y="66" width="10" height="18"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="HVO-tA-dab"/>
-                                            <constraint firstAttribute="width" constant="30" id="ZGk-CC-xl6"/>
+                                            <constraint firstAttribute="height" constant="18" id="HVO-tA-dab"/>
+                                            <constraint firstAttribute="width" constant="10" id="ZGk-CC-xl6"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
@@ -233,6 +233,7 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
+        <image name="into" width="10" height="18"/>
         <image name="timg" width="1024" height="640"/>
     </resources>
 </document>

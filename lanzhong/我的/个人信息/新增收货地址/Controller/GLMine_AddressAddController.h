@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GLMine_AddressModel.h"
 
 @interface GLMine_AddressAddController : UIViewController
+
+@property(assign , nonatomic)BOOL isEdit;//判断是否是编辑
+
+@property (nonatomic, strong)GLMine_AddressModel *model;
 
 @end

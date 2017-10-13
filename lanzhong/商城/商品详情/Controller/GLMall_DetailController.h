@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface GLMall_DetailController : UIViewController
 
 @property (nonatomic, copy)NSString *goods_id;//商品id
+
 
 @end

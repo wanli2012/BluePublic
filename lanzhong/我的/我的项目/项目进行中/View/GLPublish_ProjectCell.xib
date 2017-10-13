@@ -48,7 +48,7 @@
                             <constraint firstAttribute="height" constant="1" id="xsC-OW-J1u"/>
                         </constraints>
                     </view>
-                    <view clipsSubviews="YES" alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VIa-Ns-mka">
+                    <view clipsSubviews="YES" alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VIa-Ns-mka">
                         <rect key="frame" x="10" y="73" width="130" height="20"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -67,16 +67,16 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="G6J-L2-Oee">
-                        <rect key="frame" x="300" y="79" width="10" height="15"/>
-                        <color key="backgroundColor" red="0.66687160729999995" green="0.75596100089999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="return2" translatesAutoresizingMaskIntoConstraints="NO" id="G6J-L2-Oee">
+                        <rect key="frame" x="305" y="81.5" width="5" height="10"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="10" id="J8y-WV-LNL"/>
-                            <constraint firstAttribute="height" constant="15" id="ijn-Cq-cOP"/>
+                            <constraint firstAttribute="width" constant="5" id="J8y-WV-LNL"/>
+                            <constraint firstAttribute="height" constant="10" id="ijn-Cq-cOP"/>
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dq7-JT-HXG">
-                        <rect key="frame" x="183" y="73" width="112" height="26"/>
+                        <rect key="frame" x="183" y="73" width="117" height="26"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <state key="normal" title="资金动向">
                             <color key="titleColor" red="1" green="0.52201360460000001" blue="0.20566916469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -85,12 +85,12 @@
                             <action selector="fundTrend:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Mge-Cl-fFe"/>
                         </connections>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vu7-xb-913">
-                        <rect key="frame" x="275" y="16" width="15" height="15"/>
-                        <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="complete" translatesAutoresizingMaskIntoConstraints="NO" id="vu7-xb-913">
+                        <rect key="frame" x="275" y="16.5" width="14" height="14"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="15" id="XEe-f5-a3g"/>
-                            <constraint firstAttribute="height" constant="15" id="e5F-Bx-7kI"/>
+                            <constraint firstAttribute="width" constant="14" id="XEe-f5-a3g"/>
+                            <constraint firstAttribute="height" constant="14" id="e5F-Bx-7kI"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -130,16 +130,21 @@
             <connections>
                 <outlet property="arrowImageV" destination="G6J-L2-Oee" id="4P2-YP-N3h"/>
                 <outlet property="bgView" destination="VIa-Ns-mka" id="51f-OC-umu"/>
+                <outlet property="detailLabel" destination="BHw-2D-iEK" id="bLR-9K-mwC"/>
                 <outlet property="fundTrendBtn" destination="dq7-JT-HXG" id="sNP-S4-L3H"/>
+                <outlet property="iconImageV" destination="vu7-xb-913" id="HkD-U7-3u9"/>
                 <outlet property="moneyLabel" destination="RjK-cT-Vso" id="gaM-CF-AOM"/>
                 <outlet property="numberLabel" destination="DeJ-3H-P7j" id="gbz-LF-Xm7"/>
                 <outlet property="picImageV" destination="o3m-q2-oFn" id="gGN-Ul-tZm"/>
                 <outlet property="signLabel" destination="7YV-96-SSC" id="qL6-Hq-DV2"/>
+                <outlet property="titleLabel" destination="oAT-ae-sck" id="1tY-4J-yoA"/>
             </connections>
             <point key="canvasLocation" x="40" y="211.5"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="complete" width="14" height="14"/>
+        <image name="return2" width="8" height="15"/>
         <image name="timg" width="1024" height="640"/>
     </resources>
 </document>

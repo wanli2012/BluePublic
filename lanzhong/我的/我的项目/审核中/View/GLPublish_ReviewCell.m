@@ -14,7 +14,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *picImageV;//项目图
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;//标题
 @property (weak, nonatomic) IBOutlet UILabel *detailLabel;//详情
-@property (weak, nonatomic) IBOutlet UILabel *priceLabel;//价格
 
 @end
 
@@ -35,6 +34,54 @@
     self.titleLabel.text = model.title;
     self.detailLabel.text = model.info;
     self.priceLabel.text = model.admin_money;
+
+    switch ([model.state integerValue]) {
+        case 2:
+        {
+            self.bgView.hidden = NO;
+            self.signLabel.hidden = YES;
+            self.signImageV.hidden = NO;
+            
+            self.signImageV.image = [UIImage imageNamed:@"auditfailure"];
+        }
+            break;
+        case 5:
+        {
+            
+            self.bgView.hidden = NO;
+            self.signLabel.hidden = YES;
+            self.signImageV.hidden = NO;
+            
+            self.signImageV.image = [UIImage imageNamed:@"fundraisingfailure"];
+            
+        }
+            break;
+        case 8:
+        {
+
+            self.bgView.hidden = NO;
+            self.signLabel.hidden = NO;
+            self.signImageV.hidden = YES;
+            
+            self.signLabel.text = @"已暂停";
+        }
+            break;
+        case 9:
+        {
+            self.bgView.hidden = NO;
+            self.signImageV.hidden = NO;
+            self.signLabel.hidden = YES;
+            self.targetLabel.hidden = YES;
+            self.priceLabel.hidden = YES;
+            self.signImageV.image = [UIImage imageNamed:@"projectfailure"];
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+ 
     
 }
 

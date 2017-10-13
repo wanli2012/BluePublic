@@ -70,13 +70,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YQK-Hw-6Ni">
-                                <rect key="frame" x="267" y="10" width="20" height="20"/>
-                                <color key="backgroundColor" red="0.052515827119350433" green="0.36203587055206299" blue="0.90829825401306152" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="270" y="10" width="17" height="17"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="7N2-IH-bOB"/>
-                                    <constraint firstAttribute="width" constant="20" id="INO-oF-xth"/>
+                                    <constraint firstAttribute="height" constant="17" id="7N2-IH-bOB"/>
+                                    <constraint firstAttribute="width" constant="17" id="INO-oF-xth"/>
                                 </constraints>
-                                <state key="normal" image="未选中"/>
+                                <state key="normal" image="nochoice1"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点点滴滴" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oHp-Y0-LmW">
                                 <rect key="frame" x="120" y="61" width="167" height="12"/>
@@ -144,7 +144,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="nochoice1" width="17" height="17"/>
         <image name="timg" width="1024" height="640"/>
-        <image name="未选中" width="13" height="13"/>
     </resources>
 </document>

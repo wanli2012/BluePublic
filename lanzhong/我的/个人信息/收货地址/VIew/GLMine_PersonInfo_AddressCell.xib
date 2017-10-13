@@ -18,28 +18,28 @@
                 <rect key="frame" x="0.0" y="0.0" width="327" height="101"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qlC-Ya-6Bg">
-                        <rect key="frame" x="10" y="41" width="20" height="20"/>
-                        <color key="backgroundColor" red="2.38126886e-05" green="0.49598097800000002" blue="0.99889487030000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="address_choice" translatesAutoresizingMaskIntoConstraints="NO" id="qlC-Ya-6Bg">
+                        <rect key="frame" x="10" y="42.5" width="17" height="17"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="20" id="H08-hh-fpD"/>
-                            <constraint firstAttribute="height" constant="20" id="UN7-Yr-gNq"/>
+                            <constraint firstAttribute="width" constant="17" id="H08-hh-fpD"/>
+                            <constraint firstAttribute="height" constant="17" id="UN7-Yr-gNq"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="佑佑" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oZQ-ys-CvV">
-                        <rect key="frame" x="45" y="15" width="29" height="17"/>
+                        <rect key="frame" x="42" y="15" width="29" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.047119140625" green="0.22273763020833334" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="13876768767" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ke-Ac-Zfg">
-                        <rect key="frame" x="84" y="15" width="225" height="17"/>
+                        <rect key="frame" x="81" y="15" width="228" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="四川省成都是武侯区红牌楼520号快递费累死了返回的森林防火双氯芬酸零点" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i4y-Cl-Zds">
-                        <rect key="frame" x="45" y="42" width="267" height="29"/>
+                        <rect key="frame" x="42" y="42" width="270" height="29"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -59,7 +59,7 @@
                         </connections>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Puc-Pq-qob">
-                        <rect key="frame" x="45" y="100.5" width="282" height="1"/>
+                        <rect key="frame" x="42" y="100.5" width="285" height="1"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="r7b-6y-vV3"/>
@@ -95,4 +95,7 @@
             <point key="canvasLocation" x="58" y="75"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="address_choice" width="17" height="17"/>
+    </resources>
 </document>

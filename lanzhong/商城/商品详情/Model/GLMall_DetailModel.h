@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface GLDetail_goodsModel : NSObject
+@interface GLDetail_GoodsDetail : NSObject
 
 @property (nonatomic, copy)NSString *goods_id;//商品id
 @property (nonatomic, copy)NSString *goods_name;//商品名称
@@ -58,9 +58,9 @@
 
 @interface GLMall_DetailModel : NSObject
 
-@property (nonatomic, copy)GLDetail_goodsModel *goods_data;//商品信息
-@property (nonatomic, copy)NSString *salenum;//已售数量
-@property (nonatomic, copy)NSString *goods_info;//商品描述
+@property (nonatomic, copy)GLDetail_GoodsDetail *goods_data;//商品信息
+//@property (nonatomic, copy)NSString *salenum;//已售数量
+//@property (nonatomic, copy)NSString *goods_info;//商品描述
 @property (nonatomic, copy)NSString *goods_details;//商品详情
 @property (nonatomic, copy)NSString *cart_data;//我都购物车商品数
 @property (nonatomic, copy)NSArray<GLDetail_comment_data *> *comment_data;//评论信息

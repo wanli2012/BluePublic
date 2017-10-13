@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GLMine_AddressModel.h"
 
 @protocol GLMine_PersonInfo_AddressCellDelegate <NSObject>
 
@@ -20,5 +21,7 @@
 @property (nonatomic, weak)id <GLMine_PersonInfo_AddressCellDelegate> delegate;
 
 @property (nonatomic, assign)NSInteger index;
+
+@property (nonatomic, strong)GLMine_AddressModel *model;
 
 @end

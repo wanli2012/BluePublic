@@ -115,8 +115,9 @@
     cell.selectionStyle = 0;
     
     NSArray *arr = self.dataSource[indexPath.section];
-    cell.titleLabel.text = arr[indexPath.row];
     
+    cell.titleLabel.text = arr[indexPath.row][@"title"];
+    cell.picImageV.image = [UIImage imageNamed:arr[indexPath.row][@"image"]];
     cell.status = 3;
     
     return cell;
@@ -214,10 +215,20 @@
     if (!_dataSource) {
         _dataSource = [NSMutableArray array];
         
-        NSArray *arr = @[@"我的审核",@"我的筹款",@"我的项目"];
-        NSArray *arr2 = @[@"参与项目"];
-        NSArray *arr3 = @[@"购物车",@"订单",@"钱包"];
-        NSArray *arr4 = @[@"分享权益",@"我的消息",@"设置"];
+        NSArray *arr = @[@{@"title":@"我的审核",@"image":@"zhang"},
+                         @{@"title":@"我的筹款",@"image":@"money"},
+                         @{@"title":@"我的项目",@"image":@"myproject"}];
+        
+        NSArray *arr2 = @[@{@"title":@"参与项目",@"image":@"participationproject"}];
+        
+        NSArray *arr3 = @[@{@"title":@"购物车",@"image":@"mine_shoppingcart"},
+                          @{@"title":@"订单",@"image":@"order"},
+                          @{@"title":@"钱包",@"image":@"wallet"},
+                          ];
+        NSArray *arr4 = @[@{@"title":@"分享权益",@"image":@"mine_share"},
+                          @{@"title":@"我的消息",@"image":@"message"},
+                          @{@"title":@"设置",@"image":@"set"},
+                          ];
         
         [_dataSource addObject:arr];
         [_dataSource addObject:arr2];
