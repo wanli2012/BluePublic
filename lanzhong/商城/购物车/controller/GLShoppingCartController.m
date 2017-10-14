@@ -10,6 +10,7 @@
 #import "GLShoppingCell.h"
 #import "UIButton+SetEdgeInsets.h"
 #import "LBSetFillet.h"
+#import "GLConfirmOrderController.h"//下单界面
 
 @interface GLShoppingCartController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -96,9 +97,8 @@ static NSString *ID = @"GLShoppingCell";
         [self.tableView reloadData];
         
     }];
-    
-
 }
+
 - (void)endRefresh {
     
     [self.tableView.mj_header endRefreshing];
@@ -106,25 +106,39 @@ static NSString *ID = @"GLShoppingCell";
 //去结算
 - (void)clearingMore:(UIButton *)sender{
 
-//    NSMutableArray *tempArr = [NSMutableArray array];
-//    NSMutableArray *tempArr2 = [NSMutableArray array];
+    NSMutableArray *tempArr = [NSMutableArray array];
+    NSMutableArray *tempArr2 = [NSMutableArray array];
 //    NSMutableArray *tempArr3 = [NSMutableArray array];
-//    NSMutableArray *tempArr4 = [NSMutableArray array];
-//    
-//    for (int i = 0; i < self.models.count; i ++) {
-//        GLShoppingCartModel *model = self.models[i];
-//        if (model.isSelect) {
-//            
-//            [tempArr addObject:model.goods_id];
-//            [tempArr2 addObject:model.num];
+    NSMutableArray *tempArr4 = [NSMutableArray array];
+    
+    for (int i = 0; i < self.models.count; i ++) {
+        GLShoppingCartModel *model = self.models[i];
+        if (model.isSelect) {
+            
+            [tempArr addObject:model.goods_id];
+            [tempArr2 addObject:model.num];
 //            [tempArr3 addObject:model.cart_id];
-//            [tempArr4 addObject:model.spec_id];
-//        }
-//    }
-//    if (tempArr.count == 0) {
-//       // [MBProgressHUD showError:@"还未选择商品"];
-//        return;
-//    }
+            [tempArr4 addObject:model.spec_id];
+            
+        }
+    }
+    
+    if (tempArr.count == 0) {
+        [MBProgressHUD showError:@"还未选择商品"];
+        return;
+    }
+    
+    self.hidesBottomBarWhenPushed = YES;
+    GLConfirmOrderController *orderVC = [[GLConfirmOrderController alloc] init];
+    
+    orderVC.goods_id = [tempArr componentsJoinedByString:@","];;
+    orderVC.goods_count = [tempArr2 componentsJoinedByString:@","];
+//    orderVC.cart_id = [tempArr3 componentsJoinedByString:@","];
+    orderVC.goods_spec = [tempArr4 componentsJoinedByString:@","];
+    
+    [self.navigationController pushViewController:orderVC animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
+
     
 }
 
@@ -191,10 +205,11 @@ static NSString *ID = @"GLShoppingCell";
     if (b == YES) {
         
         self.seleteAllBtn.selected = NO;
-        
+        [self.seleteAllBtn setImage:[UIImage imageNamed:@"nochoice1"] forState:UIControlStateNormal];
     }else{
         
         self.seleteAllBtn.selected = YES;
+        [self.seleteAllBtn setImage:[UIImage imageNamed:@"mine_choice"] forState:UIControlStateNormal];
     }
     self.totalPriceLabel.text = [NSString stringWithFormat:@"总计:¥ %.2f",num];
     
@@ -214,6 +229,9 @@ static NSString *ID = @"GLShoppingCell";
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBar.hidden = YES;
+    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [self updateTitleNum];
     
@@ -306,10 +324,11 @@ static NSString *ID = @"GLShoppingCell";
                     if (b == YES) {
                         
                         self.seleteAllBtn.selected = NO;
-                        
+                        [self.seleteAllBtn setImage:[UIImage imageNamed:@"nochoice1"] forState:UIControlStateNormal];
                     }else{
                         
                         self.seleteAllBtn.selected = YES;
+                        [self.seleteAllBtn setImage:[UIImage imageNamed:@"mine_choice"] forState:UIControlStateNormal];
                     }
                     
                     [MBProgressHUD showError:responseObject[@"message"]];

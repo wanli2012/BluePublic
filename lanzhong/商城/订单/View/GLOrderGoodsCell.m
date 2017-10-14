@@ -32,12 +32,12 @@
 
 - (void)setModel:(GLConfirmOrderModel *)model{
     _model = model;
-    [_imageV sd_setImageWithURL:[NSURL URLWithString:model.cart_url] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
-    _nameLabel.text = model.cart_name;
-    _fanliLabel.text = [NSString stringWithFormat:@"原价:%@",model.cart_price];
-    _priceLabel.text = [NSString stringWithFormat:@"现价:%@",model.cart_discount];
-    _sumLabel.text = [NSString stringWithFormat:@"%@ x%@",model.cart_spec,model.cart_number];
-    _detailLabel.text = [NSString stringWithFormat:@"类型:%@",model.cart_type];
+    [_imageV sd_setImageWithURL:[NSURL URLWithString:model.must_thumb] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    _nameLabel.text = model.goods_name;
+//    _fanliLabel.text = [NSString stringWithFormat:@"原价:%@",model.cart_price];
+    _priceLabel.text = [NSString stringWithFormat:@"现价:%@",model.goods_discount];
+    _sumLabel.text = [NSString stringWithFormat:@"%@ x%@",model.spec_title,model.num];
+    _detailLabel.text = [NSString stringWithFormat:@"%@",model.goods_info];
 }
 
 @end

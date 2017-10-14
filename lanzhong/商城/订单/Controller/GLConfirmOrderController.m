@@ -20,7 +20,7 @@
 
 @interface GLConfirmOrderController ()<UITableViewDelegate,UITableViewDataSource,UITextViewDelegate>
 {
-    int _sumNum;
+    float _sumNum;//总价
     LoadWaitView * _loadV;
 }
 
@@ -56,51 +56,57 @@ static NSString *ID = @"GLOrderGoodsCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.navigationItem.title = @"确认订单";
     self.automaticallyAdjustsScrollViewInsets = NO;
   
     self.contentViewW.constant = kSCREEN_WIDTH;
     self.contentViewH.constant = kSCREEN_HEIGHT + 49;
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeAddress)];
-    [self.addressView addGestureRecognizer:tap];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeAddress)];
+//    [self.addressView addGestureRecognizer:tap];
     
     [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(dismiss) name:@"maskView_dismiss" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(ensurePassword:) name:@"input_PasswordNotification" object:nil];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"GLOrderGoodsCell" bundle:nil] forCellReuseIdentifier:ID];
-     [self postRequest];
+    [self postRequest];
     
 }
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = NO;
 
 }
+
 - (void)dealloc{
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
 - (void)postRequest {
+    
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"token"] = [UserModel defaultUser].token;
     dict[@"uid"] = [UserModel defaultUser].uid;
+    dict[@"page"] = @"1";
     
     _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
     //请求地址
-    [NetworkManager requestPOSTWithURLStr:@"Shop/address_list" paramDic:dict finish:^(id responseObject) {
+    [NetworkManager requestPOSTWithURLStr:kMYADDRESSLIST_URL paramDic:dict finish:^(id responseObject) {
         
         [_loadV removeloadview];
-        if ([responseObject[@"code"] integerValue] == 1){
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
 
             if (![responseObject[@"data"] isEqual:[NSNull null]]) {
         
                 for (NSDictionary *dic in responseObject[@"data"]) {
                     if ([dic[@"is_default"] intValue] == 1) {
                         self.nameLabel.text = [NSString stringWithFormat:@"收货人:%@",dic[@"collect_name"]];
-                        self.phoneLabel.text = [NSString stringWithFormat:@"tel:%@",dic[@"s_phone"]];
-                        self.addressLabel.text = [NSString stringWithFormat:@"%@",dic[@"s_address"]];
+                        self.phoneLabel.text = [NSString stringWithFormat:@"tel:%@",dic[@"phone"]];
+                        self.addressLabel.text = [NSString stringWithFormat:@"%@%@%@%@",dic[@"province_name"],dic[@"city_name"],dic[@"area_name"],dic[@"address"]];
                         self.address_id = [NSString stringWithFormat:@"%@",dic[@"address_id"]];
                     }
                 }
@@ -116,24 +122,26 @@ static NSString *ID = @"GLOrderGoodsCell";
     dict1[@"token"] = [UserModel defaultUser].token;
     dict1[@"uid"] = [UserModel defaultUser].uid;
     dict1[@"goods_id"] = self.goods_id;
-    dict1[@"goods_count"] = self.goods_count;
-    dict1[@"goods_spec"] = self.goods_spec;
+    dict1[@"num"] = self.goods_count;
+    dict1[@"spec_id"] = self.goods_spec;
   
     //请求商品信息
-    [NetworkManager requestPOSTWithURLStr:@"Shop/placeOrderBefore" paramDic:dict1 finish:^(id responseObject) {
+    [NetworkManager requestPOSTWithURLStr:kBUY_GOODS_URL paramDic:dict1 finish:^(id responseObject) {
         
         [_loadV removeloadview];
-        if ([responseObject[@"code"] integerValue] == 1){
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             
-            self.totalSumLabel.text = [NSString stringWithFormat:@"合计:¥%.2f",[responseObject[@"data"][@"all_realy_price"] floatValue] ];
-            self.yunfeiLabel.text = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"all_delivery"]];
+//            self.yunfeiLabel.text = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"all_delivery"]];
             
-            for (NSDictionary *dic in responseObject[@"data"][@"goods_list"]) {
+            _sumNum = 0.f;
+            for (NSDictionary *dic in responseObject[@"data"]) {
                 GLConfirmOrderModel *model = [GLConfirmOrderModel mj_objectWithKeyValues:dic];
                 [self.models addObject:model];
+                _sumNum += [model.goods_price floatValue];
             }
-            self.tableViewHeight.constant = _models.count * 140 * autoSizeScaleY;
-            self.contentViewH.constant = _models.count * 140 * autoSizeScaleY + 220;
+            self.totalSumLabel.text = [NSString stringWithFormat:@"合计:¥%.2f",_sumNum];
+            self.tableViewHeight.constant = _models.count * 117;
+            self.contentViewH.constant = _models.count * 117 + 220;
             [self.tableView reloadData];
             
         }else{
@@ -146,21 +154,23 @@ static NSString *ID = @"GLOrderGoodsCell";
     }];
     
 }
-
-- (void)changeAddress{
+- (IBAction)addressChoose:(id)sender {
     
-    self.hidesBottomBarWhenPushed = YES;
-//    GLMine_PersonInfo_AddressChooseController *modifyAD = [[GLMine_PersonInfo_AddressChooseController alloc] init];
-//    modifyAD.block = ^(NSString *name,NSString *phone,NSString *address,NSString *addressid){
-//        self.nameLabel.text = [NSString stringWithFormat:@"收货人:%@",name];
-//        self.phoneLabel.text = [NSString stringWithFormat:@"电话号码:%@",phone];
-//        self.addressLabel.text = [NSString stringWithFormat:@"%@",address];
-//        self.address_id = addressid;
-//    };
-//    
-//    [self.navigationController pushViewController:modifyAD animated:YES];
+    GLMine_PersonInfo_AddressChooseController *modifyAD = [[GLMine_PersonInfo_AddressChooseController alloc] init];
+    
+    modifyAD.block = ^(NSString *name,NSString *phone,NSString *address,NSString *addressid){
+        self.nameLabel.text = [NSString stringWithFormat:@"收货人:%@",name];
+        self.phoneLabel.text = [NSString stringWithFormat:@"电话号码:%@",phone];
+        self.addressLabel.text = [NSString stringWithFormat:@"%@",address];
+        self.address_id = addressid;
+    };
+    
+    [self.navigationController pushViewController:modifyAD animated:YES];
+
 }
+
 - (void)dismiss {
+    
 //    [_payV.passwordF resignFirstResponder];
 //    [UIView animateWithDuration:0.3 animations:^{
 //        _payV.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT *0.5);
@@ -169,13 +179,13 @@ static NSString *ID = @"GLOrderGoodsCell";
 //
 //        [_maskV removeFromSuperview];
 //    }];
+    
 }
 
 - (void)ensurePassword:(NSNotification *)userInfo{
     [self dismiss];
 
 }
-  
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     
@@ -193,19 +203,19 @@ static NSString *ID = @"GLOrderGoodsCell";
     dict[@"token"] = [UserModel defaultUser].token;
     dict[@"uid"] = [UserModel defaultUser].uid;
     dict[@"goods_id"] = self.goods_id;
-    dict[@"goods_count"] = self.goods_count;
+    dict[@"num"] = self.goods_count;
     dict[@"address_id"] = self.address_id;
-    dict[@"remark"] = self.remarkTextV.text;
-    dict[@"cart_id"] = self.cart_id;
-    dict[@"goods_spec"] = self.goods_spec;
-    dict[@"version"] = @"3";
+    dict[@"order_remark"] = self.remarkTextV.text;
+    dict[@"total"] = @(_sumNum);
+    dict[@"c_type"] = @(self.orderType);
+    dict[@"spec_id"] = self.goods_spec;
     
     _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
-    [NetworkManager requestPOSTWithURLStr:@"Shop/placeOrderEnd" paramDic:dict finish:^(id responseObject) {
+    [NetworkManager requestPOSTWithURLStr:kSUBMIT_ORDER_URL paramDic:dict finish:^(id responseObject) {
         
         [_loadV removeloadview];
         
-        if ([responseObject[@"code"] integerValue] == 1){
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshCartNotification" object:nil];
             
@@ -252,20 +262,16 @@ static NSString *ID = @"GLOrderGoodsCell";
     return self.models.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     GLOrderGoodsCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     cell.model = self.models[indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    if(self.orderType == 1){
-        cell.fanliLabel.hidden = YES;
-    }else{
-        cell.fanliLabel.hidden = NO;
-    }
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 120*autoSizeScaleY;
+    return 117;
     
 //    self.tableView.estimatedRowHeight = 44;
 //    self.tableView.rowHeight = UITableViewAutomaticDimension;

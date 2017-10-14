@@ -10,6 +10,7 @@
 #import "GLMine_PersonInfo_AddressCell.h"
 #import "GLMine_AddressAddController.h"//新增收货地址
 #import "GLMine_AddressModel.h"
+#import "GLConfirmOrderController.h"//下单界面
 
 @interface GLMine_PersonInfo_AddressChooseController ()<GLMine_PersonInfo_AddressCellDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -40,11 +41,11 @@
         
     }];
     
-    MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        
-        [weakSelf postRequest:NO];
-        
-    }];
+//    MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+//        
+//        [weakSelf postRequest:NO];
+//        
+//    }];
     
     // 设置文字
     [header setTitle:@"快扯我，快点" forState:MJRefreshStateIdle];
@@ -54,7 +55,7 @@
     [header setTitle:@"服务器正在狂奔..." forState:MJRefreshStateRefreshing];
     
     self.tableView.mj_header = header;
-    self.tableView.mj_footer = footer;
+//    self.tableView.mj_footer = footer;
     self.page = 1;
     [self postRequest:YES];
     
@@ -65,17 +66,10 @@
 }
 
 - (void)postRequest:(BOOL)isRefresh{
-    
-    if (isRefresh) {
-        self.page = 1;
-        [self.models removeAllObjects];
-    }else{
-        self.page ++ ;
-    }
-    
+
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     
-    dic[@"page"] = @(self.page);
+    dic[@"page"] = @(1);
     dic[@"token"] = [UserModel defaultUser].token;
     dic[@"uid"] = [UserModel defaultUser].uid;
     
@@ -113,7 +107,7 @@
 - (void)endRefresh {
     
     [self.tableView.mj_header endRefreshing];
-    [self.tableView.mj_footer endRefreshing];
+//    [self.tableView.mj_footer endRefreshing];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -134,9 +128,7 @@
 #pragma mark - GLMine_PersonInfo_AddressCellDelegate
 
 - (void)editAddress:(NSInteger)index{
-    
-    NSLog(@"编辑%zd",index);
-    
+
     self.hidesBottomBarWhenPushed = YES;
     GLMine_AddressAddController *addressVC = [[GLMine_AddressAddController alloc] init];
     addressVC.isEdit = YES;
@@ -179,7 +171,25 @@
     
     NSLog(@"选中一个地址");
     
+//    LBMineCentermodifyAdressTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    GLMine_AddressModel *model = self.models[indexPath.row];
+    
+    NSArray *vcsArray = [self.navigationController viewControllers];
+    NSInteger vcCount = vcsArray.count;
+    UIViewController *lastVC = vcsArray[vcCount-2];//最后一个vc是自己，倒数第二个是上一个控制器。
+    
+    if([lastVC isKindOfClass:[GLConfirmOrderController class]]){
+        
+        NSString *address = [NSString stringWithFormat:@"%@%@%@%@",model.province_name,model.city_name,model.area_name,model.address];
+        
+        self.block(model.collect_name,model.phone,address,model.address_id);
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }
+
+    
 }
+
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return  UITableViewCellEditingStyleDelete;

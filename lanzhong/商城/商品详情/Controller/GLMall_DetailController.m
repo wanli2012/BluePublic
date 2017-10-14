@@ -7,11 +7,9 @@
 //
 
 #import "GLMall_DetailController.h"
-//#import "GLMall_DetailSpecCell.h"
-//#import "GLMall_DetailAddressCell.h"
 #import "GLMall_DetailSelecteCell.h"
 #import "GLMall_DetailCommentCell.h"
-#import "GLMall_DetailFooterView.h"
+//#import "GLMall_DetailFooterView.h"
 #import <SDCycleScrollView/SDCycleScrollView.h>
 #import "GLShoppingCartController.h"
 #import "GLMall_DetailModel.h"
@@ -32,7 +30,7 @@
 @property (weak, nonatomic) IBOutlet UIView *headerView;//透视图
 @property (weak, nonatomic) IBOutlet UIView *navView;//导航栏View
 
-@property (nonatomic, strong)GLMall_DetailFooterView *footerView;//footer
+//@property (nonatomic, strong)GLMall_DetailFooterView *footerView;//footer
 @property (nonatomic, strong)NSMutableArray *dataSource;//数据源
 
 @property (nonatomic, strong)SDCycleScrollView *cycleScrollView;
@@ -81,13 +79,11 @@
     self.addCartBtn.layer.borderWidth = 1.f;
     
     
-//    [self.tableView registerNib:[UINib nibWithNibName:@"GLMall_DetailSpecCell" bundle:nil] forCellReuseIdentifier:@"GLMall_DetailSpecCell"];
-//    [self.tableView registerNib:[UINib nibWithNibName:@"GLMall_DetailAddressCell" bundle:nil] forCellReuseIdentifier:@"GLMall_DetailAddressCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMall_DetailSelecteCell" bundle:nil] forCellReuseIdentifier:@"GLMall_DetailSelecteCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMall_DetailCommentCell" bundle:nil] forCellReuseIdentifier:@"GLMall_DetailCommentCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMall_DetailWebCell" bundle:nil] forCellReuseIdentifier:@"GLMall_DetailWebCell"];
     
-    self.footerView.webView.delegate = self;
+//    self.footerView.webView.delegate = self;
     
     [self.headerView addSubview:self.cycleScrollView];
 
@@ -100,7 +96,6 @@
         
     }];
     
-    
     // 设置文字
     [header setTitle:@"快扯我，快点" forState:MJRefreshStateIdle];
     
@@ -111,7 +106,6 @@
     self.tableView.mj_header = header;
     
     [self postRequest:YES];
-//    [self.tableView.mj_header beginRefreshing];
     
     _isDetail = NO;
     self.sum = 1;
@@ -171,6 +165,11 @@
     
     [self.tableView.mj_header endRefreshing];
 }
+- (void)dealloc{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
@@ -226,7 +225,7 @@
     GLConfirmOrderController *vc=[[GLConfirmOrderController alloc]init];
     vc.goods_id = self.goods_id;
     vc.goods_count = self.countTF.text;
-    vc.orderType = 2; //订单类型
+    vc.orderType = 1; //订单类型 1:商品详情页购买 2:购物车购买
     vc.goods_spec = self.spec_id;
     [self.navigationController pushViewController:vc animated:YES];
     
@@ -468,14 +467,14 @@
 }
 #pragma mark - 懒加载
 
-- (GLMall_DetailFooterView *)footerView{
-    if (!_footerView) {
-        _footerView = [[GLMall_DetailFooterView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 300)];
-        
-    }
-    
-    return _footerView;
-}
+//- (GLMall_DetailFooterView *)footerView{
+//    if (!_footerView) {
+//        _footerView = [[GLMall_DetailFooterView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 300)];
+//        
+//    }
+//    
+//    return _footerView;
+//}
 - (NSMutableArray *)dataSource{
     if (!_dataSource) {
         _dataSource = [NSMutableArray array];

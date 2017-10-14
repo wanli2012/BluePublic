@@ -14,6 +14,7 @@
 #import "GLShoppingCartController.h"//购物车
 #import "GLMine_MyMessageController.h"//我的消息
 #import "GLMine_WalletController.h"//钱包
+#import "GLMine_MyOrderController.h"//我的订单
 
 @interface GLMineController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -140,11 +141,27 @@
                      NSLog(@"%@%zd",self.dataSource[indexPath.section][indexPath.row],indexPath.row);
                 }
                     break;
-                case 1:
+                default:
+                    break;
+            }
+        }
+            break;
+        case 2:
+        {
+            switch (indexPath.row) {
+                case 0:
                 {
-                    
                     GLShoppingCartController *cartVC = [[GLShoppingCartController alloc] init];
                     [self.navigationController pushViewController:cartVC animated:YES];
+                    
+                }
+                    break;
+                case 1://我的消息
+                {
+                    NSLog(@"我的订单");
+                    GLMine_MyOrderController *cartVC = [[GLMine_MyOrderController alloc] init];
+                    [self.navigationController pushViewController:cartVC animated:YES];
+                    
                 }
                     break;
                 case 2:
@@ -161,18 +178,18 @@
             }
         }
             break;
-        case 2:
-        {
+            
+        case 3:{
             switch (indexPath.row) {
                 case 0:
                 {
-                    NSLog(@"%@",self.dataSource[indexPath.section][indexPath.row]);
+                    NSLog(@"分享权益");
                     
                 }
                     break;
                 case 1://我的消息
                 {
-
+                    
                     GLMine_MyMessageController *myMessageVC = [[GLMine_MyMessageController alloc] init];
                     [self.navigationController pushViewController:myMessageVC animated:YES];
                     
@@ -180,6 +197,7 @@
                     break;
                 case 2:
                 {
+                    
                     GLMine_SetController *setVC = [[GLMine_SetController alloc] init];
                     [self.navigationController pushViewController:setVC animated:YES];
                 }
@@ -189,7 +207,6 @@
                     break;
             }
         }
-            break;
             
         default:
             break;
