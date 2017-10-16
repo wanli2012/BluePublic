@@ -32,51 +32,51 @@
     self.tableView.dataSource = self;
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMine_WalletDetailCell" bundle:nil] forCellReuseIdentifier:@"GLMine_WalletDetailCell"];
 
+    __weak __typeof(self) weakSelf = self;
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [weakSelf updateData:YES];
+        
+    }];
     
-//    __weak __typeof(self) weakSelf = self;
-//    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-//        
-//        [weakSelf updateData:YES];
-//        
-//    }];
-//    
-//    MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-//        [weakSelf updateData:NO];
-//    }];
-//    
-//    // 设置文字
-//    [header setTitle:@"快扯我，快点" forState:MJRefreshStateIdle];
-//    
-//    [header setTitle:@"数据要来啦" forState:MJRefreshStatePulling];
-//    
-//    [header setTitle:@"服务器正在狂奔 ..." forState:MJRefreshStateRefreshing];
-//    
-//    
-//    self.tableView.mj_header = header;
-//    self.tableView.mj_footer = footer;
-//    [self updateData:YES];
+    MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [weakSelf updateData:NO];
+    }];
+    
+    // 设置文字
+    [header setTitle:@"快扯我，快点" forState:MJRefreshStateIdle];
+    
+    [header setTitle:@"数据要来啦" forState:MJRefreshStatePulling];
+    
+    [header setTitle:@"服务器正在狂奔 ..." forState:MJRefreshStateRefreshing];
+    
+    
+    self.tableView.mj_header = header;
+    self.tableView.mj_footer = footer;
+    [self updateData:YES];
 }
-//- (void)endRefresh {
-//    [self.tableView.mj_footer endRefreshing];
-//    [self.tableView.mj_header endRefreshing];
-//    
-//}
-//- (void)updateData:(BOOL)status {
-//    
-//    if (status) {
-//        _page = 1;
-//        
-//    }else{
-//        _page ++;
-//    }
-//    
-//    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-//    dict[@"token"] = [UserModel defaultUser].token;
-//    dict[@"uid"] = [UserModel defaultUser].uid;
-//    dict[@"page"] = [NSString stringWithFormat:@"%ld",(long)_page];
+- (void)endRefresh {
+    [self.tableView.mj_footer endRefreshing];
+    [self.tableView.mj_header endRefreshing];
+    
+}
+- (void)updateData:(BOOL)status {
+    
+    if (status) {
+        _page = 1;
+        
+    }else{
+        _page ++;
+    }
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"token"] = [UserModel defaultUser].token;
+    dict[@"uid"] = [UserModel defaultUser].uid;
+    dict[@"page"] = [NSString stringWithFormat:@"%ld",(long)_page];
+    dict[@"back_status"] = [NSString stringWithFormat:@"%ld",(long)_page];
 //    
 //    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
-//    [NetworkManager requestPOSTWithURLStr:@"User/myfh_list" paramDic:dict finish:^(id responseObject) {
+//    [NetworkManager requestPOSTWithURLStr:kBACK_LIST_URL paramDic:dict finish:^(id responseObject) {
 //        
 //        [_loadV removeloadview];
 //        [self endRefresh];
@@ -129,7 +129,7 @@
 //        [self endRefresh];
 //        self.nodataV.hidden = NO;
 //    }];
-//}
+}
 -(UITableView*)tableView {
     if (_tableView == nil) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT-124)];

@@ -41,8 +41,6 @@
 		4A05EEA81F8C97380095DBCF /* UIButton+HXExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE851F8C97380095DBCF /* UIButton+HXExtension.m */; };
 		4A05EEA91F8C97380095DBCF /* UIImage+HXExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE871F8C97380095DBCF /* UIImage+HXExtension.m */; };
 		4A05EEAA1F8C97380095DBCF /* UIView+HXExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE891F8C97380095DBCF /* UIView+HXExtension.m */; };
-		4A05EEAE1F8CA1CB0095DBCF /* GLSimpleSelectionPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EEAC1F8CA1CB0095DBCF /* GLSimpleSelectionPickerController.m */; };
-		4A05EEAF1F8CA1CB0095DBCF /* GLSimpleSelectionPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A05EEAD1F8CA1CB0095DBCF /* GLSimpleSelectionPickerController.xib */; };
 		4A05EEB41F8CA5950095DBCF /* HWCalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EEB11F8CA5950095DBCF /* HWCalendar.m */; };
 		4A05EEB51F8CA5950095DBCF /* HWOptionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EEB31F8CA5950095DBCF /* HWOptionButton.m */; };
 		4A0B74E41F908A550007788B /* ChooseRank.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0B74E11F908A550007788B /* ChooseRank.m */; };
@@ -92,6 +90,28 @@
 		4A16FF421F8F891A00064CE5 /* GLPublish_FundraisingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A16FF391F8F891A00064CE5 /* GLPublish_FundraisingController.xib */; };
 		4A16FF441F8F891A00064CE5 /* GLPublish_FundraisingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A16FF3F1F8F891A00064CE5 /* GLPublish_FundraisingCell.m */; };
 		4A16FF451F8F891A00064CE5 /* GLPublish_FundraisingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A16FF401F8F891A00064CE5 /* GLPublish_FundraisingCell.xib */; };
+		4A18B8E61F943FC000E9B387 /* GLMine_RicePayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A18B8E41F943FC000E9B387 /* GLMine_RicePayController.m */; };
+		4A18B8E71F943FC000E9B387 /* GLMine_RicePayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A18B8E51F943FC000E9B387 /* GLMine_RicePayController.xib */; };
+		4A18B8EB1F9441B800E9B387 /* LBMineCenterPayPagesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A18B8E91F9441B800E9B387 /* LBMineCenterPayPagesTableViewCell.m */; };
+		4A18B8EC1F9441B800E9B387 /* LBMineCenterPayPagesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A18B8EA1F9441B800E9B387 /* LBMineCenterPayPagesTableViewCell.xib */; };
+		4A18B8F01F9441F400E9B387 /* GLOrderPayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A18B8EE1F9441F400E9B387 /* GLOrderPayView.m */; };
+		4A18B8F11F9441F400E9B387 /* GLOrderPayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A18B8EF1F9441F400E9B387 /* GLOrderPayView.xib */; };
+		4A18B8F41F949BC300E9B387 /* GLMine_WalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A18B8F31F949BC300E9B387 /* GLMine_WalletModel.m */; };
+		4A18B8FF1F94A31B00E9B387 /* GLSet_MaskVeiw.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A18B8F81F94A31B00E9B387 /* GLSet_MaskVeiw.m */; };
+		4A18B9001F94A31B00E9B387 /* LoadWaitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A18B8FA1F94A31B00E9B387 /* LoadWaitView.m */; };
+		4A18B9011F94A31B00E9B387 /* LoadWaitView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A18B8FB1F94A31B00E9B387 /* LoadWaitView.xib */; };
+		4A18B9021F94A31B00E9B387 /* NodataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A18B8FD1F94A31B00E9B387 /* NodataView.m */; };
+		4A18B9031F94A31B00E9B387 /* NodataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A18B8FE1F94A31B00E9B387 /* NodataView.xib */; };
+		4A18B9071F94A33400E9B387 /* GLSimpleSelectionPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A18B9051F94A33400E9B387 /* GLSimpleSelectionPickerController.m */; };
+		4A18B9081F94A33400E9B387 /* GLSimpleSelectionPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A18B9061F94A33400E9B387 /* GLSimpleSelectionPickerController.xib */; };
+		4A18B90B1F94A48400E9B387 /* GLMine_BankNameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A18B90A1F94A48400E9B387 /* GLMine_BankNameModel.m */; };
+		4A18B90E1F94D71C00E9B387 /* GLMine_Wallet_ExchangeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A18B90D1F94D71C00E9B387 /* GLMine_Wallet_ExchangeController.m */; };
+		4A18B9121F94D81700E9B387 /* GLMine_Wallet_Exchange_SuccessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A18B9101F94D81700E9B387 /* GLMine_Wallet_Exchange_SuccessController.m */; };
+		4A18B9131F94D81700E9B387 /* GLMine_Wallet_Exchange_SuccessController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A18B9111F94D81700E9B387 /* GLMine_Wallet_Exchange_SuccessController.xib */; };
+		4A18B9171F94D83200E9B387 /* GLMine_Wallet_Exchange_FailedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A18B9151F94D83200E9B387 /* GLMine_Wallet_Exchange_FailedController.m */; };
+		4A18B9181F94D83200E9B387 /* GLMine_Wallet_Exchange_FailedController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A18B9161F94D83200E9B387 /* GLMine_Wallet_Exchange_FailedController.xib */; };
+		4A18B91C1F94D86300E9B387 /* GLMine_Wallet_Exchange_InReviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A18B91A1F94D86300E9B387 /* GLMine_Wallet_Exchange_InReviewController.m */; };
+		4A18B91D1F94D86300E9B387 /* GLMine_Wallet_Exchange_InReviewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A18B91B1F94D86300E9B387 /* GLMine_Wallet_Exchange_InReviewController.xib */; };
 		4A509B361F8722B000D794FB /* MBProgressHUD+LB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A509B351F8722B000D794FB /* MBProgressHUD+LB.m */; };
 		4A509B411F87266600D794FB /* GLHome_NoticeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A509B3A1F87266600D794FB /* GLHome_NoticeController.m */; };
 		4A509B421F87266600D794FB /* GLHome_NoticeController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A509B3B1F87266600D794FB /* GLHome_NoticeController.xib */; };
@@ -233,11 +253,6 @@
 		4ADDD19D1F88A7A400C95F9C /* GLMall_LogisticsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ADDD19B1F88A7A400C95F9C /* GLMall_LogisticsController.xib */; };
 		4ADDD1A11F88A8C900C95F9C /* GLMall_LogisticsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADDD19F1F88A8C900C95F9C /* GLMall_LogisticsCell.m */; };
 		4ADDD1A21F88A8C900C95F9C /* GLMall_LogisticsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ADDD1A01F88A8C900C95F9C /* GLMall_LogisticsCell.xib */; };
-		4ADDD1AC1F88B1E900C95F9C /* GLSet_MaskVeiw.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADDD1A51F88B1E900C95F9C /* GLSet_MaskVeiw.m */; };
-		4ADDD1AD1F88B1E900C95F9C /* LoadWaitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADDD1A71F88B1E900C95F9C /* LoadWaitView.m */; };
-		4ADDD1AE1F88B1E900C95F9C /* LoadWaitView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ADDD1A81F88B1E900C95F9C /* LoadWaitView.xib */; };
-		4ADDD1AF1F88B1E900C95F9C /* NodataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADDD1AA1F88B1E900C95F9C /* NodataView.m */; };
-		4ADDD1B01F88B1E900C95F9C /* NodataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ADDD1AB1F88B1E900C95F9C /* NodataView.xib */; };
 		4ADDD1B31F88B64700C95F9C /* GLHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADDD1B21F88B64700C95F9C /* GLHomeModel.m */; };
 		4ADDD1B61F88D05600C95F9C /* GLMallModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADDD1B51F88D05600C95F9C /* GLMallModel.m */; };
 		4ADEBAFB1F7DDC7200C50087 /* GLPublishController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADEBAF71F7DDC7200C50087 /* GLPublishController.m */; };
@@ -381,9 +396,6 @@
 		4A05EE871F8C97380095DBCF /* UIImage+HXExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+HXExtension.m"; sourceTree = "<group>"; };
 		4A05EE881F8C97380095DBCF /* UIView+HXExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HXExtension.h"; sourceTree = "<group>"; };
 		4A05EE891F8C97380095DBCF /* UIView+HXExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HXExtension.m"; sourceTree = "<group>"; };
-		4A05EEAB1F8CA1CB0095DBCF /* GLSimpleSelectionPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLSimpleSelectionPickerController.h; sourceTree = "<group>"; };
-		4A05EEAC1F8CA1CB0095DBCF /* GLSimpleSelectionPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLSimpleSelectionPickerController.m; sourceTree = "<group>"; };
-		4A05EEAD1F8CA1CB0095DBCF /* GLSimpleSelectionPickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLSimpleSelectionPickerController.xib; sourceTree = "<group>"; };
 		4A05EEB01F8CA5950095DBCF /* HWCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWCalendar.h; sourceTree = "<group>"; };
 		4A05EEB11F8CA5950095DBCF /* HWCalendar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWCalendar.m; sourceTree = "<group>"; };
 		4A05EEB21F8CA5950095DBCF /* HWOptionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWOptionButton.h; sourceTree = "<group>"; };
@@ -462,6 +474,41 @@
 		4A16FF3E1F8F891A00064CE5 /* GLPublish_FundraisingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLPublish_FundraisingCell.h; sourceTree = "<group>"; };
 		4A16FF3F1F8F891A00064CE5 /* GLPublish_FundraisingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLPublish_FundraisingCell.m; sourceTree = "<group>"; };
 		4A16FF401F8F891A00064CE5 /* GLPublish_FundraisingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLPublish_FundraisingCell.xib; sourceTree = "<group>"; };
+		4A18B8E31F943FC000E9B387 /* GLMine_RicePayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_RicePayController.h; sourceTree = "<group>"; };
+		4A18B8E41F943FC000E9B387 /* GLMine_RicePayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_RicePayController.m; sourceTree = "<group>"; };
+		4A18B8E51F943FC000E9B387 /* GLMine_RicePayController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMine_RicePayController.xib; sourceTree = "<group>"; };
+		4A18B8E81F9441B800E9B387 /* LBMineCenterPayPagesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBMineCenterPayPagesTableViewCell.h; sourceTree = "<group>"; };
+		4A18B8E91F9441B800E9B387 /* LBMineCenterPayPagesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBMineCenterPayPagesTableViewCell.m; sourceTree = "<group>"; };
+		4A18B8EA1F9441B800E9B387 /* LBMineCenterPayPagesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBMineCenterPayPagesTableViewCell.xib; sourceTree = "<group>"; };
+		4A18B8ED1F9441F400E9B387 /* GLOrderPayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLOrderPayView.h; sourceTree = "<group>"; };
+		4A18B8EE1F9441F400E9B387 /* GLOrderPayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLOrderPayView.m; sourceTree = "<group>"; };
+		4A18B8EF1F9441F400E9B387 /* GLOrderPayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLOrderPayView.xib; sourceTree = "<group>"; };
+		4A18B8F21F949BC300E9B387 /* GLMine_WalletModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_WalletModel.h; sourceTree = "<group>"; };
+		4A18B8F31F949BC300E9B387 /* GLMine_WalletModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_WalletModel.m; sourceTree = "<group>"; };
+		4A18B8F71F94A31B00E9B387 /* GLSet_MaskVeiw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLSet_MaskVeiw.h; sourceTree = "<group>"; };
+		4A18B8F81F94A31B00E9B387 /* GLSet_MaskVeiw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLSet_MaskVeiw.m; sourceTree = "<group>"; };
+		4A18B8F91F94A31B00E9B387 /* LoadWaitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadWaitView.h; sourceTree = "<group>"; };
+		4A18B8FA1F94A31B00E9B387 /* LoadWaitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadWaitView.m; sourceTree = "<group>"; };
+		4A18B8FB1F94A31B00E9B387 /* LoadWaitView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadWaitView.xib; sourceTree = "<group>"; };
+		4A18B8FC1F94A31B00E9B387 /* NodataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodataView.h; sourceTree = "<group>"; };
+		4A18B8FD1F94A31B00E9B387 /* NodataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodataView.m; sourceTree = "<group>"; };
+		4A18B8FE1F94A31B00E9B387 /* NodataView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NodataView.xib; sourceTree = "<group>"; };
+		4A18B9041F94A33400E9B387 /* GLSimpleSelectionPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLSimpleSelectionPickerController.h; sourceTree = "<group>"; };
+		4A18B9051F94A33400E9B387 /* GLSimpleSelectionPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLSimpleSelectionPickerController.m; sourceTree = "<group>"; };
+		4A18B9061F94A33400E9B387 /* GLSimpleSelectionPickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLSimpleSelectionPickerController.xib; sourceTree = "<group>"; };
+		4A18B9091F94A48400E9B387 /* GLMine_BankNameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_BankNameModel.h; sourceTree = "<group>"; };
+		4A18B90A1F94A48400E9B387 /* GLMine_BankNameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_BankNameModel.m; sourceTree = "<group>"; };
+		4A18B90C1F94D71C00E9B387 /* GLMine_Wallet_ExchangeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_Wallet_ExchangeController.h; sourceTree = "<group>"; };
+		4A18B90D1F94D71C00E9B387 /* GLMine_Wallet_ExchangeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_Wallet_ExchangeController.m; sourceTree = "<group>"; };
+		4A18B90F1F94D81700E9B387 /* GLMine_Wallet_Exchange_SuccessController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_Wallet_Exchange_SuccessController.h; sourceTree = "<group>"; };
+		4A18B9101F94D81700E9B387 /* GLMine_Wallet_Exchange_SuccessController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_Wallet_Exchange_SuccessController.m; sourceTree = "<group>"; };
+		4A18B9111F94D81700E9B387 /* GLMine_Wallet_Exchange_SuccessController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMine_Wallet_Exchange_SuccessController.xib; sourceTree = "<group>"; };
+		4A18B9141F94D83200E9B387 /* GLMine_Wallet_Exchange_FailedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_Wallet_Exchange_FailedController.h; sourceTree = "<group>"; };
+		4A18B9151F94D83200E9B387 /* GLMine_Wallet_Exchange_FailedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_Wallet_Exchange_FailedController.m; sourceTree = "<group>"; };
+		4A18B9161F94D83200E9B387 /* GLMine_Wallet_Exchange_FailedController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMine_Wallet_Exchange_FailedController.xib; sourceTree = "<group>"; };
+		4A18B9191F94D86300E9B387 /* GLMine_Wallet_Exchange_InReviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_Wallet_Exchange_InReviewController.h; sourceTree = "<group>"; };
+		4A18B91A1F94D86300E9B387 /* GLMine_Wallet_Exchange_InReviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_Wallet_Exchange_InReviewController.m; sourceTree = "<group>"; };
+		4A18B91B1F94D86300E9B387 /* GLMine_Wallet_Exchange_InReviewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMine_Wallet_Exchange_InReviewController.xib; sourceTree = "<group>"; };
 		4A509B341F8722B000D794FB /* MBProgressHUD+LB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+LB.h"; sourceTree = "<group>"; };
 		4A509B351F8722B000D794FB /* MBProgressHUD+LB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+LB.m"; sourceTree = "<group>"; };
 		4A509B391F87266600D794FB /* GLHome_NoticeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLHome_NoticeController.h; sourceTree = "<group>"; };
@@ -677,14 +724,6 @@
 		4ADDD19E1F88A8C900C95F9C /* GLMall_LogisticsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMall_LogisticsCell.h; sourceTree = "<group>"; };
 		4ADDD19F1F88A8C900C95F9C /* GLMall_LogisticsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMall_LogisticsCell.m; sourceTree = "<group>"; };
 		4ADDD1A01F88A8C900C95F9C /* GLMall_LogisticsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMall_LogisticsCell.xib; sourceTree = "<group>"; };
-		4ADDD1A41F88B1E900C95F9C /* GLSet_MaskVeiw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLSet_MaskVeiw.h; sourceTree = "<group>"; };
-		4ADDD1A51F88B1E900C95F9C /* GLSet_MaskVeiw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLSet_MaskVeiw.m; sourceTree = "<group>"; };
-		4ADDD1A61F88B1E900C95F9C /* LoadWaitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadWaitView.h; sourceTree = "<group>"; };
-		4ADDD1A71F88B1E900C95F9C /* LoadWaitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadWaitView.m; sourceTree = "<group>"; };
-		4ADDD1A81F88B1E900C95F9C /* LoadWaitView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadWaitView.xib; sourceTree = "<group>"; };
-		4ADDD1A91F88B1E900C95F9C /* NodataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodataView.h; sourceTree = "<group>"; };
-		4ADDD1AA1F88B1E900C95F9C /* NodataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodataView.m; sourceTree = "<group>"; };
-		4ADDD1AB1F88B1E900C95F9C /* NodataView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NodataView.xib; sourceTree = "<group>"; };
 		4ADDD1B11F88B64700C95F9C /* GLHomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLHomeModel.h; sourceTree = "<group>"; };
 		4ADDD1B21F88B64700C95F9C /* GLHomeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLHomeModel.m; sourceTree = "<group>"; };
 		4ADDD1B41F88D05600C95F9C /* GLMallModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMallModel.h; sourceTree = "<group>"; };
@@ -975,6 +1014,9 @@
 				4A0B751B1F90F0840007788B /* GLOrderGoodsCell.h */,
 				4A0B751C1F90F0840007788B /* GLOrderGoodsCell.m */,
 				4A0B751D1F90F0840007788B /* GLOrderGoodsCell.xib */,
+				4A18B8ED1F9441F400E9B387 /* GLOrderPayView.h */,
+				4A18B8EE1F9441F400E9B387 /* GLOrderPayView.m */,
+				4A18B8EF1F9441F400E9B387 /* GLOrderPayView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1060,6 +1102,17 @@
 				4A165C211F860F9000D0C34B /* GLMine_WalletExchangeController.m */,
 				4A165C231F860FA500D0C34B /* GLMine_WalletRechargeController.h */,
 				4A165C241F860FA500D0C34B /* GLMine_WalletRechargeController.m */,
+				4A18B90C1F94D71C00E9B387 /* GLMine_Wallet_ExchangeController.h */,
+				4A18B90D1F94D71C00E9B387 /* GLMine_Wallet_ExchangeController.m */,
+				4A18B90F1F94D81700E9B387 /* GLMine_Wallet_Exchange_SuccessController.h */,
+				4A18B9101F94D81700E9B387 /* GLMine_Wallet_Exchange_SuccessController.m */,
+				4A18B9111F94D81700E9B387 /* GLMine_Wallet_Exchange_SuccessController.xib */,
+				4A18B9141F94D83200E9B387 /* GLMine_Wallet_Exchange_FailedController.h */,
+				4A18B9151F94D83200E9B387 /* GLMine_Wallet_Exchange_FailedController.m */,
+				4A18B9161F94D83200E9B387 /* GLMine_Wallet_Exchange_FailedController.xib */,
+				4A18B9191F94D86300E9B387 /* GLMine_Wallet_Exchange_InReviewController.h */,
+				4A18B91A1F94D86300E9B387 /* GLMine_Wallet_Exchange_InReviewController.m */,
+				4A18B91B1F94D86300E9B387 /* GLMine_Wallet_Exchange_InReviewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1107,6 +1160,8 @@
 		4A165C121F85DD6500D0C34B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4A18B8F21F949BC300E9B387 /* GLMine_WalletModel.h */,
+				4A18B8F31F949BC300E9B387 /* GLMine_WalletModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1141,6 +1196,8 @@
 		4A165C2D1F8623E000D0C34B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4A18B9091F94A48400E9B387 /* GLMine_BankNameModel.h */,
+				4A18B90A1F94A48400E9B387 /* GLMine_BankNameModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1326,6 +1383,69 @@
 				4A16FF401F8F891A00064CE5 /* GLPublish_FundraisingCell.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		4A18B8DA1F943F9800E9B387 /* 订单支付 */ = {
+			isa = PBXGroup;
+			children = (
+				4A18B8DB1F943F9800E9B387 /* Controller */,
+				4A18B8DC1F943F9800E9B387 /* Model */,
+				4A18B8DD1F943F9800E9B387 /* View */,
+			);
+			path = "订单支付";
+			sourceTree = "<group>";
+		};
+		4A18B8DB1F943F9800E9B387 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4A18B8E31F943FC000E9B387 /* GLMine_RicePayController.h */,
+				4A18B8E41F943FC000E9B387 /* GLMine_RicePayController.m */,
+				4A18B8E51F943FC000E9B387 /* GLMine_RicePayController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		4A18B8DC1F943F9800E9B387 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4A18B8DD1F943F9800E9B387 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4A18B8E81F9441B800E9B387 /* LBMineCenterPayPagesTableViewCell.h */,
+				4A18B8E91F9441B800E9B387 /* LBMineCenterPayPagesTableViewCell.m */,
+				4A18B8EA1F9441B800E9B387 /* LBMineCenterPayPagesTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4A18B8F51F94A30400E9B387 /* 自己的封装 */ = {
+			isa = PBXGroup;
+			children = (
+				4A18B9041F94A33400E9B387 /* GLSimpleSelectionPickerController.h */,
+				4A18B9051F94A33400E9B387 /* GLSimpleSelectionPickerController.m */,
+				4A18B9061F94A33400E9B387 /* GLSimpleSelectionPickerController.xib */,
+				4A18B8F61F94A31B00E9B387 /* 自定义View */,
+			);
+			path = "自己的封装";
+			sourceTree = "<group>";
+		};
+		4A18B8F61F94A31B00E9B387 /* 自定义View */ = {
+			isa = PBXGroup;
+			children = (
+				4A18B8F71F94A31B00E9B387 /* GLSet_MaskVeiw.h */,
+				4A18B8F81F94A31B00E9B387 /* GLSet_MaskVeiw.m */,
+				4A18B8F91F94A31B00E9B387 /* LoadWaitView.h */,
+				4A18B8FA1F94A31B00E9B387 /* LoadWaitView.m */,
+				4A18B8FB1F94A31B00E9B387 /* LoadWaitView.xib */,
+				4A18B8FC1F94A31B00E9B387 /* NodataView.h */,
+				4A18B8FD1F94A31B00E9B387 /* NodataView.m */,
+				4A18B8FE1F94A31B00E9B387 /* NodataView.xib */,
+			);
+			path = "自定义View";
 			sourceTree = "<group>";
 		};
 		4A509B371F87266600D794FB /* 公告 */ = {
@@ -2645,21 +2765,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		4ADDD1A31F88B1E900C95F9C /* 自定义View */ = {
-			isa = PBXGroup;
-			children = (
-				4ADDD1A41F88B1E900C95F9C /* GLSet_MaskVeiw.h */,
-				4ADDD1A51F88B1E900C95F9C /* GLSet_MaskVeiw.m */,
-				4ADDD1A61F88B1E900C95F9C /* LoadWaitView.h */,
-				4ADDD1A71F88B1E900C95F9C /* LoadWaitView.m */,
-				4ADDD1A81F88B1E900C95F9C /* LoadWaitView.xib */,
-				4ADDD1A91F88B1E900C95F9C /* NodataView.h */,
-				4ADDD1AA1F88B1E900C95F9C /* NodataView.m */,
-				4ADDD1AB1F88B1E900C95F9C /* NodataView.xib */,
-			);
-			path = "自定义View";
-			sourceTree = "<group>";
-		};
 		4ADEBAF41F7DDC7200C50087 /* 发布首页 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2676,9 +2781,6 @@
 				4ADEBAF61F7DDC7200C50087 /* GLPublishController.h */,
 				4ADEBAF71F7DDC7200C50087 /* GLPublishController.m */,
 				4ADEBAF81F7DDC7200C50087 /* GLPublishController.xib */,
-				4A05EEAB1F8CA1CB0095DBCF /* GLSimpleSelectionPickerController.h */,
-				4A05EEAC1F8CA1CB0095DBCF /* GLSimpleSelectionPickerController.m */,
-				4A05EEAD1F8CA1CB0095DBCF /* GLSimpleSelectionPickerController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2800,7 +2902,7 @@
 				4ADDD16B1F88652100C95F9C /* 网络请求 */,
 				4AF108F71F78DBB500CB51FA /* Common */,
 				4AF10A031F78E26F00CB51FA /* 图片资源 */,
-				4ADDD1A31F88B1E900C95F9C /* 自定义View */,
+				4A18B8F51F94A30400E9B387 /* 自己的封装 */,
 				4AF107091F78D5AC00CB51FA /* ViewController.h */,
 				4AF1070A1F78D5AC00CB51FA /* ViewController.m */,
 				4AF109D41F78DFC500CB51FA /* PrefixHeader.pch */,
@@ -2829,6 +2931,7 @@
 				F9BB80281F7A568D00867514 /* 购物车 */,
 				4A0B75121F90F0830007788B /* 订单 */,
 				4ADDD1961F88A75E00C95F9C /* 物流跟踪 */,
+				4A18B8DA1F943F9800E9B387 /* 订单支付 */,
 			);
 			path = "商城";
 			sourceTree = "<group>";
@@ -3292,13 +3395,13 @@
 				4A509BA01F875DCE00D794FB /* GLBuyBackChooseBankView.xib in Resources */,
 				4A6AD1E41F7F86D300E6084E /* GLBusiness_FundTrendController.xib in Resources */,
 				4A0B74F91F90A8810007788B /* MHSheetFoot.xib in Resources */,
-				4A05EEAF1F8CA1CB0095DBCF /* GLSimpleSelectionPickerController.xib in Resources */,
 				4ADDD1881F88702600C95F9C /* GLMine_PersonInfo_AddressCell.xib in Resources */,
 				4A53E83A1F7A24830021D9E0 /* GLMall_DetailSpecCell.xib in Resources */,
 				4A509B911F872C9000D794FB /* GLMine_MyMessage_DonationController.xib in Resources */,
 				4A165C1F1F85FDF600D0C34B /* GLMine_WalletDetailCell.xib in Resources */,
 				4A0B74FD1F90A8810007788B /* MHSheetView.xib in Resources */,
 				4A0B74F71F90A8810007788B /* MHSheetCell.xib in Resources */,
+				4A18B8E71F943FC000E9B387 /* GLMine_RicePayController.xib in Resources */,
 				4A0B74FB1F90A8810007788B /* MHSheetHead.xib in Resources */,
 				4ADDD17E1F886F4D00C95F9C /* GLMine_PersonInfoController.xib in Resources */,
 				4AF109291F78DBB500CB51FA /* PopMenuTableViewCell.xib in Resources */,
@@ -3306,7 +3409,6 @@
 				4A6AD22C1F7F953600E6084E /* GLPublish_ReviewCell.xib in Resources */,
 				4A6AD1CB1F7F73EE00E6084E /* GLHome_CasesController.xib in Resources */,
 				4A6B9F391F7CF100009386C8 /* GLBusiness_tradeSubCell.xib in Resources */,
-				4ADDD1B01F88B1E900C95F9C /* NodataView.xib in Resources */,
 				4A509B981F872F0000D794FB /* GLMine_MyMessageCell.xib in Resources */,
 				4A16FF111F8F484600064CE5 /* GLBusiness_Detail_heartCommentController.xib in Resources */,
 				4A6B9F581F7D00CA009386C8 /* GLBusiness_LoveListCell.xib in Resources */,
@@ -3316,23 +3418,30 @@
 				4A6AD2471F7F95DF00E6084E /* GLMine_MyProjectController.xib in Resources */,
 				4A16FF1E1F8F68B000064CE5 /* GLPublish_FailedController.xib in Resources */,
 				4A16FF451F8F891A00064CE5 /* GLPublish_FundraisingCell.xib in Resources */,
+				4A18B9081F94A33400E9B387 /* GLSimpleSelectionPickerController.xib in Resources */,
 				4A6AD1E61F7F86D300E6084E /* GLBusiness_FundTrendCell.xib in Resources */,
+				4A18B9031F94A31B00E9B387 /* NodataView.xib in Resources */,
 				4A6B9F531F7CF902009386C8 /* GLBusiness_LoveListController.xib in Resources */,
 				F9BB80301F7A57C400867514 /* GLShoppingCartController.xib in Resources */,
 				F9BB80121F7A283700867514 /* GLClassifyCell.xib in Resources */,
 				4A9F56EF1F91E60F00341A31 /* GLMine_CompletedOrderController.xib in Resources */,
 				4A53E8551F7A59880021D9E0 /* GLMall_DetailFooterView.xib in Resources */,
+				4A18B91D1F94D86300E9B387 /* GLMine_Wallet_Exchange_InReviewController.xib in Resources */,
 				4A16FF2E1F8F727F00064CE5 /* GLPublish_FundFailedController.xib in Resources */,
 				4A165C151F85DD6500D0C34B /* GLMine_WalletController.xib in Resources */,
 				4A0B751F1F90F0840007788B /* GLConfirmOrderController.xib in Resources */,
 				4A6AD2381F7F953600E6084E /* GLPublish_ProjectCompletedController.xib in Resources */,
 				4A53E84B1F7A4B5C0021D9E0 /* GLMall_DetailSelecteCell.xib in Resources */,
+				4A18B9131F94D81700E9B387 /* GLMine_Wallet_Exchange_SuccessController.xib in Resources */,
 				4A509BC01F8787ED00D794FB /* GLMine_Set_modifyPwdController.xib in Resources */,
 				4A509B421F87266600D794FB /* GLHome_NoticeController.xib in Resources */,
 				4AF10A051F78E27C00CB51FA /* tabbar.xcassets in Resources */,
 				4A16FF231F8F696100064CE5 /* GLPublish_FundStopController.xib in Resources */,
+				4A18B8EC1F9441B800E9B387 /* LBMineCenterPayPagesTableViewCell.xib in Resources */,
+				4A18B9181F94D83200E9B387 /* GLMine_Wallet_Exchange_FailedController.xib in Resources */,
 				4A165C2A1F8620BB00D0C34B /* GLMine_WalletDetailHeaderView.xib in Resources */,
 				4A509BAA1F8771D400D794FB /* GLRegisterController.xib in Resources */,
+				4A18B9011F94A31B00E9B387 /* LoadWaitView.xib in Resources */,
 				4A509B821F872B9C00D794FB /* GLMine_MyMessage_NoticeController.xib in Resources */,
 				4A509B511F8726F900D794FB /* GLHomeCell.xib in Resources */,
 				4A6B9F2F1F7CF100009386C8 /* GLBusiness_DetailController.xib in Resources */,
@@ -3367,7 +3476,6 @@
 				4A9F56F91F91E6DA00341A31 /* GLMine_ReceiveController.xib in Resources */,
 				4A509B7D1F872B6E00D794FB /* GLMine_MyMessage_RechargeController.xib in Resources */,
 				4A6B9F371F7CF100009386C8 /* GLBusiness_ProjectCollectionCell.xib in Resources */,
-				4ADDD1AE1F88B1E900C95F9C /* LoadWaitView.xib in Resources */,
 				4A16FF251F8F6BFC00064CE5 /* 我的.xcassets in Resources */,
 				4A509B6E1F8729DA00D794FB /* GLMine_MyMessageController.xib in Resources */,
 				4A165C1A1F85DDA500D0C34B /* GLMine_WalletDetailController.xib in Resources */,
@@ -3381,6 +3489,7 @@
 				4A165C331F86241800D0C34B /* GLMine_AddCardController.xib in Resources */,
 				4A509BAF1F877C2B00D794FB /* GLForgetPasswordController.xib in Resources */,
 				4A6B9EFB1F7CC92E009386C8 /* GLMineController.xib in Resources */,
+				4A18B8F11F9441F400E9B387 /* GLOrderPayView.xib in Resources */,
 				4A509BBB1F87870500D794FB /* GLMine_SetController.xib in Resources */,
 				4A0B75221F90F0840007788B /* GLOrderGoodsCell.xib in Resources */,
 				4A05EDEA1F8C5E780095DBCF /* 发布.xcassets in Resources */,
@@ -3474,12 +3583,14 @@
 				4A05EE981F8C97380095DBCF /* HXPhotoModel.m in Sources */,
 				4A509B6D1F8729DA00D794FB /* GLMine_MyMessageController.m in Sources */,
 				4A05EEA21F8C97380095DBCF /* HXPresentTransition.m in Sources */,
+				4A18B9121F94D81700E9B387 /* GLMine_Wallet_Exchange_SuccessController.m in Sources */,
 				4AF109341F78DBB500CB51FA /* WXSTransitionManager+InsideThenPushAnimation.m in Sources */,
 				4A05EEA91F8C97380095DBCF /* UIImage+HXExtension.m in Sources */,
 				4AF1093E1F78DBB500CB51FA /* XBTagTitleModel.m in Sources */,
 				4A16FF311F8F7A0100064CE5 /* GLPublish_InReViewModel.m in Sources */,
 				4A0B75111F90CA720007788B /* GLMine_AddressModel.m in Sources */,
 				4A509BA91F8771D400D794FB /* GLRegisterController.m in Sources */,
+				4A18B8E61F943FC000E9B387 /* GLMine_RicePayController.m in Sources */,
 				4A6FE1871F8E09D300860503 /* GLMall_DetailWebCell.m in Sources */,
 				4A16FF411F8F891A00064CE5 /* GLPublish_FundraisingController.m in Sources */,
 				4AF109361F78DBB500CB51FA /* WXSTransitionManager+SpreadAnimation.m in Sources */,
@@ -3490,6 +3601,7 @@
 				4A6AD23B1F7F953600E6084E /* GLPublish_ProjectInProgressController.m in Sources */,
 				4AF109F31F78E07A00CB51FA /* UILabel+UILabel_ChangeLineSpaceAndWordSpace.m in Sources */,
 				4AF109BB1F78DBB500CB51FA /* BaseNavigationViewController.m in Sources */,
+				4A18B8F41F949BC300E9B387 /* GLMine_WalletModel.m in Sources */,
 				4A05EE9B1F8C97380095DBCF /* HXPhotoResultModel.m in Sources */,
 				4AF109311F78DBB500CB51FA /* WXSTransitionManager+CoverAnimation.m in Sources */,
 				4AF1092A1F78DBB500CB51FA /* QQPopMenuView.m in Sources */,
@@ -3501,9 +3613,11 @@
 				4AF109321F78DBB500CB51FA /* WXSTransitionManager+FlipAnimation.m in Sources */,
 				4AF109EC1F78E07A00CB51FA /* GetLabelBounds.m in Sources */,
 				4A16FF441F8F891A00064CE5 /* GLPublish_FundraisingCell.m in Sources */,
+				4A18B90B1F94A48400E9B387 /* GLMine_BankNameModel.m in Sources */,
 				4AF109BF1F78DBB500CB51FA /* DWTabBar.m in Sources */,
 				4A509B4E1F8726F900D794FB /* GLHomeController.m in Sources */,
 				4A6AD22F1F7F953600E6084E /* GLPublish_AuditedController.m in Sources */,
+				4A18B9001F94A31B00E9B387 /* LoadWaitView.m in Sources */,
 				4A509B861F872BC200D794FB /* GLMine_MyMessage_SupportController.m in Sources */,
 				4AF1092B1F78DBB500CB51FA /* UINavigationController+WXSTransition.m in Sources */,
 				4ADDD1A11F88A8C900C95F9C /* GLMall_LogisticsCell.m in Sources */,
@@ -3523,6 +3637,8 @@
 				4A05EEB51F8CA5950095DBCF /* HWOptionButton.m in Sources */,
 				4A890AD51F8F397400ED6E36 /* GLBusiness_FundTrendModel.m in Sources */,
 				4A05EE8B1F8C97380095DBCF /* HXAlbumModel.m in Sources */,
+				4A18B9021F94A31B00E9B387 /* NodataView.m in Sources */,
+				4A18B9171F94D83200E9B387 /* GLMine_Wallet_Exchange_FailedController.m in Sources */,
 				4AF109F21F78E07A00CB51FA /* UIButton+SetEdgeInsets.m in Sources */,
 				4A05EE961F8C97380095DBCF /* HXPhotoEditViewController.m in Sources */,
 				4A9F57161F920B0800341A31 /* LBMyOrderListTableViewCell.m in Sources */,
@@ -3548,7 +3664,6 @@
 				4A509B9F1F875DCE00D794FB /* GLBuyBackChooseBankView.m in Sources */,
 				4A6AD2291F7F953600E6084E /* GLPublish_InReviewController.m in Sources */,
 				4AF109401F78DBB500CB51FA /* XBTagTitleCell.m in Sources */,
-				4A05EEAE1F8CA1CB0095DBCF /* GLSimpleSelectionPickerController.m in Sources */,
 				F9BB802F1F7A57C400867514 /* GLShoppingCartController.m in Sources */,
 				4A9F56EE1F91E60F00341A31 /* GLMine_CompletedOrderController.m in Sources */,
 				4A05EE991F8C97380095DBCF /* HXPhotoPreviewViewCell.m in Sources */,
@@ -3561,12 +3676,12 @@
 				4A6B9F521F7CF902009386C8 /* GLBusiness_LoveListController.m in Sources */,
 				4A05EE8C1F8C97380095DBCF /* HXAlbumTitleButton.m in Sources */,
 				4A05EE8F1F8C97380095DBCF /* HXCircleProgressView.m in Sources */,
+				4A18B8F01F9441F400E9B387 /* GLOrderPayView.m in Sources */,
 				4AF109BC1F78DBB500CB51FA /* DWTabBarController.m in Sources */,
 				4A6B9F571F7D00CA009386C8 /* GLBusiness_LoveListCell.m in Sources */,
 				4A05EEA41F8C97380095DBCF /* HXVideoPresentTransition.m in Sources */,
 				4A509B501F8726F900D794FB /* GLHomeCell.m in Sources */,
 				4A05EE8D1F8C97380095DBCF /* HXCameraPreviewViewController.m in Sources */,
-				4ADDD1AF1F88B1E900C95F9C /* NodataView.m in Sources */,
 				4A6AD22B1F7F953600E6084E /* GLPublish_ReviewCell.m in Sources */,
 				4A5A785D1F7B9B0E004FB15A /* GLBusinessCircleController.m in Sources */,
 				4A9F56E51F91E55B00341A31 /* GLMine_MyOrderController.m in Sources */,
@@ -3593,6 +3708,7 @@
 				4A0B74FA1F90A8810007788B /* MHSheetHead.m in Sources */,
 				F9BB801F1F7A3F2C00867514 /* TGWebViewController.m in Sources */,
 				4A509BA41F87643C00D794FB /* GLLoginController.m in Sources */,
+				4A18B8FF1F94A31B00E9B387 /* GLSet_MaskVeiw.m in Sources */,
 				4AF109BD1F78DBB500CB51FA /* LBLoginNavigationViewController.m in Sources */,
 				4A6B9F3F1F7CF167009386C8 /* GLBusiness_CertificationController.m in Sources */,
 				4AF109BE1F78DBB500CB51FA /* DWPublishButton.m in Sources */,
@@ -3601,7 +3717,6 @@
 				4ADDD19C1F88A7A400C95F9C /* GLMall_LogisticsController.m in Sources */,
 				4A6B9F381F7CF100009386C8 /* GLBusiness_tradeSubCell.m in Sources */,
 				4A05EE9F1F8C97380095DBCF /* HXPhotoView.m in Sources */,
-				4ADDD1AC1F88B1E900C95F9C /* GLSet_MaskVeiw.m in Sources */,
 				4A05EE911F8C97380095DBCF /* HXFullScreenCameraPlayView.m in Sources */,
 				4A53E8341F7A240F0021D9E0 /* GLMall_DetailController.m in Sources */,
 				4AF109411F78DBB500CB51FA /* XBConst.m in Sources */,
@@ -3616,6 +3731,8 @@
 				4A509B8B1F872C6300D794FB /* GLMine_MyMessage_ExchangeController.m in Sources */,
 				4A6AD23D1F7F953600E6084E /* GLPublish_ProjectCell.m in Sources */,
 				4A6B9F341F7CF100009386C8 /* GLBusiness_DetailProjectCell.m in Sources */,
+				4A18B90E1F94D71C00E9B387 /* GLMine_Wallet_ExchangeController.m in Sources */,
+				4A18B8EB1F9441B800E9B387 /* LBMineCenterPayPagesTableViewCell.m in Sources */,
 				4A0B75211F90F0840007788B /* GLOrderGoodsCell.m in Sources */,
 				4A6B9F2E1F7CF100009386C8 /* GLBusiness_DetailController.m in Sources */,
 				4A0B74F81F90A8810007788B /* MHSheetFoot.m in Sources */,
@@ -3623,13 +3740,14 @@
 				4A05EE931F8C97380095DBCF /* HXPhoto3DTouchViewController.m in Sources */,
 				4AF1093A1F78DBB500CB51FA /* WXSTransitionManager.m in Sources */,
 				4A05EE9E1F8C97380095DBCF /* HXPhotoUIManager.m in Sources */,
-				4ADDD1AD1F88B1E900C95F9C /* LoadWaitView.m in Sources */,
+				4A18B91C1F94D86300E9B387 /* GLMine_Wallet_Exchange_InReviewController.m in Sources */,
 				4AF109331F78DBB500CB51FA /* WXSTransitionManager+FragmentAnimation.m in Sources */,
 				4A6B9F361F7CF100009386C8 /* GLBusiness_ProjectCollectionCell.m in Sources */,
 				4A16FF221F8F696100064CE5 /* GLPublish_FundStopController.m in Sources */,
 				4A509BBF1F8787ED00D794FB /* GLMine_Set_modifyPwdController.m in Sources */,
 				4AF1093F1F78DBB500CB51FA /* XBPageCell.m in Sources */,
 				4A9F57101F920AFE00341A31 /* LBMyOrdersModel.m in Sources */,
+				4A18B9071F94A33400E9B387 /* GLSimpleSelectionPickerController.m in Sources */,
 				4A165C191F85DDA500D0C34B /* GLMine_WalletDetailController.m in Sources */,
 				4A0B751E1F90F0840007788B /* GLConfirmOrderController.m in Sources */,
 				4A16FF2D1F8F727F00064CE5 /* GLPublish_FundFailedController.m in Sources */,

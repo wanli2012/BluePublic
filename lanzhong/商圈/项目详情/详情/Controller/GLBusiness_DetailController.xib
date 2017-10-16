@@ -47,6 +47,9 @@
                             <color key="backgroundColor" red="0.00149723934" green="0.492005527" blue="0.99493986369999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="支持他"/>
+                            <connections>
+                                <action selector="support:" destination="-1" eventType="touchUpInside" id="e8X-Gc-BuV"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4PZ-iZ-AKk">
                             <rect key="frame" x="0.0" y="0.0" width="135" height="50"/>

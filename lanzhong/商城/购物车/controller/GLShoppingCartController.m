@@ -135,6 +135,7 @@ static NSString *ID = @"GLShoppingCell";
     orderVC.goods_count = [tempArr2 componentsJoinedByString:@","];
 //    orderVC.cart_id = [tempArr3 componentsJoinedByString:@","];
     orderVC.goods_spec = [tempArr4 componentsJoinedByString:@","];
+    orderVC.orderType = 2;
     
     [self.navigationController pushViewController:orderVC animated:YES];
     self.hidesBottomBarWhenPushed = NO;

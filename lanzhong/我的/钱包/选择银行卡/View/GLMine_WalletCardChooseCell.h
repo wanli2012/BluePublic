@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GLMine_WalletModel.h"
 
 @interface GLMine_WalletCardChooseCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *bankNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bankNumLabel;
+
+@property (nonatomic, strong)Wallet_back_info *model;
 
 @end

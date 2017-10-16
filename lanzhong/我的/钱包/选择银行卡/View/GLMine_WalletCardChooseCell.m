@@ -20,5 +20,10 @@
    
 }
 
-
+- (void)setModel:(Wallet_back_info *)model{
+    _model = model;
+    
+    self.bankNameLabel.text = model.bank_name;
+    self.bankNumLabel.text = model.bank_num;
+}
 @end

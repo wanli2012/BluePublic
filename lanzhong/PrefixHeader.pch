@@ -66,6 +66,11 @@
 #define kADD_ADDRESS_URL @"User/add_address"//添加收货地址
 #define kUPDATE_ADDRESS_URL @"User/save_my_address"//编辑地址
 #define kDEL_ADDRESS_URL @"User/del_address"//删除地址
+#define kBACK_DATA_URL @"User/back_data"//兑换页面数据
+#define kBANK_NAMELIST_URL @"Other/open_bank_list"//银行名列表
+#define kADD_BANK_URL @"User/add_bank"//银行卡添加
+#define kEXCHANGE_MONEY_URL @"User/umoney_handle"//兑换操作
+#define kBACK_LIST_URL @"User/back_list"//兑换记录
 
 #define kCIRCLE_HOME_URL @"Item/item_pen"//商圈首页
 #define kCIRCLE_FITER_URL @"Item/item_screen"//商圈筛选条件

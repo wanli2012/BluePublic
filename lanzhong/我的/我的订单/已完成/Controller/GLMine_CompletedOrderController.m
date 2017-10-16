@@ -200,17 +200,12 @@
         
         [tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationAutomatic];
     };
-    
-//    headerview.payBt.hidden = NO;
+
     headerview.DeleteBt.hidden = NO;
 
-//    [headerview.payBt setTitle:@"再次购买" forState:UIControlStateNormal];
     [headerview.DeleteBt setImage:[UIImage imageNamed:@"垃圾桶"] forState:UIControlStateNormal];
     headerview.DeleteBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
 
-//    headerview.returnPayBt = ^(NSInteger index){
-//        NSLog(@"再次购买%zd",index);
-//    };
     headerview.returnDeleteBt = ^(NSInteger index){
         NSLog(@"删除订单%zd",index);
     };

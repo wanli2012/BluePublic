@@ -38,7 +38,6 @@ static CGFloat const kCellHeight = 44;
         _trianglePoint = point;
         self.action = action;
         
-        
         // 添加手势
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
         tap.delegate = self;
@@ -65,6 +64,7 @@ static CGFloat const kCellHeight = 44;
         [self addSubview:_tableView];
     
     }
+    
     return self;
 }
 

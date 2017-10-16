@@ -18,6 +18,8 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "GLBusiness_Detail_heartCommentController.h"//更多评论
 
+#import "GLPay_ChooseController.h"//选择支付界面
+
 @interface GLBusiness_DetailController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,GLBusiness_ChooseCellDelegate,GLBusiness_DetailCommentCellDelegate>
 {
     CGRect _rect;
@@ -233,6 +235,15 @@
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBar.hidden = NO;
+    
+}
+
+- (IBAction)support:(id)sender {
+
+    self.hidesBottomBarWhenPushed = YES;
+    GLPay_ChooseController *payVC = [[GLPay_ChooseController alloc] init];
+    [self.navigationController pushViewController:payVC animated:YES];
+
 }
 
 //爱心贡献榜

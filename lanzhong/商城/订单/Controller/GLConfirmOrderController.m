@@ -16,7 +16,7 @@
 //#import "LBMineCenterPayPagesViewController.h"
 #import "GLOrderGoodsCell.h"
 #import "GLConfirmOrderModel.h"
-//#import "GLMine_RicePayController.h"
+#import "GLMine_RicePayController.h"
 
 @interface GLConfirmOrderController ()<UITableViewDelegate,UITableViewDataSource,UITextViewDelegate>
 {
@@ -219,31 +219,16 @@ static NSString *ID = @"GLOrderGoodsCell";
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshCartNotification" object:nil];
             
-            if ([responseObject[@"data"][@"order_type"] integerValue] == 2) {
-                
-//                GLMine_RicePayController *riceVC = [[GLMine_RicePayController alloc] init];
-//                riceVC.orderPrice = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"total_price"]];
-//                riceVC.useableScore = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"user_integal"]];
-//                riceVC.order_id = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"order_id"]];
-//                riceVC.order_sn = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"ordere_sn"]];
-//                riceVC.order_sh = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"order_sh"]];
-//
-//                [self.navigationController pushViewController:riceVC animated:YES];
-                
-                return ;
-            }
-            
             self.hidesBottomBarWhenPushed = YES;
-//            LBMineCenterPayPagesViewController *payVC = [[LBMineCenterPayPagesViewController alloc] init];
-//            payVC.payType = [responseObject[@"data"][@"order_type"] integerValue];;
-//            payVC.orderPrice = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"total_price"]];
-//            payVC.useableScore = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"user_integal"]];
-//            payVC.order_id = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"order_id"]];
-//            payVC.order_sn = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"ordere_sn"]];
-//            payVC.order_sh = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"order_sh"]];
-//            payVC.pushIndex = 1;
-//            
-//            [self.navigationController pushViewController:payVC animated:YES];
+            
+            GLMine_RicePayController *riceVC = [[GLMine_RicePayController alloc] init];
+            riceVC.orderPrice = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"order_money"]];
+            riceVC.order_id = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"order_id"]];
+            riceVC.order_sn = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"order_num"]];
+//            riceVC.order_sh = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"order_sh"]];
+//            riceVC.useableScore = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"user_integal"]];
+            
+            [self.navigationController pushViewController:riceVC animated:YES];
             
         }else{
             [MBProgressHUD showError:responseObject[@"message"]];
@@ -269,6 +254,7 @@ static NSString *ID = @"GLOrderGoodsCell";
     
     return cell;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     return 117;

@@ -30,13 +30,14 @@
 #pragma mark - UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 3;
+    return self.models.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     GLMine_WalletCardChooseCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMine_WalletCardChooseCell"];
     cell.selectionStyle = 0;
+    cell.model = self.models[indexPath.row];
     
     return cell;
 }
@@ -48,8 +49,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     GLMine_WalletCardChooseCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    
-    self.block(cell.bankNameLabel.text,cell.bankNumLabel.text);
+    Wallet_back_info *model = self.models[indexPath.row];
+    self.block(cell.bankNameLabel.text,cell.bankNumLabel.text,model.bank_id);
     [self.navigationController popViewControllerAnimated:YES];
     
 }

@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^cardChooseBlock)(NSString *bankName,NSString *bankNum);
+typedef void(^cardChooseBlock)(NSString *bankName,NSString *bankNum,NSString *bank_id);
 
 @interface GLMine_WalletCardChooseController : UIViewController
 
 @property (nonatomic, copy)cardChooseBlock block;
+
+@property (nonatomic, strong)NSArray *models;
 
 @end
