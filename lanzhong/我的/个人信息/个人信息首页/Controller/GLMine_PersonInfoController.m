@@ -16,6 +16,15 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewHeight;
 @property (weak, nonatomic) IBOutlet UIButton *ensureBtn;
 
+
+@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (weak, nonatomic) IBOutlet UITextField *trueNameTF;//真实姓名
+@property (weak, nonatomic) IBOutlet UITextField *IDCardNumTF;//身份证号
+
+@property (weak, nonatomic) IBOutlet UITextField *phoneTF;//手机号
+@property (weak, nonatomic) IBOutlet UITextField *recommendTF;//推荐人TF
+@property (nonatomic, strong)LoadWaitView *loadV;
+
 @end
 
 @implementation GLMine_PersonInfoController
@@ -31,6 +40,45 @@
     self.contentViewHeight.constant = kSCREEN_HEIGHT - 64;
     self.ensureBtn.layer.cornerRadius = 5.f;
     
+    self.phoneTF.text = [UserModel defaultUser].phone;
+    self.recommendTF.text = [UserModel defaultUser].g_name;
+    self.userNameLabel.text = [UserModel defaultUser].uname;
+    
+    self.trueNameTF.text = [UserModel defaultUser].truename;
+    self.IDCardNumTF.text = [UserModel defaultUser].idcard;
+    
+    
+    switch ([[UserModel defaultUser].real_state integerValue]) {//实名认证状态 0未认证  1成功   2失败   3审核中
+        case 0:
+        {
+            self.ensureBtn.hidden = NO;
+        }
+            break;
+        case 1:
+        {
+            self.ensureBtn.hidden = YES;
+        }
+            break;
+        case 2:
+        {
+            self.ensureBtn.hidden = NO;
+            self.ensureBtn.enabled = NO;
+            [self.ensureBtn setTitle:@"重新认证" forState:UIControlStateNormal];
+            
+        }
+            break;
+        case 3:
+        {
+            self.ensureBtn.hidden = NO;
+            self.ensureBtn.enabled = NO;
+            [self.ensureBtn setTitle:@"审核中" forState:UIControlStateNormal];
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -40,8 +88,50 @@
 }
 
 - (IBAction)ensure:(id)sender {
-    NSLog(@"确定");
+
+    if (self.trueNameTF.text.length == 0) {
+        [MBProgressHUD showError:@"请输入真实姓名"];
+        return;
+    }else if(![predicateModel IsChinese:self.trueNameTF.text]){
+        [MBProgressHUD showError:@"真实姓名应该是汉字"];
+        return;
+    }
+    
+    if (self.IDCardNumTF.text.length == 0) {
+        [MBProgressHUD showError:@"请输入身份证号"];
+        return;
+    }
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"token"] = [UserModel defaultUser].token;
+    dict[@"uid"] = [UserModel defaultUser].uid;
+    dict[@"type"] = @"2";
+    dict[@"truename"] = self.trueNameTF.text;
+    dict[@"idcard"] = self.IDCardNumTF.text;
+    
+    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+    [NetworkManager requestPOSTWithURLStr:kUSER_INFO_SAVE_URL paramDic:dict finish:^(id responseObject) {
+        
+        [_loadV removeloadview];
+        
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+            
+        }
+        
+        [MBProgressHUD showError:responseObject[@"message"]];
+        
+    } enError:^(NSError *error) {
+        [_loadV removeloadview];
+
+    }];
+
 }
+
+//头像修改
+- (IBAction)picModify:(id)sender {
+    
+}
+
 - (IBAction)address:(id)sender {
     
     self.hidesBottomBarWhenPushed = YES;

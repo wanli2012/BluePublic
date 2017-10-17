@@ -7,12 +7,13 @@
 //
 
 #import "GLMine_WalletController.h"
-#import "GLMine_WalletDetailController.h"//明细
 #import "GLMine_AddCardController.h"//添加银行卡
 #import "GLMine_WalletCardChooseController.h"//选择银行卡
 #import "GLMine_WalletModel.h"
 #import "QQPopMenuView.h"
-#import "GLMine_Wallet_ExchangeController.h"
+#import "GLMine_Wallet_ExchangeController.h"//兑换记录界面
+#import "GLMine_Wallet_RechargeController.h"//充值记录界面
+
 
 
 @interface GLMine_WalletController ()<UITextFieldDelegate>
@@ -39,6 +40,12 @@
 @property (weak, nonatomic) IBOutlet UITextField *moneyTextF;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextF;
 @property (weak, nonatomic) IBOutlet UITextField *exchangeTextF;//兑换金额
+
+@property (weak, nonatomic) IBOutlet UIImageView *weixinImageV;
+@property (weak, nonatomic) IBOutlet UIImageView *alipayImageV;
+
+@property (nonatomic, copy)NSString  *pay_type;//支付方式1支付宝 2微信
+
 @property (nonatomic, assign)BOOL isHaveDian;
 
 @property (nonatomic, strong)LoadWaitView *loadV;
@@ -146,24 +153,32 @@
 }
 //明细
 - (void)detail{
-    
-//    self.hidesBottomBarWhenPushed = YES;
-//    GLMine_WalletDetailController *detailVC = [[GLMine_WalletDetailController alloc] init];
-//    [self.navigationController pushViewController:detailVC animated:YES];
-//    __weak typeof(self) weakself = self;
-    
+
     NSArray *arr = @[@{@"title":@"兑换明细",@"imageName":@""},@{@"title":@"充值明细",@"imageName":@""}];
-    QQPopMenuView *popview = [[QQPopMenuView alloc] initWithItems:arr
-                                                            width:130
-                                                 triangleLocation:CGPointMake([UIScreen mainScreen].bounds.size.width - 30, 64 + 5)
-                                                           action:^(NSInteger index) {
-                                                               
-                                                               NSLog(@"%zd",index);
-                                                               self.hidesBottomBarWhenPushed = YES;
-                                                               GLMine_Wallet_ExchangeController *exchangeVC = [[GLMine_Wallet_ExchangeController alloc] init];
-                                                               [self.navigationController pushViewController:exchangeVC animated:YES];
-                                                               
-                                                           }];
+    QQPopMenuView *popview = [[QQPopMenuView alloc] initWithItems:arr width:130 triangleLocation:CGPointMake([UIScreen mainScreen].bounds.size.width - 30, 64 + 5) action:^(NSInteger index) {
+        
+        self.hidesBottomBarWhenPushed = YES;
+        switch (index) {
+            case 0:
+            {
+                GLMine_Wallet_ExchangeController *exchangeVC = [[GLMine_Wallet_ExchangeController alloc] init];
+                [self.navigationController pushViewController:exchangeVC animated:YES];
+                
+            }
+                break;
+            case 1:
+            {
+                GLMine_Wallet_RechargeController*rechargeVC = [[GLMine_Wallet_RechargeController alloc] init];
+                [self.navigationController pushViewController:rechargeVC animated:YES];
+                
+            }
+                break;
+                
+            default:
+                break;
+        }
+        
+    }];
     
 
     
@@ -226,6 +241,23 @@
 //确认支付
 - (IBAction)paySure:(id)sender {
     NSLog(@"确认支付");
+}
+
+
+//选择支付方式
+- (IBAction)weixinPay:(id)sender {
+    
+    self.weixinImageV.image = [UIImage imageNamed:@"mine_choice"];
+    self.alipayImageV.image = [UIImage imageNamed:@"nochoice1"];
+    self.pay_type = @"2";
+}
+
+- (IBAction)alipay:(id)sender {
+    
+    self.weixinImageV.image = [UIImage imageNamed:@"nochoice1"];
+    self.alipayImageV.image = [UIImage imageNamed:@"mine_choice"];
+    self.pay_type = @"1";
+
 }
 
 - (IBAction)switchFunc:(UISegmentedControl *)sender {

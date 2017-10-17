@@ -15,6 +15,9 @@
 #import "GLMine_MyMessageController.h"//我的消息
 #import "GLMine_WalletController.h"//钱包
 #import "GLMine_MyOrderController.h"//我的订单
+#import "GLMine_ParticipateController.h"//我参与的项目
+
+#import "GLMine_AddFundTrendController.h"//添加资金动向
 
 @interface GLMineController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -25,9 +28,16 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageV;//头像
 @property (weak, nonatomic) IBOutlet UIView *middleView;//中间6个label的背景View
 
+@property (weak, nonatomic) IBOutlet UILabel *participateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *publishLabel;
+@property (weak, nonatomic) IBOutlet UILabel *banlanceLabel;
+
+
 @property (nonatomic, strong)UIVisualEffectView *visualEffectView;
 
 @property (nonatomic, strong)NSMutableArray *dataSource;
+
+@property (nonatomic, strong)LoadWaitView *loadV;
 
 @end
 
@@ -43,8 +53,9 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMineCell" bundle:nil] forCellReuseIdentifier:@"GLMineCell"];
     
 }
-- (void)setUI
-{
+
+- (void)setUI {
+    
     self.view.backgroundColor = [UIColor blueColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.imageV.layer.cornerRadius = self.imageV.height/2;
@@ -81,6 +92,41 @@
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBar.hidden = YES;
+    
+    [self postRequest];
+}
+
+//请求数据
+-(void)postRequest {
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"token"] = [UserModel defaultUser].token;
+    dict[@"uid"] = [UserModel defaultUser].uid;
+    
+//    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+    [NetworkManager requestPOSTWithURLStr:kREFRESH_URL paramDic:dict finish:^(id responseObject) {
+        
+//        [_loadV removeloadview];
+
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+            
+            [UserModel defaultUser].umoney = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"umoney"]];
+            [UserModel defaultUser].invest_count = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"invest_count"]];
+            [UserModel defaultUser].item_count = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"item_count"]];
+            [UserModel defaultUser].user_server = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"user_server"]];
+            [UserModel defaultUser].real_state = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"real_state"]];
+            
+            [usermodelachivar achive];
+  
+            self.participateLabel.text = [UserModel defaultUser].invest_count;
+            self.publishLabel.text = [UserModel defaultUser].item_count;
+            self.banlanceLabel.text = [UserModel defaultUser].umoney;
+            
+        }
+        
+    } enError:^(NSError *error) {
+//        [_loadV removeloadview];
+    }];
 }
 
 #pragma mark - UIScrollViewDelegate 下拉放大图片
@@ -102,6 +148,7 @@
         
     }
 }
+
 #pragma mark - UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return self.dataSource.count;
@@ -129,7 +176,7 @@
         case 0:
         {
             GLMine_MyProjectController *myProjectVC = [[GLMine_MyProjectController alloc] initWithSignIndex:indexPath.row];
-//            myProjectVC.signIndex = indexPath.row;
+
             [self.navigationController pushViewController:myProjectVC animated:YES];
         }
             break;
@@ -138,7 +185,8 @@
             switch (indexPath.row) {
                 case 0:
                 {
-                     NSLog(@"%@%zd",self.dataSource[indexPath.section][indexPath.row],indexPath.row);
+                    GLMine_ParticipateController *participateVC = [[GLMine_ParticipateController alloc] init];
+                    [self.navigationController pushViewController:participateVC animated:YES];
                 }
                     break;
                 default:
@@ -156,7 +204,7 @@
                     
                 }
                     break;
-                case 1://我的消息
+                case 1://
                 {
                     NSLog(@"我的订单");
                     GLMine_MyOrderController *cartVC = [[GLMine_MyOrderController alloc] init];
@@ -184,6 +232,8 @@
                 case 0:
                 {
                     NSLog(@"分享权益");
+                    GLMine_AddFundTrendController *addFundVC = [[GLMine_AddFundTrendController alloc] init];
+                    [self.navigationController pushViewController:addFundVC animated:YES];
                     
                 }
                     break;

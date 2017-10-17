@@ -49,6 +49,7 @@
 #define kREGISTER_URL @"User/user_enroll"//注册
 #define kLOGIN_URL @"User/user_login"//登录
 #define kFORGET_PWD_URL @"User/forget_pwd"//找回密码
+#define kMODIFY_PWD_URL @"User/pwd_save"//修改密码
 #define kHOME_URL @"Item/index"//首页
 #define kHOME_ALL_CLASSIC_URL @"Item/more_item"//所有经典项目
 #define kMALL_HOME_URL @"Shop/shop_index"//商城首页
@@ -71,6 +72,13 @@
 #define kADD_BANK_URL @"User/add_bank"//银行卡添加
 #define kEXCHANGE_MONEY_URL @"User/umoney_handle"//兑换操作
 #define kBACK_LIST_URL @"User/back_list"//兑换记录
+#define kRECHARGE_LIST_URL @"User/my_recharge_list"//充值记录
+#define kIN_ITEM_LIST_URL @"User/in_item"//我参与的项目
+
+#define kREFRESH_URL @"Other/break_user"//刷新
+#define kUSER_INFO_SAVE_URL @"User/user_info_save"//实名认证,修改头像
+#define kADD_TREND_URL @"Item/item_dynamic_add"//新增项目动态
+
 
 #define kCIRCLE_HOME_URL @"Item/item_pen"//商圈首页
 #define kCIRCLE_FITER_URL @"Item/item_screen"//商圈筛选条件

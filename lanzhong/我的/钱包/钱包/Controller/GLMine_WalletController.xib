@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="addCardLabel" destination="swx-iJ-eD4" id="Gzh-Q2-rjg"/>
                 <outlet property="addImageV" destination="QCb-Dy-bhm" id="cXY-bb-2Lt"/>
+                <outlet property="alipayImageV" destination="hgt-Dd-HL3" id="SEU-vX-Ymb"/>
                 <outlet property="arrowImageV" destination="Yqw-ce-osF" id="ZaU-Wz-YT6"/>
                 <outlet property="balanceLabel" destination="UOq-lA-zKX" id="HS2-3a-uzp"/>
                 <outlet property="bankIconImageV" destination="uYG-uS-Ldg" id="mRY-YG-Qtt"/>
@@ -27,6 +28,7 @@
                 <outlet property="rechargeView" destination="ryV-wt-pVO" id="PCZ-2O-ckj"/>
                 <outlet property="topBgView" destination="KzH-bS-pMT" id="Gbk-9t-Mcm"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="weixinImageV" destination="e5B-GT-3iE" id="qhf-71-u2Y"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -521,8 +523,16 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="0.5" y="138"/>
         </view>
-        <tapGestureRecognizer id="YTc-mu-uQ9" userLabel="微信"/>
-        <tapGestureRecognizer id="Cgi-xg-nFz" userLabel="支付宝"/>
+        <tapGestureRecognizer id="YTc-mu-uQ9" userLabel="微信">
+            <connections>
+                <action selector="weixinPay:" destination="-1" id="OAO-7U-zpp"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="Cgi-xg-nFz" userLabel="支付宝">
+            <connections>
+                <action selector="alipay:" destination="-1" id="Hf0-2G-JUE"/>
+            </connections>
+        </tapGestureRecognizer>
         <tapGestureRecognizer id="xXz-TB-C89" userLabel="添加银行卡">
             <connections>
                 <action selector="addCard:" destination="-1" id="rPk-Af-MAW"/>

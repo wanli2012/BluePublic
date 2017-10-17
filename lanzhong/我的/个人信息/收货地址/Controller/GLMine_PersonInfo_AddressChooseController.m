@@ -82,6 +82,7 @@
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             if([responseObject[@"data"] count] != 0){
                 
+                [self.models removeAllObjects];
                 for (NSDictionary *dic in responseObject[@"data"]) {
                     
                     GLMine_AddressModel *model = [GLMine_AddressModel mj_objectWithKeyValues:dic];

@@ -9,12 +9,17 @@
 #import "GLMine_SetController.h"
 #import "GLMineCell.h"
 #import "GLMine_Set_modifyPwdController.h"//修改密码
+#import "MinePhoneAlertView.h"
 
 @interface GLMine_SetController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong)NSMutableArray *dataSource;
 @property (weak, nonatomic) IBOutlet UIButton *exitBtn;
+
+@property (nonatomic, copy)NSString *memory;//内存
+@property(nonatomic ,strong)MinePhoneAlertView  *phoneView;
+@property(nonatomic ,strong)NSString  *phonestr;//服务热线
 
 @end
 
@@ -28,7 +33,9 @@
     self.exitBtn.layer.borderColor = YYSRGBColor(0, 125, 254, 1).CGColor;
     self.exitBtn.layer.borderWidth = 1.f;
     self.exitBtn.layer.cornerRadius = 5.f;
-    
+
+     self.memory = [NSString stringWithFormat:@"%.2fM", [self filePath]];
+     self.phonestr = [UserModel defaultUser].user_server;
     
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMineCell" bundle:nil] forCellReuseIdentifier:@"GLMineCell"];
 }
@@ -40,7 +47,32 @@
     
 }
 - (IBAction)quit:(id)sender {
-    NSLog(@"退出登录");
+    
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"你确定要退出吗?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [UserModel defaultUser].loginstatus = NO;
+        [UserModel defaultUser].user_pic = @"";
+
+        [usermodelachivar achive];
+        
+        CATransition *animation = [CATransition animation];
+        animation.duration = 0.3;
+        animation.timingFunction = UIViewAnimationCurveEaseInOut;
+        animation.type = @"suckEffect";
+        [self.view.window.layer addAnimation:animation forKey:nil];
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"exitLogin" object:nil];
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+    
+    [alertVC addAction:cancel];
+    [alertVC addAction:ok];
+    
+    [self presentViewController:alertVC animated:YES completion:nil];
+    
 }
 
 #pragma mark - UITableViewDelegate
@@ -66,7 +98,7 @@
                 cell.status = 2;
             }else if(indexPath.row == 1){
                 cell.status = 0;
-                cell.valueLabel.text = @"200M";
+                cell.valueLabel.text = self.memory;
             }else if(indexPath.row == 2){
                 cell.status = 2;
             }
@@ -76,7 +108,7 @@
         {
             if (indexPath.row == 0) {
                 cell.status = 1;
-                cell.valueLabel.text = @"0282397656";
+                cell.valueLabel.text = self.phonestr;
             }else if(indexPath.row == 1){
                 cell.status = 2;
             }else if(indexPath.row == 2){
@@ -92,6 +124,7 @@
     
     return cell;
 }
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     self.hidesBottomBarWhenPushed = YES;
@@ -110,7 +143,23 @@
                     break;
                 case 1:
                 {
-                    NSLog(@"清理内存");
+
+                    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"您确定要删除缓存吗?" preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                        
+                    }];
+                    
+                    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        
+                       [self clearFile];//清楚缓存
+                        
+                    }];
+                    
+                    [alertVC addAction:cancel];
+                    [alertVC addAction:ok];
+                    
+                    [self presentViewController:alertVC animated:YES completion:nil];
+
                 }
                     break;
                 case 2:
@@ -130,6 +179,24 @@
                 case 0:
                 {
                     NSLog(@"联系客服");
+                    self.phoneView.transform=CGAffineTransformMakeScale(0, 0);
+                    
+                    NSString *str=[NSString stringWithFormat:@"是否拨打电话? %@",self.phonestr];
+                    NSMutableAttributedString *textColor = [[NSMutableAttributedString alloc]initWithString:str];
+                    NSRange rangel = [[textColor string] rangeOfString:self.phonestr];
+                    [textColor addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:76/255.0 green:140/255.0 blue:247/255.0 alpha:1] range:rangel];
+                    //[textColor addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:17] range:rangel];
+                    [_phoneView.titleLb setAttributedText:textColor];
+                    
+                    [[UIApplication sharedApplication].keyWindow addSubview:self.phoneView];
+                    
+                    [UIView animateWithDuration:0.3 animations:^{
+                        _phoneView.transform=CGAffineTransformIdentity;
+                        
+                    } completion:^(BOOL finished) {
+                        
+                    }];
+
                 }
                     break;
                 case 1:
@@ -169,6 +236,70 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 5;
 }
+
+//*********************清理缓存********************//
+//显示缓存大小
+-( float )filePath
+{
+    NSString * cachPath = [ NSSearchPathForDirectoriesInDomains ( NSCachesDirectory , NSUserDomainMask , YES ) firstObject ];
+    
+    return [self folderSizeAtPath :cachPath];
+    
+}
+//单个文件的大小
+
+- ( long long ) fileSizeAtPath:( NSString *) filePath{
+    
+    NSFileManager * manager = [ NSFileManager defaultManager ];
+    
+    if ([manager fileExistsAtPath :filePath]){
+        
+        return [[manager attributesOfItemAtPath :filePath error : nil ] fileSize ];
+    }
+    
+    return 0 ;
+    
+}
+//返回多少 M
+- ( float ) folderSizeAtPath:( NSString *) folderPath{
+    NSFileManager * manager = [ NSFileManager defaultManager ];
+    if (![manager fileExistsAtPath :folderPath]) return 0 ;
+    NSEnumerator *childFilesEnumerator = [[manager subpathsAtPath :folderPath] objectEnumerator ];
+    NSString * fileName;
+    long long folderSize = 0 ;
+    while ((fileName = [childFilesEnumerator nextObject ]) != nil ){
+        NSString * fileAbsolutePath = [folderPath stringByAppendingPathComponent :fileName];
+        folderSize += [ self fileSizeAtPath :fileAbsolutePath];
+    }
+    return folderSize/( 1024.0 * 1024.0 );
+}
+// 清理缓存
+- (void)clearFile
+{
+    NSString * cachPath = [ NSSearchPathForDirectoriesInDomains ( NSCachesDirectory , NSUserDomainMask , YES ) firstObject ];
+    NSArray * files = [[ NSFileManager defaultManager ] subpathsAtPath :cachPath];
+    //NSLog ( @"cachpath = %@" , cachPath);
+    for ( NSString * p in files) {
+        NSError * error = nil ;
+        NSString * path = [cachPath stringByAppendingPathComponent :p];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+            [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+        }
+    }
+    
+    [self performSelectorOnMainThread:@selector(clearCachSuccess) withObject:nil waitUntilDone:YES];
+}
+
+-(void)clearCachSuccess{
+    
+    self.memory = [NSString stringWithFormat:@"%.2fM", [self filePath]];
+    
+    [self.tableView reloadData];
+    
+//    self.momeryLb.text = [NSString stringWithFormat:@"%.2fM",self.folderSize];
+    
+}
+
 #pragma mark - 懒加载
 - (NSMutableArray *)dataSource{
     if (!_dataSource) {
@@ -176,13 +307,46 @@
         
         NSArray *arr = @[@"密码修改",@"内存清理",@"关于公司"];
         NSArray *arr2 = @[@"联系客服",@"帮助中心",@"版本更新"];
-//        NSArray *arr3 = @[@"版本更新"];
+    
         
         [_dataSource addObject:arr];
         [_dataSource addObject:arr2];
-//        [_dataSource addObject:arr3];
+
         
     }
     return _dataSource;
 }
+
+-(MinePhoneAlertView *)phoneView{
+    
+    if (!_phoneView) {
+        _phoneView=[[NSBundle mainBundle]loadNibNamed:@"MinePhoneAlertView" owner:nil options:nil].firstObject;
+        _phoneView.frame=CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT);
+        _phoneView.backgroundColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2];
+        [_phoneView.cancelBt addTarget:self action:@selector(cancelbutton) forControlEvents:UIControlEventTouchUpInside];
+        [_phoneView.sureBt addTarget:self action:@selector(surebuttonE) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    return _phoneView;
+}
+
+-(void)cancelbutton{
+    [UIView animateWithDuration:0.3 animations:^{
+        _phoneView.transform=CGAffineTransformMakeScale(0.000001, 0.000001);
+        
+    } completion:^(BOOL finished) {
+        
+        if (finished) {
+            [_phoneView removeFromSuperview];
+        }
+    }];
+    
+}
+
+-(void)surebuttonE{
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",self.phonestr]]]; //拨号
+
+}
+
 @end

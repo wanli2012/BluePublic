@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GLMine_Wallet_ExchangeModel.h"//兑换模型
+#import "GLMine_Wallet_RechargeModel.h"//充值模型
 
 @interface GLMine_WalletDetailCell : UITableViewCell
+
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+
+@property (nonatomic, strong)GLMine_Wallet_ExchangeModel *model;
+
+@property (nonatomic, strong)GLMine_Wallet_RechargeModel *rechargeModel;
 
 @end

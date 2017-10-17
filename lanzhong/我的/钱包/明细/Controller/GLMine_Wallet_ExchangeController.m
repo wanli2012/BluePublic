@@ -61,9 +61,9 @@
                             ];
     
     NSArray *classNames = @[
-                            [GLMine_Wallet_Exchange_SuccessController class],
-                            [GLMine_Wallet_Exchange_FailedController class],
                             [GLMine_Wallet_Exchange_InReviewController class],
+                            [GLMine_Wallet_Exchange_FailedController class],
+                            [GLMine_Wallet_Exchange_SuccessController class],
                                                         ];
     
     self.normalTitleColor = [UIColor darkGrayColor];

@@ -11,11 +11,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GLMineController">
             <connections>
+                <outlet property="banlanceLabel" destination="eU3-zn-4yA" id="xer-vn-Qiv"/>
                 <outlet property="bgView" destination="I3d-mg-Ztg" id="BFN-I9-noy"/>
                 <outlet property="bgimageV" destination="HKf-Ub-1BB" id="auW-Qi-Exl"/>
                 <outlet property="headerView" destination="Ly6-oP-tl2" id="zRe-vf-wXT"/>
                 <outlet property="imageV" destination="XIr-Qb-SVG" id="tld-ed-gvP"/>
                 <outlet property="middleView" destination="T9W-Sy-uZz" id="Ijw-8N-nzy"/>
+                <outlet property="participateLabel" destination="4rk-q9-xQ6" id="V5o-0l-JjS"/>
+                <outlet property="publishLabel" destination="myx-1I-nJt" id="lsH-WG-4gs"/>
                 <outlet property="tableView" destination="eFT-yX-YIB" id="0ex-Rv-uwg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
