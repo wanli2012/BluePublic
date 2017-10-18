@@ -137,6 +137,7 @@
 - (IBAction)back:(id)sender {
     
     NSLog(@"返回");
+    [self dismissViewControllerAnimated:YES completion:nil];
     
 }
 

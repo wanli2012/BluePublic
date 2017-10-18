@@ -18,17 +18,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"官方认证";
+    self.navigationItem.title = self.navTitle;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    NSString *url = [NSString stringWithFormat:@"http://192.168.1.186/Raise/index.php/Api/Item/item_content?item_id=%@",self.item_id];
 
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:self.url]];
     [self.webView loadRequest:request];
-                             
-//    self.webView.scrollView.scrollEnabled = NO;
-//    self.webView.scrollView;
-    
+
 }
 
 #pragma mark - UIWebViewDelegate
@@ -38,14 +33,7 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-    
-//    CGFloat webViewHeight=[webView.scrollView contentSize].height;
-//    CGRect newFrame = webView.frame;
-//    newFrame.size.height = webViewHeight;
-//    
-//    newFrame = CGRectMake(0, 0, kSCREEN_WIDTH, newFrame.size.height + 10);
-//    
-//    self.webView.frame = newFrame;
+
 }
 
 

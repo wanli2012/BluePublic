@@ -71,15 +71,39 @@
                                             <constraint firstAttribute="width" constant="10" id="ZGk-CC-xl6"/>
                                         </constraints>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="St9-Nm-I0i">
+                                        <rect key="frame" x="288" y="10" width="40" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="6Wy-gz-Dql"/>
+                                        </constraints>
+                                        <state key="normal" image="message-1"/>
+                                        <connections>
+                                            <action selector="message:" destination="-1" eventType="touchUpInside" id="8Cy-uS-7eL"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vow-Ki-GXn">
+                                        <rect key="frame" x="238" y="10" width="40" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="BRz-d3-6UE"/>
+                                        </constraints>
+                                        <state key="normal" image="set-1"/>
+                                        <connections>
+                                            <action selector="set:" destination="-1" eventType="touchUpInside" id="6yn-cN-Ko4"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="XIr-Qb-SVG" firstAttribute="centerY" secondItem="I3d-mg-Ztg" secondAttribute="centerY" id="AGX-3m-YvC"/>
                                     <constraint firstItem="XIr-Qb-SVG" firstAttribute="leading" secondItem="I3d-mg-Ztg" secondAttribute="leading" constant="15" id="CG4-W8-xHj"/>
+                                    <constraint firstItem="St9-Nm-I0i" firstAttribute="leading" secondItem="vow-Ki-GXn" secondAttribute="trailing" constant="10" id="JGJ-oN-hv4"/>
                                     <constraint firstItem="sis-Br-rgV" firstAttribute="centerY" secondItem="XIr-Qb-SVG" secondAttribute="centerY" id="KqR-lN-ybR"/>
                                     <constraint firstAttribute="trailing" secondItem="sis-Br-rgV" secondAttribute="trailing" constant="15" id="PAB-Ou-hfN"/>
+                                    <constraint firstItem="St9-Nm-I0i" firstAttribute="top" secondItem="I3d-mg-Ztg" secondAttribute="top" constant="10" id="QAx-93-coF"/>
                                     <constraint firstItem="rY5-bW-3dz" firstAttribute="leading" secondItem="XIr-Qb-SVG" secondAttribute="trailing" constant="10" id="VhC-xe-GOP"/>
+                                    <constraint firstItem="vow-Ki-GXn" firstAttribute="centerY" secondItem="St9-Nm-I0i" secondAttribute="centerY" id="btr-dC-tgi"/>
+                                    <constraint firstAttribute="trailing" secondItem="St9-Nm-I0i" secondAttribute="trailing" constant="10" id="gxx-0P-0k8"/>
                                     <constraint firstItem="KqU-bC-Num" firstAttribute="bottom" secondItem="XIr-Qb-SVG" secondAttribute="bottom" constant="-15" id="kXH-Zj-mNb"/>
                                     <constraint firstItem="rY5-bW-3dz" firstAttribute="top" secondItem="XIr-Qb-SVG" secondAttribute="top" constant="15" id="otw-Aq-Vze"/>
                                     <constraint firstItem="KqU-bC-Num" firstAttribute="leading" secondItem="XIr-Qb-SVG" secondAttribute="trailing" constant="10" id="waI-vt-9Yd"/>
@@ -237,6 +261,8 @@
     </objects>
     <resources>
         <image name="into" width="10" height="18"/>
+        <image name="message-1" width="17" height="18"/>
+        <image name="set-1" width="18" height="18"/>
         <image name="timg" width="1024" height="640"/>
     </resources>
 </document>

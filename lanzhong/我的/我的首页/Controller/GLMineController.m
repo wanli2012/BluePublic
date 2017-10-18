@@ -16,6 +16,8 @@
 #import "GLMine_WalletController.h"//钱包
 #import "GLMine_MyOrderController.h"//我的订单
 #import "GLMine_ParticipateController.h"//我参与的项目
+#import "GLMine_EvaluateController.h"//我的评价
+#import "GLMine_ShareController.h"//分享权益
 
 #import "GLMine_AddFundTrendController.h"//添加资金动向
 
@@ -128,6 +130,24 @@
 //        [_loadV removeloadview];
     }];
 }
+- (IBAction)set:(id)sender {
+    
+    self.hidesBottomBarWhenPushed = YES;
+    GLMine_SetController *setVC = [[GLMine_SetController alloc] init];
+    [self.navigationController pushViewController:setVC animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
+    
+}
+
+- (IBAction)message:(id)sender {
+    
+    self.hidesBottomBarWhenPushed = YES;
+    GLMine_MyMessageController *setVC = [[GLMine_MyMessageController alloc] init];
+    [self.navigationController pushViewController:setVC animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
+    
+}
+
 
 #pragma mark - UIScrollViewDelegate 下拉放大图片
 //scrollView的方法视图滑动时 实时调用
@@ -158,6 +178,7 @@
     
     return [self.dataSource[section] count];
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     GLMineCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMineCell"];
     cell.selectionStyle = 0;
@@ -197,22 +218,29 @@
         case 2:
         {
             switch (indexPath.row) {
-                case 0:
+                case 0://购物车
                 {
                     GLShoppingCartController *cartVC = [[GLShoppingCartController alloc] init];
                     [self.navigationController pushViewController:cartVC animated:YES];
                     
                 }
                     break;
-                case 1://
+                case 1://我的评价
                 {
-                    NSLog(@"我的订单");
+                    GLMine_EvaluateController *evaluateVC = [[GLMine_EvaluateController alloc] init];
+                    [self.navigationController pushViewController:evaluateVC animated:YES];
+                    
+                }
+                    break;
+                case 2://我的订单
+                {
+                  
                     GLMine_MyOrderController *cartVC = [[GLMine_MyOrderController alloc] init];
                     [self.navigationController pushViewController:cartVC animated:YES];
                     
                 }
                     break;
-                case 2:
+                case 3://钱包
                 {
                     
                     GLMine_WalletController *walletVC = [[GLMine_WalletController alloc] init];
@@ -232,27 +260,13 @@
                 case 0:
                 {
                     NSLog(@"分享权益");
-                    GLMine_AddFundTrendController *addFundVC = [[GLMine_AddFundTrendController alloc] init];
-                    [self.navigationController pushViewController:addFundVC animated:YES];
+                    GLMine_ShareController *shareVC = [[GLMine_ShareController alloc] init];
+                    [self.navigationController pushViewController:shareVC animated:YES];
+//                    GLMine_AddFundTrendController *addFundVC = [[GLMine_AddFundTrendController alloc] init];
+//                    [self.navigationController pushViewController:addFundVC animated:YES];
                     
                 }
                     break;
-                case 1://我的消息
-                {
-                    
-                    GLMine_MyMessageController *myMessageVC = [[GLMine_MyMessageController alloc] init];
-                    [self.navigationController pushViewController:myMessageVC animated:YES];
-                    
-                }
-                    break;
-                case 2:
-                {
-                    
-                    GLMine_SetController *setVC = [[GLMine_SetController alloc] init];
-                    [self.navigationController pushViewController:setVC animated:YES];
-                }
-                    break;
-                    
                 default:
                     break;
             }
@@ -289,12 +303,12 @@
         NSArray *arr2 = @[@{@"title":@"参与项目",@"image":@"participationproject"}];
         
         NSArray *arr3 = @[@{@"title":@"购物车",@"image":@"mine_shoppingcart"},
+                          @{@"title":@"商品评价",@"image":@"evaluate"},
                           @{@"title":@"订单",@"image":@"order"},
                           @{@"title":@"钱包",@"image":@"wallet"},
                           ];
-        NSArray *arr4 = @[@{@"title":@"分享权益",@"image":@"mine_share"},
-                          @{@"title":@"我的消息",@"image":@"message"},
-                          @{@"title":@"设置",@"image":@"set"},
+        
+        NSArray *arr4 = @[@{@"title":@"分享权益",@"image":@"mine_share"}
                           ];
         
         [_dataSource addObject:arr];

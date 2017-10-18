@@ -7,6 +7,7 @@
 //
 
 #import "GLMine_MyMessageCell.h"
+#import "formattime.h"
 
 @interface GLMine_MyMessageCell ()
 
@@ -28,10 +29,23 @@
 }
 
 - (void)checkProject {
-//    NSLog(@"查看项目");
+
     if([self.delegate respondsToSelector:@selector(checkProjectDetail:)]){
         [self.delegate checkProjectDetail:self.index];
     }
+}
+
+- (void)setModel:(GLMine_MyMessageModel *)model{
+    _model = model;
+    self.contentLabel.text = model.log;
+    self.dateLabel.text = [formattime formateTimeOfDate3:model.addtime];
+    
+}
+
+- (void)setNoticeModel:(GLMine_NoticeModel *)noticeModel{
+    _noticeModel = noticeModel;
+    self.contentLabel.text = noticeModel.title;
+    self.dateLabel.text = [formattime formateTimeOfDate3:noticeModel.addtime];
 }
 
 @end

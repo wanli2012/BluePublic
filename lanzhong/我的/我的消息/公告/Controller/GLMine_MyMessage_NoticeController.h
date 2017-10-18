@@ -10,4 +10,6 @@
 
 @interface GLMine_MyMessage_NoticeController : UIViewController
 
+@property (nonatomic, assign)NSInteger signIndex;//标志:0:首页跳转过来的 1:我的消息里的
+
 @end

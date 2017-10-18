@@ -129,26 +129,26 @@
  */
 - (void)setUpChildViewController{
     
-    [self addOneChildViewController:[[BaseNavigationViewController alloc]initWithRootViewController:[[GLHomeController alloc]init]]
+    [self addOneChildViewController:[[BaseNavigationViewController alloc]initWithRootViewController:[[GLHomeController alloc] init]]
                           WithTitle:@"首页"
                           imageName:@"首页未点中"
                   selectedImageName:@"首页"];
     
     [self addOneChildViewController:[[BaseNavigationViewController alloc]initWithRootViewController:[[GLBusinessCircleController alloc] init]]
                           WithTitle:@"商圈"
-                          imageName:@"社区未点中"
-                  selectedImageName:@"社区"];
+                          imageName:@"商圈未点中"
+                  selectedImageName:@"商圈"];
     
     
-    [self addOneChildViewController:[[BaseNavigationViewController alloc]initWithRootViewController:[[GLMallController alloc]init]]
+    [self addOneChildViewController:[[BaseNavigationViewController alloc]initWithRootViewController:[[GLMallController alloc] init]]
                           WithTitle:@"商城"
-                          imageName:@"好友未点中"
-                  selectedImageName:@"好友"];
+                          imageName:@"商城未点中"
+                  selectedImageName:@"商城"];
     
     
-    [self addOneChildViewController:[[BaseNavigationViewController alloc]initWithRootViewController:[[GLMineController alloc]init]]
+    [self addOneChildViewController:[[BaseNavigationViewController alloc]initWithRootViewController:[[GLMineController alloc] init]]
                           WithTitle:@"我的"
-                          imageName:@"我的未点中"
+                          imageName:@"我的nochoice"
                   selectedImageName:@"我的"];
     
 }

@@ -33,6 +33,7 @@
 @property (nonatomic, copy)NSString  *umark;//积分
 @property (nonatomic, copy)NSString  *umoney;// 用户余额
 @property (nonatomic, copy)NSString  *uname;//用户名
+@property (nonatomic, copy)NSString  *nickname;//昵称
 @property (nonatomic, copy)NSString  *user_pic;//头像
 @property (nonatomic, copy)NSString  *upwd;//
 @property (nonatomic, copy)NSString  *pay_pwd;//

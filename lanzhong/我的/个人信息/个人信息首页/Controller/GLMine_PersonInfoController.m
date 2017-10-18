@@ -17,9 +17,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *ensureBtn;
 
 
-@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;//IDNum
 @property (weak, nonatomic) IBOutlet UITextField *trueNameTF;//真实姓名
 @property (weak, nonatomic) IBOutlet UITextField *IDCardNumTF;//身份证号
+@property (weak, nonatomic) IBOutlet UILabel *nickNameLabel;//昵称
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneTF;//手机号
 @property (weak, nonatomic) IBOutlet UITextField *recommendTF;//推荐人TF
@@ -47,6 +48,7 @@
     self.trueNameTF.text = [UserModel defaultUser].truename;
     self.IDCardNumTF.text = [UserModel defaultUser].idcard;
     
+    self.nickNameLabel.text = [UserModel defaultUser].nickname;
     
     switch ([[UserModel defaultUser].real_state integerValue]) {//实名认证状态 0未认证  1成功   2失败   3审核中
         case 0:
@@ -129,6 +131,52 @@
 
 //头像修改
 - (IBAction)picModify:(id)sender {
+    
+}
+
+//昵称修改
+- (IBAction)nameModify:(id)sender {
+    
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"昵称修改" message:@"what's your name?" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertVC addTextFieldWithConfigurationHandler:^(UITextField *textField){
+        textField.placeholder = @"请输入昵称";
+    }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        dict[@"token"] = [UserModel defaultUser].token;
+        dict[@"uid"] = [UserModel defaultUser].uid;
+        dict[@"type"] = @"1";
+        dict[@"nickname"] = alertVC.textFields.lastObject.text;
+        
+        _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+        [NetworkManager requestPOSTWithURLStr:kUSER_INFO_SAVE_URL paramDic:dict finish:^(id responseObject) {
+            
+            [_loadV removeloadview];
+            
+            if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+                
+            }
+            
+            [MBProgressHUD showError:responseObject[@"message"]];
+            
+        } enError:^(NSError *error) {
+            [_loadV removeloadview];
+            
+        }];
+
+    }];
+    
+    [alertVC addAction:cancel];
+    [alertVC addAction:ok];
+    
+    [self presentViewController:alertVC animated:YES completion:nil];
     
 }
 

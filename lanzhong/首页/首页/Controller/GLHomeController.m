@@ -12,11 +12,11 @@
 #import "GLPay_ChooseController.h"//支付选择
 #import "GLHome_CasesController.h"//经典案例
 #import "GLHomeModel.h"//首页模型
+#import "GLMine_MyMessage_NoticeController.h"//公告列表
 
 @interface GLHomeController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *noticeLabel;
-
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
@@ -141,9 +141,12 @@
 }
 
 - (IBAction)notice:(id)sender {
-    
-    NSLog(@"公告详情");
-    
+  
+    self.hidesBottomBarWhenPushed = YES;
+    GLMine_MyMessage_NoticeController *myMessageVC = [[GLMine_MyMessage_NoticeController alloc] init];
+    myMessageVC.signIndex = 1;
+    [self.navigationController pushViewController:myMessageVC animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
 }
 
 - (IBAction)switchSelected:(id)sender {

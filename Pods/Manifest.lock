@@ -28,6 +28,17 @@ PODS:
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
   - SVProgressHUD (2.2.1)
+  - UMengAnalytics-NO-IDFA (4.2.5)
+  - UMengUShare/Core (6.4.5):
+    - UMengUShare/Network
+  - UMengUShare/Network (6.4.5)
+  - UMengUShare/Social/ReducedWeChat (6.4.5):
+    - UMengUShare/Core
+  - UMengUShare/Social/WeChat (6.4.5):
+    - UMengUShare/Core
+    - UMengUShare/Social/ReducedWeChat
+  - UMengUShare/UI (6.4.5):
+    - UMengUShare/Core
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
@@ -39,6 +50,9 @@ DEPENDENCIES:
   - MJRefresh
   - SDCycleScrollView (~> 1.66)
   - SVProgressHUD
+  - UMengAnalytics-NO-IDFA
+  - UMengUShare/Social/WeChat
+  - UMengUShare/UI
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -51,7 +65,9 @@ SPEC CHECKSUMS:
   SDCycleScrollView: d0fd5fe40a80918371fd8939214eb3be81033d83
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SVProgressHUD: db27c54e6e18bc903341661fc9feb55e04905cc4
+  UMengAnalytics-NO-IDFA: 16666e32edce5be44ae5b14aaaa7f3582e09d6ab
+  UMengUShare: a5711c54e640b04e3048e931d2b88d50f9cfa55c
 
-PODFILE CHECKSUM: 314ad8b6eb23105ddaaeff521ff0629d866f7c7d
+PODFILE CHECKSUM: 3435af0a1a2447409a3dc73b884906924c46c504
 
 COCOAPODS: 1.2.0
