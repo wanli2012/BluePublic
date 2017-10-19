@@ -57,8 +57,8 @@
     self.ordercode.text = self.order_sn;
     self.orderMoney.text = [NSString stringWithFormat:@"%.2f",[self.orderPrice floatValue]];
     
-    self.orderMTitleLb.text = @"订单米券:";
-    self.orderType.text = @"米券订单";
+    self.orderMTitleLb.text = @"订单金额:";
+    self.orderType.text = @"商城订单";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismiss) name:@"maskView_dismiss" object:nil];
     

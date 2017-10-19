@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+//我的订单模型
+
 @interface LBMyOrdersListModel : NSObject
 
 @property (copy, nonatomic)NSString *goods_id;// 商品id

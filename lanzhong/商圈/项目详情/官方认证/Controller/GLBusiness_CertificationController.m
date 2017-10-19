@@ -18,6 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.navigationItem.title = self.navTitle;
     self.automaticallyAdjustsScrollViewInsets = NO;
 

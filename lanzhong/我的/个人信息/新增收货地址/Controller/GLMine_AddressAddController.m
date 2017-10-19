@@ -68,6 +68,15 @@
         self.detailAddressTF.text = self.model.address;
         self.addressTF.text = [NSString stringWithFormat:@"%@%@%@",self.model.province_name,self.model.city_name,self.model.area_name];
         
+        if ([self.model.is_default integerValue] == 0) {
+            
+            self.isDefaultImage.image = [UIImage imageNamed:@"address_choice"];
+            self.isdeualtImageOne.image = [UIImage imageNamed:@"address_nochoice"];
+        }else{
+            self.isDefaultImage.image = [UIImage imageNamed:@"address_nochoice"];
+            self.isdeualtImageOne.image = [UIImage imageNamed:@"address_choice"];
+        }
+        
         self.provinceStrId = self.model.province;
         self.cityStrId = self.model.city;
         self.countryStrId = self.model.area;

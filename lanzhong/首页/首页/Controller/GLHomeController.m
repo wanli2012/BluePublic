@@ -13,6 +13,7 @@
 #import "GLHome_CasesController.h"//经典案例
 #import "GLHomeModel.h"//首页模型
 #import "GLMine_MyMessage_NoticeController.h"//公告列表
+#import "GLBusiness_DetailController.h"//项目详情
 
 @interface GLHomeController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -208,22 +209,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     self.hidesBottomBarWhenPushed = YES;
-    
-    if (indexPath.row == 0) {
-        
-        GLPay_ChooseController *payVC = [[GLPay_ChooseController alloc] init];
-        [self.navigationController pushViewController:payVC animated:YES];
-        
-    }else if(indexPath.row == 1){
-        
-    }else{
-        
-    }
-    
-    
+
+    GLBusiness_DetailController *detailVC = [[GLBusiness_DetailController alloc] init];
+    detailVC.item_id = self.model.groom_item[indexPath.row].item_id;
+    [self.navigationController pushViewController:detailVC animated:YES];
+
     self.hidesBottomBarWhenPushed = NO;
     
 }
-
-
 @end

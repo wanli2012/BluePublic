@@ -250,6 +250,7 @@
 		4A9F57161F920B0800341A31 /* LBMyOrderListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F57121F920B0800341A31 /* LBMyOrderListTableViewCell.m */; };
 		4A9F57171F920B0800341A31 /* LBMyOrderListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9F57131F920B0800341A31 /* LBMyOrderListTableViewCell.xib */; };
 		4A9F57181F920B0800341A31 /* LBMyOrdersHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F57151F920B0800341A31 /* LBMyOrdersHeaderView.m */; };
+		4ADCA6F71F989D85007D0E4D /* GLMine_ShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADCA6F61F989D85007D0E4D /* GLMine_ShareModel.m */; };
 		4ADDD16A1F88635200C95F9C /* 登录注册.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4ADDD1691F88635200C95F9C /* 登录注册.xcassets */; };
 		4ADDD16E1F88652100C95F9C /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADDD16D1F88652100C95F9C /* NetworkManager.m */; };
 		4ADDD17D1F886F4D00C95F9C /* GLMine_PersonInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADDD1721F886F4D00C95F9C /* GLMine_PersonInfoController.m */; };
@@ -747,6 +748,8 @@
 		4A9F57131F920B0800341A31 /* LBMyOrderListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBMyOrderListTableViewCell.xib; sourceTree = "<group>"; };
 		4A9F57141F920B0800341A31 /* LBMyOrdersHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBMyOrdersHeaderView.h; sourceTree = "<group>"; };
 		4A9F57151F920B0800341A31 /* LBMyOrdersHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBMyOrdersHeaderView.m; sourceTree = "<group>"; };
+		4ADCA6F51F989D85007D0E4D /* GLMine_ShareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_ShareModel.h; sourceTree = "<group>"; };
+		4ADCA6F61F989D85007D0E4D /* GLMine_ShareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_ShareModel.m; sourceTree = "<group>"; };
 		4ADDD1691F88635200C95F9C /* 登录注册.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "登录注册.xcassets"; sourceTree = "<group>"; };
 		4ADDD16C1F88652100C95F9C /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
 		4ADDD16D1F88652100C95F9C /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
@@ -1638,6 +1641,8 @@
 		4A29053A1F97579E006903F1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4ADCA6F51F989D85007D0E4D /* GLMine_ShareModel.h */,
+				4ADCA6F61F989D85007D0E4D /* GLMine_ShareModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4100,6 +4105,7 @@
 				4A0B751E1F90F0840007788B /* GLConfirmOrderController.m in Sources */,
 				4A16FF2D1F8F727F00064CE5 /* GLPublish_FundFailedController.m in Sources */,
 				4AF109371F78DBB500CB51FA /* WXSTransitionManager+SystermAnimation.m in Sources */,
+				4ADCA6F71F989D85007D0E4D /* GLMine_ShareModel.m in Sources */,
 				F9BB801E1F7A3F2C00867514 /* TGWebProgressLayer.m in Sources */,
 				4A6B9F301F7CF100009386C8 /* GLBusiness_ChooseCell.m in Sources */,
 				4A0EA9E31F86325D006A1CF5 /* GLMine_WalletCardChooseCell.m in Sources */,
@@ -4226,6 +4232,7 @@
 			baseConfigurationReference = 7451D5B0290BCE80E2B11756 /* Pods-lanzhong.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				DEVELOPMENT_TEAM = GCU762TQ3E;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/lanzhong/PrefixHeader.pch";
@@ -4242,6 +4249,7 @@
 			baseConfigurationReference = DC90251775A1E99EE4FC964D /* Pods-lanzhong.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				DEVELOPMENT_TEAM = GCU762TQ3E;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/lanzhong/PrefixHeader.pch";

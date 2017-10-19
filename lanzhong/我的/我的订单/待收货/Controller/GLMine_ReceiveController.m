@@ -10,6 +10,7 @@
 #import "LBMyOrderListTableViewCell.h"
 #import "LBMyOrdersHeaderView.h"
 #import "LBMyOrdersModel.h"
+#import "GLMall_LogisticsController.h"//物流跟踪
 
 @interface GLMine_ReceiveController ()
 
@@ -209,11 +210,14 @@
     };
     headerview.returnCancelBt = ^(NSInteger index){
         NSLog(@"查看物流%zd",index);
+        self.hidesBottomBarWhenPushed = YES;
+        GLMall_LogisticsController *vc =[[GLMall_LogisticsController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
     };
     
     return headerview;
 }
-
 
 -(NSMutableArray *)dataarr{
     

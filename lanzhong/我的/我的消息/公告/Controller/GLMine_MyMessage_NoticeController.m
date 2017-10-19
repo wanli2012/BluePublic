@@ -142,7 +142,7 @@
     GLMine_NoticeModel *model = self.models[indexPath.row];
     
     GLBusiness_CertificationController *cerVC = [[GLBusiness_CertificationController alloc] init];
-    cerVC.title = @"公告";
+    cerVC.navTitle = @"公告";
     cerVC.url = [NSString stringWithFormat:@"%@%@",Notice_URL,model.news_id];
     [self.navigationController pushViewController:cerVC animated:YES];
 

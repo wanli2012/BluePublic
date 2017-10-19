@@ -208,6 +208,35 @@
 
     headerview.returnDeleteBt = ^(NSInteger index){
         NSLog(@"删除订单%zd",index);
+        
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        dic[@"token"] = [UserModel defaultUser].token;
+        dic[@"uid"] = [UserModel defaultUser].uid;
+        dic[@"order_id"] = sectionModel.order_id;
+        
+        _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:[UIApplication sharedApplication].keyWindow];
+        [NetworkManager requestPOSTWithURLStr:kDEL_ORDER_URL paramDic:dic finish:^(id responseObject) {
+            [_loadV removeloadview];
+
+            if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+
+                [MBProgressHUD showError:responseObject[@"message"]];
+                [self.dataarr removeObjectAtIndex:index];
+
+                NSIndexPath *indexPath = [NSIndexPath indexPathWithIndex:index];
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                
+            }else{
+                [MBProgressHUD showError:responseObject[@"message"]];
+            }
+        } enError:^(NSError *error) {
+            [_loadV removeloadview];
+            [self.tableView.mj_header endRefreshing];
+            [self.tableView.mj_footer endRefreshing];
+            [MBProgressHUD showError:error.localizedDescription];
+            
+        }];
+
     };
     
     return headerview;

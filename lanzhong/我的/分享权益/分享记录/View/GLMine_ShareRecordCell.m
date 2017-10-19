@@ -7,6 +7,8 @@
 //
 
 #import "GLMine_ShareRecordCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "formattime.h"
 
 @interface GLMine_ShareRecordCell ()
 
@@ -24,5 +26,13 @@
     self.picImageV.layer.cornerRadius = self.picImageV.height/2;
 }
 
+- (void)setModel:(GLMine_ShareModel *)model{
+    _model = model;
+    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:model.must_user_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    self.titleLabel.text = model.phone;
+    self.trueNameLabel.text = model.truename;
+    self.dateLabel.text = [formattime formateTimeOfDate3:model.addtime];
+    
+}
 
 @end

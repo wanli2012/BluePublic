@@ -35,8 +35,11 @@
 @property (nonatomic, copy)NSString *reply;// 回复内容
 @property (nonatomic, copy)NSString *addtime;//评论时间
 @property (nonatomic, copy)NSString *reply_time;//回复时间
-@property (nonatomic, copy)NSString *uname;//用户名
+@property (nonatomic, copy)NSString *nickname;//用户名(昵称)
 @property (nonatomic, copy)NSString *must_user_pic;//头像
+@property (nonatomic, copy)NSString *uname;//用户名
+
+@property (nonatomic, assign)CGFloat cellHeight;
 
 @end
 

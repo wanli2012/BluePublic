@@ -20,6 +20,8 @@
 
 @property (strong, nonatomic)LoadWaitView *loadV;
 
+@property (weak, nonatomic) IBOutlet UILabel *serviceNumLabel;//客服电话Label
+
 @end
 
 @implementation GLLoginController
@@ -114,6 +116,13 @@
             [UserModel defaultUser].uname = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"uname"]];
             [UserModel defaultUser].upwd = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"upwd"]];
             [UserModel defaultUser].user_pic = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"user_pic"]];
+            
+            [UserModel defaultUser].umoney = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"umoney"]];
+            [UserModel defaultUser].invest_count = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"invest_count"]];
+            [UserModel defaultUser].item_count = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"item_count"]];
+            [UserModel defaultUser].user_server = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"user_server"]];
+            [UserModel defaultUser].real_state = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"real_state"]];
+            [UserModel defaultUser].nickname = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"nickname"]];
 
             [UserModel defaultUser].loginstatus = YES;
             [usermodelachivar achive];
@@ -122,9 +131,12 @@
             
             [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
             
-        }else{
-            
+        }else if([responseObject[@"code"] integerValue] == 412){
+            self.serviceNumLabel.hidden = NO;
+            self.serviceNumLabel.text = [NSString stringWithFormat:@"客服电话:%@",[UserModel defaultUser].user_server];
             [MBProgressHUD showError:responseObject[@"message"]];
+        }else{
+            [MBProgressHUD showError:responseObject[@"data"]];
         }
         
     } enError:^(NSError *error) {

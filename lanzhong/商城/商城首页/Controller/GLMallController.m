@@ -12,7 +12,7 @@
 #import "LBSetFillet.h"
 #import "MenuScreeningView.h"
 #import "GLShoppingCartController.h"
-#import "GLMall_LogisticsController.h"//物流跟踪
+
 
 #define sizeScaleimageH  (285.0/349.0)
 @interface GLMallController ()<UICollectionViewDelegate,UICollectionViewDataSource>
@@ -217,14 +217,7 @@ static NSString *ID = @"GLClassifyCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.row == 0 ) {
-        self.hidesBottomBarWhenPushed = YES;
-        GLMall_LogisticsController *vc =[[GLMall_LogisticsController alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
-        self.hidesBottomBarWhenPushed = NO;
-        return;
-    }
-    
+   
     self.hidesBottomBarWhenPushed = YES;
     GLMall_DetailController *vc =[[GLMall_DetailController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];

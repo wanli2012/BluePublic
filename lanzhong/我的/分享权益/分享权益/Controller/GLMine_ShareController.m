@@ -60,8 +60,10 @@
     //设置过滤器默认属性 (老油条)
     [qrImageFilter setDefaults];
     
+    NSString *str = [NSString stringWithFormat:@"%@%@",Share_URL,[UserModel defaultUser].uname];
+    
     //将字符串转换成 NSdata (虽然二维码本质上是 字符串,但是这里需要转换,不转换就崩溃)
-    NSData *qrImageData = [[UserModel defaultUser].uid dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *qrImageData = [str dataUsingEncoding:NSUTF8StringEncoding];
     
     //设置过滤器的 输入值  ,KVC赋值
     [qrImageFilter setValue:qrImageData forKey:@"inputMessage"];

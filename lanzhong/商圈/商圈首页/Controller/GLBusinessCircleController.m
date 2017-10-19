@@ -20,7 +20,6 @@
 @property (nonatomic, strong)SDCycleScrollView *cycleScrollView;
 @property (nonatomic, strong) GLBusinessCircle_MenuScreeningView *menuScreeningView;  //条件选择器
 
-//@property (nonatomic, strong)GLCircle_item_dataModel *model;
 @property (nonatomic, strong)GLCircle_item_screenModel *categoryModel;
 @property (nonatomic, strong)NSMutableArray *models;
 @property (nonatomic, strong)LoadWaitView *loadV;
@@ -29,6 +28,7 @@
 @property (nonatomic, copy)NSString *trade_id;
 @property (nonatomic, copy)NSString *man;
 @property (nonatomic, copy)NSString *stop;
+
 @end
 
 @implementation GLBusinessCircleController
@@ -75,20 +75,16 @@
         
         [weakSelf postRequest:YES];
         [weakSelf postRequest_Category];
-        
     }];
     
     MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         
         [weakSelf postRequest:NO];
-        
     }];
     
     // 设置文字
     [header setTitle:@"快扯我，快点" forState:MJRefreshStateIdle];
-    
     [header setTitle:@"数据要来啦" forState:MJRefreshStatePulling];
-    
     [header setTitle:@"服务器正在狂奔..." forState:MJRefreshStateRefreshing];
     
     self.tableView.mj_header = header;
@@ -205,7 +201,6 @@
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
     
 //    self.HideNavagation = YES;
-    
     //    JZAlbumViewController *jzAlbumVC = [[JZAlbumViewController alloc]init];
     //    jzAlbumVC.currentIndex =index;//这个参数表示当前图片的index，默认是0
     //    jzAlbumVC.imgArr = [self.cycleScrollView.imageURLStringsGroup copy];//图片数组，可以是url，也可以是UIImage

@@ -22,7 +22,7 @@
 
 static const CGFloat kPhotoViewMargin = 25;
 
-@interface GLPublishController ()<UITextViewDelegate,HXPhotoViewDelegate,UIViewControllerTransitioningDelegate,UIViewControllerAnimatedTransitioning,HWCalendarDelegate,UITextFieldDelegate>
+@interface GLPublishController ()<UITextViewDelegate,HXPhotoViewDelegate,UIViewControllerTransitioningDelegate,UIViewControllerAnimatedTransitioning,HWCalendarDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     BOOL _ishidecotr;//判断是否隐藏弹出控制器
     BOOL _isAgreeProtocol;//是否同意协议
@@ -64,6 +64,12 @@ static const CGFloat kPhotoViewMargin = 25;
 
 @property (nonatomic, assign)BOOL isHaveDian;
 @property (nonatomic, strong)NSMutableArray *imageArr;//图片数组
+@property (weak, nonatomic) IBOutlet UIImageView *aaaa;
+
+@property (weak, nonatomic) IBOutlet UIImageView *pic1;
+@property (weak, nonatomic) IBOutlet UIImageView *pic2;
+@property (weak, nonatomic) IBOutlet UIImageView *pic3;
+
 
 @end
 
@@ -90,12 +96,12 @@ static const CGFloat kPhotoViewMargin = 25;
     
     self.scrollView.alwaysBounceVertical = YES;
     
-    HXPhotoView *photoView = [HXPhotoView photoManager:self.manager];
-    photoView.frame = CGRectMake(kPhotoViewMargin, 0, kSCREEN_WIDTH - kPhotoViewMargin * 2, 0);
-    photoView.delegate = self;
-    photoView.backgroundColor = [UIColor whiteColor];
-    [self.scrollView addSubview:photoView];
-    self.photoView = photoView;
+//    HXPhotoView *photoView = [HXPhotoView photoManager:self.manager];
+//    photoView.frame = CGRectMake(kPhotoViewMargin, 0, kSCREEN_WIDTH - kPhotoViewMargin * 2, 0);
+//    photoView.delegate = self;
+//    photoView.backgroundColor = [UIColor whiteColor];
+//    [self.scrollView addSubview:photoView];
+//    self.photoView = photoView;
     
     [self.view addSubview:self.CalendarView];
     
@@ -110,6 +116,7 @@ static const CGFloat kPhotoViewMargin = 25;
             weakself.CalendarView.hidden = YES;
         });
     };
+    
     _isAgreeProtocol = NO;
     [self postRequest_Category];
     
@@ -201,9 +208,9 @@ static const CGFloat kPhotoViewMargin = 25;
     
     if (_isAgreeProtocol) {
         
-        self.isAgreeImageV.image = [UIImage imageNamed:@"choice"];
+        self.isAgreeImageV.image = [UIImage imageNamed:@"publish_choice"];
     }else{
-        self.isAgreeImageV.image = [UIImage imageNamed:@"nochoice"];
+        self.isAgreeImageV.image = [UIImage imageNamed:@"publish_nochoice"];
     }
     
 }
@@ -216,9 +223,109 @@ static const CGFloat kPhotoViewMargin = 25;
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+- (IBAction)getPicture:(id)sender {
+    
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    //    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    picker.delegate = self;
+    //    // 设置选择后的图片可以被编辑
+    //    picker.allowsEditing = YES;
+    //    [self presentViewController:picker animated:YES completion:nil];
+    //1.获取媒体支持格式
+    NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
+    picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    picker.mediaTypes = @[mediaTypes[0]];
+    //5.其他配置
+    //allowsEditing是否允许编辑，如果值为no，选择照片之后就不会进入编辑界面
+    picker.allowsEditing = YES;
+    //6.推送
+    [self presentViewController:picker animated:YES completion:nil];
+
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    
+    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
+    if ([type isEqualToString:@"public.image"]) {
+        // 先把图片转成NSData
+        UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+        NSData *data;
+        if (UIImagePNGRepresentation(image) == nil) {
+            
+            data = UIImageJPEGRepresentation(image, 0.2);
+        }else {
+            data = UIImageJPEGRepresentation(image, 0.2);
+        }
+        
+        UIImage *picImage = [UIImage imageWithData:data];
+
+        
+        [picker dismissViewControllerAnimated:YES completion:nil];
+        
+        [self.imageArr addObject:picImage];
+    }
+    
+    if (self.imageArr.count > 0){
+        self.pic1.image = self.imageArr[0];
+        if(self.imageArr.count >1){
+            self.pic2.image = self.imageArr[1];
+            if(self.imageArr.count == 3){
+                self.pic3.image = self.imageArr[2];
+            }
+        }
+    }
+}
 
 //提交
 - (IBAction)submit:(id)sender {
+//    
+//    UIImage *picImage = self.imageArr[0];
+//    
+//    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+//    dict[@"token"] = [UserModel defaultUser].token;
+//    dict[@"uid"] = [UserModel defaultUser].uid;
+//    dict[@"type"] = @"1";
+//    
+//    _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];//响应
+//    manager.requestSerializer.timeoutInterval = 10;
+//    // 加上这行代码，https ssl 验证。
+//    [manager setSecurityPolicy:[NetworkManager customSecurityPolicy]];
+//    [manager POST:[NSString stringWithFormat:@"%@%@",URL_Base,kUSER_INFO_SAVE_URL] parameters:dict  constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+//        //将图片以表单形式上传
+//        
+//        if (picImage) {
+//            
+//            NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+//            formatter.dateFormat=@"yyyyMMddHHmmss";
+//            NSString *str=[formatter stringFromDate:[NSDate date]];
+//            NSString *fileName=[NSString stringWithFormat:@"%@.png",str];
+//            NSData *data = UIImagePNGRepresentation(picImage);
+//            [formData appendPartWithFileData:data name:@"pic" fileName:fileName mimeType:@"image/png"];
+//        }
+//        
+//    }progress:^(NSProgress *uploadProgress){
+//        
+//    }success:^(NSURLSessionDataTask *task, id responseObject) {
+//        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+//        
+//        NSLog(@"%@",dic);
+//        
+//        if ([dic[@"code"]integerValue] == SUCCESS_CODE) {
+//
+//            [MBProgressHUD showError:dic[@"message"]];
+//            
+//        }else{
+//            
+//            [MBProgressHUD showError:dic[@"message"]];
+//        }
+//        
+//        [_loadV removeloadview];
+//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//        [_loadV removeloadview];
+//        [MBProgressHUD showError:error.localizedDescription];
+//    }];
     
     if (self.moneyTF.text.length == 0) {
         [MBProgressHUD showError:@"请输入目标金额"];
@@ -244,18 +351,18 @@ static const CGFloat kPhotoViewMargin = 25;
     self.submitBtn.userInteractionEnabled = NO;
     self.submitBtn.backgroundColor = [UIColor lightGrayColor];
     
-    NSMutableArray *imgDataArr = [NSMutableArray array];
+//    NSMutableArray *imgDataArr = [NSMutableArray array];
     
-    for (int i = 0; i < self.imageArr.count; i ++) {
-        NSData *data = nil;
-        if(!UIImagePNGRepresentation(self.imageArr[i])) {
-            data =UIImageJPEGRepresentation(self.imageArr[i],0.1);
-        }else{
-            data =UIImagePNGRepresentation(self.imageArr[i]);
-        }
-        
-        [imgDataArr addObject:data];
-    }
+//    for (int i = 0; i < self.imageArr.count; i ++) {
+//        NSData *data = nil;
+//        if(!UIImagePNGRepresentation(self.imageArr[i])) {
+//            data =UIImageJPEGRepresentation(self.imageArr[i],0.1);
+//        }else{
+//            data =UIImagePNGRepresentation(self.imageArr[i]);
+//        }
+//        
+//        [imgDataArr addObject:data];
+//    }
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     
@@ -283,7 +390,9 @@ static const CGFloat kPhotoViewMargin = 25;
             NSString *fileName=[NSString stringWithFormat:@"%@%d.png",str,i];
             NSString *title = [NSString stringWithFormat:@"photo[%zd]",i];
       
-            [formData appendPartWithFileData:imgDataArr[i] name:title fileName:fileName mimeType:@"image/png"];
+            NSData *data = UIImagePNGRepresentation(self.imageArr[i]);
+            
+            [formData appendPartWithFileData:data name:title fileName:fileName mimeType:@"image/png"];
         }
         
     }progress:^(NSProgress *uploadProgress){
@@ -299,7 +408,7 @@ static const CGFloat kPhotoViewMargin = 25;
         
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         
-//        NSLog(@"%@",dic);
+        NSLog(@"%@",dic);
         
         if ([dic[@"code"] integerValue] == SUCCESS_CODE) {
             
@@ -310,6 +419,7 @@ static const CGFloat kPhotoViewMargin = 25;
             
             [MBProgressHUD showError:dic[@"message"]];
         }
+        
         self.submitBtn.userInteractionEnabled = YES;
         self.submitBtn.backgroundColor = MAIN_COLOR;
         [_loadV removeloadview];
@@ -483,7 +593,7 @@ static const CGFloat kPhotoViewMargin = 25;
         [[PHImageManager defaultManager] requestImageForAsset:model.asset targetSize:size contentMode:PHImageContentModeDefault options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
 
             [self.imageArr addObject:result];
-            
+            self.aaaa.image = result;
         }];
     }
 

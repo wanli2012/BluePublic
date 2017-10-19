@@ -33,6 +33,7 @@
 @property (nonatomic, copy)NSString *must_user_pic;//头像
 @property (nonatomic, copy)NSString *nickname;//昵称
 @property (nonatomic, copy)NSString *linkman;//
+
 @property (nonatomic, assign)CGFloat cellHeight;
 
 @end

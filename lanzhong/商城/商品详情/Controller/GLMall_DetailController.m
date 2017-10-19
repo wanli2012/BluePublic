@@ -9,7 +9,6 @@
 #import "GLMall_DetailController.h"
 #import "GLMall_DetailSelecteCell.h"
 #import "GLMall_DetailCommentCell.h"
-//#import "GLMall_DetailFooterView.h"
 #import <SDCycleScrollView/SDCycleScrollView.h>
 #import "GLShoppingCartController.h"
 #import "GLMall_DetailModel.h"
@@ -19,18 +18,30 @@
 #import "GLConfirmOrderController.h"
 
 #define headerImageHeight 64
+
+
+#define HEADER_VIEW_HEIGHT      400.0f      // 顶部商品图片高度
+#define END_DRAG_SHOW_HEIGHT    80.0f       // 结束拖拽最大值时的显示
+#define BOTTOM_VIEW_HEIGHT      44.0f       // 底部视图高度（加入购物车＼立即购买）
+
+
 @interface GLMall_DetailController ()<UITableViewDelegate,UITableViewDataSource,GLMall_DetailSelecteCellDelegate,UIWebViewDelegate,SDCycleScrollViewDelegate>
 
 {
     BOOL _isDetail;//是否是商品详情
     CGFloat _detailHeight;//商品详情高度
+    
+    // 图文详情开关，
+    BOOL isShowDetail;
+    
+    CGFloat minY;
+    CGFloat maxY;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *headerView;//透视图
 @property (weak, nonatomic) IBOutlet UIView *navView;//导航栏View
 
-//@property (nonatomic, strong)GLMall_DetailFooterView *footerView;//footer
 @property (nonatomic, strong)NSMutableArray *dataSource;//数据源
 
 @property (nonatomic, strong)SDCycleScrollView *cycleScrollView;
@@ -60,6 +71,22 @@
 @property (weak, nonatomic) IBOutlet UIButton *reduceBtn;//购买数量 减
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;//购买数量 加
 
+@property (weak, nonatomic) IBOutlet UIView *secondView;
+@property (weak, nonatomic) IBOutlet UIWebView *detailWebView;
+@property (strong, nonatomic) UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIView *allView;
+
+
+@property (strong, nonatomic) UIView *popTopView;               // 弹出顶部视图
+@property (strong, nonatomic) UIView *popView;                  // 弹出底部视图
+@property (strong, nonatomic) UIView *maskView;                 // 遮罩视图
+@property (strong, nonatomic) UILabel *topTitleLabel;           // 顶部标题
+@property (strong, nonatomic) UILabel *titleLabel;              // 规格标题
+
+@property (strong, nonatomic) UILabel *topMsgLabel;             // 顶部提示信息
+@property (strong, nonatomic) UILabel *bottomMsgLabel;          // 底部提示信息
+
+@property (copy, nonatomic) NSString *popTitle;                 // 点击的代理
 @end
 
 @implementation GLMall_DetailController
@@ -69,6 +96,21 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.navTitleLabel.text = @"商品详情";
+    
+    // 加载图文详情
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [self.detailWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.hao123.com"]]];
+    });
+    self.detailWebView.scrollView.delegate = self;
+    
+    _bottomMsgLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, -END_DRAG_SHOW_HEIGHT, kSCREEN_WIDTH, END_DRAG_SHOW_HEIGHT)];
+    _bottomMsgLabel.font = [UIFont systemFontOfSize:13.0f];
+    _bottomMsgLabel.textAlignment = NSTextAlignmentCenter;
+    _bottomMsgLabel.text = @"下拉返回商品详情";
+    [self.detailWebView.scrollView addSubview:_bottomMsgLabel];
+
     
     self.buyNowBtn.layer.cornerRadius = 5.f;
     self.buyNowBtn.layer.borderColor = YYSRGBColor(24, 97, 228, 1).CGColor;
@@ -83,7 +125,6 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMall_DetailCommentCell" bundle:nil] forCellReuseIdentifier:@"GLMall_DetailCommentCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMall_DetailWebCell" bundle:nil] forCellReuseIdentifier:@"GLMall_DetailWebCell"];
     
-//    self.footerView.webView.delegate = self;
     
     [self.headerView addSubview:self.cycleScrollView];
 
@@ -213,11 +254,6 @@
         return;
     }
     
-//    if ([UserModel defaultUser].isSetTwoPwd == 0) {
-//        [MBProgressHUD showError:@"请先在设置中设置支付密码"];
-//        return;
-//    }
-
     if (self.spec_id.length <= 0) {
         [MBProgressHUD showError:@"还未选择规格"];
         return;
@@ -264,7 +300,6 @@
         [_loadV removeloadview];
         
     }];
-
     
 }
 //去购物车
@@ -278,30 +313,107 @@
 
 - (IBAction)pop:(id)sender {
     
-    [self.navigationController popViewControllerAnimated:YES];
+    if (isShowDetail) {
+        [UIView animateWithDuration:0.4 animations:^{
+            self.allView.transform = CGAffineTransformIdentity;
+        } completion:^(BOOL finished) {
+            isShowDetail = NO;
+        }];
+    }else{
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }
     
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
-    if (scrollView.contentOffset.y <= 0) {
-        
-        self.navView.backgroundColor = YYSRGBColor(255, 255, 255,0);
-        
-        self.navTitleLabel.textColor = YYSRGBColor(85, 85, 85, 0);
-    }else{
-        self.navView.backgroundColor = YYSRGBColor(255, 255, 255,ABS(scrollView.contentOffset.y)/headerImageHeight);
-        self.navTitleLabel.textColor = YYSRGBColor(85, 85, 85, ABS(scrollView.contentOffset.y)/headerImageHeight);
+#pragma mark - UIScrollViewDelegate
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat offset = scrollView.contentOffset.y;
+    if (scrollView == self.tableView) {
+        // 重新赋值，就不会有淘宝用力拖拽时的回弹
+        self.scrollView.contentOffset = CGPointMake(self.scrollView.contentOffset.x, 0);
+        if (self.tableView.contentOffset.y >= 0 &&  self.tableView.contentOffset.y <= HEADER_VIEW_HEIGHT) {
+            self.scrollView.contentOffset = CGPointMake(self.scrollView.contentOffset.x, -offset / 2.0f);
+//            self.navView.alpha = offset / HEADER_VIEW_HEIGHT;
+        } else if (self.tableView.contentOffset.y < 0) {
+//            self.navView.alpha = 0.0f;
+            if (offset <= -END_DRAG_SHOW_HEIGHT) {
+                _topMsgLabel.text = @"释放查看我的喜爱";
+            } else {
+                _topMsgLabel.text = @"下拉查看我的喜爱";
+            }
+        } else {
+//            self.navView.alpha = 1.0f;
+        }
+    } else {
+        // WebView中的ScrollView
+        if (offset <= -END_DRAG_SHOW_HEIGHT) {
+            _bottomMsgLabel.text = @"释放返回商品详情";
+        } else {
+            _bottomMsgLabel.text = @"下拉返回商品详情";
+        }
     }
 }
 
-//#pragma mark - GLMall_DetailSpecCellDelegate 规格 数量
-//- (void)changeNum:(BOOL)isAdd{
+/**
+ *  每次拖拽都会回调
+ *  @param decelerate YES时，为滑动减速动画，NO时，没有滑动减速动画
+ */
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (decelerate) {
+        CGFloat offset = scrollView.contentOffset.y;
+        if (scrollView == self.tableView) {
+            if (offset < 0) {
+                minY = MIN(minY, offset);
+            } else {
+                maxY = MAX(maxY, offset);
+            }
+        } else {
+            minY = MIN(minY, offset);
+        }
+        
+        // 滚到图文详情
+        if (maxY >= self.tableView.contentSize.height - kSCREEN_HEIGHT + END_DRAG_SHOW_HEIGHT + BOTTOM_VIEW_HEIGHT) {
+            isShowDetail = NO;
+            [UIView animateWithDuration:0.4 animations:^{
+                self.allView.transform = CGAffineTransformTranslate(self.allView.transform, 0, - (kSCREEN_HEIGHT - BOTTOM_VIEW_HEIGHT));
+            } completion:^(BOOL finished) {
+                maxY = 0.0f;
+                isShowDetail = YES;
+            }];
+        }
+        
+        // 滚到商品详情
+        if (minY <= -END_DRAG_SHOW_HEIGHT && isShowDetail) {
+            [UIView animateWithDuration:0.4 animations:^{
+                self.allView.transform = CGAffineTransformIdentity;
+            } completion:^(BOOL finished) {
+                minY = 0.0f;
+                isShowDetail = NO;
+                _bottomMsgLabel.text = @"下拉返回商品详情";
+            }];
+        }
+    }
+}
+
+/**
+ *  带有滑动减速动画效果时，才会调用
+ */
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    //    NSLog(@"END Decelerating");
+}
+
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 //    
-//    if (isAdd) {
-//        NSLog(@"加法");
+//    if (scrollView.contentOffset.y <= 0) {
+//        
+//        self.navView.backgroundColor = YYSRGBColor(255, 255, 255,0);
+//        
+//        self.navTitleLabel.textColor = YYSRGBColor(85, 85, 85, 0);
 //    }else{
-//        NSLog(@"减法");
+//        self.navView.backgroundColor = YYSRGBColor(255, 255, 255,ABS(scrollView.contentOffset.y)/headerImageHeight);
+//        self.navTitleLabel.textColor = YYSRGBColor(85, 85, 85, ABS(scrollView.contentOffset.y)/headerImageHeight);
 //    }
 //}
 
@@ -352,101 +464,109 @@
 
 #pragma mark - UITableViewDelegate UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if(section == 0){
-        return 1;
-    }else{
-         if (_isDetail) {
-             
-             return 1;
-         }else{
-             
-             return self.model.comment_data.count;
-         }
-    }
+//    if(section == 0){
+//        return 1;
+//    }else{
+//         if (_isDetail) {
+//             
+//             return 1;
+//         }else{
+//             
+//             return self.model.comment_data.count;
+//         }
+//    }
+    
+    return self.model.comment_data.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.section == 0) {
-        
-        switch (indexPath.row) {
-                
-            case 0:
-            {
-                GLMall_DetailSelecteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMall_DetailSelecteCell"];
-                cell.selectionStyle = 0;
-                cell.delegate = self;
-                return cell;
-                
-            }
-                break;
-                
-            default:
-            {
-                GLMall_DetailCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMall_DetailCommentCell"];
-                cell.selectionStyle = 0;
-                return cell;
-                
-            }
-                break;
-        }
-        
-    }else{
-        
-        if (_isDetail) {
-            
-            GLMall_DetailWebCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMall_DetailWebCell"];
-            cell.selectionStyle = 0;
+    GLMall_DetailCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMall_DetailCommentCell"];
+    cell.selectionStyle = 0;
+    
+    cell.model = self.model.comment_data[indexPath.row];
+    return cell;
 
-            cell.url = self.model.goods_details;
-            
-            return cell;
-            
-        }else{
-            
-            GLMall_DetailCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMall_DetailCommentCell"];
-            cell.selectionStyle = 0;
-            
-            
-            cell.model = self.model.comment_data[indexPath.row];
-            
-            return cell;
-        }
-
-    }
+//    if (indexPath.section == 0) {
+//        
+//        GLMall_DetailSelecteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMall_DetailSelecteCell"];
+//        cell.selectionStyle = 0;
+//        cell.delegate = self;
+//        return cell;
+//        
+//    }else{
+//        
+//        if (_isDetail) {
+//            
+//            GLMall_DetailWebCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMall_DetailWebCell"];
+//            cell.selectionStyle = 0;
+//
+//            cell.url = self.model.goods_details;
+//            
+//            return cell;
+//            
+//        }else{
+//            
+//            GLMall_DetailCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMall_DetailCommentCell"];
+//            cell.selectionStyle = 0;
+//            
+//            cell.model = self.model.comment_data[indexPath.row];
+//            return cell;
+//        }
+//    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.section == 0){
-        
-        switch (indexPath.row) {
-
-            case 0:
-            {
-                return 50;
-            }
-                break;
-            default:
-            {
-                tableView.rowHeight = UITableViewAutomaticDimension;
-                tableView.estimatedRowHeight = 44;
-                return tableView.rowHeight;
-            }
-                break;
-        }
-        
-    }else{
-        
-        tableView.rowHeight = UITableViewAutomaticDimension;
-        tableView.estimatedRowHeight = 44;
-        return tableView.rowHeight;
-    }
+    GLDetail_comment_data * model = self.model.comment_data[indexPath.row];
+    return model.cellHeight;
+//    if(indexPath.section == 0){
+//
+//        return 50;
+//        
+//    }else{
+//        
+//        if (_isDetail) {
+//
+//            tableView.rowHeight = UITableViewAutomaticDimension;
+//            tableView.estimatedRowHeight = 44;
+//            return tableView.rowHeight;
+//            
+//        }else{
+//            
+//            GLDetail_comment_data * model = self.model.comment_data[indexPath.row];
+//            return model.cellHeight;
+// 
+//        }
+//    }
+    
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
+    UIView *headerV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 44)];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, 44)];
+    label.text = @"用户评论";
+    label.textColor = MAIN_COLOR;
+    label.font = [UIFont systemFontOfSize:15];
+    
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 44 - 1, kSCREEN_WIDTH, 1)];
+    lineView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
+    [headerV addSubview:label];
+    [headerV addSubview:lineView];
+    
+    return headerV;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    return 44;
+}
 
 #pragma mark - SDCycleScrollViewDelegate 点击看大图
 /** 点击图片回调 */
@@ -467,14 +587,7 @@
 }
 #pragma mark - 懒加载
 
-//- (GLMall_DetailFooterView *)footerView{
-//    if (!_footerView) {
-//        _footerView = [[GLMall_DetailFooterView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 300)];
-//        
-//    }
-//    
-//    return _footerView;
-//}
+
 - (NSMutableArray *)dataSource{
     if (!_dataSource) {
         _dataSource = [NSMutableArray array];

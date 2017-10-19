@@ -17,11 +17,24 @@
 - (CGFloat)cellHeight{
     
   
-   CGSize replySize = [self.reply boundingRectWithSize:CGSizeMake(kSCREEN_WIDTH - 80, kSCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil].size;
+//   CGSize replySize = [self.reply boundingRectWithSize:CGSizeMake(kSCREEN_WIDTH - 80, kSCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil].size;
+    
     CGSize commentSize = [self.comment boundingRectWithSize:CGSizeMake(kSCREEN_WIDTH - 70, kSCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil].size;
 
-    
-    return 70 + replySize.height + commentSize.height;
+    CGRect replyRect;
+    if(self.reply.length == 0){
+        
+        replyRect = CGRectZero;
+        return 70 + commentSize.height + replyRect.size.height;
+        
+    }else{
+        
+        NSString *replyStr = [NSString stringWithFormat:@"回复:%@",self.reply];
+        replyRect = [replyStr boundingRectWithSize:CGSizeMake(kSCREEN_WIDTH - 85, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:12]} context:nil];
+        return 90 + commentSize.height + replyRect.size.height;
+    }
+
+//    return 70 + replyRect.size.height + commentSize.height;
 }
 
 @end

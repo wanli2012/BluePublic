@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GLMine_ShareModel.h"
 
 @interface GLMine_ShareRecordCell : UITableViewCell
+
+@property (nonatomic, strong)GLMine_ShareModel *model;
 
 @end

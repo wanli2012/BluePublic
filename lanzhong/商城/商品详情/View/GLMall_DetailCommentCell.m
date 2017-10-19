@@ -17,6 +17,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 
+@property (weak, nonatomic) IBOutlet UIView *replyView;//回复View
+@property (weak, nonatomic) IBOutlet UILabel *replyLabel;
+
 @end
 
 @implementation GLMall_DetailCommentCell
@@ -33,8 +36,23 @@
     
     [self.picImageV sd_setImageWithURL:[NSURL URLWithString:model.must_user_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     self.dateLabel.text = [formattime formateTimeOfDate:model.addtime];
-    self.nameLabel.text = model.uname;
     self.contentLabel.text = model.comment;
+    self.replyLabel.text = [NSString stringWithFormat:@"回复:%@",model.reply];
+    
+    if (model.nickname.length == 0) {
+        
+        self.nameLabel.text = model.uname;
+        
+    }else{
+        
+        self.nameLabel.text = model.nickname;
+    }
+    
+    if(model.reply.length == 0){
+        self.replyView.hidden = YES;
+    }else{
+        self.replyView.hidden = NO;
+    }
     
 }
 

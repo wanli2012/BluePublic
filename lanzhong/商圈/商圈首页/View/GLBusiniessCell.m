@@ -26,6 +26,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *raisedMoneyLabel;//已筹金额
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;//日期
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *progressViewWidth;
+
 @end
 
 @implementation GLBusiniessCell
@@ -57,9 +59,15 @@
     
     self.participationLabel.text = [NSString stringWithFormat:@"参与人数:%@", model.invest_count];
     
-    self.pesentLabel.text = [NSString stringWithFormat:@"%.2f%%",[model.draw_money floatValue]/[model.admin_money floatValue] * 100];
     
-    self.progressView.width = self.bgProgressView.width * [model.draw_money floatValue]/[model.admin_money floatValue];
+    CGFloat ratio;
+    if ([model.admin_money floatValue] == 0) {
+        ratio = 0.f;
+    }else{
+        ratio = [model.draw_money floatValue]/[model.admin_money floatValue];
+    }
+    self.pesentLabel.text = [NSString stringWithFormat:@"%.2f%%",ratio];
+    self.progressViewWidth.constant = self.bgProgressView.width * ratio;
     
     self.dateLabel.text = [formattime formateTimeOfDate3:model.time];
 //1待审核(审核中) 2审核失败 3审核成功（审核成功认定为筹款中）4筹款停止 5筹款失败  6筹款完成 7项目进行 8项目暂停 9项目失败 10项目完成

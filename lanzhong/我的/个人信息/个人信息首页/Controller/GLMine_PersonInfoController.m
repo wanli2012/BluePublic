@@ -8,8 +8,9 @@
 
 #import "GLMine_PersonInfoController.h"
 #import "GLMine_PersonInfo_AddressChooseController.h"//地址选择
+#import <SDWebImage/UIImageView+WebCache.h>
 
-@interface GLMine_PersonInfoController ()
+@interface GLMine_PersonInfoController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *picImageV;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewWidth;
@@ -37,8 +38,11 @@
     self.navigationItem.title = @"个人信息";
     
     self.picImageV.layer.cornerRadius = self.picImageV.height/2;
+    
+    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:[UserModel defaultUser].user_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    
     self.contentViewWidth.constant = kSCREEN_WIDTH;
-    self.contentViewHeight.constant = kSCREEN_HEIGHT - 64;
+    self.contentViewHeight.constant = 530;
     self.ensureBtn.layer.cornerRadius = 5.f;
     
     self.phoneTF.text = [UserModel defaultUser].phone;
@@ -49,6 +53,14 @@
     self.IDCardNumTF.text = [UserModel defaultUser].idcard;
     
     self.nickNameLabel.text = [UserModel defaultUser].nickname;
+    
+    if ([[UserModel defaultUser].real_state integerValue] == 0 || [[UserModel defaultUser].real_state integerValue] == 2) {
+        self.trueNameTF.enabled = YES;
+        self.IDCardNumTF.enabled = YES;
+    }else{
+        self.trueNameTF.enabled = NO;
+        self.IDCardNumTF.enabled = NO;
+    }
     
     switch ([[UserModel defaultUser].real_state integerValue]) {//实名认证状态 0未认证  1成功   2失败   3审核中
         case 0:
@@ -76,11 +88,9 @@
             [self.ensureBtn setTitle:@"审核中" forState:UIControlStateNormal];
         }
             break;
-            
         default:
             break;
     }
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -132,6 +142,115 @@
 //头像修改
 - (IBAction)picModify:(id)sender {
     
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"头像修改" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *picture = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        //    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        picker.delegate = self;
+        //    // 设置选择后的图片可以被编辑
+        //    picker.allowsEditing = YES;
+        //    [self presentViewController:picker animated:YES completion:nil];
+        //1.获取媒体支持格式
+        NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
+        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        picker.mediaTypes = @[mediaTypes[0]];
+        //5.其他配置
+        //allowsEditing是否允许编辑，如果值为no，选择照片之后就不会进入编辑界面
+        picker.allowsEditing = YES;
+        //6.推送
+        [self presentViewController:picker animated:YES completion:nil];
+
+    }];
+    
+    UIAlertAction *camera = [UIAlertAction actionWithTitle:@"相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            // 设置拍照后的图片可以被编辑
+            picker.allowsEditing = YES;
+            picker.sourceType = sourceType;
+            [self presentViewController:picker animated:YES completion:nil];
+        }else {
+            
+        }
+
+    }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alertVC addAction:picture];
+    [alertVC addAction:camera];
+    [alertVC addAction:cancel];
+    [self presentViewController:alertVC animated:YES completion:nil];
+}
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    
+    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
+    if ([type isEqualToString:@"public.image"]) {
+        // 先把图片转成NSData
+        UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+        NSData *data;
+        if (UIImagePNGRepresentation(image) == nil) {
+            
+            data = UIImageJPEGRepresentation(image, 0.2);
+        }else {
+            data = UIImageJPEGRepresentation(image, 0.2);
+        }
+        
+        UIImage *picImage = [UIImage imageWithData:data];
+        
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        dict[@"token"] = [UserModel defaultUser].token;
+        dict[@"uid"] = [UserModel defaultUser].uid;
+        dict[@"type"] = @"1";
+//        dict[@"pic"] = data;
+        
+        _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+        manager.responseSerializer = [AFHTTPResponseSerializer serializer];//响应
+        manager.requestSerializer.timeoutInterval = 10;
+        // 加上这行代码，https ssl 验证。
+        [manager setSecurityPolicy:[NetworkManager customSecurityPolicy]];
+        [manager POST:[NSString stringWithFormat:@"%@%@",URL_Base,kUSER_INFO_SAVE_URL] parameters:dict  constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            //将图片以表单形式上传
+            
+            if (picImage) {
+                
+                NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+                formatter.dateFormat=@"yyyyMMddHHmmss";
+                NSString *str=[formatter stringFromDate:[NSDate date]];
+                NSString *fileName=[NSString stringWithFormat:@"%@.png",str];
+                NSData *data = UIImagePNGRepresentation(picImage);
+                [formData appendPartWithFileData:data name:@"pic" fileName:fileName mimeType:@"image/png"];
+            }
+            
+        }progress:^(NSProgress *uploadProgress){
+            
+        }success:^(NSURLSessionDataTask *task, id responseObject) {
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            
+            if ([dic[@"code"]integerValue] == SUCCESS_CODE) {
+                
+                self.picImageV.image = [UIImage imageWithData:data];
+                [MBProgressHUD showError:dic[@"message"]];
+                
+            }else{
+                
+                [MBProgressHUD showError:dic[@"message"]];
+            }
+            
+            [_loadV removeloadview];
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            [_loadV removeloadview];
+            [MBProgressHUD showError:error.localizedDescription];
+        }];
+        
+        [picker dismissViewControllerAnimated:YES completion:nil];
+        
+    }
 }
 
 //昵称修改
@@ -161,23 +280,48 @@
             [_loadV removeloadview];
             
             if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
-                
+                [MBProgressHUD showSuccess:responseObject[@"message"]];
+                [self refresh];
             }
             
             [MBProgressHUD showError:responseObject[@"message"]];
             
         } enError:^(NSError *error) {
             [_loadV removeloadview];
-            
         }];
-
     }];
     
     [alertVC addAction:cancel];
     [alertVC addAction:ok];
     
     [self presentViewController:alertVC animated:YES completion:nil];
+}
+
+//刷新数据
+-(void)refresh {
     
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"token"] = [UserModel defaultUser].token;
+    dict[@"uid"] = [UserModel defaultUser].uid;
+    
+    [NetworkManager requestPOSTWithURLStr:kREFRESH_URL paramDic:dict finish:^(id responseObject) {
+        
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+            
+            [UserModel defaultUser].umoney = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"umoney"]];
+            [UserModel defaultUser].invest_count = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"invest_count"]];
+            [UserModel defaultUser].item_count = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"item_count"]];
+            [UserModel defaultUser].user_server = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"user_server"]];
+            [UserModel defaultUser].real_state = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"real_state"]];
+            [UserModel defaultUser].nickname = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"nickname"]];
+            
+            [usermodelachivar achive];
+            self.nickNameLabel.text = [UserModel defaultUser].nickname;
+        }
+        
+    } enError:^(NSError *error) {
+
+    }];
 }
 
 - (IBAction)address:(id)sender {

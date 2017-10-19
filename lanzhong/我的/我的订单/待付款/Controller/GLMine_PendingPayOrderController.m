@@ -11,6 +11,7 @@
 
 #import "LBMyOrdersHeaderView.h"
 #import "LBMyOrdersModel.h"
+#import "GLMine_RicePayController.h"
 
 @interface GLMine_PendingPayOrderController ()
 
@@ -188,7 +189,6 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     LBMyOrdersModel *sectionModel = self.dataarr[section];
     
-    
     LBMyOrdersHeaderView *headerview = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"LBMyOrdersHeaderView"];
     
     if (!headerview) {
@@ -206,7 +206,7 @@
     [headerview.payBt setTitle:@"去支付" forState:UIControlStateNormal];
     
     headerview.totalPriceLabel.hidden = NO;
-    headerview.totalPriceLabel.text = [NSString stringWithFormat:@"需付款:¥ 519.80"];
+    headerview.totalPriceLabel.text = [NSString stringWithFormat:@"需付款:%@",sectionModel.pay_money];
     headerview.totalPriceLabel.textAlignment = NSTextAlignmentRight;
     headerview.totalPriceLabel.textColor = [UIColor lightGrayColor];
     
@@ -214,11 +214,21 @@
     [headerview.DeleteBt setTitle:@"取消订单" forState:UIControlStateNormal];
     
     headerview.returnPayBt = ^(NSInteger index){
-        NSLog(@"去支付%zd",index);
+
+        LBMyOrdersModel *model = self.dataarr[index];
+        
+        self.hidesBottomBarWhenPushed = YES;
+        GLMine_RicePayController *payVC = [[GLMine_RicePayController alloc] init];
+        payVC.order_id = model.order_id;
+        payVC.order_sn = model.order_num;
+        payVC.orderPrice = model.pay_money;
+        
+        [self.navigationController pushViewController:payVC animated:YES];
     };
     
     headerview.returnDeleteBt = ^(NSInteger index){
         NSLog(@"取消订单%zd",index);
+        
     };
 
     return headerview;

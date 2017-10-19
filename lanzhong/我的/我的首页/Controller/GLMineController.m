@@ -117,9 +117,11 @@
             [UserModel defaultUser].item_count = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"item_count"]];
             [UserModel defaultUser].user_server = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"user_server"]];
             [UserModel defaultUser].real_state = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"real_state"]];
+            [UserModel defaultUser].nickname = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"nickname"]];
+            [UserModel defaultUser].user_pic = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"user_pic"]];
             
             [usermodelachivar achive];
-  
+            
             self.participateLabel.text = [UserModel defaultUser].invest_count;
             self.publishLabel.text = [UserModel defaultUser].item_count;
             self.banlanceLabel.text = [UserModel defaultUser].umoney;

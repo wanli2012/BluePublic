@@ -14,6 +14,24 @@
 
 @implementation GLDetail_comment_data
 
+- (CGFloat)cellHeight{
+    
+    CGRect commentRect = [self.comment boundingRectWithSize:CGSizeMake(kSCREEN_WIDTH - 75, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:12]} context:nil];
+    
+    CGRect replyRect;
+    if(self.reply.length == 0){
+        
+        replyRect = CGRectZero;
+        return 70 + commentRect.size.height + replyRect.size.height;
+        
+    }else{
+        
+        NSString *replyStr = [NSString stringWithFormat:@"回复:%@",self.reply];
+        replyRect = [replyStr boundingRectWithSize:CGSizeMake(kSCREEN_WIDTH - 85, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:12]} context:nil];
+        return 90 + commentRect.size.height + replyRect.size.height;
+    }
+}
+
 @end
 
 @implementation GLDetail_spec

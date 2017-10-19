@@ -140,6 +140,7 @@
                 <outlet property="participationLabel" destination="Mrw-lJ-wHE" id="xsu-Yt-i7H"/>
                 <outlet property="pesentLabel" destination="saH-jr-SzV" id="xKk-8h-IMK"/>
                 <outlet property="progressView" destination="ezl-J7-WcQ" id="dTW-7g-2lb"/>
+                <outlet property="progressViewWidth" destination="rcu-NT-g88" id="K5u-tN-nqZ"/>
                 <outlet property="publishLabel" destination="i4r-ak-vVF" id="ZUb-7P-GCR"/>
                 <outlet property="raisedMoneyLabel" destination="SPX-Q3-CKu" id="PQL-xq-eKA"/>
                 <outlet property="targetMoneyLabel" destination="nn7-aC-cMP" id="iOh-KK-j5R"/>

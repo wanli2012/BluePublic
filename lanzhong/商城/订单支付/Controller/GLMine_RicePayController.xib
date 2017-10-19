@@ -116,7 +116,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OcX-aH-zfv">
-                    <rect key="frame" x="10" y="617" width="355" height="40"/>
+                    <rect key="frame" x="10" y="547" width="355" height="40"/>
                     <color key="backgroundColor" red="2.38126886e-05" green="0.49598097800000002" blue="0.99889487030000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="ZQr-cM-OAE"/>
@@ -129,7 +129,7 @@
                     </connections>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kQ5-1w-lAF">
-                    <rect key="frame" x="0.0" y="141" width="375" height="466"/>
+                    <rect key="frame" x="0.0" y="141" width="375" height="396"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="MnV-6S-zce"/>
@@ -145,12 +145,13 @@
                 <constraint firstItem="gBS-C5-KHR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Uml-Bi-N0W"/>
                 <constraint firstItem="kQ5-1w-lAF" firstAttribute="top" secondItem="gBS-C5-KHR" secondAttribute="bottom" constant="1" id="Xpg-mJ-u09"/>
                 <constraint firstItem="OcX-aH-zfv" firstAttribute="top" secondItem="kQ5-1w-lAF" secondAttribute="bottom" constant="10" id="ZkN-AO-4jb"/>
-                <constraint firstAttribute="bottom" secondItem="OcX-aH-zfv" secondAttribute="bottom" constant="10" id="a3Q-TN-NaN"/>
+                <constraint firstAttribute="bottom" secondItem="OcX-aH-zfv" secondAttribute="bottom" constant="80" id="a3Q-TN-NaN"/>
                 <constraint firstAttribute="trailing" secondItem="kQ5-1w-lAF" secondAttribute="trailing" id="npM-bF-f0c"/>
                 <constraint firstItem="gBS-C5-KHR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="rFz-yD-oDX"/>
                 <constraint firstItem="OcX-aH-zfv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="tZG-gO-Uid"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
+            <point key="canvasLocation" x="32" y="45"/>
         </view>
     </objects>
     <resources>

@@ -77,7 +77,6 @@
         [weakSelf postRequest:YES];
 
     }];
-
     // 设置文字
     [header setTitle:@"快扯我，快点" forState:MJRefreshStateIdle];
     
@@ -110,7 +109,6 @@
         
                 self.model = [GLBusiness_DetailModel mj_objectWithKeyValues:responseObject[@"data"]];
                 [self headerViewFuzhi];
-                
             }
             
         }else{
@@ -149,12 +147,16 @@
         }
     }
    
-    CGFloat raisedMoney = [self.model.draw_money floatValue];
-    CGFloat targetMoney = [self.model.admin_money floatValue];
-    
-    self.progressViewWidth.constant = self.bgProgressView.width * (raisedMoney / targetMoney);
-    self.progressLeftConstrait.constant = self.bgProgressView.width * (raisedMoney / targetMoney);
-    self.progressLabel.text = [NSString stringWithFormat:@"%.2f%%",raisedMoney/targetMoney * 100];
+    CGFloat ratio;
+    if ([self.model.admin_money floatValue] == 0) {
+        ratio = 0.f;
+    }else{
+        ratio = [self.model.draw_money floatValue]/[self.model.admin_money floatValue];
+    }
+
+    self.progressViewWidth.constant = self.bgProgressView.width * ratio;
+    self.progressLeftConstrait.constant = self.bgProgressView.width * ratio;
+    self.progressLabel.text = [NSString stringWithFormat:@"%.2f%%",ratio * 100];
     
     NSDate *date = [NSDate date];
     
@@ -388,32 +390,6 @@
     }
     return 6;
 }
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-//    if (section == 1) {
-//        
-//        UIView *sectionHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 40)];
-//        sectionHeader.backgroundColor = [UIColor whiteColor];
-//        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 60, 40)];
-//        label.text = @"评论";
-//        label.textColor = [UIColor darkTextColor];
-//        label.font = [UIFont systemFontOfSize:14];
-//        [sectionHeader addSubview:label];
-//        
-//        return sectionHeader;
-//    }else{
-//        
-//        return nil;
-//    }
-//    
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-//    if (section == 1) {
-//        return 40;
-//    }
-//    return 0;
-//}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     switch (indexPath.section) {
@@ -422,8 +398,7 @@
             if (indexPath.row == 0) {
                 GLBusiness_DetailProjectCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLBusiness_DetailProjectCell"];
                 cell.selectionStyle = 0;
-                
-//                cell.detailStr = self.model.details;
+
                 cell.dataSourceArr = self.model.sev_photo;
                 cell.detailLabel.text = self.model.info;
                 return cell;
@@ -432,7 +407,7 @@
                 
                 GLBusiness_ChooseCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLBusiness_ChooseCell"];
                 cell.selectionStyle = 0;
-//                cell.webView.delegate = self;
+
                 cell.delegate = self;
                 
                 return cell;
@@ -463,15 +438,16 @@
         if(indexPath.row == 1){
          
             return 180;
+        }else{
+            
+            tableView.rowHeight = UITableViewAutomaticDimension;
+            tableView.estimatedRowHeight = 44;
+            return tableView.rowHeight;
         }
     }
     
-    tableView.rowHeight = UITableViewAutomaticDimension;
-    tableView.estimatedRowHeight = 44;
+      return self.model.invest_list[indexPath.row].cellHeight;
     
-//      return self.model.invest_list[indexPath.row].cellHeight;
-    
-    return tableView.rowHeight;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
