@@ -250,6 +250,8 @@
 		4A9F57161F920B0800341A31 /* LBMyOrderListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F57121F920B0800341A31 /* LBMyOrderListTableViewCell.m */; };
 		4A9F57171F920B0800341A31 /* LBMyOrderListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9F57131F920B0800341A31 /* LBMyOrderListTableViewCell.xib */; };
 		4A9F57181F920B0800341A31 /* LBMyOrdersHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F57151F920B0800341A31 /* LBMyOrdersHeaderView.m */; };
+		4AA395E61F9A2DE000FAFA4F /* GLPay_CompletedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA395E51F9A2DE000FAFA4F /* GLPay_CompletedModel.m */; };
+		4AA395E91F9A516000FAFA4F /* GLMine_RicePayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA395E81F9A516000FAFA4F /* GLMine_RicePayModel.m */; };
 		4ADCA6F71F989D85007D0E4D /* GLMine_ShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADCA6F61F989D85007D0E4D /* GLMine_ShareModel.m */; };
 		4ADDD16A1F88635200C95F9C /* 登录注册.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4ADDD1691F88635200C95F9C /* 登录注册.xcassets */; };
 		4ADDD16E1F88652100C95F9C /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADDD16D1F88652100C95F9C /* NetworkManager.m */; };
@@ -748,6 +750,10 @@
 		4A9F57131F920B0800341A31 /* LBMyOrderListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LBMyOrderListTableViewCell.xib; sourceTree = "<group>"; };
 		4A9F57141F920B0800341A31 /* LBMyOrdersHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBMyOrdersHeaderView.h; sourceTree = "<group>"; };
 		4A9F57151F920B0800341A31 /* LBMyOrdersHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBMyOrdersHeaderView.m; sourceTree = "<group>"; };
+		4AA395E41F9A2DE000FAFA4F /* GLPay_CompletedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLPay_CompletedModel.h; sourceTree = "<group>"; };
+		4AA395E51F9A2DE000FAFA4F /* GLPay_CompletedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLPay_CompletedModel.m; sourceTree = "<group>"; };
+		4AA395E71F9A516000FAFA4F /* GLMine_RicePayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_RicePayModel.h; sourceTree = "<group>"; };
+		4AA395E81F9A516000FAFA4F /* GLMine_RicePayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_RicePayModel.m; sourceTree = "<group>"; };
 		4ADCA6F51F989D85007D0E4D /* GLMine_ShareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_ShareModel.h; sourceTree = "<group>"; };
 		4ADCA6F61F989D85007D0E4D /* GLMine_ShareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_ShareModel.m; sourceTree = "<group>"; };
 		4ADDD1691F88635200C95F9C /* 登录注册.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "登录注册.xcassets"; sourceTree = "<group>"; };
@@ -1482,6 +1488,8 @@
 		4A18B8DC1F943F9800E9B387 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4AA395E71F9A516000FAFA4F /* GLMine_RicePayModel.h */,
+				4AA395E81F9A516000FAFA4F /* GLMine_RicePayModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2873,6 +2881,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		4AA395E31F9A2DCD00FAFA4F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4AA395E41F9A2DE000FAFA4F /* GLPay_CompletedModel.h */,
+				4AA395E51F9A2DE000FAFA4F /* GLPay_CompletedModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		4ADDD16B1F88652100C95F9C /* 网络请求 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3067,6 +3084,7 @@
 			children = (
 				4ADEBB5D1F7E481D00C50087 /* Controller */,
 				4ADEBB5E1F7E481D00C50087 /* View */,
+				4AA395E31F9A2DCD00FAFA4F /* Model */,
 			);
 			path = "支付完成";
 			sourceTree = "<group>";
@@ -3963,6 +3981,7 @@
 				4A509B861F872BC200D794FB /* GLMine_MyMessage_SupportController.m in Sources */,
 				4AF1092B1F78DBB500CB51FA /* UINavigationController+WXSTransition.m in Sources */,
 				4ADDD1A11F88A8C900C95F9C /* GLMall_LogisticsCell.m in Sources */,
+				4AA395E91F9A516000FAFA4F /* GLMine_RicePayModel.m in Sources */,
 				4A05EEA01F8C97380095DBCF /* HXPhotoViewCell.m in Sources */,
 				4ADDD1871F88702600C95F9C /* GLMine_PersonInfo_AddressCell.m in Sources */,
 				F9BB80251F7A440100867514 /* MenuScreeningView.m in Sources */,
@@ -4073,6 +4092,7 @@
 				4A53E8341F7A240F0021D9E0 /* GLMall_DetailController.m in Sources */,
 				4AF109411F78DBB500CB51FA /* XBConst.m in Sources */,
 				4A509B431F87266600D794FB /* GLHome_NoticeCell.m in Sources */,
+				4AA395E61F9A2DE000FAFA4F /* GLPay_CompletedModel.m in Sources */,
 				4AF109301F78DBB500CB51FA /* WXSTransitionManager+BrickAnimation.m in Sources */,
 				4AF1092E1F78DBB500CB51FA /* WXSPercentDrivenInteractiveTransition.m in Sources */,
 				4A165C321F86241800D0C34B /* GLMine_AddCardController.m in Sources */,

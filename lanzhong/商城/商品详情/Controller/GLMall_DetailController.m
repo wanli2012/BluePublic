@@ -164,8 +164,6 @@
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     
-    self.goods_id = @"8";
-    
     dic[@"goods_id"] = self.goods_id;
     
     _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
@@ -275,8 +273,6 @@
     }
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    
-    self.goods_id = @"8";
     
     dic[@"uid"] = [UserModel defaultUser].uid;
     dic[@"token"] = [UserModel defaultUser].token;

@@ -118,9 +118,12 @@
     
     GLMine_EvaluatingController *evaluateVC = [[GLMine_EvaluatingController alloc] init];
     evaluateVC.model = self.models[index];
+    __weak __typeof(self) weakSelf = self;
+    evaluateVC.block = ^(){
+        [weakSelf postRequest:YES];
+    };
     
     [vc.navigationController pushViewController:evaluateVC animated:YES];
-    
 }
 
 - (GLMine_EvaluateController *)viewController

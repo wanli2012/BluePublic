@@ -10,17 +10,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="105" id="KGk-i7-Jjw" customClass="GLPublish_ProjectCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="105"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="144" id="KGk-i7-Jjw" customClass="GLPublish_ProjectCell">
+            <rect key="frame" x="0.0" y="0.0" width="328" height="144"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="105"/>
+                <rect key="frame" x="0.0" y="0.0" width="328" height="144"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timg" translatesAutoresizingMaskIntoConstraints="NO" id="o3m-q2-oFn">
-                        <rect key="frame" x="10" y="10" width="130" height="83"/>
+                        <rect key="frame" x="10" y="10" width="130" height="80"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="130" id="96P-c9-b2i"/>
+                            <constraint firstAttribute="height" constant="80" id="DvW-Sb-W39"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="东城水利开发项目" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oAT-ae-sck">
@@ -30,45 +31,45 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="项目前景非常好,政府投资非常大,能挣很多钱,反正前程是大大的有" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHw-2D-iEK">
-                        <rect key="frame" x="150" y="37" width="160" height="29"/>
+                        <rect key="frame" x="150" y="37" width="168" height="29"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共筹" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RjK-cT-Vso">
-                        <rect key="frame" x="150" y="79" width="23" height="14"/>
+                        <rect key="frame" x="150" y="76" width="23" height="14"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mK2-wz-AYf">
-                        <rect key="frame" x="0.0" y="103" width="320" height="1"/>
+                        <rect key="frame" x="0.0" y="143" width="328" height="1"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="xsC-OW-J1u"/>
                         </constraints>
                     </view>
                     <view clipsSubviews="YES" alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VIa-Ns-mka">
-                        <rect key="frame" x="10" y="73" width="130" height="20"/>
+                        <rect key="frame" x="10" y="70" width="130" height="20"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="ZdL-YV-D9W"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="进行中..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7YV-96-SSC">
-                        <rect key="frame" x="10" y="73" width="130" height="20"/>
+                        <rect key="frame" x="10" y="70" width="130" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="共筹 123.4万元" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DeJ-3H-P7j">
-                        <rect key="frame" x="233" y="79" width="77" height="14"/>
+                        <rect key="frame" x="241" y="76" width="77" height="14"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="return2" translatesAutoresizingMaskIntoConstraints="NO" id="G6J-L2-Oee">
-                        <rect key="frame" x="305" y="81.5" width="5" height="10"/>
+                        <rect key="frame" x="313" y="78" width="5" height="10"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="5" id="J8y-WV-LNL"/>
@@ -76,7 +77,7 @@
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dq7-JT-HXG">
-                        <rect key="frame" x="183" y="73" width="117" height="26"/>
+                        <rect key="frame" x="183" y="70" width="125" height="26"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <state key="normal" title="资金动向">
                             <color key="titleColor" red="1" green="0.52201360460000001" blue="0.20566916469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -86,19 +87,32 @@
                         </connections>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="complete" translatesAutoresizingMaskIntoConstraints="NO" id="vu7-xb-913">
-                        <rect key="frame" x="275" y="16.5" width="14" height="14"/>
+                        <rect key="frame" x="275" y="17" width="14" height="14"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="14" id="XEe-f5-a3g"/>
                             <constraint firstAttribute="height" constant="14" id="e5F-Bx-7kI"/>
                         </constraints>
                     </imageView>
+                    <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8sC-5f-r3Q">
+                        <rect key="frame" x="218" y="106" width="100" height="27"/>
+                        <color key="backgroundColor" red="0.0033863803839999998" green="0.47301894430000002" blue="0.95515209440000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="nCh-8j-F9S"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="支持列表">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="clici:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ONr-LI-EOM"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="vu7-xb-913" firstAttribute="leading" secondItem="oAT-ae-sck" secondAttribute="trailing" constant="10" id="0SN-12-3W7"/>
                     <constraint firstItem="mK2-wz-AYf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="31S-Yb-I9z"/>
                     <constraint firstItem="dq7-JT-HXG" firstAttribute="centerY" secondItem="RjK-cT-Vso" secondAttribute="centerY" id="5ZP-np-l3C"/>
-                    <constraint firstItem="mK2-wz-AYf" firstAttribute="top" secondItem="o3m-q2-oFn" secondAttribute="bottom" constant="10" id="9N0-eI-h3Q"/>
                     <constraint firstItem="o3m-q2-oFn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="9U4-XF-Ahh"/>
                     <constraint firstItem="DeJ-3H-P7j" firstAttribute="centerY" secondItem="RjK-cT-Vso" secondAttribute="centerY" id="Aew-wD-nkn"/>
                     <constraint firstItem="7YV-96-SSC" firstAttribute="trailing" secondItem="VIa-Ns-mka" secondAttribute="trailing" id="BBN-BE-aCb"/>
@@ -116,7 +130,9 @@
                     <constraint firstItem="BHw-2D-iEK" firstAttribute="top" secondItem="oAT-ae-sck" secondAttribute="bottom" constant="5" id="UgU-ap-UVl"/>
                     <constraint firstItem="G6J-L2-Oee" firstAttribute="centerY" secondItem="RjK-cT-Vso" secondAttribute="centerY" id="ZeR-Wy-Kum"/>
                     <constraint firstItem="G6J-L2-Oee" firstAttribute="leading" secondItem="dq7-JT-HXG" secondAttribute="trailing" constant="5" id="Zss-Hm-HEG"/>
+                    <constraint firstItem="8sC-5f-r3Q" firstAttribute="top" secondItem="dq7-JT-HXG" secondAttribute="bottom" constant="10" id="aJS-zB-q1k"/>
                     <constraint firstItem="7YV-96-SSC" firstAttribute="leading" secondItem="VIa-Ns-mka" secondAttribute="leading" id="apn-pj-CtV"/>
+                    <constraint firstAttribute="trailing" secondItem="8sC-5f-r3Q" secondAttribute="trailing" constant="10" id="btA-or-AW7"/>
                     <constraint firstItem="7YV-96-SSC" firstAttribute="top" secondItem="VIa-Ns-mka" secondAttribute="top" id="d5s-AL-qZx"/>
                     <constraint firstItem="dq7-JT-HXG" firstAttribute="leading" secondItem="RjK-cT-Vso" secondAttribute="trailing" constant="10" id="dTr-cj-lfg"/>
                     <constraint firstItem="BHw-2D-iEK" firstAttribute="leading" secondItem="o3m-q2-oFn" secondAttribute="trailing" constant="10" id="hzH-Tr-qwi"/>
@@ -137,9 +153,10 @@
                 <outlet property="numberLabel" destination="DeJ-3H-P7j" id="gbz-LF-Xm7"/>
                 <outlet property="picImageV" destination="o3m-q2-oFn" id="gGN-Ul-tZm"/>
                 <outlet property="signLabel" destination="7YV-96-SSC" id="qL6-Hq-DV2"/>
+                <outlet property="suportListBtn" destination="8sC-5f-r3Q" id="6Tt-ND-drd"/>
                 <outlet property="titleLabel" destination="oAT-ae-sck" id="1tY-4J-yoA"/>
             </connections>
-            <point key="canvasLocation" x="40" y="211.5"/>
+            <point key="canvasLocation" x="44" y="231"/>
         </tableViewCell>
     </objects>
     <resources>

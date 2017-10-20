@@ -16,25 +16,44 @@
 
 - (CGFloat)cellHeight{
     
-  
-//   CGSize replySize = [self.reply boundingRectWithSize:CGSizeMake(kSCREEN_WIDTH - 80, kSCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil].size;
-    
     CGSize commentSize = [self.comment boundingRectWithSize:CGSizeMake(kSCREEN_WIDTH - 70, kSCREEN_HEIGHT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil].size;
 
     CGRect replyRect;
+    
     if(self.reply.length == 0){
-        
         replyRect = CGRectZero;
-        return 70 + commentSize.height + replyRect.size.height;
+        if (self.comment.length == 0) {
+            commentSize = CGSizeZero;
+            if (self.signIndex == 1) {
+                
+                return 100 + commentSize.height + replyRect.size.height;
+            }else{
+                return 60 + commentSize.height + replyRect.size.height;
+            }
+        }else{
+            if (self.signIndex == 1) {
+
+                return 110 + commentSize.height + replyRect.size.height;
+            }else{
+                return 70 + commentSize.height + replyRect.size.height;
+            }
+        
+        }
         
     }else{
         
         NSString *replyStr = [NSString stringWithFormat:@"回复:%@",self.reply];
         replyRect = [replyStr boundingRectWithSize:CGSizeMake(kSCREEN_WIDTH - 85, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:12]} context:nil];
-        return 90 + commentSize.height + replyRect.size.height;
+        
+        if (self.comment.length == 0) {
+            commentSize = CGSizeZero;
+            return 80 + commentSize.height + replyRect.size.height;
+        }else{
+            
+            return 90 + commentSize.height + replyRect.size.height;
+        }
     }
 
-//    return 70 + replyRect.size.height + commentSize.height;
 }
 
 @end

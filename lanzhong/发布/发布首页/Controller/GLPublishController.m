@@ -41,8 +41,8 @@ static const CGFloat kPhotoViewMargin = 25;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollViewHeight;
 
-@property (strong, nonatomic) HXPhotoManager *manager;
-@property (strong, nonatomic) HXPhotoView *photoView;
+//@property (strong, nonatomic) HXPhotoManager *manager;
+//@property (strong, nonatomic) HXPhotoView *photoView;
 
 @property (strong, nonatomic)HWCalendar *Calendar;
 @property (strong, nonatomic)UIView *CalendarView;
@@ -70,6 +70,7 @@ static const CGFloat kPhotoViewMargin = 25;
 @property (weak, nonatomic) IBOutlet UIImageView *pic2;
 @property (weak, nonatomic) IBOutlet UIImageView *pic3;
 
+@property (nonatomic, assign)NSInteger picIndex;//pic下标
 
 @end
 
@@ -96,13 +97,10 @@ static const CGFloat kPhotoViewMargin = 25;
     
     self.scrollView.alwaysBounceVertical = YES;
     
-//    HXPhotoView *photoView = [HXPhotoView photoManager:self.manager];
-//    photoView.frame = CGRectMake(kPhotoViewMargin, 0, kSCREEN_WIDTH - kPhotoViewMargin * 2, 0);
-//    photoView.delegate = self;
-//    photoView.backgroundColor = [UIColor whiteColor];
-//    [self.scrollView addSubview:photoView];
-//    self.photoView = photoView;
-    
+    self.pic1.hidden = NO;
+    self.pic2.hidden = YES;
+    self.pic3.hidden = YES;
+ 
     [self.view addSubview:self.CalendarView];
     
     self.CalendarView.hidden = YES;
@@ -147,22 +145,6 @@ static const CGFloat kPhotoViewMargin = 25;
         [_loadV removeloadview];
     }];
     
-}
-- (HXPhotoManager *)manager {
-    if (!_manager) {
-        _manager = [[HXPhotoManager alloc] initWithType:HXPhotoManagerSelectedTypePhotoAndVideo];
-        _manager.openCamera = YES;
-        _manager.cacheAlbum = YES;
-        _manager.lookLivePhoto = YES;
-        _manager.open3DTouchPreview = YES;
-        _manager.cameraType = HXPhotoManagerCameraTypeSystem;
-        _manager.photoMaxNum = 9;
-        _manager.videoMaxNum = 9;
-        _manager.maxNum = 18;
-        _manager.saveSystemAblum = NO;
-        
-    }
-    return _manager;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -223,7 +205,31 @@ static const CGFloat kPhotoViewMargin = 25;
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-- (IBAction)getPicture:(id)sender {
+
+- (IBAction)getPicture:(UITapGestureRecognizer *)sender {
+    
+    switch (sender.view.tag) {
+        case 11:
+        {
+            self.picIndex = 1;
+        }
+            break;
+        case 22:
+        {
+            self.picIndex = 2;
+        }
+            break;
+        case 33:
+        {
+            self.picIndex = 3;
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+    //弹出相册
     
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     //    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
@@ -263,72 +269,66 @@ static const CGFloat kPhotoViewMargin = 25;
         [picker dismissViewControllerAnimated:YES completion:nil];
         
         [self.imageArr addObject:picImage];
-    }
-    
-    if (self.imageArr.count > 0){
-        self.pic1.image = self.imageArr[0];
-        if(self.imageArr.count >1){
-            self.pic2.image = self.imageArr[1];
-            if(self.imageArr.count == 3){
-                self.pic3.image = self.imageArr[2];
+        
+        switch (self.picIndex) {
+            case 1:
+            {
+                 self.pic1.image = picImage;
             }
+                break;
+            case 2:
+            {
+                 self.pic2.image = picImage;
+            }
+                break;
+            case 3:
+            {
+                 self.pic3.image = picImage;
+            }
+                break;
+                
+            default:
+                break;
+        }
+        
+        switch (self.imageArr.count) {
+            case 0:
+            {
+                self.pic1.hidden = NO;
+                self.pic2.hidden = YES;
+                self.pic3.hidden = NO;
+            }
+                break;
+            case 1:
+            {
+                self.pic1.hidden = NO;
+                self.pic2.hidden = NO;
+                self.pic3.hidden = YES;
+            }
+                break;
+            case 2:
+            {
+                self.pic1.hidden = NO;
+                self.pic2.hidden = NO;
+                self.pic3.hidden = NO;
+            }
+                break;
+                
+            default:
+                break;
         }
     }
+
 }
 
 //提交
 - (IBAction)submit:(id)sender {
-//    
-//    UIImage *picImage = self.imageArr[0];
-//    
-//    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-//    dict[@"token"] = [UserModel defaultUser].token;
-//    dict[@"uid"] = [UserModel defaultUser].uid;
-//    dict[@"type"] = @"1";
-//    
-//    _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
-//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];//响应
-//    manager.requestSerializer.timeoutInterval = 10;
-//    // 加上这行代码，https ssl 验证。
-//    [manager setSecurityPolicy:[NetworkManager customSecurityPolicy]];
-//    [manager POST:[NSString stringWithFormat:@"%@%@",URL_Base,kUSER_INFO_SAVE_URL] parameters:dict  constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-//        //将图片以表单形式上传
-//        
-//        if (picImage) {
-//            
-//            NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
-//            formatter.dateFormat=@"yyyyMMddHHmmss";
-//            NSString *str=[formatter stringFromDate:[NSDate date]];
-//            NSString *fileName=[NSString stringWithFormat:@"%@.png",str];
-//            NSData *data = UIImagePNGRepresentation(picImage);
-//            [formData appendPartWithFileData:data name:@"pic" fileName:fileName mimeType:@"image/png"];
-//        }
-//        
-//    }progress:^(NSProgress *uploadProgress){
-//        
-//    }success:^(NSURLSessionDataTask *task, id responseObject) {
-//        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-//        
-//        NSLog(@"%@",dic);
-//        
-//        if ([dic[@"code"]integerValue] == SUCCESS_CODE) {
-//
-//            [MBProgressHUD showError:dic[@"message"]];
-//            
-//        }else{
-//            
-//            [MBProgressHUD showError:dic[@"message"]];
-//        }
-//        
-//        [_loadV removeloadview];
-//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//        [_loadV removeloadview];
-//        [MBProgressHUD showError:error.localizedDescription];
-//    }];
     
     if (self.moneyTF.text.length == 0) {
         [MBProgressHUD showError:@"请输入目标金额"];
+        return;
+    }else if([self.moneyTF.text floatValue] <= 0){
+        [MBProgressHUD showError:@"金额必须大于0"];
         return;
     }
     if (self.titleTF.text.length == 0) {
@@ -350,20 +350,7 @@ static const CGFloat kPhotoViewMargin = 25;
   
     self.submitBtn.userInteractionEnabled = NO;
     self.submitBtn.backgroundColor = [UIColor lightGrayColor];
-    
-//    NSMutableArray *imgDataArr = [NSMutableArray array];
-    
-//    for (int i = 0; i < self.imageArr.count; i ++) {
-//        NSData *data = nil;
-//        if(!UIImagePNGRepresentation(self.imageArr[i])) {
-//            data =UIImageJPEGRepresentation(self.imageArr[i],0.1);
-//        }else{
-//            data =UIImagePNGRepresentation(self.imageArr[i]);
-//        }
-//        
-//        [imgDataArr addObject:data];
-//    }
-    
+
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     
     dic[@"token"] = [UserModel defaultUser].token;
@@ -571,87 +558,6 @@ static const CGFloat kPhotoViewMargin = 25;
     NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[now timeIntervalSince1970]];
     
     self.need_time = timeSp;
-    
-}
-
-#pragma mark-
-#pragma mark HXPhotoViewDelegate
-- (void)photoView:(HXPhotoView *)photoView changeComplete:(NSArray<HXPhotoModel *> *)allList photos:(NSArray<HXPhotoModel *> *)photos videos:(NSArray<HXPhotoModel *> *)videos original:(BOOL)isOriginal {
-
-    [self.imageArr removeAllObjects];
-    
-    for (HXPhotoModel *model in photos) {
-        PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
-        // 同步获得图片, 只会返回1张图片
-        options.synchronous = YES;
-
-        BOOL original = YES;
-        // 是否要原图
-        CGSize size = original ? CGSizeMake(model.asset.pixelWidth, model.asset.pixelHeight) : CGSizeZero;
-        
-        // 从asset中获得图片
-        [[PHImageManager defaultManager] requestImageForAsset:model.asset targetSize:size contentMode:PHImageContentModeDefault options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
-
-            [self.imageArr addObject:result];
-            self.aaaa.image = result;
-        }];
-    }
-
-//    
-//    // 获得所有的自定义相簿
-//    PHFetchResult<PHAssetCollection *> *assetCollections = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
-//    // 遍历所有的自定义相簿
-//    for (PHAssetCollection *assetCollection in assetCollections) {
-//        [self enumerateAssetsInAssetCollection:assetCollection original:YES];
-//    }
-//    
-//    // 获得相机胶卷
-//    PHAssetCollection *cameraRoll = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary options:nil].lastObject;
-//    // 遍历相机胶卷,获取大图
-//    [self enumerateAssetsInAssetCollection:cameraRoll original:YES];
-//    
-
-}
-
-/**
- *  遍历相簿中的所有图片
- *  @param assetCollection 相簿
- *  @param original        是否要原图
- */
-- (void)enumerateAssetsInAssetCollection:(PHAssetCollection *)assetCollection original:(BOOL)original
-{
-    NSLog(@"相簿名:%@", assetCollection.localizedTitle);
-    
-    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
-    // 同步获得图片, 只会返回1张图片
-    options.synchronous = YES;
-    
-    // 获得某个相簿中的所有PHAsset对象
-    PHFetchResult<PHAsset *> *assets = [PHAsset fetchAssetsInAssetCollection:assetCollection options:nil];
-    for (PHAsset *asset in assets) {
-        // 是否要原图
-        CGSize size = original ? CGSizeMake(asset.pixelWidth, asset.pixelHeight) : CGSizeZero;
-        
-        // 从asset中获得图片
-        [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:size contentMode:PHImageContentModeDefault options:options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
-            NSLog(@"%@", result);
-            UIImage *img = result;
-        }];
-    }
-}
-
-- (void)photoView:(HXPhotoView *)photoView deleteNetworkPhoto:(NSString *)networkPhotoUrl {
-    //    NSSLog(@"%@",networkPhotoUrl);
-}
-
-- (void)photoView:(HXPhotoView *)photoView updateFrame:(CGRect)frame {
-    //    NSSLog(@"%@",NSStringFromCGRect(frame));
-//    self.bgPhotoViewHeight.constant = CGRectGetMaxY(frame) + kPhotoViewMargin;
-    
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, CGRectGetMaxY(frame) + kPhotoViewMargin);
-    
-    self.scrollViewHeight.constant = CGRectGetMaxY(frame) + kPhotoViewMargin;
-    self.contentViewHeight.constant = 720 + frame.size.height;
     
 }
 

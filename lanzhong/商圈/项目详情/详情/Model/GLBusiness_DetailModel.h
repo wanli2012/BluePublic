@@ -21,7 +21,7 @@
 @end
 @interface GLBusiness_CommentModel : NSObject
 
-@property (nonatomic, copy)NSString *id;//项目id
+@property (nonatomic, copy)NSString *id;//评论id
 @property (nonatomic, copy)NSString *uid;//项目id
 @property (nonatomic, copy)NSString *money;//支持金额
 @property (nonatomic, copy)NSString *addtime;//支持时间
@@ -35,6 +35,8 @@
 @property (nonatomic, copy)NSString *linkman;//
 
 @property (nonatomic, assign)CGFloat cellHeight;
+@property (nonatomic, assign)NSInteger signIndex;//1:可以回复  0:不能回复,只能看
+
 
 @end
 

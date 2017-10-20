@@ -113,7 +113,7 @@
     GLPublish_ReviewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLPublish_ReviewCell"];
     cell.model = self.models[indexPath.row];
     cell.selectionStyle = 0;
-    
+    cell.isReviewed = NO;
     return cell;
 }
 

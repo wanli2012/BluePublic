@@ -130,14 +130,15 @@ static NSString *ID = @"GLOrderGoodsCell";
         
         [_loadV removeloadview];
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
-            
-//            self.yunfeiLabel.text = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"all_delivery"]];
-            
+   
             _sumNum = 0.f;
             for (NSDictionary *dic in responseObject[@"data"]) {
                 GLConfirmOrderModel *model = [GLConfirmOrderModel mj_objectWithKeyValues:dic];
                 [self.models addObject:model];
-                _sumNum += [model.goods_price floatValue];
+                
+                CGFloat sum = [model.goods_price floatValue] * [model.num integerValue];
+                _sumNum += sum;
+                
             }
             self.totalSumLabel.text = [NSString stringWithFormat:@"合计:¥%.2f",_sumNum];
             self.tableViewHeight.constant = _models.count * 117;
@@ -154,6 +155,7 @@ static NSString *ID = @"GLOrderGoodsCell";
     }];
     
 }
+
 - (IBAction)addressChoose:(id)sender {
     
     GLMine_PersonInfo_AddressChooseController *modifyAD = [[GLMine_PersonInfo_AddressChooseController alloc] init];
@@ -222,15 +224,15 @@ static NSString *ID = @"GLOrderGoodsCell";
             self.hidesBottomBarWhenPushed = YES;
             
             GLMine_RicePayController *riceVC = [[GLMine_RicePayController alloc] init];
-            riceVC.orderPrice = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"order_money"]];
+            
+            riceVC.orderPrice = [NSString stringWithFormat:@"%f",_sumNum];
             riceVC.order_id = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"order_id"]];
             riceVC.order_sn = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"order_num"]];
-//            riceVC.order_sh = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"order_sh"]];
-//            riceVC.useableScore = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"user_integal"]];
             
             [self.navigationController pushViewController:riceVC animated:YES];
             
         }else{
+            
             [MBProgressHUD showError:responseObject[@"message"]];
         }
         

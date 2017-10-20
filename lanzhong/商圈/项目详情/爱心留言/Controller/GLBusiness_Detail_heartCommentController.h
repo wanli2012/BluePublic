@@ -12,4 +12,6 @@
 
 @property (nonatomic, copy)NSString *item_id;
 
+@property (nonatomic, assign)NSInteger signIndex;//1:可以回复  0:不能回复,只能看
+
 @end

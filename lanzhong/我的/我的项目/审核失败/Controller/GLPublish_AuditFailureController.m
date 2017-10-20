@@ -114,7 +114,7 @@
     GLPublish_ReviewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLPublish_ReviewCell"];
     
     cell.model = self.models[indexPath.row];
-    
+    cell.isReviewed = YES;
     cell.selectionStyle = 0;
       
     //18380468763  1234567

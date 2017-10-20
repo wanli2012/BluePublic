@@ -10,4 +10,6 @@
 
 @interface GLPay_ChooseController : UIViewController
 
+@property (nonatomic, copy)NSString *item_id;
+
 @end

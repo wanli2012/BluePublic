@@ -116,7 +116,7 @@
     cell.model = self.models[indexPath.row];
 
     cell.selectionStyle = 0;
-    
+    cell.isReviewed = NO;
     return cell;
 }
 

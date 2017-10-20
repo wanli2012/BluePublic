@@ -64,6 +64,7 @@
         
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             [MBProgressHUD showSuccess:responseObject[@"message"]];
+            self.block();
             [self.navigationController popViewControllerAnimated:YES];
         }
         

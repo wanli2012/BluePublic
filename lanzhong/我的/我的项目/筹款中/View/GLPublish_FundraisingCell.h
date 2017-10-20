@@ -9,8 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "GLPublish_InReViewModel.h"
 
+@protocol GLPublish_FundraisingCellDelegate <NSObject>
+
+- (void)surportList:(NSInteger)index;
+
+@end
+
 @interface GLPublish_FundraisingCell : UITableViewCell
 
 @property (nonatomic, strong)GLPublish_InReViewModel *model;
+@property (weak, nonatomic) IBOutlet UIButton *suportListBtn;
+@property (nonatomic, assign)NSInteger index;
+
+@property (nonatomic, weak)id <GLPublish_FundraisingCellDelegate>delegate;
 
 @end

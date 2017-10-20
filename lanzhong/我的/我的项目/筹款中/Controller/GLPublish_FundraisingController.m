@@ -9,8 +9,9 @@
 #import "GLPublish_FundraisingController.h"
 #import "GLPublish_FundraisingCell.h"
 #import "GLPublish_InReViewModel.h"
+#import "GLBusiness_Detail_heartCommentController.h"
 
-@interface GLPublish_FundraisingController ()
+@interface GLPublish_FundraisingController ()<GLPublish_FundraisingCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -105,8 +106,21 @@
     [self.tableView.mj_footer endRefreshing];
 }
 
+#pragma mark - GLPublish_FundraisingCellDelegate
+- (void)surportList:(NSInteger)index{
+    NSLog(@"kjsdhfhsd %zd",index);
+    
+    GLPublish_InReViewModel *model = self.models[index];
+    self.hidesBottomBarWhenPushed = YES;
+    GLBusiness_Detail_heartCommentController *listVC = [[GLBusiness_Detail_heartCommentController alloc] init];
+    listVC.item_id = model.item_id;
+    listVC.signIndex = 1;
+    [self.navigationController pushViewController:listVC animated:YES];
+}
+
 #pragma mark - UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
     return self.models.count;
 }
 
@@ -114,14 +128,17 @@
     
     GLPublish_FundraisingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLPublish_FundraisingCell"];
     cell.model = self.models[indexPath.row];
-    
+    cell.suportListBtn.hidden = NO;
     cell.selectionStyle = 0;
+    
+    cell.index = indexPath.row;
+    cell.delegate = self;
     
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 130;
+    return 165;
 }
 
 - (NSMutableArray *)models{

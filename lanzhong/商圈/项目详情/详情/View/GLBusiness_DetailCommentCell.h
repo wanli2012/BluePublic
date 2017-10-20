@@ -11,7 +11,8 @@
 
 @protocol GLBusiness_DetailCommentCellDelegate <NSObject>
 
-- (void)personInfo;
+//- (void)personInfo:(NSInteger)index;
+- (void)reply:(NSInteger)index;
 
 @end
 

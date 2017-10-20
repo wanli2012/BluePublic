@@ -93,9 +93,6 @@
 - (void)postRequest:(BOOL)isRefresh{
 
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    
-    self.item_id = @"36";
-    
     dic[@"item_id"] = self.item_id;
     
     _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
@@ -134,13 +131,13 @@
     self.raisedLabel.text = [NSString stringWithFormat:@"%@元",self.model.draw_money];
     self.listNumLabel.text = [NSString stringWithFormat:@"榜单:%@人",self.model.invest_count];
     
-    if (self.model.sev_photo.count == 1) {
+    if (self.model.invest_10.count >= 1) {
         
         [self.iconImageV3 sd_setImageWithURL:[NSURL URLWithString:self.model.invest_10[0].must_user_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
-        if (self.model.sev_photo.count == 2) {
+        if (self.model.invest_10.count >= 2) {
             
             [self.iconImageV2 sd_setImageWithURL:[NSURL URLWithString:self.model.invest_10[1].must_user_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
-            if (self.model.sev_photo.count == 3) {
+            if (self.model.invest_10.count >= 3) {
                 
                 [self.iconImageV sd_setImageWithURL:[NSURL URLWithString:self.model.invest_10[2].must_user_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
             }
@@ -246,6 +243,7 @@
 
     self.hidesBottomBarWhenPushed = YES;
     GLPay_ChooseController *payVC = [[GLPay_ChooseController alloc] init];
+    payVC.item_id = self.item_id;
     [self.navigationController pushViewController:payVC animated:YES];
 
 }
@@ -347,11 +345,9 @@
             break;
         case 2:
         {
-            NSLog(@"全部评论");
             GLBusiness_Detail_heartCommentController *commentVC = [[GLBusiness_Detail_heartCommentController alloc] init];
             commentVC.item_id = self.item_id;
-            
-//            GLBusiness_FundTrendController *fundVC = [[GLBusiness_FundTrendController alloc] init];
+
             [self.navigationController pushViewController:commentVC animated:YES];
         }
             break;
@@ -412,7 +408,6 @@
                 
                 return cell;
             }
-
         }
             break;
         default:
@@ -420,15 +415,17 @@
             GLBusiness_DetailCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLBusiness_DetailCommentCell"];
             cell.selectionStyle = 0;
             
-            cell.delegate = self;
-            cell.model = self.model.invest_list[indexPath.row];
+            GLBusiness_CommentModel *model = self.model.invest_list[indexPath.row];
+            model.linkman = self.model.linkman;
+            model.signIndex = 0;
             
-            return cell;
+            cell.delegate = self;
+            cell.model = model;
 
+            return cell;
         }
             break;
     }
-
     return nil;
 }
 

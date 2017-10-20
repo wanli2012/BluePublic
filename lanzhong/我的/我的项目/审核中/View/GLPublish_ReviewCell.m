@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *picImageV;//项目图
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;//标题
 @property (weak, nonatomic) IBOutlet UILabel *detailLabel;//详情
+@property (weak, nonatomic) IBOutlet UILabel *titleNameLabel;
 
 @end
 
@@ -33,7 +34,12 @@
     [self.picImageV sd_setImageWithURL:[NSURL URLWithString:model.sev_photo] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     self.titleLabel.text = model.title;
     self.detailLabel.text = model.info;
-    self.priceLabel.text = model.admin_money;
+    
+    if(self.isReviewed){
+        self.priceLabel.text = model.budget_money;
+    }else{
+        self.priceLabel.text = model.admin_money;
+    }
 
     switch ([model.state integerValue]) {
         case 2:
@@ -80,8 +86,16 @@
         default:
             break;
     }
+}
+
+- (void)setPayModel:(GLPay_CompletedModel *)payModel{
+    _payModel = payModel;
     
- 
+    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:payModel.sev_photo] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    self.titleLabel.text = payModel.title;
+    self.detailLabel.text = payModel.info;
+    self.titleNameLabel.text = @"支持人数";
+    self.priceLabel.text = [NSString stringWithFormat:@"%@人",payModel.invest_count];
     
 }
 

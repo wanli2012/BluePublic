@@ -233,9 +233,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    GLCircle_item_dataModel *model = self.models[indexPath.row];
     self.hidesBottomBarWhenPushed = YES;
     GLBusiness_DetailController *detailVC = [[GLBusiness_DetailController alloc] init];
-    detailVC.item_id = self.categoryModel.trade[indexPath.row].trade_id;
+    detailVC.item_id = model.item_id;
     [self.navigationController pushViewController:detailVC animated:YES];
     self.hidesBottomBarWhenPushed = NO;
     

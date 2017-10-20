@@ -30,9 +30,8 @@
     
     self.arrowImageV.hidden = NO;
     self.fundTrendBtn.hidden = NO;
-    
     self.numberLabel.hidden = YES;
-    
+    self.suportListBtn.layer.cornerRadius = 5.f;
     
 }
 
@@ -121,6 +120,11 @@
     [self.numberLabel setAttributedText:noteStr];
     
     
+}
+- (IBAction)clici:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(surportList:)]) {
+        [self.delegate surportList:self.index];
+    }
 }
 
 @end

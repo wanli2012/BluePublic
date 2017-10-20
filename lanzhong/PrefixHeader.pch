@@ -89,6 +89,8 @@
 #define kMYMESSAGE_LIST_URL @"User/mymsg"//我的消息
 #define kNOTICE_LIST_URL @"News/more_notice"//公告列表
 #define kRECOMMENT_LIST_URL @"User/user_groom"//推荐列表
+#define kORDER_PAY_URL @"Shop/order_pay"//订单支付
+#define kPAY_SWITCH_URL @"Other/pay_type"//支付方式返回
 
 #define kREFRESH_URL @"Other/break_user"//刷新
 #define kUSER_INFO_SAVE_URL @"User/user_info_save"//实名认证,修改头像
@@ -101,6 +103,9 @@
 #define kCIRCLE_DETAIL_URL @"Item/myitem_details"//商圈_项目详情
 #define kCIRCLE_FUNDTREND_URL @"Item/item_dynamic"//商圈_资金动向
 #define kCIRCLE_MORECOMMENT_URL @"Item/more_comment"//商圈_更多评论
+#define kANSWER_COMMENT_URL @"Item/item_answer"//项目发布人回复评论
+#define kSUPPORT_URL @"Item/support_item"//项目支持
+#define kSUPPORT_SUCCESS_URL @"Item/stochastic_item"//支持成功 推荐列表
 
 #define kMINE_MYPROJECT_URL @"User/myitem"//我的项目
 

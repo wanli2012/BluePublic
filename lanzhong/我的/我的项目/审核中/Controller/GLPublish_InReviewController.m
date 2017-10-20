@@ -121,7 +121,7 @@
     cell.signLabel.hidden = NO;
     cell.signImageV.hidden = YES;
     
-    //18380468763  1234567
+    cell.isReviewed = YES;
     
     return cell;
 }

@@ -17,10 +17,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *alipaySignImageV;
 @property (weak, nonatomic) IBOutlet UIButton *weixinBtn;//微信支付
 @property (weak, nonatomic) IBOutlet UIButton *aliPayBtn;//支付宝支付
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewWidth;
 @property (weak, nonatomic) IBOutlet UIButton *ensureBtn;
-@property (weak, nonatomic) IBOutlet UITextView *messageTextV;//留言textView
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -31,6 +31,10 @@
 @property (nonatomic, strong)GLOrderPayView *contentView;
 
 @property (nonatomic, strong)UIView *maskView;
+
+@property (nonatomic, strong)LoadWaitView *loadV;
+@property (weak, nonatomic) IBOutlet UITextField *moneyTF;
+@property (weak, nonatomic) IBOutlet UITextView *messageTextV;//留言textView
 
 @end
 
@@ -77,6 +81,7 @@
     [window addSubview:self.contentView];
     
 }
+
 -(void)isShowPayInterface{
 
     [self.dataarr addObject:@{@"image":@"余额",@"title":@"余额支付"}];
@@ -84,20 +89,10 @@
     [self.dataarr addObject:@{@"image":@"zhifubao",@"title":@"支付宝支付"}];
     
     [self setPayType];
-    
 }
 
 - (void)setPayType {
-    
-    //没有米劵
-    //    if ([[UserModel defaultUser].mark floatValue] == 0.0) {
-    //
-    //        for ( int i = 0 ; i < self.dataarr.count; i++) {
-    //            [self.selectB addObject:@NO];
-    //        }
-    //
-    //    }else{
-    //
+
     [self.selectB addObject:@YES];
     
     if (self.dataarr.count <= 1) {
@@ -108,7 +103,7 @@
         [self.selectB addObject:@NO];
     }
     self.selectIndex = 0;
-    //    }
+  
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -129,21 +124,90 @@
         
         self.weixinSignImageV.hidden = NO;
         self.alipaySignImageV.hidden = YES;
+        
     }else{
         
         self.weixinSignImageV.hidden = YES;
         self.alipaySignImageV.hidden = NO;
     }
-    
 }
 
 //确认支付
 - (IBAction)ensurePay:(id)sender {
-    NSLog(@"确认支付");
     
-    self.hidesBottomBarWhenPushed = YES;
-    GLPay_CompletedController *completeVC = [[GLPay_CompletedController alloc] init];
-    [self.navigationController pushViewController:completeVC animated:YES];
+    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval a=[dat timeIntervalSince1970];
+    NSString*timeString = [NSString stringWithFormat:@"%0.f", a];//转为字符型
+
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请输入密码" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertVC addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"请输入登录密码";
+    }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        dict[@"uid"] = [UserModel defaultUser].uid;
+        dict[@"token"] = [UserModel defaultUser].token;
+        dict[@"item_id"] = self.item_id;
+        dict[@"money"] = self.moneyTF.text;
+        dict[@"comment"] = self.messageTextV.text;
+        dict[@"c_time"] = timeString;
+        dict[@"upwd"] = alertVC.textFields.lastObject.text;
+        
+        switch (self.selectIndex) {
+            case 0://余额
+            {
+                dict[@"paytype"] = @"3";
+            }
+                break;
+            case 1://微信
+            {
+                dict[@"paytype"] = @"2";
+            }
+                break;
+            case 2://支付宝
+            {
+                dict[@"paytype"] = @"1";
+            }
+                break;
+            default:
+                break;
+        }
+        
+        _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+        [NetworkManager requestPOSTWithURLStr:kSUPPORT_URL paramDic:dict finish:^(id responseObject) {
+            
+            [_loadV removeloadview];
+            if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+                
+                self.hidesBottomBarWhenPushed = YES;
+                GLPay_CompletedController *completeVC = [[GLPay_CompletedController alloc] init];
+                completeVC.item_id = self.item_id;
+                [self.navigationController pushViewController:completeVC animated:YES];
+                
+            }
+            [MBProgressHUD showError:responseObject[@"message"]];
+        } enError:^(NSError *error) {
+            [_loadV removeloadview];
+            
+        }];
+        
+        
+    }];
+    
+    [alertVC addAction:cancel];
+    [alertVC addAction:ok];
+    
+    [self presentViewController:alertVC animated:YES completion:nil];
+    
+    
+    
     
 }
 

@@ -10,4 +10,6 @@
 
 @interface GLPay_CompletedController : UIViewController
 
+@property (nonatomic, copy)NSString *item_id;
+
 @end

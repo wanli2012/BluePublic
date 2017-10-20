@@ -109,6 +109,7 @@
                 <outlet property="signLabel" destination="BMO-dH-B0M" id="SZ7-ue-Aws"/>
                 <outlet property="targetLabel" destination="moQ-tj-K4H" id="ywP-Ze-EHR"/>
                 <outlet property="titleLabel" destination="ydc-lg-CGD" id="zXR-X0-LSw"/>
+                <outlet property="titleNameLabel" destination="moQ-tj-K4H" id="2Oi-Lw-sbx"/>
             </connections>
             <point key="canvasLocation" x="-83" y="11.5"/>
         </tableViewCell>

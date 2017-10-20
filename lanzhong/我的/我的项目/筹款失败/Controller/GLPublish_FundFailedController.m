@@ -117,8 +117,7 @@
     cell.model = self.models[indexPath.row];
     
     cell.selectionStyle = 0;
-
-    //18380468763  1234567
+    cell.isReviewed = NO;
     
     return cell;
 }

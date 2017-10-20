@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "GLPublish_InReViewModel.h"
 
+@protocol GLPublish_ProjectCellDelegate <NSObject>
+
+- (void)surportList:(NSInteger)index;
+
+@end
+
 @interface GLPublish_ProjectCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *moneyLabel;//资金数
@@ -20,5 +26,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *signLabel;//标志label
 
 @property (nonatomic, strong)GLPublish_InReViewModel *model;
+@property (weak, nonatomic) IBOutlet UIButton *suportListBtn;
+
+@property (nonatomic, assign)NSInteger index;
+
+@property (nonatomic, weak)id <GLPublish_ProjectCellDelegate>delegate;
 
 @end

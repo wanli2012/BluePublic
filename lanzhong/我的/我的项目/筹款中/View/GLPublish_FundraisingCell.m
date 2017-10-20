@@ -38,6 +38,8 @@
     self.ballView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.ballView.layer.borderWidth = 1.f;
     
+    self.suportListBtn.layer.cornerRadius = 5.f;
+    
 }
 
 - (void)setModel:(GLPublish_InReViewModel *)model{
@@ -54,6 +56,12 @@
     self.progressViewWidth.constant = self.progressBgView.width * 0.3;
     self.persentLabel.text = [NSString stringWithFormat:@"%.2f%%",persent * 100];
     
+    
+}
+- (IBAction)suportList:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(surportList:)]) {
+        [self.delegate surportList:self.index];
+    }
     
 }
 

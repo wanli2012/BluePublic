@@ -217,9 +217,11 @@ static NSString *ID = @"GLClassifyCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-   
+    GLMallModel *model = self.models[indexPath.row];
+    
     self.hidesBottomBarWhenPushed = YES;
     GLMall_DetailController *vc =[[GLMall_DetailController alloc]init];
+    vc.goods_id = model.goods_id;
     [self.navigationController pushViewController:vc animated:YES];
     self.hidesBottomBarWhenPushed = NO;
     

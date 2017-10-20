@@ -187,7 +187,6 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     LBMyOrdersModel *sectionModel = self.dataarr[section];
     
-    
     LBMyOrdersHeaderView *headerview = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"LBMyOrdersHeaderView"];
     
     if (!headerview) {
@@ -205,9 +204,30 @@
     headerview.cancelBt.hidden = NO;
     [headerview.payBt setTitle:@"确认收货" forState:UIControlStateNormal];
     [headerview.cancelBt setTitle:@"查看物流" forState:UIControlStateNormal];
+    
+    __weak __typeof(self) weakSelf = self;
     headerview.returnPayBt = ^(NSInteger index){
         NSLog(@"确认收货%zd",index);
+        
+//        _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+//        [NetworkManager requestPOSTWithURLStr:kORDER_PAY_URL paramDic:dict finish:^(id responseObject) {
+//            
+//            [_loadV removeloadview];
+//            if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+//                
+//                [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+//                
+//            }
+//            [MBProgressHUD showError:responseObject[@"message"]];
+//        } enError:^(NSError *error) {
+//            [_loadV removeloadview];
+//            
+//        }];
+//        
+//    }];
+
     };
+    
     headerview.returnCancelBt = ^(NSInteger index){
         NSLog(@"查看物流%zd",index);
         self.hidesBottomBarWhenPushed = YES;
