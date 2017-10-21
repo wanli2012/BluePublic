@@ -91,19 +91,13 @@
             }
             
             for (NSDictionary *dic in responseObject[@"data"]) {
-                LBMyOrdersModel *ordersMdel=[LBMyOrdersModel mj_objectWithKeyValues:dic];
+                LBMyOrdersModel *ordersMdel = [LBMyOrdersModel mj_objectWithKeyValues:dic];
                 ordersMdel.isExpanded = NO;
                 [self.dataarr addObject:ordersMdel];
             }
             
             [self.tableView reloadData];
             
-        }else if ([responseObject[@"code"] integerValue]==3){
-            
-            if (self.dataarr.count != 0) {
-                
-                [MBProgressHUD showError:responseObject[@"message"]];
-            }
             
         }else{
             [MBProgressHUD showError:responseObject[@"message"]];
@@ -187,6 +181,7 @@
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    __weak __typeof(self) weakSelf = self;
     LBMyOrdersModel *sectionModel = self.dataarr[section];
     
     LBMyOrdersHeaderView *headerview = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"LBMyOrdersHeaderView"];
@@ -194,8 +189,8 @@
     if (!headerview) {
         headerview = [[LBMyOrdersHeaderView alloc] initWithReuseIdentifier:@"LBMyOrdersHeaderView"];
     }
-    
-    headerview.section = section;
+
+    sectionModel.section = section;
     headerview.sectionModel = sectionModel;
     headerview.expandCallback = ^(BOOL isExpanded) {
         
@@ -213,28 +208,59 @@
     headerview.DeleteBt.hidden = NO;
     [headerview.DeleteBt setTitle:@"取消订单" forState:UIControlStateNormal];
     
+    //支付
     headerview.returnPayBt = ^(NSInteger index){
 
-        LBMyOrdersModel *model = self.dataarr[index];
+        LBMyOrdersModel *model = weakSelf.dataarr[index];
         
-        self.hidesBottomBarWhenPushed = YES;
+        weakSelf.hidesBottomBarWhenPushed = YES;
         GLMine_RicePayController *payVC = [[GLMine_RicePayController alloc] init];
         payVC.order_id = model.order_id;
         payVC.order_sn = model.order_num;
         payVC.orderPrice = model.pay_money;
+        payVC.signIndex = 1;
         
-        [self.navigationController pushViewController:payVC animated:YES];
+        payVC.block = ^(){
+            [self.dataarr removeObjectAtIndex:index];
+            [tableView reloadData];
+        };
+        
+        [weakSelf.navigationController pushViewController:payVC animated:YES];
     };
     
+    //取消订单
     headerview.returnDeleteBt = ^(NSInteger index){
-        NSLog(@"取消订单%zd",index);
         
+        LBMyOrdersModel *model = weakSelf.dataarr[section];
+
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        dic[@"token"] = [UserModel defaultUser].token;
+        dic[@"uid"] = [UserModel defaultUser].uid;
+        dic[@"order_id"] = model.order_id;
+        
+        _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:[UIApplication sharedApplication].keyWindow];
+        [NetworkManager requestPOSTWithURLStr:kORDER_CANCEL_URL paramDic:dic finish:^(id responseObject) {
+            [_loadV removeloadview];
+            
+            if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+                
+                [self.dataarr removeObjectAtIndex:section];
+//                NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:section];
+//                [tableView deleteSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
+                
+                [tableView reloadData];
+            }
+            
+            [MBProgressHUD showError:responseObject[@"message"]];
+        } enError:^(NSError *error) {
+            [_loadV removeloadview];
+            [MBProgressHUD showError:error.localizedDescription];
+        }];
     };
 
     return headerview;
     
 }
-
 
 -(NSMutableArray *)dataarr{
     

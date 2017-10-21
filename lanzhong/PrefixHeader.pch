@@ -91,6 +91,8 @@
 #define kRECOMMENT_LIST_URL @"User/user_groom"//推荐列表
 #define kORDER_PAY_URL @"Shop/order_pay"//订单支付
 #define kPAY_SWITCH_URL @"Other/pay_type"//支付方式返回
+#define kORDER_CANCEL_URL @"Shop/cancel_order"//取消订单shop/recipient
+#define kRECIPIENT_URL @"Shop/recipient"//确认订单收货
 
 #define kREFRESH_URL @"Other/break_user"//刷新
 #define kUSER_INFO_SAVE_URL @"User/user_info_save"//实名认证,修改头像

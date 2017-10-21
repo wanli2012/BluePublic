@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GLMallModel.h"
 
 @interface GLMall_LogisticsCell : UITableViewCell
+
+@property (nonatomic, strong)GLMallModel *model;
 
 @end

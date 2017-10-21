@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GLMall_LogisticsController">
             <connections>
+                <outlet property="numberLabel" destination="Ecs-9N-fau" id="2WF-oE-0mu"/>
                 <outlet property="tableView" destination="hMn-DE-bDy" id="IT0-ES-6kO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

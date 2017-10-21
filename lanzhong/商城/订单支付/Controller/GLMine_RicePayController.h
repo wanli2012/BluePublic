@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^GLMine_RicePayControllerBlock)();
+
 @interface GLMine_RicePayController : UIViewController
 
 @property (nonatomic, copy) NSString *order_id;//订单id
@@ -16,7 +18,8 @@
 
 @property (nonatomic, copy) NSString *orderPrice;//订单金额
 
-//@property (nonatomic, copy) NSString *useableScore;//可用米分
-//@property (nonatomic, copy) NSString *order_sh; //后台生成的加密字符串
+@property (nonatomic, assign)NSInteger signIndex;//1:订单支付 我的订单界面跳转过来的   0:下单成功
+
+@property (nonatomic, copy)GLMine_RicePayControllerBlock block;
 
 @end

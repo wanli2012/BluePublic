@@ -10,4 +10,6 @@
 
 @interface GLMall_LogisticsController : UIViewController
 
+@property (nonatomic, copy)NSString *order_id;
+
 @end

@@ -121,13 +121,23 @@
                             <color key="textColor" red="0.0" green="0.4078977406" blue="0.99984532589999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HB0-GF-Ahs">
+                            <rect key="frame" x="0.0" y="63" width="375" height="1"/>
+                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="lLu-M2-Dz3"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="t7U-qs-zlg" secondAttribute="bottom" id="2T1-CN-i7X"/>
                         <constraint firstItem="4EK-bi-CRt" firstAttribute="centerX" secondItem="OK6-mH-ss6" secondAttribute="centerX" id="7ZA-IE-CDm"/>
+                        <constraint firstAttribute="trailing" secondItem="HB0-GF-Ahs" secondAttribute="trailing" id="Bxd-3j-myg"/>
+                        <constraint firstItem="HB0-GF-Ahs" firstAttribute="leading" secondItem="OK6-mH-ss6" secondAttribute="leading" id="UdC-id-NMX"/>
                         <constraint firstItem="t7U-qs-zlg" firstAttribute="leading" secondItem="OK6-mH-ss6" secondAttribute="leading" id="Y7I-UT-B7i"/>
                         <constraint firstAttribute="height" constant="64" id="kdG-ys-RU5"/>
+                        <constraint firstAttribute="bottom" secondItem="HB0-GF-Ahs" secondAttribute="bottom" id="ki2-b0-7FO"/>
                         <constraint firstItem="4EK-bi-CRt" firstAttribute="centerY" secondItem="t7U-qs-zlg" secondAttribute="centerY" id="vN9-5f-ap4"/>
                     </constraints>
                 </view>
@@ -149,7 +159,7 @@
                 <constraint firstItem="OcX-aH-zfv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="tZG-gO-Uid"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
-            <point key="canvasLocation" x="1" y="-124"/>
+            <point key="canvasLocation" x="0.5" y="-124.5"/>
         </view>
     </objects>
     <resources>

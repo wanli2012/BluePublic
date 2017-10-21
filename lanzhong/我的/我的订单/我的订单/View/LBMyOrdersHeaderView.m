@@ -99,23 +99,11 @@
 }
 
 -(void)setSectionModel:(LBMyOrdersModel *)sectionModel{
-
-    if (_sectionModel != sectionModel) {
-        _sectionModel = sectionModel;
-    }
+    
+    _sectionModel = sectionModel;
     
     self.orderCode.text = [NSString stringWithFormat:@"订单号:%@" , _sectionModel.order_num];
-     self.orderTime.text = [NSString stringWithFormat:@"下单时间:%@" ,[formattime formateTimeOfDate3:_sectionModel.addtime]];
-    
-//    if ([_sectionModel.order_type integerValue] == 1) {
-//        self.orderStaues.text = @"订单类型:消费订单";
-//    }else if ([_sectionModel.order_type integerValue] == 2){
-//        self.orderStaues.text = @"订单类型:米券订单";
-//    
-//    }else if ([_sectionModel.order_type integerValue] == 3){
-//        self.orderStaues.text = @"订单类型:面对面订单";
-//    }
-    
+     self.orderTime.text = [NSString stringWithFormat:@"下单时间:%@" ,[formattime formateTimeOfDate3:_sectionModel.addtime]];    
 }
 
 -(void)tapgestureSection{
@@ -124,27 +112,27 @@
         self.expandCallback(self.sectionModel.isExpanded);
     }
 }
+
 //支付
 -(void)CollectinGoodsBtbttonOne{
 
     if (self.returnPayBt) {
-        self.returnPayBt(self.section);
+        self.returnPayBt(self.sectionModel.section);
     }
-
-
 }
+
 //取消订单
 - (void)cancelOrder {
     if (self.returnCancelBt) {
-        self.returnCancelBt(self.section);
+        self.returnCancelBt(self.sectionModel.section);
     }
 }
+
 //删除
 -(void)delegeteEvent{
 
-    if (self.returnDeleteBt) {
-        self.returnDeleteBt(self.section);
-    }
+    self.returnDeleteBt(self.sectionModel.section);
+    
 }
 
 -(UILabel*)orderCode{

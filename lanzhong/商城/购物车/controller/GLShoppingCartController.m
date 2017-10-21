@@ -369,7 +369,6 @@ static NSString *ID = @"GLShoppingCell";
     self.clearingBtn.layer.cornerRadius = 4;
     self.clearingBtn.clipsToBounds = YES;
     
-    
 }
 
 - (NSMutableArray *)selectArr {
@@ -383,22 +382,6 @@ static NSString *ID = @"GLShoppingCell";
     if (!_models) {
         _models = [NSMutableArray array];
         
-//        for (int i = 0; i < 5; i ++) {
-//            GLShoppingCartModel *model = [[GLShoppingCartModel alloc] init];
-//            model.goods_name = [NSString stringWithFormat:@"我是商品名%zd",i];
-//            model.goods_price = [NSString stringWithFormat:@"%zd",i+100];
-//            model.info = [NSString stringWithFormat:@"我是商品描述%zd",i+100];
-//            model.num = [NSString stringWithFormat:@"%zd",i+100];
-//            model.send_price = [NSString stringWithFormat:@"%zd",i+100];
-//            model.thumb = [NSString stringWithFormat:@"%zd",i+100];
-//            model.cart_id = [NSString stringWithFormat:@"%zd",i+100];
-////            model.goods_type = [NSString stringWithFormat:@"%zd",i+100];
-////            model.status = [NSString stringWithFormat:@"%zd",i+100];
-//            model.spec = [NSString stringWithFormat:@"红色%zd",i+100];
-//            model.spec_id = [NSString stringWithFormat:@"%zd",i+100];
-//            
-//            [_models addObject:model];
-//        }
     }
     return _models;
 }

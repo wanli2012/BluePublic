@@ -34,8 +34,16 @@
 }
 - (void)setModel:(GLBusiness_FundTrendModel *)model{
     _model = model;
+    
     self.dateLabel.text = [NSString stringWithFormat:@"%@ -- %@",[formattime formateTimeOfDate3:model.starttime],[formattime formateTimeOfDate3:model.endtime]];
     self.contentLabel.text = model.content;
+}
+
+- (void)setLogisticsmodel:(GLMall_list *)logisticsmodel{
+    _logisticsmodel = logisticsmodel;
+    
+    self.dateLabel.text = logisticsmodel.time;
+    self.contentLabel.text = logisticsmodel.status;
 }
 
 // 返回虚线image的方法

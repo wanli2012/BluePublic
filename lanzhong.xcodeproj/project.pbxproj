@@ -325,6 +325,7 @@
 		4AF109F31F78E07A00CB51FA /* UILabel+UILabel_ChangeLineSpaceAndWordSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF109E61F78E07A00CB51FA /* UILabel+UILabel_ChangeLineSpaceAndWordSpace.m */; };
 		4AF109F41F78E07A00CB51FA /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF109E81F78E07A00CB51FA /* UIView+Extension.m */; };
 		4AF10A051F78E27C00CB51FA /* tabbar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AF10A041F78E27C00CB51FA /* tabbar.xcassets */; };
+		4AF563D31F9B2CA00041D13C /* GLMall_LogisticsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF563D21F9B2CA00041D13C /* GLMall_LogisticsModel.m */; };
 		4AF5B0271F9594A7000407A7 /* GLMine_Wallet_ExchangeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF5B0261F9594A7000407A7 /* GLMine_Wallet_ExchangeModel.m */; };
 		4AF5B02B1F95A353000407A7 /* GLMine_Wallet_RechargeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF5B0291F95A353000407A7 /* GLMine_Wallet_RechargeController.m */; };
 		4AF5B02C1F95A353000407A7 /* GLMine_Wallet_RechargeController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AF5B02A1F95A353000407A7 /* GLMine_Wallet_RechargeController.xib */; };
@@ -889,6 +890,8 @@
 		4AF109E71F78E07A00CB51FA /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		4AF109E81F78E07A00CB51FA /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		4AF10A041F78E27C00CB51FA /* tabbar.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = tabbar.xcassets; sourceTree = "<group>"; };
+		4AF563D11F9B2CA00041D13C /* GLMall_LogisticsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMall_LogisticsModel.h; sourceTree = "<group>"; };
+		4AF563D21F9B2CA00041D13C /* GLMall_LogisticsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMall_LogisticsModel.m; sourceTree = "<group>"; };
 		4AF5B0251F9594A7000407A7 /* GLMine_Wallet_ExchangeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_Wallet_ExchangeModel.h; sourceTree = "<group>"; };
 		4AF5B0261F9594A7000407A7 /* GLMine_Wallet_ExchangeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_Wallet_ExchangeModel.m; sourceTree = "<group>"; };
 		4AF5B0281F95A353000407A7 /* GLMine_Wallet_RechargeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_Wallet_RechargeController.h; sourceTree = "<group>"; };
@@ -2741,8 +2744,6 @@
 			isa = PBXGroup;
 			children = (
 				4A9F56D41F91E51300341A31 /* Controller */,
-				4A9F56D51F91E51300341A31 /* Model */,
-				4A9F56D61F91E51300341A31 /* View */,
 			);
 			path = "已完成";
 			sourceTree = "<group>";
@@ -2757,26 +2758,10 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		4A9F56D51F91E51300341A31 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		4A9F56D61F91E51300341A31 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		4A9F56D71F91E51300341A31 /* 待付款 */ = {
 			isa = PBXGroup;
 			children = (
 				4A9F56D81F91E51300341A31 /* Controller */,
-				4A9F56D91F91E51300341A31 /* Model */,
-				4A9F56DA1F91E51300341A31 /* View */,
 			);
 			path = "待付款";
 			sourceTree = "<group>";
@@ -2791,26 +2776,10 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		4A9F56D91F91E51300341A31 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		4A9F56DA1F91E51300341A31 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		4A9F56DB1F91E51300341A31 /* 待收货 */ = {
 			isa = PBXGroup;
 			children = (
 				4A9F56DC1F91E51300341A31 /* Controller */,
-				4A9F56DD1F91E51300341A31 /* Model */,
-				4A9F56DE1F91E51300341A31 /* View */,
 			);
 			path = "待收货";
 			sourceTree = "<group>";
@@ -2823,20 +2792,6 @@
 				4A9F56F71F91E6DA00341A31 /* GLMine_ReceiveController.xib */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		4A9F56DD1F91E51300341A31 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		4A9F56DE1F91E51300341A31 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		4A9F56DF1F91E52E00341A31 /* 我的订单 */ = {
@@ -3008,6 +2963,7 @@
 			children = (
 				4ADDD1971F88A75E00C95F9C /* Controller */,
 				4ADDD1981F88A75E00C95F9C /* View */,
+				4AF563D01F9B2C840041D13C /* Model */,
 			);
 			path = "物流跟踪";
 			sourceTree = "<group>";
@@ -3505,6 +3461,15 @@
 				4A16FF241F8F6BFC00064CE5 /* 我的.xcassets */,
 			);
 			path = "图片资源";
+			sourceTree = "<group>";
+		};
+		4AF563D01F9B2C840041D13C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4AF563D11F9B2CA00041D13C /* GLMall_LogisticsModel.h */,
+				4AF563D21F9B2CA00041D13C /* GLMall_LogisticsModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		4AF5B0301F95A97F000407A7 /* 参与项目 */ = {
@@ -4064,6 +4029,7 @@
 				4A53E8531F7A59710021D9E0 /* GLMall_DetailFooterView.m in Sources */,
 				4A509BAE1F877C2B00D794FB /* GLForgetPasswordController.m in Sources */,
 				4AF109391F78DBB500CB51FA /* WXSTransitionManager+ViewMoveAnimation.m in Sources */,
+				4AF563D31F9B2CA00041D13C /* GLMall_LogisticsModel.m in Sources */,
 				4AFF4FAD1F8A30C700CE6D79 /* GLBusinessCircleModel.m in Sources */,
 				4A16FF1D1F8F68B000064CE5 /* GLPublish_FailedController.m in Sources */,
 				F9BB80241F7A440100867514 /* DropMenuView.m in Sources */,

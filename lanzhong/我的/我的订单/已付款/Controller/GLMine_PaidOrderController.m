@@ -182,9 +182,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    
         return 100;
-
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -196,8 +194,8 @@
     if (!headerview) {
         headerview = [[LBMyOrdersHeaderView alloc] initWithReuseIdentifier:@"LBMyOrdersHeaderView"];
     }
-    
-    headerview.section = section;
+
+    sectionModel.section = section;
     headerview.sectionModel = sectionModel;
     headerview.expandCallback = ^(BOOL isExpanded) {
         

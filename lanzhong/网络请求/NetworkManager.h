@@ -27,5 +27,6 @@ typedef void (^failure)(NSURLSessionDataTask *task, NSError *error);
 + (NSURLSessionDataTask*)requestGETWithURLStrReture:(NSString *)urlStr paramDic:(NSDictionary *)paramDic finish:(void(^)(id responseObject)) finish enError:(void(^)(NSError *error))enError;
 
 + (AFSecurityPolicy*)customSecurityPolicy;
+
 @end
 

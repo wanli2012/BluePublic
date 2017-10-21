@@ -187,14 +187,13 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     LBMyOrdersModel *sectionModel = self.dataarr[section];
     
-    
     LBMyOrdersHeaderView *headerview = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"LBMyOrdersHeaderView"];
     
     if (!headerview) {
         headerview = [[LBMyOrdersHeaderView alloc] initWithReuseIdentifier:@"LBMyOrdersHeaderView"];
     }
-    
-    headerview.section = section;
+
+    sectionModel.section = section;
     headerview.sectionModel = sectionModel;
     headerview.expandCallback = ^(BOOL isExpanded) {
         
@@ -207,8 +206,8 @@
     headerview.DeleteBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
 
     headerview.returnDeleteBt = ^(NSInteger index){
-        NSLog(@"删除订单%zd",index);
         
+        NSLog(@"删除%zd",index);
         NSMutableDictionary *dic = [NSMutableDictionary dictionary];
         dic[@"token"] = [UserModel defaultUser].token;
         dic[@"uid"] = [UserModel defaultUser].uid;
@@ -221,10 +220,17 @@
             if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
 
                 [MBProgressHUD showError:responseObject[@"message"]];
+                
+                if(self.dataarr.count <= 0){
+                    [self.tableView reloadData];
+                    return ;
+                }
+                
                 [self.dataarr removeObjectAtIndex:index];
-
-                NSIndexPath *indexPath = [NSIndexPath indexPathWithIndex:index];
-                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                [tableView reloadData];
+                
+//                NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:index];
+//                [self.tableView deleteSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
                 
             }else{
                 [MBProgressHUD showError:responseObject[@"message"]];

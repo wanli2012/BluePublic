@@ -69,8 +69,7 @@
 
 -(void)initdatasource{
     
-    _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:[UIApplication sharedApplication].keyWindow];
-    
+    [self.dataarr removeAllObjects];
     //type:订单状态(0订单异常1 已下单,未付款2 已付款,待发货3 已发货,待验收4 已验收,订单完成5 交易失败6取消订单
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     dic[@"token"] = [UserModel defaultUser].token;
@@ -78,6 +77,7 @@
     dic[@"page"] = @(self.page);
     dic[@"type"] = @"3";
     
+    _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:[UIApplication sharedApplication].keyWindow];
     [NetworkManager requestPOSTWithURLStr:kMYORDER_LIST_URL paramDic:dic finish:^(id responseObject) {
         [_loadV removeloadview];
         [self.tableView.mj_header endRefreshing];
@@ -93,19 +93,11 @@
                 ordersMdel.isExpanded = NO;
                 [self.dataarr addObject:ordersMdel];
             }
-            
-            [self.tableView reloadData];
-            
-        }else if ([responseObject[@"code"] integerValue]==3){
-            
-            if (self.dataarr.count != 0) {
-                
-                [MBProgressHUD showError:responseObject[@"message"]];
-            }
-            
+     
         }else{
             [MBProgressHUD showError:responseObject[@"message"]];
         }
+        [self.tableView reloadData];
     } enError:^(NSError *error) {
         [_loadV removeloadview];
         [self.tableView.mj_header endRefreshing];
@@ -193,7 +185,7 @@
         headerview = [[LBMyOrdersHeaderView alloc] initWithReuseIdentifier:@"LBMyOrdersHeaderView"];
     }
     
-    headerview.section = section;
+    sectionModel.section = section;
     headerview.sectionModel = sectionModel;
     headerview.expandCallback = ^(BOOL isExpanded) {
         
@@ -207,31 +199,38 @@
     
     __weak __typeof(self) weakSelf = self;
     headerview.returnPayBt = ^(NSInteger index){
-        NSLog(@"确认收货%zd",index);
-        
-//        _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
-//        [NetworkManager requestPOSTWithURLStr:kORDER_PAY_URL paramDic:dict finish:^(id responseObject) {
-//            
-//            [_loadV removeloadview];
-//            if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
-//                
-//                [weakSelf.navigationController popToRootViewControllerAnimated:YES];
-//                
-//            }
-//            [MBProgressHUD showError:responseObject[@"message"]];
-//        } enError:^(NSError *error) {
-//            [_loadV removeloadview];
-//            
-//        }];
-//        
-//    }];
 
+        LBMyOrdersModel *model = weakSelf.dataarr[index];
+        
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        dict[@"uid"] = [UserModel defaultUser].uid;
+        dict[@"token"] = [UserModel defaultUser].token;
+        dict[@"order_id"] = model.order_id;
+        
+        _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+        [NetworkManager requestPOSTWithURLStr:kRECIPIENT_URL paramDic:dict finish:^(id responseObject) {
+            
+            [_loadV removeloadview];
+            if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+                
+                [self.dataarr removeObjectAtIndex:section];
+        
+                [tableView reloadData];
+
+            }
+            [MBProgressHUD showError:responseObject[@"message"]];
+        } enError:^(NSError *error) {
+            [_loadV removeloadview];
+            
+        }];
     };
     
     headerview.returnCancelBt = ^(NSInteger index){
-        NSLog(@"查看物流%zd",index);
+      
+        LBMyOrdersModel *model = weakSelf.dataarr[index];
         self.hidesBottomBarWhenPushed = YES;
         GLMall_LogisticsController *vc =[[GLMall_LogisticsController alloc]init];
+        vc.order_id = model.send_num;
         [self.navigationController pushViewController:vc animated:YES];
         
     };

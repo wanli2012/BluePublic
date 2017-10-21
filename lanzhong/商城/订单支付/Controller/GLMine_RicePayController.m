@@ -39,8 +39,8 @@
 @property (nonatomic, strong)GLOrderPayView *contentView;
 
 @property (nonatomic, strong)UIView *maskView;
-@property (weak, nonatomic) IBOutlet UILabel *typeLabel;
 @property (nonatomic, strong) GLMine_RicePayModel *payModel;
+@property (weak, nonatomic) IBOutlet UILabel *typeLabel;//提示类型,区分从哪里跳进来的
 
 @end
 
@@ -60,6 +60,12 @@
     self.orderMoney.text = [NSString stringWithFormat:@"%.2f",[self.orderPrice floatValue]];
     self.orderMTitleLb.text = @"订单金额:";
     
+    if(self.signIndex == 1){
+        self.typeLabel.text = @"订单支付";
+    }else{
+        self.typeLabel.text = @"下单成功";
+    }
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismiss) name:@"maskView_dismiss" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postRepuest:paySituation:) name:@"input_PasswordNotification" object:nil];
@@ -78,36 +84,40 @@
     [self isShowPayInterface];
 }
 
--(void)isShowPayInterface{//kPAY_SWITCH_URL
-    
-    [self setPayType];
+-(void)isShowPayInterface{
+
+    [self.dataarr removeAllObjects];
     
     _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
-    [NetworkManager requestPOSTWithURLStr:kORDER_PAY_URL paramDic:@{} finish:^(id responseObject) {
+    [NetworkManager requestPOSTWithURLStr:kPAY_SWITCH_URL paramDic:@{} finish:^(id responseObject) {
         
         [_loadV removeloadview];
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
     
+            
             self.payModel = [GLMine_RicePayModel mj_objectWithKeyValues:responseObject[@"data"]];
             
             if (self.payModel.credit.open) {
                 
                 [self.dataarr addObject:@{@"image":@"余额",@"title":@"余额支付",@"index":@"3"}];
-            }else if (self.payModel.alipay.open){
+            }
+            if (self.payModel.alipay.open){
                 
                 [self.dataarr addObject:@{@"image":@"zhifubao",@"title":@"支付宝支付",@"index":@"1"}];
-            }else if(self.payModel.wechat.open){
+            }
+            if (self.payModel.wechat.open){
                 
                 [self.dataarr addObject:@{@"image":@"weixin",@"title":@"微信支付",@"index":@"2"}];
             }
         }
-        
-        [MBProgressHUD showError:responseObject[@"message"]];
+        [self setPayType];
+
+        [self.tableview reloadData];
     } enError:^(NSError *error) {
         [_loadV removeloadview];
+        [self.tableview reloadData];
         
     }];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -117,7 +127,15 @@
     
 }
 - (IBAction)pop:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+    if(self.signIndex == 1){
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }else{
+        
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 - (void)setPayType {
@@ -271,9 +289,9 @@
 //确定支付
 - (IBAction)surebutton:(UIButton *)sender {
     
-    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
-    NSTimeInterval a=[dat timeIntervalSince1970];
-    NSString*timeString = [NSString stringWithFormat:@"%0.f", a];//转为字符型
+//    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+//    NSTimeInterval a=[dat timeIntervalSince1970];
+//    NSString*timeString = [NSString stringWithFormat:@"%0.f", a];//转为字符型
     
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请输入密码" message:nil preferredStyle:UIAlertControllerStyleAlert];
     
@@ -294,18 +312,19 @@
         dict[@"order_money"] = self.orderPrice;
         dict[@"upwd"] = alertVC.textFields.lastObject.text;
         
-        switch (self.selectIndex) {
-            case 0://余额
+        NSInteger index = [self.dataarr[self.selectIndex][@"index"] integerValue];
+        switch (index) {
+            case 3://余额
             {
                 dict[@"paytype"] = @"3";
             }
                 break;
-            case 1://微信
+            case 2://微信
             {
                 dict[@"paytype"] = @"2";
             }
                 break;
-            case 2://支付宝
+            case 1://支付宝
             {
                 dict[@"paytype"] = @"1";
             }
@@ -320,7 +339,14 @@
             [_loadV removeloadview];
             if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
                 
-                [self.navigationController popToRootViewControllerAnimated:YES];
+                if (self.signIndex == 1) {
+                    
+                    self.block();
+                    [self.navigationController popViewControllerAnimated:YES];
+                }else{
+                    
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                }
 
             }
             [MBProgressHUD showError:responseObject[@"message"]];

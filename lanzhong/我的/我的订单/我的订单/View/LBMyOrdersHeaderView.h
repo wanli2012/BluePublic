@@ -26,7 +26,7 @@ typedef void(^GWHeadViewExpandCallback)(BOOL isExpanded);
 @property(nonatomic , strong) UIButton *DeleteBt;//支付按钮
 @property(nonatomic , strong) UILabel *totalPriceLabel;//总价label
 @property(nonatomic , strong) UILabel *statusLabel;//状态Label
-@property(nonatomic , assign) NSInteger section;
+//@property(nonatomic , assign) NSInteger section;
 
 @property(nonatomic , copy)void(^returnPayBt)(NSInteger section);
 @property(nonatomic , copy)void(^returnDeleteBt)(NSInteger section);

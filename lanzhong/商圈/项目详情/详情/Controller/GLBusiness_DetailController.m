@@ -377,7 +377,14 @@
             break;
         case 1:
         {
-            return self.model.invest_list.count;
+            if (self.model.invest_list.count <= 2) {
+                
+                return self.model.invest_list.count;
+                
+            }else{
+                
+                return 2;
+            }
         }
             break;
             

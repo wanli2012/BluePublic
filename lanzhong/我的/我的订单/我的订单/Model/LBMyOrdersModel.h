@@ -48,5 +48,7 @@
 @property (copy, nonatomic)NSString *send_num;//快递单号
 @property (copy, nonatomic)NSArray <LBMyOrdersListModel *>*order_goods;//订单商品信息
 
+@property (nonatomic, assign)NSInteger section;
+
 
 @end
