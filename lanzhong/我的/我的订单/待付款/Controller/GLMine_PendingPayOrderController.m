@@ -230,32 +230,42 @@
     
     //取消订单
     headerview.returnDeleteBt = ^(NSInteger index){
-        
-        LBMyOrdersModel *model = weakSelf.dataarr[section];
 
-        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-        dic[@"token"] = [UserModel defaultUser].token;
-        dic[@"uid"] = [UserModel defaultUser].uid;
-        dic[@"order_id"] = model.order_id;
+        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"你确定要取消该订单吗?" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
         
-        _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:[UIApplication sharedApplication].keyWindow];
-        [NetworkManager requestPOSTWithURLStr:kORDER_CANCEL_URL paramDic:dic finish:^(id responseObject) {
-            [_loadV removeloadview];
+        UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-            if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
-                
-                [self.dataarr removeObjectAtIndex:section];
-//                NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:section];
-//                [tableView deleteSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
-                
-                [tableView reloadData];
-            }
+            LBMyOrdersModel *model = weakSelf.dataarr[section];
             
-            [MBProgressHUD showError:responseObject[@"message"]];
-        } enError:^(NSError *error) {
-            [_loadV removeloadview];
-            [MBProgressHUD showError:error.localizedDescription];
+            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+            dic[@"token"] = [UserModel defaultUser].token;
+            dic[@"uid"] = [UserModel defaultUser].uid;
+            dic[@"order_id"] = model.order_id;
+            
+            _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:[UIApplication sharedApplication].keyWindow];
+            [NetworkManager requestPOSTWithURLStr:kORDER_CANCEL_URL paramDic:dic finish:^(id responseObject) {
+                [_loadV removeloadview];
+                
+                if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+                    
+                    [self.dataarr removeObjectAtIndex:section];
+                    
+                    [tableView reloadData];
+                }
+                
+                [MBProgressHUD showError:responseObject[@"message"]];
+            } enError:^(NSError *error) {
+                [_loadV removeloadview];
+                [MBProgressHUD showError:error.localizedDescription];
+            }];
+            
         }];
+        
+        [alertVC addAction:cancel];
+        [alertVC addAction:ok];
+        [weakSelf presentViewController:alertVC animated:YES completion:nil];
+
     };
 
     return headerview;

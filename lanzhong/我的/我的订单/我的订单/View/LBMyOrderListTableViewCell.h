@@ -10,9 +10,10 @@
 #import "LBMyOrdersModel.h"
 #import "LBMyorderRebateModel.h"
 
-@protocol LBMyOrderListTableViewdelegete <NSObject>
+@protocol LBMyOrderListTableViewCellDelegete <NSObject>
 
 -(void)clickTapgesture;
+- (void)applyForReturn:(NSInteger)index section:(NSInteger)section;
 
 @end
 
@@ -21,12 +22,14 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imagev;
 
 @property (weak, nonatomic) IBOutlet UILabel *namelb;
-@property (weak, nonatomic) IBOutlet UILabel *numlb;
+@property (weak, nonatomic) IBOutlet UILabel *specLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLb;
 @property (assign, nonatomic)NSInteger index;
+@property (nonatomic, assign)NSInteger section;
 @property (strong, nonatomic)NSIndexPath *indexpath;
+@property (weak, nonatomic) IBOutlet UILabel *numberLabel;
 
-@property (assign, nonatomic)id<LBMyOrderListTableViewdelegete> delegete;
+@property (assign, nonatomic)id<LBMyOrderListTableViewCellDelegete> delegete;
 @property (strong, nonatomic)LBMyOrdersListModel *myorderlistModel;
 @property (strong, nonatomic)LBMyorderRebateModel *myorderRebateModel;
 

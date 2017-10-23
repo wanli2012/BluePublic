@@ -94,7 +94,6 @@
 
 - (void)postRequest{
     
-    self.model = nil;
     _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
     [NetworkManager requestPOSTWithURLStr:kHOME_URL paramDic:@{} finish:^(id responseObject) {
         
@@ -103,6 +102,7 @@
         
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
   
+            self.model = nil;
             self.model = [GLHomeModel mj_objectWithKeyValues:responseObject[@"data"]];
             
             self.noticeLabel.text = self.model.new_notice.title;

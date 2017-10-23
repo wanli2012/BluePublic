@@ -193,8 +193,6 @@
 		4A6AD22C1F7F953600E6084E /* GLPublish_ReviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A6AD1F11F7F953500E6084E /* GLPublish_ReviewCell.xib */; };
 		4A6AD22D1F7F953600E6084E /* GLPublish_AuditFailureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6AD1F51F7F953500E6084E /* GLPublish_AuditFailureController.m */; };
 		4A6AD22E1F7F953600E6084E /* GLPublish_AuditFailureController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A6AD1F61F7F953500E6084E /* GLPublish_AuditFailureController.xib */; };
-		4A6AD22F1F7F953600E6084E /* GLPublish_AuditedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6AD1FC1F7F953500E6084E /* GLPublish_AuditedController.m */; };
-		4A6AD2301F7F953600E6084E /* GLPublish_AuditedController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A6AD1FD1F7F953500E6084E /* GLPublish_AuditedController.xib */; };
 		4A6AD2351F7F953600E6084E /* GLPublish_FundraisingSuccessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6AD20D1F7F953500E6084E /* GLPublish_FundraisingSuccessController.m */; };
 		4A6AD2361F7F953600E6084E /* GLPublish_FundraisingSuccessController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A6AD20E1F7F953500E6084E /* GLPublish_FundraisingSuccessController.xib */; };
 		4A6AD2371F7F953600E6084E /* GLPublish_ProjectCompletedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6AD2141F7F953500E6084E /* GLPublish_ProjectCompletedController.m */; };
@@ -663,9 +661,6 @@
 		4A6AD1F41F7F953500E6084E /* GLPublish_AuditFailureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLPublish_AuditFailureController.h; sourceTree = "<group>"; };
 		4A6AD1F51F7F953500E6084E /* GLPublish_AuditFailureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLPublish_AuditFailureController.m; sourceTree = "<group>"; };
 		4A6AD1F61F7F953500E6084E /* GLPublish_AuditFailureController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLPublish_AuditFailureController.xib; sourceTree = "<group>"; };
-		4A6AD1FB1F7F953500E6084E /* GLPublish_AuditedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLPublish_AuditedController.h; sourceTree = "<group>"; };
-		4A6AD1FC1F7F953500E6084E /* GLPublish_AuditedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLPublish_AuditedController.m; sourceTree = "<group>"; };
-		4A6AD1FD1F7F953500E6084E /* GLPublish_AuditedController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLPublish_AuditedController.xib; sourceTree = "<group>"; };
 		4A6AD20C1F7F953500E6084E /* GLPublish_FundraisingSuccessController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLPublish_FundraisingSuccessController.h; sourceTree = "<group>"; };
 		4A6AD20D1F7F953500E6084E /* GLPublish_FundraisingSuccessController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLPublish_FundraisingSuccessController.m; sourceTree = "<group>"; };
 		4A6AD20E1F7F953500E6084E /* GLPublish_FundraisingSuccessController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLPublish_FundraisingSuccessController.xib; sourceTree = "<group>"; };
@@ -1333,8 +1328,6 @@
 			isa = PBXGroup;
 			children = (
 				4A16FF131F8F681800064CE5 /* Controller */,
-				4A16FF141F8F681800064CE5 /* Model */,
-				4A16FF151F8F681800064CE5 /* View */,
 			);
 			path = "筹款停止";
 			sourceTree = "<group>";
@@ -1349,26 +1342,10 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		4A16FF141F8F681800064CE5 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		4A16FF151F8F681800064CE5 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		4A16FF161F8F681F00064CE5 /* 项目失败 */ = {
 			isa = PBXGroup;
 			children = (
 				4A16FF171F8F681F00064CE5 /* Controller */,
-				4A16FF181F8F681F00064CE5 /* Model */,
-				4A16FF191F8F681F00064CE5 /* View */,
 			);
 			path = "项目失败";
 			sourceTree = "<group>";
@@ -1383,26 +1360,10 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		4A16FF181F8F681F00064CE5 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		4A16FF191F8F681F00064CE5 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		4A16FF261F8F701A00064CE5 /* 筹款失败 */ = {
 			isa = PBXGroup;
 			children = (
 				4A16FF271F8F701A00064CE5 /* Controller */,
-				4A16FF281F8F701A00064CE5 /* Model */,
-				4A16FF291F8F701A00064CE5 /* View */,
 			);
 			path = "筹款失败";
 			sourceTree = "<group>";
@@ -1417,25 +1378,10 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		4A16FF281F8F701A00064CE5 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		4A16FF291F8F701A00064CE5 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		4A16FF351F8F891A00064CE5 /* 筹款中 */ = {
 			isa = PBXGroup;
 			children = (
 				4A16FF361F8F891A00064CE5 /* Controller */,
-				4A16FF3A1F8F891A00064CE5 /* Model */,
 				4A16FF3D1F8F891A00064CE5 /* View */,
 			);
 			path = "筹款中";
@@ -1449,13 +1395,6 @@
 				4A16FF391F8F891A00064CE5 /* GLPublish_FundraisingController.xib */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		4A16FF3A1F8F891A00064CE5 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		4A16FF3D1F8F891A00064CE5 /* View */ = {
@@ -2241,7 +2180,6 @@
 				4A6AD23F1F7F95C800E6084E /* 我的项目 */,
 				4A6AD1E81F7F953500E6084E /* 审核中 */,
 				4A6AD1F21F7F953500E6084E /* 审核失败 */,
-				4A6AD1F91F7F953500E6084E /* 审核成功 */,
 				4A16FF351F8F891A00064CE5 /* 筹款中 */,
 				4A16FF121F8F681800064CE5 /* 筹款停止 */,
 				4A6AD20A1F7F953500E6084E /* 筹款成功 */,
@@ -2297,8 +2235,6 @@
 			isa = PBXGroup;
 			children = (
 				4A6AD1F31F7F953500E6084E /* Controller */,
-				4A6AD1F71F7F953500E6084E /* Model */,
-				4A6AD1F81F7F953500E6084E /* View */,
 			);
 			path = "审核失败";
 			sourceTree = "<group>";
@@ -2311,54 +2247,6 @@
 				4A6AD1F61F7F953500E6084E /* GLPublish_AuditFailureController.xib */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		4A6AD1F71F7F953500E6084E /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		4A6AD1F81F7F953500E6084E /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		4A6AD1F91F7F953500E6084E /* 审核成功 */ = {
-			isa = PBXGroup;
-			children = (
-				4A6AD1FA1F7F953500E6084E /* Controller */,
-				4A6AD1FE1F7F953500E6084E /* Model */,
-				4A6AD1FF1F7F953500E6084E /* View */,
-			);
-			path = "审核成功";
-			sourceTree = "<group>";
-		};
-		4A6AD1FA1F7F953500E6084E /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				4A6AD1FB1F7F953500E6084E /* GLPublish_AuditedController.h */,
-				4A6AD1FC1F7F953500E6084E /* GLPublish_AuditedController.m */,
-				4A6AD1FD1F7F953500E6084E /* GLPublish_AuditedController.xib */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		4A6AD1FE1F7F953500E6084E /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		4A6AD1FF1F7F953500E6084E /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		4A6AD20A1F7F953500E6084E /* 筹款成功 */ = {
@@ -2400,8 +2288,6 @@
 			isa = PBXGroup;
 			children = (
 				4A6AD2121F7F953500E6084E /* Controller */,
-				4A6AD2161F7F953500E6084E /* Model */,
-				4A6AD2171F7F953500E6084E /* View */,
 			);
 			path = "项目已完成";
 			sourceTree = "<group>";
@@ -2416,26 +2302,10 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		4A6AD2161F7F953500E6084E /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		4A6AD2171F7F953500E6084E /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		4A6AD2181F7F953500E6084E /* 项目暂停 */ = {
 			isa = PBXGroup;
 			children = (
 				4A6AD2191F7F953500E6084E /* Controller */,
-				4A6AD21D1F7F953500E6084E /* Model */,
-				4A6AD21E1F7F953500E6084E /* View */,
 			);
 			path = "项目暂停";
 			sourceTree = "<group>";
@@ -2450,25 +2320,10 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		4A6AD21D1F7F953500E6084E /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		4A6AD21E1F7F953500E6084E /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		4A6AD21F1F7F953500E6084E /* 项目进行中 */ = {
 			isa = PBXGroup;
 			children = (
 				4A6AD2201F7F953500E6084E /* Controller */,
-				4A6AD2241F7F953500E6084E /* Model */,
 				4A6AD2251F7F953600E6084E /* View */,
 			);
 			path = "项目进行中";
@@ -2482,13 +2337,6 @@
 				4A6AD2231F7F953500E6084E /* GLPublish_ProjectInProgressController.xib */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		4A6AD2241F7F953500E6084E /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		4A6AD2251F7F953600E6084E /* View */ = {
@@ -2505,8 +2353,6 @@
 			isa = PBXGroup;
 			children = (
 				4A6AD2401F7F95C800E6084E /* Controller */,
-				4A6AD2411F7F95C800E6084E /* Model */,
-				4A6AD2421F7F95C800E6084E /* View */,
 			);
 			path = "我的项目";
 			sourceTree = "<group>";
@@ -2519,20 +2365,6 @@
 				4A6AD2451F7F95DF00E6084E /* GLMine_MyProjectController.xib */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		4A6AD2411F7F95C800E6084E /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		4A6AD2421F7F95C800E6084E /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		4A6B9EED1F7CC92E009386C8 /* 设置 */ = {
@@ -3776,7 +3608,6 @@
 				4A05EEA61F8C97380095DBCF /* HXWeiboPhotoPicker.bundle in Resources */,
 				4A2905491F9757BF006903F1 /* GLMine_ShareRecordController.xib in Resources */,
 				4A6B9F331F7CF100009386C8 /* GLBusiness_DetailCommentCell.xib in Resources */,
-				4A6AD2301F7F953600E6084E /* GLPublish_AuditedController.xib in Resources */,
 				4ADEBB661F7E487200C50087 /* GLPay_ChooseController.xib in Resources */,
 				4A6B9F311F7CF100009386C8 /* GLBusiness_ChooseCell.xib in Resources */,
 				4A0EA9DA1F8630C4006A1CF5 /* GLMine_WalletCardChooseController.xib in Resources */,
@@ -3941,7 +3772,6 @@
 				4A18B90B1F94A48400E9B387 /* GLMine_BankNameModel.m in Sources */,
 				4AF109BF1F78DBB500CB51FA /* DWTabBar.m in Sources */,
 				4A509B4E1F8726F900D794FB /* GLHomeController.m in Sources */,
-				4A6AD22F1F7F953600E6084E /* GLPublish_AuditedController.m in Sources */,
 				4A18B9001F94A31B00E9B387 /* LoadWaitView.m in Sources */,
 				4A509B861F872BC200D794FB /* GLMine_MyMessage_SupportController.m in Sources */,
 				4AF1092B1F78DBB500CB51FA /* UINavigationController+WXSTransition.m in Sources */,

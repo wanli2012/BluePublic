@@ -99,7 +99,7 @@
     
     if (isRefresh) {
         self.page = 1;
-        [self.models removeAllObjects];
+        
     }else{
         self.page ++ ;
     }
@@ -120,6 +120,7 @@
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             if([responseObject[@"data"] count] != 0){
 
+                [self.models removeAllObjects];
                 for (NSDictionary *dict in responseObject[@"data"]) {
                     GLCircle_item_dataModel *model = [GLCircle_item_dataModel mj_objectWithKeyValues:dict];
                     [self.models addObject:model];
@@ -150,7 +151,7 @@
             if([responseObject[@"data"] count] != 0){
                 
                 self.categoryModel = [GLCircle_item_screenModel mj_objectWithKeyValues:responseObject[@"data"]];
-         
+                
                 NSMutableArray *arrM = [NSMutableArray array];
                 NSMutableArray *arrM2 = [NSMutableArray array];
                 NSMutableArray *arrM3 = [NSMutableArray array];

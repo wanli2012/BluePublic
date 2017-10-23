@@ -14,6 +14,7 @@
 //#import <AlipaySDK/AlipaySDK.h>
 //#import "WXApi.h"
 #import "GLMine_RicePayModel.h"
+#import "GLBusiness_DetailController.h"
 
 @interface GLMine_RicePayController ()
 {

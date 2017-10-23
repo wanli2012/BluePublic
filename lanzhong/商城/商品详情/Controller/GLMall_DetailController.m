@@ -20,9 +20,9 @@
 #define headerImageHeight 64
 
 
-#define HEADER_VIEW_HEIGHT      400.0f      // 顶部商品图片高度
+#define HEADER_VIEW_HEIGHT      170.0f      // 顶部商品图片高度
 #define END_DRAG_SHOW_HEIGHT    80.0f       // 结束拖拽最大值时的显示
-#define BOTTOM_VIEW_HEIGHT      44.0f       // 底部视图高度（加入购物车＼立即购买）
+#define BOTTOM_VIEW_HEIGHT      50.0f       // 底部视图高度（加入购物车＼立即购买）
 
 
 @interface GLMall_DetailController ()<UITableViewDelegate,UITableViewDataSource,GLMall_DetailSelecteCellDelegate,UIWebViewDelegate,SDCycleScrollViewDelegate>
@@ -331,13 +331,12 @@
         self.scrollView.contentOffset = CGPointMake(self.scrollView.contentOffset.x, 0);
         if (self.tableView.contentOffset.y >= 0 &&  self.tableView.contentOffset.y <= HEADER_VIEW_HEIGHT) {
             self.scrollView.contentOffset = CGPointMake(self.scrollView.contentOffset.x, -offset / 2.0f);
-//            self.navView.alpha = offset / HEADER_VIEW_HEIGHT;
         } else if (self.tableView.contentOffset.y < 0) {
-//            self.navView.alpha = 0.0f;
+
             if (offset <= -END_DRAG_SHOW_HEIGHT) {
-                _topMsgLabel.text = @"释放查看我的喜爱";
+//                _topMsgLabel.text = @"释放查看我的喜爱";
             } else {
-                _topMsgLabel.text = @"下拉查看我的喜爱";
+//                _topMsgLabel.text = @"下拉查看我的喜爱";
             }
         } else {
 //            self.navView.alpha = 1.0f;
@@ -370,14 +369,27 @@
         }
         
         // 滚到图文详情
-        if (maxY >= self.tableView.contentSize.height - kSCREEN_HEIGHT + END_DRAG_SHOW_HEIGHT + BOTTOM_VIEW_HEIGHT) {
-            isShowDetail = NO;
-            [UIView animateWithDuration:0.4 animations:^{
-                self.allView.transform = CGAffineTransformTranslate(self.allView.transform, 0, - (kSCREEN_HEIGHT - BOTTOM_VIEW_HEIGHT));
-            } completion:^(BOOL finished) {
-                maxY = 0.0f;
-                isShowDetail = YES;
-            }];
+        if (self.tableView.contentSize.height < self.view.height - 114) {
+            if (maxY >= self.view.height - 114 - kSCREEN_HEIGHT + END_DRAG_SHOW_HEIGHT + BOTTOM_VIEW_HEIGHT) {
+                isShowDetail = NO;
+                [UIView animateWithDuration:0.4 animations:^{
+                    self.allView.transform = CGAffineTransformTranslate(self.allView.transform, 0, - (kSCREEN_HEIGHT - BOTTOM_VIEW_HEIGHT));
+                } completion:^(BOOL finished) {
+                    maxY = 0.0f;
+                    isShowDetail = YES;
+                }];
+            }
+
+        }else{
+            if (maxY >= self.tableView.contentSize.height - kSCREEN_HEIGHT + END_DRAG_SHOW_HEIGHT + BOTTOM_VIEW_HEIGHT) {
+                isShowDetail = NO;
+                [UIView animateWithDuration:0.4 animations:^{
+                    self.allView.transform = CGAffineTransformTranslate(self.allView.transform, 0, - (kSCREEN_HEIGHT - BOTTOM_VIEW_HEIGHT));
+                } completion:^(BOOL finished) {
+                    maxY = 0.0f;
+                    isShowDetail = YES;
+                }];
+            }
         }
         
         // 滚到商品详情
@@ -397,7 +409,7 @@
  *  带有滑动减速动画效果时，才会调用
  */
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    //    NSLog(@"END Decelerating");
+        NSLog(@"END Decelerating");
 }
 
 //- (void)scrollViewDidScroll:(UIScrollView *)scrollView {

@@ -12,9 +12,8 @@
 #import "LBMyOrdersHeaderView.h"
 #import "LBMyOrdersModel.h"
 
-@interface GLMine_CompletedOrderController ()
+@interface GLMine_CompletedOrderController ()<LBMyOrderListTableViewCellDelegete>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
 
 @property (strong, nonatomic)NSMutableArray *dataarr;
 @property (strong, nonatomic)LoadWaitView *loadV;
@@ -131,6 +130,66 @@
     
     [self initdatasource];
 }
+
+#pragma mark - LBMyOrderListTableViewCellDelegete
+- (void)applyForReturn:(NSInteger)index section:(NSInteger)section{
+    
+    __weak __typeof(self) weakSelf = self;
+    
+//    switch () {
+//        case :
+//
+//            break;
+    
+//        default:
+//            break;
+//    }
+    
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"退货理由" message:@"你确定要申请退款吗?" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertVC addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+       textField.placeholder = @"请输入退货原因(50字内)";
+    }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"提交" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+//        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+//        dic[@"token"] = [UserModel defaultUser].token;
+//        dic[@"uid"] = [UserModel defaultUser].uid;
+//        dic[@"order_id"] = sectionModel.order_id;
+//        
+//        _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:[UIApplication sharedApplication].keyWindow];
+//        [NetworkManager requestPOSTWithURLStr:kDEL_ORDER_URL paramDic:dic finish:^(id responseObject) {
+//            [_loadV removeloadview];
+//            if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+//                [MBProgressHUD showError:responseObject[@"message"]];
+//                if(weakSelf.dataarr.count <= 0){
+//                    [weakSelf.tableView reloadData];
+//                    return ;
+//                }
+//                [weakSelf.dataarr removeObjectAtIndex:index];
+//                [tableView reloadData];
+//            }else{
+//                [MBProgressHUD showError:responseObject[@"message"]];
+//            }
+//        } enError:^(NSError *error) {
+//            [_loadV removeloadview];
+//            [weakSelf.tableView.mj_header endRefreshing];
+//            [weakSelf.tableView.mj_footer endRefreshing];
+//            [MBProgressHUD showError:error.localizedDescription];
+//        }];
+        
+    }];
+    
+    [alertVC addAction:cancel];
+    [alertVC addAction:ok];
+    [weakSelf presentViewController:alertVC animated:YES completion:nil];
+    
+
+}
+
+#pragma mark - UITableViewDelegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if (self.dataarr.count > 0 ) {
         
@@ -139,7 +198,6 @@
         self.nodataV.hidden = NO;
         
     }
-    
     return self.dataarr.count;
     
 }
@@ -162,7 +220,8 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     cell.index = indexPath.row;
-    
+    cell.section = indexPath.section;
+    cell.delegete = self;
     LBMyOrdersModel *model= (LBMyOrdersModel*)self.dataarr[indexPath.section];
     
     cell.myorderlistModel = model.order_goods[indexPath.row];
@@ -192,6 +251,8 @@
     if (!headerview) {
         headerview = [[LBMyOrdersHeaderView alloc] initWithReuseIdentifier:@"LBMyOrdersHeaderView"];
     }
+    
+    __weak __typeof(self) weakSelf = self;
 
     sectionModel.section = section;
     headerview.sectionModel = sectionModel;
@@ -206,43 +267,51 @@
     headerview.DeleteBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
 
     headerview.returnDeleteBt = ^(NSInteger index){
-        
-        NSLog(@"删除%zd",index);
-        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-        dic[@"token"] = [UserModel defaultUser].token;
-        dic[@"uid"] = [UserModel defaultUser].uid;
-        dic[@"order_id"] = sectionModel.order_id;
-        
-        _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:[UIApplication sharedApplication].keyWindow];
-        [NetworkManager requestPOSTWithURLStr:kDEL_ORDER_URL paramDic:dic finish:^(id responseObject) {
-            [_loadV removeloadview];
 
-            if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
-
-                [MBProgressHUD showError:responseObject[@"message"]];
-                
-                if(self.dataarr.count <= 0){
-                    [self.tableView reloadData];
-                    return ;
-                }
-                
-                [self.dataarr removeObjectAtIndex:index];
-                [tableView reloadData];
-                
-//                NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:index];
-//                [self.tableView deleteSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
-                
-            }else{
-                [MBProgressHUD showError:responseObject[@"message"]];
-            }
-        } enError:^(NSError *error) {
-            [_loadV removeloadview];
-            [self.tableView.mj_header endRefreshing];
-            [self.tableView.mj_footer endRefreshing];
-            [MBProgressHUD showError:error.localizedDescription];
+        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"你确定要删除该订单吗?" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        
+        UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-        }];
+            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+            dic[@"token"] = [UserModel defaultUser].token;
+            dic[@"uid"] = [UserModel defaultUser].uid;
+            dic[@"order_id"] = sectionModel.order_id;
+            
+            _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:[UIApplication sharedApplication].keyWindow];
+            [NetworkManager requestPOSTWithURLStr:kDEL_ORDER_URL paramDic:dic finish:^(id responseObject) {
+                [_loadV removeloadview];
+                
+                if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+                    
+                    [MBProgressHUD showError:responseObject[@"message"]];
+                    
+                    if(weakSelf.dataarr.count <= 0){
+                        [weakSelf.tableView reloadData];
+                        return ;
+                    }
+                    
+                    [weakSelf.dataarr removeObjectAtIndex:index];
+                    [tableView reloadData];
+                    
+                }else{
+                    [MBProgressHUD showError:responseObject[@"message"]];
+                }
+            } enError:^(NSError *error) {
+                [_loadV removeloadview];
+                [weakSelf.tableView.mj_header endRefreshing];
+                [weakSelf.tableView.mj_footer endRefreshing];
+                [MBProgressHUD showError:error.localizedDescription];
+                
+            }];
 
+        }];
+        
+        [alertVC addAction:cancel];
+        [alertVC addAction:ok];
+        [weakSelf presentViewController:alertVC animated:YES completion:nil];
+        
+       
     };
     
     return headerview;

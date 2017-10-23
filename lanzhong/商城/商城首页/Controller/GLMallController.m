@@ -17,7 +17,6 @@
 #define sizeScaleimageH  (285.0/349.0)
 @interface GLMallController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
-
 @property (weak, nonatomic) IBOutlet UICollectionView *collectioview;
 @property (nonatomic, strong) MenuScreeningView *menuScreeningView;  //条件选择器
 
@@ -44,7 +43,6 @@ static NSString *ID = @"GLClassifyCell";
     [self.collectioview registerNib:[UINib nibWithNibName:ID bundle:nil] forCellWithReuseIdentifier:ID];
     
     [self.view addSubview:self.menuScreeningView];
-    
     
     __weak __typeof(self) weakSelf = self;
     self.menuScreeningView.block = ^(NSInteger itemIndex,NSInteger index){
@@ -75,7 +73,6 @@ static NSString *ID = @"GLClassifyCell";
         
         [weakSelf postRequest:YES];
     };
-    
     
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
@@ -111,7 +108,7 @@ static NSString *ID = @"GLClassifyCell";
     
     if (isRefresh) {
         self.page = 1;
-        [self.models removeAllObjects];
+       
     }else{
         self.page ++ ;
     }
@@ -132,6 +129,7 @@ static NSString *ID = @"GLClassifyCell";
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             if([responseObject[@"data"] count] != 0){
                 
+                [self.models removeAllObjects];
                 for (NSDictionary *dict in responseObject[@"data"]) {
                     GLMallModel *model = [GLMallModel mj_objectWithKeyValues:dict];
                     [self.models addObject:model];
