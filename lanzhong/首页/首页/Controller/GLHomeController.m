@@ -39,6 +39,7 @@
 
 @property (nonatomic, strong)GLHomeModel *model;
 @property (nonatomic, strong)LoadWaitView *loadV;
+@property (nonatomic, strong)NodataView *nodataV;
 
 @end
 
@@ -50,6 +51,9 @@
     [self setUI];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"GLHomeCell" bundle:nil] forCellReuseIdentifier:@"GLHomeCell"];
+    
+    [self.tableView addSubview:self.nodataV];
+    self.nodataV.hidden = YES;
     
     __weak __typeof(self) weakSelf = self;
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -100,9 +104,9 @@
         [_loadV removeloadview];
         [self endRefresh];
         
+        self.model = nil;
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
   
-            self.model = nil;
             self.model = [GLHomeModel mj_objectWithKeyValues:responseObject[@"data"]];
             
             self.noticeLabel.text = self.model.new_notice.title;
@@ -190,6 +194,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
+    if (self.model.groom_item.count == 0) {
+        self.nodataV.hidden = NO;
+    }else{
+        self.nodataV.hidden = YES;
+    }
     return self.model.groom_item.count;
 }
 
@@ -203,7 +212,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 180;
+    return 180 * autoSizeScaleX;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -217,4 +226,12 @@
     self.hidesBottomBarWhenPushed = NO;
     
 }
+
+- (NodataView *)nodataV{
+    if (!_nodataV) {
+        _nodataV = [[NodataView alloc] initWithFrame:CGRectMake(0, 270, kSCREEN_WIDTH, kSCREEN_HEIGHT - 49 - 64)];
+    }
+    return _nodataV;
+}
+
 @end

@@ -38,31 +38,29 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eIY-01-pdT">
-                                <rect key="frame" x="120" y="35" width="60" height="20"/>
+                                <rect key="frame" x="120" y="35" width="138" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Iwa-OM-JlL"/>
-                                    <constraint firstAttribute="width" constant="60" id="eLx-7t-FWb"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b6O-Bj-3ll">
-                                <rect key="frame" x="120" y="65" width="42" height="20"/>
+                                <rect key="frame" x="120" y="65" width="98" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="OBu-dG-rYQ"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="iox-gr-vrb"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.77709561589999998" green="0.19865089650000001" blue="0.056773729619999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WjA-ks-HyM">
-                                <rect key="frame" x="228" y="62" width="80" height="26"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WjA-ks-HyM">
+                                <rect key="frame" x="228" y="61" width="80" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="jWR-f1-VN5"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="申请退货">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -85,8 +83,10 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="18s-4C-nRB" secondAttribute="trailing" constant="10" id="8nc-wK-oZT"/>
                             <constraint firstItem="yEg-Jw-33U" firstAttribute="centerY" secondItem="u1r-Mr-HYL" secondAttribute="centerY" id="93t-cg-g9s"/>
+                            <constraint firstItem="18s-4C-nRB" firstAttribute="leading" secondItem="eIY-01-pdT" secondAttribute="trailing" constant="10" id="BZR-P2-gwH"/>
                             <constraint firstAttribute="trailing" secondItem="xnY-Vy-hhu" secondAttribute="trailing" constant="10" id="G5h-Ge-bac"/>
                             <constraint firstItem="eIY-01-pdT" firstAttribute="leading" secondItem="yEg-Jw-33U" secondAttribute="trailing" constant="10" id="IAg-ev-uKI"/>
+                            <constraint firstItem="WjA-ks-HyM" firstAttribute="leading" secondItem="b6O-Bj-3ll" secondAttribute="trailing" constant="10" id="Kar-Ll-G5B"/>
                             <constraint firstItem="b6O-Bj-3ll" firstAttribute="top" secondItem="eIY-01-pdT" secondAttribute="bottom" constant="10" id="N8n-DH-zn2"/>
                             <constraint firstAttribute="trailing" secondItem="WjA-ks-HyM" secondAttribute="trailing" constant="10" id="ObM-Yn-HwX"/>
                             <constraint firstItem="xnY-Vy-hhu" firstAttribute="leading" secondItem="yEg-Jw-33U" secondAttribute="trailing" constant="10" id="Wlj-II-Ggo"/>
@@ -108,6 +108,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <connections>
+                <outlet property="applyReturnBtn" destination="WjA-ks-HyM" id="F7N-PU-orn"/>
                 <outlet property="imagev" destination="yEg-Jw-33U" id="A9E-M4-6x7"/>
                 <outlet property="namelb" destination="xnY-Vy-hhu" id="Jde-M4-ZfK"/>
                 <outlet property="numberLabel" destination="18s-4C-nRB" id="SYy-7e-GfO"/>

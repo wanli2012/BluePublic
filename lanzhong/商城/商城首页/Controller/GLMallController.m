@@ -126,13 +126,18 @@ static NSString *ID = @"GLClassifyCell";
         [_loadV removeloadview];
         [self endRefresh];
         
+        if (isRefresh) {
+            [self.models removeAllObjects];
+        }
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
-            if([responseObject[@"data"] count] != 0){
+            if (![[NSString stringWithFormat:@"%@",responseObject[@"data"]] isEqualToString:@""]) {
                 
-                [self.models removeAllObjects];
-                for (NSDictionary *dict in responseObject[@"data"]) {
-                    GLMallModel *model = [GLMallModel mj_objectWithKeyValues:dict];
-                    [self.models addObject:model];
+                if([responseObject[@"data"] count] != 0){
+                    
+                    for (NSDictionary *dict in responseObject[@"data"]) {
+                        GLMallModel *model = [GLMallModel mj_objectWithKeyValues:dict];
+                        [self.models addObject:model];
+                    }
                 }
             }
             

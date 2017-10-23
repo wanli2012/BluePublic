@@ -28,7 +28,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *secondNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *thirdNameLabel;
 
-
+@property (nonatomic, strong)NodataView *nodataV;
 
 @end
 
@@ -39,17 +39,10 @@
 
     self.navigationItem.title = @"爱心排行行";
     [self.tableView registerNib:[UINib nibWithNibName:@"GLBusiness_LoveListCell" bundle:nil] forCellReuseIdentifier:@"GLBusiness_LoveListCell"];
+    [self.tableView addSubview:self.nodataV];
+    self.nodataV.hidden = YES;
     
     [self setUI];
-//    NSString *str = [NSString stringWithFormat:@"%@",@"800"];
-//    
-//    NSMutableAttributedString *hintString=[[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@元",str]];
-//    
-//    [hintString addAttribute:NSForegroundColorAttributeName value:MAIN_COLOR range:NSMakeRange(0,str.length)];
-//       
-//    self.firstMoneyLabel.attributedText = hintString;
-//    self.secondMoneyLabel.attributedText = hintString;
-//    self.thirdMoneyLabel.attributedText = hintString;
     
 }
 - (void)setUI{
@@ -89,9 +82,7 @@
                 [self.thirdBtn sd_setImageWithURL:[NSURL URLWithString:model2.must_user_pic] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
             }
         }
-        
     }
-    
 }
 
 - (NSMutableAttributedString *)attributedTextWithString:(NSString *)string{
@@ -106,12 +97,17 @@
 #pragma mark - UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
+    if (self.dataSourceArr.count == 0) {
+        self.nodataV.hidden = NO;
+    }else{
+        self.nodataV.hidden = YES;
+    }
+    
     if (self.dataSourceArr.count <= 3) {
         return 0;
     }else{
         return self.dataSourceArr.count - 3;
     }
-    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -127,5 +123,12 @@
     return 60;
 }
 
-
+- (NodataView *)nodataV{
+    if (!_nodataV) {
+        _nodataV = [[NSBundle mainBundle] loadNibNamed:@"NodataView" owner:nil options:nil].lastObject;
+        _nodataV.frame = CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT - 64);
+        
+    }
+    return _nodataV;
+}
 @end

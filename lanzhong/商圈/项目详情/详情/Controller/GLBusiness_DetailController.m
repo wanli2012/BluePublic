@@ -329,7 +329,7 @@
 
             GLBusiness_CertificationController *cerVC = [[GLBusiness_CertificationController alloc] init];
             cerVC.url = [NSString stringWithFormat:@"%@%@",Certification_URL,self.item_id];
-            cerVC.title = @"官方认证";
+            cerVC.navTitle = @"官方认证";
             [self.navigationController pushViewController:cerVC animated:YES];
             
         }

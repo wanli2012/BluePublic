@@ -21,7 +21,8 @@
 @property (copy, nonatomic)NSString *og_id;//订单商品id
 @property (copy, nonatomic)NSString *op_id;//规格id
 @property (copy, nonatomic)NSString *title;//规格名称
-@property (copy, nonatomic)NSString *total_price;//商品总价
+@property (copy, nonatomic)NSString *total_price;//商品总价refunds_state
+@property (copy, nonatomic)NSString *refunds_state;//退货状态  0无申请  1申请退货  2管理员同意  3管理员拒绝  4用户已提交退货信息   5管理员审核确定退货退款操作
 
 @end
 

@@ -223,7 +223,7 @@
     cell.section = indexPath.section;
     cell.delegete = self;
     LBMyOrdersModel *model= (LBMyOrdersModel*)self.dataarr[indexPath.section];
-    
+    cell.applyReturnBtn.hidden = NO;
     cell.myorderlistModel = model.order_goods[indexPath.row];
     
     return cell;

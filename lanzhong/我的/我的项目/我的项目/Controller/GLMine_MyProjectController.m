@@ -9,7 +9,6 @@
 #import "GLMine_MyProjectController.h"
 
 #import "GLPublish_InReviewController.h"//审核中
-#import "GLPublish_AuditedController.h"//审核成功
 #import "GLPublish_AuditFailureController.h"//审核失败
 #import "GLPublish_FundraisingController.h"//筹款中
 #import "GLPublish_FundraisingSuccessController.h"//筹款失败
@@ -80,7 +79,6 @@
     
     NSArray *classNames = @[
                             [GLPublish_InReviewController class],
-//                            [GLPublish_AuditedController class],
                             [GLPublish_AuditFailureController class],
                             [GLPublish_FundraisingController class],
                             [GLPublish_FundraisingSuccessController class],

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LBMyOrdersModel.h"
-#import "LBMyorderRebateModel.h"
+//#import "LBMyorderRebateModel.h"
 
 @protocol LBMyOrderListTableViewCellDelegete <NSObject>
 
@@ -31,6 +31,6 @@
 
 @property (assign, nonatomic)id<LBMyOrderListTableViewCellDelegete> delegete;
 @property (strong, nonatomic)LBMyOrdersListModel *myorderlistModel;
-@property (strong, nonatomic)LBMyorderRebateModel *myorderRebateModel;
+@property (weak, nonatomic) IBOutlet UIButton *applyReturnBtn;
 
 @end

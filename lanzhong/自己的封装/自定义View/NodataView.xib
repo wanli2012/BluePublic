@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D30" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,32 +14,32 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="无数据占位图" translatesAutoresizingMaskIntoConstraints="NO" id="fhH-rB-ERI">
-                    <rect key="frame" x="113" y="238.5" width="150" height="110"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wushuju" translatesAutoresizingMaskIntoConstraints="NO" id="fhH-rB-ERI">
+                    <rect key="frame" x="113" y="278.5" width="150" height="110"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="110" id="MVE-yp-ON3"/>
                         <constraint firstAttribute="width" constant="150" id="pDe-7H-Hdc"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="风萧萧兮易水寒，木有数据怎么办！" translatesAutoresizingMaskIntoConstraints="NO" id="A6s-Hk-0f1">
-                    <rect key="frame" x="106" y="353.5" width="164" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="30" id="XkD-JX-vMy"/>
-                    </constraints>
-                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="空空如也" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfX-f2-BZQ">
+                    <rect key="frame" x="147" y="408.5" width="82" height="24"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="A6s-Hk-0f1" firstAttribute="top" secondItem="fhH-rB-ERI" secondAttribute="bottom" constant="5" id="3FE-D7-CrB"/>
-                <constraint firstItem="A6s-Hk-0f1" firstAttribute="centerX" secondItem="E61-Sq-55L" secondAttribute="centerX" id="L3k-RN-get"/>
-                <constraint firstItem="fhH-rB-ERI" firstAttribute="centerY" secondItem="E61-Sq-55L" secondAttribute="centerY" constant="-40" id="NT1-RQ-BUj"/>
+                <constraint firstItem="hfX-f2-BZQ" firstAttribute="top" secondItem="fhH-rB-ERI" secondAttribute="bottom" constant="20" id="M30-x5-4gr"/>
+                <constraint firstItem="fhH-rB-ERI" firstAttribute="centerY" secondItem="E61-Sq-55L" secondAttribute="centerY" id="NT1-RQ-BUj"/>
                 <constraint firstItem="fhH-rB-ERI" firstAttribute="centerX" secondItem="E61-Sq-55L" secondAttribute="centerX" id="Nsy-Eh-uoE"/>
+                <constraint firstItem="hfX-f2-BZQ" firstAttribute="centerX" secondItem="E61-Sq-55L" secondAttribute="centerX" id="SfI-48-RnO"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
     <resources>
-        <image name="无数据占位图" width="1078" height="1036"/>
-        <image name="风萧萧兮易水寒，木有数据怎么办！" width="164" height="10"/>
+        <image name="wushuju" width="120" height="139"/>
     </resources>
 </document>

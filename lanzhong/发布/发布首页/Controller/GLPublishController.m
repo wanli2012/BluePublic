@@ -26,6 +26,10 @@ static const CGFloat kPhotoViewMargin = 25;
 {
     BOOL _ishidecotr;//判断是否隐藏弹出控制器
     BOOL _isAgreeProtocol;//是否同意协议
+    BOOL _picIndex1;//pic1是否有图
+    BOOL _picIndex2;//pic2是否有图
+    BOOL _picIndex3;//pic3是否有图
+    
 }
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewWidth;
@@ -70,6 +74,8 @@ static const CGFloat kPhotoViewMargin = 25;
 @property (weak, nonatomic) IBOutlet UIImageView *pic2;
 @property (weak, nonatomic) IBOutlet UIImageView *pic3;
 
+
+
 @property (nonatomic, assign)NSInteger picIndex;//pic下标
 
 @end
@@ -97,9 +103,9 @@ static const CGFloat kPhotoViewMargin = 25;
     
     self.scrollView.alwaysBounceVertical = YES;
     
-    self.pic1.hidden = NO;
-    self.pic2.hidden = YES;
-    self.pic3.hidden = YES;
+//    self.pic1.hidden = NO;
+//    self.pic2.hidden = YES;
+//    self.pic3.hidden = YES;
  
     [self.view addSubview:self.CalendarView];
     
@@ -224,28 +230,71 @@ static const CGFloat kPhotoViewMargin = 25;
             self.picIndex = 3;
         }
             break;
-            
         default:
             break;
     }
     
-    //弹出相册
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"项目图片" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *picture = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        //    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        picker.delegate = self;
+        //    // 设置选择后的图片可以被编辑
+        //    picker.allowsEditing = YES;
+        //    [self presentViewController:picker animated:YES completion:nil];
+        //1.获取媒体支持格式
+        NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
+        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        picker.mediaTypes = @[mediaTypes[0]];
+        //5.其他配置
+        //allowsEditing是否允许编辑，如果值为no，选择照片之后就不会进入编辑界面
+        picker.allowsEditing = YES;
+        //6.推送
+        [self presentViewController:picker animated:YES completion:nil];
+        
+    }];
     
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    //    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    picker.delegate = self;
-    //    // 设置选择后的图片可以被编辑
-    //    picker.allowsEditing = YES;
-    //    [self presentViewController:picker animated:YES completion:nil];
-    //1.获取媒体支持格式
-    NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
-    picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-    picker.mediaTypes = @[mediaTypes[0]];
-    //5.其他配置
-    //allowsEditing是否允许编辑，如果值为no，选择照片之后就不会进入编辑界面
-    picker.allowsEditing = YES;
-    //6.推送
-    [self presentViewController:picker animated:YES completion:nil];
+    UIAlertAction *camera = [UIAlertAction actionWithTitle:@"相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            // 设置拍照后的图片可以被编辑
+            picker.allowsEditing = YES;
+            picker.sourceType = sourceType;
+            [self presentViewController:picker animated:YES completion:nil];
+        }else {
+            
+        }
+        
+    }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alertVC addAction:picture];
+    [alertVC addAction:camera];
+    [alertVC addAction:cancel];
+    [self presentViewController:alertVC animated:YES completion:nil];
+    
+    
+//    //弹出相册
+//    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+//    //    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//    picker.delegate = self;
+//    //    // 设置选择后的图片可以被编辑
+//    //    picker.allowsEditing = YES;
+//    //    [self presentViewController:picker animated:YES completion:nil];
+//    //1.获取媒体支持格式
+//    NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
+//    picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+//    picker.mediaTypes = @[mediaTypes[0]];
+//    //5.其他配置
+//    //allowsEditing是否允许编辑，如果值为no，选择照片之后就不会进入编辑界面
+//    picker.allowsEditing = YES;
+//    //6.推送
+//    [self presentViewController:picker animated:YES completion:nil];
 
 }
 
@@ -265,25 +314,42 @@ static const CGFloat kPhotoViewMargin = 25;
         
         UIImage *picImage = [UIImage imageWithData:data];
 
-        
         [picker dismissViewControllerAnimated:YES completion:nil];
         
-        [self.imageArr addObject:picImage];
+        UIImage *placeImage = [UIImage imageNamed:@"addphotograph"];
         
         switch (self.picIndex) {
             case 1:
             {
-                 self.pic1.image = picImage;
+                if (![UIImagePNGRepresentation(placeImage) isEqual:UIImagePNGRepresentation(picImage)]){
+                    
+                    self.pic1.image = picImage;
+                    _picIndex1 = 1;
+                    
+//                    [self.imageArr addObject:picImage];
+                }
             }
                 break;
             case 2:
             {
-                 self.pic2.image = picImage;
+                if (![UIImagePNGRepresentation(placeImage) isEqual:UIImagePNGRepresentation(picImage)]){
+                    
+                    self.pic2.image = picImage;
+                    _picIndex2 = 1;
+//                    [self.imageArr addObject:picImage];
+                }
+
             }
                 break;
             case 3:
             {
-                 self.pic3.image = picImage;
+                if (![UIImagePNGRepresentation(placeImage) isEqual:UIImagePNGRepresentation(picImage)]){
+                    
+                    self.pic3.image = picImage;
+                    _picIndex3 = 1;
+//                    [self.imageArr addObject:picImage];
+                }
+
             }
                 break;
                 
@@ -291,32 +357,33 @@ static const CGFloat kPhotoViewMargin = 25;
                 break;
         }
         
-        switch (self.imageArr.count) {
-            case 0:
-            {
-                self.pic1.hidden = NO;
-                self.pic2.hidden = YES;
-                self.pic3.hidden = NO;
-            }
-                break;
-            case 1:
-            {
-                self.pic1.hidden = NO;
-                self.pic2.hidden = NO;
-                self.pic3.hidden = YES;
-            }
-                break;
-            case 2:
-            {
-                self.pic1.hidden = NO;
-                self.pic2.hidden = NO;
-                self.pic3.hidden = NO;
-            }
-                break;
-                
-            default:
-                break;
-        }
+//        
+//        switch (self.imageArr.count) {
+//            case 0:
+//            {
+//                self.pic1.hidden = NO;
+//                self.pic2.hidden = YES;
+//                self.pic3.hidden = NO;
+//            }
+//                break;
+//            case 1:
+//            {
+//                self.pic1.hidden = NO;
+//                self.pic2.hidden = NO;
+//                self.pic3.hidden = YES;
+//            }
+//                break;
+//            case 2:
+//            {
+//                self.pic1.hidden = NO;
+//                self.pic2.hidden = NO;
+//                self.pic3.hidden = NO;
+//            }
+//                break;
+//                
+//            default:
+//                break;
+//        }
     }
 
 }
@@ -360,6 +427,16 @@ static const CGFloat kPhotoViewMargin = 25;
     dic[@"info"] = self.infoTV.text;
     dic[@"trade_id"] = self.trade_id;
     dic[@"need_time"] = self.need_time;
+    
+    if(_picIndex1 == 1){
+        [self.imageArr addObject:self.pic1.image];
+    }
+    if(_picIndex2 == 1){
+        [self.imageArr addObject:self.pic2.image];
+    }
+    if(_picIndex3 == 1){
+        [self.imageArr addObject:self.pic3.image];
+    }
 
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];//响应
@@ -629,7 +706,7 @@ static const CGFloat kPhotoViewMargin = 25;
 -(HWCalendar*)Calendar{
     
     if (!_Calendar) {
-        _Calendar=[[HWCalendar alloc]initWithFrame:CGRectMake(0, kSCREEN_HEIGHT, kSCREEN_WIDTH , (kSCREEN_WIDTH * 0.8)/7 * 9.5)];
+        _Calendar = [[HWCalendar alloc]initWithFrame:CGRectMake(0, kSCREEN_HEIGHT, kSCREEN_WIDTH , (kSCREEN_WIDTH * 0.8)/7 * 9.5)];
         _Calendar.delegate = self;
         _Calendar.showTimePicker = YES;
     }
@@ -639,8 +716,8 @@ static const CGFloat kPhotoViewMargin = 25;
 -(UIView*)CalendarView{
     
     if (!_CalendarView) {
-        _CalendarView=[[UIView alloc]initWithFrame:[UIScreen mainScreen].bounds];
-        _CalendarView.backgroundColor=YYSRGBColor(0, 0, 0, 0.2);
+        _CalendarView = [[UIView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+        _CalendarView.backgroundColor = YYSRGBColor(0, 0, 0, 0.2);
     }
     return _CalendarView;
 }

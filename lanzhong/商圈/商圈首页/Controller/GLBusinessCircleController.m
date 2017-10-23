@@ -24,6 +24,7 @@
 @property (nonatomic, strong)NSMutableArray *models;
 @property (nonatomic, strong)LoadWaitView *loadV;
 @property (nonatomic, assign)NSInteger page;
+@property (nonatomic, strong)NodataView *nodataV;
 
 @property (nonatomic, copy)NSString *trade_id;
 @property (nonatomic, copy)NSString *man;
@@ -40,6 +41,9 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.headerView.height = 200;
     [self.tableView registerNib:[UINib nibWithNibName:@"GLBusiniessCell" bundle:nil] forCellReuseIdentifier:@"GLBusiniessCell"];
+    [self.tableView addSubview:self.nodataV];
+    self.nodataV.hidden = YES;
+    
     self.stop = @"3";
      __weak __typeof(self) weakSelf = self;
     
@@ -117,10 +121,13 @@
         [_loadV removeloadview];
         [self endRefresh];
         
+         if (isRefresh) {
+             [self.models removeAllObjects];
+         }
+        
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             if([responseObject[@"data"] count] != 0){
 
-                [self.models removeAllObjects];
                 for (NSDictionary *dict in responseObject[@"data"]) {
                     GLCircle_item_dataModel *model = [GLCircle_item_dataModel mj_objectWithKeyValues:dict];
                     [self.models addObject:model];
@@ -216,6 +223,11 @@
 
 #pragma mark - UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (self.models.count == 0) {
+        self.nodataV.hidden = NO;
+    }else{
+        self.nodataV.hidden = YES;
+    }
     return self.models.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -282,6 +294,14 @@
         _models = [NSMutableArray array];
     }
     return _models;
+}
+- (NodataView *)nodataV{
+    if (!_nodataV) {
+        _nodataV = [[NSBundle mainBundle] loadNibNamed:@"NodataView" owner:nil options:nil].lastObject;
+        _nodataV.frame = CGRectMake(0, 170, kSCREEN_WIDTH, kSCREEN_HEIGHT - 64 - 49 - 150);
+        
+    }
+    return _nodataV;
 }
 
 @end
