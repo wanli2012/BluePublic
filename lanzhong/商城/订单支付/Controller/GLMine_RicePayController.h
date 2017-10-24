@@ -18,6 +18,8 @@ typedef void(^GLMine_RicePayControllerBlock)();
 
 @property (nonatomic, copy) NSString *orderPrice;//订单金额
 
+@property (nonatomic, copy) NSString *orders_Price;//多订单金额
+
 @property (nonatomic, assign)NSInteger signIndex;//1:订单支付 我的订单界面跳转过来的   0:下单成功
 
 @property (nonatomic, copy)GLMine_RicePayControllerBlock block;

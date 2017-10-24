@@ -58,7 +58,7 @@
 
 - (void)setUI {
     
-    self.view.backgroundColor = [UIColor blueColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.imageV.layer.cornerRadius = self.imageV.height/2;
     

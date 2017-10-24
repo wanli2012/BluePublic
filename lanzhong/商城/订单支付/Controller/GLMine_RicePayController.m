@@ -310,7 +310,7 @@
         dict[@"uid"] = [UserModel defaultUser].uid;
         dict[@"token"] = [UserModel defaultUser].token;
         dict[@"order_id"] = self.order_id;
-        dict[@"order_money"] = self.orderPrice;
+        dict[@"order_money"] = self.orders_Price;
         dict[@"upwd"] = alertVC.textFields.lastObject.text;
         
         NSInteger index = [self.dataarr[self.selectIndex][@"index"] integerValue];
@@ -363,100 +363,7 @@
     
     [self presentViewController:alertVC animated:YES completion:nil];
     
-//    //判断选中了几中支付方式
-//    int yesNum = 0;
-//    
-//    for (int i = 0; i < self.selectB.count; i++) {
-//        
-//        if ([self.selectB[i] boolValue]) {
-//            yesNum += 1;
-//        }
-//    }
-//    
-//    if ([[UserModel defaultUser].mark floatValue] == 0) {//米劵为0
-//        if (self.selectIndex == 1) {
-//          
-//            self.paySituation = 5;
-//            
-//        }else if(self.selectIndex == 2){
-//   
-//            self.paySituation = 6;
-//            
-//        }else if(self.selectIndex == 3){
-//   
-//            self.paySituation = 7;
-//        }
-//        
-//    }else{//米劵不为0
-//        
-//        if([self.orderPrice floatValue] <= [[UserModel defaultUser].mark floatValue]){//米劵支付
-//   
-//            self.paySituation = 1;
-//            
-//        }else if([self.orderPrice floatValue] > [[UserModel defaultUser].mark floatValue]){
-//            
-//            if (yesNum < 2){
-//                
-//                [MBProgressHUD showError:@"米劵不足,请再选择一种支付方式"];
-//                
-//                return;
-//            }
-//            
-//            if (self.selectIndex == 1) {
-//                
-//                self.paySituation = 2;
-//                
-//            }else if(self.selectIndex == 2){
-//
-//                self.paySituation = 3;
-//                
-//            }else{
-//
-//                self.paySituation = 4;
-//                
-//            }
-//        }
-//    }
-//    
-//    switch (self.paySituation) {
-//        case 1: case 5://米劵支付 米子支付
-//        {
-//            [self popSecretView];//弹出密码输入框
-//
-//        }
-//            break;
-//        case 2: case 3: case 4:
-//        {
-//            NSString *str = [NSString stringWithFormat:@"米券不足的部分将用米子或现金1:1补足,本次需要补足金额为:%.2f",[self.orderPrice floatValue] - [[UserModel defaultUser].mark floatValue]];
-//            
-//            UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"提示" message:str preferredStyle:UIAlertControllerStyleAlert];
-//            UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//                
-//                [self popSecretView];//弹出密码输入框
-//                
-//            }];
-//            UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-//            
-//            [alertVC addAction:ok];
-//            [alertVC addAction:cancel];
-//            
-//            [self presentViewController:alertVC animated:YES completion:nil];
-//        }
-//            break;
-//        case 6://微信支付
-//        {
-//            [self postRepuest:nil paySituation:self.paySituation];
-//        }
-//            break;
-//        case 7://支付宝支付
-//        {
-//            [self postRepuest:nil paySituation:self.paySituation];
-//        }
-//            break;
-//            
-//        default:
-//            break;
-//    }
+
 }
 
 //支付请求
@@ -464,172 +371,6 @@
     
     NSLog(@"支付完成");
     [self dismiss];
-    
-//    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-//    dict[@"token"] = [UserModel defaultUser].token;
-//    dict[@"uid"] = [UserModel defaultUser].uid;
-//    dict[@"orderId"] = self.order_id;
-//    dict[@"order_id"] =[RSAEncryptor encryptString:[NSString stringWithFormat:@"%@_%@_%@",self.order_sh,self.order_id,self.order_sn] publicKey:public_RSA];
-//    dict[@"version"] = @3;
-//    
-////    dict[@"order_id"] = [NSString stringWithFormat:@"%@_%@_%@",self.order_sh,self.order_id,self.order_sn];
-//    
-    //    switch (self.paySituation) {
-//        case 1://米劵支付
-//        {
-// 
-//            dict[@"is_rmb"] = @0;
-//            dict[@"is_mark"] = @3;
-//            dict[@"password"] = [RSAEncryptor encryptString:[sender.userInfo objectForKey:@"password"] publicKey:public_RSA];
-//            
-//        }
-//            break;
-//        case 2://米劵+米子
-//        {
-//
-//            dict[@"is_rmb"] = @0;
-//            dict[@"is_mark"] = @6;
-//            dict[@"password"] = [RSAEncryptor encryptString:[sender.userInfo objectForKey:@"password"] publicKey:public_RSA];
-//
-//        }
-//            break;
-//        case 3://米劵+微信
-//        {
-//            dict[@"pay_type"] = @2;
-//            dict[@"is_rmb"] = @1;
-//            dict[@"is_mark"] = @3;
-//            dict[@"password"] = [RSAEncryptor encryptString:[sender.userInfo objectForKey:@"password"] publicKey:public_RSA];
-//            
-//        }
-//            break;
-//        case 4://米劵+支付宝
-//        {
-//            dict[@"pay_type"] = @1;
-//            dict[@"is_rmb"] = @1;
-//            dict[@"is_mark"] = @3;
-//            dict[@"password"] = [RSAEncryptor encryptString:[sender.userInfo objectForKey:@"password"] publicKey:public_RSA];
-//            
-//        }
-//            break;
-//        case 5://米子
-//        {
-//            dict[@"is_rmb"] = @0;
-//            dict[@"is_mark"] = @4;
-//            dict[@"password"] = [RSAEncryptor encryptString:[sender.userInfo objectForKey:@"password"] publicKey:public_RSA];
-//            
-//        }
-//            break;
-//        case 6://微信
-//        {
-//            dict[@"pay_type"] = @2;
-//            dict[@"is_rmb"] = @1;
-//            dict[@"is_mark"] = @0;
-//            
-//        }
-//            break;
-//        case 7://支付宝
-//        {
-//            dict[@"pay_type"] = @1;
-//            dict[@"is_rmb"] = @1;
-//            dict[@"is_mark"] = @0;
-//
-//        }
-//            break;
-//            
-//        default:
-//            break;
-//    }
-//    
-//    [NetworkManager requestPOSTWithURLStr:@"Shop/getPayType" paramDic:dict finish:^(id responseObject) {
-//        
-//        [_loadV removeloadview];
-//        [self dismiss];
-//        
-//        if ([responseObject[@"code"] integerValue] == 1){
-//            
-//            switch (self.paySituation) {//没有现金
-//                case 1: case 2: case 5:
-//                {
-//                    [MBProgressHUD showError:responseObject[@"message"]];
-//                    [self.navigationController popToRootViewControllerAnimated:YES];
-//                }
-//                    break;
-//                    
-//                case 3: case 6://带有微信
-//                {
-//                    [MBProgressHUD showError:responseObject[@"message"]];
-//                    
-//                    //调起微信支付
-//                    PayReq* req = [[PayReq alloc] init];
-//                    req.openID=responseObject[@"data"][@"weixinpay"][@"appid"];
-//                    req.partnerId = responseObject[@"data"][@"weixinpay"][@"partnerid"];
-//                    req.prepayId = responseObject[@"data"][@"weixinpay"][@"prepayid"];
-//                    req.nonceStr = responseObject[@"data"][@"weixinpay"][@"noncestr"];
-//                    req.timeStamp = [responseObject[@"data"][@"weixinpay"][@"timestamp"] intValue];
-//                    req.package = responseObject[@"data"][@"weixinpay"][@"package"];
-//                    req.sign = responseObject[@"data"][@"weixinpay"][@"sign"];
-//                    [WXApi sendReq:req];
-//
-//                }
-//                    break;
-//                    
-//                case 4: case 7://带有支付宝
-//                {
-//                    [[AlipaySDK defaultService]payOrder:responseObject[@"data"][@"alipay"][@"url"] fromScheme:@"univerAlipay" callback:^(NSDictionary *resultDic) {
-//                        
-//                        NSInteger orderState=[resultDic[@"resultStatus"] integerValue];
-//                        if (orderState==9000) {
-//                            self.hidesBottomBarWhenPushed = YES;
-//                            
-//                            [self.navigationController popToRootViewControllerAnimated:YES];
-//                            
-//                            self.hidesBottomBarWhenPushed = NO;
-//                            
-//                        }else{
-//                            NSString *returnStr;
-//                            switch (orderState) {
-//                                case 8000:
-//                                    returnStr=@"订单正在处理中";
-//                                    break;
-//                                case 4000:
-//                                    returnStr=@"订单支付失败";
-//                                    break;
-//                                case 6001:
-//                                    returnStr=@"订单取消";
-//                                    break;
-//                                case 6002:
-//                                    returnStr=@"网络连接出错";
-//                                    break;
-//                                    
-//                                default:
-//                                    break;
-//                            }
-//                            
-//                            [MBProgressHUD showError:returnStr];
-//                            
-//                        }
-//                        
-//                    }];
-//                   
-//                }
-//                    break;
-//                    
-//                default:
-//                    break;
-//            }
-//
-//        }else{
-//            
-//            [MBProgressHUD showError:responseObject[@"message"]];
-//        }
-//        
-//    } enError:^(NSError *error) {
-//        
-//        [MBProgressHUD showError:error.localizedDescription];
-//        [_loadV removeloadview];
-//        
-//    }];
-    
 }
 
 - (void)popSecretView{
@@ -653,7 +394,7 @@
 }
 
 - (void)WeChatPay:(NSString *)payType{
-//
+
 //    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 //    dict[@"token"] = [UserModel defaultUser].token;
 //    dict[@"uid"] = [UserModel defaultUser].uid;
@@ -661,7 +402,7 @@
 //    dict[@"paytype"] = payType;
 //    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
 //    [NetworkManager requestPOSTWithURLStr:@"Shop/payParam" paramDic:dict finish:^(id responseObject) {
-//        
+    
 //        [_loadV removeloadview];
 //        [self dismiss];
 //        if ([responseObject[@"code"] integerValue] == 1){
@@ -684,10 +425,10 @@
 //    } enError:^(NSError *error) {
 //        [MBProgressHUD showError:error.localizedDescription];
 //        [_loadV removeloadview];
-//        
+    
 //    }];
 }
-//
+
 - (void)alipay:(NSString *)payType{
 //    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 //    dict[@"token"] = [UserModel defaultUser].token;

@@ -39,6 +39,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
     self.headerView.height = 200;
     [self.tableView registerNib:[UINib nibWithNibName:@"GLBusiniessCell" bundle:nil] forCellReuseIdentifier:@"GLBusiniessCell"];
     [self.tableView addSubview:self.nodataV];
@@ -116,18 +117,19 @@
     dic[@"stop"] = self.stop;
     
     _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+    
     [NetworkManager requestPOSTWithURLStr:kCIRCLE_HOME_URL paramDic:dic finish:^(id responseObject) {
         
         [_loadV removeloadview];
         [self endRefresh];
         
-         if (isRefresh) {
-             [self.models removeAllObjects];
-         }
+        if (isRefresh) {
+            [self.models removeAllObjects];
+        }
         
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             if([responseObject[@"data"] count] != 0){
-
+                
                 for (NSDictionary *dict in responseObject[@"data"]) {
                     GLCircle_item_dataModel *model = [GLCircle_item_dataModel mj_objectWithKeyValues:dict];
                     [self.models addObject:model];
@@ -147,7 +149,6 @@
         [self.tableView reloadData];
         
     }];
-    
 }
 
 - (void)postRequest_Category {
@@ -259,7 +260,7 @@
 -(GLBusinessCircle_MenuScreeningView*)menuScreeningView{
     
     if (!_menuScreeningView) {
-        _menuScreeningView = [[GLBusinessCircle_MenuScreeningView alloc] initWithFrame:CGRectMake(0, 20,kSCREEN_WIDTH , 50) WithTitles:@[@"行业",@"官方发布",@"筹款中"]];
+        _menuScreeningView = [[GLBusinessCircle_MenuScreeningView alloc] initWithFrame:CGRectMake(0, 0,kSCREEN_WIDTH , 50) WithTitles:@[@"行业",@"官方发布",@"筹款中"]];
         _menuScreeningView.backgroundColor = [UIColor whiteColor];
     }
     

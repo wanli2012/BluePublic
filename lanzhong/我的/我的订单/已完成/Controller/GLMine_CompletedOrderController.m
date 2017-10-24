@@ -134,60 +134,59 @@
 #pragma mark - LBMyOrderListTableViewCellDelegete
 - (void)applyForReturn:(NSInteger)index section:(NSInteger)section{
     
+    LBMyOrdersModel *sectionModel = self.dataarr[section];
     __weak __typeof(self) weakSelf = self;
-    
-//    switch () {
-//        case :
-//
-//            break;
-    
-//        default:
-//            break;
-//    }
     
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"退货理由" message:@"你确定要申请退款吗?" preferredStyle:UIAlertControllerStyleAlert];
     
     [alertVC addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
        textField.placeholder = @"请输入退货原因(50字内)";
     }];
+    
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"提交" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-//        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-//        dic[@"token"] = [UserModel defaultUser].token;
-//        dic[@"uid"] = [UserModel defaultUser].uid;
-//        dic[@"order_id"] = sectionModel.order_id;
-//        
-//        _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:[UIApplication sharedApplication].keyWindow];
-//        [NetworkManager requestPOSTWithURLStr:kDEL_ORDER_URL paramDic:dic finish:^(id responseObject) {
-//            [_loadV removeloadview];
-//            if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
-//                [MBProgressHUD showError:responseObject[@"message"]];
-//                if(weakSelf.dataarr.count <= 0){
-//                    [weakSelf.tableView reloadData];
-//                    return ;
-//                }
-//                [weakSelf.dataarr removeObjectAtIndex:index];
-//                [tableView reloadData];
-//            }else{
-//                [MBProgressHUD showError:responseObject[@"message"]];
-//            }
-//        } enError:^(NSError *error) {
-//            [_loadV removeloadview];
-//            [weakSelf.tableView.mj_header endRefreshing];
-//            [weakSelf.tableView.mj_footer endRefreshing];
-//            [MBProgressHUD showError:error.localizedDescription];
-//        }];
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        dic[@"token"] = [UserModel defaultUser].token;
+        dic[@"uid"] = [UserModel defaultUser].uid;
+        dic[@"goods_id"] = sectionModel.order_goods[index].goods_id;
+        dic[@"order_id"] = sectionModel.order_id;
+        dic[@"og_id"] = sectionModel.order_goods[index].og_id;
+        dic[@"refunds_reason"] = alertVC.textFields.lastObject.text;
+        
+        _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:[UIApplication sharedApplication].keyWindow];
+        [NetworkManager requestPOSTWithURLStr:kAPPLY_RETURN_URL paramDic:dic finish:^(id responseObject) {
+            [_loadV removeloadview];
+            if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+                
+                [MBProgressHUD showError:responseObject[@"message"]];
+                sectionModel.order_goods[index].refunds_state = @"1";
+                NSIndexSet *set = [NSIndexSet indexSetWithIndex:index];
+                [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationFade];
+                
+            }else{
+                [MBProgressHUD showError:responseObject[@"message"]];
+            }
+        } enError:^(NSError *error) {
+            [_loadV removeloadview];
+            [weakSelf.tableView.mj_header endRefreshing];
+            [weakSelf.tableView.mj_footer endRefreshing];
+            [MBProgressHUD showError:error.localizedDescription];
+        }];
         
     }];
     
     [alertVC addAction:cancel];
     [alertVC addAction:ok];
     [weakSelf presentViewController:alertVC animated:YES completion:nil];
-    
 
 }
+//#pragma mark - UITextFieldDelegate
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+//    
+//}
+
 
 #pragma mark - UITableViewDelegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -264,7 +263,7 @@
     headerview.DeleteBt.hidden = NO;
 
     [headerview.DeleteBt setImage:[UIImage imageNamed:@"垃圾桶"] forState:UIControlStateNormal];
-    headerview.DeleteBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    headerview.DeleteBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
 
     headerview.returnDeleteBt = ^(NSInteger index){
 
@@ -310,7 +309,6 @@
         [alertVC addAction:cancel];
         [alertVC addAction:ok];
         [weakSelf presentViewController:alertVC animated:YES completion:nil];
-        
        
     };
     

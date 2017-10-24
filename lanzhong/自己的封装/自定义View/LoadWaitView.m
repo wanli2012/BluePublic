@@ -11,7 +11,7 @@
 
 @interface LoadWaitView  ()
 
-
+@property (weak, nonatomic) IBOutlet UIImageView *imageV;
 
 @end
 
@@ -34,6 +34,27 @@
         
         self.isTap = NO;
         
+        
+        
+//        NSString *path = [[NSBundle mainBundle] pathForResource:@"9e32602be585527e120aa99beb0d666f" ofType:@"gif"];
+//        NSData *data = [NSData dataWithContentsOfFile:path];
+////        UIImage *image = [UIImage sd_animatedGIFWithData:data];
+//        UIImage *image = [UIImage sd_animatedGIFWithData:data];
+//        self.imageV.image = image;
+        
+//        // 读取gif图片数据
+//        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(50,100,200,200)];
+//        [self addSubview:webView];
+//        
+//        NSString *path = [[NSBundle mainBundle] pathForResource:@"9e32602be585527e120aa99beb0d666f" ofType:@"gif"];
+        /*
+         NSData *data = [NSData dataWithContentsOfFile:path];
+         使用loadData:MIMEType:textEncodingName: 则有警告
+         [webView loadData:data MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
+         */
+//        NSURL *url = [NSURL URLWithString:path];
+//        [webView loadRequest:[NSURLRequest requestWithURL:url]];
+
     }
     return self;
 
@@ -57,11 +78,16 @@
 
 -(void)initinterface{
  
-    self.loadImage.animationImages = self.imageArr;
-    self.loadImage.animationDuration = 1;//设置动画时间
-    self.loadImage.animationRepeatCount = 0;//设置动画次数 0 表示无限
+//    self.loadImage.animationImages = self.imageArr;
+//    self.loadImage.animationDuration = 1;//设置动画时间
+//    self.loadImage.animationRepeatCount = 0;//设置动画次数 0 表示无限
+//    
+//    [self.loadImage startAnimating];
     
-    [self.loadImage startAnimating];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"gif03" ofType:@"gif"];
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    UIImage *image = [UIImage sd_animatedGIFWithData:data];
+    self.imageV.image = image;
     
 }
 

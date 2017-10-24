@@ -228,7 +228,7 @@ static NSString *ID = @"GLOrderGoodsCell";
             riceVC.orderPrice = [NSString stringWithFormat:@"%f",_sumNum];
             riceVC.order_id = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"order_id"]];
             riceVC.order_sn = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"order_num"]];
-            
+            riceVC.orders_Price = responseObject[@"data"][@"order_money"];
             [self.navigationController pushViewController:riceVC animated:YES];
             
         }else{

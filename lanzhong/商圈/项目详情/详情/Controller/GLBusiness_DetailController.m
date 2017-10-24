@@ -54,7 +54,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageV2;
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageV3;
 
-
 @property (nonatomic, strong)GLBusiness_DetailModel *model;
 @property (nonatomic, strong)LoadWaitView *loadV;
 
@@ -75,7 +74,7 @@
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         [weakSelf postRequest:YES];
-
+        
     }];
     // 设置文字
     [header setTitle:@"快扯我，快点" forState:MJRefreshStateIdle];
@@ -178,6 +177,15 @@
     NSInteger dayCount = [self getTheCountOfTwoDaysWithBeginDate:DateTime endDate:endDateStr];
     
     self.needTimeLabel.text = [NSString stringWithFormat:@"剩余时间%zd天",dayCount];
+    
+    
+    if([self.model.state integerValue] == 3){
+        self.supportBtn.enabled = YES;
+        self.supportBtn.backgroundColor = MAIN_COLOR;
+    }else{
+        self.supportBtn.enabled = NO;
+        self.supportBtn.backgroundColor = [UIColor lightGrayColor];
+    }
 }
 /**任意两天相差天数*/
 - (NSInteger)getTheCountOfTwoDaysWithBeginDate:(NSString *)beginDate endDate:(NSString *)endDate{
@@ -300,7 +308,7 @@
                 UMSocialLogInfo(@"response data is %@",data);
             }
         }
-//        [self alertWithError:error];
+
     }];
 }
 

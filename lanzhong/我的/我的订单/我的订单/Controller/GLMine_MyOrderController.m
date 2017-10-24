@@ -11,6 +11,7 @@
 #import "GLMine_CompletedOrderController.h"//已完成
 #import "GLMine_PendingPayOrderController.h"//待付款
 #import "GLMine_ReceiveController.h"//待收货
+#import "GLMine_ReturnGoodsController.h"//退换货
 
 @interface GLMine_MyOrderController ()
 
@@ -26,8 +27,36 @@
     
     self.navigationItem.title = @"我的订单";
     
-    self.hidesBottomBarWhenPushed=YES;
+    [self setNav];
     [self addviewcontrol];
+    
+}
+- (void)setNav {
+    
+    UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, 44)];
+//    [rightBtn setTitle:@"退换货" forState:UIControlStateNormal];
+//    [rightBtn setTitleColor:MAIN_COLOR forState:UIControlStateNormal];
+//    [rightBtn.titleLabel setFont:[UIFont systemFontOfSize:13]];
+    [rightBtn addTarget:self action:@selector(returnGoods) forControlEvents:UIControlEventTouchUpInside];
+    rightBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;//右对齐
+    [rightBtn setImage:[UIImage imageNamed:@"tui"] forState:UIControlStateNormal];
+    [rightBtn setImageEdgeInsets:UIEdgeInsetsMake(0 ,0, 0, 10)];
+    // 让返回按钮内容继续向左边偏移10
+    rightBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -17);
+
+    rightBtn.backgroundColor=[UIColor clearColor];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
+    
+}
+
+- (void)returnGoods {
+
+    self.hidesBottomBarWhenPushed = YES;
+    
+    GLMine_ReturnGoodsController *returnVC = [[GLMine_ReturnGoodsController alloc] init];
+    [self.navigationController pushViewController:returnVC animated:YES];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{

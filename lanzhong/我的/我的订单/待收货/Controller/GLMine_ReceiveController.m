@@ -202,27 +202,40 @@
 
         LBMyOrdersModel *model = weakSelf.dataarr[index];
         
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[@"uid"] = [UserModel defaultUser].uid;
-        dict[@"token"] = [UserModel defaultUser].token;
-        dict[@"order_id"] = model.order_id;
+        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"确认收货" message:@"你确定要确认收货吗?" preferredStyle:UIAlertControllerStyleAlert];
+  
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
         
-        _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
-        [NetworkManager requestPOSTWithURLStr:kRECIPIENT_URL paramDic:dict finish:^(id responseObject) {
+        UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-            [_loadV removeloadview];
-            if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+            NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+            dict[@"uid"] = [UserModel defaultUser].uid;
+            dict[@"token"] = [UserModel defaultUser].token;
+            dict[@"order_id"] = model.order_id;
+            
+            _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+            [NetworkManager requestPOSTWithURLStr:kRECIPIENT_URL paramDic:dict finish:^(id responseObject) {
                 
-                [self.dataarr removeObjectAtIndex:section];
-        
-                [tableView reloadData];
-
-            }
-            [MBProgressHUD showError:responseObject[@"message"]];
-        } enError:^(NSError *error) {
-            [_loadV removeloadview];
+                [_loadV removeloadview];
+                if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+                    
+                    [self.dataarr removeObjectAtIndex:section];
+                    
+                    [tableView reloadData];
+                    
+                }
+                [MBProgressHUD showError:responseObject[@"message"]];
+            } enError:^(NSError *error) {
+                [_loadV removeloadview];
+                
+            }];
             
         }];
+        
+        [alertVC addAction:cancel];
+        [alertVC addAction:ok];
+        [weakSelf presentViewController:alertVC animated:YES completion:nil];
+        
     };
     
     headerview.returnCancelBt = ^(NSInteger index){

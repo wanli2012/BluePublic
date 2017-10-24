@@ -148,6 +148,7 @@
     return _orderCode;
     
 }
+
 -(UILabel*)orderTime{
     
     if (!_orderTime) {

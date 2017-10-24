@@ -12,7 +12,7 @@
 
 @protocol LBMyOrderListTableViewCellDelegete <NSObject>
 
--(void)clickTapgesture;
+//-(void)clickTapgesture;
 - (void)applyForReturn:(NSInteger)index section:(NSInteger)section;
 
 @end

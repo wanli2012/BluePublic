@@ -71,6 +71,9 @@
 #define kMYORDER_LIST_URL @"Shop/my_order_list"//我的订单列表
 #define kCOMMENT_GOODS_URL @"Shop/comment_goods"//评价商品
 #define kDEL_ORDER_URL @"Shop/del_order"//删除订单
+#define kAPPLY_RETURN_URL @"Shop/user_refunds"//用户申请退货
+#define kREFUNDS_LIST_URL @"Shop/refunds_list"//用户申请退货列表
+#define kREFUND_INFO_URL @"Shop/refunds_info"//用户填写退货信息资料
 
 #define kMYCART_URL @"User/my_cart"//购物车
 #define kDEL_CARTGOODS_URL @"User/del_cart"//删除购物车商品

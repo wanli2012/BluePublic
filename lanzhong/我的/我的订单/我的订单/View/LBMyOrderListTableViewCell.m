@@ -18,8 +18,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.applyReturnBtn.layer.borderColor = MAIN_COLOR.CGColor;
-    self.applyReturnBtn.layer.borderWidth = 0.5;
+    
 }
 
 - (IBAction)click:(id)sender {
@@ -37,6 +36,52 @@
     self.numberLabel.text = [NSString stringWithFormat:@"x %@",myorderlistModel.goods_num];
     self.priceLb.text = [NSString stringWithFormat:@"价格: %@",myorderlistModel.goods_discount];
     self.specLabel.text = [NSString stringWithFormat:@"规格:%@",myorderlistModel.title];
+    //退货状态  0无申请  1申请退货  2管理员同意  3管理员拒绝  4用户已提交退货信息   5管理员审核确定退货退款操作
+    NSString *string;
+    switch ([myorderlistModel.refunds_state integerValue]) {
+        case 0://0无申请
+        {
+            string = @"申请退货";
+            self.applyReturnBtn.enabled = YES;
+            self.applyReturnBtn.layer.borderColor = MAIN_COLOR.CGColor;
+            self.applyReturnBtn.layer.borderWidth = 0.5;
+        }
+            break;
+        case 1://1申请退货
+        {
+            string = @"退货申请中";
+            self.applyReturnBtn.enabled = NO;
+        }
+            break;
+        case 2://2管理员同意
+        {
+            string = @"提交退货单";
+            self.applyReturnBtn.enabled = NO;
+        }
+            break;
+        case 3://3管理员拒绝
+        {
+            string = @"被拒,请联系客服";
+            self.applyReturnBtn.enabled = NO;
+        }
+            break;
+        case 4://4用户已提交退货信息
+        {
+            string = @"等待退款";
+            self.applyReturnBtn.enabled = NO;
+        }
+            break;
+        case 5://5管理员审核确定退货退款操作
+        {
+            string = @"已退款";
+            self.applyReturnBtn.enabled = NO;
+        }
+            break;
+            
+        default:
+            break;
+    }
+    [self.applyReturnBtn setTitle:string forState:UIControlStateNormal];
     
 }
 
