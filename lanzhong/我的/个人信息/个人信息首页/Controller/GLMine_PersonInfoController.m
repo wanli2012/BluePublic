@@ -37,8 +37,12 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.title = @"个人信息";
     
-    self.picImageV.layer.cornerRadius = self.picImageV.height/2;
+    [self refreshUI];
+}
+//刷新UI界面
+- (void)refreshUI{
     
+    self.picImageV.layer.cornerRadius = self.picImageV.height/2;
     [self.picImageV sd_setImageWithURL:[NSURL URLWithString:[UserModel defaultUser].user_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     
     self.contentViewWidth.constant = kSCREEN_WIDTH;
@@ -54,29 +58,26 @@
     
     self.nickNameLabel.text = [UserModel defaultUser].nickname;
     
-    if ([[UserModel defaultUser].real_state integerValue] == 0 || [[UserModel defaultUser].real_state integerValue] == 2) {
-        self.trueNameTF.enabled = YES;
-        self.IDCardNumTF.enabled = YES;
-    }else{
-        self.trueNameTF.enabled = NO;
-        self.IDCardNumTF.enabled = NO;
-    }
-    
-    switch ([[UserModel defaultUser].real_state integerValue]) {//实名认证状态 0未认证  1成功   2失败   3审核中
+    switch ([[UserModel defaultUser].real_state integerValue]) {//实名认证状态 0未认证 1成功 2失败 3审核中
         case 0:
         {
             self.ensureBtn.hidden = NO;
+            self.trueNameTF.enabled = YES;
+            self.IDCardNumTF.enabled = YES;
         }
             break;
         case 1:
         {
             self.ensureBtn.hidden = YES;
+            self.trueNameTF.enabled = NO;
+            self.IDCardNumTF.enabled = NO;
         }
             break;
         case 2:
         {
             self.ensureBtn.hidden = NO;
-            self.ensureBtn.enabled = NO;
+            self.trueNameTF.enabled = YES;
+            self.IDCardNumTF.enabled = YES;
             [self.ensureBtn setTitle:@"重新认证" forState:UIControlStateNormal];
             
         }
@@ -85,6 +86,8 @@
         {
             self.ensureBtn.hidden = NO;
             self.ensureBtn.enabled = NO;
+            self.trueNameTF.enabled = NO;
+            self.IDCardNumTF.enabled = NO;
             [self.ensureBtn setTitle:@"审核中" forState:UIControlStateNormal];
         }
             break;
@@ -112,6 +115,9 @@
     if (self.IDCardNumTF.text.length == 0) {
         [MBProgressHUD showError:@"请输入身份证号"];
         return;
+    }else if(self.IDCardNumTF.text.length != 15 && self.IDCardNumTF.text.length != 18){
+        [MBProgressHUD showError:@"身份证号位数不正确"];
+        return;
     }
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -128,6 +134,11 @@
         
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             
+            [UserModel defaultUser].real_state = @"3";
+            [UserModel defaultUser].truename = self.trueNameTF.text;
+            [UserModel defaultUser].idcard = self.IDCardNumTF.text;
+            [usermodelachivar achive];
+            [self refreshUI];
         }
         
         [MBProgressHUD showError:responseObject[@"message"]];
@@ -139,7 +150,7 @@
 
 }
 
-//头像修改
+#pragma mark - 头像修改
 - (IBAction)picModify:(id)sender {
     
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"头像修改" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
@@ -252,7 +263,7 @@
     }
 }
 
-//昵称修改
+#pragma mark - 昵称修改
 - (IBAction)nameModify:(id)sender {
     
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"昵称修改" message:@"what's your name?" preferredStyle:UIAlertControllerStyleAlert];
@@ -296,7 +307,7 @@
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 
-//刷新数据
+#pragma mark - 刷新数据
 -(void)refresh {
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -323,6 +334,7 @@
     }];
 }
 
+#pragma mark - 地址管理
 - (IBAction)address:(id)sender {
     
     self.hidesBottomBarWhenPushed = YES;

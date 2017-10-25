@@ -25,7 +25,6 @@
 
 @property (nonatomic, copy)NSString *umonry;//  余额
 @property (nonatomic, copy)NSString *real_state;//实名认证状态 0未认证  1成功   2失败   3审核中
-@property (nonatomic, copy)NSArray <Wallet_back_info *>*back_info;
-
+@property (nonatomic, copy)NSMutableArray <Wallet_back_info *>*back_info;
 
 @end

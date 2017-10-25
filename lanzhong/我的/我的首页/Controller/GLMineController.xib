@@ -17,8 +17,10 @@
                 <outlet property="headerView" destination="Ly6-oP-tl2" id="zRe-vf-wXT"/>
                 <outlet property="imageV" destination="XIr-Qb-SVG" id="tld-ed-gvP"/>
                 <outlet property="middleView" destination="T9W-Sy-uZz" id="Ijw-8N-nzy"/>
+                <outlet property="nicknameLabel" destination="rY5-bW-3dz" id="DqV-b7-Exu"/>
                 <outlet property="participateLabel" destination="4rk-q9-xQ6" id="V5o-0l-JjS"/>
                 <outlet property="publishLabel" destination="myx-1I-nJt" id="lsH-WG-4gs"/>
+                <outlet property="statusLabel" destination="KqU-bC-Num" id="OpJ-cw-MxR"/>
                 <outlet property="tableView" destination="eFT-yX-YIB" id="0ex-Rv-uwg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

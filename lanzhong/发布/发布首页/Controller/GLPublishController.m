@@ -74,8 +74,6 @@ static const CGFloat kPhotoViewMargin = 25;
 @property (weak, nonatomic) IBOutlet UIImageView *pic2;
 @property (weak, nonatomic) IBOutlet UIImageView *pic3;
 
-
-
 @property (nonatomic, assign)NSInteger picIndex;//pic下标
 
 @end
@@ -102,10 +100,6 @@ static const CGFloat kPhotoViewMargin = 25;
     self.submitBtn.layer.cornerRadius = 5.f;
     
     self.scrollView.alwaysBounceVertical = YES;
-    
-//    self.pic1.hidden = NO;
-//    self.pic2.hidden = YES;
-//    self.pic3.hidden = YES;
  
     [self.view addSubview:self.CalendarView];
     
@@ -141,7 +135,6 @@ static const CGFloat kPhotoViewMargin = 25;
                     [self.dataSourceArr addObject:manModel.trade_name];
                 }
             }
-            
         }else{
             
             [MBProgressHUD showError:responseObject[@"message"]];
@@ -277,24 +270,6 @@ static const CGFloat kPhotoViewMargin = 25;
     [alertVC addAction:camera];
     [alertVC addAction:cancel];
     [self presentViewController:alertVC animated:YES completion:nil];
-    
-    
-//    //弹出相册
-//    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-//    //    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-//    picker.delegate = self;
-//    //    // 设置选择后的图片可以被编辑
-//    //    picker.allowsEditing = YES;
-//    //    [self presentViewController:picker animated:YES completion:nil];
-//    //1.获取媒体支持格式
-//    NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
-//    picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-//    picker.mediaTypes = @[mediaTypes[0]];
-//    //5.其他配置
-//    //allowsEditing是否允许编辑，如果值为no，选择照片之后就不会进入编辑界面
-//    picker.allowsEditing = YES;
-//    //6.推送
-//    [self presentViewController:picker animated:YES completion:nil];
 
 }
 
@@ -325,8 +300,6 @@ static const CGFloat kPhotoViewMargin = 25;
                     
                     self.pic1.image = picImage;
                     _picIndex1 = 1;
-                    
-//                    [self.imageArr addObject:picImage];
                 }
             }
                 break;
@@ -336,7 +309,6 @@ static const CGFloat kPhotoViewMargin = 25;
                     
                     self.pic2.image = picImage;
                     _picIndex2 = 1;
-//                    [self.imageArr addObject:picImage];
                 }
 
             }
@@ -347,7 +319,6 @@ static const CGFloat kPhotoViewMargin = 25;
                     
                     self.pic3.image = picImage;
                     _picIndex3 = 1;
-//                    [self.imageArr addObject:picImage];
                 }
 
             }
@@ -357,33 +328,6 @@ static const CGFloat kPhotoViewMargin = 25;
                 break;
         }
         
-//        
-//        switch (self.imageArr.count) {
-//            case 0:
-//            {
-//                self.pic1.hidden = NO;
-//                self.pic2.hidden = YES;
-//                self.pic3.hidden = NO;
-//            }
-//                break;
-//            case 1:
-//            {
-//                self.pic1.hidden = NO;
-//                self.pic2.hidden = NO;
-//                self.pic3.hidden = YES;
-//            }
-//                break;
-//            case 2:
-//            {
-//                self.pic1.hidden = NO;
-//                self.pic2.hidden = NO;
-//                self.pic3.hidden = NO;
-//            }
-//                break;
-//                
-//            default:
-//                break;
-//        }
     }
 
 }
@@ -410,8 +354,38 @@ static const CGFloat kPhotoViewMargin = 25;
         [MBProgressHUD showError:@"请选择截止日期"];
         return;
     }
+    
     if ([self.infoTV.text isEqualToString:@"  请填写项目说明（限制150字以内）"]|| [self.infoTV.text isEqualToString:@""]) {
         [MBProgressHUD showError:@"请输入项目说明"];
+        return;
+    }
+    
+    if(_picIndex1 == 1){
+        [self.imageArr addObject:self.pic1.image];
+    }
+    if(_picIndex2 == 1){
+        [self.imageArr addObject:self.pic2.image];
+    }
+    if(_picIndex3 == 1){
+        [self.imageArr addObject:self.pic3.image];
+    }
+    
+    if (self.imageArr.count <= 0) {
+        [MBProgressHUD showError:@"至少上传一张项目图片"];
+        return;
+    }
+    
+    if (!_isAgreeProtocol) {
+        [MBProgressHUD showError:@"请先同意发布协议"];
+        return;
+    }
+    
+    NSTimeInterval time = [self.need_time doubleValue];
+    NSDate *detaildate = [NSDate dateWithTimeIntervalSince1970:time];
+    
+    NSInteger kk = [self compareOneDay:detaildate withAnotherDay:[NSDate date]];
+    if(kk != 1){
+        [MBProgressHUD showError:@"截止日期需大于当前日期"];
         return;
     }
   
@@ -428,16 +402,6 @@ static const CGFloat kPhotoViewMargin = 25;
     dic[@"trade_id"] = self.trade_id;
     dic[@"need_time"] = self.need_time;
     
-    if(_picIndex1 == 1){
-        [self.imageArr addObject:self.pic1.image];
-    }
-    if(_picIndex2 == 1){
-        [self.imageArr addObject:self.pic2.image];
-    }
-    if(_picIndex3 == 1){
-        [self.imageArr addObject:self.pic3.image];
-    }
-
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];//响应
     manager.requestSerializer.timeoutInterval = 20;
@@ -615,6 +579,7 @@ static const CGFloat kPhotoViewMargin = 25;
     
     return YES;
 }
+
 #pragma mark - HWCalendarDelegate
 - (void)calendar:(HWCalendar *)calendar didClickSureButtonWithDate:(NSString *)date
 {
@@ -625,19 +590,37 @@ static const CGFloat kPhotoViewMargin = 25;
     
     self.dateLabel.text = date;
     
-    //    NSDate * senddate = [NSDate date];
     NSDateFormatter  *dateformatter = [[NSDateFormatter alloc] init];
     [dateformatter setDateFormat:@"YYYY年MM月dd日"];
-    //    NSString * locationString=[dateformatter stringFromDate:senddate];
     
     NSDate * now = [dateformatter dateFromString:date];
     //转成时间戳
     NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[now timeIntervalSince1970]];
     
     self.need_time = timeSp;
-    
 }
 
+#pragma mark - 时间比较大小
+- (NSInteger )compareOneDay:(NSDate *)oneDay withAnotherDay:(NSDate *)anotherDay
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy"];
+    NSString *oneDayStr = [dateFormatter stringFromDate:oneDay];
+    NSString *anotherDayStr = [dateFormatter stringFromDate:anotherDay];
+    NSDate *dateA = [dateFormatter dateFromString:oneDayStr];
+    NSDate *dateB = [dateFormatter dateFromString:anotherDayStr];
+    NSComparisonResult result = [dateA compare:dateB];
+    if (result == NSOrderedDescending) {
+        //oneDay > anotherDay
+        return 1;
+    }
+    else if (result == NSOrderedAscending){
+        //oneDay < anotherDay
+        return -1;
+    }
+    //oneDay = anotherDay
+    return 0;
+}
 #pragma mark - 动画的代理
 //动画
 - (nullable UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(UIViewController *)presenting sourceViewController:(UIViewController *)source{

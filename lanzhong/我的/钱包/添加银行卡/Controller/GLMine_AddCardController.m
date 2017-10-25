@@ -42,6 +42,8 @@
     self.ensureBtn.layer.cornerRadius = 5.f;
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismiss) name:@"maskView_dismiss" object:nil];
 
+    self.nameTF.text = [UserModel defaultUser].truename;
+    self.nameTF.enabled = NO;
     [self getPickerData];
 
 }
@@ -122,8 +124,12 @@
 }
 - (IBAction)ensure:(id)sender {
     
-    if (self.cardNumTF.text.length < 14){
+    if (self.cardNumTF.text.length < 14 || self.cardNumTF.text.length > 21){
         [MBProgressHUD showError:@"银行卡输入不合法"];
+        return;
+    }
+    if ([predicateModel checkIsHaveNumAndLetter:self.cardNumTF.text] != 1) {
+        [MBProgressHUD showError:@"银行卡号只能是数字"];
         return;
     }
     
@@ -146,6 +152,9 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"addCardNotification" object:nil];
             [self.navigationController popViewControllerAnimated:YES];
         }
+        
+        [MBProgressHUD showError:responseObject[@"message"]];
+        
     } enError:^(NSError *error) {
         
         [_loadV removeloadview];
@@ -154,7 +163,6 @@
     }];
     
 }
-
 
 #pragma mark - 动画代理
 - (nullable UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(UIViewController *)presenting sourceViewController:(UIViewController *)source{

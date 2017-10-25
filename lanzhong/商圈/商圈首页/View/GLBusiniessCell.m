@@ -66,7 +66,7 @@
     }else{
         ratio = [model.draw_money floatValue]/[model.admin_money floatValue];
     }
-    self.pesentLabel.text = [NSString stringWithFormat:@"%.2f%%",ratio];
+    self.pesentLabel.text = [NSString stringWithFormat:@"%.2f%%",ratio * 100];
     self.progressViewWidth.constant = self.bgProgressView.width * ratio;
     
     self.dateLabel.text = [formattime formateTimeOfDate3:model.time];

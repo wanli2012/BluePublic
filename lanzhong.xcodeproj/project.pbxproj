@@ -126,8 +126,6 @@
 		4A29054E1F97581D006903F1 /* GLMine_ShareRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A29054C1F97581D006903F1 /* GLMine_ShareRecordCell.xib */; };
 		4A2905511F976BCC006903F1 /* GLMine_MyMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2905501F976BCC006903F1 /* GLMine_MyMessageModel.m */; };
 		4A2905541F97707E006903F1 /* GLMine_NoticeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2905531F97707E006903F1 /* GLMine_NoticeModel.m */; };
-		4A47F09A1F9ED58200C50A9E /* 9e32602be585527e120aa99beb0d666f.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4A47F0991F9ED58200C50A9E /* 9e32602be585527e120aa99beb0d666f.gif */; };
-		4A47F09C1F9EDA9000C50A9E /* gif03.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4A47F09B1F9EDA9000C50A9E /* gif03.gif */; };
 		4A47F0A41F9F165700C50A9E /* GLMine_ReturnGoodsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A47F0A21F9F165700C50A9E /* GLMine_ReturnGoodsController.m */; };
 		4A47F0A51F9F165700C50A9E /* GLMine_ReturnGoodsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A47F0A31F9F165700C50A9E /* GLMine_ReturnGoodsController.xib */; };
 		4A47F0A91F9F16A100C50A9E /* GLMine_ReturnGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A47F0A71F9F16A100C50A9E /* GLMine_ReturnGoodsCell.m */; };
@@ -236,6 +234,7 @@
 		4A6FE1871F8E09D300860503 /* GLMall_DetailWebCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6FE1851F8E09D300860503 /* GLMall_DetailWebCell.m */; };
 		4A6FE1881F8E09D300860503 /* GLMall_DetailWebCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A6FE1861F8E09D300860503 /* GLMall_DetailWebCell.xib */; };
 		4A6FE18A1F8E2D9B00860503 /* 商圈.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A6FE1891F8E2D9B00860503 /* 商圈.xcassets */; };
+		4A8385791FA0716D00F3A30C /* 加载动画.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A8385781FA0716D00F3A30C /* 加载动画.xcassets */; };
 		4A890AD51F8F397400ED6E36 /* GLBusiness_FundTrendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A890AD41F8F397400ED6E36 /* GLBusiness_FundTrendModel.m */; };
 		4A9F56E51F91E55B00341A31 /* GLMine_MyOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F56E41F91E55B00341A31 /* GLMine_MyOrderController.m */; };
 		4A9F56E91F91E5F100341A31 /* GLMine_PaidOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F56E71F91E5F100341A31 /* GLMine_PaidOrderController.m */; };
@@ -562,8 +561,6 @@
 		4A2905501F976BCC006903F1 /* GLMine_MyMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_MyMessageModel.m; sourceTree = "<group>"; };
 		4A2905521F97707E006903F1 /* GLMine_NoticeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_NoticeModel.h; sourceTree = "<group>"; };
 		4A2905531F97707E006903F1 /* GLMine_NoticeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_NoticeModel.m; sourceTree = "<group>"; };
-		4A47F0991F9ED58200C50A9E /* 9e32602be585527e120aa99beb0d666f.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 9e32602be585527e120aa99beb0d666f.gif; sourceTree = "<group>"; };
-		4A47F09B1F9EDA9000C50A9E /* gif03.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = gif03.gif; sourceTree = "<group>"; };
 		4A47F0A11F9F165700C50A9E /* GLMine_ReturnGoodsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_ReturnGoodsController.h; sourceTree = "<group>"; };
 		4A47F0A21F9F165700C50A9E /* GLMine_ReturnGoodsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_ReturnGoodsController.m; sourceTree = "<group>"; };
 		4A47F0A31F9F165700C50A9E /* GLMine_ReturnGoodsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMine_ReturnGoodsController.xib; sourceTree = "<group>"; };
@@ -727,6 +724,7 @@
 		4A6FE1851F8E09D300860503 /* GLMall_DetailWebCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMall_DetailWebCell.m; sourceTree = "<group>"; };
 		4A6FE1861F8E09D300860503 /* GLMall_DetailWebCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMall_DetailWebCell.xib; sourceTree = "<group>"; };
 		4A6FE1891F8E2D9B00860503 /* 商圈.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "商圈.xcassets"; sourceTree = "<group>"; };
+		4A8385781FA0716D00F3A30C /* 加载动画.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "加载动画.xcassets"; sourceTree = "<group>"; };
 		4A890AD31F8F397400ED6E36 /* GLBusiness_FundTrendModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLBusiness_FundTrendModel.h; sourceTree = "<group>"; };
 		4A890AD41F8F397400ED6E36 /* GLBusiness_FundTrendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLBusiness_FundTrendModel.m; sourceTree = "<group>"; };
 		4A9F56E31F91E55B00341A31 /* GLMine_MyOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_MyOrderController.h; sourceTree = "<group>"; };
@@ -2968,8 +2966,6 @@
 				4AF1070A1F78D5AC00CB51FA /* ViewController.m */,
 				4AF109D41F78DFC500CB51FA /* PrefixHeader.pch */,
 				4AF1070F1F78D5AC00CB51FA /* Assets.xcassets */,
-				4A47F0991F9ED58200C50A9E /* 9e32602be585527e120aa99beb0d666f.gif */,
-				4A47F09B1F9EDA9000C50A9E /* gif03.gif */,
 				4AF107111F78D5AC00CB51FA /* LaunchScreen.storyboard */,
 				4AF107141F78D5AC00CB51FA /* Info.plist */,
 				4AF107031F78D5AC00CB51FA /* Supporting Files */,
@@ -3297,6 +3293,7 @@
 				4A05EDE91F8C5E780095DBCF /* 发布.xcassets */,
 				4A6FE1891F8E2D9B00860503 /* 商圈.xcassets */,
 				4A16FF241F8F6BFC00064CE5 /* 我的.xcassets */,
+				4A8385781FA0716D00F3A30C /* 加载动画.xcassets */,
 			);
 			path = "图片资源";
 			sourceTree = "<group>";
@@ -3579,7 +3576,6 @@
 				4A9F56EF1F91E60F00341A31 /* GLMine_CompletedOrderController.xib in Resources */,
 				4AF5B03D1F95AA3E000407A7 /* GLMine_ParticipateController.xib in Resources */,
 				4A53E8551F7A59880021D9E0 /* GLMall_DetailFooterView.xib in Resources */,
-				4A47F09C1F9EDA9000C50A9E /* gif03.gif in Resources */,
 				4A18B91D1F94D86300E9B387 /* GLMine_Wallet_Exchange_InReviewController.xib in Resources */,
 				4A16FF2E1F8F727F00064CE5 /* GLPublish_FundFailedController.xib in Resources */,
 				4A165C151F85DD6500D0C34B /* GLMine_WalletController.xib in Resources */,
@@ -3612,10 +3608,10 @@
 				4AF107101F78D5AC00CB51FA /* Assets.xcassets in Resources */,
 				4A9F57171F920B0800341A31 /* LBMyOrderListTableViewCell.xib in Resources */,
 				4A05EEA61F8C97380095DBCF /* HXWeiboPhotoPicker.bundle in Resources */,
-				4A47F09A1F9ED58200C50A9E /* 9e32602be585527e120aa99beb0d666f.gif in Resources */,
 				4A2905491F9757BF006903F1 /* GLMine_ShareRecordController.xib in Resources */,
 				4A6B9F331F7CF100009386C8 /* GLBusiness_DetailCommentCell.xib in Resources */,
 				4ADEBB661F7E487200C50087 /* GLPay_ChooseController.xib in Resources */,
+				4A8385791FA0716D00F3A30C /* 加载动画.xcassets in Resources */,
 				4A6B9F311F7CF100009386C8 /* GLBusiness_ChooseCell.xib in Resources */,
 				4A0EA9DA1F8630C4006A1CF5 /* GLMine_WalletCardChooseController.xib in Resources */,
 				4ADDD1831F886F7200C95F9C /* GLMine_PersonInfo_AddressChooseController.xib in Resources */,
@@ -4056,7 +4052,6 @@
 			baseConfigurationReference = 7451D5B0290BCE80E2B11756 /* Pods-lanzhong.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				DEVELOPMENT_TEAM = MSWMY8ZT7D;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/lanzhong/PrefixHeader.pch";
@@ -4073,7 +4068,6 @@
 			baseConfigurationReference = DC90251775A1E99EE4FC964D /* Pods-lanzhong.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				DEVELOPMENT_TEAM = MSWMY8ZT7D;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/lanzhong/PrefixHeader.pch";

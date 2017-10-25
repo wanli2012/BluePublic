@@ -20,6 +20,7 @@
 #import "GLMine_ShareController.h"//分享权益
 
 #import "GLMine_AddFundTrendController.h"//添加资金动向
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface GLMineController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -28,6 +29,11 @@
 @property (weak, nonatomic) IBOutlet UIView *bgView;//topView
 @property (weak, nonatomic) IBOutlet UIImageView *bgimageV;//背景图
 @property (weak, nonatomic) IBOutlet UIImageView *imageV;//头像
+@property (weak, nonatomic) IBOutlet UILabel *nicknameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+
+
+
 @property (weak, nonatomic) IBOutlet UIView *middleView;//中间6个label的背景View
 
 @property (weak, nonatomic) IBOutlet UILabel *participateLabel;
@@ -105,33 +111,85 @@
     dict[@"token"] = [UserModel defaultUser].token;
     dict[@"uid"] = [UserModel defaultUser].uid;
     
-//    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
     [NetworkManager requestPOSTWithURLStr:kREFRESH_URL paramDic:dict finish:^(id responseObject) {
-        
-//        [_loadV removeloadview];
 
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             
-            [UserModel defaultUser].umoney = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"umoney"]];
+            [UserModel defaultUser].address = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"address"]];
+            [UserModel defaultUser].area = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"area"]];
+            [UserModel defaultUser].city = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"city"]];
+            [UserModel defaultUser].del = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"del"]];
+            [UserModel defaultUser].g_id = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"g_id"]];
+            [UserModel defaultUser].g_name = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"g_name"]];
+            [UserModel defaultUser].idcard = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"idcard"]];
             [UserModel defaultUser].invest_count = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"invest_count"]];
-            [UserModel defaultUser].item_count = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"item_count"]];
-            [UserModel defaultUser].user_server = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"user_server"]];
-            [UserModel defaultUser].real_state = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"real_state"]];
-            [UserModel defaultUser].nickname = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"nickname"]];
-            [UserModel defaultUser].user_pic = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"user_pic"]];
+            [UserModel defaultUser].is_help = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"is_help"]];
+            [UserModel defaultUser].item_count = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"item_count"]];
+            [UserModel defaultUser].nickname = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"nickname"]];
+            [UserModel defaultUser].phone = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"phone"]];
+            [UserModel defaultUser].province = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"province"]];
+            [UserModel defaultUser].real_state = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"real_state"]];
+            [UserModel defaultUser].real_time = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"real_time"]];
+            [UserModel defaultUser].token = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"token"]];
+            [UserModel defaultUser].truename = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"truename"]];
+            [UserModel defaultUser].uid = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"uid"]];
+            [UserModel defaultUser].umark = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"umark"]];
+            [UserModel defaultUser].umoney = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"umoney"]];
+            [UserModel defaultUser].uname = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"uname"]];
+            [UserModel defaultUser].user_pic = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"user_pic"]];
+            [UserModel defaultUser].user_server = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"user_server"]];
             
             [usermodelachivar achive];
-            
-            self.participateLabel.text = [UserModel defaultUser].invest_count;
-            self.publishLabel.text = [UserModel defaultUser].item_count;
-            self.banlanceLabel.text = [UserModel defaultUser].umoney;
+            [self assignment];//为头视图赋值
             
         }
         
     } enError:^(NSError *error) {
-//        [_loadV removeloadview];
     }];
 }
+//头视图赋值
+- (void)assignment{
+    
+    self.participateLabel.text = [UserModel defaultUser].invest_count;
+    self.publishLabel.text = [UserModel defaultUser].item_count;
+    self.banlanceLabel.text = [UserModel defaultUser].umoney;
+    
+    [self.imageV sd_setImageWithURL:[NSURL URLWithString:[UserModel defaultUser].user_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    
+    if ([UserModel defaultUser].nickname.length <= 0) {
+        self.nicknameLabel.text = @"蓝众创客";
+    }else{
+        self.nicknameLabel.text = [UserModel defaultUser].nickname;
+    }
+    
+    NSString *str;
+    switch ([[UserModel defaultUser].real_state integerValue]) {
+        case 0:
+        {
+            str = @"未认证";
+        }
+            break;
+        case 1:
+        {
+            str = @"已认证";
+        }
+            break;
+        case 2:
+        {
+            str = @"认证失败";
+        }
+            break;
+        case 3:
+        {
+            str = @"审核中";
+        }
+            break;
+        default:
+            break;
+    }
+    self.statusLabel.text = [NSString stringWithFormat:@"实名认证:%@",str];
+}
+
 - (IBAction)set:(id)sender {
     
     self.hidesBottomBarWhenPushed = YES;

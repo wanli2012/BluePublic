@@ -97,7 +97,7 @@
                                     </connections>
                                 </segmentedControl>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eAB-cL-dns">
-                                    <rect key="frame" x="0.0" y="238" width="353" height="70"/>
+                                    <rect key="frame" x="0.0" y="228" width="353" height="70"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bank_nopicture" translatesAutoresizingMaskIntoConstraints="NO" id="uYG-uS-Ldg">
                                             <rect key="frame" x="10" y="15" width="40" height="40"/>
@@ -188,7 +188,7 @@
                                     </connections>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fsl-5M-AHs">
-                                    <rect key="frame" x="30" y="318" width="273" height="40"/>
+                                    <rect key="frame" x="30" y="308" width="273" height="40"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="兑换金额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wQx-QE-hYs">
                                             <rect key="frame" x="20" y="12" width="54" height="16"/>
@@ -230,7 +230,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JyD-Cz-GLV">
-                                    <rect key="frame" x="30" y="358" width="273" height="40"/>
+                                    <rect key="frame" x="30" y="348" width="273" height="40"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="兑换密码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tkd-hD-ZJ6">
                                             <rect key="frame" x="20" y="12" width="54" height="16"/>
@@ -272,7 +272,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Yt-jo-WOA">
-                                    <rect key="frame" x="0.0" y="448" width="353" height="170"/>
+                                    <rect key="frame" x="0.0" y="438" width="353" height="180"/>
                                     <subviews>
                                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ihb-1Q-W8z">
                                             <rect key="frame" x="50" y="50" width="253" height="45"/>
@@ -308,7 +308,7 @@
                                                     <color key="textColor" white="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入兑换金额" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JDP-kK-nAk">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入充值金额" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JDP-kK-nAk">
                                                     <rect key="frame" x="84" y="8" width="149" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="mVG-Qv-XTu"/>
@@ -497,7 +497,7 @@
                                 <constraint firstAttribute="trailing" secondItem="5Yt-jo-WOA" secondAttribute="trailing" id="hx5-hd-fDN"/>
                                 <constraint firstAttribute="trailing" secondItem="ryV-wt-pVO" secondAttribute="trailing" id="o8i-g2-Tzn"/>
                                 <constraint firstItem="5Yt-jo-WOA" firstAttribute="leading" secondItem="UNf-9P-IPs" secondAttribute="leading" id="pdb-Dj-tNe"/>
-                                <constraint firstItem="eAB-cL-dns" firstAttribute="top" secondItem="Z3Q-SY-Gjo" secondAttribute="bottom" constant="30" id="qBh-Ms-OuT"/>
+                                <constraint firstItem="eAB-cL-dns" firstAttribute="top" secondItem="Z3Q-SY-Gjo" secondAttribute="bottom" constant="20" id="qBh-Ms-OuT"/>
                                 <constraint firstItem="ryV-wt-pVO" firstAttribute="leading" secondItem="UNf-9P-IPs" secondAttribute="leading" id="s3e-8Y-b7z"/>
                                 <constraint firstItem="pwo-qj-W39" firstAttribute="bottom" secondItem="KzH-bS-pMT" secondAttribute="bottom" constant="20" id="tE9-e3-dJQ"/>
                                 <constraint firstItem="KzH-bS-pMT" firstAttribute="top" secondItem="UNf-9P-IPs" secondAttribute="top" constant="20" id="xI9-LA-tSa"/>

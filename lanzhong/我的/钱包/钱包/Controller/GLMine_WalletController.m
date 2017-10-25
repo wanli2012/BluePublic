@@ -83,6 +83,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postRequest) name:@"addCardNotification" object:nil];
+     [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(postRequest) name:@"deleteBankCardNotification" object:nil];
     [self postRequest];
  
 }
@@ -103,11 +104,11 @@
             self.model = [GLMine_WalletModel mj_objectWithKeyValues:responseObject[@"data"]];
             [self updateBankInfo];
         }
+        
     } enError:^(NSError *error) {
         [_loadV removeloadview];
         
     }];
-    
 }
 
 - (void)updateBankInfo {
@@ -198,6 +199,14 @@
         return;
     }
 
+    if(self.moneyTextF.text.length == 0){
+        [MBProgressHUD showError:@"请输入金额"];
+        return;
+    }
+    if (self.passwordTextF.text.length == 0) {
+        [MBProgressHUD showError:@"请输入密码"];
+        return;
+    }
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"uid"] = [UserModel defaultUser].uid;
@@ -286,7 +295,7 @@
     
     self.hidesBottomBarWhenPushed = YES;
     GLMine_WalletCardChooseController *cardChooseVC = [[GLMine_WalletCardChooseController alloc] init];
-    cardChooseVC.models = self.model.back_info;
+//    cardChooseVC.models = self.model.back_info;
     
     cardChooseVC.block = ^(NSString *bankName,NSString *bankNum,NSString *bank_id){
         self.bankNameLabel.text = bankName;

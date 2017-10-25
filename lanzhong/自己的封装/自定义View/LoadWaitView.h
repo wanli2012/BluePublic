@@ -12,7 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *loadImage;
 
-@property (strong, nonatomic) NSArray *imageArr;
+@property (strong, nonatomic) NSMutableArray *imageArr;
 
 @property (assign , nonatomic)BOOL  isTap;//判断是否可以点击 默认是可以的
 

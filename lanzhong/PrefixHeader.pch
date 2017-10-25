@@ -49,7 +49,7 @@
 
 
 #define Notice_URL @"http://192.168.1.186/Raise/index.php/Api/News/notice?news_id="
-#define Certification_URL @"http://192.168.0.148/Raise/index.php/Api/Item/item_content?item_id="
+#define Certification_URL @"http://lz.51dztg.com/index.php/Api/Item/item_content?item_id="
 #define Share_URL @"http://lz.51dztg.com/index.php/Wap/Index/index?g_name="
 
 //#define URL_Base @"http://192.168.0.163/Raise/index.php/Api/"
@@ -96,6 +96,7 @@
 #define kPAY_SWITCH_URL @"Other/pay_type"//支付方式返回
 #define kORDER_CANCEL_URL @"Shop/cancel_order"//取消订单shop/recipient
 #define kRECIPIENT_URL @"Shop/recipient"//确认订单收货
+#define kDEL_CARD_URL @"User/del_bank"//删除银行卡
 
 #define kREFRESH_URL @"Other/break_user"//刷新
 #define kUSER_INFO_SAVE_URL @"User/user_info_save"//实名认证,修改头像

@@ -78,17 +78,11 @@
 
 -(void)initinterface{
  
-//    self.loadImage.animationImages = self.imageArr;
-//    self.loadImage.animationDuration = 1;//设置动画时间
-//    self.loadImage.animationRepeatCount = 0;//设置动画次数 0 表示无限
-//    
-//    [self.loadImage startAnimating];
+    self.loadImage.animationImages = self.imageArr;
+    self.loadImage.animationDuration = 5;//设置动画时间
+    self.loadImage.animationRepeatCount = 0;//设置动画次数 0 表示无限
     
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"gif03" ofType:@"gif"];
-    NSData *data = [NSData dataWithContentsOfFile:path];
-    UIImage *image = [UIImage sd_animatedGIFWithData:data];
-    self.imageV.image = image;
-    
+    [self.loadImage startAnimating];
 }
 
 -(void)tapgestrue{
@@ -101,14 +95,17 @@
     }
 }
 
--(NSArray*)imageArr{
+-(NSMutableArray*)imageArr{
 
     if (!_imageArr) {
-        _imageArr=[NSArray arrayWithObjects:[UIImage imageNamed:@"progress_1.png"],[UIImage imageNamed:@"progress_2.png"],[UIImage imageNamed:@"progress_3.png"],[UIImage imageNamed:@"progress_4.png"],[UIImage imageNamed:@"progress_5.png"],[UIImage imageNamed:@"progress_6.png"],[UIImage imageNamed:@"progress_7.png"],[UIImage imageNamed:@"progress_8.png"], nil];
+        _imageArr=[NSMutableArray array];
+        for (int i = 0; i < 23; i ++) {
+            NSString *imageName = [NSString stringWithFormat:@"合成 1_%zd",i];
+            [_imageArr addObject:[UIImage imageNamed:imageName]];
+        }
         
     }
     return _imageArr;
-
 }
 
 @end

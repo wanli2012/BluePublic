@@ -52,12 +52,18 @@
     self.raisedMoneyLabel.text = model.draw_money;
     self.invest_countLabel.text = model.invest_count;
     
-    CGFloat persent = [model.draw_money floatValue] / [model.admin_money floatValue];
-    self.progressViewWidth.constant = self.progressBgView.width * 0.3;
-    self.persentLabel.text = [NSString stringWithFormat:@"%.2f%%",persent * 100];
+    CGFloat ratio;
+    if ([model.admin_money floatValue] == 0) {
+        ratio = 0.f;
+    }else{
+        ratio = [model.draw_money floatValue]/[model.admin_money floatValue];
+    }
     
+    self.persentLabel.text = [NSString stringWithFormat:@"%.2f%%",ratio * 100];
+    self.progressViewWidth.constant = self.progressBgView.width * ratio;
     
 }
+
 - (IBAction)suportList:(id)sender {
     if ([self.delegate respondsToSelector:@selector(surportList:)]) {
         [self.delegate surportList:self.index];

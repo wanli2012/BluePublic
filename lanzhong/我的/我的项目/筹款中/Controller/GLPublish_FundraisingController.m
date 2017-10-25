@@ -51,6 +51,7 @@
     self.tableView.mj_footer = footer;
     
     self.page = 1;
+    
     [self postRequest:YES];
     
 }
@@ -108,8 +109,7 @@
 
 #pragma mark - GLPublish_FundraisingCellDelegate
 - (void)surportList:(NSInteger)index{
-    NSLog(@"kjsdhfhsd %zd",index);
-    
+
     GLPublish_InReViewModel *model = self.models[index];
     self.hidesBottomBarWhenPushed = YES;
     GLBusiness_Detail_heartCommentController *listVC = [[GLBusiness_Detail_heartCommentController alloc] init];
@@ -129,11 +129,11 @@
     GLPublish_FundraisingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLPublish_FundraisingCell"];
     cell.model = self.models[indexPath.row];
     cell.suportListBtn.hidden = NO;
-    cell.selectionStyle = 0;
     
     cell.index = indexPath.row;
     cell.delegate = self;
     
+    cell.selectionStyle = 0;
     return cell;
 }
 

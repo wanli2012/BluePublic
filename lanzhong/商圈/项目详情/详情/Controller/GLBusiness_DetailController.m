@@ -87,6 +87,13 @@
     
     [self postRequest:YES];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"supportNotification" object:nil];
+    
+}
+
+-(void)refresh{
+    
+    [self postRequest:YES];
 }
 
 - (void)postRequest:(BOOL)isRefresh{

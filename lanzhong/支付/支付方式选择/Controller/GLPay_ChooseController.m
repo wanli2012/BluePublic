@@ -189,6 +189,9 @@
                 self.hidesBottomBarWhenPushed = YES;
                 GLPay_CompletedController *completeVC = [[GLPay_CompletedController alloc] init];
                 completeVC.item_id = self.item_id;
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"supportNotification" object:nil];
+                
                 [self.navigationController pushViewController:completeVC animated:YES];
                 
             }
