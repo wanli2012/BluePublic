@@ -10,11 +10,6 @@
 #import "DWTabBarController.h"
 #import "BaseNavigationViewController.h"
 
-//#import "GLHomeController.h"
-//#import "GLCommunityController.h"
-//#import "GLFriendController.h"
-//#import "GLMineController.h"
-
 #import "GLLoginController.h"
 
 #import "yindaotuViewController.h"
@@ -51,13 +46,13 @@
     
     [self.window makeKeyAndVisible];
     
-//    if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"isdirect1"] isEqualToString:@"YES"]) {
-//        
+    if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"isdirect1"] isEqualToString:@"YES"]) {
+        
         self.window.rootViewController = [[DWTabBarController alloc]init];
 
-//    }else{
-//        self.window.rootViewController = [[yindaotuViewController alloc]init];
-//    }
+    }else{
+        self.window.rootViewController = [[yindaotuViewController alloc]init];
+    }
 
     return YES;
 }

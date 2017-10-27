@@ -31,11 +31,12 @@
 - (void)setModel:(GLPublish_InReViewModel *)model{
     _model = model;
     
-    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:model.sev_photo] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    NSString *imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/300/h/200",model.sev_photo];
+    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     self.titleLabel.text = model.title;
     self.detailLabel.text = model.info;
     
-    if(self.isReviewed){
+    if(model.isReviewed){
         self.priceLabel.text = model.budget_money;
     }else{
         self.priceLabel.text = model.admin_money;

@@ -43,7 +43,7 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timg" translatesAutoresizingMaskIntoConstraints="NO" id="2Xg-Cg-iDD">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2Xg-Cg-iDD">
                                             <rect key="frame" x="295" y="10" width="50" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="50" id="9zm-ig-Ccf"/>
@@ -431,6 +431,5 @@
     </objects>
     <resources>
         <image name="home_return" width="7" height="15"/>
-        <image name="timg" width="1024" height="640"/>
     </resources>
 </document>

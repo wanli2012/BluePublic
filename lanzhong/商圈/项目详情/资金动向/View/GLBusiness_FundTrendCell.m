@@ -35,7 +35,7 @@
 - (void)setModel:(GLBusiness_FundTrendModel *)model{
     _model = model;
     
-    self.dateLabel.text = [NSString stringWithFormat:@"%@ -- %@",[formattime formateTimeOfDate3:model.starttime],[formattime formateTimeOfDate3:model.endtime]];
+    self.dateLabel.text = [NSString stringWithFormat:@"%@ -- %@",[formattime formateTimeOfDate4:model.starttime],[formattime formateTimeOfDate4:model.endtime]];
     self.contentLabel.text = model.content;
 }
 

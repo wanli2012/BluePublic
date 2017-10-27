@@ -84,7 +84,7 @@
                                 <rect key="frame" x="10" y="105" width="355" height="180"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timg" translatesAutoresizingMaskIntoConstraints="NO" id="zem-2Z-ttd">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zem-2Z-ttd">
                                 <rect key="frame" x="15" y="15" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="5Dv-Mw-TyV"/>
@@ -344,7 +344,6 @@
         <image name="second" width="38" height="37"/>
         <image name="share" width="22" height="22"/>
         <image name="third" width="37" height="37"/>
-        <image name="timg" width="1024" height="640"/>
         <image name="商圈_矢量智能对象" width="14" height="18"/>
     </resources>
 </document>

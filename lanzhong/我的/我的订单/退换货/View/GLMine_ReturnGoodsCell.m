@@ -29,7 +29,8 @@
 - (void)setModel:(GLMine_ReturnGoodsModel *)model{
     _model = model;
     
-    [self.imageV sd_setImageWithURL:[NSURL URLWithString:model.must_thumb] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    NSString *imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/300/h/300",model.must_thumb];
+    [self.imageV sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     
     self.titleLabel.text = model.goods_name;
     self.specLabel.text = model.title;

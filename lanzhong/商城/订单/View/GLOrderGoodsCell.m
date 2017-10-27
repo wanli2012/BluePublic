@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *detailLabel;
+@property (weak, nonatomic) IBOutlet UILabel *specLabel;
 
 @end
 
@@ -24,23 +25,18 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    // Initialization code
-//    self.fanliLabel.layer.cornerRadius = 5.f;
-//    self.fanliLabel.clipsToBounds = YES;
-//    self.fanliLabel.layer.borderWidth = 1;
-//    self.fanliLabel.layer.borderColor = [UIColor redColor].CGColor;
-    
 }
 
 - (void)setModel:(GLConfirmOrderModel *)model{
     _model = model;
     
-    [_imageV sd_setImageWithURL:[NSURL URLWithString:model.must_thumb] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    NSString *imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/300/h/300",model.must_thumb];
+    [_imageV sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     _nameLabel.text = model.goods_name;
-//    _fanliLabel.text = [NSString stringWithFormat:@"原价:%@",model.cart_price];
-    _priceLabel.text = [NSString stringWithFormat:@"现价:%@",model.goods_price];
-    _sumLabel.text = [NSString stringWithFormat:@"%@ x%@",model.spec_title,model.num];
+    _priceLabel.text = [NSString stringWithFormat:@"单价:%@",model.goods_price];
+    _sumLabel.text = [NSString stringWithFormat:@"数量:x%@",model.num];
     _detailLabel.text = [NSString stringWithFormat:@"%@",model.goods_info];
+    _specLabel.text = [NSString stringWithFormat:@"规格:%@",model.spec_title];
 }
 
 @end

@@ -16,6 +16,7 @@
 @property (nonatomic, strong)NSMutableArray *models;
 @property (nonatomic, strong)LoadWaitView *loadV;
 @property (nonatomic, assign)NSInteger page;
+@property (nonatomic, strong)NodataView *nodataV;
 
 @end
 
@@ -23,8 +24,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.view.backgroundColor = [UIColor whiteColor];
     [self.tableView registerNib:[UINib nibWithNibName:@"GLPublish_ReviewCell" bundle:nil] forCellReuseIdentifier:@"GLPublish_ReviewCell"];
+    [self.tableView addSubview:self.nodataV];
+    self.nodataV.hidden = YES;
+    
     __weak __typeof(self) weakSelf = self;
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
@@ -103,21 +107,26 @@
     [self.tableView.mj_footer endRefreshing];
 }
 
-
-
 #pragma mark - UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    if (self.models.count== 0) {
+        
+        self.nodataV.hidden = NO;
+    }else{
+        self.nodataV.hidden = YES;
+    }
+    
     return self.models.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     GLPublish_ReviewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLPublish_ReviewCell"];
     
-    cell.model = self.models[indexPath.row];
-    cell.isReviewed = YES;
+    GLPublish_InReViewModel *model = self.models[indexPath.row];
+    model.isReviewed = YES;
+    cell.model = model;
     cell.selectionStyle = 0;
-      
-    //18380468763  1234567
     
     return cell;
 }
@@ -132,6 +141,14 @@
         _models = [NSMutableArray array];
     }
     return _models;
+}
+- (NodataView *)nodataV{
+    if (!_nodataV) {
+        _nodataV = [[NSBundle mainBundle] loadNibNamed:@"NodataView" owner:nil options:nil].lastObject;
+        _nodataV.frame = CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT - 64 - 40);
+        
+    }
+    return _nodataV;
 }
 
 @end

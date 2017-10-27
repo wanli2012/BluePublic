@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *arrowImageV;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *valueLabeltrailing;
 
+
 @end
 
 @implementation GLMineCell

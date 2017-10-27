@@ -20,4 +20,6 @@
 
 + (NSString *)formateTimeOfDate3:(NSString *)time;//YYYY.MM.dd
 
++ (NSString *)formateTimeOfDate4:(NSString *)time;//YYYY.MM.dd  不显示时分秒
+
 @end

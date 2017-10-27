@@ -34,7 +34,8 @@
 - (void)setModel:(GLDetail_comment_data *)model{
     _model = model;
     
-    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:model.must_user_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    NSString *imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/100/h/100",model.must_user_pic];
+    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     self.dateLabel.text = [formattime formateTimeOfDate:model.addtime];
     self.contentLabel.text = model.comment;
     self.replyLabel.text = [NSString stringWithFormat:@"回复:%@",model.reply];

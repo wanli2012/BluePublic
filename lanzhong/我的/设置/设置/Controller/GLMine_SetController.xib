@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GLMine_SetController">
             <connections>
+                <outlet property="copyrightLabel" destination="ulZ-HX-QJg" id="jnq-Kz-DlM"/>
                 <outlet property="exitBtn" destination="cyf-Qb-og2" id="ZJV-bz-aWh"/>
                 <outlet property="tableView" destination="cEF-tp-bRa" id="Tac-bc-Nlb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -45,13 +46,25 @@
                         <action selector="quit:" destination="-1" eventType="touchUpInside" id="C8d-Zz-1qU"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ulZ-HX-QJg">
+                    <rect key="frame" x="10" y="624" width="355" height="33"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="33" id="VpR-Zz-B1s"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="cEF-tp-bRa" secondAttribute="trailing" id="112-5B-azQ"/>
                 <constraint firstItem="cEF-tp-bRa" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Ba3-TZ-Z7w"/>
                 <constraint firstItem="cyf-Qb-og2" firstAttribute="top" secondItem="cEF-tp-bRa" secondAttribute="bottom" constant="30" id="Mdd-Oe-oVv"/>
+                <constraint firstItem="ulZ-HX-QJg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="Ncc-0u-U9R"/>
                 <constraint firstItem="cyf-Qb-og2" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Xyt-Ig-an5"/>
+                <constraint firstAttribute="trailing" secondItem="ulZ-HX-QJg" secondAttribute="trailing" constant="10" id="ZP0-1e-RRz"/>
+                <constraint firstAttribute="bottom" secondItem="ulZ-HX-QJg" secondAttribute="bottom" constant="10" id="pZv-Uf-MDQ"/>
                 <constraint firstItem="cEF-tp-bRa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="sJN-PZ-DSs"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

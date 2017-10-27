@@ -102,6 +102,7 @@
     [self.tableView.mj_header endRefreshing];
     [self.tableView.mj_footer endRefreshing];
 }
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
@@ -109,7 +110,7 @@
         self.navigationController.navigationBar.hidden = NO;
         self.navigationItem.title = @"公告列表";
     }else{
-        self.navigationController.navigationBar.hidden = YES;
+//        self.navigationController.navigationBar.hidden = YES;
     }
 }
 

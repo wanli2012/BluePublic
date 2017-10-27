@@ -12,6 +12,7 @@
 #import "GLBusinessCircle_MenuScreeningView.h"
 #import "GLBusiness_DetailController.h"//项目详情
 #import "GLBusinessCircleModel.h"
+#import "GLBusinessAdModel.h"//广告Model
 
 @interface GLBusinessCircleController ()<SDCycleScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -29,6 +30,8 @@
 @property (nonatomic, copy)NSString *trade_id;
 @property (nonatomic, copy)NSString *man;
 @property (nonatomic, copy)NSString *stop;
+
+@property (nonatomic, strong)NSMutableArray *adModels;
 
 @end
 
@@ -80,6 +83,7 @@
         
         [weakSelf postRequest:YES];
         [weakSelf postRequest_Category];
+        [weakSelf postAdData];
     }];
     
     MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
@@ -97,6 +101,7 @@
     
     [self postRequest:YES];
     [self postRequest_Category];
+    [self postAdData];
     
 }
 
@@ -184,13 +189,48 @@
             [MBProgressHUD showError:responseObject[@"message"]];
         }
         
-        [self.tableView reloadData];
+//        [self.tableView reloadData];
         
     } enError:^(NSError *error) {
-       
-        [self.tableView reloadData];
+//       
+//        [self.tableView reloadData];
     }];
+}
+
+//请求广告数据
+- (void)postAdData{
     
+    [NetworkManager requestPOSTWithURLStr:kBANNER_LIST_URL paramDic:@{} finish:^(id responseObject) {
+        
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+            if([responseObject[@"data"] count] != 0){
+                
+                [self.adModels removeAllObjects];
+                
+                NSMutableArray *arrM = [NSMutableArray array];
+                for (NSDictionary *dic in responseObject[@"data"]) {
+                    
+                    GLBusinessAdModel *model = [GLBusinessAdModel mj_objectWithKeyValues:dic];
+                    [self.adModels addObject:model];
+                    
+                    NSString *imageurl = [NSString stringWithFormat:@"%@?imageView2/1/w/%f/h/150",model.must_banner,kSCREEN_WIDTH];
+                    [arrM addObject:imageurl];
+                }
+                
+                self.cycleScrollView.imageURLStringsGroup = arrM;
+            }
+            
+        }else{
+            
+            [MBProgressHUD showError:responseObject[@"message"]];
+        }
+        
+//        [self.tableView reloadData];
+        
+    } enError:^(NSError *error) {
+        
+//        [self.tableView reloadData];
+    }];
 }
 
 - (void)endRefresh {
@@ -285,8 +325,9 @@
         _cycleScrollView.placeholderImage = [UIImage imageNamed:LUNBO_PlaceHolder];
         _cycleScrollView.pageControlDotSize = CGSizeMake(10, 10);
         
-        _cycleScrollView.localizationImageNamesGroup = @[@"timg",@"timg",@"timg",@"timg"];
+        _cycleScrollView.localizationImageNamesGroup = @[LUNBO_PlaceHolder,LUNBO_PlaceHolder,LUNBO_PlaceHolder,LUNBO_PlaceHolder];
     }
+    
     return _cycleScrollView;
 }
 
@@ -296,6 +337,14 @@
     }
     return _models;
 }
+
+- (NSMutableArray *)adModels{
+    if (!_adModels) {
+        _adModels = [NSMutableArray array];
+    }
+    return _adModels;
+}
+
 - (NodataView *)nodataV{
     if (!_nodataV) {
         _nodataV = [[NSBundle mainBundle] loadNibNamed:@"NodataView" owner:nil options:nil].lastObject;

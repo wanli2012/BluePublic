@@ -33,6 +33,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *seleteAllBtn;
 
 @property (nonatomic, strong)LoadWaitView *loadV;
+@property (nonatomic, strong)NodataView *nodataV;
 
 @end
 
@@ -47,7 +48,8 @@ static NSString *ID = @"GLShoppingCell";
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerNib:[UINib nibWithNibName:@"GLShoppingCell" bundle:nil] forCellReuseIdentifier:ID];
-
+    [self.tableView addSubview:self.nodataV];
+    self.nodataV.hidden = YES;
      [self.clearingBtn addTarget:self action:@selector(clearingMore:) forControlEvents:UIControlEventTouchUpInside];
 
     [self.seleteAllBtn horizontalCenterTitleAndImageRight:10.f];
@@ -103,7 +105,7 @@ static NSString *ID = @"GLShoppingCell";
     
     [self.tableView.mj_header endRefreshing];
 }
-//去结算
+#pragma mark - 去结算
 - (void)clearingMore:(UIButton *)sender{
 
     NSMutableArray *tempArr = [NSMutableArray array];
@@ -143,7 +145,7 @@ static NSString *ID = @"GLShoppingCell";
     
 }
 
-//全选
+#pragma mark - 全选
 - (IBAction)selectAll:(UIButton*)sender {
     
     if(self.models.count == 0){
@@ -183,7 +185,7 @@ static NSString *ID = @"GLShoppingCell";
     
 }
 
-//选中,取消选中
+#pragma mark - 选中,取消选中
 - (void)changeStatus:(NSInteger)index {
     
      [self.selectArr removeAllObjects];
@@ -242,6 +244,11 @@ static NSString *ID = @"GLShoppingCell";
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
+    if (self.models.count == 0) {
+        self.nodataV.hidden = NO;
+    }else{
+        self.nodataV.hidden = YES;
+    }
     
     return self.models.count == 0 ? 0:self.models.count;
 }
@@ -279,7 +286,7 @@ static NSString *ID = @"GLShoppingCell";
     return YES;
 }
 
-//进入编辑模式，按下出现的编辑按钮后
+#pragma mark - 进入编辑模式，按下出现的编辑按钮后
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
@@ -384,6 +391,14 @@ static NSString *ID = @"GLShoppingCell";
         
     }
     return _models;
+}
+- (NodataView *)nodataV{
+    if (!_nodataV) {
+        _nodataV = [[NSBundle mainBundle] loadNibNamed:@"NodataView" owner:nil options:nil].lastObject;
+        _nodataV.frame = CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT - 150);
+        
+    }
+    return _nodataV;
 }
 
 @end

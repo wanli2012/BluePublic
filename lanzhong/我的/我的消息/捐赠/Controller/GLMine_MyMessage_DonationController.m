@@ -103,7 +103,11 @@
     [self.tableView.mj_footer endRefreshing];
 }
 
-
+//- (void)viewWillAppear:(BOOL)animated{
+//    [super viewWillAppear:animated];
+//    
+//    self.navigationController.navigationBar.hidden = NO;
+//}
 #pragma mark - UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     

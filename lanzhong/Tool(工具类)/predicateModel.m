@@ -72,8 +72,8 @@
     }
     NSString *regex2 = @"^(\\d{14}|\\d{17})(\\d|[xX])$";
     NSPredicate *identityCardPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex2];
-//    return [identityCardPredicate evaluateWithObject:identityCard];
-    return YES;
+    return [identityCardPredicate evaluateWithObject:identityCard];
+
 }
 +(BOOL) IsBankCard:(NSString *)bankCardNumber;
 {

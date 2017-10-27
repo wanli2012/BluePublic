@@ -11,6 +11,7 @@
 #import "LBMyOrdersHeaderView.h"
 #import "LBMyOrdersModel.h"
 #import "GLMall_LogisticsController.h"//物流跟踪
+#import "GLMine_MyOrderController.h"
 
 @interface GLMine_ReceiveController ()
 
@@ -241,16 +242,30 @@
     headerview.returnCancelBt = ^(NSInteger index){
       
         LBMyOrdersModel *model = weakSelf.dataarr[index];
-        self.hidesBottomBarWhenPushed = YES;
+        [weakSelf viewController].hidesBottomBarWhenPushed = YES;
         GLMall_LogisticsController *vc =[[GLMall_LogisticsController alloc]init];
         vc.order_id = model.send_num;
-        [self.navigationController pushViewController:vc animated:YES];
+        [[weakSelf viewController].navigationController pushViewController:vc animated:YES];
         
     };
     
     return headerview;
 }
-
+/**
+ *  获取父视图的控制器
+ *
+ *  @return 父视图的控制器
+ */
+- (GLMine_MyOrderController *)viewController
+{
+    for (UIView* next = [self.view superview]; next; next = next.superview) {
+        UIResponder *nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[GLMine_MyOrderController class]]) {
+            return (GLMine_MyOrderController *)nextResponder;
+        }
+    }
+    return nil;
+}
 -(NSMutableArray *)dataarr{
     
     if (!_dataarr) {

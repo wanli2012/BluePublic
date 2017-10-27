@@ -31,7 +31,8 @@
 -(void)setMyorderlistModel:(LBMyOrdersListModel *)myorderlistModel{
     _myorderlistModel = myorderlistModel;
     
-    [self.imagev sd_setImageWithURL:[NSURL URLWithString:myorderlistModel.must_thumb] placeholderImage:[UIImage imageNamed:@"熊"]];
+    NSString *imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/300/h/300",myorderlistModel.must_thumb];
+    [self.imagev sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:@"熊"]];
     self.namelb.text = [NSString stringWithFormat:@"%@",myorderlistModel.goods_name];
     self.numberLabel.text = [NSString stringWithFormat:@"x %@",myorderlistModel.goods_num];
     self.priceLb.text = [NSString stringWithFormat:@"价格: %@",myorderlistModel.goods_discount];

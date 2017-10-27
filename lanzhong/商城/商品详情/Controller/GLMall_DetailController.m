@@ -100,8 +100,9 @@
     self.navTitleLabel.text = @"商品详情";
     
     // 加载图文详情
+    NSString *urlStr = [NSString stringWithFormat:@"%@%@",Goods_Info_URL,self.goods_id];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        [self.detailWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.hao123.com"]]];
+        [self.detailWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]]];
     });
     self.detailWebView.scrollView.delegate = self;
     
@@ -177,10 +178,10 @@
                 
                 self.model = [GLMall_DetailModel mj_objectWithKeyValues:responseObject[@"data"]];
 
-                self.model.goods_details = @"http://www.jianshu.com/p/69d338f8b67d";
+                self.model.goods_details = [NSString stringWithFormat:@"%@%@",Goods_Info_URL,self.goods_id];
                 self.goods_infoDic = responseObject[@"data"][@"goods_data"];
                 
-                self.cycleScrollView.imageURLStringsGroup = self.model.goods_data.must_thumb_url;
+                self.cycleScrollView.imageURLStringsGroup = self.goods_infoDic[@"must_thumb_url"];
                 [self setHeaderValue];//为头视图赋值
             }
             
@@ -476,18 +477,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    if(section == 0){
-//        return 1;
-//    }else{
-//         if (_isDetail) {
-//             
-//             return 1;
-//         }else{
-//             
-//             return self.model.comment_data.count;
-//         }
-//    }
-    
+
     return self.model.comment_data.count;
 }
 
@@ -499,57 +489,12 @@
     cell.model = self.model.comment_data[indexPath.row];
     return cell;
 
-//    if (indexPath.section == 0) {
-//        
-//        GLMall_DetailSelecteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMall_DetailSelecteCell"];
-//        cell.selectionStyle = 0;
-//        cell.delegate = self;
-//        return cell;
-//        
-//    }else{
-//        
-//        if (_isDetail) {
-//            
-//            GLMall_DetailWebCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMall_DetailWebCell"];
-//            cell.selectionStyle = 0;
-//
-//            cell.url = self.model.goods_details;
-//            
-//            return cell;
-//            
-//        }else{
-//            
-//            GLMall_DetailCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMall_DetailCommentCell"];
-//            cell.selectionStyle = 0;
-//            
-//            cell.model = self.model.comment_data[indexPath.row];
-//            return cell;
-//        }
-//    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     GLDetail_comment_data * model = self.model.comment_data[indexPath.row];
     return model.cellHeight;
-//    if(indexPath.section == 0){
-//
-//        return 50;
-//        
-//    }else{
-//        
-//        if (_isDetail) {
-//
-//            tableView.rowHeight = UITableViewAutomaticDimension;
-//            tableView.estimatedRowHeight = 44;
-//            return tableView.rowHeight;
-//            
-//        }else{
-//            
-//            GLDetail_comment_data * model = self.model.comment_data[indexPath.row];
-//            return model.cellHeight;
-// 
-//        }
-//    }
+
     
 }
 
@@ -622,7 +567,7 @@
         _cycleScrollView.placeholderImage = [UIImage imageNamed:LUNBO_PlaceHolder];
         _cycleScrollView.pageControlDotSize = CGSizeMake(10, 10);
         
-        _cycleScrollView.localizationImageNamesGroup = @[@"timg",@"timg",@"timg",@"timg"];
+        _cycleScrollView.localizationImageNamesGroup = @[LUNBO_PlaceHolder,LUNBO_PlaceHolder,LUNBO_PlaceHolder,LUNBO_PlaceHolder];
     }
     return _cycleScrollView;
 }

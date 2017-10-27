@@ -83,8 +83,13 @@
 
 - (void)clickPublish {
     
-//    UITabBarController *tabBarController = (UITabBarController *)self.window.rootViewController;
-//    UIViewController *viewController = tabBarController.selectedViewController;
+    if ([[UserModel defaultUser].real_state integerValue] == 0 || [[UserModel defaultUser].real_state integerValue] == 2) {
+        [MBProgressHUD showError:@"请前往个人中心实名认证"];
+        return;
+    }else if([[UserModel defaultUser].real_state integerValue] == 3){
+        [MBProgressHUD showError:@"实名认证审核中,请等待"];
+        return;
+    }
     
     GLPublishController * publishVC = [[GLPublishController alloc] init];
     BaseNavigationViewController *publishNav = [[BaseNavigationViewController alloc] initWithRootViewController:publishVC];

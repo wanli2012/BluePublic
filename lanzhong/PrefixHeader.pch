@@ -31,11 +31,12 @@
 #define kSCREEN_WIDTH  [UIScreen mainScreen].bounds.size.width
 #define kSCREEN_HEIGHT  [UIScreen mainScreen].bounds.size.height
 
-#define FONT(s)       [UIFont systemFontOfSize:s]
+#define FONT(s) [UIFont systemFontOfSize:s]
 
 //占位图
-#define PlaceHolderImage @"timg"
-#define LUNBO_PlaceHolder @"轮播暂位图"
+#define PlaceHolderImage @"商城占位图"
+
+#define LUNBO_PlaceHolder @"案例占位图"
 
 #define SUCCESS_CODE 200
 #define PAGE_ERROR_CODE 204
@@ -48,9 +49,19 @@
 #define WEIXIN_APPSECRET @"d8168698d8940f3aa3a078b25347a591"
 
 
-#define Notice_URL @"http://192.168.1.186/Raise/index.php/Api/News/notice?news_id="
-#define Certification_URL @"http://lz.51dztg.com/index.php/Api/Item/item_content?item_id="
-#define Share_URL @"http://lz.51dztg.com/index.php/Wap/Index/index?g_name="
+#define Notice_URL @"http://lz.51dztg.com/index.php/Api/News/notice?news_id="//公告
+#define Certification_URL @"http://lz.51dztg.com/index.php/Api/Item/item_content?item_id="//官方认证
+#define Goods_Info_URL @"http://lz.51dztg.com/index.php/Api/Shop/goods_info?goods_id="//图文详情
+
+#define Share_URL @"http://lz.51dztg.com/index.php/Wap/Index/index?g_name="//分享
+//关于公司
+#define About_URL @"http://lz.51dztg.com/protocol/about.html"
+//帮助中心
+#define Help_Center_URL @"http://lz.51dztg.com/protocol/help.html"
+//发布协议
+#define Publish_Protocol_URL @"http://lz.51dztg.com/protocol/issue.html"
+//注册协议
+#define Register_Protocol_URL @"http://lz.51dztg.com/protocol/register.html"
 
 //#define URL_Base @"http://192.168.0.163/Raise/index.php/Api/"
 #define URL_Base @"http://lz.51dztg.com/index.php/Api/"
@@ -74,6 +85,8 @@
 #define kAPPLY_RETURN_URL @"Shop/user_refunds"//用户申请退货
 #define kREFUNDS_LIST_URL @"Shop/refunds_list"//用户申请退货列表
 #define kREFUND_INFO_URL @"Shop/refunds_info"//用户填写退货信息资料
+#define kBANNER_LIST_URL @"Other/banner_list"//广告展示
+#define kADD_FUNDTREND_URL @"Item/item_dynamic_add"//添加资金动向
 
 #define kMYCART_URL @"User/my_cart"//购物车
 #define kDEL_CARTGOODS_URL @"User/del_cart"//删除购物车商品

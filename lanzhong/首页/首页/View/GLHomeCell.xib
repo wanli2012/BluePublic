@@ -14,13 +14,13 @@
             <rect key="frame" x="0.0" y="0.0" width="354" height="200"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="354" height="199.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="354" height="200"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ctw-ak-Twv" userLabel="bgView">
                         <rect key="frame" x="15" y="10" width="324" height="179.5"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timg" translatesAutoresizingMaskIntoConstraints="NO" id="sGo-OA-4td">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sGo-OA-4td">
                                 <rect key="frame" x="0.0" y="0.0" width="324" height="144.5"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="buu-N3-768" userLabel="middleView">
@@ -142,7 +142,4 @@
             <point key="canvasLocation" x="160" y="13"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="timg" width="1024" height="640"/>
-    </resources>
 </document>

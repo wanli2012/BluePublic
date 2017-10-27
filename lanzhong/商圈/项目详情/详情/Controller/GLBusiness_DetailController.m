@@ -9,7 +9,6 @@
 #import "GLBusiness_DetailController.h"
 #import "GLBusiness_DetailCommentCell.h"
 #import "GLBusiness_DetailProjectCell.h"
-//#import "GLBusiness_trendCell.h"
 #import "GLBusiness_ChooseCell.h"//资金动向和官方认证
 #import "GLBusiness_CertificationController.h"//官方认证
 #import "GLBusiness_LoveListController.h"
@@ -131,7 +130,8 @@
 //为头视图赋值
 - (void)headerViewFuzhi {
     
-    [self.imageV sd_setImageWithURL:[NSURL URLWithString:self.model.user_info_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    NSString *imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/200/h/200",self.model.user_info_pic];
+    [self.imageV sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     self.personNameLabel.text = self.model.linkman;
     self.targetMoneyLabel.text = [NSString stringWithFormat:@"%@元",self.model.admin_money];
     self.raisedLabel.text = [NSString stringWithFormat:@"%@元",self.model.draw_money];
@@ -139,13 +139,17 @@
     
     if (self.model.invest_10.count >= 1) {
         
-        [self.iconImageV3 sd_setImageWithURL:[NSURL URLWithString:self.model.invest_10[0].must_user_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+        NSString *imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/100/h/100",self.model.invest_10[0].must_user_pic];
+        [self.iconImageV3 sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+        
         if (self.model.invest_10.count >= 2) {
             
-            [self.iconImageV2 sd_setImageWithURL:[NSURL URLWithString:self.model.invest_10[1].must_user_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+            NSString *imageStr1 = [NSString stringWithFormat:@"%@?imageView2/1/w/100/h/100",self.model.invest_10[1].must_user_pic];
+            [self.iconImageV2 sd_setImageWithURL:[NSURL URLWithString:imageStr1] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+            
             if (self.model.invest_10.count >= 3) {
-                
-                [self.iconImageV sd_setImageWithURL:[NSURL URLWithString:self.model.invest_10[2].must_user_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+                NSString *imageStr2 = [NSString stringWithFormat:@"%@?imageView2/1/w/100/h/100",self.model.invest_10[2].must_user_pic];
+                [self.iconImageV sd_setImageWithURL:[NSURL URLWithString:imageStr2] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
             }
         }
     }
@@ -162,16 +166,11 @@
     self.progressLabel.text = [NSString stringWithFormat:@"%.2f%%",ratio * 100];
     
     NSDate *date = [NSDate date];
-    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-
     [formatter setDateFormat:@"yyyy-MM-dd"];
     
     NSString *DateTime = [formatter stringFromDate:date];
-    
-    
     NSTimeInterval time=[self.model.need_time doubleValue];//因为时差问题要加8小时 == 28800 sec
-    
     NSDate *detaildate=[NSDate dateWithTimeIntervalSince1970:time];
 
     //实例化一个NSDateFormatter对象
@@ -185,7 +184,6 @@
     
     self.needTimeLabel.text = [NSString stringWithFormat:@"剩余时间%zd天",dayCount];
     
-    
     if([self.model.state integerValue] == 3){
         self.supportBtn.enabled = YES;
         self.supportBtn.backgroundColor = MAIN_COLOR;
@@ -194,6 +192,7 @@
         self.supportBtn.backgroundColor = [UIColor lightGrayColor];
     }
 }
+
 /**任意两天相差天数*/
 - (NSInteger)getTheCountOfTwoDaysWithBeginDate:(NSString *)beginDate endDate:(NSString *)endDate{
     
@@ -275,12 +274,12 @@
 
 - (IBAction)share:(id)sender {
 
-    [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession)]];
+    [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine)]];
     
     [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
         // 根据获取的platformType确定所选平台进行下一步操作
         
-        [self shareWebPageToPlatformType:UMSocialPlatformType_WechatSession];
+        [self shareWebPageToPlatformType:platformType];
         
     }];
 }
@@ -408,6 +407,7 @@
     }
     return 6;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     switch (indexPath.section) {
@@ -416,7 +416,7 @@
             if (indexPath.row == 0) {
                 GLBusiness_DetailProjectCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLBusiness_DetailProjectCell"];
                 cell.selectionStyle = 0;
-
+                
                 cell.dataSourceArr = self.model.sev_photo;
                 cell.detailLabel.text = self.model.info;
                 return cell;
@@ -425,9 +425,8 @@
                 
                 GLBusiness_ChooseCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLBusiness_ChooseCell"];
                 cell.selectionStyle = 0;
-
-                cell.delegate = self;
                 
+                cell.delegate = self;
                 return cell;
             }
         }
@@ -443,7 +442,6 @@
             
             cell.delegate = self;
             cell.model = model;
-
             return cell;
         }
             break;
@@ -475,7 +473,6 @@
 //    GLBusiness_DetailController *detailVC = [[GLBusiness_DetailController alloc] init];
 //    [self.navigationController pushViewController:detailVC animated:YES];
 //    self.hidesBottomBarWhenPushed = NO;
-    
 }
 
 

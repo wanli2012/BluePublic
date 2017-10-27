@@ -19,7 +19,8 @@
  */
 + (void)show:(NSString *)text icon:(NSString *)icon view:(UIView *)view
 {
-    if (view == nil) view = [[UIApplication sharedApplication].windows lastObject];
+    view = [[UIApplication sharedApplication].windows lastObject];
+    view.hidden = NO;
     // 快速显示一个提示信息
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
     hud.label.text = text;
@@ -76,8 +77,10 @@
  *  @param view  需要显示信息的视图
  */
 + (void)showError:(NSString *)error toView:(UIView *)view{
+    
     view = [[UIApplication sharedApplication].windows lastObject];
     view.hidden = NO;
+    
     [self show:error icon:@"error.png" view:view];
 }
 

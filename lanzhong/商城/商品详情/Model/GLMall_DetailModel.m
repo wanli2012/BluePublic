@@ -40,7 +40,6 @@
 
 @implementation GLMall_DetailModel
 
-
 + (NSDictionary *)mj_objectClassInArray {
     
     return @{@"comment_data":@"GLDetail_comment_data",

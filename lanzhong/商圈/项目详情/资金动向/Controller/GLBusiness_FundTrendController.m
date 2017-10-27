@@ -9,7 +9,7 @@
 #import "GLBusiness_FundTrendController.h"
 #import "GLBusiness_FundTrendCell.h"
 #import "GLBusiness_FundTrendModel.h"
-
+#import "GLBusiness_AddFundTrendController.h"//添加资金动向
 
 @interface GLBusiness_FundTrendController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -55,10 +55,31 @@
     self.tableView.mj_footer = footer;
     self.page = 1;
     [self postRequest:YES];
-//    [self.tableView.mj_header beginRefreshing];
+    
+    if (self.signIndex == 1) {
+        
+        UIButton *button=[[UIButton alloc]initWithFrame:CGRectMake( 0, 0, 60, 44)];
+        button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;//左对齐
+        [button setImage:[UIImage imageNamed:@"circle_add"] forState:UIControlStateNormal];
+        [button setImageEdgeInsets:UIEdgeInsetsMake(0 ,0, 0, 10)];
+        // 让返回按钮内容继续向左边偏移10
+        button.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -17);
+        
+        button.backgroundColor = [UIColor clearColor];
+        
+        [button addTarget:self action:@selector(addFundTrend) forControlEvents:UIControlEventTouchUpInside];
+        
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];
+       
+    }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refeshData) name:@"AddFundTrendNotification" object:nil];
     
 }
 
+- (void)refeshData{
+    [self postRequest:YES];
+}
 - (void)postRequest:(BOOL)isRefresh{
     
     if (isRefresh) {
@@ -69,8 +90,6 @@
     }
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    
-    self.item_id = @"36";
     
     dic[@"item_id"] = self.item_id;
     dic[@"page"] = @(self.page);
@@ -107,6 +126,14 @@
     
     [self.tableView.mj_header endRefreshing];
     [self.tableView.mj_footer endRefreshing];
+}
+
+- (void)addFundTrend {
+    
+    self.hidesBottomBarWhenPushed = YES;
+    GLBusiness_AddFundTrendController *addVC = [[GLBusiness_AddFundTrendController alloc] init];
+    addVC.item_id = self.item_id;
+    [self.navigationController pushViewController:addVC animated:YES];
 }
 
 #pragma mark - UITableViewDelegate
@@ -153,19 +180,19 @@
     
     
 }
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 40)];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 200, 40)];
-    label.text = @"项目支出明细";
-    label.font = [UIFont systemFontOfSize:14];
-    label.textColor = [UIColor darkGrayColor];
-    
-    [view addSubview:label];
-    return view;
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 40;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 40)];
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 200, 40)];
+//    label.text = @"项目支出明细";
+//    label.font = [UIFont systemFontOfSize:14];
+//    label.textColor = [UIColor darkGrayColor];
+//    
+//    [view addSubview:label];
+//    return view;
+//}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+//    return 40;
+//}
 
 - (NSMutableArray *)models{
     if (!_models) {

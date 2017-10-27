@@ -21,6 +21,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *targetLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;//价格
 
-@property (nonatomic, assign)BOOL isReviewed;//是否在审核中
+//@property (nonatomic, assign)BOOL isReviewed;//是否在审核中
 
 @end

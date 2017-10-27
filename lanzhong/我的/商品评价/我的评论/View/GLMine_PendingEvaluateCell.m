@@ -35,7 +35,8 @@
 - (void)setModel:(GLMine_EvaluateModel *)model{
     _model = model;
     
-    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:model.must_thumb] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    NSString *imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/300/h/300",model.must_thumb];
+    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     self.titleLabel.text = model.goods_name;
     self.detailLabel.text = [NSString stringWithFormat:@"规格:%@",model.title];
     self.replyLabel.text = [NSString stringWithFormat:@"商家回复:%@", model.reply];

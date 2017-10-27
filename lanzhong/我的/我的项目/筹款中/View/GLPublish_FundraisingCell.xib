@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="395" height="168"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="395" height="167"/>
+                <rect key="frame" x="0.0" y="0.0" width="395" height="168"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7E1-Pa-Dlb">
@@ -49,14 +49,14 @@
                         <rect key="frame" x="140" y="43" width="190" height="3"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cxT-NP-Are" userLabel="progressView">
-                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="3"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1" height="3"/>
                                 <color key="backgroundColor" red="2.38126886e-05" green="0.49598097800000002" blue="0.99889487030000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" id="c5B-xP-phP"/>
+                                    <constraint firstAttribute="width" constant="0.5" id="c5B-xP-phP"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Cy-x0-ijm" userLabel="qiu">
-                                <rect key="frame" x="-12" y="-4" width="12" height="12"/>
+                                <rect key="frame" x="1" y="-4" width="12" height="12"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="12" id="ZLL-cc-gCy"/>
@@ -66,8 +66,8 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Cy-x0-ijm" firstAttribute="trailing" secondItem="cxT-NP-Are" secondAttribute="trailing" id="5kz-7v-26q"/>
                             <constraint firstItem="cxT-NP-Are" firstAttribute="top" secondItem="eaj-qi-Azj" secondAttribute="top" id="6Bv-eZ-Hif"/>
+                            <constraint firstItem="6Cy-x0-ijm" firstAttribute="leading" secondItem="cxT-NP-Are" secondAttribute="trailing" id="EYC-UC-wlx"/>
                             <constraint firstAttribute="bottom" secondItem="cxT-NP-Are" secondAttribute="bottom" id="Jc1-c7-5nu"/>
                             <constraint firstAttribute="height" constant="3" id="Jjq-2m-by1"/>
                             <constraint firstItem="6Cy-x0-ijm" firstAttribute="centerY" secondItem="eaj-qi-Azj" secondAttribute="centerY" id="MJy-yg-ihp"/>
@@ -91,7 +91,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="S4L-Xq-sSz"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.99961632489999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -100,7 +100,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="u0M-ei-V2P"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.99961632489999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -109,25 +109,25 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="8Vp-Zk-hEV"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.99961632489999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="目标金额(元)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97U-BO-FpA">
                                 <rect key="frame" x="0.0" y="30" width="82" height="28"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="已筹(元)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JUh-25-8H8">
                                 <rect key="frame" x="82" y="30" width="82" height="28"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="参与人数(人)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgI-ph-Wc2">
                                 <rect key="frame" x="164" y="30" width="81" height="28"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -222,7 +222,7 @@
                 <outlet property="targetMoneyLabel" destination="17B-8n-7Do" id="aen-Z6-gle"/>
                 <outlet property="titleLabel" destination="ryD-g0-hqD" id="nel-CL-uAq"/>
             </connections>
-            <point key="canvasLocation" x="45.5" y="56"/>
+            <point key="canvasLocation" x="55" y="-33"/>
         </tableViewCell>
     </objects>
 </document>

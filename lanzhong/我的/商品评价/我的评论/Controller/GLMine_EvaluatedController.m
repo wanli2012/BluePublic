@@ -65,11 +65,9 @@
     }
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    
-//    dic[@"token"] = [UserModel defaultUser].token;
-//    dic[@"uid"] = [UserModel defaultUser].uid;
-    dic[@"token"] = @"IAa089";
-    dic[@"uid"] = @"10";
+
+    dic[@"token"] = [UserModel defaultUser].token;
+    dic[@"uid"] = [UserModel defaultUser].uid;
     dic[@"type"] = @"1";//评论状态 1已评论 0未评论
     dic[@"page"] = @(self.page);
     

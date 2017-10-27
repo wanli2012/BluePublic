@@ -49,7 +49,7 @@
 
 @end
 
-#define kHEIGHT 150
+#define kHEIGHT 170
 
 @implementation GLMineController
 
@@ -64,21 +64,24 @@
 
 - (void)setUI {
     
+    
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    self.headerView.height = 235;
     self.imageV.layer.cornerRadius = self.imageV.height/2;
+    self.imageV.image = [UIImage imageNamed:PlaceHolderImage];
     
-    //实现模糊效果
-    UIBlurEffect *blurEffrct = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    
-    //毛玻璃视图
-    self.visualEffectView = [[UIVisualEffectView alloc]initWithEffect:blurEffrct];
-    
-    self.visualEffectView.frame = CGRectMake(0, 0, kSCREEN_WIDTH, self.bgimageV.height);
-    
-    self.visualEffectView.alpha = 0.95;
-    
-    [self.bgimageV addSubview:self.visualEffectView];
+//    //实现模糊效果
+//    UIBlurEffect *blurEffrct = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+//    
+//    //毛玻璃视图
+//    self.visualEffectView = [[UIVisualEffectView alloc]initWithEffect:blurEffrct];
+//    
+//    self.visualEffectView.frame = CGRectMake(0, 0, kSCREEN_WIDTH, self.bgimageV.height);
+//    
+//    self.visualEffectView.alpha = 1;
+//    
+//    [self.bgimageV addSubview:self.visualEffectView];
     
     self.middleView.layer.cornerRadius = 5.f;
 
@@ -147,6 +150,7 @@
     } enError:^(NSError *error) {
     }];
 }
+
 //头视图赋值
 - (void)assignment{
     
@@ -224,7 +228,7 @@
         CGFloat f = totalOffset / kHEIGHT;
         //拉伸后的图片的frame应该是同比例缩放。
         self.bgimageV.frame =  CGRectMake(- (width *f-width) / 2, yOffset, width * f, totalOffset);
-        self.visualEffectView.frame = CGRectMake(0, 0, width * f, totalOffset);
+//        self.visualEffectView.frame = CGRectMake(0, 0, width * f, totalOffset);
         
     }
 }

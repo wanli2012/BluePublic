@@ -10,6 +10,7 @@
 #import "GLMineCell.h"
 #import "GLMine_Set_modifyPwdController.h"//修改密码
 #import "MinePhoneAlertView.h"
+#import "GLBusiness_CertificationController.h"//web页面VC
 
 @interface GLMine_SetController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -20,6 +21,8 @@
 @property (nonatomic, copy)NSString *memory;//内存
 @property(nonatomic ,strong)MinePhoneAlertView  *phoneView;
 @property(nonatomic ,strong)NSString  *phonestr;//服务热线
+
+@property (weak, nonatomic) IBOutlet UILabel *copyrightLabel;
 
 @end
 
@@ -34,8 +37,10 @@
     self.exitBtn.layer.borderWidth = 1.f;
     self.exitBtn.layer.cornerRadius = 5.f;
 
-     self.memory = [NSString stringWithFormat:@"%.2fM", [self filePath]];
-     self.phonestr = [UserModel defaultUser].user_server;
+    self.memory = [NSString stringWithFormat:@"%.2fM", [self filePath]];
+    self.phonestr = [UserModel defaultUser].user_server;
+    
+    self.copyrightLabel.text = @"copyright@2017-2018\n贵州蓝众投资管理有限公司";
     
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMineCell" bundle:nil] forCellReuseIdentifier:@"GLMineCell"];
 }
@@ -90,7 +95,7 @@
     
     NSArray *arr = self.dataSource[indexPath.section];
     cell.titleLabel.text = arr[indexPath.row];
-    
+    cell.imageViewWidth.constant = 0;
     switch (indexPath.section) {
         case 0:
         {
@@ -164,7 +169,11 @@
                     break;
                 case 2:
                 {
-                    NSLog(@"关于公司");
+                    self.hidesBottomBarWhenPushed = YES;
+                    GLBusiness_CertificationController *aboutVC = [[GLBusiness_CertificationController alloc] init];
+                    aboutVC.url = About_URL;
+                    aboutVC.navTitle = @"关于";
+                    [self.navigationController pushViewController:aboutVC animated:YES];
                 }
                     break;
                     
@@ -178,7 +187,7 @@
             switch (indexPath.row) {
                 case 0:
                 {
-                    NSLog(@"联系客服");
+                    
                     self.phoneView.transform=CGAffineTransformMakeScale(0, 0);
                     
                     NSString *str=[NSString stringWithFormat:@"是否拨打电话? %@",self.phonestr];
@@ -201,7 +210,13 @@
                     break;
                 case 1:
                 {
-                    NSLog(@"帮助中心");
+                    
+                    self.hidesBottomBarWhenPushed = YES;
+                    GLBusiness_CertificationController *aboutVC = [[GLBusiness_CertificationController alloc] init];
+                    aboutVC.url = Help_Center_URL;
+                    aboutVC.navTitle = @"帮助中心";
+                    [self.navigationController pushViewController:aboutVC animated:YES];
+
                 }
                     break;
                 case 2:

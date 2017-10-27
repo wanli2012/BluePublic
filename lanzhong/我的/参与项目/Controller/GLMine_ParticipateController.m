@@ -17,6 +17,7 @@
 @property (nonatomic, strong)LoadWaitView *loadV;
 @property (nonatomic, assign)NSInteger page;
 @property (nonatomic, strong)NSMutableArray *models;
+@property (nonatomic, strong)NodataView *nodataV;
 
 @end
 
@@ -28,6 +29,8 @@
     self.navigationItem.title = @"参与的项目";
     
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMine_ParticipateCell" bundle:nil] forCellReuseIdentifier:@"GLMine_ParticipateCell"];
+    [self.tableView addSubview:self.nodataV];
+    self.nodataV.hidden = YES;
     
     __weak __typeof(self) weakSelf = self;
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -114,6 +117,13 @@
 #pragma  UITableviewDatasource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
+    if (self.models.count== 0) {
+        
+        self.nodataV.hidden = NO;
+    }else{
+        self.nodataV.hidden = YES;
+    }
+    
     return self.models.count;
 }
 
@@ -137,5 +147,12 @@
     return _models;
 }
 
-
+- (NodataView *)nodataV{
+    if (!_nodataV) {
+        _nodataV = [[NSBundle mainBundle] loadNibNamed:@"NodataView" owner:nil options:nil].lastObject;
+        _nodataV.frame = CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT - 64 - 40);
+        
+    }
+    return _nodataV;
+}
 @end

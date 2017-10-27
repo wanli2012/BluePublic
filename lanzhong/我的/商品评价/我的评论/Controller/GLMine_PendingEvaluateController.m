@@ -11,6 +11,7 @@
 #import "GLMine_EvaluatingController.h"//去评论界面
 #import "GLMine_EvaluateController.h"
 
+
 @interface GLMine_PendingEvaluateController ()<GLMine_PendingEvaluateCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -67,10 +68,8 @@
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     
-//    dic[@"token"] = [UserModel defaultUser].token;
-//    dic[@"uid"] = [UserModel defaultUser].uid;
-    dic[@"token"] = @"IAa089";
-    dic[@"uid"] = @"10";
+    dic[@"token"] = [UserModel defaultUser].token;
+    dic[@"uid"] = [UserModel defaultUser].uid;
     dic[@"type"] = @"0";//评论状态 1已评论 0未评论
     dic[@"page"] = @(self.page);
     
@@ -111,7 +110,6 @@
 
 #pragma mark - GLMine_PendingEvaluateCellDelegate
 - (void)goToEvaluate:(NSInteger)index{
-//    NSLog(@"去评价=----%zd",index);
     
     GLMine_EvaluateController *vc = [self viewController];
     vc.hidesBottomBarWhenPushed = YES;

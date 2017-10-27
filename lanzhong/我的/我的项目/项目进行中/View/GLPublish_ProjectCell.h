@@ -12,6 +12,7 @@
 @protocol GLPublish_ProjectCellDelegate <NSObject>
 
 - (void)surportList:(NSInteger)index;
+- (void)fundList:(NSInteger)index;
 
 @end
 

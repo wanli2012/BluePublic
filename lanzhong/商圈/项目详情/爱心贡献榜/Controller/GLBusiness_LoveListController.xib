@@ -74,7 +74,7 @@
                                                     <constraint firstAttribute="height" constant="83" id="Z3B-Pf-XFq"/>
                                                     <constraint firstAttribute="width" constant="83" id="fR9-Sq-XMS"/>
                                                 </constraints>
-                                                <state key="normal" image="timg" backgroundImage="first-1"/>
+                                                <state key="normal" backgroundImage="first-1"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLf-ex-GP8">
                                                 <rect key="frame" x="58" y="108" width="0.0" height="14.5"/>
@@ -124,7 +124,7 @@
                                                     <constraint firstAttribute="width" constant="65" id="d8G-3x-eSU"/>
                                                     <constraint firstAttribute="height" constant="65" id="fR1-qW-RMR"/>
                                                 </constraints>
-                                                <state key="normal" image="timg" backgroundImage="thirdly"/>
+                                                <state key="normal" backgroundImage="thirdly"/>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -167,7 +167,7 @@
                                                     <constraint firstAttribute="height" constant="65" id="kBX-vo-2IW"/>
                                                     <constraint firstAttribute="width" constant="65" id="qQR-YY-B22"/>
                                                 </constraints>
-                                                <state key="normal" image="timg" backgroundImage="second-1"/>
+                                                <state key="normal" backgroundImage="second-1"/>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -246,6 +246,5 @@
         <image name="second2" width="19" height="25"/>
         <image name="thirdly" width="60" height="59"/>
         <image name="thirdly3" width="19" height="25"/>
-        <image name="timg" width="1024" height="640"/>
     </resources>
 </document>

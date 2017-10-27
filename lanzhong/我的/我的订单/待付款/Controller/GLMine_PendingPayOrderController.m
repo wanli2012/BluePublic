@@ -12,6 +12,7 @@
 #import "LBMyOrdersHeaderView.h"
 #import "LBMyOrdersModel.h"
 #import "GLMine_RicePayController.h"
+#import "GLMine_MyOrderController.h"
 
 @interface GLMine_PendingPayOrderController ()
 
@@ -179,7 +180,21 @@
     return 100;
     
 }
-
+/**
+ *  获取父视图的控制器
+ *
+ *  @return 父视图的控制器
+ */
+- (GLMine_MyOrderController *)viewController
+{
+    for (UIView* next = [self.view superview]; next; next = next.superview) {
+        UIResponder *nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[GLMine_MyOrderController class]]) {
+            return (GLMine_MyOrderController *)nextResponder;
+        }
+    }
+    return nil;
+}
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     __weak __typeof(self) weakSelf = self;
     LBMyOrdersModel *sectionModel = self.dataarr[section];
@@ -213,11 +228,13 @@
 
         LBMyOrdersModel *model = weakSelf.dataarr[index];
         
-        weakSelf.hidesBottomBarWhenPushed = YES;
+        [weakSelf viewController].hidesBottomBarWhenPushed = YES;
+        
         GLMine_RicePayController *payVC = [[GLMine_RicePayController alloc] init];
         payVC.order_id = model.order_id;
         payVC.order_sn = model.order_num;
         payVC.orderPrice = model.pay_money;
+        payVC.orders_Price = model.pay_money;
         payVC.signIndex = 1;
         
         payVC.block = ^(){
@@ -225,7 +242,7 @@
             [tableView reloadData];
         };
         
-        [weakSelf.navigationController pushViewController:payVC animated:YES];
+        [[weakSelf viewController].navigationController pushViewController:payVC animated:YES];
     };
     
     //取消订单

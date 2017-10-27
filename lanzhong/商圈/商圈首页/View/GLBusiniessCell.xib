@@ -25,7 +25,7 @@
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timg" translatesAutoresizingMaskIntoConstraints="NO" id="k4b-UD-vqW">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="k4b-UD-vqW">
                         <rect key="frame" x="10" y="45" width="120" height="99"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="120" id="nXG-Fg-PLx"/>
@@ -149,7 +149,4 @@
             <point key="canvasLocation" x="-27.5" y="-10"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="timg" width="1024" height="640"/>
-    </resources>
 </document>

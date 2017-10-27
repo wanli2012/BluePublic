@@ -306,6 +306,15 @@
     
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
+        if (alertVC.textFields.lastObject.text.length == 0) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                [MBProgressHUD showError:@"请输入密码"];
+            });
+            
+            return;
+        }
+        
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[@"uid"] = [UserModel defaultUser].uid;
         dict[@"token"] = [UserModel defaultUser].token;
@@ -371,26 +380,6 @@
     
     NSLog(@"支付完成");
     [self dismiss];
-}
-
-- (void)popSecretView{
-    
-    //弹出密码输入框
-    CGFloat contentViewH = 300;
-    
-    [UIView animateWithDuration:0.2 animations:^{
-       
-        self.contentView.frame = CGRectMake(0, kSCREEN_HEIGHT, kSCREEN_WIDTH, contentViewH);
-        [self.contentView.passwordF becomeFirstResponder];
-        
-    }];
-    
-    self.maskView.frame = CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT);
-    UIWindow * window = [[UIApplication sharedApplication].delegate window];
-    
-    [window addSubview:self.maskView];
-    [window addSubview:self.contentView];
-
 }
 
 - (void)WeChatPay:(NSString *)payType{

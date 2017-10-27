@@ -28,10 +28,18 @@
 
 - (void)setModel:(GLMine_ShareModel *)model{
     _model = model;
-    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:model.must_user_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    
+    NSString *imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/300/h/300",model.must_user_pic];
+    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     self.titleLabel.text = model.phone;
-    self.trueNameLabel.text = model.truename;
     self.dateLabel.text = [formattime formateTimeOfDate3:model.addtime];
+    
+    if (model.truename.length == 0) {
+        
+        self.trueNameLabel.text = [NSString stringWithFormat:@"真实姓名:暂无"];
+    }else{
+        self.trueNameLabel.text = [NSString stringWithFormat:@"真实姓名:%@",model.truename];
+    }
     
 }
 

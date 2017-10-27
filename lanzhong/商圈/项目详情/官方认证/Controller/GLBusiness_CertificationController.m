@@ -27,10 +27,16 @@
 
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBar.hidden = NO;
+}
+
 #pragma mark - UIWebViewDelegate
 
 - (void)webViewDidStartLoad:(UIWebView *)webView{
-    NSLog(@"kaishi jiazai le  ");
+//    NSLog(@"kaishi jiazai le  ");
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{

@@ -104,7 +104,7 @@
 -(UIButton*)doneBt{
 
     if (!_doneBt) {
-        _doneBt=[[UIButton alloc]initWithFrame:CGRectMake((kSCREEN_WIDTH-150)/2,kSCREEN_HEIGHT-55, 150, 45)];
+        _doneBt=[[UIButton alloc]initWithFrame:CGRectMake((kSCREEN_WIDTH - 150)/2,kSCREEN_HEIGHT - 100, 150, 45)];
         [_doneBt setTitle:@"立即进入" forState:UIControlStateNormal];
         [_doneBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _doneBt.titleLabel.font=[UIFont systemFontOfSize:17];

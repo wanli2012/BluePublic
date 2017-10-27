@@ -25,4 +25,6 @@
 @property (nonatomic, copy)NSString *admin_money;//后台评估金额
 @property (nonatomic, copy)NSString *budget_money;//申请金额
 
+@property (nonatomic, assign)BOOL isReviewed;//是否在审核中
+
 @end

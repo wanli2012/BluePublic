@@ -21,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Zn9-eY-yPU">
-                    <rect key="frame" x="0.0" y="0.0" width="362" height="502"/>
+                    <rect key="frame" x="0.0" y="64" width="362" height="438"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <view key="tableHeaderView" contentMode="scaleToFill" id="DbC-Am-kRL">
                         <rect key="frame" x="0.0" y="0.0" width="362" height="271"/>
@@ -80,13 +80,62 @@
                         <outlet property="delegate" destination="-1" id="wSN-jU-UYd"/>
                     </connections>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9bg-bc-eax">
+                    <rect key="frame" x="0.0" y="0.0" width="362" height="64"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gVE-Cr-eTR">
+                            <rect key="frame" x="0.0" y="20" width="80" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="JRL-Lv-Yt3"/>
+                                <constraint firstAttribute="width" constant="80" id="a0B-B1-Mmc"/>
+                            </constraints>
+                            <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="返回" image="return"/>
+                            <connections>
+                                <action selector="pop:" destination="-1" eventType="touchUpInside" id="dSW-d6-3xm"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付成功" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ys7-5t-Ios">
+                            <rect key="frame" x="146.5" y="32" width="69.5" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="aS9-Ai-BtH"/>
+                                <constraint firstAttribute="height" constant="20" id="rwv-Fr-rdZ"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.4078977406" blue="0.99984532589999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YZk-4O-aaX">
+                            <rect key="frame" x="0.0" y="63" width="362" height="1"/>
+                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="rxB-Qr-71l"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="64" id="2O7-9K-d2O"/>
+                        <constraint firstItem="gVE-Cr-eTR" firstAttribute="leading" secondItem="9bg-bc-eax" secondAttribute="leading" id="9FK-eO-p5d"/>
+                        <constraint firstItem="YZk-4O-aaX" firstAttribute="leading" secondItem="9bg-bc-eax" secondAttribute="leading" id="I7P-ux-ce5"/>
+                        <constraint firstAttribute="bottom" secondItem="YZk-4O-aaX" secondAttribute="bottom" id="UCY-yq-uRN"/>
+                        <constraint firstItem="ys7-5t-Ios" firstAttribute="centerY" secondItem="gVE-Cr-eTR" secondAttribute="centerY" id="eHV-Hh-Nbx"/>
+                        <constraint firstItem="ys7-5t-Ios" firstAttribute="centerX" secondItem="9bg-bc-eax" secondAttribute="centerX" id="i7i-hO-rhX"/>
+                        <constraint firstAttribute="bottom" secondItem="gVE-Cr-eTR" secondAttribute="bottom" id="jkL-ad-KI4"/>
+                        <constraint firstAttribute="trailing" secondItem="YZk-4O-aaX" secondAttribute="trailing" id="r8A-xa-dop"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="9bg-bc-eax" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2aX-Q1-v9C"/>
+                <constraint firstAttribute="trailing" secondItem="9bg-bc-eax" secondAttribute="trailing" id="Fpc-YX-8aj"/>
+                <constraint firstItem="9bg-bc-eax" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="G7x-Ws-Qvp"/>
                 <constraint firstItem="Zn9-eY-yPU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="QTV-2o-ard"/>
                 <constraint firstAttribute="trailing" secondItem="Zn9-eY-yPU" secondAttribute="trailing" id="lF6-My-Sy3"/>
                 <constraint firstAttribute="bottom" secondItem="Zn9-eY-yPU" secondAttribute="bottom" id="wbY-Rv-k5u"/>
-                <constraint firstItem="Zn9-eY-yPU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="zDH-jo-q7y"/>
+                <constraint firstItem="Zn9-eY-yPU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="zDH-jo-q7y"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -94,6 +143,7 @@
         </view>
     </objects>
     <resources>
+        <image name="return" width="22" height="22"/>
         <image name="thanks" width="90" height="101"/>
     </resources>
 </document>

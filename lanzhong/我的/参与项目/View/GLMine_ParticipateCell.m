@@ -33,7 +33,8 @@
 - (void)setModel:(GLMine_ParticpateModel *)model{
     _model = model;
     
-    [self.picimageV sd_setImageWithURL:[NSURL URLWithString:model.sev_photo] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    NSString *imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/300/h/300",model.sev_photo];
+    [self.picimageV sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     self.titleLabel.text = model.title;
     self.infoLabel.text = model.info;
     self.moneyLabel.text = [NSString stringWithFormat:@"目标金额:%@",model.i_money];

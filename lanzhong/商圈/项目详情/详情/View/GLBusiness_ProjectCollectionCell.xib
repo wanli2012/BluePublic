@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="202" height="184"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timg" translatesAutoresizingMaskIntoConstraints="NO" id="Yno-jw-iPB">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yno-jw-iPB">
                         <rect key="frame" x="5" y="5" width="192" height="174"/>
                     </imageView>
                 </subviews>
@@ -35,7 +35,4 @@
             <point key="canvasLocation" x="4" y="-86"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="timg" width="1024" height="640"/>
-    </resources>
 </document>

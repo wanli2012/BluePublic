@@ -30,7 +30,8 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.submitBtn.layer.cornerRadius = 5.f;
     
-    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:self.model.must_thumb] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    NSString *imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/300/h/300",self.model.must_thumb];
+    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     self.titleLabel.text = self.model.goods_name;
     self.specLabel.text = self.model.title;
     

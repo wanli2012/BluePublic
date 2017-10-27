@@ -10,6 +10,8 @@
 #import "GLPublish_ProjectCell.h"
 #import "GLPublish_InReViewModel.h"
 #import "GLBusiness_Detail_heartCommentController.h"
+#import "GLBusiness_FundTrendController.h"//资金动向列表
+#import "GLMine_MyProjectController.h"
 
 @interface GLPublish_ProjectInProgressController ()<GLPublish_ProjectCellDelegate>
 
@@ -18,6 +20,7 @@
 @property (nonatomic, strong)NSMutableArray *models;
 @property (nonatomic, strong)LoadWaitView *loadV;
 @property (nonatomic, assign)NSInteger page;
+@property (nonatomic, strong)NodataView *nodataV;
 
 @end
 
@@ -27,7 +30,8 @@
     [super viewDidLoad];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"GLPublish_ProjectCell" bundle:nil] forCellReuseIdentifier:@"GLPublish_ProjectCell"];
-    
+    [self.tableView addSubview:self.nodataV];
+    self.nodataV.hidden = YES;
     
     __weak __typeof(self) weakSelf = self;
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -107,18 +111,52 @@
     [self.tableView.mj_header endRefreshing];
     [self.tableView.mj_footer endRefreshing];
 }
+
 #pragma mark - GLPublish_ProjectCellDelegate
 - (void)surportList:(NSInteger)index{
+    
     GLPublish_InReViewModel *model = self.models[index];
-    self.hidesBottomBarWhenPushed = YES;
+    [self viewController].hidesBottomBarWhenPushed = YES;
     GLBusiness_Detail_heartCommentController *listVC = [[GLBusiness_Detail_heartCommentController alloc] init];
     listVC.item_id = model.item_id;
     listVC.signIndex = 1;
-    [self.navigationController pushViewController:listVC animated:YES];
+    [[self viewController].navigationController pushViewController:listVC animated:YES];
 
+}
+
+- (void)fundList:(NSInteger)index{
+    
+    GLPublish_InReViewModel *model = self.models[index];
+    [self viewController].hidesBottomBarWhenPushed = YES;
+    GLBusiness_FundTrendController *fundVC = [[GLBusiness_FundTrendController alloc] init];
+    fundVC.signIndex = 1;
+    fundVC.item_id = model.item_id;
+    [[self viewController].navigationController pushViewController:fundVC animated:YES];
+}
+
+/**
+ *  获取父视图的控制器
+ *
+ *  @return 父视图的控制器
+ */
+- (GLMine_MyProjectController *)viewController
+{
+    for (UIView* next = [self.view superview]; next; next = next.superview) {
+        UIResponder *nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[GLMine_MyProjectController class]]) {
+            return (GLMine_MyProjectController *)nextResponder;
+        }
+    }
+    return nil;
 }
 #pragma mark - UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (self.models.count== 0) {
+        
+        self.nodataV.hidden = NO;
+    }else{
+        self.nodataV.hidden = YES;
+    }
     return self.models.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -143,6 +181,12 @@
     }
     return _models;
 }
-
-
+- (NodataView *)nodataV{
+    if (!_nodataV) {
+        _nodataV = [[NSBundle mainBundle] loadNibNamed:@"NodataView" owner:nil options:nil].lastObject;
+        _nodataV.frame = CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT - 64 - 40);
+        
+    }
+    return _nodataV;
+}
 @end

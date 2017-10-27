@@ -11,6 +11,9 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface GLMine_PersonInfoController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+{
+    UITextField *_nickNameTF;//昵称
+}
 
 @property (weak, nonatomic) IBOutlet UIImageView *picImageV;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewWidth;
@@ -27,6 +30,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *recommendTF;//推荐人TF
 @property (nonatomic, strong)LoadWaitView *loadV;
 
+@property (nonatomic, copy)NSString *lastTextContent;//昵称TF,最后的字符串
+
 @end
 
 @implementation GLMine_PersonInfoController
@@ -36,6 +41,8 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.title = @"个人信息";
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange:) name:UITextFieldTextDidChangeNotification object:_nickNameTF];
     
     [self refreshUI];
 }
@@ -102,10 +109,11 @@
     self.navigationController.navigationBar.hidden = NO;
 }
 
+#pragma mark - 实名认证
 - (IBAction)ensure:(id)sender {
 
-    if (self.trueNameTF.text.length == 0) {
-        [MBProgressHUD showError:@"请输入真实姓名"];
+    if (self.trueNameTF.text.length <= 1) {
+        [MBProgressHUD showError:@"真实姓名至少有一个字"];
         return;
     }else if(![predicateModel IsChinese:self.trueNameTF.text]){
         [MBProgressHUD showError:@"真实姓名应该是汉字"];
@@ -115,8 +123,9 @@
     if (self.IDCardNumTF.text.length == 0) {
         [MBProgressHUD showError:@"请输入身份证号"];
         return;
-    }else if(self.IDCardNumTF.text.length != 15 && self.IDCardNumTF.text.length != 18){
-        [MBProgressHUD showError:@"身份证号位数不正确"];
+
+    }else if(![predicateModel validateIdentityCard:self.IDCardNumTF.text]){
+        [MBProgressHUD showError:@"身份证号输入不合法"];
         return;
     }
     
@@ -147,7 +156,6 @@
         [_loadV removeloadview];
 
     }];
-
 }
 
 #pragma mark - 头像修改
@@ -197,6 +205,7 @@
     [alertVC addAction:cancel];
     [self presentViewController:alertVC animated:YES completion:nil];
 }
+
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     
     NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
@@ -270,14 +279,18 @@
     
     [alertVC addTextFieldWithConfigurationHandler:^(UITextField *textField){
         textField.placeholder = @"请输入昵称";
+        _nickNameTF = textField;
     }];
     
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
+        if(alertVC.textFields.lastObject.text.length == 0){
+            
+            return;
+        }
+
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[@"token"] = [UserModel defaultUser].token;
         dict[@"uid"] = [UserModel defaultUser].uid;
@@ -299,6 +312,7 @@
         } enError:^(NSError *error) {
             [_loadV removeloadview];
         }];
+        
     }];
     
     [alertVC addAction:cancel];
@@ -307,6 +321,38 @@
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 
+- (void)textFieldDidChange:(NSNotification *)note{
+//    UITextField *textField = note.object;
+    //获取文本框内容的字节数
+    int bytes = [self stringConvertToInt:_nickNameTF.text];
+    //设置不能超过32个字节，因为不能有半个汉字，所以以字符串长度为单位。
+    if (bytes > 8)
+    {
+        //超出字节数，还是原来的内容
+        _nickNameTF.text = self.lastTextContent;
+    }
+    else
+    {
+        self.lastTextContent = _nickNameTF.text;
+    }
+}
+#pragma mark - 得到字节数函数
+-  (int)stringConvertToInt:(NSString*)strtemp
+{
+    int strlength = 0;
+    char* p = (char*)[strtemp cStringUsingEncoding:NSUnicodeStringEncoding];
+    for (int i=0 ; i<[strtemp lengthOfBytesUsingEncoding:NSUnicodeStringEncoding] ;i++)
+    {
+        if (*p) {
+            p++;
+            strlength++;
+        }
+        else {
+            p++;
+        }
+    }
+    return (strlength+1)/2;
+}
 #pragma mark - 刷新数据
 -(void)refresh {
     

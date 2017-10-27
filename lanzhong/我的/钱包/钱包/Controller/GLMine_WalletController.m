@@ -152,7 +152,7 @@
     
     self.navigationController.navigationBar.hidden = NO;
 }
-//明细
+#pragma mark - 明细
 - (void)detail{
 
     NSArray *arr = @[@{@"title":@"兑换明细",@"imageName":@""},@{@"title":@"充值明细",@"imageName":@""}];
@@ -187,7 +187,7 @@
 
 }
 
-//确认兑换
+#pragma mark - 确认兑换
 - (IBAction)exchange:(id)sender {
     
     if ([self.moneyTextF.text integerValue] % 100 != 0) {
@@ -208,46 +208,58 @@
         return;
     }
     
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[@"uid"] = [UserModel defaultUser].uid;
-    dict[@"token"] = [UserModel defaultUser].token;
-    dict[@"money"] = self.moneyTextF.text;
-    dict[@"bank_id"] = self.bank_id;
-    dict[@"pwd"] = self.passwordTextF.text;
+    NSString *message = [NSString stringWithFormat:@"你确定要兑换%@?",self.moneyTextF.text];
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"兑换" message:message preferredStyle:UIAlertControllerStyleAlert];
     
-    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
-    [NetworkManager requestPOSTWithURLStr:kEXCHANGE_MONEY_URL paramDic:dict finish:^(id responseObject) {
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        [_loadV removeloadview];
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        dict[@"uid"] = [UserModel defaultUser].uid;
+        dict[@"token"] = [UserModel defaultUser].token;
+        dict[@"money"] = [NSString stringWithFormat:@"%zd",[self.moneyTextF.text integerValue]];
+        dict[@"bank_id"] = self.bank_id;
+        dict[@"pwd"] = self.passwordTextF.text;
         
-        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
-
-            [self updateBankInfo];
+        _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+        [NetworkManager requestPOSTWithURLStr:kEXCHANGE_MONEY_URL paramDic:dict finish:^(id responseObject) {
             
-            //两个浮点数 减法不正确,才用的这个办法   我也没想通,妈的
-            NSDecimalNumber*jiafa1 = [NSDecimalNumber decimalNumberWithString:self.model.umonry];
-            NSDecimalNumber*jiafa2 = [NSDecimalNumber decimalNumberWithString:self.moneyTextF.text];
+            [_loadV removeloadview];
             
-            NSDecimalNumber*jianfa = [jiafa1 decimalNumberBySubtracting:jiafa2];
-
-            self.balanceLabel.text = [NSString stringWithFormat:@"%@",jianfa];
-            [MBProgressHUD showSuccess:responseObject[@"message"]];
+            if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+                
+                [self updateBankInfo];
+                
+                //两个浮点数 减法不正确,才用的这个办法   我也没想通,妈的
+                NSDecimalNumber*jiafa1 = [NSDecimalNumber decimalNumberWithString:self.model.umonry];
+                NSDecimalNumber*jiafa2 = [NSDecimalNumber decimalNumberWithString:self.moneyTextF.text];
+                
+                NSDecimalNumber*jianfa = [jiafa1 decimalNumberBySubtracting:jiafa2];
+                
+                self.balanceLabel.text = [NSString stringWithFormat:@"%@",jianfa];
+                [MBProgressHUD showSuccess:responseObject[@"message"]];
+                
+                self.moneyTextF.text = nil;
+                self.passwordTextF.text = nil;
+                
+            }else{
+                
+                [MBProgressHUD showError:responseObject[@"message"]];
+            }
             
-            self.moneyTextF.text = nil;
-            self.passwordTextF.text = nil;
+        } enError:^(NSError *error) {
+            [_loadV removeloadview];
             
-        }else{
-            
-            [MBProgressHUD showError:responseObject[@"message"]];
-        }
-        
-    } enError:^(NSError *error) {
-        [_loadV removeloadview];
+        }];
         
     }];
+    
+    [alertVC addAction:cancel];
+    [alertVC addAction:ok];
+    [self presentViewController:alertVC animated:YES completion:nil];
 
 }
-//确认支付
+#pragma mark - 确认支付
 - (IBAction)paySure:(id)sender {
     NSLog(@"确认支付");
 }
@@ -282,20 +294,27 @@
     
 }
 
-//添加银行卡
+#pragma mark - 添加银行卡
 - (IBAction)addCard:(id)sender {
+    if ([[UserModel defaultUser].real_state integerValue] == 0 || [[UserModel defaultUser].real_state integerValue] == 2) {
+        [MBProgressHUD showError:@"请前往个人中心实名认证"];
+        return;
+    }else if([[UserModel defaultUser].real_state integerValue] == 3){
+        [MBProgressHUD showError:@"实名认证审核中,请等待"];
+        return;
+    }
+    
     self.hidesBottomBarWhenPushed = YES;
-    GLMine_AddCardController *addVC = [[GLMine_AddCardController alloc] init];
+        GLMine_AddCardController *addVC = [[GLMine_AddCardController alloc] init];
     [self.navigationController pushViewController:addVC animated:YES];
     
 }
 
-//选择银行卡
+#pragma mark - 选择银行卡
 - (IBAction)chooseCard:(id)sender {
     
     self.hidesBottomBarWhenPushed = YES;
     GLMine_WalletCardChooseController *cardChooseVC = [[GLMine_WalletCardChooseController alloc] init];
-//    cardChooseVC.models = self.model.back_info;
     
     cardChooseVC.block = ^(NSString *bankName,NSString *bankNum,NSString *bank_id){
         self.bankNameLabel.text = bankName;

@@ -7,6 +7,7 @@
 //
 
 #import "GLRegisterController.h"
+#import "GLBusiness_CertificationController.h"
 
 @interface GLRegisterController ()
 
@@ -32,7 +33,7 @@
     [super viewDidLoad];
     
     self.contentWidth.constant = kSCREEN_WIDTH;
-    self.contentHeight.constant = kSCREEN_HEIGHT - 64;
+    self.contentHeight.constant = 570;
     
     self.getCodeBtn.layer.borderWidth = 1.f;
     self.getCodeBtn.layer.borderColor = YYSRGBColor(0, 126, 255, 1).CGColor;
@@ -62,7 +63,12 @@
 }
 
 - (IBAction)privacy:(id)sender {
-    NSLog(@"隐私权益");
+
+    self.hidesBottomBarWhenPushed = YES;
+    GLBusiness_CertificationController *aboutVC = [[GLBusiness_CertificationController alloc] init];
+    aboutVC.url = Register_Protocol_URL;
+    aboutVC.navTitle = @"注册协议";
+    [self.navigationController pushViewController:aboutVC animated:YES];
 }
 
 //注册

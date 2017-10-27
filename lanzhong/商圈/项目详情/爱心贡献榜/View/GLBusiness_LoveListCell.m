@@ -33,8 +33,9 @@
 - (void)setModel:(GLBusiness_HeartModel *)model{
     _model = model;
     
+    NSString *imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/300/h/300",model.must_user_pic];
+    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     self.rankingLabel.text = [NSString stringWithFormat:@"%zd",self.index + 4];
-    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:model.must_user_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     self.nameLabel.text = model.uname;
     
     NSString *str = [NSString stringWithFormat:@"%@",model.money];

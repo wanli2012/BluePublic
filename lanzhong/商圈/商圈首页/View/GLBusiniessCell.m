@@ -40,7 +40,8 @@
 - (void)setModel:(GLCircle_item_dataModel *)model{
     _model = model;
     
-    [self.imageV sd_setImageWithURL:[NSURL URLWithString:model.sev_photo] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    NSString *imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/300/h/300",model.sev_photo];
+    [self.imageV sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     if (self.imageV.image == nil) {
         self.imageV.image = [UIImage imageNamed:PlaceHolderImage];
     }

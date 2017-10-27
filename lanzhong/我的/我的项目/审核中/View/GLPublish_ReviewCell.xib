@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="322" height="104"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="timg" translatesAutoresizingMaskIntoConstraints="NO" id="GcC-Tj-a98">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GcC-Tj-a98">
                         <rect key="frame" x="10" y="10" width="145" height="85"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="145" id="go4-Jn-lNT"/>
@@ -114,7 +114,4 @@
             <point key="canvasLocation" x="-83" y="11.5"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="timg" width="1024" height="640"/>
-    </resources>
 </document>

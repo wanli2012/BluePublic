@@ -8,6 +8,7 @@
 
 #import "GLMine_ShareController.h"
 #import "GLMine_ShareRecordController.h"//分享记录
+#import <UShareUI/UShareUI.h>
 
 @interface GLMine_ShareController ()
 
@@ -25,8 +26,6 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"分享权益";
-    
-    [self logoQrCode];
     
     self.bgLayerView.layer.cornerRadius = 5.f;
     self.bgView.layer.cornerRadius = 5.f;
@@ -49,8 +48,62 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     
+    UILongPressGestureRecognizer *ges = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(share:)];
+    [self.picImageV addGestureRecognizer:ges];
+    
+    [self logoQrCode];
+    
 }
 
+//分享到社交圈
+- (void)share:(UILongPressGestureRecognizer*)longesture{
+    
+    if (longesture.state == UIGestureRecognizerStateBegan) {
+    
+        [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine)]];
+        
+        [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+            // 根据获取的platformType确定所选平台进行下一步操作
+            
+            [self shareWebPageToPlatformType:platformType];
+            
+        }];
+    }
+}
+
+- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
+{
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    
+    //创建网页内容对象
+    NSString* thumbURL =  @"https://mobile.umeng.com/images/pic/home/social/img-1.png";
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"欢迎使用蓝众创客" descr:@"蓝众创客推广！" thumImage:thumbURL];
+    //设置网页地址
+    shareObject.webpageUrl = [NSString stringWithFormat:@"%@%@",Share_URL,[UserModel defaultUser].uname];
+    
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+    
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        if (error) {
+            UMSocialLogInfo(@"************Share fail with error %@*********",error);
+        }else{
+            if ([data isKindOfClass:[UMSocialShareResponse class]]) {
+                UMSocialShareResponse *resp = data;
+                //分享结果消息
+                UMSocialLogInfo(@"response message is %@",resp.message);
+                //第三方原始返回的数据
+                UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
+                
+            }else{
+                UMSocialLogInfo(@"response data is %@",data);
+            }
+        }
+        
+    }];
+}
 //MARK: 二维码中间内置图片,可以是公司logo
 -(void)logoQrCode{
     

@@ -158,6 +158,7 @@ static NSString *ID = @"GLOrderGoodsCell";
 
 - (IBAction)addressChoose:(id)sender {
     
+    self.hidesBottomBarWhenPushed = YES;
     GLMine_PersonInfo_AddressChooseController *modifyAD = [[GLMine_PersonInfo_AddressChooseController alloc] init];
     
     modifyAD.block = ^(NSString *name,NSString *phone,NSString *address,NSString *addressid){
@@ -193,11 +194,15 @@ static NSString *ID = @"GLOrderGoodsCell";
     
 }
 
-//订单提交
+#pragma mark - 订单提交
 - (IBAction)submitOrder:(UIButton *)sender {
 
     if (self.nameLabel.text.length <=0 ) {
         [MBProgressHUD showError:@"请填写收货信息"];
+        return;
+    }
+    if(self.address_id.length == 0){
+        [MBProgressHUD showError:@"请先选择地址"];
         return;
     }
     

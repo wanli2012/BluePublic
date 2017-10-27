@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *valueLabel;
 
 @property (nonatomic, assign)NSInteger status;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewWidth;
 
 @end

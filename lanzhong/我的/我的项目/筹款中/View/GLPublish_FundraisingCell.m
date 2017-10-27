@@ -45,8 +45,9 @@
 - (void)setModel:(GLPublish_InReViewModel *)model{
     _model = model;
     
+    NSString *imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/300/h/300",model.sev_photo];
+    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     self.dateLabel.text = [formattime formateTimeOfDate3:model.time];
-    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:model.sev_photo] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     self.titleLabel.text = model.title;
     self.targetMoneyLabel.text = model.admin_money;
     self.raisedMoneyLabel.text = model.draw_money;
@@ -60,7 +61,8 @@
     }
     
     self.persentLabel.text = [NSString stringWithFormat:@"%.2f%%",ratio * 100];
-    self.progressViewWidth.constant = self.progressBgView.width * ratio;
+
+    self.progressViewWidth.constant = (kSCREEN_WIDTH - 205) * ratio;
     
 }
 
@@ -68,7 +70,6 @@
     if ([self.delegate respondsToSelector:@selector(surportList:)]) {
         [self.delegate surportList:self.index];
     }
-    
 }
 
 @end

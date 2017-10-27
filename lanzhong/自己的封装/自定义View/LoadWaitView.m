@@ -25,7 +25,7 @@
         NSArray *viewArray = [[NSBundle mainBundle] loadNibNamed:@"LoadWaitView" owner:self options:nil];
         self = viewArray[0];
         self.frame = frame;
-        self.backgroundColor=[UIColor clearColor];
+        self.backgroundColor = YYSRGBColor(170, 170, 170, 0.5);
         
         UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapgestrue)];
         [self addGestureRecognizer:tap];
@@ -33,9 +33,7 @@
         [self initinterface];
         
         self.isTap = NO;
-        
-        
-        
+
 //        NSString *path = [[NSBundle mainBundle] pathForResource:@"9e32602be585527e120aa99beb0d666f" ofType:@"gif"];
 //        NSData *data = [NSData dataWithContentsOfFile:path];
 ////        UIImage *image = [UIImage sd_animatedGIFWithData:data];
@@ -57,10 +55,9 @@
 
     }
     return self;
-
 }
 
-+(LoadWaitView*)addloadview:(CGRect)rect tagert:(id)tagert{
++ (LoadWaitView*)addloadview:(CGRect)rect tagert:(id)tagert{
     
     LoadWaitView *loadview=[[LoadWaitView alloc] initWithFrame:rect];
     [tagert addSubview:loadview];
@@ -69,23 +66,23 @@
 
 }
 
--(void)removeloadview{
+- (void)removeloadview{
 
     [self removeFromSuperview];
     [self.loadImage stopAnimating];
 
 }
 
--(void)initinterface{
+- (void)initinterface{
  
     self.loadImage.animationImages = self.imageArr;
-    self.loadImage.animationDuration = 5;//设置动画时间
+    self.loadImage.animationDuration = 2;//设置动画时间
     self.loadImage.animationRepeatCount = 0;//设置动画次数 0 表示无限
     
     [self.loadImage startAnimating];
 }
 
--(void)tapgestrue{
+- (void)tapgestrue{
 
     if (self.isTap == NO) {
         [self removeFromSuperview];
@@ -95,15 +92,14 @@
     }
 }
 
--(NSMutableArray*)imageArr{
+- (NSMutableArray*)imageArr{
 
     if (!_imageArr) {
         _imageArr=[NSMutableArray array];
-        for (int i = 0; i < 23; i ++) {
-            NSString *imageName = [NSString stringWithFormat:@"合成 1_%zd",i];
+        for (int i = 1; i < 28; i ++) {
+            NSString *imageName = [NSString stringWithFormat:@"%zd",i];
             [_imageArr addObject:[UIImage imageNamed:imageName]];
         }
-        
     }
     return _imageArr;
 }

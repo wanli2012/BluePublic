@@ -12,4 +12,6 @@
 
 @property (nonatomic, copy)NSString *item_id;
 
+@property (nonatomic, assign)NSInteger signIndex;// 1:从我的项目(进行中)跳转过来的 0:从项目详情跳转过来的
+
 @end

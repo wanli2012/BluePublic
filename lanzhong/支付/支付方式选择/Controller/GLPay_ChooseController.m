@@ -151,6 +151,16 @@
     
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
+        if([predicateModel checkIsHaveNumAndLetter:self.moneyTF.text] != 1){
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [MBProgressHUD showError:@"支持金额只能为数字"];
+                
+            });
+            
+            return;
+        }
+        
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[@"uid"] = [UserModel defaultUser].uid;
         dict[@"token"] = [UserModel defaultUser].token;
@@ -191,11 +201,13 @@
                 completeVC.item_id = self.item_id;
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"supportNotification" object:nil];
-                
                 [self.navigationController pushViewController:completeVC animated:YES];
                 
+            }else{
+                
+                [MBProgressHUD showError:responseObject[@"message"]];
+                
             }
-            [MBProgressHUD showError:responseObject[@"message"]];
         } enError:^(NSError *error) {
             [_loadV removeloadview];
             

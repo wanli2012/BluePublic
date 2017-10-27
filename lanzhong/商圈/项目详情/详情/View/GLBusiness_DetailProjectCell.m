@@ -25,7 +25,12 @@
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     self.collectionView.collectionViewLayout = layout;
-    if (self.dataSourceArr.count<= 3) {
+    
+    if(self.dataSourceArr.count == 0){
+        
+        self.collectionViewHeight.constant = 0;
+    }else if (self.dataSourceArr.count<= 3) {
+        
        self.collectionViewHeight.constant = 100;
     }else if(self.dataSourceArr.count <= 6 && self.dataSourceArr.count > 3){
         
@@ -48,10 +53,11 @@
     return self.dataSourceArr.count;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
     GLBusiness_ProjectCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GLBusiness_ProjectCollectionCell" forIndexPath:indexPath];
     
-    NSString *urlStr = self.dataSourceArr[indexPath.row];
-    [cell.imageV sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    NSString *imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/200/h/200",self.dataSourceArr[indexPath.row]];
+    [cell.imageV sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     
     return cell;
 }

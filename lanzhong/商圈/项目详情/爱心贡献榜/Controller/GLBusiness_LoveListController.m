@@ -57,7 +57,7 @@
     self.secondBtn.layer.cornerRadius = self.secondBtn.height / 2;
     self.thirdBtn.layer.cornerRadius = self.thirdBtn.height / 2;
     
-    if (self.dataSourceArr.count > 1) {
+    if (self.dataSourceArr.count >= 1) {
         
         GLBusiness_HeartModel *model = self.dataSourceArr[0];
         

@@ -8,6 +8,7 @@
 
 #import "GLPublishController.h"
 #import "GLBusinessCircleModel.h"
+#import "GLBusiness_CertificationController.h"//webview的VC
 
 //照片选择
 #import "HXPhotoViewController.h"
@@ -20,7 +21,6 @@
 #import "HWCalendar.h"//日期选择
 #import <SVProgressHUD/SVProgressHUD.h>
 
-static const CGFloat kPhotoViewMargin = 25;
 
 @interface GLPublishController ()<UITextViewDelegate,HXPhotoViewDelegate,UIViewControllerTransitioningDelegate,UIViewControllerAnimatedTransitioning,HWCalendarDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
@@ -44,9 +44,6 @@ static const CGFloat kPhotoViewMargin = 25;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollViewHeight;
-
-//@property (strong, nonatomic) HXPhotoManager *manager;
-//@property (strong, nonatomic) HXPhotoView *photoView;
 
 @property (strong, nonatomic)HWCalendar *Calendar;
 @property (strong, nonatomic)UIView *CalendarView;
@@ -75,6 +72,7 @@ static const CGFloat kPhotoViewMargin = 25;
 @property (weak, nonatomic) IBOutlet UIImageView *pic3;
 
 @property (nonatomic, assign)NSInteger picIndex;//pic下标
+@property (nonatomic, copy)NSString *lastTextContent;//titleTF最后的字符串
 
 @end
 
@@ -101,6 +99,8 @@ static const CGFloat kPhotoViewMargin = 25;
     
     self.scrollView.alwaysBounceVertical = YES;
  
+    self.isAgreeImageV.image = [UIImage imageNamed:@"publish_nochoice"];
+    
     [self.view addSubview:self.CalendarView];
     
     self.CalendarView.hidden = YES;
@@ -117,6 +117,8 @@ static const CGFloat kPhotoViewMargin = 25;
     
     _isAgreeProtocol = NO;
     [self postRequest_Category];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange:) name:UITextFieldTextDidChangeNotification object:self.titleTF];
     
 }
 
@@ -196,8 +198,14 @@ static const CGFloat kPhotoViewMargin = 25;
     
 }
 
+#pragma mark - 发布协议
 - (IBAction)toProtocol:(id)sender {
-    NSLog(@"跳转协议");
+    
+    self.hidesBottomBarWhenPushed = YES;
+    GLBusiness_CertificationController *aboutVC = [[GLBusiness_CertificationController alloc] init];
+    aboutVC.url = Publish_Protocol_URL;
+    aboutVC.navTitle = @"发布协议";
+    [self.navigationController pushViewController:aboutVC animated:YES];
 }
 
 - (IBAction)dismiss:(id)sender {
@@ -360,21 +368,6 @@ static const CGFloat kPhotoViewMargin = 25;
         return;
     }
     
-    if(_picIndex1 == 1){
-        [self.imageArr addObject:self.pic1.image];
-    }
-    if(_picIndex2 == 1){
-        [self.imageArr addObject:self.pic2.image];
-    }
-    if(_picIndex3 == 1){
-        [self.imageArr addObject:self.pic3.image];
-    }
-    
-    if (self.imageArr.count <= 0) {
-        [MBProgressHUD showError:@"至少上传一张项目图片"];
-        return;
-    }
-    
     if (!_isAgreeProtocol) {
         [MBProgressHUD showError:@"请先同意发布协议"];
         return;
@@ -388,10 +381,27 @@ static const CGFloat kPhotoViewMargin = 25;
         [MBProgressHUD showError:@"截止日期需大于当前日期"];
         return;
     }
-  
+    
+    [self.imageArr removeAllObjects];//每次判定的时候都清空数组,保证不会重复添加图片
+    
+    if(_picIndex1 == 1){
+        [self.imageArr addObject:self.pic1.image];
+    }
+    if(_picIndex2 == 1){
+        [self.imageArr addObject:self.pic2.image];
+    }
+    if(_picIndex3 == 1){
+        [self.imageArr addObject:self.pic3.image];
+    }
+
+    if (self.imageArr.count <= 0) {
+        [MBProgressHUD showError:@"至少上传一张项目图片"];
+        return;
+    }
+    
     self.submitBtn.userInteractionEnabled = NO;
     self.submitBtn.backgroundColor = [UIColor lightGrayColor];
-
+    
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     
     dic[@"token"] = [UserModel defaultUser].token;
@@ -435,17 +445,17 @@ static const CGFloat kPhotoViewMargin = 25;
     }success:^(NSURLSessionDataTask *task, id responseObject) {
         
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        
-        NSLog(@"%@",dic);
+    
         
         if ([dic[@"code"] integerValue] == SUCCESS_CODE) {
-            
-            [MBProgressHUD showError:dic[@"message"]];
+
+            [SVProgressHUD showSuccessWithStatus:dic[@"message"]];
             [self dismissViewControllerAnimated:YES completion:nil];
             
         }else{
             
-            [MBProgressHUD showError:dic[@"message"]];
+            [SVProgressHUD showErrorWithStatus:dic[@"message"]];
+
         }
         
         self.submitBtn.userInteractionEnabled = YES;
@@ -461,19 +471,41 @@ static const CGFloat kPhotoViewMargin = 25;
 
 }
 
+- (void)textFieldDidChange:(NSNotification *)note{
+    //获取文本框内容的字节数
+    int bytes = [self stringConvertToInt:self.titleTF.text];
+    //设置不能超过32个字节，因为不能有半个汉字，所以以字符串长度为单位。
+    if (bytes > 10){
+        //超出字节数，还是原来的内容
+        self.titleTF.text = self.lastTextContent;
+        
+    }else{
+        
+        self.lastTextContent = self.titleTF.text;
+    }
+}
+
+#pragma mark - 得到字节数函数
+-  (int)stringConvertToInt:(NSString*)strtemp
+{
+    int strlength = 0;
+    char* p = (char*)[strtemp cStringUsingEncoding:NSUnicodeStringEncoding];
+    for (int i=0 ; i<[strtemp lengthOfBytesUsingEncoding:NSUnicodeStringEncoding] ;i++)
+    {
+        if (*p) {
+            p++;
+            strlength++;
+        }
+        else {
+            p++;
+        }
+    }
+    return (strlength+1)/2;
+}
 #pragma mark - UITextFieldDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     
-    if (textField == self.titleTF) {
-        if (textField.text.length > 9) {
-            if(![string isEqualToString:@""]){
-                
-                [MBProgressHUD showError:@"标题请设置在10字以内"];
-                return NO;
-            }
-        }
-    }
-    
+
     if (textField == self.moneyTF) {
         /*
          * 不能输入.0-9以外的字符。

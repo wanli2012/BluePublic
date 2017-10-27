@@ -7,7 +7,7 @@
 //
 
 #import "GLShoppingCell.h"
-
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface GLShoppingCell ()
 @property (weak, nonatomic) IBOutlet UIView *bgViewLayerView;
@@ -47,17 +47,18 @@
 }
 - (void)setModel:(GLShoppingCartModel *)model {
     _model = model;
-//    [_imageV sd_setImageWithURL:[NSURL URLWithString:model.thumb] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     
+     NSString *imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/300/h/300",model.must_thumb];
+    [_imageV sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    if (_imageV.image == nil) {
+        _imageV.image = [UIImage imageNamed:PlaceHolderImage];
+    }
     _goodsNamelabel.text = model.goods_name;
     _amountLabel.text =[NSString stringWithFormat:@"x%@",model.num];
     _detailLabel.text = model.goods_info;
 
     _priceLabel.text = [NSString stringWithFormat:@"¥%@",model.marketprice];
     _specLabel.text = model.title;
-    if (_imageV.image == nil) {
-        _imageV.image = [UIImage imageNamed:PlaceHolderImage];
-    }
 
     if (model.isSelect == NO) {
         

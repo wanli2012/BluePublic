@@ -50,12 +50,12 @@
             self.statusLabel.text = @"已完成";
         }
             break;
-            
         default:
             break;
     }
     
-    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:model.sev_photo] placeholderImage:[UIImage imageNamed:@"timg"]];
+    NSString *imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/414/h/200",model.sev_photo];
+    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     self.titleLabel.text = model.title;
     self.publishLabel.text = model.uid;
     self.moneyLabel.text = [NSString stringWithFormat:@"%@元",model.admin_money];

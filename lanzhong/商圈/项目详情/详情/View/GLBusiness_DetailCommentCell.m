@@ -43,7 +43,8 @@
 - (void)setModel:(GLBusiness_CommentModel *)model{
     _model = model;
     
-    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:model.must_user_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    NSString *imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/100/h/100",model.must_user_pic];
+    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     self.priceLabel.text = [NSString stringWithFormat:@"支持了 %@",model.money];
     self.commentLabel.text = model.comment;
     self.dateLabel.text = [formattime formateTimeOfDate:model.addtime];
@@ -54,9 +55,7 @@
         self.nameLabel.text = model.nickname;
     }
     
-    
-    
-    typeof(self)weakSelf = self;
+//    typeof(self)weakSelf = self;
 
     if (model.reply.length == 0) {
         self.replyCommentLabel.height = 0;
@@ -76,8 +75,6 @@
 
     }
     
-    
-    
     NSString *str = [NSString stringWithFormat:@"%@:%@",model.linkman,model.reply];
     
     NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:str];
@@ -87,13 +84,6 @@
     self.replyCommentLabel.rangeArr=(id)@[NSStringFromRange(NSMakeRange(0, model.linkman.length))];
     self.replyCommentLabel.attributedText = noteStr;
     
-//    self.replyCommentLabel.selectBlobk = ^(NSString *str,NSRange range,NSInteger index){
-//    
-//        if ([weakSelf.delegate respondsToSelector:@selector(personInfo:)]) {
-//            
-//            [weakSelf.delegate personInfo:self.index];
-//        }
-//    };
 }
 
 @end

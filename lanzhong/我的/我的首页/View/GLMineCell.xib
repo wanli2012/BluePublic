@@ -69,6 +69,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="arrowImageV" destination="eoE-E4-r5N" id="ecm-Wa-Eso"/>
+                <outlet property="imageViewWidth" destination="ghc-b0-T7Q" id="ejS-kc-Otd"/>
                 <outlet property="picImageV" destination="MgI-UH-7v8" id="3oo-P0-Uh4"/>
                 <outlet property="titleLabel" destination="Q4c-dz-6Hf" id="9Q9-c7-4Oe"/>
                 <outlet property="valueLabel" destination="JUj-Ho-wcM" id="9bO-Yy-jda"/>
