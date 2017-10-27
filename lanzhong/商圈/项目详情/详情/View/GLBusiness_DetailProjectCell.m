@@ -26,30 +26,31 @@
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     self.collectionView.collectionViewLayout = layout;
     
-    if(self.dataSourceArr.count == 0){
-        
-        self.collectionViewHeight.constant = 0;
-    }else if (self.dataSourceArr.count<= 3) {
-        
-       self.collectionViewHeight.constant = 100;
-    }else if(self.dataSourceArr.count <= 6 && self.dataSourceArr.count > 3){
-        
-        self.collectionViewHeight.constant = 200;
-    }else if(self.dataSourceArr.count <= 9 && self.dataSourceArr.count > 6){
-        self.collectionViewHeight.constant = 300;
-    }
-    
     [self.collectionView registerNib:[UINib nibWithNibName:@"GLBusiness_ProjectCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"GLBusiness_ProjectCollectionCell"];
 }
 
 - (void)setDataSourceArr:(NSArray *)dataSourceArr{
     _dataSourceArr = dataSourceArr;
     
+    if(self.dataSourceArr.count == 0){
+        
+        self.collectionViewHeight.constant = 0;
+    }else if (self.dataSourceArr.count<= 3) {
+        
+        self.collectionViewHeight.constant = 100;
+    }else if(self.dataSourceArr.count <= 6 && self.dataSourceArr.count > 3){
+        
+        self.collectionViewHeight.constant = 200;
+    }else if(self.dataSourceArr.count <= 9 && self.dataSourceArr.count > 6){
+        self.collectionViewHeight.constant = 300;
+    }
+
     [self.collectionView reloadData];
 }
 
 #pragma mark - UICollectionViewDelegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+   
     return self.dataSourceArr.count;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -57,6 +58,7 @@
     GLBusiness_ProjectCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GLBusiness_ProjectCollectionCell" forIndexPath:indexPath];
     
     NSString *imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/200/h/200",self.dataSourceArr[indexPath.row]];
+    
     [cell.imageV sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     
     return cell;

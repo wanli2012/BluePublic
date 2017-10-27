@@ -14,6 +14,8 @@
 #import "GLBusinessCircleModel.h"
 #import "GLBusinessAdModel.h"//广告Model
 
+#import "JZAlbumViewController.h"
+
 @interface GLBusinessCircleController ()<SDCycleScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -32,6 +34,8 @@
 @property (nonatomic, copy)NSString *stop;
 
 @property (nonatomic, strong)NSMutableArray *adModels;
+
+@property (nonatomic, assign)BOOL  HideNavagation;//是否需要恢复自定义导航栏
 
 @end
 
@@ -249,11 +253,11 @@
 /** 点击图片回调 */
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
     
-//    self.HideNavagation = YES;
-    //    JZAlbumViewController *jzAlbumVC = [[JZAlbumViewController alloc]init];
-    //    jzAlbumVC.currentIndex =index;//这个参数表示当前图片的index，默认是0
-    //    jzAlbumVC.imgArr = [self.cycleScrollView.imageURLStringsGroup copy];//图片数组，可以是url，也可以是UIImage
-    //    [self presentViewController:jzAlbumVC animated:NO completion:nil];
+    self.HideNavagation = YES;
+    JZAlbumViewController *jzAlbumVC = [[JZAlbumViewController alloc]init];
+    jzAlbumVC.currentIndex = index;//这个参数表示当前图片的index，默认是0
+    jzAlbumVC.imgArr = [self.cycleScrollView.imageURLStringsGroup copy];//图片数组，可以是url，也可以是UIImage
+    [self presentViewController:jzAlbumVC animated:NO completion:nil];
     
 }
 

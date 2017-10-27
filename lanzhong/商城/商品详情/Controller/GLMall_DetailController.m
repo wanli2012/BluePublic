@@ -17,6 +17,7 @@
 #import "MHActionSheet.h"
 #import "GLConfirmOrderController.h"
 
+
 #define headerImageHeight 64
 
 
@@ -413,18 +414,6 @@
         NSLog(@"END Decelerating");
 }
 
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    
-//    if (scrollView.contentOffset.y <= 0) {
-//        
-//        self.navView.backgroundColor = YYSRGBColor(255, 255, 255,0);
-//        
-//        self.navTitleLabel.textColor = YYSRGBColor(85, 85, 85, 0);
-//    }else{
-//        self.navView.backgroundColor = YYSRGBColor(255, 255, 255,ABS(scrollView.contentOffset.y)/headerImageHeight);
-//        self.navTitleLabel.textColor = YYSRGBColor(85, 85, 85, ABS(scrollView.contentOffset.y)/headerImageHeight);
-//    }
-//}
 
 - (IBAction)chooseSpec:(id)sender {
   
@@ -526,12 +515,7 @@
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
     
     self.HideNavagation = YES;
-    
-//    JZAlbumViewController *jzAlbumVC = [[JZAlbumViewController alloc]init];
-//    jzAlbumVC.currentIndex =index;//这个参数表示当前图片的index，默认是0
-//    jzAlbumVC.imgArr = [self.cycleScrollView.imageURLStringsGroup copy];//图片数组，可以是url，也可以是UIImage
-//    [self presentViewController:jzAlbumVC animated:NO completion:nil];
-    
+
 }
 
 /** 图片滚动回调 */

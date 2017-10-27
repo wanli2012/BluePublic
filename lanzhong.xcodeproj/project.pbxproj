@@ -62,6 +62,8 @@
 		4A0B75221F90F0840007788B /* GLOrderGoodsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A0B751D1F90F0840007788B /* GLOrderGoodsCell.xib */; };
 		4A0E701F1FA34A9000435871 /* GLBusiness_AddFundTrendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0E701D1FA34A9000435871 /* GLBusiness_AddFundTrendController.m */; };
 		4A0E70201FA34A9000435871 /* GLBusiness_AddFundTrendController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A0E701E1FA34A9000435871 /* GLBusiness_AddFundTrendController.xib */; };
+		4A0E70291FA3725D00435871 /* JZAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0E70261FA3725D00435871 /* JZAlbumViewController.m */; };
+		4A0E702A1FA3725D00435871 /* PhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0E70281FA3725D00435871 /* PhotoView.m */; };
 		4A0EA9D91F8630C4006A1CF5 /* GLMine_WalletCardChooseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0EA9D71F8630C4006A1CF5 /* GLMine_WalletCardChooseController.m */; };
 		4A0EA9DA1F8630C4006A1CF5 /* GLMine_WalletCardChooseController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A0EA9D81F8630C4006A1CF5 /* GLMine_WalletCardChooseController.xib */; };
 		4A0EA9E31F86325D006A1CF5 /* GLMine_WalletCardChooseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0EA9E11F86325D006A1CF5 /* GLMine_WalletCardChooseCell.m */; };
@@ -465,6 +467,10 @@
 		4A0E701C1FA34A9000435871 /* GLBusiness_AddFundTrendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLBusiness_AddFundTrendController.h; sourceTree = "<group>"; };
 		4A0E701D1FA34A9000435871 /* GLBusiness_AddFundTrendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLBusiness_AddFundTrendController.m; sourceTree = "<group>"; };
 		4A0E701E1FA34A9000435871 /* GLBusiness_AddFundTrendController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLBusiness_AddFundTrendController.xib; sourceTree = "<group>"; };
+		4A0E70251FA3725D00435871 /* JZAlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZAlbumViewController.h; sourceTree = "<group>"; };
+		4A0E70261FA3725D00435871 /* JZAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZAlbumViewController.m; sourceTree = "<group>"; };
+		4A0E70271FA3725D00435871 /* PhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoView.h; sourceTree = "<group>"; };
+		4A0E70281FA3725D00435871 /* PhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoView.m; sourceTree = "<group>"; };
 		4A0EA9D61F8630C4006A1CF5 /* GLMine_WalletCardChooseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_WalletCardChooseController.h; sourceTree = "<group>"; };
 		4A0EA9D71F8630C4006A1CF5 /* GLMine_WalletCardChooseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_WalletCardChooseController.m; sourceTree = "<group>"; };
 		4A0EA9D81F8630C4006A1CF5 /* GLMine_WalletCardChooseController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMine_WalletCardChooseController.xib; sourceTree = "<group>"; };
@@ -1143,6 +1149,17 @@
 			children = (
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		4A0E70241FA3725D00435871 /* IOS图片浏览器 */ = {
+			isa = PBXGroup;
+			children = (
+				4A0E70251FA3725D00435871 /* JZAlbumViewController.h */,
+				4A0E70261FA3725D00435871 /* JZAlbumViewController.m */,
+				4A0E70271FA3725D00435871 /* PhotoView.h */,
+				4A0E70281FA3725D00435871 /* PhotoView.m */,
+			);
+			path = "IOS图片浏览器";
 			sourceTree = "<group>";
 		};
 		4A0EA9D21F863092006A1CF5 /* 选择银行卡 */ = {
@@ -3144,6 +3161,7 @@
 		4AF1075B1F78DBB400CB51FA /* 三方库 */ = {
 			isa = PBXGroup;
 			children = (
+				4A0E70241FA3725D00435871 /* IOS图片浏览器 */,
 				4A0B74DF1F908A550007788B /* ChooseView */,
 				4A05EE481F8C97380095DBCF /* HXWeiboPhotoPicker */,
 				F9BB80161F7A3F2C00867514 /* TGWebController */,
@@ -3901,6 +3919,7 @@
 				4A18B8F01F9441F400E9B387 /* GLOrderPayView.m in Sources */,
 				4AF109BC1F78DBB500CB51FA /* DWTabBarController.m in Sources */,
 				4A6B9F571F7D00CA009386C8 /* GLBusiness_LoveListCell.m in Sources */,
+				4A0E70291FA3725D00435871 /* JZAlbumViewController.m in Sources */,
 				4A05EEA41F8C97380095DBCF /* HXVideoPresentTransition.m in Sources */,
 				4A509B501F8726F900D794FB /* GLHomeCell.m in Sources */,
 				4A2905511F976BCC006903F1 /* GLMine_MyMessageModel.m in Sources */,
@@ -3980,6 +3999,7 @@
 				4AF109371F78DBB500CB51FA /* WXSTransitionManager+SystermAnimation.m in Sources */,
 				4ADCA6F71F989D85007D0E4D /* GLMine_ShareModel.m in Sources */,
 				F9BB801E1F7A3F2C00867514 /* TGWebProgressLayer.m in Sources */,
+				4A0E702A1FA3725D00435871 /* PhotoView.m in Sources */,
 				4A6B9F301F7CF100009386C8 /* GLBusiness_ChooseCell.m in Sources */,
 				4A0EA9E31F86325D006A1CF5 /* GLMine_WalletCardChooseCell.m in Sources */,
 				4AF1092D1F78DBB500CB51FA /* UIViewController+WXSTransitionProperty.m in Sources */,
