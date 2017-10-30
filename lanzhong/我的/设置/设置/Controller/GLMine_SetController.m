@@ -23,6 +23,7 @@
 @property(nonatomic ,strong)NSString  *phonestr;//服务热线
 
 @property (weak, nonatomic) IBOutlet UILabel *copyrightLabel;
+@property (strong, nonatomic)  NSString *app_Version;//当前版本号
 
 @end
 
@@ -42,7 +43,14 @@
     
     self.copyrightLabel.text = @"copyright@2017-2018\n贵州蓝众投资管理有限公司";
     
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    CFShow((__bridge CFTypeRef)(infoDictionary));
+    // app版本
+    _app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMineCell" bundle:nil] forCellReuseIdentifier:@"GLMineCell"];
+    
+//    [self Postpath:GET_VERSION];/检查是否有更新版本
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -118,7 +126,7 @@
                 cell.status = 2;
             }else if(indexPath.row == 2){
                 cell.status = 1;
-                cell.valueLabel.text = @"V1.02";
+                cell.valueLabel.text = [NSString stringWithFormat:@"V%@",self.app_Version];
             }
         }
             break;
@@ -194,7 +202,6 @@
                     NSMutableAttributedString *textColor = [[NSMutableAttributedString alloc]initWithString:str];
                     NSRange rangel = [[textColor string] rangeOfString:self.phonestr];
                     [textColor addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:76/255.0 green:140/255.0 blue:247/255.0 alpha:1] range:rangel];
-                    //[textColor addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:17] range:rangel];
                     [_phoneView.titleLb setAttributedText:textColor];
                     
                     [[UIApplication sharedApplication].keyWindow addSubview:self.phoneView];
@@ -221,7 +228,16 @@
                     break;
                 case 2:
                 {
-                    NSLog(@"版本更新");
+//                    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"更新" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+//                    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+//                    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"立即更新" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//                    }];
+//                    
+//                    [alertVC addAction:cancel];
+//                    [alertVC addAction:ok];
+//                    
+//                    [self presentViewController:alertVC animated:YES completion:nil];
+                    
                 }
                     break;
                     
@@ -236,6 +252,64 @@
     }
 }
 
+-(void)Postpath:(NSString *)path
+{
+    
+    NSURL *url = [NSURL URLWithString:path];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestReloadIgnoringCacheData
+                                                       timeoutInterval:10];
+    
+    [request setHTTPMethod:@"POST"];
+    
+    NSOperationQueue *queue = [NSOperationQueue new];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response,NSData *data,NSError *error){
+        NSMutableDictionary *receiveStatusDic=[[NSMutableDictionary alloc]init];
+        if (data) {
+            
+            NSDictionary *receiveDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+            if ([[receiveDic valueForKey:@"resultCount"] intValue] > 0) {
+                
+                [receiveStatusDic setValue:@"1" forKey:@"status"];
+                [receiveStatusDic setValue:[[[receiveDic valueForKey:@"results"] objectAtIndex:0] valueForKey:@"version"]   forKey:@"version"];
+            }else{
+                
+                [receiveStatusDic setValue:@"-1" forKey:@"status"];
+            }
+        }else{
+            [receiveStatusDic setValue:@"-1" forKey:@"status"];
+        }
+        
+        [self performSelectorOnMainThread:@selector(receiveData:) withObject:receiveStatusDic waitUntilDone:NO];
+    }];
+}
+
+-(void)receiveData:(id)sender
+{
+    NSString  *Newversion = [NSString stringWithFormat:@"%@",sender[@"version"]];
+    
+    if (![_app_Version isEqualToString:Newversion]) {
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"更新提示"
+                                                            message:@"发现新版本,是否更新 ?"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"取消"
+                                                  otherButtonTitles:@"立即更新", nil];
+        
+        [alertView show];
+    }
+    
+}
+#pragma mark ----- uialertviewdelegete
+//下载
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex == 1) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:DOWNLOAD_URL]];
+    }
+    
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     return 44;

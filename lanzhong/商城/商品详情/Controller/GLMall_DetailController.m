@@ -16,6 +16,7 @@
 
 #import "MHActionSheet.h"
 #import "GLConfirmOrderController.h"
+#import "GLMall_MoreCommentController.h"//更多评论
 
 
 #define headerImageHeight 64
@@ -217,7 +218,23 @@
     self.navigationController.navigationBar.hidden = YES;
 }
 
-//头视图赋值
+#pragma mark - 重写返回键
+- (IBAction)pop:(id)sender {
+    
+    if (isShowDetail) {
+        [UIView animateWithDuration:0.4 animations:^{
+            self.allView.transform = CGAffineTransformIdentity;
+        } completion:^(BOOL finished) {
+            isShowDetail = NO;
+        }];
+    }else{
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
+}
+
+#pragma mark - 头视图赋值
 - (void)setHeaderValue{
     
     self.priceLabel.text = [NSString stringWithFormat:@"%@",self.goods_infoDic[@"goods_discount"]];
@@ -246,7 +263,7 @@
 #pragma mark - 立即购买  加入购物车
 //立即购买
 - (IBAction)buyNow:(id)sender {
-    NSLog(@"立即购买");
+    
     self.hidesBottomBarWhenPushed = YES;
    
     if ([UserModel defaultUser].loginstatus == NO) {
@@ -266,7 +283,7 @@
     [self.navigationController pushViewController:vc animated:YES];
     
 }
-//添加到购物车
+#pragma mark - 添加到购物车
 - (IBAction)addToCart:(id)sender {
     
     if (self.spec_id.length == 0) {
@@ -300,27 +317,29 @@
     }];
     
 }
-//去购物车
+
+
+#pragma mark - 去购物车
 - (IBAction)toCart:(id)sender {
-    NSLog(@"跳转到购物车");
+    
     self.hidesBottomBarWhenPushed = YES;
     GLShoppingCartController *cartVC = [[GLShoppingCartController alloc] init];
     [self.navigationController pushViewController:cartVC animated:YES];
     
 }
 
-- (IBAction)pop:(id)sender {
+#pragma mark -查看更多评论
+- (void)moreComment {
     
-    if (isShowDetail) {
-        [UIView animateWithDuration:0.4 animations:^{
-            self.allView.transform = CGAffineTransformIdentity;
-        } completion:^(BOOL finished) {
-            isShowDetail = NO;
-        }];
-    }else{
-        
-        [self.navigationController popViewControllerAnimated:YES];
+    if (self.model.comment_data.count == 0) {
+        [MBProgressHUD showError:@"没有更多评论了"];
+        return;
     }
+    
+    self.hidesBottomBarWhenPushed = YES;
+    GLMall_MoreCommentController *moreVC = [[GLMall_MoreCommentController alloc] init];
+    moreVC.goods_id = self.goods_id;
+    [self.navigationController pushViewController:moreVC animated:YES];
     
 }
 
@@ -333,15 +352,6 @@
         self.scrollView.contentOffset = CGPointMake(self.scrollView.contentOffset.x, 0);
         if (self.tableView.contentOffset.y >= 0 &&  self.tableView.contentOffset.y <= HEADER_VIEW_HEIGHT) {
             self.scrollView.contentOffset = CGPointMake(self.scrollView.contentOffset.x, -offset / 2.0f);
-        } else if (self.tableView.contentOffset.y < 0) {
-
-            if (offset <= -END_DRAG_SHOW_HEIGHT) {
-//                _topMsgLabel.text = @"释放查看我的喜爱";
-            } else {
-//                _topMsgLabel.text = @"下拉查看我的喜爱";
-            }
-        } else {
-//            self.navView.alpha = 1.0f;
         }
     } else {
         // WebView中的ScrollView
@@ -411,7 +421,7 @@
  *  带有滑动减速动画效果时，才会调用
  */
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-        NSLog(@"END Decelerating");
+
 }
 
 
@@ -425,7 +435,6 @@
     MHActionSheet *actionSheet = [[MHActionSheet alloc] initSheetWithTitle:@"规格选择" style:MHSheetStyleDefault itemTitles:specTitles];
     __weak typeof(self) weakSelf = self;
     [actionSheet didFinishSelectIndex:^(NSInteger index, NSString *title) {
-//        NSString *text = [NSString stringWithFormat:@"第%ld行,%@",index, title];
         weakSelf.specLabel.text = title;
         
         weakSelf.priceLabel.text = [NSString stringWithFormat:@"¥ %@",self.model.spec[index].marketprice];
@@ -496,10 +505,17 @@
     label.textColor = MAIN_COLOR;
     label.font = [UIFont systemFontOfSize:15];
     
+    UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(kSCREEN_WIDTH - 25, 15, 10, 15)];
+    imageV.image = [UIImage imageNamed:@"return2"];
+    
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 44 - 1, kSCREEN_WIDTH, 1)];
     lineView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(moreComment)];
+    [headerV addGestureRecognizer:tap];
+    
     [headerV addSubview:label];
+    [headerV addSubview:imageV];
     [headerV addSubview:lineView];
     
     return headerV;

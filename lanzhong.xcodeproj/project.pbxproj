@@ -241,6 +241,19 @@
 		4A6FE18A1F8E2D9B00860503 /* 商圈.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A6FE1891F8E2D9B00860503 /* 商圈.xcassets */; };
 		4A8385791FA0716D00F3A30C /* 加载动画.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A8385781FA0716D00F3A30C /* 加载动画.xcassets */; };
 		4A890AD51F8F397400ED6E36 /* GLBusiness_FundTrendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A890AD41F8F397400ED6E36 /* GLBusiness_FundTrendModel.m */; };
+		4A94D8C11FA6F9480071B732 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A94D8C01FA6F9480071B732 /* AlipaySDK.framework */; };
+		4A94D8C31FA6F9570071B732 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4A94D8C21FA6F9570071B732 /* AlipaySDK.bundle */; };
+		4A94D8C51FA6F99A0071B732 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A94D8C41FA6F99A0071B732 /* libc++.tbd */; };
+		4A94D8C71FA6F9A30071B732 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A94D8C61FA6F9A30071B732 /* libz.tbd */; };
+		4A94D8C91FA6F9B60071B732 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A94D8C81FA6F9B60071B732 /* SystemConfiguration.framework */; };
+		4A94D8CB1FA6F9C00071B732 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A94D8CA1FA6F9C00071B732 /* CoreTelephony.framework */; };
+		4A94D8CD1FA6F9C70071B732 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A94D8CC1FA6F9C70071B732 /* QuartzCore.framework */; };
+		4A94D8CF1FA6F9CF0071B732 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A94D8CE1FA6F9CF0071B732 /* CoreText.framework */; };
+		4A94D8D11FA6F9DE0071B732 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A94D8D01FA6F9DE0071B732 /* CoreGraphics.framework */; };
+		4A94D8D31FA6F9E50071B732 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A94D8D21FA6F9E50071B732 /* UIKit.framework */; };
+		4A94D8D51FA6F9F20071B732 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A94D8D41FA6F9F20071B732 /* Foundation.framework */; };
+		4A94D8D71FA6F9FC0071B732 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A94D8D61FA6F9FC0071B732 /* CFNetwork.framework */; };
+		4A94D8D91FA6FA050071B732 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A94D8D81FA6FA050071B732 /* CoreMotion.framework */; };
 		4A9F56E51F91E55B00341A31 /* GLMine_MyOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F56E41F91E55B00341A31 /* GLMine_MyOrderController.m */; };
 		4A9F56E91F91E5F100341A31 /* GLMine_PaidOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9F56E71F91E5F100341A31 /* GLMine_PaidOrderController.m */; };
 		4A9F56EA1F91E5F100341A31 /* GLMine_PaidOrderController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9F56E81F91E5F100341A31 /* GLMine_PaidOrderController.xib */; };
@@ -257,6 +270,8 @@
 		4A9FD62C1FA1E68C00313606 /* GLBusinessAdModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A9FD62B1FA1E68C00313606 /* GLBusinessAdModel.m */; };
 		4AA395E61F9A2DE000FAFA4F /* GLPay_CompletedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA395E51F9A2DE000FAFA4F /* GLPay_CompletedModel.m */; };
 		4AA395E91F9A516000FAFA4F /* GLMine_RicePayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AA395E81F9A516000FAFA4F /* GLMine_RicePayModel.m */; };
+		4AC41DFF1FA7158300221603 /* GLMall_MoreCommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC41DFD1FA7158300221603 /* GLMall_MoreCommentController.m */; };
+		4AC41E001FA7158300221603 /* GLMall_MoreCommentController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AC41DFE1FA7158300221603 /* GLMall_MoreCommentController.xib */; };
 		4ADCA6F71F989D85007D0E4D /* GLMine_ShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADCA6F61F989D85007D0E4D /* GLMine_ShareModel.m */; };
 		4ADDD16A1F88635200C95F9C /* 登录注册.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4ADDD1691F88635200C95F9C /* 登录注册.xcassets */; };
 		4ADDD16E1F88652100C95F9C /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADDD16D1F88652100C95F9C /* NetworkManager.m */; };
@@ -741,6 +756,19 @@
 		4A8385781FA0716D00F3A30C /* 加载动画.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "加载动画.xcassets"; sourceTree = "<group>"; };
 		4A890AD31F8F397400ED6E36 /* GLBusiness_FundTrendModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLBusiness_FundTrendModel.h; sourceTree = "<group>"; };
 		4A890AD41F8F397400ED6E36 /* GLBusiness_FundTrendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLBusiness_FundTrendModel.m; sourceTree = "<group>"; };
+		4A94D8C01FA6F9480071B732 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		4A94D8C21FA6F9570071B732 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		4A94D8C41FA6F99A0071B732 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		4A94D8C61FA6F9A30071B732 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		4A94D8C81FA6F9B60071B732 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		4A94D8CA1FA6F9C00071B732 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		4A94D8CC1FA6F9C70071B732 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4A94D8CE1FA6F9CF0071B732 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		4A94D8D01FA6F9DE0071B732 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		4A94D8D21FA6F9E50071B732 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		4A94D8D41FA6F9F20071B732 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		4A94D8D61FA6F9FC0071B732 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		4A94D8D81FA6FA050071B732 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		4A9F56E31F91E55B00341A31 /* GLMine_MyOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_MyOrderController.h; sourceTree = "<group>"; };
 		4A9F56E41F91E55B00341A31 /* GLMine_MyOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_MyOrderController.m; sourceTree = "<group>"; };
 		4A9F56E61F91E5F100341A31 /* GLMine_PaidOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_PaidOrderController.h; sourceTree = "<group>"; };
@@ -768,6 +796,9 @@
 		4AA395E51F9A2DE000FAFA4F /* GLPay_CompletedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLPay_CompletedModel.m; sourceTree = "<group>"; };
 		4AA395E71F9A516000FAFA4F /* GLMine_RicePayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_RicePayModel.h; sourceTree = "<group>"; };
 		4AA395E81F9A516000FAFA4F /* GLMine_RicePayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_RicePayModel.m; sourceTree = "<group>"; };
+		4AC41DFC1FA7158300221603 /* GLMall_MoreCommentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMall_MoreCommentController.h; sourceTree = "<group>"; };
+		4AC41DFD1FA7158300221603 /* GLMall_MoreCommentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMall_MoreCommentController.m; sourceTree = "<group>"; };
+		4AC41DFE1FA7158300221603 /* GLMall_MoreCommentController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMall_MoreCommentController.xib; sourceTree = "<group>"; };
 		4ADCA6F51F989D85007D0E4D /* GLMine_ShareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_ShareModel.h; sourceTree = "<group>"; };
 		4ADCA6F61F989D85007D0E4D /* GLMine_ShareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_ShareModel.m; sourceTree = "<group>"; };
 		4ADDD1691F88635200C95F9C /* 登录注册.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "登录注册.xcassets"; sourceTree = "<group>"; };
@@ -964,7 +995,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A94D8D91FA6FA050071B732 /* CoreMotion.framework in Frameworks */,
+				4A94D8D71FA6F9FC0071B732 /* CFNetwork.framework in Frameworks */,
+				4A94D8D51FA6F9F20071B732 /* Foundation.framework in Frameworks */,
+				4A94D8D31FA6F9E50071B732 /* UIKit.framework in Frameworks */,
+				4A94D8D11FA6F9DE0071B732 /* CoreGraphics.framework in Frameworks */,
+				4A94D8CF1FA6F9CF0071B732 /* CoreText.framework in Frameworks */,
+				4A94D8CD1FA6F9C70071B732 /* QuartzCore.framework in Frameworks */,
+				4A94D8CB1FA6F9C00071B732 /* CoreTelephony.framework in Frameworks */,
+				4A94D8C91FA6F9B60071B732 /* SystemConfiguration.framework in Frameworks */,
+				4A94D8C71FA6F9A30071B732 /* libz.tbd in Frameworks */,
+				4A94D8C51FA6F99A0071B732 /* libc++.tbd in Frameworks */,
 				6982E3A60C2A1ECE784BC35D /* Pods_lanzhong.framework in Frameworks */,
+				4A94D8C11FA6F9480071B732 /* AlipaySDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2082,6 +2125,9 @@
 				4A53E8311F7A240F0021D9E0 /* GLMall_DetailController.h */,
 				4A53E8321F7A240F0021D9E0 /* GLMall_DetailController.m */,
 				4A53E8331F7A240F0021D9E0 /* GLMall_DetailController.xib */,
+				4AC41DFC1FA7158300221603 /* GLMall_MoreCommentController.h */,
+				4AC41DFD1FA7158300221603 /* GLMall_MoreCommentController.m */,
+				4AC41DFE1FA7158300221603 /* GLMall_MoreCommentController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3041,6 +3087,8 @@
 			isa = PBXGroup;
 			children = (
 				4AF107041F78D5AC00CB51FA /* main.m */,
+				4A94D8C21FA6F9570071B732 /* AlipaySDK.bundle */,
+				4A94D8C01FA6F9480071B732 /* AlipaySDK.framework */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -3458,6 +3506,17 @@
 		BBF1CC57678E9E178E929D0C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4A94D8D81FA6FA050071B732 /* CoreMotion.framework */,
+				4A94D8D61FA6F9FC0071B732 /* CFNetwork.framework */,
+				4A94D8D41FA6F9F20071B732 /* Foundation.framework */,
+				4A94D8D21FA6F9E50071B732 /* UIKit.framework */,
+				4A94D8D01FA6F9DE0071B732 /* CoreGraphics.framework */,
+				4A94D8CE1FA6F9CF0071B732 /* CoreText.framework */,
+				4A94D8CC1FA6F9C70071B732 /* QuartzCore.framework */,
+				4A94D8CA1FA6F9C00071B732 /* CoreTelephony.framework */,
+				4A94D8C81FA6F9B60071B732 /* SystemConfiguration.framework */,
+				4A94D8C61FA6F9A30071B732 /* libz.tbd */,
+				4A94D8C41FA6F99A0071B732 /* libc++.tbd */,
 				19A11FB975C44A94E569750A /* Pods_lanzhong.framework */,
 			);
 			name = Frameworks;
@@ -3646,6 +3705,7 @@
 				4A18B91D1F94D86300E9B387 /* GLMine_Wallet_Exchange_InReviewController.xib in Resources */,
 				4A16FF2E1F8F727F00064CE5 /* GLPublish_FundFailedController.xib in Resources */,
 				4A165C151F85DD6500D0C34B /* GLMine_WalletController.xib in Resources */,
+				4AC41E001FA7158300221603 /* GLMall_MoreCommentController.xib in Resources */,
 				4A0B751F1F90F0840007788B /* GLConfirmOrderController.xib in Resources */,
 				4A6AD2381F7F953600E6084E /* GLPublish_ProjectCompletedController.xib in Resources */,
 				4A53E84B1F7A4B5C0021D9E0 /* GLMall_DetailSelecteCell.xib in Resources */,
@@ -3708,6 +3768,7 @@
 				4A6AD1AA1F7F2E8800E6084E /* GLPay_CompletedController.xib in Resources */,
 				4A5A78601F7B9B0E004FB15A /* GLBusiniessCell.xib in Resources */,
 				F9BB80381F7A585000867514 /* GLShoppingCell.xib in Resources */,
+				4A94D8C31FA6F9570071B732 /* AlipaySDK.bundle in Resources */,
 				4A165C331F86241800D0C34B /* GLMine_AddCardController.xib in Resources */,
 				4A509BAF1F877C2B00D794FB /* GLForgetPasswordController.xib in Resources */,
 				4A6B9EFB1F7CC92E009386C8 /* GLMineController.xib in Resources */,
@@ -3799,6 +3860,7 @@
 				4AF1070B1F78D5AC00CB51FA /* ViewController.m in Sources */,
 				4AF5B0411F95AAFE000407A7 /* GLMine_ParticipateCell.m in Sources */,
 				4A9F56E91F91E5F100341A31 /* GLMine_PaidOrderController.m in Sources */,
+				4AC41DFF1FA7158300221603 /* GLMall_MoreCommentController.m in Sources */,
 				4AF107081F78D5AC00CB51FA /* AppDelegate.m in Sources */,
 				4A165C141F85DD6500D0C34B /* GLMine_WalletController.m in Sources */,
 				4A2905271F9726B9006903F1 /* GLMine_EvaluateModel.m in Sources */,
@@ -4127,6 +4189,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = MSWMY8ZT7D;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lanzhong",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/lanzhong/PrefixHeader.pch";
 				INFOPLIST_FILE = lanzhong/Info.plist;
@@ -4146,6 +4212,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = MSWMY8ZT7D;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lanzhong",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/lanzhong/PrefixHeader.pch";
 				INFOPLIST_FILE = lanzhong/Info.plist;

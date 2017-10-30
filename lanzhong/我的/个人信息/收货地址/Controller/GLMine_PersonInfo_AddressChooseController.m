@@ -170,9 +170,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSLog(@"选中一个地址");
-    
-//    LBMineCentermodifyAdressTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     GLMine_AddressModel *model = self.models[indexPath.row];
     
     NSArray *vcsArray = [self.navigationController viewControllers];
@@ -188,7 +185,6 @@
         
     }
 
-    
 }
 
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -233,10 +229,13 @@
                 if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
                     
                     [self.models removeObjectAtIndex:indexPath.row];
-         
+                    
                     [MBProgressHUD showError:responseObject[@"message"]];
                     
                     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"delAddressNotification" object:nil];
+
                 }else{
                     
                     [MBProgressHUD showError:responseObject[@"message"]];

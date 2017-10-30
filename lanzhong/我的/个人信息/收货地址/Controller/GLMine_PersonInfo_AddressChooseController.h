@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void (^GLMine_PersonInfo_AddressChooseControllerBlock)(NSString *name,NSString *phoneNum,NSString *address,NSString *addressid);
+typedef void (^GLMine_PersonInfo_AddressChooseControllerBlock)(NSString *name,NSString *phoneNum,NSString *address,NSString *addressid);// isDel是否删除
 
 @interface GLMine_PersonInfo_AddressChooseController : UIViewController
 

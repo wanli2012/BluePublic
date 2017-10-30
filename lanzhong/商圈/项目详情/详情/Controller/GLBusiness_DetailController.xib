@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -27,6 +28,7 @@
                 <outlet property="progressSignView" destination="Km1-V6-hG6" id="lQc-n6-rtd"/>
                 <outlet property="progressView" destination="mDL-UG-ebO" id="0GD-Jl-HAb"/>
                 <outlet property="progressViewWidth" destination="jy9-Qh-oRL" id="uj7-Ym-7uE"/>
+                <outlet property="projectTitleLabel" destination="ZZQ-08-hoc" id="O3T-T2-DBB"/>
                 <outlet property="raisedLabel" destination="5xu-ZG-oPu" id="ILW-Zr-GNW"/>
                 <outlet property="supportBtn" destination="Ueq-ys-cYZ" id="Udo-K1-eca"/>
                 <outlet property="tableView" destination="z44-gL-KZw" id="V9f-tz-UaA"/>
@@ -92,13 +94,13 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="蓝众创客" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9zw-up-bBx">
-                                <rect key="frame" x="110" y="30" width="250" height="18"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <rect key="frame" x="110" y="64.5" width="57.5" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="剩余时间20天" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AFx-lV-nOO">
-                                <rect key="frame" x="110" y="65.5" width="250" height="14.5"/>
+                                <rect key="frame" x="283.5" y="65.5" width="76.5" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -289,12 +291,17 @@
                                     <constraint firstItem="5xu-ZG-oPu" firstAttribute="leading" secondItem="Ja1-Kp-ifI" secondAttribute="trailing" id="zE9-Mm-UqE"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="项目标题" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZQ-08-hoc">
+                                <rect key="frame" x="110" y="30" width="57.5" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="UsG-yK-xOy" firstAttribute="trailing" secondItem="G50-bK-tQn" secondAttribute="trailing" id="1Io-n1-MIn"/>
                             <constraint firstItem="9zw-up-bBx" firstAttribute="leading" secondItem="zem-2Z-ttd" secondAttribute="trailing" constant="15" id="1eg-bM-G8a"/>
-                            <constraint firstItem="9zw-up-bBx" firstAttribute="top" secondItem="zem-2Z-ttd" secondAttribute="top" constant="15" id="9Ih-5g-8fL"/>
                             <constraint firstAttribute="trailing" secondItem="UEf-s1-E4f" secondAttribute="trailing" id="AqC-Av-Xbk"/>
                             <constraint firstAttribute="trailing" secondItem="AFx-lV-nOO" secondAttribute="trailing" constant="15" id="GdH-mv-2q7"/>
                             <constraint firstItem="UsG-yK-xOy" firstAttribute="leading" secondItem="G50-bK-tQn" secondAttribute="leading" id="I4E-cP-mLk"/>
@@ -302,9 +309,10 @@
                             <constraint firstItem="G50-bK-tQn" firstAttribute="leading" secondItem="Uij-uS-o7T" secondAttribute="leading" constant="10" id="Pn3-2u-xVS"/>
                             <constraint firstItem="zem-2Z-ttd" firstAttribute="top" secondItem="Uij-uS-o7T" secondAttribute="top" constant="15" id="S45-zx-SKL"/>
                             <constraint firstItem="zem-2Z-ttd" firstAttribute="leading" secondItem="Uij-uS-o7T" secondAttribute="leading" constant="15" id="V9f-5G-yPA"/>
-                            <constraint firstAttribute="trailing" secondItem="9zw-up-bBx" secondAttribute="trailing" constant="15" id="aDC-k8-9OT"/>
+                            <constraint firstItem="ZZQ-08-hoc" firstAttribute="leading" secondItem="zem-2Z-ttd" secondAttribute="trailing" constant="15" id="VJ4-8V-EGP"/>
                             <constraint firstItem="UEf-s1-E4f" firstAttribute="leading" secondItem="Uij-uS-o7T" secondAttribute="leading" id="cBB-z0-fHP"/>
-                            <constraint firstItem="AFx-lV-nOO" firstAttribute="leading" secondItem="zem-2Z-ttd" secondAttribute="trailing" constant="15" id="hKu-dQ-tOH"/>
+                            <constraint firstItem="ZZQ-08-hoc" firstAttribute="top" secondItem="zem-2Z-ttd" secondAttribute="top" constant="15" id="ldb-QM-6G7"/>
+                            <constraint firstItem="9zw-up-bBx" firstAttribute="centerY" secondItem="AFx-lV-nOO" secondAttribute="centerY" id="mf8-zm-j8I"/>
                             <constraint firstItem="UEf-s1-E4f" firstAttribute="top" secondItem="zem-2Z-ttd" secondAttribute="bottom" constant="20" id="nIY-f9-ff9"/>
                             <constraint firstItem="G50-bK-tQn" firstAttribute="top" secondItem="zem-2Z-ttd" secondAttribute="bottom" constant="10" id="nid-sM-Dx1"/>
                             <constraint firstAttribute="trailing" secondItem="G50-bK-tQn" secondAttribute="trailing" constant="10" id="sO0-f3-6aW"/>

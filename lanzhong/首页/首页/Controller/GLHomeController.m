@@ -16,6 +16,9 @@
 #import "GLBusiness_DetailController.h"//项目详情
 
 @interface GLHomeController ()<UITableViewDataSource,UITableViewDelegate>
+{
+    NSInteger _selectedSegmentIndex;//显示 0:创客 1:爱心
+}
 
 @property (weak, nonatomic) IBOutlet UILabel *noticeLabel;
 
@@ -40,6 +43,8 @@
 @property (nonatomic, strong)GLHomeModel *model;
 @property (nonatomic, strong)LoadWaitView *loadV;
 @property (nonatomic, strong)NodataView *nodataV;
+
+@property (strong, nonatomic)  NSString *app_Version;//当前版本号
 
 @end
 
@@ -71,12 +76,15 @@
     self.tableView.mj_header = header;
     
     [self postRequest];//请求数据
-    
+    [self Postpath:GET_VERSION];
 }
+
 - (void)setUI{
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    _selectedSegmentIndex = 0;
     
     self.headerView.height = 260;
     
@@ -111,7 +119,7 @@
             
             self.noticeLabel.text = self.model.new_notice.title;
             
-            [self switchSelected:nil];
+            [self swithToHidden:_selectedSegmentIndex];
         }
         
         [self.tableView reloadData];
@@ -158,7 +166,14 @@
     
     UISegmentedControl* control = (UISegmentedControl*)sender;
     
-    switch (control.selectedSegmentIndex) {
+    _selectedSegmentIndex = control.selectedSegmentIndex;
+    
+    [self swithToHidden:_selectedSegmentIndex];
+
+}
+- (void)swithToHidden:(NSInteger)index {
+    
+    switch (index) {
         case 0:
         {
             
@@ -190,6 +205,65 @@
     }
 }
 
+#pragma mark - 检查是否有更新
+-(void)Postpath:(NSString *)path
+{
+    
+    NSURL *url = [NSURL URLWithString:path];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestReloadIgnoringCacheData
+                                                       timeoutInterval:10];
+    
+    [request setHTTPMethod:@"POST"];
+    
+    NSOperationQueue *queue = [NSOperationQueue new];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response,NSData *data,NSError *error){
+        NSMutableDictionary *receiveStatusDic=[[NSMutableDictionary alloc]init];
+        if (data) {
+            
+            NSDictionary *receiveDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+            if ([[receiveDic valueForKey:@"resultCount"] intValue] > 0) {
+                
+                [receiveStatusDic setValue:@"1" forKey:@"status"];
+                [receiveStatusDic setValue:[[[receiveDic valueForKey:@"results"] objectAtIndex:0] valueForKey:@"version"]   forKey:@"version"];
+            }else{
+                
+                [receiveStatusDic setValue:@"-1" forKey:@"status"];
+            }
+        }else{
+            [receiveStatusDic setValue:@"-1" forKey:@"status"];
+        }
+        
+        [self performSelectorOnMainThread:@selector(receiveData:) withObject:receiveStatusDic waitUntilDone:NO];
+    }];
+}
+
+-(void)receiveData:(id)sender
+{
+    NSString  *Newversion = [NSString stringWithFormat:@"%@",sender[@"version"]];
+    
+    if (![_app_Version isEqualToString:Newversion]) {
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"更新提示"
+                                                            message:@"发现新版本,是否更新 ?"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"取消"
+                                                  otherButtonTitles:@"立即更新", nil];
+        
+        [alertView show];
+    }
+    
+}
+#pragma mark ----- uialertviewdelegete
+//下载
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex == 1) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:DOWNLOAD_URL]];
+    }
+    
+}
 #pragma mark - UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

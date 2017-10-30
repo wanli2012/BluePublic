@@ -20,12 +20,14 @@
 #import "GLPay_ChooseController.h"//选择支付界面
 
 #import <UShareUI/UShareUI.h>
+#import "JZAlbumViewController.h"
 
-@interface GLBusiness_DetailController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,GLBusiness_ChooseCellDelegate,GLBusiness_DetailCommentCellDelegate>
+@interface GLBusiness_DetailController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,GLBusiness_ChooseCellDelegate,GLBusiness_DetailCommentCellDelegate,GLBusiness_DetailProjectCellDelegate>
 {
     CGRect _rect;
 }
 
+@property (weak, nonatomic) IBOutlet UILabel *projectTitleLabel;//项目标题Label
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageV;//项目图
 @property (weak, nonatomic) IBOutlet UILabel *personNameLabel;//发起人名
@@ -55,6 +57,9 @@
 
 @property (nonatomic, strong)GLBusiness_DetailModel *model;
 @property (nonatomic, strong)LoadWaitView *loadV;
+
+
+@property (nonatomic, assign)BOOL  HideNavagation;//是否需要恢复自定义导航栏
 
 @end
 
@@ -132,7 +137,8 @@
     
     NSString *imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/200/h/200",self.model.user_info_pic];
     [self.imageV sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
-    self.personNameLabel.text = self.model.linkman;
+    self.projectTitleLabel.text = [NSString stringWithFormat:@"项目:%@",self.model.title];
+    self.personNameLabel.text = [NSString stringWithFormat:@"负责人:%@",self.model.linkman];
     self.targetMoneyLabel.text = [NSString stringWithFormat:@"%@元",self.model.admin_money];
     self.raisedLabel.text = [NSString stringWithFormat:@"%@元",self.model.draw_money];
     self.listNumLabel.text = [NSString stringWithFormat:@"榜单:%@人",self.model.invest_count];
@@ -170,8 +176,8 @@
     [formatter setDateFormat:@"yyyy-MM-dd"];
     
     NSString *DateTime = [formatter stringFromDate:date];
-    NSTimeInterval time=[self.model.need_time doubleValue];//因为时差问题要加8小时 == 28800 sec
-    NSDate *detaildate=[NSDate dateWithTimeIntervalSince1970:time];
+    NSTimeInterval time = [self.model.need_time doubleValue];//因为时差问题要加8小时 == 28800 sec
+    NSDate *detaildate = [NSDate dateWithTimeIntervalSince1970:time];
 
     //实例化一个NSDateFormatter对象
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -182,12 +188,19 @@
 
     NSInteger dayCount = [self getTheCountOfTwoDaysWithBeginDate:DateTime endDate:endDateStr];
     
-    self.needTimeLabel.text = [NSString stringWithFormat:@"剩余时间%zd天",dayCount];
     
-    if([self.model.state integerValue] == 3){
+    if([self compareOneDay:detaildate withAnotherDay:date] == 1){
+        self.needTimeLabel.text = [NSString stringWithFormat:@"筹款已截止"];
+    }else{
+        self.needTimeLabel.text = [NSString stringWithFormat:@"剩余时间%zd天",dayCount];
+    }
+    
+    if([self.model.state integerValue] == 3 && [self compareOneDay:detaildate withAnotherDay:date] != 1){
+        
         self.supportBtn.enabled = YES;
         self.supportBtn.backgroundColor = MAIN_COLOR;
     }else{
+        
         self.supportBtn.enabled = NO;
         self.supportBtn.backgroundColor = [UIColor lightGrayColor];
     }
@@ -212,7 +225,27 @@
     
     return dateCom.day;
 }
-
+#pragma mark - 时间比较大小
+- (NSInteger )compareOneDay:(NSDate *)oneDay withAnotherDay:(NSDate *)anotherDay
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy"];
+    NSString *oneDayStr = [dateFormatter stringFromDate:oneDay];
+    NSString *anotherDayStr = [dateFormatter stringFromDate:anotherDay];
+    NSDate *dateA = [dateFormatter dateFromString:oneDayStr];
+    NSDate *dateB = [dateFormatter dateFromString:anotherDayStr];
+    NSComparisonResult result = [dateA compare:dateB];
+    if (result == NSOrderedDescending) {
+        //oneDay > anotherDay
+        return 1;
+    }
+    else if (result == NSOrderedAscending){
+        //oneDay < anotherDay
+        return -1;
+    }
+    //oneDay = anotherDay
+    return 0;
+}
 - (void)endRefresh {
     
     [self.tableView.mj_header endRefreshing];
@@ -290,10 +323,10 @@
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     
     //创建网页内容对象
-    NSString* thumbURL =  @"https://mobile.umeng.com/images/pic/home/social/img-1.png";
-    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"欢迎使用【友盟+】社会化组件U-Share" descr:@"欢迎使用【友盟+】社会化组件U-Share，SDK包最小，集成成本最低，助力您的产品开发、运营与推广！" thumImage:thumbURL];
+    UIImage *thumbURL = [UIImage imageNamed:@"ios-template-1024"];
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"蓝众创客项目分享" descr:@"项目具体详情" thumImage:thumbURL];
     //设置网页地址
-    shareObject.webpageUrl = [NSString stringWithFormat:@"http://192.168.1.188:8080/item_details.html?item_id=%@",self.item_id];
+    shareObject.webpageUrl = [NSString stringWithFormat:@"%@%@",Share_Project_URL,self.item_id];
     
     //分享消息对象设置分享内容对象
     messageObject.shareObject = shareObject;
@@ -330,6 +363,23 @@
     
     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPathA,nil] withRowAnimation:UITableViewRowAnimationNone];
     
+}
+
+#pragma mark - 点击查看大图 GLBusiness_DetailProjectCell
+- (void)clickToCheckBigImage:(NSInteger)index{
+    
+    self.HideNavagation = YES;
+    JZAlbumViewController *jzAlbumVC = [[JZAlbumViewController alloc]init];
+    jzAlbumVC.currentIndex = index;//这个参数表示当前图片的index，默认是0
+    
+    NSMutableArray *arrM = [NSMutableArray array];
+    for (NSString * s in self.model.sev_photo) {//@"%@?imageView2/1/w/200/h/200",
+        NSString *str = [NSString stringWithFormat:@"%@?imageView2/1/w/414/h/700",s];
+        [arrM addObject:str];
+    }
+    jzAlbumVC.imgArr = arrM;//图片数组，可以是url，也可以是UIImage
+    [self presentViewController:jzAlbumVC animated:NO completion:nil];
+
 }
 
 #pragma mark - GLBusiness_ChooseCellDelegate
@@ -419,6 +469,8 @@
                 
                 cell.dataSourceArr = self.model.sev_photo;
                 cell.detailLabel.text = self.model.info;
+                cell.delegate = self;
+                
                 return cell;
                 
             }else if(indexPath.row == 1){

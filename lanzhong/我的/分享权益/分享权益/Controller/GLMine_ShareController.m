@@ -77,8 +77,8 @@
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     
     //创建网页内容对象
-    NSString* thumbURL =  @"https://mobile.umeng.com/images/pic/home/social/img-1.png";
-    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"欢迎使用蓝众创客" descr:@"蓝众创客推广！" thumImage:thumbURL];
+    UIImage *thumbURL = [UIImage imageNamed:@"ios-template-1024"];
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"蓝众创客注册分享" descr:@"欢迎使用蓝众创客" thumImage:thumbURL];
     //设置网页地址
     shareObject.webpageUrl = [NSString stringWithFormat:@"%@%@",Share_URL,[UserModel defaultUser].uname];
     

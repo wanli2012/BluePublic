@@ -45,7 +45,7 @@
 - (void)setNoticeModel:(GLMine_NoticeModel *)noticeModel{
     _noticeModel = noticeModel;
     self.contentLabel.text = noticeModel.title;
-    self.dateLabel.text = [formattime formateTimeOfDate3:noticeModel.addtime];
+    self.dateLabel.text = noticeModel.addtime;
 }
 
 @end

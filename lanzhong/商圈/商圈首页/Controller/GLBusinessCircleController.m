@@ -14,7 +14,8 @@
 #import "GLBusinessCircleModel.h"
 #import "GLBusinessAdModel.h"//广告Model
 
-#import "JZAlbumViewController.h"
+#import "GLBusiness_CertificationController.h"//webVC,此处用于展示广告
+
 
 @interface GLBusinessCircleController ()<SDCycleScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -108,7 +109,7 @@
     [self postAdData];
     
 }
-
+#pragma mark - 项目数据
 - (void)postRequest:(BOOL)isRefresh{
     
     if (isRefresh) {
@@ -160,6 +161,7 @@
     }];
 }
 
+#pragma mark - 分类数据
 - (void)postRequest_Category {
 
     [NetworkManager requestPOSTWithURLStr:kCIRCLE_FITER_URL paramDic:@{} finish:^(id responseObject) {
@@ -193,15 +195,12 @@
             [MBProgressHUD showError:responseObject[@"message"]];
         }
         
-//        [self.tableView reloadData];
-        
     } enError:^(NSError *error) {
-//       
-//        [self.tableView reloadData];
+       
     }];
 }
 
-//请求广告数据
+#pragma mark - 请求广告数据
 - (void)postAdData{
     
     [NetworkManager requestPOSTWithURLStr:kBANNER_LIST_URL paramDic:@{} finish:^(id responseObject) {
@@ -229,11 +228,9 @@
             [MBProgressHUD showError:responseObject[@"message"]];
         }
         
-//        [self.tableView reloadData];
         
     } enError:^(NSError *error) {
         
-//        [self.tableView reloadData];
     }];
 }
 
@@ -253,11 +250,14 @@
 /** 点击图片回调 */
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
     
-    self.HideNavagation = YES;
-    JZAlbumViewController *jzAlbumVC = [[JZAlbumViewController alloc]init];
-    jzAlbumVC.currentIndex = index;//这个参数表示当前图片的index，默认是0
-    jzAlbumVC.imgArr = [self.cycleScrollView.imageURLStringsGroup copy];//图片数组，可以是url，也可以是UIImage
-    [self presentViewController:jzAlbumVC animated:NO completion:nil];
+    GLBusinessAdModel *adModel = self.adModels[index];
+    
+    self.hidesBottomBarWhenPushed = YES;
+    GLBusiness_CertificationController *adVC = [[GLBusiness_CertificationController alloc] init];
+    adVC.navTitle = adModel.banner_title;
+    adVC.url = [NSString stringWithFormat:@"%@%@",AD_URL,adModel.banner_id];
+    [self.navigationController pushViewController:adVC animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
     
 }
 

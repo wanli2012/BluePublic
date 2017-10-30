@@ -49,11 +49,18 @@
 #define WEIXIN_APPSECRET @"d8168698d8940f3aa3a078b25347a591"
 
 
-#define Notice_URL @"http://lz.51dztg.com/index.php/Api/News/notice?news_id="//公告
-#define Certification_URL @"http://lz.51dztg.com/index.php/Api/Item/item_content?item_id="//官方认证
-#define Goods_Info_URL @"http://lz.51dztg.com/index.php/Api/Shop/goods_info?goods_id="//图文详情
-
-#define Share_URL @"http://lz.51dztg.com/index.php/Wap/Index/index?g_name="//分享
+//公告
+#define Notice_URL @"http://lz.51dztg.com/index.php/Api/News/notice?news_id="
+//官方认证
+#define Certification_URL @"http://lz.51dztg.com/index.php/Api/Item/item_content?item_id="
+//图文详情
+#define Goods_Info_URL @"http://lz.51dztg.com/index.php/Api/Shop/goods_info?goods_id="
+//广告
+#define AD_URL @"http://lz.51dztg.com/index.php/Api/Other/banner_data?banner_id="
+//分享项目详情
+#define Share_Project_URL @"http://lz.51dztg.com/Wx_lz/app/item_details.html?item_id=" 
+//分享注册
+#define Share_URL @"http://lz.51dztg.com/index.php/Wap/Index/index?g_name="
 //关于公司
 #define About_URL @"http://lz.51dztg.com/protocol/about.html"
 //帮助中心
@@ -62,6 +69,11 @@
 #define Publish_Protocol_URL @"http://lz.51dztg.com/protocol/issue.html"
 //注册协议
 #define Register_Protocol_URL @"http://lz.51dztg.com/protocol/register.html"
+
+//获取appStore上的最新版本号地址
+#define GET_VERSION  @"https://itunes.apple.com/lookup?id=1300026210"
+//下载地址
+#define DOWNLOAD_URL @"https://itunes.apple.com/cn/app/id1300026210?mt=8"
 
 //#define URL_Base @"http://192.168.0.163/Raise/index.php/Api/"
 #define URL_Base @"http://lz.51dztg.com/index.php/Api/"
@@ -127,8 +139,9 @@
 #define kSUPPORT_SUCCESS_URL @"Item/stochastic_item"//支持成功 推荐列表
 
 #define kMINE_MYPROJECT_URL @"User/myitem"//我的项目
-
-
 #define kPUBLISH_PROJECT_URL @"Item/add_item"//用户发布项目
+
+#define kRECHARGE_URL @"User/recharge"//充值操作
+#define kMORE_GOODSCOMMENT_URL @"Shop/more_comment"//商品评论更多
 
 #endif /* PrefixHeader_pch */

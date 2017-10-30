@@ -15,6 +15,7 @@
 #import "yindaotuViewController.h"
 #import <UMSocialCore/UMSocialCore.h>
 #import "UMMobClick/MobClick.h"
+#import <AlipaySDK/AlipaySDK.h>
 
 @interface AppDelegate ()
 
@@ -95,6 +96,12 @@
     BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url sourceApplication:sourceApplication annotation:annotation];
     if (!result) {
         // 其他如支付等SDK的回调
+        if ([url.host isEqualToString:@"safepay"]) {
+            //跳转支付宝钱包进行支付，处理支付结果
+            [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+                NSLog(@"result = %@",resultDic);
+            }];
+        }
     }
     return result;
 }

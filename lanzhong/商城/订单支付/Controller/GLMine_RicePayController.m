@@ -11,10 +11,11 @@
 //#import "LBIntegralMallViewController.h"
 #import "GLOrderPayView.h"
 #import "GLSet_MaskVeiw.h"
-//#import <AlipaySDK/AlipaySDK.h>
+#import <AlipaySDK/AlipaySDK.h>
 //#import "WXApi.h"
 #import "GLMine_RicePayModel.h"
 #import "GLBusiness_DetailController.h"
+
 
 @interface GLMine_RicePayController ()
 {
@@ -419,76 +420,76 @@
 }
 
 - (void)alipay:(NSString *)payType{
-//    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-//    dict[@"token"] = [UserModel defaultUser].token;
-//    dict[@"uid"] = [UserModel defaultUser].uid;
-//    dict[@"order_id"] = self.order_id;
-//    dict[@"paytype"] = payType;
-//    
-//    [NetworkManager requestPOSTWithURLStr:@"Shop/payParam" paramDic:dict finish:^(id responseObject) {
-//        
-//        [_loadV removeloadview];
-//        [self dismiss];
-//        if ([responseObject[@"code"] integerValue] == 1){
-//            
-//            [ [AlipaySDK defaultService]payOrder:responseObject[@"data"][@"alipay"][@"url"] fromScheme:@"univerAlipay" callback:^(NSDictionary *resultDic) {
-//                
-//                NSInteger orderState=[resultDic[@"resultStatus"] integerValue];
-//                if (orderState==9000) {
-//                    self.hidesBottomBarWhenPushed = YES;
-//                    
-//                    [self.navigationController popToRootViewControllerAnimated:YES];
-//                        
-//                    self.hidesBottomBarWhenPushed = NO;
-//                    
-//                }else{
-//                    NSString *returnStr;
-//                    switch (orderState) {
-//                        case 8000:
-//                            returnStr=@"订单正在处理中";
-//                            break;
-//                        case 4000:
-//                            returnStr=@"订单支付失败";
-//                            break;
-//                        case 6001:
-//                            returnStr=@"订单取消";
-//                            break;
-//                        case 6002:
-//                            returnStr=@"网络连接出错";
-//                            break;
-//                            
-//                        default:
-//                            break;
-//                    }
-//                    
-//                    [MBProgressHUD showError:returnStr];
-//                    
-//                }
-//                
-//            }];
-//            
-//        }else{
-//            
-//            [MBProgressHUD showError:responseObject[@"message"]];
-//        }
-//        
-//    } enError:^(NSError *error) {
-//        [MBProgressHUD showError:error.localizedDescription];
-//        [_loadV removeloadview];
-//        
-//    }];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"token"] = [UserModel defaultUser].token;
+    dict[@"uid"] = [UserModel defaultUser].uid;
+    dict[@"order_id"] = self.order_id;
+    dict[@"paytype"] = payType;
+    
+    [NetworkManager requestPOSTWithURLStr:@"Shop/payParam" paramDic:dict finish:^(id responseObject) {
+        
+        [_loadV removeloadview];
+        [self dismiss];
+        if ([responseObject[@"code"] integerValue] == 1){
+            
+            [[AlipaySDK defaultService]payOrder:responseObject[@"data"][@"alipay"][@"url"] fromScheme:@"univerAlipay" callback:^(NSDictionary *resultDic) {
+                
+                NSInteger orderState=[resultDic[@"resultStatus"] integerValue];
+                if (orderState==9000) {
+                    self.hidesBottomBarWhenPushed = YES;
+                    
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                        
+                    self.hidesBottomBarWhenPushed = NO;
+                    
+                }else{
+                    NSString *returnStr;
+                    switch (orderState) {
+                        case 8000:
+                            returnStr=@"订单正在处理中";
+                            break;
+                        case 4000:
+                            returnStr=@"订单支付失败";
+                            break;
+                        case 6001:
+                            returnStr=@"订单取消";
+                            break;
+                        case 6002:
+                            returnStr=@"网络连接出错";
+                            break;
+                            
+                        default:
+                            break;
+                    }
+                    
+                    [MBProgressHUD showError:returnStr];
+                    
+                }
+                
+            }];
+            
+        }else{
+            
+            [MBProgressHUD showError:responseObject[@"message"]];
+        }
+        
+    } enError:^(NSError *error) {
+        [MBProgressHUD showError:error.localizedDescription];
+        [_loadV removeloadview];
+        
+    }];
 }
 
 //支付宝客户端支付成功之后 发送通知
-//-(void)Alipaysucess{
-//    
-//    self.hidesBottomBarWhenPushed = YES;
-//    
-//    [self.navigationController popToRootViewControllerAnimated:YES];
-//    
-//    self.hidesBottomBarWhenPushed = NO;
-//    
-//}
+-(void)Alipaysucess{
+    
+    self.hidesBottomBarWhenPushed = YES;
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+    self.hidesBottomBarWhenPushed = NO;
+    
+}
 
 
 - (void)pay:(NSNotification *)sender{

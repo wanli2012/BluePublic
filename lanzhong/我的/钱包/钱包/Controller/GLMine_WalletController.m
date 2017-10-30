@@ -14,6 +14,7 @@
 #import "GLMine_Wallet_ExchangeController.h"//兑换记录界面
 #import "GLMine_Wallet_RechargeController.h"//充值记录界面
 
+#import <AlipaySDK/AlipaySDK.h>
 
 
 @interface GLMine_WalletController ()<UITextFieldDelegate>
@@ -214,6 +215,19 @@
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
+        if(self.moneyTextF.text.length == 0){
+            [MBProgressHUD showError:@"请输入金额"];
+            return ;
+        }
+        if(self.bank_id.length == 0){
+            [MBProgressHUD showError:@"请选择银行卡"];
+            return ;
+        }
+        if(self.passwordTextF.text.length == 0){
+            [MBProgressHUD showError:@"请输入密码"];
+            return ;
+        }
+        
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[@"uid"] = [UserModel defaultUser].uid;
         dict[@"token"] = [UserModel defaultUser].token;
@@ -261,7 +275,64 @@
 }
 #pragma mark - 确认支付
 - (IBAction)paySure:(id)sender {
-    NSLog(@"确认支付");
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"uid"] = [UserModel defaultUser].uid;
+    dict[@"token"] = [UserModel defaultUser].token;
+    dict[@"money"] = [NSString stringWithFormat:@"%.2f",[self.exchangeTextF.text floatValue]];
+    dict[@"pay_type"] = self.pay_type;
+    
+    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+    [NetworkManager requestPOSTWithURLStr:kRECHARGE_URL paramDic:dict finish:^(id responseObject) {
+        
+        [_loadV removeloadview];
+        
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+            
+            [[AlipaySDK defaultService]payOrder:responseObject[@"data"][@"alipay"] fromScheme:@"lanzhongAlipay" callback:^(NSDictionary *resultDic) {
+                
+                NSInteger orderState = [resultDic[@"resultStatus"] integerValue];
+                if (orderState == 9000) {
+                    self.hidesBottomBarWhenPushed = YES;
+                    
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    
+                    self.hidesBottomBarWhenPushed = NO;
+                    
+                }else{
+                    NSString *returnStr;
+                    switch (orderState) {
+                        case 8000:
+                            returnStr=@"订单正在处理中";
+                            break;
+                        case 4000:
+                            returnStr=@"订单支付失败";
+                            break;
+                        case 6001:
+                            returnStr=@"订单取消";
+                            break;
+                        case 6002:
+                            returnStr=@"网络连接出错";
+                            break;
+                            
+                        default:
+                            break;
+                    }
+                    
+                    [MBProgressHUD showError:returnStr];
+                    
+                }
+                
+            }];
+        }else{
+            
+            [MBProgressHUD showError:responseObject[@"message"]];
+        }
+        
+    } enError:^(NSError *error) {
+        [_loadV removeloadview];
+        
+    }];
 }
 
 

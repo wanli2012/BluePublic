@@ -62,16 +62,16 @@ static NSString *ID = @"GLOrderGoodsCell";
   
     self.contentViewW.constant = kSCREEN_WIDTH;
     self.contentViewH.constant = kSCREEN_HEIGHT + 49;
-    
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeAddress)];
-//    [self.addressView addGestureRecognizer:tap];
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(dismiss) name:@"maskView_dismiss" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(ensurePassword:) name:@"input_PasswordNotification" object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshAddress:) name:@"delAddressNotification" object:nil];
+    
     [self.tableView registerNib:[UINib nibWithNibName:@"GLOrderGoodsCell" bundle:nil] forCellReuseIdentifier:ID];
-    [self postRequest];
+    [self postAddressRequest];
+    [self postGoodsDetail];
     
 }
 
@@ -86,7 +86,7 @@ static NSString *ID = @"GLOrderGoodsCell";
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)postRequest {
+- (void)postAddressRequest {
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"token"] = [UserModel defaultUser].token;
@@ -101,6 +101,15 @@ static NSString *ID = @"GLOrderGoodsCell";
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
 
             if (![responseObject[@"data"] isEqual:[NSNull null]]) {
+                if ([responseObject[@"data"] count] > 0) {
+                    
+                    NSDictionary *dic = responseObject[@"data"][0];
+                    self.nameLabel.text = [NSString stringWithFormat:@"收货人:%@",dic[@"collect_name"]];
+                    self.phoneLabel.text = [NSString stringWithFormat:@"tel:%@",dic[@"phone"]];
+                    self.addressLabel.text = [NSString stringWithFormat:@"%@%@%@%@",dic[@"province_name"],dic[@"city_name"],dic[@"area_name"],dic[@"address"]];
+                    self.address_id = [NSString stringWithFormat:@"%@",dic[@"address_id"]];
+
+                }
         
                 for (NSDictionary *dic in responseObject[@"data"]) {
                     if ([dic[@"is_default"] intValue] == 1) {
@@ -116,7 +125,9 @@ static NSString *ID = @"GLOrderGoodsCell";
     } enError:^(NSError *error) {
         [_loadV removeloadview];
     }];
-    
+}
+
+- (void)postGoodsDetail{
     
     NSMutableDictionary *dict1 = [NSMutableDictionary dictionary];
     dict1[@"token"] = [UserModel defaultUser].token;
@@ -124,13 +135,13 @@ static NSString *ID = @"GLOrderGoodsCell";
     dict1[@"goods_id"] = self.goods_id;
     dict1[@"num"] = self.goods_count;
     dict1[@"spec_id"] = self.goods_spec;
-  
+    
     //请求商品信息
     [NetworkManager requestPOSTWithURLStr:kBUY_GOODS_URL paramDic:dict1 finish:^(id responseObject) {
         
         [_loadV removeloadview];
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
-   
+            
             _sumNum = 0.f;
             for (NSDictionary *dic in responseObject[@"data"]) {
                 GLConfirmOrderModel *model = [GLConfirmOrderModel mj_objectWithKeyValues:dic];
@@ -156,16 +167,24 @@ static NSString *ID = @"GLOrderGoodsCell";
     
 }
 
+- (void)refreshAddress:(NSNotification *)notification{
+    
+    [self postAddressRequest];
+    
+}
+
 - (IBAction)addressChoose:(id)sender {
     
     self.hidesBottomBarWhenPushed = YES;
     GLMine_PersonInfo_AddressChooseController *modifyAD = [[GLMine_PersonInfo_AddressChooseController alloc] init];
     
     modifyAD.block = ^(NSString *name,NSString *phone,NSString *address,NSString *addressid){
+        
         self.nameLabel.text = [NSString stringWithFormat:@"收货人:%@",name];
         self.phoneLabel.text = [NSString stringWithFormat:@"电话号码:%@",phone];
         self.addressLabel.text = [NSString stringWithFormat:@"%@",address];
         self.address_id = addressid;
+        
     };
     
     [self.navigationController pushViewController:modifyAD animated:YES];
