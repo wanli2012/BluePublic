@@ -170,35 +170,58 @@
     self.progressViewWidth.constant = self.bgProgressView.width * ratio;
     self.progressLeftConstrait.constant = self.bgProgressView.width * ratio;
     self.progressLabel.text = [NSString stringWithFormat:@"%.2f%%",ratio * 100];
-    
-    NSDate *date = [NSDate date];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
-    
-    NSString *DateTime = [formatter stringFromDate:date];
-    NSTimeInterval time = [self.model.need_time doubleValue];//因为时差问题要加8小时 == 28800 sec
-    NSDate *detaildate = [NSDate dateWithTimeIntervalSince1970:time];
 
-    //实例化一个NSDateFormatter对象
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    //设定时间格式,这里可以设置成自己需要的格式
+    //获取当前日期0点0分的时间戳
+    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *strDate = [dateFormatter stringFromDate:[NSDate date]];
     
-    NSString *endDateStr = [dateFormatter stringFromDate: detaildate];
+    NSDate *now = [dateFormatter dateFromString:strDate];
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[now timeIntervalSince1970]];
 
-    NSInteger dayCount = [self getTheCountOfTwoDaysWithBeginDate:DateTime endDate:endDateStr];
-    
-    
-    if([self compareOneDay:detaildate withAnotherDay:date] == 1){
-        self.needTimeLabel.text = [NSString stringWithFormat:@"筹款已截止"];
-    }else{
-        self.needTimeLabel.text = [NSString stringWithFormat:@"剩余时间%zd天",dayCount];
+    //算出天数
+    NSInteger dayCount = [self getTheCountOfTwoDaysWithBeginDate:timeSp endDate:self.model.need_time];
+
+    switch ([self.model.state integerValue]) {
+        case 3:
+        {
+            if(dayCount > -1){
+                self.needTimeLabel.text = [NSString stringWithFormat:@"剩余时间%zd天",dayCount];
+            }else{
+                self.needTimeLabel.text = [NSString stringWithFormat:@"筹款已截止"];
+            }
+        }
+            break;
+        case 6://6筹款完成
+        {
+            self.needTimeLabel.text = [NSString stringWithFormat:@"筹款完成"];
+        }
+            break;
+        case 7:
+        {
+            self.needTimeLabel.text = [NSString stringWithFormat:@"项目进行中"];
+        }
+            break;
+        case 10:
+        {
+            self.needTimeLabel.text = [NSString stringWithFormat:@"项目完成"];
+        }
+            break;
+            
+        default:
+            break;
     }
     
-    if([self.model.state integerValue] == 3 && [self compareOneDay:detaildate withAnotherDay:date] != 1){
+    
+    
+    
+    
+    
+    if([self.model.state integerValue] == 3 && dayCount > -1){
         
         self.supportBtn.enabled = YES;
         self.supportBtn.backgroundColor = MAIN_COLOR;
+        
     }else{
         
         self.supportBtn.enabled = NO;
@@ -209,43 +232,18 @@
 /**任意两天相差天数*/
 - (NSInteger)getTheCountOfTwoDaysWithBeginDate:(NSString *)beginDate endDate:(NSString *)endDate{
     
-    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-    [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-    [inputFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSTimeInterval begin = [beginDate doubleValue];
+    NSTimeInterval end = [endDate doubleValue];
     
-    NSDate *startD =[inputFormatter dateFromString:beginDate];
-    NSDate *endD = [inputFormatter dateFromString:endDate];
-    // 当前日历
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    // 需要对比的时间数据
-    NSCalendarUnit unit = NSCalendarUnitYear | NSCalendarUnitMonth
-    | NSCalendarUnitDay;
-    // 对比时间差
-    NSDateComponents *dateCom = [calendar components:unit fromDate:startD toDate:endD options:0];
-    
-    return dateCom.day;
-}
-#pragma mark - 时间比较大小
-- (NSInteger )compareOneDay:(NSDate *)oneDay withAnotherDay:(NSDate *)anotherDay
-{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"dd-MM-yyyy"];
-    NSString *oneDayStr = [dateFormatter stringFromDate:oneDay];
-    NSString *anotherDayStr = [dateFormatter stringFromDate:anotherDay];
-    NSDate *dateA = [dateFormatter dateFromString:oneDayStr];
-    NSDate *dateB = [dateFormatter dateFromString:anotherDayStr];
-    NSComparisonResult result = [dateA compare:dateB];
-    if (result == NSOrderedDescending) {
-        //oneDay > anotherDay
-        return 1;
-    }
-    else if (result == NSOrderedAscending){
-        //oneDay < anotherDay
+    if (begin > end) {
         return -1;
     }
-    //oneDay = anotherDay
-    return 0;
+    
+    NSInteger dayCount = (end - begin)/(24 * 60 * 60);
+    
+    return dayCount;
 }
+
 - (void)endRefresh {
     
     [self.tableView.mj_header endRefreshing];

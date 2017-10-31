@@ -76,6 +76,11 @@
     self.tableView.mj_header = header;
     
     [self postRequest];//请求数据
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    CFShow((__bridge CFTypeRef)(infoDictionary));
+    // app版本
+    _app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+
     [self Postpath:GET_VERSION];
 }
 
@@ -239,8 +244,8 @@
     }];
 }
 
--(void)receiveData:(id)sender
-{
+-(void)receiveData:(id)sender{
+    
     NSString  *Newversion = [NSString stringWithFormat:@"%@",sender[@"version"]];
     
     if (![_app_Version isEqualToString:Newversion]) {
