@@ -211,12 +211,7 @@
         default:
             break;
     }
-    
-    
-    
-    
-    
-    
+
     if([self.model.state integerValue] == 3 && dayCount > -1){
         
         self.supportBtn.enabled = YES;
@@ -372,8 +367,8 @@
     
     NSMutableArray *arrM = [NSMutableArray array];
     for (NSString * s in self.model.sev_photo) {//@"%@?imageView2/1/w/200/h/200",
-        NSString *str = [NSString stringWithFormat:@"%@?imageView2/1/w/414/h/700",s];
-        [arrM addObject:str];
+//        NSString *str = [NSString stringWithFormat:@"%@?imageView2/1/w/414/h/700",s];
+        [arrM addObject:s];
     }
     jzAlbumVC.imgArr = arrM;//图片数组，可以是url，也可以是UIImage
     [self presentViewController:jzAlbumVC animated:NO completion:nil];

@@ -48,7 +48,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    self.headerView.height = 200;
+    self.headerView.height = 150;
     [self.tableView registerNib:[UINib nibWithNibName:@"GLBusiniessCell" bundle:nil] forCellReuseIdentifier:@"GLBusiniessCell"];
     [self.tableView addSubview:self.nodataV];
     self.nodataV.hidden = YES;
@@ -82,7 +82,7 @@
         [weakSelf postRequest:YES];
     };
 
-    [self.headerView addSubview:self.menuScreeningView];
+    [self.view addSubview:self.menuScreeningView];
     
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
@@ -304,7 +304,7 @@
 -(GLBusinessCircle_MenuScreeningView*)menuScreeningView{
     
     if (!_menuScreeningView) {
-        _menuScreeningView = [[GLBusinessCircle_MenuScreeningView alloc] initWithFrame:CGRectMake(0, 0,kSCREEN_WIDTH , 50) WithTitles:@[@"行业",@"官方发布",@"筹款中"]];
+        _menuScreeningView = [[GLBusinessCircle_MenuScreeningView alloc] initWithFrame:CGRectMake(0, 20,kSCREEN_WIDTH , 50) WithTitles:@[@"行业",@"官方发布",@"筹款中"]];
         _menuScreeningView.backgroundColor = [UIColor whiteColor];
     }
     
@@ -316,7 +316,7 @@
     
     if (!_cycleScrollView) {
         
-        _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 50, kSCREEN_WIDTH, 150)
+        _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 150)
                                                               delegate:self
                                                       placeholderImage:[UIImage imageNamed:LUNBO_PlaceHolder]];
         

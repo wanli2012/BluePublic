@@ -110,7 +110,6 @@ static NSString *ID = @"GLShoppingCell";
 
     NSMutableArray *tempArr = [NSMutableArray array];
     NSMutableArray *tempArr2 = [NSMutableArray array];
-//    NSMutableArray *tempArr3 = [NSMutableArray array];
     NSMutableArray *tempArr4 = [NSMutableArray array];
     
     for (int i = 0; i < self.models.count; i ++) {
@@ -119,7 +118,6 @@ static NSString *ID = @"GLShoppingCell";
             
             [tempArr addObject:model.goods_id];
             [tempArr2 addObject:model.num];
-//            [tempArr3 addObject:model.cart_id];
             [tempArr4 addObject:model.spec_id];
             
         }
@@ -135,14 +133,18 @@ static NSString *ID = @"GLShoppingCell";
     
     orderVC.goods_id = [tempArr componentsJoinedByString:@","];;
     orderVC.goods_count = [tempArr2 componentsJoinedByString:@","];
-//    orderVC.cart_id = [tempArr3 componentsJoinedByString:@","];
     orderVC.goods_spec = [tempArr4 componentsJoinedByString:@","];
-    orderVC.orderType = 2;
+    if(tempArr.count == 1){
+        
+        orderVC.orderType = 2;
+    }else{
+        
+        orderVC.orderType = 0;
+    }
     
     [self.navigationController pushViewController:orderVC animated:YES];
     self.hidesBottomBarWhenPushed = NO;
 
-    
 }
 
 #pragma mark - 全选
@@ -181,8 +183,6 @@ static NSString *ID = @"GLShoppingCell";
     self.totalPriceLabel.text = [NSString stringWithFormat:@"总计:¥ %.2f",num];
     
     [self.tableView reloadData];
-
-    
 }
 
 #pragma mark - 选中,取消选中

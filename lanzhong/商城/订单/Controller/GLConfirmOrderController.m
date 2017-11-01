@@ -253,6 +253,13 @@ static NSString *ID = @"GLOrderGoodsCell";
             riceVC.order_id = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"order_id"]];
             riceVC.order_sn = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"order_num"]];
             riceVC.orders_Price = responseObject[@"data"][@"order_money"];
+            
+            if (self.orderType == 0) {
+                riceVC.signIndex = 0;
+            }else{
+                riceVC.signIndex = 2;
+            }
+            
             [self.navigationController pushViewController:riceVC animated:YES];
             
         }else{

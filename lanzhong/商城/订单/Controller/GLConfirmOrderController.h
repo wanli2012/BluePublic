@@ -12,7 +12,7 @@
 
 @property (nonatomic, copy)NSString * goods_count;
 
-//订单类型  1:商品详情页购买 2:购物车购买
+//订单类型  1:商品详情页购买 2:购物车单商品购买 0:购物车多商品购买
 @property (nonatomic, assign)int orderType;
 
 @property (nonatomic, copy)NSString * goods_id;

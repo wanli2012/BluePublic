@@ -142,15 +142,6 @@
 
 - (void)setPayType {
 
-    //没有米劵
-//    if ([[UserModel defaultUser].mark floatValue] == 0.0) {
-//        
-//        for ( int i = 0 ; i < self.dataarr.count; i++) {
-//            [self.selectB addObject:@NO];
-//        }
-//
-//    }else{
-//        
     [self.selectB addObject:@YES];
     
     if (self.dataarr.count <= 1) {
@@ -161,8 +152,7 @@
         [self.selectB addObject:@NO];
     }
     self.selectIndex = 0;
-    
-//    }
+
     
 }
 
@@ -203,53 +193,8 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
+    [self choosePayType:indexPath.row];
 
-//    //米劵足够
-//    if ([self.orderPrice floatValue] < [[UserModel defaultUser].mark floatValue]) {
-//        [MBProgressHUD showError:@"请优先使用米劵"];
-//        return;
-//    }
-//    
-//    //米劵不足
-//    if ([self.orderPrice floatValue] > [[UserModel defaultUser].mark floatValue]) {
-//        
-//        //米子不足
-//        if(([self.orderPrice floatValue] - [[UserModel defaultUser].mark floatValue]) > [[UserModel defaultUser].ketiBean floatValue]){
-//            
-//            if (indexPath.row == 1) {
-//                
-//                [MBProgressHUD showError:@"米子不足"];
-//                
-//                return;
-//                
-//            }else if(indexPath.row == 2 || indexPath.row == 3){
-//                
-                [self choosePayType:indexPath.row];
-//
-//            }
-//        }else{//米子足够
-//
-//            [self choosePayType:indexPath.row];
-//        
-//        }
-//    }
-//    //没有米劵
-//    if ([[UserModel defaultUser].mark floatValue] == 0) {
-//        if (indexPath.row == 0 ) {
-//            [MBProgressHUD showError:@"米劵为0,请选择其他支付方式"];
-//            return;
-//            
-//        }else if(indexPath.row == 1 && [self.orderPrice floatValue] > [[UserModel defaultUser].ketiBean floatValue]){//米子不足
-//            [MBProgressHUD showError:@"米子不足,请选择其他支付方式"];
-//            return;
-//            
-//        }else{
-//            
-//            [self choosePayType:indexPath.row];
-//        }
-//    }
-//    
-//    [self.tableview reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     [self.tableview reloadData];
     
 }
@@ -290,10 +235,119 @@
 
 //确定支付
 - (IBAction)surebutton:(UIButton *)sender {
+
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"uid"] = [UserModel defaultUser].uid;
+    dict[@"token"] = [UserModel defaultUser].token;
+    dict[@"order_id"] = self.order_id;
+    dict[@"order_money"] = self.orders_Price;
+    if (self.signIndex == 0) {
+        dict[@"num_num"] = @2;
+    }else{
+        dict[@"num_num"] = @1;
+    }
     
-//    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
-//    NSTimeInterval a=[dat timeIntervalSince1970];
-//    NSString*timeString = [NSString stringWithFormat:@"%0.f", a];//转为字符型
+    NSInteger index = [self.dataarr[self.selectIndex][@"index"] integerValue];
+    switch (index) {
+        case 3://余额
+        {
+            dict[@"paytype"] = @"3";
+            [self balancePay:dict];
+        }
+            break;
+        case 2://微信
+        {
+            dict[@"paytype"] = @"2";
+        }
+            break;
+        case 1://支付宝
+        {
+            dict[@"paytype"] = @"1";
+            [self cashPay:dict];
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+//现金支付
+- (void)cashPay:(NSMutableDictionary *)dict{
+    
+    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+    [NetworkManager requestPOSTWithURLStr:kORDER_PAY_URL paramDic:dict finish:^(id responseObject) {
+        
+        [_loadV removeloadview];
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+            
+            NSInteger index = [self.dataarr[self.selectIndex][@"index"] integerValue];
+            switch (index) {
+                case 2://微信
+                {
+                    
+                }
+                    break;
+                case 1://支付宝
+                {
+                    [[AlipaySDK defaultService]payOrder:responseObject[@"data"][@"alipay"] fromScheme:@"lanzhongAlipay" callback:^(NSDictionary *resultDic) {
+                        
+                        NSInteger orderState = [resultDic[@"resultStatus"] integerValue];
+                        if (orderState == 9000) {
+                            
+                            if (self.signIndex == 1) {
+                                
+                                self.block();
+                                [self.navigationController popViewControllerAnimated:YES];
+                            }else{
+                                
+                                [self.navigationController popToRootViewControllerAnimated:YES];
+                            }
+
+                            
+                        }else{
+                            NSString *returnStr;
+                            switch (orderState) {
+                                case 8000:
+                                    returnStr=@"订单正在处理中";
+                                    break;
+                                case 4000:
+                                    returnStr=@"订单支付失败";
+                                    break;
+                                case 6001:
+                                    returnStr=@"订单取消";
+                                    break;
+                                case 6002:
+                                    returnStr=@"网络连接出错";
+                                    break;
+                                    
+                                default:
+                                    break;
+                            }
+                            
+                            [MBProgressHUD showError:returnStr];
+                            
+                        }
+                        
+                    }];
+                }
+                    break;
+                default:
+                    break;
+            }
+            
+            
+            
+        }
+        [MBProgressHUD showError:responseObject[@"message"]];
+    } enError:^(NSError *error) {
+        [_loadV removeloadview];
+        
+    }];
+
+}
+
+//余额支付
+- (void)balancePay:(NSMutableDictionary *)dict{
     
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请输入密码" message:nil preferredStyle:UIAlertControllerStyleAlert];
     
@@ -316,34 +370,8 @@
             return;
         }
         
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[@"uid"] = [UserModel defaultUser].uid;
-        dict[@"token"] = [UserModel defaultUser].token;
-        dict[@"order_id"] = self.order_id;
-        dict[@"order_money"] = self.orders_Price;
         dict[@"upwd"] = alertVC.textFields.lastObject.text;
-        
-        NSInteger index = [self.dataarr[self.selectIndex][@"index"] integerValue];
-        switch (index) {
-            case 3://余额
-            {
-                dict[@"paytype"] = @"3";
-            }
-                break;
-            case 2://微信
-            {
-                dict[@"paytype"] = @"2";
-            }
-                break;
-            case 1://支付宝
-            {
-                dict[@"paytype"] = @"1";
-            }
-                break;
-            default:
-                break;
-        }
-        
+
         _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
         [NetworkManager requestPOSTWithURLStr:kORDER_PAY_URL paramDic:dict finish:^(id responseObject) {
             
@@ -358,22 +386,20 @@
                     
                     [self.navigationController popToRootViewControllerAnimated:YES];
                 }
-
+                
             }
             [MBProgressHUD showError:responseObject[@"message"]];
         } enError:^(NSError *error) {
             [_loadV removeloadview];
             
         }];
-    
+        
     }];
     
     [alertVC addAction:cancel];
     [alertVC addAction:ok];
     
     [self presentViewController:alertVC animated:YES completion:nil];
-    
-
 }
 
 //支付请求

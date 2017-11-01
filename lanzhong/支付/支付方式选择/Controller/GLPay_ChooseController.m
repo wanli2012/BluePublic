@@ -11,6 +11,8 @@
 #import "LBMineCenterPayPagesTableViewCell.h"
 #import "GLOrderPayView.h"
 
+#import <AlipaySDK/AlipaySDK.h>
+
 @interface GLPay_ChooseController ()<UITextViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UIImageView *weixinSignImageV;
@@ -135,10 +137,120 @@
 //确认支付
 - (IBAction)ensurePay:(id)sender {
     
-    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
-    NSTimeInterval a=[dat timeIntervalSince1970];
-    NSString*timeString = [NSString stringWithFormat:@"%0.f", a];//转为字符型
+    NSDate *dat = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval a = [dat timeIntervalSince1970];
+    NSString *timeString = [NSString stringWithFormat:@"%0.f", a];//转为字符型
 
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"uid"] = [UserModel defaultUser].uid;
+    dict[@"token"] = [UserModel defaultUser].token;
+    dict[@"item_id"] = self.item_id;
+    dict[@"money"] = @([self.moneyTF.text doubleValue]);
+    dict[@"comment"] = self.messageTextV.text;
+    dict[@"c_time"] = timeString;
+    
+    switch (self.selectIndex) {
+        case 0://余额
+        {
+            dict[@"paytype"] = @"3";
+            [self balancePay:dict];
+        }
+            break;
+        case 1://微信
+        {
+            dict[@"paytype"] = @"2";
+            [self cashPay:dict];
+        }
+            break;
+        case 2://支付宝
+        {
+            dict[@"paytype"] = @"1";
+            [self cashPay:dict];
+        }
+            break;
+        default:
+            break;
+    }
+
+}
+
+//现金支付
+- (void)cashPay:(NSMutableDictionary *)dict{
+    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+    [NetworkManager requestPOSTWithURLStr:kSUPPORT_URL paramDic:dict finish:^(id responseObject) {
+        
+        [_loadV removeloadview];
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+            
+            switch (self.selectIndex) {
+                case 0://余额
+                {
+                    
+                }
+                    break;
+                case 1://微信
+                {
+                    
+                }
+                    break;
+                case 2://支付宝
+                {
+                    [[AlipaySDK defaultService]payOrder:responseObject[@"data"][@"alipay"] fromScheme:@"lanzhongAlipay" callback:^(NSDictionary *resultDic) {
+                        
+                        NSInteger orderState = [resultDic[@"resultStatus"] integerValue];
+                        if (orderState == 9000) {
+                            
+                            self.hidesBottomBarWhenPushed = YES;
+                            GLPay_CompletedController *completeVC = [[GLPay_CompletedController alloc] init];
+                            completeVC.item_id = self.item_id;
+                            
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"supportNotification" object:nil];
+                            [self.navigationController pushViewController:completeVC animated:YES];
+                            
+                        }else{
+                            NSString *returnStr;
+                            switch (orderState) {
+                                case 8000:
+                                    returnStr=@"订单正在处理中";
+                                    break;
+                                case 4000:
+                                    returnStr=@"订单支付失败";
+                                    break;
+                                case 6001:
+                                    returnStr=@"订单取消";
+                                    break;
+                                case 6002:
+                                    returnStr=@"网络连接出错";
+                                    break;
+                                    
+                                default:
+                                    break;
+                            }
+                            [MBProgressHUD showError:returnStr];
+                            
+                        }
+                    }];
+                    
+                }
+                    break;
+                default:
+                    break;
+            }
+            
+        }else{
+            
+            [MBProgressHUD showError:responseObject[@"message"]];
+            
+        }
+    } enError:^(NSError *error) {
+        [_loadV removeloadview];
+        
+    }];
+}
+
+//余额支付
+- (void)balancePay:(NSMutableDictionary *)dict{
+    
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请输入密码" message:nil preferredStyle:UIAlertControllerStyleAlert];
     
     [alertVC addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
@@ -160,35 +272,7 @@
             return;
         }
         
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[@"uid"] = [UserModel defaultUser].uid;
-        dict[@"token"] = [UserModel defaultUser].token;
-        dict[@"item_id"] = self.item_id;
-        dict[@"money"] = [NSString stringWithFormat:@"%.f",[self.moneyTF.text floatValue]];
-        dict[@"comment"] = self.messageTextV.text;
-        dict[@"c_time"] = timeString;
         dict[@"upwd"] = alertVC.textFields.lastObject.text;
-        
-        switch (self.selectIndex) {
-            case 0://余额
-            {
-                dict[@"paytype"] = @"3";
-            }
-                break;
-            case 1://微信
-            {
-                dict[@"paytype"] = @"2";
-            }
-                break;
-            case 2://支付宝
-            {
-                dict[@"paytype"] = @"1";
-            }
-                break;
-            default:
-                break;
-        }
-        
         _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
         [NetworkManager requestPOSTWithURLStr:kSUPPORT_URL paramDic:dict finish:^(id responseObject) {
             
@@ -211,18 +295,11 @@
             [_loadV removeloadview];
             
         }];
-        
-        
     }];
     
     [alertVC addAction:cancel];
     [alertVC addAction:ok];
-    
     [self presentViewController:alertVC animated:YES completion:nil];
-    
-    
-    
-    
 }
 
 #pragma mark - UITextViewDelegate
