@@ -11,7 +11,8 @@
 @class DropMenuView;
 @protocol DropMenuViewDelegate <NSObject>
 
--(void)dropMenuView:(DropMenuView *)view didSelectName:(NSString *)str selectIndex:(NSInteger)selectIndex;
+-(void)dropMenuView:(DropMenuView *)view didSelectName:(NSString *)str firstSelectIndex:(NSInteger)firstSelectIndex selectIndex:(NSInteger)selectIndex;
+
 
 @end
 
@@ -33,6 +34,8 @@
  @param arr 使用数据
  */
 -(void)creatDropView:(UIView *)view withShowTableNum:(NSInteger)tableNum withData:(NSArray *)arr;
+
+//-(void)creatDropView:(UIView *)view withShowTableNum:(NSInteger)tableNum withData:(NSArray *)arr x:(CGFloat)x width:(CGFloat)width;
 
 /** 视图消失 */
 - (void)dismiss;

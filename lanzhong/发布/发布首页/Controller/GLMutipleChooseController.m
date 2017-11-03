@@ -1,22 +1,22 @@
 //
-//  LBMineCenterChooseAreaViewController.m
-//  Universialshare
+//  GLMutipleChooseController.m
+//  lanzhong
 //
-//  Created by 四川三君科技有限公司 on 2017/3/30.
-//  Copyright © 2017年 四川三君科技有限公司. All rights reserved.
+//  Created by 龚磊 on 2017/11/3.
+//  Copyright © 2017年 三君科技有限公司. All rights reserved.
 //
 
-#import "LBMineCenterChooseAreaViewController.h"
-//#import <ReactiveCocoa/ReactiveCocoa.h>
+#import "GLMutipleChooseController.h"
 
-@interface LBMineCenterChooseAreaViewController ()<UIPickerViewDataSource,UIPickerViewDelegate>
-@property (weak, nonatomic) IBOutlet UIPickerView *pickerview;
+@interface GLMutipleChooseController ()<UIPickerViewDelegate,UIPickerViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 
 @property (strong, nonatomic)NSString *resultStr;
 @property (strong, nonatomic)NSString *cityStr;
 @property (strong, nonatomic)NSString *countryStr;
 @property (strong, nonatomic)NSString *provinceStr;
-//@property (strong, nonatomic)LoadWaitView *loadV;
+@property (strong, nonatomic)LoadWaitView *loadV;
 
 @property (strong, nonatomic)NSString *provinceStrId;
 @property (strong, nonatomic)NSString *cityStrId;
@@ -29,7 +29,7 @@
 
 @end
 
-@implementation LBMineCenterChooseAreaViewController
+@implementation GLMutipleChooseController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -47,37 +47,34 @@
     self.condutryRow = 0;
     
     [self getPickerData];
+    
 }
 
 #pragma mark - get data
 -(void)getPickerData {
-//    self.dataArr = responseObject[@"data"];
-    self.cityArr = self.dataArr[0][@"city"];
-    self.countryArr = self.dataArr[0][@"city"][0][@"country"];
     
-    _provinceStrId = self.dataArr[0][@"province_code"];
-    _provinceStr = self.dataArr[0][@"province_name"];
-    _cityStrId = self.cityArr[0][@"city_code"];
-    _cityStr = self.cityArr[0][@"city_name"];
-    _countryStrId = self.countryArr[0][@"country_code"];
-    _countryStr = self.countryArr[0][@"country_name"];
-    
-    [self.pickerview reloadAllComponents];
-    
+    self.cityArr = self.dataArr[0].city;
+
+    _provinceStrId = self.dataArr[0].province_code;
+    _provinceStr = self.dataArr[0].province_name;
+    _cityStrId = self.cityArr[0].city_code;
+    _cityStr = self.cityArr[0].city_name;
+
+    [self.pickerView reloadAllComponents];
 }
 
-- (IBAction)canelbutton:(UIButton *)sender {
+#pragma mark - 取消
+- (IBAction)cancel:(id)sender {
     
     [[NSNotificationCenter defaultCenter]postNotificationName:@"LoveConsumptionVC" object:nil];
-    
 }
 
-- (IBAction)ensurebutton:(UIButton *)sender {
-    
+#pragma mark - 确定
+- (IBAction)ensure:(id)sender {
     if (_cityStrId.length<=0) {
         _resultStrId = [NSString stringWithFormat:@"%@&%@&%@",_provinceStrId,_provinceStrId,_provinceStrId];
         _resultStr = [NSString stringWithFormat:@"%@",_provinceStr];
-         _countryStrId =_provinceStrId;
+        _countryStrId =_provinceStrId;
         _cityStrId =_provinceStrId;
     }
     
@@ -88,10 +85,10 @@
         _countryStrId =_cityStrId;
     }
     else{
-    
+        
         _resultStrId = [NSString stringWithFormat:@"%@&%@&%@",_provinceStrId,_cityStrId,_countryStrId];
-         _resultStr = [NSString stringWithFormat:@"%@%@%@",_provinceStr,_cityStr,_countryStr];
-    
+        _resultStr = [NSString stringWithFormat:@"%@%@%@",_provinceStr,_cityStr,_countryStr];
+        
     }
     
     if (self.returnreslut) {
@@ -99,12 +96,13 @@
     }
     
     [[NSNotificationCenter defaultCenter]postNotificationName:@"LoveConsumptionVC" object:nil];
-    
 }
+
+#pragma mark - UIPickerViewDelegate UIPickerDataSource
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
     
-    return 3;
+    return 2;
 }
 
 /**< 行*/
@@ -114,8 +112,6 @@
         return self.dataArr.count;
     } else if (component == 1) {
         return self.cityArr.count;
-    } else {
-        return self.countryArr.count;
     }
     return 0;
 }
@@ -130,15 +126,10 @@
     displaylable.numberOfLines=0;
     
     if (component == 0) {
-        displaylable.text = [self.dataArr objectAtIndex:row][@"province_name"];
-       
+        displaylable.text = [self.dataArr objectAtIndex:row].province_name;
         
     } else if (component == 1) {
-        displaylable.text = [self.cityArr objectAtIndex:row][@"city_name"];
-       
-        
-    } else if (component == 2){
-         displaylable.text = [self.countryArr objectAtIndex:row][@"country_name"];
+        displaylable.text = [self.cityArr objectAtIndex:row].city_name;
         
     }
     
@@ -167,20 +158,17 @@
     return 50;/**< 高度*/
 }
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-
+    
     if (component == 0) {
         self.provinceRow = row;
-        self.cityArr = self.dataArr[row][@"city"];
-        self.countryArr = self.dataArr[row][@"city"][0][@"country"];
-        
-        _provinceStrId = self.dataArr[row][@"province_code"];
-        _provinceStr = self.dataArr[row][@"province_name"];
-        _cityStrId = self.cityArr[0][@"city_code"];
-        _cityStr = self.cityArr[0][@"city_name"];
-        _countryStrId = self.countryArr[0][@"country_code"];
-        _countryStr = self.countryArr[0][@"country_name"];
-        
-        [pickerView selectRow:0 inComponent:2 animated:YES];
+        self.cityArr = self.dataArr[row].city;
+
+        _provinceStrId = self.dataArr[row].province_code;
+        _provinceStr = self.dataArr[row].province_name;
+        _cityStrId = self.cityArr[0].city_code;
+        _cityStr = self.cityArr[0].city_name;
+
+        [pickerView selectRow:0 inComponent:1 animated:YES];
     }
     
     [pickerView selectedRowInComponent:1];
@@ -188,45 +176,8 @@
     
     if (component == 1) {
         self.cityRow = row;
-        self.countryArr = self.dataArr[self.provinceRow][@"city"][row][@"country"];
-        
-        if (self.countryArr.count > 0) {
-            [pickerView selectRow:0 inComponent:2 animated:YES];
-            _cityStrId = self.cityArr[row][@"city_code"];
-            _cityStr = self.cityArr[row][@"city_name"];
-            _countryStrId = self.countryArr[0][@"country_code"];
-            _countryStr = self.countryArr[0][@"country_name"];
-        }else{
-        
-            [pickerView selectRow:0 inComponent:2 animated:YES];
-//            _cityStrId = self.cityArr[row][@"city_code"];
-//            _cityStr = self.cityArr[row][@"city_name"];
-//            _countryStrId = self.countryArr[0][@"country_code"];
-//            _countryStr = self.countryArr[0][@"country_name"];
-        
-        }
     }
-    
-    [pickerView reloadComponent:2];
-    
-    if (component == 2) {
-        self.condutryRow = row;
-        _countryStrId = self.countryArr[row][@"country_code"];
-        _countryStr = self.countryArr[row][@"country_name"];
-    }
-    
-//    if (component == 0) {
-//        _provinceStrId = self.dataArr[self.provinceRow][@"province_code"];
-//        _provinceStr = self.dataArr[self.provinceRow][@"province_name"];
-//    }else if (component == 1){
-//        _cityStrId = self.cityArr[self.cityRow][@"city_code"];
-//        _cityStr = self.cityArr[self.cityRow][@"city_name"];
-//    }else if (component == 2){
-//        _countryStrId = self.countryArr[self.condutryRow][@"country_code"];
-//        _countryStr = self.countryArr[self.condutryRow][@"country_name"];
-//    }
-    
-}
 
+}
 
 @end

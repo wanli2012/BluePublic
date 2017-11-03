@@ -7,6 +7,7 @@
 //
 
 #import "DropMenuView.h"
+#import "GLPublish_CityModel.h"
 
 #define kWidth [UIScreen mainScreen].bounds.size.width
 #define kHeight [UIScreen mainScreen].bounds.size.height
@@ -120,22 +121,70 @@
             [UIView animateWithDuration:0.2f animations:^{
                 self.alpha = 1.0f;
             }];
-            
-            
             [self loadSelects];
             [self adjustTableViews];
         
         }
-        
     }else{
         /** 什么也不选择时候, 再次点击按钮 消失视图 */
         [self dismiss];
     }
-
-
 }
 
-
+-(void)creatDropView:(UIView *)view withShowTableNum:(NSInteger)tableNum withData:(NSArray *)arr x:(CGFloat)x width:(CGFloat)width{
+    
+    if (arr.count == 0) {
+        return;
+    }
+    
+    if (!self.show) {
+        
+        self.show = !self.show;
+        
+        // 显示 TableView数量
+        self.tableCount = tableNum;
+        
+        // 数据
+        self.dataArr = arr;
+        for (UITableView *tableView in self.tableViewArr) {
+            [tableView reloadData];
+        }
+        
+        UIWindow * window=[[[UIApplication sharedApplication] delegate] window];
+        CGRect rect=[view convertRect:view.bounds toView:window];
+        
+        // 初始位置 设置
+        CGFloat x = 0;
+        CGFloat y = rect.origin.y + rect.size.height;
+        CGFloat w = kWidth;
+        CGFloat h = kHeight - y;
+        
+        self.frame = CGRectMake(x, y, w, h);
+        self.cancelButton.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+        self.cancelButton.backgroundColor = YYSRGBColor(0, 0, 0, 0.2);
+        
+        if (arr.count < 8) {
+            self.tableViewUnderView.frame = CGRectMake(0, 0, self.frame.size.width, self.rowHeightNum * arr.count);
+        }else{
+            self.tableViewUnderView.frame = CGRectMake(0, 0, self.frame.size.width, self.rowHeightNum * 7);
+        }
+        
+        if (!self.superview) {
+            
+            [[[UIApplication sharedApplication] keyWindow] addSubview:self];
+            self.alpha = 0.0f;
+            [UIView animateWithDuration:0.2f animations:^{
+                self.alpha = 1.0f;
+            }];
+            [self loadSelects];
+            [self adjustTableViews];
+            
+        }
+    }else{
+        /** 什么也不选择时候, 再次点击按钮 消失视图 */
+        [self dismiss];
+    }
+}
 #pragma mark - 加载选中的TableView
 -(void)loadSelects{
     
@@ -158,7 +207,6 @@
             }];
         }
     }];
-    
 }
 
 #pragma mark - 重置TableView的 位置
@@ -178,7 +226,7 @@
         UITableView *tableView = self.tableViewArr[i];
         CGRect adjustFrame = tableView.frame;
         
-        adjustFrame.size.width = kWidth / addTableCount ;
+        adjustFrame.size.width = kWidth / addTableCount;
         adjustFrame.origin.x = adjustFrame.size.width * i + 0.5 * i;
         adjustFrame.size.height = self.tableViewUnderView.frame.size.height;
         
@@ -187,11 +235,9 @@
     
 }
 
-
 #pragma mark - TableView协议
 /** 行数 */
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
     
     NSInteger __block count;
     [self.tableViewArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -210,15 +256,13 @@
     
 }
 
-
-
 -(NSInteger)countForChooseTable:(NSInteger)idx firstTableSelectRow:(NSInteger)firstSelectRow withSecondTableSelectRow:(NSInteger)secondSelectRow{
 
     if (idx == 0) {
         
         return self.dataArr.count;
         
-    }else  if (idx == 1){
+    }else if (idx == 1){
         
         if (firstSelectRow == -1) {
             
@@ -227,17 +271,14 @@
         }else{
         
             if (self.tableCount == 2) {
-                
-                return [self.dataArr count];
+                GLPublish_CityModel *model = self.dataArr[firstSelectRow];
+                return [model.city count];
                 
             }else{
                 
                 return [self.dataArr count];
             }
-        
         }
-    
-        
         
     }else{
         
@@ -249,7 +290,6 @@
             return [self.dataArr count];
             
         }
-    
     }
 }
 
@@ -258,41 +298,33 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DropCell"];
     cell.textLabel.font = [UIFont systemFontOfSize:14];
-
+    GLPublish_CityModel *model = self.dataArr[indexPath.row];
     if (self.tableCount == 1) {
         
         cell.textLabel.text = self.dataArr[indexPath.row];
         
     }else if (self.tableCount == 2){
-        
-         // NSInteger firstSelectRow = ((UITableView *)self.tableViewArr[0]).indexPathForSelectedRow.row;
-        
+     
         if (tableView == self.tableViewArr[0]) {
             
-            cell.textLabel.text = self.dataArr[indexPath.row];
+            cell.textLabel.text = model.province_name;
             
         }else if (tableView == self.tableViewArr[1]){
-
-            //cell.textLabel.text = self.dataArr[firstSelectRow][@"subcategories"][indexPath.row];
+            NSInteger firstSelectRow = ((UITableView *)self.tableViewArr[0]).indexPathForSelectedRow.row;
+            GLPublish_CityModel *selectModel = self.dataArr[firstSelectRow];
+            cell.textLabel.text = selectModel.city[indexPath.row].city_name;
         }
         
     }else if (self.tableCount == 3){
-        
-//         NSInteger firstSelectRow = ((UITableView *)self.tableViewArr[0]).indexPathForSelectedRow.row;
-//         NSInteger secondSelectRow = ((UITableView *)self.tableViewArr[1]).indexPathForSelectedRow.row;
-        
+
         if (tableView == self.tableViewArr[0]) {
             
             cell.textLabel.text = self.dataArr[indexPath.row];
             
         }else if (tableView == self.tableViewArr[1]){
             
-            //cell.textLabel.text = self.dataArr[firstSelectRow][@"sub"][indexPath.row][@"name"];
-            
         }else if (tableView == self.tableViewArr[2]){
-            
-            
-           //cell.textLabel.text =  self.dataArr[firstSelectRow][@"sub"][secondSelectRow][@"sub"][indexPath.row];
+      
         }
     }
 
@@ -302,7 +334,6 @@
 /** 点击 */
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
     UITableView *secondTableView = self.tableViewArr[1];
     UITableView *thirdTableView = self.tableViewArr[2];
     
@@ -310,7 +341,7 @@
         
         [self saveSelects];
         [self dismiss];
-        [_delegate dropMenuView:self didSelectName:self.dataArr[indexPath.row] selectIndex:indexPath.row];
+        [_delegate dropMenuView:self didSelectName:self.dataArr[indexPath.row]  firstSelectIndex:indexPath.row selectIndex:-1];
         
         
     }else if (self.tableCount == 2){
@@ -327,15 +358,17 @@
             
             [self saveSelects];
             [self dismiss];
-
+            
              NSInteger firstSelectRow = ((UITableView *)self.tableViewArr[0]).indexPathForSelectedRow.row;
             
-            [_delegate dropMenuView:self didSelectName:self.dataArr[firstSelectRow] selectIndex:indexPath.row];
+            GLPublish_CityModel *model = self.dataArr[firstSelectRow];
+            
+            [_delegate dropMenuView:self didSelectName:model.city[indexPath.row].city_name firstSelectIndex:firstSelectRow selectIndex:indexPath.row];
         }
         
     }else if (self.tableCount == 3){
         
-        NSInteger firstSelectRow = ((UITableView *)self.tableViewArr[0]).indexPathForSelectedRow.row;
+//        NSInteger firstSelectRow = ((UITableView *)self.tableViewArr[0]).indexPathForSelectedRow.row;
 //        NSInteger secondSelectRow = ((UITableView *)self.tableViewArr[1]).indexPathForSelectedRow.row;
         
         if (tableView == self.tableViewArr[0]) {
@@ -361,7 +394,7 @@
             
             [self saveSelects];
             [self dismiss];
-            [_delegate dropMenuView:self didSelectName:self.dataArr[firstSelectRow] selectIndex:indexPath.row];
+//            [_delegate dropMenuView:self didSelectName:self.dataArr[firstSelectRow] selectIndex:indexPath.row];
            
         }
     }

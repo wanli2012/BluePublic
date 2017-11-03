@@ -18,10 +18,12 @@
 @property (nonatomic, strong) UIButton *oneLinkageButton;
 @property (nonatomic, strong) UIButton *twoLinkageButton;
 @property (nonatomic, strong) UIButton *threeLinkageButton;
+@property (nonatomic, strong) UIButton *fourLinkageButton;
 
 @property (nonatomic, strong) DropMenuView *oneLinkageDropMenu;
 @property (nonatomic, strong) DropMenuView *twoLinkageDropMenu;
 @property (nonatomic, strong) DropMenuView *threeLinkageDropMenu;
+@property (nonatomic, strong) DropMenuView *fourLinkageDropMenu;
 
 @end
 
@@ -34,7 +36,7 @@
         self.titles = titles;
         
         self.oneLinkageButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.oneLinkageButton.frame = CGRectMake(0, 0, kWidth/3, 50);
+        self.oneLinkageButton.frame = CGRectMake(0, 0, kWidth/self.titles.count, 50);
         [self setUpButton:self.oneLinkageButton withText:titles[0]];
         
         self.oneLinkageDropMenu = [[DropMenuView alloc] init];
@@ -42,7 +44,7 @@
         self.oneLinkageDropMenu.delegate = self;
         
         self.twoLinkageButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.twoLinkageButton.frame = CGRectMake(kWidth/3, 0, kWidth/3, 50);
+        self.twoLinkageButton.frame = CGRectMake(kWidth/self.titles.count, 0, kWidth/self.titles.count, 50);
         [self setUpButton:self.twoLinkageButton withText:titles[1]];
         
         self.twoLinkageDropMenu = [[DropMenuView alloc] init];
@@ -50,12 +52,20 @@
         self.twoLinkageDropMenu.delegate = self;
         
         self.threeLinkageButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.threeLinkageButton.frame = CGRectMake(2 * kWidth/3, 0,  kWidth/3, 50);
+        self.threeLinkageButton.frame = CGRectMake(2 * kWidth/self.titles.count, 0,  kWidth/self.titles.count, 50);
         [self setUpButton:self.threeLinkageButton withText:titles[2]];
         
         self.threeLinkageDropMenu = [[DropMenuView alloc] init];
         self.threeLinkageDropMenu.arrowView = self.threeLinkageButton.imageView;
         self.threeLinkageDropMenu.delegate = self;
+        
+        self.fourLinkageButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.fourLinkageButton.frame = CGRectMake(3 * kWidth/self.titles.count, 0,  kWidth/self.titles.count, 50);
+        [self setUpButton:self.fourLinkageButton withText:titles[3]];
+        
+        self.fourLinkageDropMenu = [[DropMenuView alloc] init];
+        self.fourLinkageDropMenu.arrowView = self.fourLinkageButton.imageView;
+        self.fourLinkageDropMenu.delegate = self;
         
         /** 最下面横线 */
         UIView *horizontalLine = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 0.6, kWidth, 0.6)];
@@ -73,13 +83,16 @@
         
         [self.twoLinkageDropMenu dismiss];
         [self.threeLinkageDropMenu dismiss];
+        [self.fourLinkageDropMenu dismiss];
         
-        [self.oneLinkageDropMenu creatDropView:self withShowTableNum:1 withData:self.dataArr1];
+        [self.oneLinkageDropMenu creatDropView:self withShowTableNum:2 withData:self.dataArr1];
+
         
     }else if (button == self.twoLinkageButton){
         
         [self.oneLinkageDropMenu dismiss];
         [self.threeLinkageDropMenu dismiss];
+        [self.fourLinkageDropMenu dismiss];
         
         [self.twoLinkageDropMenu creatDropView:self withShowTableNum:1 withData:self.dataArr2];
         
@@ -87,8 +100,16 @@
         
         [self.oneLinkageDropMenu dismiss];
         [self.twoLinkageDropMenu dismiss];
+        [self.fourLinkageDropMenu dismiss];
         
         [self.threeLinkageDropMenu creatDropView:self withShowTableNum:1 withData:self.dataArr3];
+    }else if (button == self.fourLinkageButton){
+        
+        [self.oneLinkageDropMenu dismiss];
+        [self.twoLinkageDropMenu dismiss];
+        [self.threeLinkageDropMenu dismiss];
+        
+        [self.fourLinkageDropMenu creatDropView:self withShowTableNum:1 withData:self.dataArr4];
     }
 }
 
@@ -98,28 +119,36 @@
     [self.oneLinkageDropMenu dismiss];
     [self.twoLinkageDropMenu dismiss];
     [self.threeLinkageDropMenu dismiss];
+    [self.fourLinkageDropMenu dismiss];
 }
 
 #pragma mark - 协议实现
--(void)dropMenuView:(DropMenuView *)view didSelectName:(NSString *)str selectIndex:(NSInteger)selectIndex{
+-(void)dropMenuView:(DropMenuView *)view didSelectName:(NSString *)str firstSelectIndex:(NSInteger)firstSelectIndex selectIndex:(NSInteger)selectIndex{
     
     if (view == self.oneLinkageDropMenu) {
-        
+
         [self.oneLinkageButton setTitle:str forState:UIControlStateNormal];
         [self buttonEdgeInsets:self.oneLinkageButton];
-        self.block(0,selectIndex);
+        self.block(0,firstSelectIndex,selectIndex);
+        
     }else if (view == self.twoLinkageDropMenu){
         
         [self.twoLinkageButton setTitle:str forState:UIControlStateNormal];
-
+        
         [self buttonEdgeInsets:self.twoLinkageButton];
-        self.block(1,selectIndex);
+        self.block(1,firstSelectIndex,selectIndex);
     }else if (view == self.threeLinkageDropMenu){
         
         [self.threeLinkageButton setTitle:str forState:UIControlStateNormal];
 
         [self buttonEdgeInsets:self.threeLinkageButton];
-        self.block(2,selectIndex);
+        self.block(2,firstSelectIndex,selectIndex);
+    }else if (view == self.fourLinkageDropMenu){
+        
+        [self.fourLinkageButton setTitle:str forState:UIControlStateNormal];
+        
+        [self buttonEdgeInsets:self.fourLinkageButton];
+        self.block(3,firstSelectIndex,selectIndex);
     }
 }
 

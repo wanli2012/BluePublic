@@ -20,6 +20,8 @@
 
 #import "HWCalendar.h"//日期选择
 #import <SVProgressHUD/SVProgressHUD.h>
+#import "GLMutipleChooseController.h"//省市选择
+#import "GLPublish_CityModel.h"//城市模型
 
 
 @interface GLPublishController ()<UITextViewDelegate,HXPhotoViewDelegate,UIViewControllerTransitioningDelegate,UIViewControllerAnimatedTransitioning,HWCalendarDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
@@ -39,18 +41,14 @@
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UIButton *submitBtn;//提交
 
-@property (weak, nonatomic) IBOutlet UIView *bgPhotoView;//照片View
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bgPhotoViewHeight;
-
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollViewHeight;
 
 @property (strong, nonatomic)HWCalendar *Calendar;
 @property (strong, nonatomic)UIView *CalendarView;
 
 @property (nonatomic, strong)GLCircle_item_screenModel *categoryModel;
 @property (nonatomic, strong)LoadWaitView *loadV;
-@property (nonatomic, strong)NSMutableArray *dataSourceArr;
+@property (nonatomic, strong)NSMutableArray *dataSourceArr;//行业数据源
 
 @property (weak, nonatomic) IBOutlet UILabel *industryLabel;//行业分类
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;//日期
@@ -59,13 +57,13 @@
 @property (weak, nonatomic) IBOutlet UITextField *moneyTF;//金额TF
 @property (weak, nonatomic) IBOutlet UITextField *titleTF;//标题TF
 @property (weak, nonatomic) IBOutlet UITextView *infoTV;//项目说明
+@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 
 @property (nonatomic, copy)NSString *trade_id;//行业id
 @property (nonatomic, copy)NSString *need_time;//截止日期
 
 @property (nonatomic, assign)BOOL isHaveDian;
 @property (nonatomic, strong)NSMutableArray *imageArr;//图片数组
-@property (weak, nonatomic) IBOutlet UIImageView *aaaa;
 
 @property (weak, nonatomic) IBOutlet UIImageView *pic1;
 @property (weak, nonatomic) IBOutlet UIImageView *pic2;
@@ -73,6 +71,10 @@
 
 @property (nonatomic, assign)NSInteger picIndex;//pic下标
 @property (nonatomic, copy)NSString *lastTextContent;//titleTF最后的字符串
+
+@property (nonatomic, strong)NSMutableArray *cityModels;//城市数据源
+@property (nonatomic, copy)NSString *provinceId;//省份id
+@property (nonatomic, copy)NSString *cityId;//城市id
 
 @end
 
@@ -117,16 +119,17 @@
     
     _isAgreeProtocol = NO;
     [self postRequest_Category];
+    [self postRequest_City];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange:) name:UITextFieldTextDidChangeNotification object:self.titleTF];
     
 }
-
+#pragma mark - 获取分类
 - (void)postRequest_Category {
-    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+//    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
 
     [NetworkManager requestPOSTWithURLStr:kCIRCLE_FITER_URL paramDic:@{} finish:^(id responseObject) {
-        [_loadV removeloadview];
+//        [_loadV removeloadview];
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             if([responseObject[@"data"] count] != 0){
                 
@@ -135,6 +138,32 @@
                 
                 for (GLCircle_itemScreen_manModel *manModel in self.categoryModel.trade) {
                     [self.dataSourceArr addObject:manModel.trade_name];
+                }
+            }
+        }else{
+            
+            [MBProgressHUD showError:responseObject[@"message"]];
+        }
+        
+    } enError:^(NSError *error) {
+//        [_loadV removeloadview];
+    }];
+    
+}
+#pragma mark - 获取城市列表
+- (void)postRequest_City {
+    
+    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:[UIApplication sharedApplication].keyWindow];
+    [NetworkManager requestPOSTWithURLStr:kCITYLIST_URL paramDic:@{} finish:^(id responseObject) {
+        [_loadV removeloadview];
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+            if([responseObject[@"data"] count] != 0){
+                
+                [self.cityModels removeAllObjects];
+                for (NSDictionary *dic in responseObject[@"data"]) {
+                    
+                    GLPublish_CityModel *model = [GLPublish_CityModel mj_objectWithKeyValues:dic];
+                    [self.cityModels addObject:model];
                 }
             }
         }else{
@@ -153,7 +182,7 @@
     
     self.navigationController.navigationBar.hidden = YES;
 }
-
+#pragma mark -  行业选择
 - (IBAction)industryChoose:(id)sender {
 
     GLSimpleSelectionPickerController *vc=[[GLSimpleSelectionPickerController alloc]init];
@@ -168,6 +197,7 @@
             
             weakSelf.industryLabel.text = weakSelf.categoryModel.trade[index].trade_name;
             weakSelf.trade_id = weakSelf.categoryModel.trade[index].trade_id;
+            weakSelf.industryLabel.textColor = [UIColor darkGrayColor];
         };
         
         vc.transitioningDelegate = self;
@@ -177,7 +207,7 @@
         [MBProgressHUD showError:@"行业分类暂无数据"];
     }
 }
-
+#pragma mark - 截止日期选择
 - (IBAction)endTimeChoose:(id)sender {
 
     self.CalendarView.hidden = NO;
@@ -185,6 +215,24 @@
 
 }
 
+#pragma mark - 省市选择
+- (IBAction)cityChoose:(id)sender {
+    GLMutipleChooseController *vc=[[GLMutipleChooseController alloc]init];
+    vc.dataArr = self.cityModels;
+    vc.transitioningDelegate=self;
+    vc.modalPresentationStyle=UIModalPresentationCustom;
+    
+    [self presentViewController:vc animated:YES completion:nil];
+    __weak typeof(self) weakself = self;
+    vc.returnreslut = ^(NSString *str,NSString *strid,NSString *provinceid,NSString *cityd,NSString *areaid){
+        weakself.addressLabel.textColor = [UIColor darkGrayColor];
+        weakself.addressLabel.text = str;
+        weakself.provinceId = provinceid;
+        weakself.cityId = cityd;
+
+    };
+}
+#pragma mark - 是否同意了协议
 - (IBAction)isAgreeProtocol:(id)sender {
 
     _isAgreeProtocol = !_isAgreeProtocol;
@@ -212,7 +260,7 @@
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
+#pragma mark - 图片选择
 - (IBAction)getPicture:(UITapGestureRecognizer *)sender {
     
     switch (sender.view.tag) {
@@ -340,7 +388,7 @@
 
 }
 
-//提交
+#pragma mark - 提交
 - (IBAction)submit:(id)sender {
     
     if (self.moneyTF.text.length == 0) {
@@ -358,13 +406,17 @@
         [MBProgressHUD showError:@"请选择行业"];
         return;
     }
-    if ([self.dateLabel.text isEqualToString:@"请选择"]) {
+    if ([self.dateLabel.text isEqualToString:@"筹款截止日期"]) {
         [MBProgressHUD showError:@"请选择截止日期"];
         return;
     }
     
     if ([self.infoTV.text isEqualToString:@"  请填写项目说明（限制150字以内）"]|| [self.infoTV.text isEqualToString:@""]) {
         [MBProgressHUD showError:@"请输入项目说明"];
+        return;
+    }
+    if ([self.addressLabel.text isEqualToString:@"请选择"]) {
+        [MBProgressHUD showError:@"请选择地址"];
         return;
     }
     
@@ -621,6 +673,7 @@
     });
     
     self.dateLabel.text = date;
+    self.dateLabel.textColor = [UIColor darkGrayColor];
     
     NSDateFormatter  *dateformatter = [[NSDateFormatter alloc] init];
     [dateformatter setDateFormat:@"YYYY年MM月dd日"];
@@ -750,6 +803,12 @@
         _imageArr = [NSMutableArray array];
     }
     return _imageArr;
+}
+- (NSMutableArray *)cityModels{
+    if (!_cityModels) {
+        _cityModels = [NSMutableArray array];
+    }
+    return _cityModels;
 }
 
 @end

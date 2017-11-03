@@ -15,7 +15,8 @@
 #import "GLBusinessAdModel.h"//广告Model
 
 #import "GLBusiness_CertificationController.h"//webVC,此处用于展示广告
-
+#import "GLMutipleChooseController.h"//省市选择
+#import "GLPublish_CityModel.h"//城市模型
 
 @interface GLBusinessCircleController ()<SDCycleScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -37,6 +38,9 @@
 @property (nonatomic, strong)NSMutableArray *adModels;
 
 @property (nonatomic, assign)BOOL  HideNavagation;//是否需要恢复自定义导航栏
+@property (nonatomic, strong)NSMutableArray <GLPublish_CityModel *>*cityModels;//城市数据源
+@property (nonatomic, copy)NSString *provinceId;//省份id
+@property (nonatomic, copy)NSString *cityId;//城市id
 
 @end
 
@@ -57,21 +61,27 @@
      __weak __typeof(self) weakSelf = self;
     
     [self.headerView addSubview:self.cycleScrollView];
-    self.menuScreeningView.block = ^(NSInteger itemIndex,NSInteger index){
+    self.menuScreeningView.block = ^(NSInteger itemIndex,NSInteger firstIndex,NSInteger index){
         switch (itemIndex) {
             case 0:
             {
-                weakSelf.trade_id = weakSelf.categoryModel.trade[index].trade_id;
+                weakSelf.provinceId = weakSelf.cityModels[firstIndex].province_code;
+                weakSelf.cityId = weakSelf.cityModels[firstIndex].city[index].city_code;
             }
                 break;
             case 1:
             {
-                weakSelf.man = weakSelf.categoryModel.man[index].trade_id;
+                weakSelf.trade_id = weakSelf.categoryModel.trade[firstIndex].trade_id;
             }
                 break;
             case 2:
             {
-               weakSelf.stop = weakSelf.categoryModel.stop[index].trade_id;
+                weakSelf.man = weakSelf.categoryModel.man[firstIndex].trade_id;
+            }
+                break;
+            case 3:
+            {
+               weakSelf.stop = weakSelf.categoryModel.stop[firstIndex].trade_id;
             }
                 break;
                 
@@ -107,8 +117,10 @@
     [self postRequest:YES];
     [self postRequest_Category];
     [self postAdData];
+    [self postRequest_CityList];
     
 }
+
 #pragma mark - 项目数据
 - (void)postRequest:(BOOL)isRefresh{
     
@@ -116,7 +128,7 @@
         self.page = 1;
         
     }else{
-        self.page ++ ;
+        self.page ++;
     }
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
@@ -125,6 +137,8 @@
     dic[@"trade_id"] = self.trade_id;
     dic[@"man"] = self.man;
     dic[@"stop"] = self.stop;
+    dic[@"province"] = self.provinceId;
+    dic[@"city"] = self.cityId;
     
     _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
     
@@ -140,8 +154,10 @@
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             if([responseObject[@"data"] count] != 0){
                 
+                
                 for (NSDictionary *dict in responseObject[@"data"]) {
                     GLCircle_item_dataModel *model = [GLCircle_item_dataModel mj_objectWithKeyValues:dict];
+                    
                     [self.models addObject:model];
                 }
             }
@@ -185,9 +201,9 @@
                     [arrM3 addObject:manModel.trade_name];
                 }
                 
-                self.menuScreeningView.dataArr1 = arrM;
-                self.menuScreeningView.dataArr2 = arrM2;
-                self.menuScreeningView.dataArr3 = arrM3;
+                self.menuScreeningView.dataArr2 = arrM;
+                self.menuScreeningView.dataArr3 = arrM2;
+                self.menuScreeningView.dataArr4 = arrM3;
             }
             
         }else{
@@ -197,6 +213,58 @@
         
     } enError:^(NSError *error) {
        
+    }];
+}
+
+#pragma mark - 城市列表数据
+- (void)postRequest_CityList {
+    
+    [NetworkManager requestPOSTWithURLStr:kCITYLIST_URL paramDic:@{} finish:^(id responseObject) {
+        
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+            if([responseObject[@"data"] count] != 0){
+                
+                [self.cityModels removeAllObjects];
+                
+                GLPublish_CityModel *model0 = [[GLPublish_CityModel alloc] init];
+                model0.province_name = @"不限";
+                
+                GLPublish_City *city = [[GLPublish_City alloc] init];
+                city.city_name = @"不限";
+                model0.city = [NSMutableArray arrayWithObject:city];
+                
+                [self.cityModels addObject:model0];
+               
+                for (NSDictionary *dic in responseObject[@"data"]) {
+                    
+                    GLPublish_CityModel *model = [GLPublish_CityModel mj_objectWithKeyValues:dic];
+                    
+                    [self.cityModels addObject:model];
+                   
+                }
+                
+                
+                for (GLPublish_CityModel *model in self.cityModels)
+                {
+                    GLPublish_City *city = [[GLPublish_City alloc] init];
+                    city.city_name = @"不限";
+                    
+                    NSMutableArray *array = [NSMutableArray array];
+                    [array addObject:city];
+                    [array addObjectsFromArray:model.city];
+                    
+                    model.city = array;
+                }
+                
+                self.menuScreeningView.dataArr1 = self.cityModels;
+            }
+        }else{
+            
+            [MBProgressHUD showError:responseObject[@"message"]];
+        }
+        
+    } enError:^(NSError *error) {
+        
     }];
 }
 
@@ -304,7 +372,8 @@
 -(GLBusinessCircle_MenuScreeningView*)menuScreeningView{
     
     if (!_menuScreeningView) {
-        _menuScreeningView = [[GLBusinessCircle_MenuScreeningView alloc] initWithFrame:CGRectMake(0, 20,kSCREEN_WIDTH , 50) WithTitles:@[@"行业",@"官方发布",@"筹款中"]];
+        _menuScreeningView = [[GLBusinessCircle_MenuScreeningView alloc] initWithFrame:CGRectMake(0, 20,kSCREEN_WIDTH , 50) WithTitles:@[@"城市",@"行业",@"官方发布",@"筹款中"]];
+//        _menuScreeningView.isHaveSecond = YES;
         _menuScreeningView.backgroundColor = [UIColor whiteColor];
     }
     
@@ -356,6 +425,13 @@
         
     }
     return _nodataV;
+}
+
+- (NSMutableArray *)cityModels{
+    if (!_cityModels) {
+        _cityModels = [NSMutableArray array];
+    }
+    return _cityModels;
 }
 
 @end

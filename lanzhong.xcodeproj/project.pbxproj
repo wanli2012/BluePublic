@@ -185,6 +185,9 @@
 		4A5A785E1F7B9B0E004FB15A /* GLBusinessCircleController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A5A78531F7B9B0E004FB15A /* GLBusinessCircleController.xib */; };
 		4A5A785F1F7B9B0E004FB15A /* GLBusiniessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A5A78571F7B9B0E004FB15A /* GLBusiniessCell.m */; };
 		4A5A78601F7B9B0E004FB15A /* GLBusiniessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A5A78581F7B9B0E004FB15A /* GLBusiniessCell.xib */; };
+		4A69EEC91FAC137B00271C32 /* GLMutipleChooseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A69EEC71FAC137B00271C32 /* GLMutipleChooseController.m */; };
+		4A69EECA1FAC137B00271C32 /* GLMutipleChooseController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A69EEC81FAC137B00271C32 /* GLMutipleChooseController.xib */; };
+		4A69EECD1FAC3C2900271C32 /* GLPublish_CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A69EECC1FAC3C2900271C32 /* GLPublish_CityModel.m */; };
 		4A6AD1A91F7F2E8800E6084E /* GLPay_CompletedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6AD1A71F7F2E8800E6084E /* GLPay_CompletedController.m */; };
 		4A6AD1AA1F7F2E8800E6084E /* GLPay_CompletedController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A6AD1A81F7F2E8800E6084E /* GLPay_CompletedController.xib */; };
 		4A6AD1CA1F7F73EE00E6084E /* GLHome_CasesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A6AD1C81F7F73EE00E6084E /* GLHome_CasesController.m */; };
@@ -672,6 +675,11 @@
 		4A5A78561F7B9B0E004FB15A /* GLBusiniessCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLBusiniessCell.h; sourceTree = "<group>"; };
 		4A5A78571F7B9B0E004FB15A /* GLBusiniessCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLBusiniessCell.m; sourceTree = "<group>"; };
 		4A5A78581F7B9B0E004FB15A /* GLBusiniessCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLBusiniessCell.xib; sourceTree = "<group>"; };
+		4A69EEC61FAC137B00271C32 /* GLMutipleChooseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMutipleChooseController.h; sourceTree = "<group>"; };
+		4A69EEC71FAC137B00271C32 /* GLMutipleChooseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMutipleChooseController.m; sourceTree = "<group>"; };
+		4A69EEC81FAC137B00271C32 /* GLMutipleChooseController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMutipleChooseController.xib; sourceTree = "<group>"; };
+		4A69EECB1FAC3C2900271C32 /* GLPublish_CityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLPublish_CityModel.h; path = "lanzhong/发布/发布首页/Controller/GLPublish_CityModel.h"; sourceTree = SOURCE_ROOT; };
+		4A69EECC1FAC3C2900271C32 /* GLPublish_CityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GLPublish_CityModel.m; path = "lanzhong/发布/发布首页/Controller/GLPublish_CityModel.m"; sourceTree = SOURCE_ROOT; };
 		4A6AD1A61F7F2E8800E6084E /* GLPay_CompletedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLPay_CompletedController.h; sourceTree = "<group>"; };
 		4A6AD1A71F7F2E8800E6084E /* GLPay_CompletedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLPay_CompletedController.m; sourceTree = "<group>"; };
 		4A6AD1A81F7F2E8800E6084E /* GLPay_CompletedController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLPay_CompletedController.xib; sourceTree = "<group>"; };
@@ -2949,6 +2957,9 @@
 				4ADEBAF61F7DDC7200C50087 /* GLPublishController.h */,
 				4ADEBAF71F7DDC7200C50087 /* GLPublishController.m */,
 				4ADEBAF81F7DDC7200C50087 /* GLPublishController.xib */,
+				4A69EEC61FAC137B00271C32 /* GLMutipleChooseController.h */,
+				4A69EEC71FAC137B00271C32 /* GLMutipleChooseController.m */,
+				4A69EEC81FAC137B00271C32 /* GLMutipleChooseController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2956,6 +2967,8 @@
 		4ADEBAF91F7DDC7200C50087 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4A69EECB1FAC3C2900271C32 /* GLPublish_CityModel.h */,
+				4A69EECC1FAC3C2900271C32 /* GLPublish_CityModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3683,6 +3696,7 @@
 				4A6AD22C1F7F953600E6084E /* GLPublish_ReviewCell.xib in Resources */,
 				4A47F0AA1F9F16A100C50A9E /* GLMine_ReturnGoodsCell.xib in Resources */,
 				4A6AD1CB1F7F73EE00E6084E /* GLHome_CasesController.xib in Resources */,
+				4A69EECA1FAC137B00271C32 /* GLMutipleChooseController.xib in Resources */,
 				4A6B9F391F7CF100009386C8 /* GLBusiness_tradeSubCell.xib in Resources */,
 				4A509B981F872F0000D794FB /* GLMine_MyMessageCell.xib in Resources */,
 				4A16FF111F8F484600064CE5 /* GLBusiness_Detail_heartCommentController.xib in Resources */,
@@ -3920,6 +3934,7 @@
 				4AF109F41F78E07A00CB51FA /* UIView+Extension.m in Sources */,
 				4A2905431F97579E006903F1 /* GLMine_ShareController.m in Sources */,
 				4A05EEAA1F8C97380095DBCF /* UIView+HXExtension.m in Sources */,
+				4A69EECD1FAC3C2900271C32 /* GLPublish_CityModel.m in Sources */,
 				4A0B74F51F90A8810007788B /* MHActionSheet.m in Sources */,
 				4A2905481F9757BF006903F1 /* GLMine_ShareRecordController.m in Sources */,
 				4ADDD1951F88A45500C95F9C /* editorMaskPresentationController.m in Sources */,
@@ -4069,6 +4084,7 @@
 				4AF5B04D1F960101000407A7 /* ScaleSizeImage.m in Sources */,
 				4ADDD1B31F88B64700C95F9C /* GLHomeModel.m in Sources */,
 				4A53E84F1F7A4BE20021D9E0 /* GLMall_DetailCommentCell.m in Sources */,
+				4A69EEC91FAC137B00271C32 /* GLMutipleChooseController.m in Sources */,
 				F9BB80111F7A283700867514 /* GLClassifyCell.m in Sources */,
 				4A6AD2371F7F953600E6084E /* GLPublish_ProjectCompletedController.m in Sources */,
 				4AF5B0271F9594A7000407A7 /* GLMine_Wallet_ExchangeModel.m in Sources */,
