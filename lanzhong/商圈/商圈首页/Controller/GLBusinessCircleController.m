@@ -163,8 +163,8 @@
             }
             
         }else{
-            
-            [MBProgressHUD showError:responseObject[@"message"]];
+
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
         [self.tableView reloadData];
@@ -207,8 +207,8 @@
             }
             
         }else{
-            
-            [MBProgressHUD showError:responseObject[@"message"]];
+
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
     } enError:^(NSError *error) {
@@ -228,10 +228,7 @@
                 
                 GLPublish_CityModel *model0 = [[GLPublish_CityModel alloc] init];
                 model0.province_name = @"不限";
-                
-                GLPublish_City *city = [[GLPublish_City alloc] init];
-                city.city_name = @"不限";
-                model0.city = [NSMutableArray arrayWithObject:city];
+
                 
                 [self.cityModels addObject:model0];
                
@@ -242,7 +239,6 @@
                     [self.cityModels addObject:model];
                    
                 }
-                
                 
                 for (GLPublish_CityModel *model in self.cityModels)
                 {
@@ -259,8 +255,8 @@
                 self.menuScreeningView.dataArr1 = self.cityModels;
             }
         }else{
-            
-            [MBProgressHUD showError:responseObject[@"message"]];
+
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
     } enError:^(NSError *error) {
@@ -292,8 +288,8 @@
             }
             
         }else{
-            
-            [MBProgressHUD showError:responseObject[@"message"]];
+
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
         

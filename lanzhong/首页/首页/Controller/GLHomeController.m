@@ -84,14 +84,17 @@
     [self Postpath:GET_VERSION];
 }
 
+#pragma mark - 界面设置
 - (void)setUI{
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     
+    self.navigationController.navigationBar.barTintColor = [UIColor clearColor];
+    
     _selectedSegmentIndex = 0;
     
-    self.headerView.height = 260;
+    self.headerView.height = 280;
     
     self.segment.selectedSegmentIndex = 0;
     
@@ -109,6 +112,7 @@
     self.middleViewLayerView.layer.shadowRadius = 1.f;
 }
 
+#pragma mark - 请求数据
 - (void)postRequest{
     
     _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
@@ -133,6 +137,7 @@
         [_loadV removeloadview];
         [self endRefresh];
         [self.tableView reloadData];
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
         
     }];
 
@@ -148,7 +153,7 @@
     
     self.navigationController.navigationBar.hidden = YES;
 }
-
+#pragma mark - 查看更多
 - (IBAction)more:(id)sender {
 
     self.hidesBottomBarWhenPushed = YES;
@@ -157,7 +162,7 @@
     self.hidesBottomBarWhenPushed = NO;
     
 }
-
+#pragma mark - 公告
 - (IBAction)notice:(id)sender {
   
     self.hidesBottomBarWhenPushed = YES;
@@ -167,6 +172,7 @@
     self.hidesBottomBarWhenPushed = NO;
 }
 
+#pragma mark - 切换数据显示
 - (IBAction)switchSelected:(id)sender {
     
     UISegmentedControl* control = (UISegmentedControl*)sender;
@@ -181,6 +187,7 @@
     switch (index) {
         case 0:
         {
+            double c_over_num = [self.model.c_over_num doubleValue];
             
             self.titleLabel.text = @"创客大数据";
             self.label.text = @"创客人数";
@@ -188,19 +195,20 @@
             self.label3.text = @"创客资金";
             self.label4.text = [NSString stringWithFormat:@"%@人",self.model.c_man_num];
             self.label5.text = [NSString stringWithFormat:@"%@个",self.model.c_item_num];
-            self.label6.text = [NSString stringWithFormat:@"%@元",self.model.c_over_num];
+            self.label6.text = [NSString stringWithFormat:@"%.2f元",c_over_num];
             
         }
             break;
         case 1:
         {
+            double ai_over_num = [self.model.ai_over_num doubleValue];
             self.titleLabel.text = @"爱心大数据";
             self.label.text = @"爱心人数";
             self.label2.text = @"帮扶项目";
             self.label3.text = @"爱心资金";
             self.label4.text = [NSString stringWithFormat:@"%@人",self.model.ai_man_num];
             self.label5.text = [NSString stringWithFormat:@"%@个",self.model.ai_item_num ];
-            self.label6.text = [NSString stringWithFormat:@"%@元",self.model.ai_over_num ];
+            self.label6.text = [NSString stringWithFormat:@"%.2f元",ai_over_num ];
         }
             break;
             
@@ -258,17 +266,17 @@
         
         [alertView show];
     }
-    
 }
-#pragma mark ----- uialertviewdelegete
+
+#pragma mark ----- UIAlertviewdelegete
 //下载
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     if (buttonIndex == 1) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:DOWNLOAD_URL]];
     }
-    
 }
+
 #pragma mark - UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -292,7 +300,6 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     return 180;
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -304,7 +311,6 @@
     [self.navigationController pushViewController:detailVC animated:YES];
 
     self.hidesBottomBarWhenPushed = NO;
-    
 }
 
 - (NodataView *)nodataV{
@@ -313,5 +319,4 @@
     }
     return _nodataV;
 }
-
 @end

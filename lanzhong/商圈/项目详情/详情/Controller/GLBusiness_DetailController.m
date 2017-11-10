@@ -119,8 +119,8 @@
             }
             
         }else{
-            
-            [MBProgressHUD showError:responseObject[@"message"]];
+
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
         [self.tableView reloadData];
@@ -245,6 +245,7 @@
     [self.tableView.mj_footer endRefreshing];
 }
 
+#pragma mark - 设置UI界面
 - (void)setUI{
     
     self.view.backgroundColor = [UIColor brownColor];
@@ -278,9 +279,23 @@
     self.navigationController.navigationBar.hidden = NO;
     
 }
-
+#pragma mark - 查看大图
+- (IBAction)checkBigImageV:(id)sender {
+    self.HideNavagation = YES;
+    JZAlbumViewController *jzAlbumVC = [[JZAlbumViewController alloc]init];
+    jzAlbumVC.currentIndex = 0;//这个参数表示当前图片的index，默认是0
+    jzAlbumVC.imgArr = [NSMutableArray arrayWithArray:@[self.model.user_info_pic]];//图片数组，可以是url，也可以是UIImage
+    [self presentViewController:jzAlbumVC animated:NO completion:nil];
+    
+}
+#pragma mark - 支持
 - (IBAction)support:(id)sender {
-
+    
+    if ([UserModel defaultUser].loginstatus == NO) {
+        [SVProgressHUD showErrorWithStatus:@"请先登录"];
+        return;
+    }
+    
     self.hidesBottomBarWhenPushed = YES;
     GLPay_ChooseController *payVC = [[GLPay_ChooseController alloc] init];
     payVC.item_id = self.item_id;
@@ -288,7 +303,7 @@
 
 }
 
-//爱心贡献榜
+#pragma mark - 爱心贡献榜
 - (IBAction)contributionList:(id)sender {
     
     self.hidesBottomBarWhenPushed = YES;
@@ -297,7 +312,7 @@
     [self.navigationController pushViewController:lovelistVC animated:YES];
     
 }
-
+#pragma mark - 分享
 - (IBAction)share:(id)sender {
 
     [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine)]];

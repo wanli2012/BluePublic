@@ -12,16 +12,11 @@
 #import "GLOrderPayView.h"
 
 #import <AlipaySDK/AlipaySDK.h>
+#import "WXApi.h"
+#import "RSAEncryptor.h"
 
-@interface GLPay_ChooseController ()<UITextViewDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface GLPay_ChooseController ()<UITextViewDelegate,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UIImageView *weixinSignImageV;
-@property (weak, nonatomic) IBOutlet UIImageView *alipaySignImageV;
-@property (weak, nonatomic) IBOutlet UIButton *weixinBtn;//微信支付
-@property (weak, nonatomic) IBOutlet UIButton *aliPayBtn;//支付宝支付
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewHeight;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewWidth;
 @property (weak, nonatomic) IBOutlet UIButton *ensureBtn;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -37,6 +32,7 @@
 @property (nonatomic, strong)LoadWaitView *loadV;
 @property (weak, nonatomic) IBOutlet UITextField *moneyTF;
 @property (weak, nonatomic) IBOutlet UITextView *messageTextV;//留言textView
+@property (nonatomic, assign)BOOL isHaveDian;
 
 @end
 
@@ -47,20 +43,20 @@
     
     self.navigationItem.title = @"支付详情";
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    self.contentViewWidth.constant = kSCREEN_WIDTH;
-    self.contentViewHeight.constant = kSCREEN_HEIGHT;
-    
+
     self.ensureBtn.layer.cornerRadius = 5.f;
     
     self.messageTextV.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
     self.messageTextV.layer.borderWidth = 1.f;
-    
-    [self switchPay:self.weixinBtn];
+
     
     [self.tableView registerNib:[UINib nibWithNibName:@"LBMineCenterPayPagesTableViewCell" bundle:nil] forCellReuseIdentifier:@"LBMineCenterPayPagesTableViewCell"];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popScrectView) name:@"input_PasswordNotification" object:nil];
+    /**
+     *微信支付成功 回调
+     */
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(wxpaysucess) name:@"wxpaysucess" object:nil];
     
     [self isShowPayInterface];
 }
@@ -116,22 +112,7 @@
 
 //选择方式
 - (IBAction)switchPay:(UIButton *)sender {
-    
-    self.weixinBtn.layer.borderColor = YYSRGBColor(184, 184, 184, 0.5).CGColor;
-    self.aliPayBtn.layer.borderColor = YYSRGBColor(184, 184, 184, 0.5).CGColor;
-    
-    sender.layer.borderColor = YYSRGBColor(170, 193, 255, 1).CGColor;
-    
-    if (sender == self.weixinBtn) {
-        
-        self.weixinSignImageV.hidden = NO;
-        self.alipaySignImageV.hidden = YES;
-        
-    }else{
-        
-        self.weixinSignImageV.hidden = YES;
-        self.alipaySignImageV.hidden = NO;
-    }
+
 }
 
 //确认支付
@@ -140,6 +121,16 @@
     NSDate *dat = [NSDate dateWithTimeIntervalSinceNow:0];
     NSTimeInterval a = [dat timeIntervalSince1970];
     NSString *timeString = [NSString stringWithFormat:@"%0.f", a];//转为字符型
+    
+    if ([self.messageTextV.text isEqualToString:@"留言"]) {
+        self.messageTextV.text = @"";
+    }
+    
+    if([self.moneyTF.text doubleValue] <= 0){
+
+        [SVProgressHUD showErrorWithStatus:@"支持金额必须大于0"];
+        return;
+    }
 
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"uid"] = [UserModel defaultUser].uid;
@@ -171,7 +162,6 @@
         default:
             break;
     }
-
 }
 
 //现金支付
@@ -183,14 +173,19 @@
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             
             switch (self.selectIndex) {
-                case 0://余额
-                {
-                    
-                }
-                    break;
                 case 1://微信
                 {
-                    
+                    //调起微信支付
+                    PayReq* req = [[PayReq alloc] init];
+                    req.openID=responseObject[@"data"][@"wxinpay"][@"appid"];
+                    req.partnerId = responseObject[@"data"][@"wxinpay"][@"partnerid"];
+                    req.prepayId = responseObject[@"data"][@"wxinpay"][@"prepayid"];
+                    req.nonceStr = responseObject[@"data"][@"wxinpay"][@"noncestr"];
+                    req.timeStamp = [responseObject[@"data"][@"wxinpay"][@"timestamp"] intValue];
+                    req.package = responseObject[@"data"][@"wxinpay"][@"packages"];
+                    req.sign = responseObject[@"data"][@"wxinpay"][@"sign"];
+                    [WXApi sendReq:req];
+
                 }
                     break;
                 case 2://支付宝
@@ -226,20 +221,17 @@
                                 default:
                                     break;
                             }
-                            [MBProgressHUD showError:returnStr];
-                            
+                            [SVProgressHUD showErrorWithStatus:returnStr];
                         }
                     }];
-                    
                 }
                     break;
                 default:
                     break;
             }
-            
         }else{
-            
-            [MBProgressHUD showError:responseObject[@"message"]];
+
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
             
         }
     } enError:^(NSError *error) {
@@ -248,6 +240,11 @@
     }];
 }
 
+-(void)wxpaysucess{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"supportNotification" object:nil];
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
 //余额支付
 - (void)balancePay:(NSMutableDictionary *)dict{
     
@@ -257,22 +254,20 @@
         textField.placeholder = @"请输入登录密码";
     }];
     
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
         if(self.moneyTF.text.length == 0){
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [MBProgressHUD showError:@"请输入支持金额"];
-                
+      
+                [SVProgressHUD showErrorWithStatus:@"请输入支持金额"];
             });
             
             return;
         }
-        
-        dict[@"upwd"] = alertVC.textFields.lastObject.text;
+        NSString *encryptsecret = [RSAEncryptor encryptString:alertVC.textFields.lastObject.text publicKey:public_RSA];
+        dict[@"upwd"] = encryptsecret;
         _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
         [NetworkManager requestPOSTWithURLStr:kSUPPORT_URL paramDic:dict finish:^(id responseObject) {
             
@@ -287,9 +282,7 @@
                 [self.navigationController pushViewController:completeVC animated:YES];
                 
             }else{
-                
-                [MBProgressHUD showError:responseObject[@"message"]];
-                
+                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
             }
         } enError:^(NSError *error) {
             [_loadV removeloadview];
@@ -306,11 +299,9 @@
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
     
     if ([self.messageTextV.text isEqualToString:@"留言"]) {
-        
         self.messageTextV.textColor = [UIColor darkGrayColor];
         self.messageTextV.text = @"";
     }
-    
     return YES;
 }
 
@@ -324,10 +315,89 @@
     }
     return YES;
 }
+#pragma mark - UITextFieldDelegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    /*
+     * 不能输入.0-9以外的字符。
+     * 设置输入框输入的内容格式
+     * 只能有一个小数点
+     * 小数点后最多能输入两位
+     * 如果第一位是.则前面加上0.
+     * 如果第一位是0则后面必须输入点，否则不能输入。
+     */
+    
+    // 判断是否有小数点
+    if ([textField.text containsString:@"."]) {
+        self.isHaveDian = YES;
+    }else{
+        self.isHaveDian = NO;
+    }
+    
+    if (string.length > 0) {
+        
+        //当前输入的字符
+        unichar single = [string characterAtIndex:0];
+        
+        // 不能输入.0-9以外的字符
+        if (!((single >= '0' && single <= '9') || single == '.'))
+        {
+
+            [SVProgressHUD showErrorWithStatus:@"您的输入格式不正确"];
+            return NO;
+        }
+        
+        // 只能有一个小数点
+        if (self.isHaveDian && single == '.') {
+    
+            [SVProgressHUD showErrorWithStatus:@"最多只能输入一个小数点"];
+            return NO;
+        }
+        
+        // 如果第一位是.则前面加上0.
+        if ((textField.text.length == 0) && (single == '.')) {
+            textField.text = @"0";
+        }
+        
+        // 如果第一位是0则后面必须输入点，否则不能输入。
+        if ([textField.text hasPrefix:@"0"]) {
+            if (textField.text.length > 1) {
+                NSString *secondStr = [textField.text substringWithRange:NSMakeRange(1, 1)];
+                if (![secondStr isEqualToString:@"."]) {
+         
+                    [SVProgressHUD showErrorWithStatus:@"第二个字符需要是小数点"];
+                    return NO;
+                }
+            }else{
+                if (![string isEqualToString:@"."]) {
+                
+                    [SVProgressHUD showErrorWithStatus:@"第二个字符需要是小数点"];
+                    return NO;
+                }
+            }
+        }
+        
+        // 小数点后最多能输入两位
+        if (self.isHaveDian) {
+            NSRange ran = [textField.text rangeOfString:@"."];
+            // 由于range.location是NSUInteger类型的，所以这里不能通过(range.location - ran.location)>2来判断
+            if (range.location > ran.location) {
+                if ([textField.text pathExtension].length > 1) {
+                   
+                    [SVProgressHUD showErrorWithStatus:@"小数点后最多有两位小数"];
+                    return NO;
+                }
+            }
+        }
+        
+    }
+
+    return YES;
+}
 
 #pragma mark - UITableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
+
     return self.dataarr.count;
 }
 
@@ -341,8 +411,8 @@
     
     LBMineCenterPayPagesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LBMineCenterPayPagesTableViewCell" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.payimage.image = [UIImage imageNamed:_dataarr[indexPath.row][@"image"]];
-    cell.paytitile.text = _dataarr[indexPath.row][@"title"];
+    cell.payimage.image = [UIImage imageNamed:self.dataarr[indexPath.row][@"image"]];
+    cell.paytitile.text = self.dataarr[indexPath.row][@"title"];
     
     if ([self.selectB[indexPath.row] boolValue] == NO) {
         

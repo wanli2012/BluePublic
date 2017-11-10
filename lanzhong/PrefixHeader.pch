@@ -11,6 +11,7 @@
 
 #import "UIView+Extension.h"
 #import "MBProgressHUD+LB.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "predicateModel.h"
 #import "NetworkManager.h"
 #import "LoadWaitView.h"
@@ -48,43 +49,42 @@
 #define WEIXIN_APPKEY @"wxa433d16a1ffeae20"
 #define WEIXIN_APPSECRET @"d8168698d8940f3aa3a078b25347a591"
 
+//公钥RSA
+#define public_RSA @"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDKJXC91J8tJ334v2J8sCAryP9UP/Fx3N2YxlLrM73J37bqmxuIU7ZZ0L8s1TF8BB8qaBLpfWCQZj95fLrW758mttyBW6vWf8CGChyxnSianl4d0eOvoJSThQEphzu0/1Ngl5uCLrKmje3+F9Kd+IpiY+YKmXii0bbenpPoZK0C5QIDAQAB"
 
 //公告
-#define Notice_URL @"http://lz.51dztg.com/index.php/Api/News/notice?news_id="
+#define Notice_URL @"http://www.lzcke.com/index.php/Api/News/notice?news_id="
 //官方认证
-#define Certification_URL @"http://lz.51dztg.com/index.php/Api/Item/item_content?item_id="
+#define Certification_URL @"http://www.lzcke.com/index.php/Api/Item/item_content?item_id="
 //图文详情
-#define Goods_Info_URL @"http://lz.51dztg.com/index.php/Api/Shop/goods_info?goods_id="
+#define Goods_Info_URL @"http://www.lzcke.com/index.php/Api/Shop/goods_info?goods_id="
 //广告
-#define AD_URL @"http://lz.51dztg.com/index.php/Api/Other/banner_data?banner_id="
+#define AD_URL @"http://www.lzcke.com/index.php/Api/Other/banner_data?banner_id="
 //分享项目详情
-#define Share_Project_URL @"http://lz.51dztg.com/Wx_lz/app/item_details.html?item_id=" 
+#define Share_Project_URL @"http://www.lzcke.com/Wx_lz/app/item_details.html?item_id="
 //分享注册
-#define Share_URL @"http://lz.51dztg.com/index.php/Wap/Index/index?g_name="
+#define Share_URL @"http://www.lzcke.com/index.php/Wap/Index/index?g_name="
 //关于公司
-#define About_URL @"http://lz.51dztg.com/protocol/about.html"
+#define About_URL @"http://www.lzcke.com/protocol/about.html"
 //帮助中心
-#define Help_Center_URL @"http://lz.51dztg.com/protocol/help.html"
+#define Help_Center_URL @"http://www.lzcke.com/protocol/help.html"
 //发布协议
-#define Publish_Protocol_URL @"http://lz.51dztg.com/protocol/issue.html"
+#define Publish_Protocol_URL @"http://www.lzcke.com/protocol/issue.html"
 //注册协议
-#define Register_Protocol_URL @"http://lz.51dztg.com/protocol/register.html"
+#define Register_Protocol_URL @"http://www.lzcke.com/protocol/register.html"
 
 //获取appStore上的最新版本号地址
 #define GET_VERSION  @"https://itunes.apple.com/lookup?id=1300026210"
 //下载地址
 #define DOWNLOAD_URL @"https://itunes.apple.com/cn/app/id1300026210?mt=8"
 
+//http://lz.51dztg.com
+//http://www.lzcke.com
 //#define URL_Base @"http://192.168.0.163/Raise/index.php/Api/"
-#define URL_Base @"http://lz.51dztg.com/index.php/Api/"
+#define URL_Base @"http://www.lzcke.com/index.php/Api/"
+
 
 #define kGETCODE_URL @"Common/sms"//获取验证码
-#define kREGISTER_URL @"User/user_enroll"//注册
-#define kLOGIN_URL @"User/user_login"//登录
-#define kFORGET_PWD_URL @"User/forget_pwd"//找回密码
-#define kMODIFY_PWD_URL @"User/pwd_save"//修改密码
-#define kHOME_URL @"Item/index"//首页
-#define kHOME_ALL_CLASSIC_URL @"Item/more_item"//所有经典项目
 #define kMALL_HOME_URL @"Shop/shop_index"//商城首页
 #define kMALL_FITER_URL @"Shop/term"//商城筛选
 #define kGOODS_DETAIL_URL @"Shop/goods_data"//商品详情
@@ -97,38 +97,39 @@
 #define kAPPLY_RETURN_URL @"Shop/user_refunds"//用户申请退货
 #define kREFUNDS_LIST_URL @"Shop/refunds_list"//用户申请退货列表
 #define kREFUND_INFO_URL @"Shop/refunds_info"//用户填写退货信息资料
-#define kBANNER_LIST_URL @"Other/banner_list"//广告展示
-#define kADD_FUNDTREND_URL @"Item/item_dynamic_add"//添加资金动向
+#define kMORE_GOODSCOMMENT_URL @"Shop/more_comment"//商品评论更多
+#define kORDER_PAY_URL @"Shop/order_pay"//订单支付
+#define kORDER_CANCEL_URL @"Shop/cancel_order"//取消订单shop/recipient
+#define kRECIPIENT_URL @"Shop/recipient"//确认订单收货
+#define kGOODS_COMMENT_URL @"Shop/goods_comment_data"//我的评论
 
+#define kREGISTER_URL @"User/user_enroll"//注册
+#define kLOGIN_URL @"User/user_login"//登录
+#define kFORGET_PWD_URL @"User/forget_pwd"//找回密码
+#define kMODIFY_PWD_URL @"User/pwd_save"//修改密码
 #define kMYCART_URL @"User/my_cart"//购物车
 #define kDEL_CARTGOODS_URL @"User/del_cart"//删除购物车商品
 #define kMYADDRESSLIST_URL @"User/my_address"//我的收货地址
-#define kCITYLIST_URL @"Other/getCityList"//城市列表
 #define kADD_ADDRESS_URL @"User/add_address"//添加收货地址
 #define kUPDATE_ADDRESS_URL @"User/save_my_address"//编辑地址
 #define kDEL_ADDRESS_URL @"User/del_address"//删除地址
+#define kMINE_MYPROJECT_URL @"User/myitem"//我的项目
 #define kBACK_DATA_URL @"User/back_data"//兑换页面数据
-#define kBANK_NAMELIST_URL @"Other/open_bank_list"//银行名列表
 #define kADD_BANK_URL @"User/add_bank"//银行卡添加
 #define kEXCHANGE_MONEY_URL @"User/umoney_handle"//兑换操作
 #define kBACK_LIST_URL @"User/back_list"//兑换记录
 #define kRECHARGE_LIST_URL @"User/my_recharge_list"//充值记录
 #define kIN_ITEM_LIST_URL @"User/in_item"//我参与的项目
 #define kMYMESSAGE_LIST_URL @"User/mymsg"//我的消息
-#define kNOTICE_LIST_URL @"News/more_notice"//公告列表
 #define kRECOMMENT_LIST_URL @"User/user_groom"//推荐列表
-#define kORDER_PAY_URL @"Shop/order_pay"//订单支付
-#define kPAY_SWITCH_URL @"Other/pay_type"//支付方式返回
-#define kORDER_CANCEL_URL @"Shop/cancel_order"//取消订单shop/recipient
-#define kRECIPIENT_URL @"Shop/recipient"//确认订单收货
 #define kDEL_CARD_URL @"User/del_bank"//删除银行卡
-
-#define kREFRESH_URL @"Other/break_user"//刷新
+#define kRECHARGE_URL @"User/recharge"//充值操作
 #define kUSER_INFO_SAVE_URL @"User/user_info_save"//实名认证,修改头像
+
+
+#define kHOME_URL @"Item/index"//首页
+#define kHOME_ALL_CLASSIC_URL @"Item/more_item"//所有经典项目
 #define kADD_TREND_URL @"Item/item_dynamic_add"//新增项目动态
-#define kGOODS_COMMENT_URL @"Shop/goods_comment_data"//我的评论
-
-
 #define kCIRCLE_HOME_URL @"Item/item_pen"//商圈首页
 #define kCIRCLE_FITER_URL @"Item/item_screen"//商圈筛选条件
 #define kCIRCLE_DETAIL_URL @"Item/myitem_details"//商圈_项目详情
@@ -137,11 +138,15 @@
 #define kANSWER_COMMENT_URL @"Item/item_answer"//项目发布人回复评论
 #define kSUPPORT_URL @"Item/support_item"//项目支持
 #define kSUPPORT_SUCCESS_URL @"Item/stochastic_item"//支持成功 推荐列表
-
-#define kMINE_MYPROJECT_URL @"User/myitem"//我的项目
+#define kADD_FUNDTREND_URL @"Item/item_dynamic_add"//添加资金动向
 #define kPUBLISH_PROJECT_URL @"Item/add_item"//用户发布项目
 
-#define kRECHARGE_URL @"User/recharge"//充值操作
-#define kMORE_GOODSCOMMENT_URL @"Shop/more_comment"//商品评论更多
+
+#define kNOTICE_LIST_URL @"News/more_notice"//公告列表
+#define kPAY_SWITCH_URL @"Other/pay_type"//支付方式返回
+#define kREFRESH_URL @"Other/break_user"//刷新
+#define kCITYLIST_URL @"Other/getCityList"//城市列表
+#define kBANK_NAMELIST_URL @"Other/open_bank_list"//银行名列表
+#define kBANNER_LIST_URL @"Other/banner_list"//广告展示
 
 #endif /* PrefixHeader_pch */

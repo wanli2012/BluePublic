@@ -60,6 +60,7 @@
 		4A0B75201F90F0840007788B /* GLConfirmOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0B75191F90F0840007788B /* GLConfirmOrderModel.m */; };
 		4A0B75211F90F0840007788B /* GLOrderGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0B751C1F90F0840007788B /* GLOrderGoodsCell.m */; };
 		4A0B75221F90F0840007788B /* GLOrderGoodsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A0B751D1F90F0840007788B /* GLOrderGoodsCell.xib */; };
+		4A0BAC5C1FB3F03F0039C81C /* RSAEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BAC5B1FB3F03F0039C81C /* RSAEncryptor.m */; };
 		4A0E701F1FA34A9000435871 /* GLBusiness_AddFundTrendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0E701D1FA34A9000435871 /* GLBusiness_AddFundTrendController.m */; };
 		4A0E70201FA34A9000435871 /* GLBusiness_AddFundTrendController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A0E701E1FA34A9000435871 /* GLBusiness_AddFundTrendController.xib */; };
 		4A0E70291FA3725D00435871 /* JZAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0E70261FA3725D00435871 /* JZAlbumViewController.m */; };
@@ -112,6 +113,8 @@
 		4A18B9181F94D83200E9B387 /* GLMine_Wallet_Exchange_FailedController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A18B9161F94D83200E9B387 /* GLMine_Wallet_Exchange_FailedController.xib */; };
 		4A18B91C1F94D86300E9B387 /* GLMine_Wallet_Exchange_InReviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A18B91A1F94D86300E9B387 /* GLMine_Wallet_Exchange_InReviewController.m */; };
 		4A18B91D1F94D86300E9B387 /* GLMine_Wallet_Exchange_InReviewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A18B91B1F94D86300E9B387 /* GLMine_Wallet_Exchange_InReviewController.xib */; };
+		4A1B0B851FB57BA5007F686B /* GLRegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A509BA71F8771D400D794FB /* GLRegisterController.m */; };
+		4A1B0B871FB57D64007F686B /* GLRegisterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A1B0B861FB57D64007F686B /* GLRegisterController.xib */; };
 		4A2905221F9726B9006903F1 /* GLMine_EvaluateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2905141F9726B9006903F1 /* GLMine_EvaluateController.m */; };
 		4A2905231F9726B9006903F1 /* GLMine_EvaluatedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2905161F9726B9006903F1 /* GLMine_EvaluatedController.m */; };
 		4A2905241F9726B9006903F1 /* GLMine_EvaluatedController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A2905171F9726B9006903F1 /* GLMine_EvaluatedController.xib */; };
@@ -159,8 +162,6 @@
 		4A509BA01F875DCE00D794FB /* GLBuyBackChooseBankView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A509B9E1F875DCE00D794FB /* GLBuyBackChooseBankView.xib */; };
 		4A509BA41F87643C00D794FB /* GLLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A509BA21F87643C00D794FB /* GLLoginController.m */; };
 		4A509BA51F87643C00D794FB /* GLLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A509BA31F87643C00D794FB /* GLLoginController.xib */; };
-		4A509BA91F8771D400D794FB /* GLRegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A509BA71F8771D400D794FB /* GLRegisterController.m */; };
-		4A509BAA1F8771D400D794FB /* GLRegisterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A509BA81F8771D400D794FB /* GLRegisterController.xib */; };
 		4A509BAE1F877C2B00D794FB /* GLForgetPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A509BAC1F877C2B00D794FB /* GLForgetPasswordController.m */; };
 		4A509BAF1F877C2B00D794FB /* GLForgetPasswordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A509BAD1F877C2B00D794FB /* GLForgetPasswordController.xib */; };
 		4A509BBA1F87870500D794FB /* GLMine_SetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A509BB71F87870500D794FB /* GLMine_SetController.m */; };
@@ -482,6 +483,8 @@
 		4A0B751B1F90F0840007788B /* GLOrderGoodsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLOrderGoodsCell.h; sourceTree = "<group>"; };
 		4A0B751C1F90F0840007788B /* GLOrderGoodsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLOrderGoodsCell.m; sourceTree = "<group>"; };
 		4A0B751D1F90F0840007788B /* GLOrderGoodsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLOrderGoodsCell.xib; sourceTree = "<group>"; };
+		4A0BAC5A1FB3F03F0039C81C /* RSAEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSAEncryptor.h; sourceTree = "<group>"; };
+		4A0BAC5B1FB3F03F0039C81C /* RSAEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSAEncryptor.m; sourceTree = "<group>"; };
 		4A0E701C1FA34A9000435871 /* GLBusiness_AddFundTrendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLBusiness_AddFundTrendController.h; sourceTree = "<group>"; };
 		4A0E701D1FA34A9000435871 /* GLBusiness_AddFundTrendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLBusiness_AddFundTrendController.m; sourceTree = "<group>"; };
 		4A0E701E1FA34A9000435871 /* GLBusiness_AddFundTrendController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLBusiness_AddFundTrendController.xib; sourceTree = "<group>"; };
@@ -563,6 +566,7 @@
 		4A18B9191F94D86300E9B387 /* GLMine_Wallet_Exchange_InReviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_Wallet_Exchange_InReviewController.h; sourceTree = "<group>"; };
 		4A18B91A1F94D86300E9B387 /* GLMine_Wallet_Exchange_InReviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_Wallet_Exchange_InReviewController.m; sourceTree = "<group>"; };
 		4A18B91B1F94D86300E9B387 /* GLMine_Wallet_Exchange_InReviewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMine_Wallet_Exchange_InReviewController.xib; sourceTree = "<group>"; };
+		4A1B0B861FB57D64007F686B /* GLRegisterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLRegisterController.xib; sourceTree = "<group>"; };
 		4A2905131F9726B9006903F1 /* GLMine_EvaluateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_EvaluateController.h; sourceTree = "<group>"; };
 		4A2905141F9726B9006903F1 /* GLMine_EvaluateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_EvaluateController.m; sourceTree = "<group>"; };
 		4A2905151F9726B9006903F1 /* GLMine_EvaluatedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_EvaluatedController.h; sourceTree = "<group>"; };
@@ -638,7 +642,6 @@
 		4A509BA31F87643C00D794FB /* GLLoginController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLLoginController.xib; sourceTree = "<group>"; };
 		4A509BA61F8771D400D794FB /* GLRegisterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLRegisterController.h; sourceTree = "<group>"; };
 		4A509BA71F8771D400D794FB /* GLRegisterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLRegisterController.m; sourceTree = "<group>"; };
-		4A509BA81F8771D400D794FB /* GLRegisterController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLRegisterController.xib; sourceTree = "<group>"; };
 		4A509BAB1F877C2B00D794FB /* GLForgetPasswordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLForgetPasswordController.h; sourceTree = "<group>"; };
 		4A509BAC1F877C2B00D794FB /* GLForgetPasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLForgetPasswordController.m; sourceTree = "<group>"; };
 		4A509BAD1F877C2B00D794FB /* GLForgetPasswordController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLForgetPasswordController.xib; sourceTree = "<group>"; };
@@ -1166,6 +1169,15 @@
 				4A18B8EF1F9441F400E9B387 /* GLOrderPayView.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		4A0BAC591FB3F03F0039C81C /* RSA密钥 */ = {
+			isa = PBXGroup;
+			children = (
+				4A0BAC5A1FB3F03F0039C81C /* RSAEncryptor.h */,
+				4A0BAC5B1FB3F03F0039C81C /* RSAEncryptor.m */,
+			);
+			path = "RSA密钥";
 			sourceTree = "<group>";
 		};
 		4A0E70181FA34A6700435871 /* 添加资金动向 */ = {
@@ -3085,6 +3097,7 @@
 				4AF108F71F78DBB500CB51FA /* Common */,
 				4AF10A031F78E26F00CB51FA /* 图片资源 */,
 				4A18B8F51F94A30400E9B387 /* 自己的封装 */,
+				4A0BAC591FB3F03F0039C81C /* RSA密钥 */,
 				4AF107091F78D5AC00CB51FA /* ViewController.h */,
 				4AF1070A1F78D5AC00CB51FA /* ViewController.m */,
 				4AF109D41F78DFC500CB51FA /* PrefixHeader.pch */,
@@ -3196,7 +3209,7 @@
 			children = (
 				4A509BA61F8771D400D794FB /* GLRegisterController.h */,
 				4A509BA71F8771D400D794FB /* GLRegisterController.m */,
-				4A509BA81F8771D400D794FB /* GLRegisterController.xib */,
+				4A1B0B861FB57D64007F686B /* GLRegisterController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3725,13 +3738,13 @@
 				4A53E84B1F7A4B5C0021D9E0 /* GLMall_DetailSelecteCell.xib in Resources */,
 				4A18B9131F94D81700E9B387 /* GLMine_Wallet_Exchange_SuccessController.xib in Resources */,
 				4A29054E1F97581D006903F1 /* GLMine_ShareRecordCell.xib in Resources */,
+				4A1B0B871FB57D64007F686B /* GLRegisterController.xib in Resources */,
 				4A509BC01F8787ED00D794FB /* GLMine_Set_modifyPwdController.xib in Resources */,
 				4AF10A051F78E27C00CB51FA /* tabbar.xcassets in Resources */,
 				4A16FF231F8F696100064CE5 /* GLPublish_FundStopController.xib in Resources */,
 				4A18B8EC1F9441B800E9B387 /* LBMineCenterPayPagesTableViewCell.xib in Resources */,
 				4A18B9181F94D83200E9B387 /* GLMine_Wallet_Exchange_FailedController.xib in Resources */,
 				4A165C2A1F8620BB00D0C34B /* GLMine_WalletDetailHeaderView.xib in Resources */,
-				4A509BAA1F8771D400D794FB /* GLRegisterController.xib in Resources */,
 				4A18B9011F94A31B00E9B387 /* LoadWaitView.xib in Resources */,
 				4A509B821F872B9C00D794FB /* GLMine_MyMessage_NoticeController.xib in Resources */,
 				4A509B511F8726F900D794FB /* GLHomeCell.xib in Resources */,
@@ -3893,7 +3906,6 @@
 				4AF1093E1F78DBB500CB51FA /* XBTagTitleModel.m in Sources */,
 				4A16FF311F8F7A0100064CE5 /* GLPublish_InReViewModel.m in Sources */,
 				4A0B75111F90CA720007788B /* GLMine_AddressModel.m in Sources */,
-				4A509BA91F8771D400D794FB /* GLRegisterController.m in Sources */,
 				4A18B8E61F943FC000E9B387 /* GLMine_RicePayController.m in Sources */,
 				4A6FE1871F8E09D300860503 /* GLMall_DetailWebCell.m in Sources */,
 				4A16FF411F8F891A00064CE5 /* GLPublish_FundraisingController.m in Sources */,
@@ -3912,6 +3924,7 @@
 				4AF5B0551F96142D000407A7 /* GLMine_AddFundTrendController.m in Sources */,
 				4AF1092A1F78DBB500CB51FA /* QQPopMenuView.m in Sources */,
 				4A165C1E1F85FDF600D0C34B /* GLMine_WalletDetailCell.m in Sources */,
+				4A0BAC5C1FB3F03F0039C81C /* RSAEncryptor.m in Sources */,
 				4ADEBB651F7E487200C50087 /* GLPay_ChooseController.m in Sources */,
 				4AF109381F78DBB500CB51FA /* WXSTransitionManager+TypeTool.m in Sources */,
 				4A05EE941F8C97380095DBCF /* HXPhotoCustomNavigationBar.m in Sources */,
@@ -3952,6 +3965,7 @@
 				4AF5B03C1F95AA3E000407A7 /* GLMine_ParticipateController.m in Sources */,
 				4A18B9171F94D83200E9B387 /* GLMine_Wallet_Exchange_FailedController.m in Sources */,
 				4AF109F21F78E07A00CB51FA /* UIButton+SetEdgeInsets.m in Sources */,
+				4A1B0B851FB57BA5007F686B /* GLRegisterController.m in Sources */,
 				4A9FD62C1FA1E68C00313606 /* GLBusinessAdModel.m in Sources */,
 				4A05EE961F8C97380095DBCF /* HXPhotoEditViewController.m in Sources */,
 				4A9F57161F920B0800341A31 /* LBMyOrderListTableViewCell.m in Sources */,

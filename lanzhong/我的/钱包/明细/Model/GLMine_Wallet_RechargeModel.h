@@ -19,4 +19,5 @@
 @property (nonatomic, copy)NSString *addtime;//充值时间
 @property (nonatomic, copy)NSString *time;//月份
 
+
 @end

@@ -9,6 +9,7 @@
 #import "GLLoginController.h"
 #import "GLRegisterController.h"//注册
 #import "GLForgetPasswordController.h"//忘记密码
+#import "RSAEncryptor.h"
 
 @interface GLLoginController ()
 
@@ -84,9 +85,9 @@
     
     _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
     
-    //    NSString *encryptsecret = [RSAEncryptor encryptString:self.scretTf.text publicKey:public_RSA];
+    NSString *encryptsecret = [RSAEncryptor encryptString:self.passwordTF.text publicKey:public_RSA];
     
-    [NetworkManager requestPOSTWithURLStr:kLOGIN_URL paramDic:@{@"uname":self.accountTF.text,@"upwd":self.passwordTF.text} finish:^(id responseObject) {
+    [NetworkManager requestPOSTWithURLStr:kLOGIN_URL paramDic:@{@"uname":self.accountTF.text,@"upwd":encryptsecret} finish:^(id responseObject) {
         
         [_loadV removeloadview];
         

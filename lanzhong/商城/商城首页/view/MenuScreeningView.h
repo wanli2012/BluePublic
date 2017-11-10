@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^MenuScreeningViewBlock)(NSInteger itemIndex,NSInteger index2);
+typedef void(^MenuScreeningViewBlock)(NSInteger itemIndex,NSInteger firstIndex,NSInteger index2);
 
 @interface MenuScreeningView : UIView
 

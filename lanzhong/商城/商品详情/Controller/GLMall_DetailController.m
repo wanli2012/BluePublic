@@ -17,7 +17,7 @@
 #import "MHActionSheet.h"
 #import "GLConfirmOrderController.h"
 #import "GLMall_MoreCommentController.h"//更多评论
-
+#import "JZAlbumViewController.h"
 
 #define headerImageHeight 64
 
@@ -89,6 +89,7 @@
 @property (strong, nonatomic) UILabel *bottomMsgLabel;          // 底部提示信息
 
 @property (copy, nonatomic) NSString *popTitle;                 // 点击的代理
+
 @end
 
 @implementation GLMall_DetailController
@@ -183,7 +184,12 @@
                 self.model.goods_details = [NSString stringWithFormat:@"%@%@",Goods_Info_URL,self.goods_id];
                 self.goods_infoDic = responseObject[@"data"][@"goods_data"];
                 
-                self.cycleScrollView.imageURLStringsGroup = self.goods_infoDic[@"must_thumb_url"];
+                NSMutableArray *arrM = [NSMutableArray array];
+                for (NSString * s in self.goods_infoDic[@"must_thumb_url"]) {
+                    NSString *str = [NSString stringWithFormat:@"%@?imageView2/1/w/414/h/200",s];
+                    [arrM addObject:str];
+                }                
+                self.cycleScrollView.imageURLStringsGroup = arrM;
                 [self setHeaderValue];//为头视图赋值
             }
             
@@ -231,7 +237,6 @@
         
         [self.navigationController popViewControllerAnimated:YES];
     }
-    
 }
 
 #pragma mark - 头视图赋值
@@ -286,6 +291,11 @@
 #pragma mark - 添加到购物车
 - (IBAction)addToCart:(id)sender {
     
+    if ([UserModel defaultUser].loginstatus == NO) {
+        [MBProgressHUD showError:@"请先登录"];
+        return;
+    }
+    
     if (self.spec_id.length == 0) {
         [MBProgressHUD showError:@"请选择规格"];
         return;
@@ -321,6 +331,11 @@
 
 #pragma mark - 去购物车
 - (IBAction)toCart:(id)sender {
+    
+    if ([UserModel defaultUser].loginstatus == NO) {
+        [MBProgressHUD showError:@"请先登录"];
+        return;
+    }
     
     self.hidesBottomBarWhenPushed = YES;
     GLShoppingCartController *cartVC = [[GLShoppingCartController alloc] init];
@@ -450,17 +465,9 @@
 - (void)selectedFunc:(BOOL)isDetail{
     
     [self.dataSource removeAllObjects];
-    
     if (isDetail) {
-        
-        NSLog(@"商品详情");
         _isDetail = YES;
-
-
     }else{
-        
-        NSLog(@"用户评论");
-
         _isDetail = NO;
     }
  
@@ -493,12 +500,12 @@
     GLDetail_comment_data * model = self.model.comment_data[indexPath.row];
     return model.cellHeight;
 
-    
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
     UIView *headerV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 44)];
+    headerV.backgroundColor = [UIColor whiteColor];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, 44)];
     label.text = @"用户评论";
@@ -531,7 +538,16 @@
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
     
     self.HideNavagation = YES;
-
+    JZAlbumViewController *jzAlbumVC = [[JZAlbumViewController alloc]init];
+    jzAlbumVC.currentIndex = index;//这个参数表示当前图片的index，默认是0
+    
+    NSMutableArray *arrM = [NSMutableArray array];
+    for (NSString * s in self.goods_infoDic[@"must_thumb_url"]) {
+//        NSString *str = [NSString stringWithFormat:@"%@?imageView2/1/w/414/h/200",s];
+        [arrM addObject:s];
+    }
+    jzAlbumVC.imgArr = arrM;//图片数组，可以是url，也可以是UIImage
+    [self presentViewController:jzAlbumVC animated:NO completion:nil];
 }
 
 /** 图片滚动回调 */
@@ -539,8 +555,6 @@
     
 }
 #pragma mark - 懒加载
-
-
 - (NSMutableArray *)dataSource{
     if (!_dataSource) {
         _dataSource = [NSMutableArray array];

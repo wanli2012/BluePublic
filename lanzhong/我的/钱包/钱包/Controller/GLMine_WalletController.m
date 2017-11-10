@@ -15,6 +15,7 @@
 #import "GLMine_Wallet_RechargeController.h"//充值记录界面
 
 #import <AlipaySDK/AlipaySDK.h>
+#import "WXApi.h"
 
 
 @interface GLMine_WalletController ()<UITextFieldDelegate>
@@ -35,9 +36,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *balanceLabel;//余额
 @property (weak, nonatomic) IBOutlet UILabel *bankNameLabel;//银行名字
 @property (weak, nonatomic) IBOutlet UILabel *bankNumLabel;//银行卡号
-@property (nonatomic, copy)NSString *bank_id;//银行名字
-//@property (nonatomic, copy)NSString *bankName;//银行名字
-//@property (nonatomic, copy)NSString *bankNum;//银行卡号
 @property (weak, nonatomic) IBOutlet UITextField *moneyTextF;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextF;
 @property (weak, nonatomic) IBOutlet UITextField *exchangeTextF;//兑换金额
@@ -45,6 +43,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *weixinImageV;
 @property (weak, nonatomic) IBOutlet UIImageView *alipayImageV;
 
+@property (nonatomic, copy)NSString *bank_id;//银行名字
 @property (nonatomic, copy)NSString  *pay_type;//支付方式1支付宝 2微信
 
 @property (nonatomic, assign)BOOL isHaveDian;
@@ -85,6 +84,12 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postRequest) name:@"addCardNotification" object:nil];
      [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(postRequest) name:@"deleteBankCardNotification" object:nil];
+    /**
+     *微信支付成功 回调
+     */
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(wxpaysucess) name:@"wxpaysucess" object:nil];
+    
+    self.pay_type = @"2";
     [self postRequest];
  
 }
@@ -124,11 +129,10 @@
         [self isHiddenTheAddImage:YES];
         
     }else{
-        
         [self isHiddenTheAddImage:NO];
     }
-
 }
+
 //是否隐藏
 - (void)isHiddenTheAddImage:(BOOL)isHidden{
     
@@ -139,7 +143,6 @@
     self.bankNameLabel.hidden = !isHidden;
     self.bankNumLabel.hidden = !isHidden;
     self.arrowImageV.hidden = !isHidden;
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -153,6 +156,7 @@
     
     self.navigationController.navigationBar.hidden = NO;
 }
+
 #pragma mark - 明细
 - (void)detail{
 
@@ -165,68 +169,75 @@
             {
                 GLMine_Wallet_ExchangeController *exchangeVC = [[GLMine_Wallet_ExchangeController alloc] init];
                 [self.navigationController pushViewController:exchangeVC animated:YES];
-                
             }
                 break;
             case 1:
             {
                 GLMine_Wallet_RechargeController*rechargeVC = [[GLMine_Wallet_RechargeController alloc] init];
                 [self.navigationController pushViewController:rechargeVC animated:YES];
-                
             }
                 break;
-                
             default:
                 break;
         }
-        
     }];
     
-
-    
     [popview show];
-
 }
 
 #pragma mark - 确认兑换
 - (IBAction)exchange:(id)sender {
+ 
+    if(self.bank_id.length == 0){
+        [MBProgressHUD showError:@"请选择银行卡"];
+        return ;
+    }
     
-    if ([self.moneyTextF.text integerValue] % 100 != 0) {
-        [MBProgressHUD showError:@"数量必须是100的整数倍!"];
+    if(self.moneyTextF.text.length == 0){
+        [MBProgressHUD showError:@"请输入金额"];
         return;
     }
+    
+    NSString *money = [NSString stringWithFormat:@"%.2f",[self.moneyTextF.text doubleValue]];
+    double moneyf = [money doubleValue];
+
+    if (moneyf <= 0.0) {
+        [MBProgressHUD showError:@"金额必须大于0"];
+        return;
+    }
+    
+    if ([self.moneyTextF.text integerValue] % 100 != 0) {
+        [MBProgressHUD showError:@"兑换金额必须是100的整数倍!"];
+        return;
+    }
+    
+    if([self.moneyTextF.text doubleValue] /100 > 0){
+        if([self.moneyTextF.text doubleValue] - [self.moneyTextF.text integerValue]/100 *100 != 0){
+            [MBProgressHUD showError:@"兑换金额必须是100的整数倍!"];
+            return;
+        }
+    }else{
+        [MBProgressHUD showError:@"兑换金额必须是100的整数倍!"];
+        return;
+    }
+    
     if ([self.moneyTextF.text integerValue] > [self.balanceLabel.text integerValue]){
         [MBProgressHUD showError:@"余额不足!"];
         return;
     }
 
-    if(self.moneyTextF.text.length == 0){
-        [MBProgressHUD showError:@"请输入金额"];
-        return;
-    }
     if (self.passwordTextF.text.length == 0) {
         [MBProgressHUD showError:@"请输入密码"];
         return;
     }
     
-    NSString *message = [NSString stringWithFormat:@"你确定要兑换%@?",self.moneyTextF.text];
+    NSString *message = [NSString stringWithFormat:@"兑换须知:你确定要兑换%@?",self.moneyTextF.text];
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"兑换" message:message preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        if(self.moneyTextF.text.length == 0){
-            [MBProgressHUD showError:@"请输入金额"];
-            return ;
-        }
-        if(self.bank_id.length == 0){
-            [MBProgressHUD showError:@"请选择银行卡"];
-            return ;
-        }
-        if(self.passwordTextF.text.length == 0){
-            [MBProgressHUD showError:@"请输入密码"];
-            return ;
-        }
+        
         
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[@"uid"] = [UserModel defaultUser].uid;
@@ -271,15 +282,23 @@
     [alertVC addAction:cancel];
     [alertVC addAction:ok];
     [self presentViewController:alertVC animated:YES completion:nil];
-
 }
-#pragma mark - 确认支付
+
+#pragma mark - 充值操作
 - (IBAction)paySure:(id)sender {
+    
+    NSString *money = [NSString stringWithFormat:@"%.2f",[self.exchangeTextF.text doubleValue]];
+    CGFloat moneyf = [money doubleValue];
+    
+    if(moneyf <= 0.0){
+        [MBProgressHUD showError:@"请输入金额"];
+        return;
+    }
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"uid"] = [UserModel defaultUser].uid;
     dict[@"token"] = [UserModel defaultUser].token;
-    dict[@"money"] = [NSString stringWithFormat:@"%.2f",[self.exchangeTextF.text floatValue]];
+    dict[@"money"] = [NSString stringWithFormat:@"%.2f",[self.exchangeTextF.text doubleValue]];
     dict[@"pay_type"] = self.pay_type;
     
     _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
@@ -289,41 +308,56 @@
         
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             
-            [[AlipaySDK defaultService]payOrder:responseObject[@"data"][@"alipay"] fromScheme:@"lanzhongAlipay" callback:^(NSDictionary *resultDic) {
+            if([self.pay_type integerValue] == 1){//支付宝支付
                 
-                NSInteger orderState = [resultDic[@"resultStatus"] integerValue];
-                if (orderState == 9000) {
-                    self.hidesBottomBarWhenPushed = YES;
+                [[AlipaySDK defaultService]payOrder:responseObject[@"data"][@"alipay"] fromScheme:@"lanzhongAlipay" callback:^(NSDictionary *resultDic) {
                     
-                    [self.navigationController popToRootViewControllerAnimated:YES];
-                    
-                    self.hidesBottomBarWhenPushed = NO;
-                    
-                }else{
-                    NSString *returnStr;
-                    switch (orderState) {
-                        case 8000:
-                            returnStr=@"订单正在处理中";
-                            break;
-                        case 4000:
-                            returnStr=@"订单支付失败";
-                            break;
-                        case 6001:
-                            returnStr=@"订单取消";
-                            break;
-                        case 6002:
-                            returnStr=@"网络连接出错";
-                            break;
-                            
-                        default:
-                            break;
+                    NSInteger orderState = [resultDic[@"resultStatus"] integerValue];
+                    if (orderState == 9000) {
+                        self.hidesBottomBarWhenPushed = YES;
+                        
+                        [self.navigationController popToRootViewControllerAnimated:YES];
+                        
+                        self.hidesBottomBarWhenPushed = NO;
+                        
+                    }else{
+                        NSString *returnStr;
+                        switch (orderState) {
+                            case 8000:
+                                returnStr=@"订单正在处理中";
+                                break;
+                            case 4000:
+                                returnStr=@"订单支付失败";
+                                break;
+                            case 6001:
+                                returnStr=@"订单取消";
+                                break;
+                            case 6002:
+                                returnStr=@"网络连接出错";
+                                break;
+                                
+                            default:
+                                break;
+                        }
+                        
+                        [MBProgressHUD showError:returnStr];
                     }
-                    
-                    [MBProgressHUD showError:returnStr];
-                    
-                }
+                }];
                 
-            }];
+            }else{//微信支付
+                [MBProgressHUD showError:responseObject[@"message"]];
+                //调起微信支付
+                PayReq* req = [[PayReq alloc] init];
+                req.openID=responseObject[@"data"][@"wxinpay"][@"appid"];
+                req.partnerId = responseObject[@"data"][@"wxinpay"][@"partnerid"];
+                req.prepayId = responseObject[@"data"][@"wxinpay"][@"prepayid"];
+                req.nonceStr = responseObject[@"data"][@"wxinpay"][@"noncestr"];
+                req.timeStamp = [responseObject[@"data"][@"wxinpay"][@"timestamp"] intValue];
+                req.package = responseObject[@"data"][@"wxinpay"][@"packages"];
+                req.sign = responseObject[@"data"][@"wxinpay"][@"sign"];
+                [WXApi sendReq:req];
+            }
+
         }else{
             
             [MBProgressHUD showError:responseObject[@"message"]];
@@ -331,11 +365,13 @@
         
     } enError:^(NSError *error) {
         [_loadV removeloadview];
-        
     }];
 }
 
-
+-(void)wxpaysucess{
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
 //选择支付方式
 - (IBAction)weixinPay:(id)sender {
     
@@ -349,7 +385,6 @@
     self.weixinImageV.image = [UIImage imageNamed:@"nochoice1"];
     self.alipayImageV.image = [UIImage imageNamed:@"mine_choice"];
     self.pay_type = @"1";
-
 }
 
 - (IBAction)switchFunc:(UISegmentedControl *)sender {
@@ -362,7 +397,6 @@
         
         self.rechargeView.hidden = NO;
     }
-    
 }
 
 #pragma mark - 添加银行卡
@@ -411,9 +445,29 @@
     return YES;
 }
 
+- (BOOL)validateNumber:(NSString*)number {
+    BOOL res = YES;
+    NSCharacterSet* tmpSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+    int i = 0;
+    while (i < number.length) {
+        NSString * string = [number substringWithRange:NSMakeRange(i, 1)];
+        NSRange range = [string rangeOfCharacterFromSet:tmpSet];
+        if (range.length == 0) {
+            res = NO;
+            break;
+        }
+        i++;
+    }
+    return res;
+}
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     
-    if (textField == self.moneyTextF || textField == self.exchangeTextF) {
+    if (textField == self.moneyTextF) {
+        return [self validateNumber:string];
+    }
+    
+    if (textField == self.exchangeTextF) {
         /*
          * 不能输入.0-9以外的字符。
          * 设置输入框输入的内容格式

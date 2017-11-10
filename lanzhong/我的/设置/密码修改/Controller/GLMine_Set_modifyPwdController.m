@@ -7,6 +7,7 @@
 //
 
 #import "GLMine_Set_modifyPwdController.h"
+#import "RSAEncryptor.h"
 
 @interface GLMine_Set_modifyPwdController ()
 
@@ -116,11 +117,12 @@
         [MBProgressHUD showError:@"请输入验证码"];
         return;
     }
+    NSString *encryptsecret = [RSAEncryptor encryptString:self.pwdTF.text publicKey:public_RSA];
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     dic[@"phone_code"] = self.codeTF.text;
     dic[@"phone"] = [UserModel defaultUser].phone;
-    dic[@"pwd"] = self.pwdTF.text;
+    dic[@"pwd"] = encryptsecret;
     dic[@"token"] = [UserModel defaultUser].token;
     dic[@"uid"] = [UserModel defaultUser].uid;
     

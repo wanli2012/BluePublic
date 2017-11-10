@@ -100,25 +100,25 @@
 }
 
 #pragma mark - 协议实现
--(void)dropMenuView:(DropMenuView *)view didSelectName:(NSString *)str selectIndex:(NSInteger)selectIndex{
-    
+- (void)dropMenuView:(DropMenuView *)view didSelectName:(NSString *)str firstSelectIndex:(NSInteger)firstSelectIndex selectIndex:(NSInteger)selectIndex{
     if (view == self.oneLinkageDropMenu) {
-     
+        
         [self.oneLinkageButton setTitle:str forState:UIControlStateNormal];
         [self buttonEdgeInsets:self.oneLinkageButton];
-        self.block(0,selectIndex);
+        self.block(0,firstSelectIndex,selectIndex);
+        
     }else if (view == self.twoLinkageDropMenu){
-    
+        
         [self.twoLinkageButton setTitle:str forState:UIControlStateNormal];
-        [self.threeLinkageButton setTitle:self.titles[2] forState:UIControlStateNormal];
+        
         [self buttonEdgeInsets:self.twoLinkageButton];
-        self.block(1,selectIndex);
+        self.block(1,firstSelectIndex,selectIndex);
     }else if (view == self.threeLinkageDropMenu){
-    
+        
         [self.threeLinkageButton setTitle:str forState:UIControlStateNormal];
-        [self.twoLinkageButton setTitle:self.titles[1] forState:UIControlStateNormal];
+        
         [self buttonEdgeInsets:self.threeLinkageButton];
-        self.block(2,selectIndex);
+        self.block(2,firstSelectIndex,selectIndex);
     }
 }
 

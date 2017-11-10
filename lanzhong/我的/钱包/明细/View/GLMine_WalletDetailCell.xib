@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="356" height="87"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="356" height="87"/>
+                <rect key="frame" x="0.0" y="0.0" width="356" height="86"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="兑换: 1552636" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dha-vq-7DR">
@@ -24,13 +25,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="余额:35355" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UkE-Ya-sdO">
-                        <rect key="frame" x="15" y="35" width="326" height="15"/>
+                        <rect key="frame" x="15" y="35" width="65.5" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017.01.16" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QIM-bS-AaY">
-                        <rect key="frame" x="270" y="9" width="71" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QIM-bS-AaY">
+                        <rect key="frame" x="306.5" y="9" width="34.5" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="1" green="0.52198332548141479" blue="0.2107541561126709" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -43,7 +44,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017-09-09" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rNk-Vf-ZEq">
-                        <rect key="frame" x="272" y="61" width="69" height="15"/>
+                        <rect key="frame" x="272" y="35" width="69" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="0.0" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -54,11 +55,10 @@
                     <constraint firstItem="dha-vq-7DR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="FgH-qq-5D9"/>
                     <constraint firstAttribute="bottom" secondItem="U6O-26-VfI" secondAttribute="bottom" id="NeD-CE-FRI"/>
                     <constraint firstAttribute="trailing" secondItem="rNk-Vf-ZEq" secondAttribute="trailing" constant="15" id="NtB-72-IuW"/>
+                    <constraint firstItem="rNk-Vf-ZEq" firstAttribute="centerY" secondItem="UkE-Ya-sdO" secondAttribute="centerY" id="QrM-nJ-OrM"/>
                     <constraint firstAttribute="trailing" secondItem="U6O-26-VfI" secondAttribute="trailing" id="S0H-3x-hJH"/>
                     <constraint firstItem="dha-vq-7DR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Trn-p8-Sem"/>
-                    <constraint firstItem="U6O-26-VfI" firstAttribute="top" secondItem="rNk-Vf-ZEq" secondAttribute="bottom" constant="10" id="WzC-tF-Aa8"/>
                     <constraint firstItem="UkE-Ya-sdO" firstAttribute="top" secondItem="dha-vq-7DR" secondAttribute="bottom" constant="10" id="cj4-lZ-Ltc"/>
-                    <constraint firstAttribute="trailing" secondItem="UkE-Ya-sdO" secondAttribute="trailing" constant="15" id="dVV-7e-1w1"/>
                     <constraint firstAttribute="trailing" secondItem="QIM-bS-AaY" secondAttribute="trailing" constant="15" id="eg3-K9-rnF"/>
                     <constraint firstItem="U6O-26-VfI" firstAttribute="leading" secondItem="UkE-Ya-sdO" secondAttribute="leading" id="kdu-Iw-Rff"/>
                     <constraint firstItem="UkE-Ya-sdO" firstAttribute="leading" secondItem="dha-vq-7DR" secondAttribute="leading" id="v2M-5W-p4G"/>

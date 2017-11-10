@@ -77,10 +77,7 @@
  *  @param view  需要显示信息的视图
  */
 + (void)showError:(NSString *)error toView:(UIView *)view{
-    
-    view = [[UIApplication sharedApplication].windows lastObject];
-    view.hidden = NO;
-    
+
     [self show:error icon:@"error.png" view:view];
 }
 

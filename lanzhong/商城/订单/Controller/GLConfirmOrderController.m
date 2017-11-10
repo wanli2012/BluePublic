@@ -232,7 +232,7 @@ static NSString *ID = @"GLOrderGoodsCell";
     dict[@"num"] = self.goods_count;
     dict[@"address_id"] = self.address_id;
     dict[@"order_remark"] = self.remarkTextV.text;
-    dict[@"total"] = @(_sumNum);
+    dict[@"total"] = [NSString stringWithFormat:@"%.4f",_sumNum];
     dict[@"c_type"] = @(self.orderType);
     dict[@"spec_id"] = self.goods_spec;
     

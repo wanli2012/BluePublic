@@ -99,7 +99,7 @@
                 }
             }
         }else{
-            [MBProgressHUD showError:responseObject[@"message"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         [self.tableView reloadData];
         
@@ -135,12 +135,14 @@
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             [self dismiss];
             [self postRequest:YES];
+            [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
         }
-        [MBProgressHUD showError:responseObject[@"message"]];
+        [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         
     } enError:^(NSError *error) {
         [_loadV removeloadview];
         [self endRefresh];
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
     }];
 
 }

@@ -45,24 +45,23 @@ static NSString *ID = @"GLClassifyCell";
     [self.view addSubview:self.menuScreeningView];
     
     __weak __typeof(self) weakSelf = self;
-    self.menuScreeningView.block = ^(NSInteger itemIndex,NSInteger index){
+    self.menuScreeningView.block = ^(NSInteger itemIndex,NSInteger firstIndex,NSInteger index2){
         switch (itemIndex) {
             case 0:
             {
-           
-                weakSelf.cate_id = weakSelf.categoryModel.cate[index].cate_id;
+                weakSelf.cate_id = weakSelf.categoryModel.cate[firstIndex].cate_id;
                 
             }
                 break;
             case 1:
             {
-                weakSelf.order_money = weakSelf.categoryModel.money[index].cate_id;
+                weakSelf.order_money = weakSelf.categoryModel.money[firstIndex].cate_id;
                 weakSelf.order_salenum = nil;
             }
                 break;
             case 2:
             {
-                weakSelf.order_salenum = weakSelf.categoryModel.salenum[index].cate_id;
+                weakSelf.order_salenum = weakSelf.categoryModel.salenum[firstIndex].cate_id;
                 weakSelf.order_money = nil;
             }
                 break;
@@ -214,6 +213,7 @@ static NSString *ID = @"GLClassifyCell";
     
     GLClassifyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ID forIndexPath:indexPath];
     cell.layer.mask = [LBSetFillet setFilletRoundedRect:cell.bounds cornerRadii:CGSizeMake(4, 4)];
+    
     cell.model = self.models[indexPath.row];
     return cell;
 }
@@ -255,7 +255,6 @@ static NSString *ID = @"GLClassifyCell";
     }
     
     return _menuScreeningView;
-
 }
 
 - (NSMutableArray *)models{
@@ -264,4 +263,5 @@ static NSString *ID = @"GLClassifyCell";
     }
     return _models;
 }
+
 @end

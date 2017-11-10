@@ -11,8 +11,8 @@
 @class DropMenuView;
 @protocol DropMenuViewDelegate <NSObject>
 
+@optional
 -(void)dropMenuView:(DropMenuView *)view didSelectName:(NSString *)str firstSelectIndex:(NSInteger)firstSelectIndex selectIndex:(NSInteger)selectIndex;
-
 
 @end
 

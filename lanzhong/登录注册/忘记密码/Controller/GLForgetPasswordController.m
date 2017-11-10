@@ -7,6 +7,7 @@
 //
 
 #import "GLForgetPasswordController.h"
+#import "RSAEncryptor.h"
 
 @interface GLForgetPasswordController ()
 
@@ -138,10 +139,11 @@
         return;
     }
     
+    NSString *encryptsecret = [RSAEncryptor encryptString:self.passwordTF.text publicKey:public_RSA];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     dic[@"phone_code"] = self.codeTF.text;
     dic[@"phone"] = self.phoneTF.text;
-    dic[@"pwd"] = self.passwordTF.text;
+    dic[@"pwd"] = encryptsecret;
     
     _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
     [NetworkManager requestPOSTWithURLStr:kFORGET_PWD_URL paramDic:dic finish:^(id responseObject) {

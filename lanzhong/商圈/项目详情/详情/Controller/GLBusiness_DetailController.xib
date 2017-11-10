@@ -86,12 +86,16 @@
                                 <rect key="frame" x="10" y="105" width="355" height="180"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zem-2Z-ttd">
+                            <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zem-2Z-ttd">
                                 <rect key="frame" x="15" y="15" width="80" height="80"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="5Dv-Mw-TyV"/>
                                     <constraint firstAttribute="height" constant="80" id="lfl-Gh-uL0"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="YBM-I5-x2U" appends="YES" id="X3X-U9-sDS"/>
+                                </connections>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="蓝众创客" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9zw-up-bBx">
                                 <rect key="frame" x="110" y="64.5" width="57.5" height="17"/>
@@ -343,6 +347,11 @@
         <tapGestureRecognizer id="M8B-ze-3Z2" userLabel="爱心贡献榜">
             <connections>
                 <action selector="contributionList:" destination="-1" id="849-Hn-lUg"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="YBM-I5-x2U" userLabel="查看大图">
+            <connections>
+                <action selector="checkBigImageV:" destination="-1" id="qva-R1-Slw"/>
             </connections>
         </tapGestureRecognizer>
     </objects>

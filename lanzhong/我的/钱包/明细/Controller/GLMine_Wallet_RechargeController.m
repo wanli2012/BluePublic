@@ -8,7 +8,7 @@
 
 #import "GLMine_Wallet_RechargeController.h"
 #import "GLMine_WalletDetailCell.h"
-#import "GLMine_Wallet_ExchangeModel.h"
+#import "GLMine_Wallet_RechargeModel.h"
 
 @interface GLMine_Wallet_RechargeController ()
 
@@ -84,7 +84,7 @@
             
             for (NSDictionary *dic in responseObject[@"data"] ) {
                 
-                GLMine_Wallet_ExchangeModel *model = [GLMine_Wallet_ExchangeModel mj_objectWithKeyValues:dic];
+                GLMine_Wallet_RechargeModel *model = [GLMine_Wallet_RechargeModel mj_objectWithKeyValues:dic];
                 [self.models addObject:model];
                 
             }
@@ -125,7 +125,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     GLMine_WalletDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMine_WalletDetailCell"];
-    cell.model = self.models[indexPath.row];
+    cell.rechargeModel = self.models[indexPath.row];
     cell.dateLabel.hidden = YES;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;

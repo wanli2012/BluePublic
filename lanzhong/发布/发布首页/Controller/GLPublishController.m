@@ -19,7 +19,6 @@
 #import "editorMaskPresentationController.h"
 
 #import "HWCalendar.h"//日期选择
-#import <SVProgressHUD/SVProgressHUD.h>
 #import "GLMutipleChooseController.h"//省市选择
 #import "GLPublish_CityModel.h"//城市模型
 
@@ -126,10 +125,9 @@
 }
 #pragma mark - 获取分类
 - (void)postRequest_Category {
-//    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
 
     [NetworkManager requestPOSTWithURLStr:kCIRCLE_FITER_URL paramDic:@{} finish:^(id responseObject) {
-//        [_loadV removeloadview];
+
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             if([responseObject[@"data"] count] != 0){
                 
@@ -142,11 +140,11 @@
             }
         }else{
             
-            [MBProgressHUD showError:responseObject[@"message"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
     } enError:^(NSError *error) {
-//        [_loadV removeloadview];
+
     }];
     
 }
@@ -167,8 +165,8 @@
                 }
             }
         }else{
-            
-            [MBProgressHUD showError:responseObject[@"message"]];
+
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
     } enError:^(NSError *error) {
@@ -204,7 +202,8 @@
         vc.modalPresentationStyle = UIModalPresentationCustom;
         [self presentViewController:vc animated:YES completion:nil];
     }else{
-        [MBProgressHUD showError:@"行业分类暂无数据"];
+ 
+        [SVProgressHUD showErrorWithStatus:@"行业分类暂无数据"];
     }
 }
 #pragma mark - 截止日期选择
@@ -379,49 +378,53 @@
 
             }
                 break;
-                
             default:
                 break;
         }
-        
     }
-
 }
 
 #pragma mark - 提交
 - (IBAction)submit:(id)sender {
     
     if (self.moneyTF.text.length == 0) {
-        [MBProgressHUD showError:@"请输入目标金额"];
+
+        [SVProgressHUD showErrorWithStatus:@"请输入目标金额"];
         return;
     }else if([self.moneyTF.text floatValue] <= 0){
-        [MBProgressHUD showError:@"金额必须大于0"];
+
+        [SVProgressHUD showErrorWithStatus:@"金额必须大于0"];
         return;
     }
     if (self.titleTF.text.length == 0) {
-        [MBProgressHUD showError:@"请输入标题"];
+
+        [SVProgressHUD showErrorWithStatus:@"请输入标题"];
         return;
     }
     if ([self.industryLabel.text isEqualToString:@"请选择"]) {
-        [MBProgressHUD showError:@"请选择行业"];
+
+        [SVProgressHUD showErrorWithStatus:@"请选择行业"];
         return;
     }
     if ([self.dateLabel.text isEqualToString:@"筹款截止日期"]) {
-        [MBProgressHUD showError:@"请选择截止日期"];
+     
+        [SVProgressHUD showErrorWithStatus:@"请选择截止日期"];
         return;
     }
     
     if ([self.infoTV.text isEqualToString:@"  请填写项目说明（限制150字以内）"]|| [self.infoTV.text isEqualToString:@""]) {
-        [MBProgressHUD showError:@"请输入项目说明"];
+       
+        [SVProgressHUD showErrorWithStatus:@"请输入项目说明"];
         return;
     }
     if ([self.addressLabel.text isEqualToString:@"请选择"]) {
-        [MBProgressHUD showError:@"请选择地址"];
+    
+        [SVProgressHUD showErrorWithStatus:@"请选择地址"];
         return;
     }
     
     if (!_isAgreeProtocol) {
-        [MBProgressHUD showError:@"请先同意发布协议"];
+        [SVProgressHUD showErrorWithStatus:@"请先同意发布协议"];
         return;
     }
     
@@ -430,7 +433,14 @@
     
     NSInteger kk = [self compareOneDay:detaildate withAnotherDay:[NSDate date]];
     if(kk != 1){
-        [MBProgressHUD showError:@"截止日期需大于当前日期"];
+  
+        [SVProgressHUD showErrorWithStatus:@"截止日期需大于当前日期"];
+        return;
+    }
+    
+    if (self.provinceId.length <= 0 || self.cityId.length == 0) {
+    
+        [SVProgressHUD showErrorWithStatus:@"未选择地区"];
         return;
     }
     
@@ -447,9 +457,10 @@
     }
 
     if (self.imageArr.count <= 0) {
-        [MBProgressHUD showError:@"至少上传一张项目图片"];
+        [SVProgressHUD showErrorWithStatus:@"至少上传一张项目图片"];
         return;
     }
+    
     
     self.submitBtn.userInteractionEnabled = NO;
     self.submitBtn.backgroundColor = [UIColor lightGrayColor];
@@ -463,6 +474,9 @@
     dic[@"info"] = self.infoTV.text;
     dic[@"trade_id"] = self.trade_id;
     dic[@"need_time"] = self.need_time;
+    
+    dic[@"province"] = self.provinceId;
+    dic[@"city"] = self.cityId;
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];//响应
@@ -489,7 +503,7 @@
 
         [SVProgressHUD showProgress:uploadProgress.fractionCompleted status:[NSString stringWithFormat:@"上传中%.0f%%",(uploadProgress.fractionCompleted * 100)]];
         
-        if (uploadProgress.fractionCompleted == 1.0) {
+        if (uploadProgress.fractionCompleted == 0.5) {
             [SVProgressHUD dismiss];
         
         }
@@ -517,7 +531,8 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         self.submitBtn.userInteractionEnabled = YES;
         self.submitBtn.backgroundColor = MAIN_COLOR;
-        [MBProgressHUD showError:error.localizedDescription];
+
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
         
     }];
 
@@ -583,13 +598,14 @@
             // 不能输入.0-9以外的字符
             if (!((single >= '0' && single <= '9') || single == '.' || single == '\n'))
             {
-                [MBProgressHUD showError:@"您的输入格式不正确"];
+                [SVProgressHUD showErrorWithStatus:@"您的输入格式不正确"];
                 return NO;
             }
             
             // 只能有一个小数点
             if (self.isHaveDian && single == '.') {
-                [MBProgressHUD showError:@"最多只能输入一个小数点"];
+    
+                [SVProgressHUD showErrorWithStatus:@"最多只能输入一个小数点"];
                 return NO;
             }
             
@@ -603,12 +619,14 @@
                 if (textField.text.length > 1) {
                     NSString *secondStr = [textField.text substringWithRange:NSMakeRange(1, 1)];
                     if (![secondStr isEqualToString:@"."]) {
-                        [MBProgressHUD showError:@"第二个字符需要是小数点"];
+                        
+                        [SVProgressHUD showErrorWithStatus:@"第二个字符需要是小数点"];
                         return NO;
                     }
                 }else{
                     if (![string isEqualToString:@"."]) {
-                        [MBProgressHUD showError:@"第二个字符需要是小数点"];
+    
+                        [SVProgressHUD showErrorWithStatus:@"第二个字符需要是小数点"];
                         return NO;
                     }
                 }
@@ -620,7 +638,8 @@
                 // 由于range.location是NSUInteger类型的，所以这里不能通过(range.location - ran.location)>2来判断
                 if (range.location > ran.location) {
                     if ([textField.text pathExtension].length > 1) {
-                        [MBProgressHUD showError:@"小数点后最多有两位小数"];
+                   
+                        [SVProgressHUD showErrorWithStatus:@"小数点后最多有两位小数"];
                         return NO;
                     }
                 }

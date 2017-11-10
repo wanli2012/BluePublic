@@ -10,6 +10,7 @@
 #import "GLMine_PersonInfo_AddressChooseController.h"//地址选择
 #import <SDWebImage/UIImageView+WebCache.h>
 
+
 @interface GLMine_PersonInfoController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     UITextField *_nickNameTF;//昵称
@@ -46,6 +47,7 @@
     
     [self refreshUI];
 }
+
 //刷新UI界面
 - (void)refreshUI{
     
@@ -113,19 +115,23 @@
 - (IBAction)ensure:(id)sender {
 
     if (self.trueNameTF.text.length <= 1) {
-        [MBProgressHUD showError:@"真实姓名至少有一个字"];
+     
+        [SVProgressHUD showErrorWithStatus:@"真实姓名至少有一个字"];
         return;
     }else if(![predicateModel IsChinese:self.trueNameTF.text]){
-        [MBProgressHUD showError:@"真实姓名应该是汉字"];
+       
+        [SVProgressHUD showErrorWithStatus:@"真实姓名应该是汉字"];
         return;
     }
     
     if (self.IDCardNumTF.text.length == 0) {
-        [MBProgressHUD showError:@"请输入身份证号"];
+ 
+        [SVProgressHUD showErrorWithStatus:@"请输入身份证号"];
         return;
 
     }else if(![predicateModel validateIdentityCard:self.IDCardNumTF.text]){
-        [MBProgressHUD showError:@"身份证号输入不合法"];
+  
+        [SVProgressHUD showErrorWithStatus:@"身份证号输入不合法"];
         return;
     }
     
@@ -150,7 +156,7 @@
             [self refreshUI];
         }
         
-        [MBProgressHUD showError:responseObject[@"message"]];
+        [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         
     } enError:^(NSError *error) {
         [_loadV removeloadview];
@@ -166,9 +172,8 @@
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         //    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         picker.delegate = self;
-        //    // 设置选择后的图片可以被编辑
-        //    picker.allowsEditing = YES;
-        //    [self presentViewController:picker animated:YES completion:nil];
+   // 设置选择后的图片可以被编辑
+
         //1.获取媒体支持格式
         NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
         picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
@@ -196,9 +201,7 @@
         }
 
     }];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     
     [alertVC addAction:picture];
     [alertVC addAction:camera];
@@ -226,7 +229,6 @@
         dict[@"token"] = [UserModel defaultUser].token;
         dict[@"uid"] = [UserModel defaultUser].uid;
         dict[@"type"] = @"1";
-//        dict[@"pic"] = data;
         
         _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
         AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -255,17 +257,18 @@
             if ([dic[@"code"]integerValue] == SUCCESS_CODE) {
                 
                 self.picImageV.image = [UIImage imageWithData:data];
-                [MBProgressHUD showError:dic[@"message"]];
+                
+                [SVProgressHUD showSuccessWithStatus:dic[@"message"]];
                 
             }else{
-                
-                [MBProgressHUD showError:dic[@"message"]];
+                [SVProgressHUD showErrorWithStatus:dic[@"message"]];
             }
             
             [_loadV removeloadview];
         } failure:^(NSURLSessionDataTask *task, NSError *error) {
             [_loadV removeloadview];
-            [MBProgressHUD showError:error.localizedDescription];
+          
+            [SVProgressHUD showErrorWithStatus:error.localizedDescription];
         }];
         
         [picker dismissViewControllerAnimated:YES completion:nil];
@@ -303,11 +306,12 @@
             [_loadV removeloadview];
             
             if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
-                [MBProgressHUD showSuccess:responseObject[@"message"]];
+
+                [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
                 [self refresh];
             }
             
-            [MBProgressHUD showError:responseObject[@"message"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
             
         } enError:^(NSError *error) {
             [_loadV removeloadview];

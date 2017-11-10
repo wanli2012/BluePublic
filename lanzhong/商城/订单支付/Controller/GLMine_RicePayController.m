@@ -8,21 +8,20 @@
 
 #import "GLMine_RicePayController.h"
 #import "LBMineCenterPayPagesTableViewCell.h"
-//#import "LBIntegralMallViewController.h"
 #import "GLOrderPayView.h"
 #import "GLSet_MaskVeiw.h"
 #import <AlipaySDK/AlipaySDK.h>
-//#import "WXApi.h"
+#import "WXApi.h"
 #import "GLMine_RicePayModel.h"
 #import "GLBusiness_DetailController.h"
+#import "RSAEncryptor.h"
 
 
 @interface GLMine_RicePayController ()
 {
     LoadWaitView *_loadV;
     GLSet_MaskVeiw *_maskV;
-//    UIView *_maskView;
-//    GLOrderPayView *_contentView;
+
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -32,8 +31,7 @@
 @property (strong, nonatomic)  NSMutableArray *dataarr;
 @property (strong, nonatomic)  NSMutableArray *selectB;
 @property (assign, nonatomic)  NSInteger selectIndex;
-//@property (weak, nonatomic) IBOutlet UILabel *orderType;
-//@property (weak, nonatomic) IBOutlet UILabel *ordercode;
+
 @property (weak, nonatomic) IBOutlet UILabel *orderMoney;
 @property (weak, nonatomic) IBOutlet UILabel *orderMTitleLb;
 
@@ -77,7 +75,7 @@
     /**
      *微信支付成功 回调
      */
-//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(wxpaysucess) name:@"wxpaysucess" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(wxpaysucess) name:@"wxpaysucess" object:nil];
     
     /**
      *判断是否展示支付
@@ -258,6 +256,7 @@
         case 2://微信
         {
             dict[@"paytype"] = @"2";
+            [self cashPay:dict];
         }
             break;
         case 1://支付宝
@@ -284,7 +283,19 @@
             switch (index) {
                 case 2://微信
                 {
+                    [MBProgressHUD showError:responseObject[@"message"]];
                     
+                    //调起微信支付
+                    PayReq* req = [[PayReq alloc] init];
+                    req.openID=responseObject[@"data"][@"wxinpay"][@"appid"];
+                    req.partnerId = responseObject[@"data"][@"wxinpay"][@"partnerid"];
+                    req.prepayId = responseObject[@"data"][@"wxinpay"][@"prepayid"];
+                    req.nonceStr = responseObject[@"data"][@"wxinpay"][@"noncestr"];
+                    req.timeStamp = [responseObject[@"data"][@"wxinpay"][@"timestamp"] intValue];
+                    req.package = responseObject[@"data"][@"wxinpay"][@"packages"];
+                    req.sign = responseObject[@"data"][@"wxinpay"][@"sign"];
+                    [WXApi sendReq:req];
+
                 }
                     break;
                 case 1://支付宝
@@ -302,7 +313,6 @@
                                 
                                 [self.navigationController popToRootViewControllerAnimated:YES];
                             }
-
                             
                         }else{
                             NSString *returnStr;
@@ -323,20 +333,14 @@
                                 default:
                                     break;
                             }
-                            
                             [MBProgressHUD showError:returnStr];
-                            
                         }
-                        
                     }];
                 }
                     break;
                 default:
                     break;
             }
-            
-            
-            
         }
         [MBProgressHUD showError:responseObject[@"message"]];
     } enError:^(NSError *error) {
@@ -369,8 +373,8 @@
             
             return;
         }
-        
-        dict[@"upwd"] = alertVC.textFields.lastObject.text;
+        NSString *encryptsecret = [RSAEncryptor encryptString:alertVC.textFields.lastObject.text publicKey:public_RSA];
+        dict[@"upwd"] = encryptsecret;
 
         _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
         [NetworkManager requestPOSTWithURLStr:kORDER_PAY_URL paramDic:dict finish:^(id responseObject) {
@@ -409,29 +413,54 @@
     [self dismiss];
 }
 
-- (void)WeChatPay:(NSString *)payType{
-
+//- (void)alipay:(NSString *)payType{
 //    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 //    dict[@"token"] = [UserModel defaultUser].token;
 //    dict[@"uid"] = [UserModel defaultUser].uid;
 //    dict[@"order_id"] = self.order_id;
 //    dict[@"paytype"] = payType;
-//    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+//    
 //    [NetworkManager requestPOSTWithURLStr:@"Shop/payParam" paramDic:dict finish:^(id responseObject) {
-    
+//        
 //        [_loadV removeloadview];
 //        [self dismiss];
 //        if ([responseObject[@"code"] integerValue] == 1){
-//            //调起微信支付
-//            PayReq* req = [[PayReq alloc] init];
-//            req.openID=responseObject[@"data"][@"weixinpay"][@"appid"];
-//            req.partnerId = responseObject[@"data"][@"weixinpay"][@"partnerid"];
-//            req.prepayId = responseObject[@"data"][@"weixinpay"][@"prepayid"];
-//            req.nonceStr = responseObject[@"data"][@"weixinpay"][@"noncestr"];
-//            req.timeStamp = [responseObject[@"data"][@"weixinpay"][@"timestamp"] intValue];
-//            req.package = responseObject[@"data"][@"weixinpay"][@"package"];
-//            req.sign = responseObject[@"data"][@"weixinpay"][@"sign"];
-//            [WXApi sendReq:req];
+//            
+//            [[AlipaySDK defaultService]payOrder:responseObject[@"data"][@"alipay"][@"url"] fromScheme:@"univerAlipay" callback:^(NSDictionary *resultDic) {
+//                
+//                NSInteger orderState=[resultDic[@"resultStatus"] integerValue];
+//                if (orderState==9000) {
+//                    self.hidesBottomBarWhenPushed = YES;
+//                    
+//                    [self.navigationController popToRootViewControllerAnimated:YES];
+//                        
+//                    self.hidesBottomBarWhenPushed = NO;
+//                    
+//                }else{
+//                    NSString *returnStr;
+//                    switch (orderState) {
+//                        case 8000:
+//                            returnStr=@"订单正在处理中";
+//                            break;
+//                        case 4000:
+//                            returnStr=@"订单支付失败";
+//                            break;
+//                        case 6001:
+//                            returnStr=@"订单取消";
+//                            break;
+//                        case 6002:
+//                            returnStr=@"网络连接出错";
+//                            break;
+//                            
+//                        default:
+//                            break;
+//                    }
+//                    
+//                    [MBProgressHUD showError:returnStr];
+//                    
+//                }
+//                
+//            }];
 //            
 //        }else{
 //            
@@ -441,84 +470,23 @@
 //    } enError:^(NSError *error) {
 //        [MBProgressHUD showError:error.localizedDescription];
 //        [_loadV removeloadview];
-    
+//        
 //    }];
-}
-
-- (void)alipay:(NSString *)payType{
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[@"token"] = [UserModel defaultUser].token;
-    dict[@"uid"] = [UserModel defaultUser].uid;
-    dict[@"order_id"] = self.order_id;
-    dict[@"paytype"] = payType;
-    
-    [NetworkManager requestPOSTWithURLStr:@"Shop/payParam" paramDic:dict finish:^(id responseObject) {
-        
-        [_loadV removeloadview];
-        [self dismiss];
-        if ([responseObject[@"code"] integerValue] == 1){
-            
-            [[AlipaySDK defaultService]payOrder:responseObject[@"data"][@"alipay"][@"url"] fromScheme:@"univerAlipay" callback:^(NSDictionary *resultDic) {
-                
-                NSInteger orderState=[resultDic[@"resultStatus"] integerValue];
-                if (orderState==9000) {
-                    self.hidesBottomBarWhenPushed = YES;
-                    
-                    [self.navigationController popToRootViewControllerAnimated:YES];
-                        
-                    self.hidesBottomBarWhenPushed = NO;
-                    
-                }else{
-                    NSString *returnStr;
-                    switch (orderState) {
-                        case 8000:
-                            returnStr=@"订单正在处理中";
-                            break;
-                        case 4000:
-                            returnStr=@"订单支付失败";
-                            break;
-                        case 6001:
-                            returnStr=@"订单取消";
-                            break;
-                        case 6002:
-                            returnStr=@"网络连接出错";
-                            break;
-                            
-                        default:
-                            break;
-                    }
-                    
-                    [MBProgressHUD showError:returnStr];
-                    
-                }
-                
-            }];
-            
-        }else{
-            
-            [MBProgressHUD showError:responseObject[@"message"]];
-        }
-        
-    } enError:^(NSError *error) {
-        [MBProgressHUD showError:error.localizedDescription];
-        [_loadV removeloadview];
-        
-    }];
-}
+//}
 
 //支付宝客户端支付成功之后 发送通知
--(void)Alipaysucess{
-    
-    self.hidesBottomBarWhenPushed = YES;
-    
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    
-    self.hidesBottomBarWhenPushed = NO;
-    
-}
+//-(void)Alipaysucess{
+//    
+//    self.hidesBottomBarWhenPushed = YES;
+//    
+//    [self.navigationController popToRootViewControllerAnimated:YES];
+//    
+//    self.hidesBottomBarWhenPushed = NO;
+//    
+//}
 
 
-- (void)pay:(NSNotification *)sender{
+//- (void)pay:(NSNotification *)sender{
 //    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 //    dict[@"token"] = [UserModel defaultUser].token;
 //    dict[@"uid"] = [UserModel defaultUser].uid;
@@ -553,7 +521,7 @@
 //        
 //    }];
 //
-}
+//}
 
 -(NSMutableArray*)dataarr{
     

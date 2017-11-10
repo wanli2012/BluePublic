@@ -53,6 +53,7 @@
     }
     
 }
+
 - (void)setRechargeModel:(GLMine_Wallet_RechargeModel *)rechargeModel{
     _rechargeModel = rechargeModel;
     
@@ -75,7 +76,7 @@
     
     self.detailLabel.text = [formattime formateTimeOfDate3:rechargeModel.addtime];
     self.moneyLabel.text = rechargeModel.money;
-    
+
 }
 
 @end

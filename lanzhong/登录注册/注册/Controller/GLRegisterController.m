@@ -8,8 +8,12 @@
 
 #import "GLRegisterController.h"
 #import "GLBusiness_CertificationController.h"
+#import "RSAEncryptor.h"
 
-@interface GLRegisterController ()
+@interface GLRegisterController ()<UITextFieldDelegate>
+{
+    bool _isAgreeProtocol;
+}
 
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageV;
@@ -22,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordTF;//密码
 @property (weak, nonatomic) IBOutlet UITextField *ensurePwdTF;//确认密码
 @property (weak, nonatomic) IBOutlet UITextField *codeTF;//验证码
+@property (weak, nonatomic) IBOutlet UIImageView *protocolImageV;//同意标志
 
 @property (strong, nonatomic)LoadWaitView *loadV;
 
@@ -48,6 +53,7 @@
     self.bgView.layer.shadowColor = [UIColor blueColor].CGColor;
     
     self.registerBtn.layer.cornerRadius = 5.f;
+    _isAgreeProtocol = NO;
     
 }
 
@@ -70,6 +76,19 @@
     aboutVC.navTitle = @"注册协议";
     [self.navigationController pushViewController:aboutVC animated:YES];
 }
+
+#pragma mark - 是否同意注册协议
+- (IBAction)isAgree:(id)sender {
+    _isAgreeProtocol = !_isAgreeProtocol;
+    
+    if (_isAgreeProtocol) {
+        self.protocolImageV.image = [UIImage imageNamed:@"publish_choice"];
+    }else{
+        self.protocolImageV.image = [UIImage imageNamed:@"publish_nochoice"];
+    }
+    
+}
+
 
 //注册
 - (IBAction)register:(id)sender {
@@ -114,9 +133,15 @@
         return;
     }
     
+    if(!_isAgreeProtocol){
+        [MBProgressHUD showError:@"请先同意注册协议"];
+        return;
+    }
+    
+    NSString *encryptsecret = [RSAEncryptor encryptString:self.passwordTF.text publicKey:public_RSA];
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"phone"] = self.phoneTF.text;
-    dict[@"upwd"] = self.passwordTF.text;
+    dict[@"upwd"] = encryptsecret;
     dict[@"phone_code"] = self.codeTF.text;
     dict[@"reg_port"] = @"3";
     
@@ -207,6 +232,21 @@
     });
     dispatch_resume(_timer);
     
+}
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    if (textField == self.phoneTF) {
+        [self.passwordTF becomeFirstResponder];
+    }else if(textField == self.passwordTF){
+        [self.ensurePwdTF becomeFirstResponder];
+    }else if(textField == self.ensurePwdTF){
+        [self.codeTF becomeFirstResponder];
+    }else{
+        [self.codeTF resignFirstResponder];
+    }
+    
+    return YES;
 }
 
 

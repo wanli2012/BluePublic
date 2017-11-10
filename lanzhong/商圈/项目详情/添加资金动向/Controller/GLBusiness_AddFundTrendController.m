@@ -77,11 +77,14 @@
     NSInteger kk = [self compareOneDay:startDate withAnotherDay:endDate];
     
     if(kk != -1){
-        [MBProgressHUD showError:@"截止日期需大于开始日期"];
+
+        [SVProgressHUD showSuccessWithStatus:@"截止日期需大于开始日期"];
         return;
     }
+    
     if(self.textV.text.length == 0 || [self.textV.text isEqualToString:@"请填写资金动向内容(限制150字以内)"]){
-        [MBProgressHUD showError:@"请输入动向内容"];
+      
+        [SVProgressHUD showSuccessWithStatus:@"请输入动向内容"];
         return;
     }
     
@@ -101,14 +104,14 @@
         
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
            
-            [MBProgressHUD showError:responseObject[@"message"]];
+            [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"AddFundTrendNotification" object:nil];
             [self.navigationController popViewControllerAnimated:YES];
             
         }else{
             
-            [MBProgressHUD showError:responseObject[@"message"]];
+            [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
         }
         
         

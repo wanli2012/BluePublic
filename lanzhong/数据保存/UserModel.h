@@ -42,9 +42,6 @@
 @property (nonatomic, copy)NSString  *item_count;//我的项目数量统计
 @property (nonatomic, copy)NSString  *user_server;//客服电话
 
-
-
-
 +(UserModel*)defaultUser;
 
 @end

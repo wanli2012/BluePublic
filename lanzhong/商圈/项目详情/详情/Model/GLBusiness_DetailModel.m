@@ -37,7 +37,6 @@
             }else{
                 return 70 + commentSize.height + replyRect.size.height;
             }
-        
         }
         
     }else{
@@ -53,7 +52,6 @@
             return 90 + commentSize.height + replyRect.size.height;
         }
     }
-
 }
 
 @end

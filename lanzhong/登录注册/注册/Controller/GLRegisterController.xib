@@ -20,6 +20,7 @@
                 <outlet property="imageV" destination="eBA-kH-fgZ" id="t9x-wI-w2X"/>
                 <outlet property="passwordTF" destination="6YD-6Z-ntG" id="os1-9g-4gD"/>
                 <outlet property="phoneTF" destination="l5c-Ls-hMF" id="hSr-dB-atc"/>
+                <outlet property="protocolImageV" destination="uxO-0Q-Jnt" id="M4J-bJ-Ple"/>
                 <outlet property="registerBtn" destination="XnT-41-XQb" id="cKp-gk-1yT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -93,7 +94,10 @@
                                                     <rect key="frame" x="43" y="0.0" width="288" height="49"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="-1" id="CEv-tP-dUg"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -132,9 +136,9 @@
                                                     <rect key="frame" x="44" y="0.0" width="287" height="49"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
                                                     <connections>
-                                                        <action selector="privacy:" destination="-1" eventType="editingDidEnd" id="45V-by-uyH"/>
+                                                        <outlet property="delegate" destination="-1" id="vFr-lZ-ss9"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
@@ -174,7 +178,10 @@
                                                     <rect key="frame" x="44" y="0.0" width="287" height="49"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="-1" id="fpu-fX-BCk"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -213,7 +220,10 @@
                                                     <rect key="frame" x="46.5" y="0.0" width="151.5" height="49"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="-1" id="QRK-z9-Pgb"/>
+                                                    </connections>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xeq-3J-Uvg">
                                                     <rect key="frame" x="208" y="10" width="93" height="30"/>
@@ -272,30 +282,61 @@
                                         <action selector="register:" destination="-1" eventType="touchUpInside" id="34I-Ak-W8k"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注册即视为同意" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cz8-Mr-y6c">
-                                    <rect key="frame" x="116" y="495" width="79" height="13.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aaz-d0-0NG">
-                                    <rect key="frame" x="195" y="489" width="68" height="26"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                    <state key="normal" title="《隐私权益》">
-                                        <color key="titleColor" red="2.38126886e-05" green="0.49598097800000002" blue="0.99889487030000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </state>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eHD-vb-OSP">
+                                    <rect key="frame" x="0.0" y="485" width="371" height="40"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aaz-d0-0NG">
+                                            <rect key="frame" x="195" y="4" width="68" height="26"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="26" id="cUs-2T-iXN"/>
+                                                <constraint firstAttribute="width" constant="68" id="rZk-Bf-Yrt"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <state key="normal" title="《隐私权益》">
+                                                <color key="titleColor" red="2.38126886e-05" green="0.49598097800000002" blue="0.99889487030000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="privacy:" destination="-1" eventType="touchUpInside" id="CE0-4r-CGO"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注册即视为同意" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cz8-Mr-y6c">
+                                            <rect key="frame" x="116" y="10" width="79" height="13.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="publish_nochoice" translatesAutoresizingMaskIntoConstraints="NO" id="uxO-0Q-Jnt">
+                                            <rect key="frame" x="99" y="11" width="12" height="12"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="12" id="N7Q-1w-tBm"/>
+                                                <constraint firstAttribute="height" constant="12" id="YPr-KW-ayh"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <gestureRecognizers/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="B0W-wG-olJ"/>
+                                        <constraint firstItem="aaz-d0-0NG" firstAttribute="centerY" secondItem="Cz8-Mr-y6c" secondAttribute="centerY" id="KLi-eE-lvc"/>
+                                        <constraint firstItem="aaz-d0-0NG" firstAttribute="leading" secondItem="Cz8-Mr-y6c" secondAttribute="trailing" id="UO3-t6-FBo"/>
+                                        <constraint firstItem="Cz8-Mr-y6c" firstAttribute="top" secondItem="eHD-vb-OSP" secondAttribute="top" constant="10" id="VUC-WN-pTO"/>
+                                        <constraint firstItem="Cz8-Mr-y6c" firstAttribute="leading" secondItem="uxO-0Q-Jnt" secondAttribute="trailing" constant="5" id="ZVR-Cs-JIp"/>
+                                        <constraint firstItem="Cz8-Mr-y6c" firstAttribute="centerX" secondItem="eHD-vb-OSP" secondAttribute="centerX" constant="-30" id="hOR-En-qmC"/>
+                                        <constraint firstItem="uxO-0Q-Jnt" firstAttribute="centerY" secondItem="Cz8-Mr-y6c" secondAttribute="centerY" id="kUS-1d-Pd8"/>
+                                    </constraints>
                                     <connections>
-                                        <action selector="privacy:" destination="-1" eventType="touchUpInside" id="CE0-4r-CGO"/>
+                                        <outletCollection property="gestureRecognizers" destination="AyD-1L-D12" appends="YES" id="VPT-UK-VkC"/>
                                     </connections>
-                                </button>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstAttribute="trailing" secondItem="eHD-vb-OSP" secondAttribute="trailing" id="AyV-K0-8CU"/>
+                                <constraint firstItem="eHD-vb-OSP" firstAttribute="leading" secondItem="5a2-xH-N6D" secondAttribute="leading" id="HJn-hN-WPC"/>
                                 <constraint firstItem="eBA-kH-fgZ" firstAttribute="top" secondItem="5a2-xH-N6D" secondAttribute="top" constant="20" id="LRK-zs-hyJ"/>
+                                <constraint firstItem="eHD-vb-OSP" firstAttribute="top" secondItem="XnT-41-XQb" secondAttribute="bottom" id="LYZ-Hz-vx3"/>
                                 <constraint firstItem="lSr-O0-AQw" firstAttribute="top" secondItem="eBA-kH-fgZ" secondAttribute="bottom" constant="20" id="MlD-fV-MoW"/>
                                 <constraint firstItem="XnT-41-XQb" firstAttribute="leading" secondItem="5a2-xH-N6D" secondAttribute="leading" constant="30" id="Ng5-Ca-8VD"/>
-                                <constraint firstItem="Cz8-Mr-y6c" firstAttribute="top" secondItem="XnT-41-XQb" secondAttribute="bottom" constant="10" id="OR0-3O-jI2"/>
-                                <constraint firstItem="Cz8-Mr-y6c" firstAttribute="centerX" secondItem="5a2-xH-N6D" secondAttribute="centerX" constant="-30" id="Pv0-St-Qh5"/>
                                 <constraint firstItem="lSr-O0-AQw" firstAttribute="leading" secondItem="5a2-xH-N6D" secondAttribute="leading" constant="20" id="RRy-xh-Ytm"/>
                                 <constraint firstItem="eBA-kH-fgZ" firstAttribute="centerX" secondItem="5a2-xH-N6D" secondAttribute="centerX" id="W6U-p8-7dk"/>
                                 <constraint firstAttribute="width" constant="371" id="Z4T-Lt-e5S"/>
@@ -303,8 +344,6 @@
                                 <constraint firstAttribute="trailing" secondItem="lSr-O0-AQw" secondAttribute="trailing" constant="20" id="apo-yd-4Ec"/>
                                 <constraint firstItem="XnT-41-XQb" firstAttribute="top" secondItem="lSr-O0-AQw" secondAttribute="bottom" constant="30" id="euJ-sR-h4s"/>
                                 <constraint firstAttribute="height" constant="557" id="g8X-Ly-HeN"/>
-                                <constraint firstItem="aaz-d0-0NG" firstAttribute="centerY" secondItem="Cz8-Mr-y6c" secondAttribute="centerY" id="gN8-6B-tkr"/>
-                                <constraint firstItem="aaz-d0-0NG" firstAttribute="leading" secondItem="Cz8-Mr-y6c" secondAttribute="trailing" id="iJD-og-b4e"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -330,11 +369,17 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="48" y="2"/>
         </view>
+        <tapGestureRecognizer id="AyD-1L-D12" userLabel="注册协议">
+            <connections>
+                <action selector="isAgree:" destination="-1" id="T6W-05-hPn"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="ios-template-1024" width="1024" height="1024"/>
         <image name="iphone" width="13" height="20"/>
         <image name="key" width="14" height="20"/>
+        <image name="publish_nochoice" width="12" height="12"/>
         <image name="verification" width="16" height="19"/>
     </resources>
 </document>

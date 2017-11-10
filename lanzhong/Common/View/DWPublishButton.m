@@ -83,6 +83,11 @@
 
 - (void)clickPublish {
     
+    if ([UserModel defaultUser].loginstatus == NO) {
+        [MBProgressHUD showError:@"请先登录"];
+        return;
+    }
+    
     if ([[UserModel defaultUser].real_state integerValue] == 0 || [[UserModel defaultUser].real_state integerValue] == 2) {
         [MBProgressHUD showError:@"请前往个人中心实名认证"];
         return;

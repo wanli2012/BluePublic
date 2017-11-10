@@ -59,16 +59,17 @@
     self.navigationController.navigationBar.hidden = NO;
     
 }
+#pragma mark - 退出登录
 - (IBAction)quit:(id)sender {
     
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"你确定要退出吗?" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [UserModel defaultUser].loginstatus = NO;
         [UserModel defaultUser].user_pic = @"";
+        [UserModel defaultUser].token = @"";
+        [UserModel defaultUser].uid = @"";
 
         [usermodelachivar achive];
         
@@ -130,7 +131,6 @@
             }
         }
             break;
-            
         default:
             break;
     }
@@ -333,7 +333,6 @@
     NSString * cachPath = [ NSSearchPathForDirectoriesInDomains ( NSCachesDirectory , NSUserDomainMask , YES ) firstObject ];
     
     return [self folderSizeAtPath :cachPath];
-    
 }
 //单个文件的大小
 
@@ -345,9 +344,7 @@
         
         return [[manager attributesOfItemAtPath :filePath error : nil ] fileSize ];
     }
-    
     return 0 ;
-    
 }
 //返回多少 M
 - ( float ) folderSizeAtPath:( NSString *) folderPath{
