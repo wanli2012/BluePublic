@@ -69,17 +69,20 @@
    
     [self.view endEditing:YES];
     if (self.accountTF.text.length <=0 ) {
-        [MBProgressHUD showError:@"请输入手机号码"];
+
+        [SVProgressHUD showErrorWithStatus:@"请输入手机号码"];
         return;
     }
     
     if (self.passwordTF.text.length <= 0) {
-        [MBProgressHUD showError:@"密码不能为空"];
+
+        [SVProgressHUD showErrorWithStatus:@"密码不能为空"];
         return;
     }
     
     if (self.passwordTF.text.length < 6 || self.passwordTF.text.length > 12) {
-        [MBProgressHUD showError:@"请输入6-12位密码"];
+
+        [SVProgressHUD showErrorWithStatus:@"请输入6-12位密码"];
         return;
     }
     
@@ -92,8 +95,8 @@
         [_loadV removeloadview];
         
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
-            
-            [MBProgressHUD showError:responseObject[@"message"]];
+
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
            
             [UserModel defaultUser].address = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"address"]];
             [UserModel defaultUser].area = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"area"]];
@@ -135,21 +138,21 @@
         }else if([responseObject[@"code"] integerValue] == 412){
             self.serviceNumLabel.hidden = NO;
             self.serviceNumLabel.text = [NSString stringWithFormat:@"客服电话:%@",[UserModel defaultUser].user_server];
-            [MBProgressHUD showError:responseObject[@"message"]];
+
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }else{
-            [MBProgressHUD showError:responseObject[@"data"]];
+
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
     } enError:^(NSError *error) {
         [_loadV removeloadview];
-        [MBProgressHUD showError:error.localizedDescription];
-        
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
     }];
 
 }
 - (IBAction)back:(id)sender {
     
-    NSLog(@"返回");
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }

@@ -40,11 +40,12 @@
 - (IBAction)getCode:(id)sender {
     
     if (self.phoneTF.text.length <=0 ) {
-        [MBProgressHUD showError:@"请输入手机号码"];
+        [SVProgressHUD showErrorWithStatus:@"请输入手机号码"];
         return;
     }else{
         if (![predicateModel valiMobile:self.phoneTF.text]) {
-            [MBProgressHUD showError:@"手机号格式不对"];
+ 
+            [SVProgressHUD showErrorWithStatus:@"手机号格式不对"];
             return;
         }
     }
@@ -99,43 +100,51 @@
 - (IBAction)submit:(id)sender {
     
     if (self.phoneTF.text.length <=0 ) {
-        [MBProgressHUD showError:@"请输入手机号码"];
+
+        [SVProgressHUD showErrorWithStatus:@"请输入手机号码"];
         return;
     }else{
         if (![predicateModel valiMobile:self.phoneTF.text]) {
-            [MBProgressHUD showError:@"手机号格式不对"];
+
+            [SVProgressHUD showErrorWithStatus:@"手机号格式不对"];
             return;
         }
     }
     
     if (self.passwordTF.text.length <= 0) {
-        [MBProgressHUD showError:@"密码不能为空"];
+
+        [SVProgressHUD showErrorWithStatus:@"密码不能为空"];
         return;
     }
     
     if (self.passwordTF.text.length < 6 || self.passwordTF.text.length > 12) {
-        [MBProgressHUD showError:@"请输入6-12位密码"];
+
+        [SVProgressHUD showErrorWithStatus:@"请输入6-12位密码"];
         return;
     }
     
     if ([predicateModel checkIsHaveNumAndLetter:self.passwordTF.text] != 3) {
         
-        [MBProgressHUD showError:@"密码须包含数字和字母"];
+
+        [SVProgressHUD showErrorWithStatus:@"密码须包含数字和字母"];
         return;
     }
     
     if (self.ensurePasswordTF.text.length <= 0) {
-        [MBProgressHUD showError:@"请输入确认密码"];
+
+        [SVProgressHUD showErrorWithStatus:@"请输入确认密码"];
         return;
     }
     
     if (![self.passwordTF.text isEqualToString:self.ensurePasswordTF.text]) {
-        [MBProgressHUD showError:@"两次输入的密码不一致"];
+
+        [SVProgressHUD showErrorWithStatus:@"两次输入的密码不一致"];
         return;
     }
     
     if (self.codeTF.text.length <= 0) {
-        [MBProgressHUD showError:@"请输入验证码"];
+
+        [SVProgressHUD showErrorWithStatus:@"请输入验证码"];
         return;
     }
     
@@ -151,17 +160,17 @@
         [_loadV removeloadview];
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
             
-            [MBProgressHUD showSuccess:responseObject[@"message"]];
+            [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
             [self.navigationController popViewControllerAnimated:YES];
             
         }else{
             
-            [MBProgressHUD showError:responseObject[@"message"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
 
     } enError:^(NSError *error) {
         [_loadV removeloadview];
-        [MBProgressHUD showError:error.localizedDescription];
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
     }];
 }
 

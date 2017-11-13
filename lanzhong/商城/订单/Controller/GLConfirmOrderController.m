@@ -157,8 +157,8 @@ static NSString *ID = @"GLOrderGoodsCell";
             [self.tableView reloadData];
             
         }else{
-            
-            [MBProgressHUD showError:responseObject[@"message"]];
+         
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
     } enError:^(NSError *error) {
@@ -217,11 +217,13 @@ static NSString *ID = @"GLOrderGoodsCell";
 - (IBAction)submitOrder:(UIButton *)sender {
 
     if (self.nameLabel.text.length <=0 ) {
-        [MBProgressHUD showError:@"请填写收货信息"];
+    
+        [SVProgressHUD showErrorWithStatus:@"请填写收货信息"];
         return;
     }
     if(self.address_id.length == 0){
-        [MBProgressHUD showError:@"请先选择地址"];
+  
+        [SVProgressHUD showErrorWithStatus:@"请先选择地址"];
         return;
     }
     
@@ -264,12 +266,13 @@ static NSString *ID = @"GLOrderGoodsCell";
             
         }else{
             
-            [MBProgressHUD showError:responseObject[@"message"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
     } enError:^(NSError *error) {
         [_loadV removeloadview];
-        [MBProgressHUD showError:@"请求失败"];
+
+        [SVProgressHUD showErrorWithStatus:@"请求失败"];
     }];
     
 }

@@ -154,9 +154,11 @@
             [UserModel defaultUser].idcard = self.IDCardNumTF.text;
             [usermodelachivar achive];
             [self refreshUI];
+        }else{
+            
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
-        [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         
     } enError:^(NSError *error) {
         [_loadV removeloadview];
@@ -309,9 +311,12 @@
 
                 [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
                 [self refresh];
+                
+            }else{
+                
+                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
             }
             
-            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
             
         } enError:^(NSError *error) {
             [_loadV removeloadview];

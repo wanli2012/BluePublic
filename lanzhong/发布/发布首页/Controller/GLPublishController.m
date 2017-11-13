@@ -334,9 +334,9 @@
     if ([type isEqualToString:@"public.image"]) {
         // 先把图片转成NSData
         UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+        
         NSData *data;
         if (UIImagePNGRepresentation(image) == nil) {
-            
             data = UIImageJPEGRepresentation(image, 0.2);
         }else {
             data = UIImageJPEGRepresentation(image, 0.2);

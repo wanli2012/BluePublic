@@ -136,8 +136,10 @@
             [self dismiss];
             [self postRequest:YES];
             [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
+        }else{
+            
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
-        [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         
     } enError:^(NSError *error) {
         [_loadV removeloadview];

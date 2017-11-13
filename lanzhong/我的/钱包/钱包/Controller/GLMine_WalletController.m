@@ -113,7 +113,6 @@
         
     } enError:^(NSError *error) {
         [_loadV removeloadview];
-        
     }];
 }
 
@@ -189,12 +188,14 @@
 - (IBAction)exchange:(id)sender {
  
     if(self.bank_id.length == 0){
-        [MBProgressHUD showError:@"请选择银行卡"];
+    
+        [SVProgressHUD showErrorWithStatus:@"请选择银行卡"];
         return ;
     }
     
     if(self.moneyTextF.text.length == 0){
-        [MBProgressHUD showError:@"请输入金额"];
+  
+        [SVProgressHUD showErrorWithStatus:@"请输入金额"];
         return;
     }
     
@@ -202,32 +203,33 @@
     double moneyf = [money doubleValue];
 
     if (moneyf <= 0.0) {
-        [MBProgressHUD showError:@"金额必须大于0"];
+        [SVProgressHUD showErrorWithStatus:@"金额必须大于0"];
         return;
     }
     
     if ([self.moneyTextF.text integerValue] % 100 != 0) {
-        [MBProgressHUD showError:@"兑换金额必须是100的整数倍!"];
+ 
+        [SVProgressHUD showErrorWithStatus:@"兑换金额必须是100的整数倍!"];
         return;
     }
     
     if([self.moneyTextF.text doubleValue] /100 > 0){
         if([self.moneyTextF.text doubleValue] - [self.moneyTextF.text integerValue]/100 *100 != 0){
-            [MBProgressHUD showError:@"兑换金额必须是100的整数倍!"];
+             [SVProgressHUD showErrorWithStatus:@"兑换金额必须是100的整数倍!"];
             return;
         }
     }else{
-        [MBProgressHUD showError:@"兑换金额必须是100的整数倍!"];
+         [SVProgressHUD showErrorWithStatus:@"兑换金额必须是100的整数倍!"];
         return;
     }
     
     if ([self.moneyTextF.text integerValue] > [self.balanceLabel.text integerValue]){
-        [MBProgressHUD showError:@"余额不足!"];
+         [SVProgressHUD showErrorWithStatus:@"余额不足!"];
         return;
     }
 
     if (self.passwordTextF.text.length == 0) {
-        [MBProgressHUD showError:@"请输入密码"];
+         [SVProgressHUD showErrorWithStatus:@"请输入密码"];
         return;
     }
     
@@ -236,8 +238,6 @@
     
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        
         
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         dict[@"uid"] = [UserModel defaultUser].uid;
@@ -250,33 +250,27 @@
         [NetworkManager requestPOSTWithURLStr:kEXCHANGE_MONEY_URL paramDic:dict finish:^(id responseObject) {
             
             [_loadV removeloadview];
-            
             if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
                 
                 [self updateBankInfo];
-                
                 //两个浮点数 减法不正确,才用的这个办法   我也没想通,妈的
                 NSDecimalNumber*jiafa1 = [NSDecimalNumber decimalNumberWithString:self.model.umonry];
                 NSDecimalNumber*jiafa2 = [NSDecimalNumber decimalNumberWithString:self.moneyTextF.text];
-                
                 NSDecimalNumber*jianfa = [jiafa1 decimalNumberBySubtracting:jiafa2];
                 
                 self.balanceLabel.text = [NSString stringWithFormat:@"%@",jianfa];
-                [MBProgressHUD showSuccess:responseObject[@"message"]];
-                
+                 [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
                 self.moneyTextF.text = nil;
                 self.passwordTextF.text = nil;
                 
             }else{
                 
-                [MBProgressHUD showError:responseObject[@"message"]];
+                 [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
             }
             
         } enError:^(NSError *error) {
             [_loadV removeloadview];
-            
         }];
-        
     }];
     
     [alertVC addAction:cancel];
@@ -291,7 +285,7 @@
     CGFloat moneyf = [money doubleValue];
     
     if(moneyf <= 0.0){
-        [MBProgressHUD showError:@"请输入金额"];
+         [SVProgressHUD showErrorWithStatus:@"请输入金额"];
         return;
     }
     
@@ -340,12 +334,12 @@
                                 break;
                         }
                         
-                        [MBProgressHUD showError:returnStr];
+                         [SVProgressHUD showErrorWithStatus:returnStr];
                     }
                 }];
                 
             }else{//微信支付
-                [MBProgressHUD showError:responseObject[@"message"]];
+                 [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
                 //调起微信支付
                 PayReq* req = [[PayReq alloc] init];
                 req.openID=responseObject[@"data"][@"wxinpay"][@"appid"];
@@ -360,7 +354,7 @@
 
         }else{
             
-            [MBProgressHUD showError:responseObject[@"message"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
     } enError:^(NSError *error) {
@@ -402,10 +396,10 @@
 #pragma mark - 添加银行卡
 - (IBAction)addCard:(id)sender {
     if ([[UserModel defaultUser].real_state integerValue] == 0 || [[UserModel defaultUser].real_state integerValue] == 2) {
-        [MBProgressHUD showError:@"请前往个人中心实名认证"];
+         [SVProgressHUD showErrorWithStatus:@"请前往个人中心实名认证"];
         return;
     }else if([[UserModel defaultUser].real_state integerValue] == 3){
-        [MBProgressHUD showError:@"实名认证审核中,请等待"];
+         [SVProgressHUD showErrorWithStatus:@"实名认证审核中,请等待"];
         return;
     }
     
@@ -492,13 +486,13 @@
             // 不能输入.0-9以外的字符
             if (!((single >= '0' && single <= '9') || single == '.'))
             {
-                [MBProgressHUD showError:@"您的输入格式不正确"];
+                 [SVProgressHUD showErrorWithStatus:@"您的输入格式不正确"];
                 return NO;
             }
             
             // 只能有一个小数点
             if (self.isHaveDian && single == '.') {
-                [MBProgressHUD showError:@"最多只能输入一个小数点"];
+                 [SVProgressHUD showErrorWithStatus:@"最多只能输入一个小数点"];
                 return NO;
             }
             
@@ -512,12 +506,12 @@
                 if (textField.text.length > 1) {
                     NSString *secondStr = [textField.text substringWithRange:NSMakeRange(1, 1)];
                     if (![secondStr isEqualToString:@"."]) {
-                        [MBProgressHUD showError:@"第二个字符需要是小数点"];
+                         [SVProgressHUD showErrorWithStatus:@"第二个字符需要是小数点"];
                         return NO;
                     }
                 }else{
                     if (![string isEqualToString:@"."]) {
-                        [MBProgressHUD showError:@"第二个字符需要是小数点"];
+                         [SVProgressHUD showErrorWithStatus:@"第二个字符需要是小数点"];
                         return NO;
                     }
                 }
@@ -529,7 +523,7 @@
                 // 由于range.location是NSUInteger类型的，所以这里不能通过(range.location - ran.location)>2来判断
                 if (range.location > ran.location) {
                     if ([textField.text pathExtension].length > 1) {
-                        [MBProgressHUD showError:@"小数点后最多有两位小数"];
+                        [SVProgressHUD showErrorWithStatus:@"小数点后最多有两位小数"];
                         return NO;
                     }
                 }

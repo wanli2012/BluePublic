@@ -10,13 +10,14 @@
 #import "GLBusiniessCell.h"
 #import <SDCycleScrollView/SDCycleScrollView.h>
 #import "GLBusinessCircle_MenuScreeningView.h"
-#import "GLBusiness_DetailController.h"//项目详情
 #import "GLBusinessCircleModel.h"
 #import "GLBusinessAdModel.h"//广告Model
 
 #import "GLBusiness_CertificationController.h"//webVC,此处用于展示广告
 #import "GLMutipleChooseController.h"//省市选择
 #import "GLPublish_CityModel.h"//城市模型
+#import "GLBusiness_DetailController.h"//项目详情
+#import "GLMall_DetailController.h"//商品详情
 
 @interface GLBusinessCircleController ()<SDCycleScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -229,15 +230,11 @@
                 GLPublish_CityModel *model0 = [[GLPublish_CityModel alloc] init];
                 model0.province_name = @"不限";
 
-                
                 [self.cityModels addObject:model0];
                
                 for (NSDictionary *dic in responseObject[@"data"]) {
-                    
                     GLPublish_CityModel *model = [GLPublish_CityModel mj_objectWithKeyValues:dic];
-                    
                     [self.cityModels addObject:model];
-                   
                 }
                 
                 for (GLPublish_CityModel *model in self.cityModels)
@@ -283,15 +280,11 @@
                     NSString *imageurl = [NSString stringWithFormat:@"%@?imageView2/1/w/%f/h/150",model.must_banner,kSCREEN_WIDTH];
                     [arrM addObject:imageurl];
                 }
-                
                 self.cycleScrollView.imageURLStringsGroup = arrM;
             }
-            
         }else{
-
             [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
-        
         
     } enError:^(NSError *error) {
         
@@ -317,12 +310,34 @@
     GLBusinessAdModel *adModel = self.adModels[index];
     
     self.hidesBottomBarWhenPushed = YES;
-    GLBusiness_CertificationController *adVC = [[GLBusiness_CertificationController alloc] init];
-    adVC.navTitle = adModel.banner_title;
-    adVC.url = [NSString stringWithFormat:@"%@%@",AD_URL,adModel.banner_id];
-    [self.navigationController pushViewController:adVC animated:YES];
-    self.hidesBottomBarWhenPushed = NO;
     
+    GLBusiness_CertificationController *adVC = [[GLBusiness_CertificationController alloc] init];
+    if([adModel.type integerValue] == 1){
+        
+        adVC.navTitle = adModel.banner_title;
+        adVC.url = [NSString stringWithFormat:@"%@%@",AD_URL,adModel.banner_id];
+        [self.navigationController pushViewController:adVC animated:YES];
+        
+    }else if([adModel.type integerValue] == 2){
+        
+        GLMall_DetailController *detailVC = [[GLMall_DetailController alloc] init];
+        detailVC.goods_id = adModel.z_id;
+        [self.navigationController pushViewController:detailVC animated:YES];
+
+    }else if([adModel.type integerValue] == 3){
+        
+        GLBusiness_DetailController *detailVC = [[GLBusiness_DetailController alloc] init];
+        detailVC.item_id = adModel.z_id;
+        [self.navigationController pushViewController:detailVC animated:YES];
+        
+    }else{
+//        adVC.navTitle = adModel.banner_title;
+//        adVC.url = [NSString stringWithFormat:@"%@",adModel.url];
+//        [self.navigationController pushViewController:adVC animated:YES];
+         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:adModel.url]];
+    }
+    
+    self.hidesBottomBarWhenPushed = NO;
 }
 
 /** 图片滚动回调 */
@@ -339,6 +354,7 @@
     }
     return self.models.count;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     GLBusiniessCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLBusiniessCell"];

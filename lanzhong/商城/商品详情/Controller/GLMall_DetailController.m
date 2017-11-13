@@ -272,12 +272,14 @@
     self.hidesBottomBarWhenPushed = YES;
    
     if ([UserModel defaultUser].loginstatus == NO) {
-        [MBProgressHUD showError:@"请先登录"];
+
+        [SVProgressHUD showErrorWithStatus:@"请先登录"];
         return;
     }
     
     if (self.spec_id.length <= 0) {
-        [MBProgressHUD showError:@"还未选择规格"];
+
+        [SVProgressHUD showErrorWithStatus:@"还未选择规格"];
         return;
     }
     GLConfirmOrderController *vc=[[GLConfirmOrderController alloc]init];

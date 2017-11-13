@@ -84,15 +84,18 @@
 - (void)clickPublish {
     
     if ([UserModel defaultUser].loginstatus == NO) {
-        [MBProgressHUD showError:@"请先登录"];
+       
+        [SVProgressHUD showErrorWithStatus:@"请先登录"];
         return;
     }
     
     if ([[UserModel defaultUser].real_state integerValue] == 0 || [[UserModel defaultUser].real_state integerValue] == 2) {
-        [MBProgressHUD showError:@"请前往个人中心实名认证"];
+        
+        [SVProgressHUD showErrorWithStatus:@"请前往个人中心实名认证"];
         return;
     }else if([[UserModel defaultUser].real_state integerValue] == 3){
-        [MBProgressHUD showError:@"实名认证审核中,请等待"];
+      
+        [SVProgressHUD showErrorWithStatus:@"实名认证审核中,请等待"];
         return;
     }
     

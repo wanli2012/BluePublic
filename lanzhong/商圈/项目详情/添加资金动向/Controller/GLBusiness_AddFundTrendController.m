@@ -78,13 +78,13 @@
     
     if(kk != -1){
 
-        [SVProgressHUD showSuccessWithStatus:@"截止日期需大于开始日期"];
+        [SVProgressHUD showErrorWithStatus:@"截止日期需大于开始日期"];
         return;
     }
     
     if(self.textV.text.length == 0 || [self.textV.text isEqualToString:@"请填写资金动向内容(限制150字以内)"]){
       
-        [SVProgressHUD showSuccessWithStatus:@"请输入动向内容"];
+        [SVProgressHUD showErrorWithStatus:@"请输入动向内容"];
         return;
     }
     
@@ -111,7 +111,7 @@
             
         }else{
             
-            [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
         
