@@ -134,7 +134,7 @@
 
 + (AFSecurityPolicy*)customSecurityPolicy
 {
-    // /先导入证书
+    // /先导入证书//www.lzcke.com
     NSString *cerPath = [[NSBundle mainBundle] pathForResource:@"https" ofType:@"cer"];//证书的路径
     NSData *certData = [NSData dataWithContentsOfFile:cerPath];
     

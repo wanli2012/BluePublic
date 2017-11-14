@@ -120,6 +120,11 @@
     [self postAdData];
     [self postRequest_CityList];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"supportNotification" object:nil];
+}
+
+- (void)refresh{
+    [self postRequest:YES];
 }
 
 #pragma mark - 项目数据

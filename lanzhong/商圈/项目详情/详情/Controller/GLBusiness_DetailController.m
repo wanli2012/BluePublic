@@ -277,8 +277,8 @@
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBar.hidden = NO;
-    
 }
+
 #pragma mark - 查看大图
 - (IBAction)checkBigImageV:(id)sender {
     self.HideNavagation = YES;
@@ -288,6 +288,7 @@
     [self presentViewController:jzAlbumVC animated:NO completion:nil];
     
 }
+
 #pragma mark - 支持
 - (IBAction)support:(id)sender {
     

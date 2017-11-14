@@ -89,13 +89,10 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
-    
     self.navigationController.navigationBar.barTintColor = [UIColor clearColor];
     
     _selectedSegmentIndex = 0;
-    
     self.headerView.height = 280;
-    
     self.segment.selectedSegmentIndex = 0;
     
     self.noticeView.layer.cornerRadius = 5.f;

@@ -259,6 +259,7 @@
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 #pragma mark - 图片选择
 - (IBAction)getPicture:(UITapGestureRecognizer *)sender {
     
@@ -401,11 +402,12 @@
         [SVProgressHUD showErrorWithStatus:@"请输入标题"];
         return;
     }
-    if ([self.industryLabel.text isEqualToString:@"请选择"]) {
+    if ([self.industryLabel.text isEqualToString:@"请选择"] || self.trade_id.length == 0) {
 
         [SVProgressHUD showErrorWithStatus:@"请选择行业"];
         return;
     }
+    
     if ([self.dateLabel.text isEqualToString:@"筹款截止日期"]) {
      
         [SVProgressHUD showErrorWithStatus:@"请选择截止日期"];

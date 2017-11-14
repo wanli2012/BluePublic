@@ -53,25 +53,25 @@
 #define public_RSA @"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDKJXC91J8tJ334v2J8sCAryP9UP/Fx3N2YxlLrM73J37bqmxuIU7ZZ0L8s1TF8BB8qaBLpfWCQZj95fLrW758mttyBW6vWf8CGChyxnSianl4d0eOvoJSThQEphzu0/1Ngl5uCLrKmje3+F9Kd+IpiY+YKmXii0bbenpPoZK0C5QIDAQAB"
 
 //公告
-#define Notice_URL @"http://www.lzcke.com/index.php/Api/News/notice?news_id="
+#define Notice_URL @"https://www.lzcke.com/index.php/Api/News/notice?news_id="
 //官方认证
-#define Certification_URL @"http://www.lzcke.com/index.php/Api/Item/item_content?item_id="
+#define Certification_URL @"https://www.lzcke.com/index.php/Api/Item/item_content?item_id="
 //图文详情
-#define Goods_Info_URL @"http://www.lzcke.com/index.php/Api/Shop/goods_info?goods_id="
+#define Goods_Info_URL @"https://www.lzcke.com/index.php/Api/Shop/goods_info?goods_id="
 //广告
-#define AD_URL @"http://www.lzcke.com/index.php/Api/Other/banner_data?banner_id="
+#define AD_URL @"https://www.lzcke.com/index.php/Api/Other/banner_data?banner_id="
 //分享项目详情
-#define Share_Project_URL @"http://www.lzcke.com/Wx_lz/app/item_details.html?item_id="
+#define Share_Project_URL @"https://www.lzcke.com/Wx_lz/app/item_details.html?item_id="
 //分享注册
-#define Share_URL @"http://www.lzcke.com/index.php/Wap/Index/index?g_name="
+#define Share_URL @"https://www.lzcke.com/index.php/Wap/Index/index?g_name="
 //关于公司
-#define About_URL @"http://www.lzcke.com/protocol/about.html"
+#define About_URL @"https://www.lzcke.com/protocol/about.html"
 //帮助中心
-#define Help_Center_URL @"http://www.lzcke.com/protocol/help.html"
+#define Help_Center_URL @"https://www.lzcke.com/protocol/help.html"
 //发布协议
-#define Publish_Protocol_URL @"http://www.lzcke.com/protocol/issue.html"
+#define Publish_Protocol_URL @"https://www.lzcke.com/protocol/issue.html"
 //注册协议
-#define Register_Protocol_URL @"http://www.lzcke.com/protocol/register.html"
+#define Register_Protocol_URL @"https://www.lzcke.com/protocol/register.html"
 
 //获取appStore上的最新版本号地址
 #define GET_VERSION  @"https://itunes.apple.com/lookup?id=1300026210"
@@ -81,7 +81,7 @@
 //http://lz.51dztg.com
 //http://www.lzcke.com
 //#define URL_Base @"http://192.168.0.163/Raise/index.php/Api/"
-#define URL_Base @"http://www.lzcke.com/index.php/Api/"
+#define URL_Base @"https://www.lzcke.com/index.php/Api/"
 
 
 #define kGETCODE_URL @"Common/sms"//获取验证码
