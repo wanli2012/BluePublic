@@ -99,7 +99,7 @@
 
             [self.tableView reloadData];
             
-        }else if ([responseObject[@"code"] integerValue]==3){
+        }else if ([responseObject[@"code"] integerValue] == PAGE_ERROR_CODE){
             
             if (self.dataarr.count != 0) {
                 

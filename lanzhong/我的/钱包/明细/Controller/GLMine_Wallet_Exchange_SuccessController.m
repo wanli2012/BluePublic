@@ -16,6 +16,7 @@
 @property (nonatomic, strong)LoadWaitView *loadV;
 @property (nonatomic, assign)NSInteger page;
 @property (nonatomic, strong)NSMutableArray *models;
+@property (nonatomic, strong)NodataView *nodataV;
 
 @end
 
@@ -25,6 +26,8 @@
     [super viewDidLoad];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMine_WalletDetailCell" bundle:nil] forCellReuseIdentifier:@"GLMine_WalletDetailCell"];
+    [self.tableView addSubview:self.nodataV];
+    self.nodataV.hidden = YES;
     
     __weak __typeof(self) weakSelf = self;
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -87,7 +90,10 @@
                 }
            
             }else{
-                [MBProgressHUD showError:responseObject[@"message"]];
+                if (self.models.count != 0) {
+                    
+                    [MBProgressHUD showError:responseObject[@"message"]];
+                }
             }
     
             [self.tableView reloadData];
@@ -97,25 +103,19 @@
             [_loadV removeloadview];
             [self endRefresh];
             [self.tableView reloadData];
-            
         }];
-
 }
-//
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    
-//    CGFloat sectionHeaderHeight = 40;
-//    if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
-//        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
-//    } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
-//        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
-//    }
-//}
 
 #pragma  UITableviewDatasource
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 
+    if (self.models.count == 0) {
+        self.nodataV.hidden = NO;
+    }else{
+        self.nodataV.hidden = YES;
+    }
+    
     return self.models.count;
     
 }
@@ -123,7 +123,8 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     GLMine_WalletDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMine_WalletDetailCell"];
     cell.model = self.models[indexPath.row];
-    cell.dateLabel.hidden = YES;
+    cell.reasonLabel.hidden = YES;
+    cell.actuallyGetLabel.hidden = NO;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -132,7 +133,7 @@
     return 60;
 }
 
-
+#pragma mark - 懒加载
 - (NSMutableArray *)models{
     if (!_models) {
         _models = [NSMutableArray array];
@@ -140,4 +141,15 @@
     }
     return _models;
 }
+
+- (NodataView *)nodataV{
+    if (!_nodataV) {
+        _nodataV = [[NSBundle mainBundle] loadNibNamed:@"NodataView" owner:nil options:nil].lastObject;
+        _nodataV.frame = CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT - 64 - 40);
+        
+    }
+    return _nodataV;
+}
+
+
 @end

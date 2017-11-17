@@ -31,7 +31,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *isDefaultImage;
 @property (weak, nonatomic) IBOutlet UIImageView *isdeualtImageOne;
 
-
 @end
 
 @implementation GLMine_AddressAddController
@@ -234,6 +233,7 @@
         weakself.countryStrId = areaid;
     };
 }
+
 - (nullable UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(UIViewController *)presenting sourceViewController:(UIViewController *)source{
     
     return [[editorMaskPresentationController alloc]initWithPresentedViewController:presented presentingViewController:presenting];

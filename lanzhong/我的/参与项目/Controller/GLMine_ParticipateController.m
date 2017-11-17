@@ -94,9 +94,14 @@
                 [self.models addObject:model];
             }
             
+        }else if ([responseObject[@"code"] integerValue]==PAGE_ERROR_CODE){
+            if (self.models.count != 0) {
+                [MBProgressHUD showError:responseObject[@"message"]];
+            }
         }else{
             [MBProgressHUD showError:responseObject[@"message"]];
         }
+
         
         [self.tableView reloadData];
         

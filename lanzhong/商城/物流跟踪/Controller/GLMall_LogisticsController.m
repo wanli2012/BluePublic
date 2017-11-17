@@ -77,7 +77,8 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [_loadV removeloadview];
         [self.tableView reloadData];
-        [MBProgressHUD showError:@"订单单号异常,联系商家"];
+       
+        [SVProgressHUD showErrorWithStatus:@"订单单号异常,联系平台"];
     }];
 }
 

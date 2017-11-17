@@ -117,6 +117,7 @@
         [MBProgressHUD showError:@"请输入验证码"];
         return;
     }
+    
     NSString *encryptsecret = [RSAEncryptor encryptString:self.pwdTF.text publicKey:public_RSA];
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];

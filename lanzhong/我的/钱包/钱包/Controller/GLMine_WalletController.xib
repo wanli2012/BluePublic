@@ -24,6 +24,7 @@
                 <outlet property="ensureExchangeBtn" destination="ihb-1Q-W8z" id="hD3-UC-EmZ"/>
                 <outlet property="ensurePayBtn" destination="n1r-NT-NTp" id="j3T-vY-6pa"/>
                 <outlet property="exchangeTextF" destination="JDP-kK-nAk" id="no2-Le-her"/>
+                <outlet property="feeLabel" destination="lbv-Q6-S1a" id="0QG-XO-xzC"/>
                 <outlet property="moneyTextF" destination="B0B-cH-yR9" id="KZZ-b5-uvZ"/>
                 <outlet property="passwordTextF" destination="9Og-9D-Sfw" id="4B8-i7-lFK"/>
                 <outlet property="rechargeView" destination="ryV-wt-pVO" id="PCZ-2O-ckj"/>
@@ -471,9 +472,16 @@
                                         <constraint firstAttribute="trailing" secondItem="tMa-HS-OmZ" secondAttribute="trailing" id="zYH-sh-SqX"/>
                                     </constraints>
                                 </view>
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*注:手续费为" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbv-Q6-S1a">
+                                    <rect key="frame" x="10" y="398" width="333" height="12"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                    <color key="textColor" red="1" green="0.1015892991" blue="0.054391829209999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstItem="lbv-Q6-S1a" firstAttribute="leading" secondItem="UNf-9P-IPs" secondAttribute="leading" constant="10" id="0QW-9k-VW7"/>
                                 <constraint firstItem="JyD-Cz-GLV" firstAttribute="top" secondItem="Fsl-5M-AHs" secondAttribute="bottom" id="3l9-o9-oY2"/>
                                 <constraint firstAttribute="height" constant="618" id="7xO-4C-iXl"/>
                                 <constraint firstItem="5Yt-jo-WOA" firstAttribute="top" secondItem="JyD-Cz-GLV" secondAttribute="bottom" constant="50" id="AzO-eH-ycV"/>
@@ -483,6 +491,7 @@
                                 <constraint firstItem="Fsl-5M-AHs" firstAttribute="top" secondItem="eAB-cL-dns" secondAttribute="bottom" constant="10" id="I9m-Oe-jby"/>
                                 <constraint firstItem="KzH-bS-pMT" firstAttribute="leading" secondItem="UNf-9P-IPs" secondAttribute="leading" constant="35" id="JWR-Nz-acS"/>
                                 <constraint firstItem="JyD-Cz-GLV" firstAttribute="leading" secondItem="Fsl-5M-AHs" secondAttribute="leading" id="L2Q-J3-vRu"/>
+                                <constraint firstItem="lbv-Q6-S1a" firstAttribute="top" secondItem="JyD-Cz-GLV" secondAttribute="bottom" constant="10" id="Org-e6-H7k"/>
                                 <constraint firstAttribute="trailing" secondItem="KzH-bS-pMT" secondAttribute="trailing" constant="35" id="Oxe-Hf-0Pj"/>
                                 <constraint firstItem="pwo-qj-W39" firstAttribute="top" secondItem="UNf-9P-IPs" secondAttribute="top" constant="80" id="QhN-kY-0Dk"/>
                                 <constraint firstAttribute="trailing" secondItem="eAB-cL-dns" secondAttribute="trailing" id="RK6-Zk-5IF"/>
@@ -502,6 +511,7 @@
                                 <constraint firstItem="ryV-wt-pVO" firstAttribute="leading" secondItem="UNf-9P-IPs" secondAttribute="leading" id="s3e-8Y-b7z"/>
                                 <constraint firstItem="pwo-qj-W39" firstAttribute="bottom" secondItem="KzH-bS-pMT" secondAttribute="bottom" constant="20" id="tE9-e3-dJQ"/>
                                 <constraint firstItem="KzH-bS-pMT" firstAttribute="top" secondItem="UNf-9P-IPs" secondAttribute="top" constant="20" id="xI9-LA-tSa"/>
+                                <constraint firstAttribute="trailing" secondItem="lbv-Q6-S1a" secondAttribute="trailing" constant="10" id="xiY-Qf-HeX"/>
                             </constraints>
                         </view>
                     </subviews>

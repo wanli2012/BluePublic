@@ -52,7 +52,7 @@
 - (void)refreshUI{
     
     self.picImageV.layer.cornerRadius = self.picImageV.height/2;
-    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:[UserModel defaultUser].user_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:[UserModel defaultUser].user_pic] placeholderImage:[UIImage imageNamed:PicHolderImage]];
     
     self.contentViewWidth.constant = kSCREEN_WIDTH;
     self.contentViewHeight.constant = 530;

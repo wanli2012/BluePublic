@@ -16,7 +16,11 @@
 
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
+#import "GLHomePageNoticeView.h"
+#import "RSAEncryptor.h"
 
+#import "BaseNavigationViewController.h"
+#import "GLLoginController.h"
 
 @interface GLMine_WalletController ()<UITextFieldDelegate>
 
@@ -50,6 +54,10 @@
 
 @property (nonatomic, strong)LoadWaitView *loadV;
 @property (nonatomic, strong)GLMine_WalletModel *model;
+
+@property (nonatomic, strong)UIView  *maskV;//遮罩
+@property (nonatomic, strong)GLHomePageNoticeView *noticeView;//兑换须知
+@property (weak, nonatomic) IBOutlet UILabel *feeLabel;//手续费Label
 
 @end
 
@@ -109,6 +117,18 @@
             
             self.model = [GLMine_WalletModel mj_objectWithKeyValues:responseObject[@"data"]];
             [self updateBankInfo];
+        }else if([responseObject[@"code"] integerValue] == OVERDUE_CODE){
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+            
+            [UserModel defaultUser].loginstatus = NO;
+            [usermodelachivar achive];
+            
+            GLLoginController *loginVC = [[GLLoginController alloc] init];
+            loginVC.sign = 1;
+            BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginVC];
+            nav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            [self presentViewController:nav animated:YES completion:nil];
+            
         }
         
     } enError:^(NSError *error) {
@@ -117,9 +137,17 @@
 }
 
 - (void)updateBankInfo {
+    double fee = [self.model.back_counter doubleValue] * 100;
+    
+    if(self.model.back_counter.length == 0 || fee == 0.0){
+        self.feeLabel.hidden = YES;
+    }else{
+        self.feeLabel.hidden = NO;
+        self.feeLabel.text = [NSString stringWithFormat:@"*注:兑换手续费为提交金额的%.2f%%",fee];
+    }
     
     self.balanceLabel.text = self.model.umonry;
-
+    
     if (self.model.back_info.count > 0) {
         
         self.bankNameLabel.text = self.model.back_info[0].bank_name;
@@ -186,96 +214,135 @@
 
 #pragma mark - 确认兑换
 - (IBAction)exchange:(id)sender {
- 
     if(self.bank_id.length == 0){
-    
+        
         [SVProgressHUD showErrorWithStatus:@"请选择银行卡"];
         return ;
     }
     
     if(self.moneyTextF.text.length == 0){
-  
+        
         [SVProgressHUD showErrorWithStatus:@"请输入金额"];
         return;
     }
     
     NSString *money = [NSString stringWithFormat:@"%.2f",[self.moneyTextF.text doubleValue]];
     double moneyf = [money doubleValue];
-
+    
     if (moneyf <= 0.0) {
         [SVProgressHUD showErrorWithStatus:@"金额必须大于0"];
         return;
     }
     
     if ([self.moneyTextF.text integerValue] % 100 != 0) {
- 
+        
         [SVProgressHUD showErrorWithStatus:@"兑换金额必须是100的整数倍!"];
         return;
     }
     
     if([self.moneyTextF.text doubleValue] /100 > 0){
         if([self.moneyTextF.text doubleValue] - [self.moneyTextF.text integerValue]/100 *100 != 0){
-             [SVProgressHUD showErrorWithStatus:@"兑换金额必须是100的整数倍!"];
+            [SVProgressHUD showErrorWithStatus:@"兑换金额必须是100的整数倍!"];
             return;
         }
     }else{
-         [SVProgressHUD showErrorWithStatus:@"兑换金额必须是100的整数倍!"];
+        [SVProgressHUD showErrorWithStatus:@"兑换金额必须是100的整数倍!"];
         return;
     }
     
     if ([self.moneyTextF.text integerValue] > [self.balanceLabel.text integerValue]){
-         [SVProgressHUD showErrorWithStatus:@"余额不足!"];
+        [SVProgressHUD showErrorWithStatus:@"余额不足!"];
+        return;
+    }
+    
+    if (self.passwordTextF.text.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请输入密码"];
         return;
     }
 
-    if (self.passwordTextF.text.length == 0) {
-         [SVProgressHUD showErrorWithStatus:@"请输入密码"];
-        return;
-    }
+    [self initInterDataSorceinfomessage];//公告
+ 
+}
+- (void)sureExchange{
     
-    NSString *message = [NSString stringWithFormat:@"兑换须知:你确定要兑换%@?",self.moneyTextF.text];
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"兑换" message:message preferredStyle:UIAlertControllerStyleAlert];
+    NSString *encryptsecret = [RSAEncryptor encryptString:self.passwordTextF.text publicKey:public_RSA];
     
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"uid"] = [UserModel defaultUser].uid;
+    dict[@"token"] = [UserModel defaultUser].token;
+    dict[@"money"] = [NSString stringWithFormat:@"%zd",[self.moneyTextF.text integerValue]];
+    dict[@"bank_id"] = self.bank_id;
+    dict[@"pwd"] = encryptsecret;
+    
+    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+    [NetworkManager requestPOSTWithURLStr:kEXCHANGE_MONEY_URL paramDic:dict finish:^(id responseObject) {
         
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[@"uid"] = [UserModel defaultUser].uid;
-        dict[@"token"] = [UserModel defaultUser].token;
-        dict[@"money"] = [NSString stringWithFormat:@"%zd",[self.moneyTextF.text integerValue]];
-        dict[@"bank_id"] = self.bank_id;
-        dict[@"pwd"] = self.passwordTextF.text;
+        [_loadV removeloadview];
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+            
+            [self updateBankInfo];
+            //两个浮点数 减法不正确,才用的这个办法   我也没想通,妈的
+            NSDecimalNumber*jiafa1 = [NSDecimalNumber decimalNumberWithString:self.model.umonry];
+            NSDecimalNumber*jiafa2 = [NSDecimalNumber decimalNumberWithString:self.moneyTextF.text];
+            NSDecimalNumber*jianfa = [jiafa1 decimalNumberBySubtracting:jiafa2];
+            
+            self.balanceLabel.text = [NSString stringWithFormat:@"%@",jianfa];
+            [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
+            self.moneyTextF.text = nil;
+            self.passwordTextF.text = nil;
         
-        _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
-        [NetworkManager requestPOSTWithURLStr:kEXCHANGE_MONEY_URL paramDic:dict finish:^(id responseObject) {
+        }else{
             
-            [_loadV removeloadview];
-            if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
-                
-                [self updateBankInfo];
-                //两个浮点数 减法不正确,才用的这个办法   我也没想通,妈的
-                NSDecimalNumber*jiafa1 = [NSDecimalNumber decimalNumberWithString:self.model.umonry];
-                NSDecimalNumber*jiafa2 = [NSDecimalNumber decimalNumberWithString:self.moneyTextF.text];
-                NSDecimalNumber*jianfa = [jiafa1 decimalNumberBySubtracting:jiafa2];
-                
-                self.balanceLabel.text = [NSString stringWithFormat:@"%@",jianfa];
-                 [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
-                self.moneyTextF.text = nil;
-                self.passwordTextF.text = nil;
-                
-            }else{
-                
-                 [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
-            }
-            
-        } enError:^(NSError *error) {
-            [_loadV removeloadview];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+        }
+        
+        [self dismiss];
+    } enError:^(NSError *error) {
+        [_loadV removeloadview];
+        [self dismiss];
+    }];
+
+}
+#pragma mark ----公告
+-(void)initInterDataSorceinfomessage{
+    
+    CGFloat contentViewH = kSCREEN_HEIGHT / 2;
+    CGFloat contentViewW = kSCREEN_WIDTH - 40;
+    CGFloat contentViewX = 20;
+    
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    [window addSubview:self.maskV];
+    [window addSubview:self.noticeView];
+
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:Exchange_Info_URL]];
+    [self.noticeView.webView loadRequest:request];
+    self.noticeView.frame = CGRectMake(contentViewX, (kSCREEN_HEIGHT - contentViewH)/2, contentViewW, contentViewH);
+    //缩放
+    self.noticeView.transform=CGAffineTransformMakeScale(0.01f, 0.01f);
+    self.noticeView.alpha = 0;
+    [UIView animateWithDuration:0.2 animations:^{
+        
+        self.noticeView.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
+        self.noticeView.alpha = 1;
+    }];
+}
+
+- (void)dismiss{
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        self.noticeView.transform = CGAffineTransformMakeScale(0.07, 0.07);
+        
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.noticeView.center = CGPointMake(kSCREEN_WIDTH - 30,30);
+        } completion:^(BOOL finished) {
+            [self.noticeView removeFromSuperview];
+            [self.maskV removeFromSuperview];
+            self.noticeView = nil;
+            self.maskV = nil;
         }];
     }];
-    
-    [alertVC addAction:cancel];
-    [alertVC addAction:ok];
-    [self presentViewController:alertVC animated:YES completion:nil];
 }
 
 #pragma mark - 充值操作
@@ -349,7 +416,7 @@
                 req.sign = responseObject[@"data"][@"wxinpay"][@"sign"];
                 [WXApi sendReq:req];
             }
-
+            
         }else{
             
             [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
@@ -384,10 +451,11 @@
     if (sender.selectedSegmentIndex == 0) {
         
         self.rechargeView.hidden = YES;
-    
+        self.feeLabel.hidden = NO;
     }else if (sender.selectedSegmentIndex == 1){
         
         self.rechargeView.hidden = NO;
+        self.feeLabel.hidden = YES;
     }
 }
 
@@ -459,79 +527,47 @@
         return [self validateNumber:string];
     }
     
-//    if (textField == self.exchangeTextF) {
-//        /*
-//         * 不能输入.0-9以外的字符。
-//         * 设置输入框输入的内容格式
-//         * 只能有一个小数点
-//         * 小数点后最多能输入两位
-//         * 如果第一位是.则前面加上0.
-//         * 如果第一位是0则后面必须输入点，否则不能输入。
-//         */
-//        
-//        // 判断是否有小数点
-//        if ([textField.text containsString:@"."]) {
-//            self.isHaveDian = YES;
-//        }else{
-//            self.isHaveDian = NO;
-//        }
-//        
-//        if (string.length > 0) {
-//            
-//            //当前输入的字符
-//            unichar single = [string characterAtIndex:0];
-//            
-//            // 不能输入.0-9以外的字符
-//            if (!((single >= '0' && single <= '9') || single == '.'))
-//            {
-//                 [SVProgressHUD showErrorWithStatus:@"您的输入格式不正确"];
-//                return NO;
-//            }
-//            
-//            // 只能有一个小数点
-//            if (self.isHaveDian && single == '.') {
-//                 [SVProgressHUD showErrorWithStatus:@"最多只能输入一个小数点"];
-//                return NO;
-//            }
-//            
-//            // 如果第一位是.则前面加上0.
-//            if ((textField.text.length == 0) && (single == '.')) {
-//                textField.text = @"0";
-//            }
-//            
-//            // 如果第一位是0则后面必须输入点，否则不能输入。
-//            if ([textField.text hasPrefix:@"0"]) {
-//                if (textField.text.length > 1) {
-//                    NSString *secondStr = [textField.text substringWithRange:NSMakeRange(1, 1)];
-//                    if (![secondStr isEqualToString:@"."]) {
-//                         [SVProgressHUD showErrorWithStatus:@"第二个字符需要是小数点"];
-//                        return NO;
-//                    }
-//                }else{
-//                    if (![string isEqualToString:@"."]) {
-//                         [SVProgressHUD showErrorWithStatus:@"第二个字符需要是小数点"];
-//                        return NO;
-//                    }
-//                }
-//            }
-//            
-//            // 小数点后最多能输入两位
-//            if (self.isHaveDian) {
-//                NSRange ran = [textField.text rangeOfString:@"."];
-//                // 由于range.location是NSUInteger类型的，所以这里不能通过(range.location - ran.location)>2来判断
-//                if (range.location > ran.location) {
-//                    if ([textField.text pathExtension].length > 1) {
-//                        [SVProgressHUD showErrorWithStatus:@"小数点后最多有两位小数"];
-//                        return NO;
-//                    }
-//                }
-//            }
-//            
-//        }
-//    }
-    
     return YES;
+}
 
+- (UIView *)maskV{
+    if (!_maskV) {
+        _maskV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT)];
+        _maskV.backgroundColor = [UIColor blackColor];
+        _maskV.alpha = 0.3;
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(dismiss)];
+        [_maskV addGestureRecognizer:tap];
+        
+    }
+    return _maskV;
+}
+
+- (GLHomePageNoticeView *)noticeView{
+    if (!_noticeView) {
+        
+        _noticeView = [[NSBundle mainBundle] loadNibNamed:@"GLHomePageNoticeView" owner:nil options:nil].lastObject;
+        
+        _noticeView.contentViewW.constant = kSCREEN_WIDTH - 40;
+        _noticeView.contentViewH.constant = kSCREEN_HEIGHT / 2 - 40;
+        _noticeView.layer.cornerRadius = 5;
+        _noticeView.layer.masksToBounds = YES;
+        [_noticeView.cancelBtn addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+        [_noticeView.sureBtn addTarget:self action:@selector(sureExchange) forControlEvents:UIControlEventTouchUpInside];
+        
+        _noticeView.titleLabel.text = @"兑换须知";
+        //设置webView
+        _noticeView.webView.scrollView.contentSize = CGSizeMake(kSCREEN_WIDTH - 40, 0);
+        _noticeView.webView.scalesPageToFit = YES;
+        _noticeView.webView.autoresizesSubviews = NO;
+        _noticeView.webView.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
+        _noticeView.webView.scrollView.bounces = NO;
+        
+        _noticeView.webView.backgroundColor = [UIColor clearColor];
+        _noticeView.webView.opaque = NO;
+        
+    }
+    return _noticeView;
 }
 
 @end

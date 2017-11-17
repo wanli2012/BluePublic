@@ -12,6 +12,9 @@
 #import "LBSetFillet.h"
 #import "GLConfirmOrderController.h"//下单界面
 
+#import "BaseNavigationViewController.h"
+#import "GLLoginController.h"
+
 @interface GLShoppingCartController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -85,6 +88,18 @@ static NSString *ID = @"GLShoppingCell";
                 GLShoppingCartModel *model = [GLShoppingCartModel mj_objectWithKeyValues:dic];
                 [self.models addObject:model];
             }
+        }else if([responseObject[@"code"] integerValue] == OVERDUE_CODE){
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+            
+            [UserModel defaultUser].loginstatus = NO;
+            [usermodelachivar achive];
+            
+            GLLoginController *loginVC = [[GLLoginController alloc] init];
+            loginVC.sign = 1;
+            BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginVC];
+            nav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            [self presentViewController:nav animated:YES completion:nil];
+            
             
         }else{
             

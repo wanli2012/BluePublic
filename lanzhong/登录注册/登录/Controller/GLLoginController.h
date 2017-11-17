@@ -10,4 +10,6 @@
 
 @interface GLLoginController : UIViewController
 
+@property (nonatomic, assign)NSInteger sign;//1:dimiss的时候回到一级界面
+
 @end

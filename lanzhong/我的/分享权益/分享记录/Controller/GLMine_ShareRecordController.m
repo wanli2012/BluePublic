@@ -16,6 +16,7 @@
 @property (nonatomic, strong)NSMutableArray *models;
 @property (nonatomic, strong)LoadWaitView *loadV;
 @property (nonatomic, assign)NSInteger page;
+@property (nonatomic, strong)NodataView *nodataV;
 
 @end
 
@@ -27,6 +28,8 @@
     self.navigationItem.title = @"分享记录";
     
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMine_ShareRecordCell" bundle:nil] forCellReuseIdentifier:@"GLMine_ShareRecordCell"];
+    [self.tableView addSubview:self.nodataV];
+    self.nodataV.hidden = YES;
     __weak __typeof(self) weakSelf = self;
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
@@ -59,7 +62,6 @@
     
     if (isRefresh) {
         self.page = 1;
-        [self.models removeAllObjects];
     }else{
         self.page ++ ;
     }
@@ -79,14 +81,23 @@
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             if([responseObject[@"data"] count] != 0){
                 
+                if(isRefresh){
+                    [self.models removeAllObjects];
+                }
                 for (NSDictionary *dic in responseObject[@"data"]) {
                     GLMine_ShareModel * model = [GLMine_ShareModel mj_objectWithKeyValues:dic];
                     
                     [self.models addObject:model];
                 }
             }
-        }else{
+        }else if ([responseObject[@"code"] integerValue] == PAGE_ERROR_CODE){
             
+            if (self.models.count != 0) {
+                
+                [MBProgressHUD showError:responseObject[@"message"]];
+            }
+            
+        }else{
             [MBProgressHUD showError:responseObject[@"message"]];
         }
         
@@ -109,7 +120,11 @@
 #pragma mark - UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
+    if (self.models.count == 0) {
+        self.nodataV.hidden = NO;
+    }else{
+        self.nodataV.hidden = YES;
+    }
     return self.models.count;
 }
 
@@ -127,20 +142,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-//    self.hidesBottomBarWhenPushed = YES;
-//    
-//    if (indexPath.row == 0) {
-//        
-//        GLPay_ChooseController *payVC = [[GLPay_ChooseController alloc] init];
-//        [self.navigationController pushViewController:payVC animated:YES];
-//        
-//    }else if(indexPath.row == 1){
-//        
-//    }else{
-//        
-//    }
-//    self.hidesBottomBarWhenPushed = NO;
+
     
 }
 
@@ -149,6 +151,14 @@
         _models = [NSMutableArray array];
     }
     return _models;
+}
+- (NodataView *)nodataV{
+    if (!_nodataV) {
+        _nodataV = [[NSBundle mainBundle] loadNibNamed:@"NodataView" owner:nil options:nil].lastObject;
+        _nodataV.frame = CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT - 64);
+        
+    }
+    return _nodataV;
 }
 
 

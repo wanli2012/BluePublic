@@ -12,9 +12,14 @@
 
 - (CGFloat)cellHeight{
     
-    CGRect rect = [self.reason boundingRectWithSize:CGSizeMake(kSCREEN_WIDTH - 30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:12]} context:nil];
+    NSString *reason = [NSString stringWithFormat:@"原因:%@",self.reason];
+    CGRect rect = [reason boundingRectWithSize:CGSizeMake(kSCREEN_WIDTH - 30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:12]} context:nil];
 
+    if ([self.back_status integerValue] == 0) {
+        return 70 + rect.size.height;
+    }else{
+        return 60;
+    }
     
-    return 60 + rect.size.height;
 }
 @end

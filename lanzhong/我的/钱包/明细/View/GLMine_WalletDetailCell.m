@@ -10,11 +10,10 @@
 #import "formattime.h"
 
 @interface GLMine_WalletDetailCell()
+
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *detailLabel;
 @property (weak, nonatomic) IBOutlet UILabel *moneyLabel;
-
-
 
 @end
 
@@ -22,14 +21,16 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+
 }
+
 - (void)setModel:(GLMine_Wallet_ExchangeModel *)model{
     _model = model;
     
     self.detailLabel.text = [formattime formateTimeOfDate3:model.addtime];
-    self.moneyLabel.text = model.back_money;
-    
+    self.moneyLabel.text = [NSString stringWithFormat:@"兑换:¥ %@",model.back_money];
+    self.reasonLabel.text = [NSString stringWithFormat:@"原因:%@",model.reason];
+    self.actuallyGetLabel.text = [NSString stringWithFormat:@"实得:¥ %@",model.realy_money];
     
     switch ([model.back_status integerValue]) {
         case 0:
@@ -75,7 +76,7 @@
     }
     
     self.detailLabel.text = [formattime formateTimeOfDate3:rechargeModel.addtime];
-    self.moneyLabel.text = rechargeModel.money;
+    self.moneyLabel.text = [NSString stringWithFormat:@"充值:¥ %@",rechargeModel.money];
 
 }
 

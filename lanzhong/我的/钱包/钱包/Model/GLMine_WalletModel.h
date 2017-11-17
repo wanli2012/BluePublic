@@ -19,6 +19,7 @@
 @property (nonatomic, copy)NSString *addtime;//添加时间
 @property (nonatomic, copy)NSString *del;//是否删除  1是  0否
 
+
 @end
 
 @interface GLMine_WalletModel : NSObject
@@ -26,5 +27,6 @@
 @property (nonatomic, copy)NSString *umonry;//  余额
 @property (nonatomic, copy)NSString *real_state;//实名认证状态 0未认证  1成功   2失败   3审核中
 @property (nonatomic, copy)NSMutableArray <Wallet_back_info *>*back_info;
+@property (nonatomic, copy)NSString *back_counter;// 手续费
 
 @end

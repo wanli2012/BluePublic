@@ -12,10 +12,11 @@
 
 @interface GLMine_WalletDetailCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-
 @property (nonatomic, strong)GLMine_Wallet_ExchangeModel *model;
 
 @property (nonatomic, strong)GLMine_Wallet_RechargeModel *rechargeModel;
+
+@property (weak, nonatomic) IBOutlet UILabel *reasonLabel;
+@property (weak, nonatomic) IBOutlet UILabel *actuallyGetLabel;//实得金额
 
 @end

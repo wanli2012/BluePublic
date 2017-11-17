@@ -187,7 +187,7 @@
             double c_over_num = [self.model.c_over_num doubleValue];
             
             self.titleLabel.text = @"创客大数据";
-            self.label.text = @"创客人数";
+            self.label.text = @"创客";
             self.label2.text = @"创客项目";
             self.label3.text = @"创客资金";
             self.label4.text = [NSString stringWithFormat:@"%@人",self.model.c_man_num];
@@ -200,9 +200,9 @@
         {
             double ai_over_num = [self.model.ai_over_num doubleValue];
             self.titleLabel.text = @"爱心大数据";
-            self.label.text = @"爱心人数";
-            self.label2.text = @"帮扶项目";
-            self.label3.text = @"爱心资金";
+            self.label.text = @"互助人数";
+            self.label2.text = @"互助项目";
+            self.label3.text = @"爱心基金";
             self.label4.text = [NSString stringWithFormat:@"%@人",self.model.ai_man_num];
             self.label5.text = [NSString stringWithFormat:@"%@个",self.model.ai_item_num ];
             self.label6.text = [NSString stringWithFormat:@"%.2f元",ai_over_num ];

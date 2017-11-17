@@ -12,6 +12,7 @@
 
 @protocol GLMine_MyMessageCellDelegate <NSObject>
 
+@optional
 - (void)checkProjectDetail:(NSInteger)index;
 
 @end

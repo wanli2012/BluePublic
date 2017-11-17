@@ -70,7 +70,6 @@
 
 -(void)initdatasource{
     
-    [self.dataarr removeAllObjects];
     //type:订单状态(0订单异常1 已下单,未付款2 已付款,待发货3 已发货,待验收4 已验收,订单完成5 交易失败6取消订单
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     dic[@"token"] = [UserModel defaultUser].token;
@@ -86,6 +85,7 @@
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
             
             if (_refreshType == NO) {
+            
                 [self.dataarr removeAllObjects];
             }
             
@@ -95,6 +95,13 @@
                 [self.dataarr addObject:ordersMdel];
             }
      
+        }else if ([responseObject[@"code"] integerValue]==PAGE_ERROR_CODE){
+            
+            if (self.dataarr.count != 0) {
+                
+                [MBProgressHUD showError:responseObject[@"message"]];
+            }
+            
         }else{
             [MBProgressHUD showError:responseObject[@"message"]];
         }

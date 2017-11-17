@@ -111,8 +111,8 @@
                                             <constraint firstAttribute="width" constant="200" id="E3V-jm-mem"/>
                                         </constraints>
                                         <segments>
-                                            <segment title="创客"/>
-                                            <segment title="爱心"/>
+                                            <segment title="创客之家"/>
+                                            <segment title="爱心互助"/>
                                         </segments>
                                         <connections>
                                             <action selector="switchSelected:" destination="-1" eventType="valueChanged" id="8kY-w0-umg"/>

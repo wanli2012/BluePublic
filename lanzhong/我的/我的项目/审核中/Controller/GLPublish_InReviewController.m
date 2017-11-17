@@ -90,10 +90,17 @@
                     [self.models addObject:model];
                 }
             }
-        }else{
+        }else if ([responseObject[@"code"] integerValue]==PAGE_ERROR_CODE){
             
+            if (self.models.count != 0) {
+                
+                [MBProgressHUD showError:responseObject[@"message"]];
+            }
+            
+        }else{
             [MBProgressHUD showError:responseObject[@"message"]];
         }
+
         
         [self.tableView reloadData];
         
@@ -154,7 +161,7 @@
 - (NodataView *)nodataV{
     if (!_nodataV) {
         _nodataV = [[NSBundle mainBundle] loadNibNamed:@"NodataView" owner:nil options:nil].lastObject;
-        _nodataV.frame = CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT - 64 - 40);
+        _nodataV.frame = CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT - 64 - 40 - 10);
         
     }
     return _nodataV;

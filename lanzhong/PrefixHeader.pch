@@ -37,6 +37,8 @@
 //占位图
 #define PlaceHolderImage @"商城占位图"
 
+#define PicHolderImage @"logo"
+
 #define LUNBO_PlaceHolder @"案例占位图"
 
 #define SUCCESS_CODE 200
@@ -72,6 +74,11 @@
 #define Publish_Protocol_URL @"https://www.lzcke.com/protocol/issue.html"
 //注册协议
 #define Register_Protocol_URL @"https://www.lzcke.com/protocol/register.html"
+//退换商品须知
+#define Return_Goods_URL @"https://www.lzcke.com/protocol/return.html"
+//兑换须知
+#define Exchange_Info_URL @"https://www.lzcke.com/protocol/exchange.html"
+
 
 //获取appStore上的最新版本号地址
 #define GET_VERSION  @"https://itunes.apple.com/lookup?id=1300026210"

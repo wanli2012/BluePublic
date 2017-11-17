@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A024E6A1FBC2A5000B3F484 /* GLHomePageNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A024E681FBC2A5000B3F484 /* GLHomePageNoticeView.m */; };
+		4A024E6B1FBC2A5000B3F484 /* GLHomePageNoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A024E691FBC2A5000B3F484 /* GLHomePageNoticeView.xib */; };
 		4A0511681FBAF5FA00E272D1 /* https.cer in Resources */ = {isa = PBXBuildFile; fileRef = 4A0511671FBAF5FA00E272D1 /* https.cer */; };
 		4A05EDEA1F8C5E780095DBCF /* 发布.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A05EDE91F8C5E780095DBCF /* 发布.xcassets */; };
 		4A05EE8A1F8C97380095DBCF /* HXAlbumListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A05EE4A1F8C97380095DBCF /* HXAlbumListView.m */; };
@@ -386,6 +388,9 @@
 
 /* Begin PBXFileReference section */
 		19A11FB975C44A94E569750A /* Pods_lanzhong.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lanzhong.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A024E671FBC2A5000B3F484 /* GLHomePageNoticeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLHomePageNoticeView.h; sourceTree = "<group>"; };
+		4A024E681FBC2A5000B3F484 /* GLHomePageNoticeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLHomePageNoticeView.m; sourceTree = "<group>"; };
+		4A024E691FBC2A5000B3F484 /* GLHomePageNoticeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLHomePageNoticeView.xib; sourceTree = "<group>"; };
 		4A0511671FBAF5FA00E272D1 /* https.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = https.cer; sourceTree = "<group>"; };
 		4A05EDE91F8C5E780095DBCF /* 发布.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "发布.xcassets"; sourceTree = "<group>"; };
 		4A05EE491F8C97380095DBCF /* HXAlbumListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXAlbumListView.h; sourceTree = "<group>"; };
@@ -1375,6 +1380,9 @@
 		4A165C131F85DD6500D0C34B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4A024E671FBC2A5000B3F484 /* GLHomePageNoticeView.h */,
+				4A024E681FBC2A5000B3F484 /* GLHomePageNoticeView.m */,
+				4A024E691FBC2A5000B3F484 /* GLHomePageNoticeView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3696,6 +3704,7 @@
 				4A509BA01F875DCE00D794FB /* GLBuyBackChooseBankView.xib in Resources */,
 				4A6AD1E41F7F86D300E6084E /* GLBusiness_FundTrendController.xib in Resources */,
 				4A0B74F91F90A8810007788B /* MHSheetFoot.xib in Resources */,
+				4A024E6B1FBC2A5000B3F484 /* GLHomePageNoticeView.xib in Resources */,
 				4ADDD1881F88702600C95F9C /* GLMine_PersonInfo_AddressCell.xib in Resources */,
 				4A0E70201FA34A9000435871 /* GLBusiness_AddFundTrendController.xib in Resources */,
 				4A53E83A1F7A24830021D9E0 /* GLMall_DetailSpecCell.xib in Resources */,
@@ -4070,6 +4079,7 @@
 				4A6AD23D1F7F953600E6084E /* GLPublish_ProjectCell.m in Sources */,
 				4A6B9F341F7CF100009386C8 /* GLBusiness_DetailProjectCell.m in Sources */,
 				4A2905541F97707E006903F1 /* GLMine_NoticeModel.m in Sources */,
+				4A024E6A1FBC2A5000B3F484 /* GLHomePageNoticeView.m in Sources */,
 				4A18B90E1F94D71C00E9B387 /* GLMine_Wallet_ExchangeController.m in Sources */,
 				4A18B8EB1F9441B800E9B387 /* LBMineCenterPayPagesTableViewCell.m in Sources */,
 				4A0B75211F90F0840007788B /* GLOrderGoodsCell.m in Sources */,

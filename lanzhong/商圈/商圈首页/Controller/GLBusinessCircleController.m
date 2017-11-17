@@ -167,6 +167,12 @@
                     [self.models addObject:model];
                 }
             }
+        }else if ([responseObject[@"code"] integerValue]==PAGE_ERROR_CODE){
+            
+            if (self.models.count != 0) {
+                
+                [MBProgressHUD showError:responseObject[@"message"]];
+            }
             
         }else{
 
@@ -282,7 +288,10 @@
                     GLBusinessAdModel *model = [GLBusinessAdModel mj_objectWithKeyValues:dic];
                     [self.adModels addObject:model];
                     
-                    NSString *imageurl = [NSString stringWithFormat:@"%@?imageView2/1/w/%f/h/150",model.must_banner,kSCREEN_WIDTH];
+                    NSString *s = [NSString stringWithFormat:@"%.0f",kSCREEN_WIDTH];
+                    NSInteger w = [s integerValue];
+                    
+                    NSString *imageurl = [NSString stringWithFormat:@"%@?imageView2/1/w/%zd/h/150",model.must_banner,w];
                     [arrM addObject:imageurl];
                 }
                 self.cycleScrollView.imageURLStringsGroup = arrM;

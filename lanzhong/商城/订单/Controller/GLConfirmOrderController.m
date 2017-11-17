@@ -7,16 +7,14 @@
 //
 
 #import "GLConfirmOrderController.h"
-//#import "GLOrderDetailController.h"
-//#import "GLOrderPayView.h"
 #import "GLSet_MaskVeiw.h"
-//#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "GLMine_PersonInfo_AddressChooseController.h"
-
-//#import "LBMineCenterPayPagesViewController.h"
 #import "GLOrderGoodsCell.h"
 #import "GLConfirmOrderModel.h"
 #import "GLMine_RicePayController.h"
+#import "BaseNavigationViewController.h"
+#import "GLLoginController.h"
+
 
 @interface GLConfirmOrderController ()<UITableViewDelegate,UITableViewDataSource,UITextViewDelegate>
 {
@@ -25,7 +23,6 @@
 }
 
 @property (nonatomic, strong)GLSet_MaskVeiw *maskV;
-//@property (nonatomic, strong)GLOrderPayView *payV;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewW;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewH;
 
@@ -156,9 +153,22 @@ static NSString *ID = @"GLOrderGoodsCell";
             self.contentViewH.constant = _models.count * 117 + 220;
             [self.tableView reloadData];
             
-        }else{
-         
+        }else if([responseObject[@"code"] integerValue] == OVERDUE_CODE){
             [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+            
+            [UserModel defaultUser].loginstatus = NO;
+            [usermodelachivar achive];
+            
+            GLLoginController *loginVC = [[GLLoginController alloc] init];
+            loginVC.sign = 1;
+            BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginVC];
+            nav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            [self presentViewController:nav animated:YES completion:nil];
+
+            
+        }else{
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+            
         }
         
     } enError:^(NSError *error) {
@@ -192,15 +202,6 @@ static NSString *ID = @"GLOrderGoodsCell";
 }
 
 - (void)dismiss {
-    
-//    [_payV.passwordF resignFirstResponder];
-//    [UIView animateWithDuration:0.3 animations:^{
-//        _payV.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT *0.5);
-//
-//    }completion:^(BOOL finished) {
-//
-//        [_maskV removeFromSuperview];
-//    }];
     
 }
 

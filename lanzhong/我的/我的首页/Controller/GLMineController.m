@@ -31,15 +31,12 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageV;//头像
 @property (weak, nonatomic) IBOutlet UILabel *nicknameLabel;//用户昵称
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;//实名认证状态
-
 @property (weak, nonatomic) IBOutlet UIView *middleView;//中间6个label的背景View
-
 @property (weak, nonatomic) IBOutlet UILabel *participateLabel;//参与项目个数
 @property (weak, nonatomic) IBOutlet UILabel *publishLabel;//发布项目个数
 @property (weak, nonatomic) IBOutlet UILabel *banlanceLabel;//余额
 
 @property (nonatomic, strong)NSMutableArray *dataSource;//显示数据_数据源
-
 @property (nonatomic, strong)LoadWaitView *loadV;
 
 @end
@@ -54,7 +51,6 @@
     [self setUI];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMineCell" bundle:nil] forCellReuseIdentifier:@"GLMineCell"];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -72,7 +68,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.headerView.height = 235;
     self.imageV.layer.cornerRadius = self.imageV.height/2;
-    self.imageV.image = [UIImage imageNamed:PlaceHolderImage];
+    self.imageV.image = [UIImage imageNamed:PicHolderImage];
     
     self.middleView.layer.cornerRadius = 5.f;
 
@@ -125,7 +121,6 @@
             
             [usermodelachivar achive];
             [self assignment];//为头视图赋值
-            
         }
         
     } enError:^(NSError *error) {
@@ -139,9 +134,9 @@
     self.publishLabel.text = [UserModel defaultUser].item_count;
     self.banlanceLabel.text = [UserModel defaultUser].umoney;
     
-    [self.imageV sd_setImageWithURL:[NSURL URLWithString:[UserModel defaultUser].user_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    [self.imageV sd_setImageWithURL:[NSURL URLWithString:[UserModel defaultUser].user_pic] placeholderImage:[UIImage imageNamed:PicHolderImage]];
     
-    if ([UserModel defaultUser].nickname.length <= 0) {
+    if ([UserModel defaultUser].nickname.length == 0) {
         self.nicknameLabel.text = @"蓝众创客";
     }else{
         self.nicknameLabel.text = [UserModel defaultUser].nickname;

@@ -135,8 +135,13 @@
 //为头视图赋值
 - (void)headerViewFuzhi {
     
-    NSString *imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/200/h/200",self.model.user_info_pic];
-    [self.imageV sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    if (self.model.user_info_pic.length == 0) {
+        self.imageV.image = [UIImage imageNamed:PicHolderImage];
+    }else{
+        NSString *imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/200/h/200",self.model.user_info_pic];
+        [self.imageV sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    }
+    
     self.projectTitleLabel.text = [NSString stringWithFormat:@"项目:%@",self.model.title];
     self.personNameLabel.text = [NSString stringWithFormat:@"负责人:%@",self.model.linkman];
     self.targetMoneyLabel.text = [NSString stringWithFormat:@"%@元",self.model.admin_money];
@@ -284,7 +289,14 @@
     self.HideNavagation = YES;
     JZAlbumViewController *jzAlbumVC = [[JZAlbumViewController alloc]init];
     jzAlbumVC.currentIndex = 0;//这个参数表示当前图片的index，默认是0
-    jzAlbumVC.imgArr = [NSMutableArray arrayWithArray:@[self.model.user_info_pic]];//图片数组，可以是url，也可以是UIImage
+    if (self.model.user_info_pic.length == 0) {
+        UIImage *image = [UIImage imageNamed:@"logo"];
+        jzAlbumVC.imgArr = [NSMutableArray arrayWithArray:@[image]];
+    }else{
+        
+        jzAlbumVC.imgArr = [NSMutableArray arrayWithArray:@[self.model.user_info_pic]];//图片数组，可以是url，也可以是UIImage
+    }
+    
     [self presentViewController:jzAlbumVC animated:NO completion:nil];
     
 }

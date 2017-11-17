@@ -10,6 +10,7 @@
 #import "GLRegisterController.h"//注册
 #import "GLForgetPasswordController.h"//忘记密码
 #import "RSAEncryptor.h"
+#import "DWTabBarController.h"
 
 @interface GLLoginController ()
 
@@ -96,7 +97,7 @@
         
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
 
-            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+            [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
            
             [UserModel defaultUser].address = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"address"]];
             [UserModel defaultUser].area = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"area"]];
@@ -153,7 +154,13 @@
 }
 - (IBAction)back:(id)sender {
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if(self.sign == 1){
+        [self dismissViewControllerAnimated:YES completion:nil];
+        [UIApplication sharedApplication].keyWindow.rootViewController = [[DWTabBarController alloc] init];
+    }else{
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
     
 }
 

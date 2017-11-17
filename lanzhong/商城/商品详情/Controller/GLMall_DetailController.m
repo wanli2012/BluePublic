@@ -18,9 +18,10 @@
 #import "GLConfirmOrderController.h"
 #import "GLMall_MoreCommentController.h"//更多评论
 #import "JZAlbumViewController.h"
+#import "BaseNavigationViewController.h"
+#import "GLLoginController.h"
 
 #define headerImageHeight 64
-
 
 #define HEADER_VIEW_HEIGHT      170.0f      // 顶部商品图片高度
 #define END_DRAG_SHOW_HEIGHT    80.0f       // 结束拖拽最大值时的显示
@@ -195,7 +196,7 @@
             
         }else{
             
-            [MBProgressHUD showError:responseObject[@"message"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
         [self.tableView reloadData];
@@ -290,16 +291,18 @@
     [self.navigationController pushViewController:vc animated:YES];
     
 }
+
 #pragma mark - 添加到购物车
 - (IBAction)addToCart:(id)sender {
     
     if ([UserModel defaultUser].loginstatus == NO) {
-        [MBProgressHUD showError:@"请先登录"];
+        [SVProgressHUD showErrorWithStatus:@"请先登录"];
         return;
     }
     
     if (self.spec_id.length == 0) {
-        [MBProgressHUD showError:@"请选择规格"];
+
+        [SVProgressHUD showErrorWithStatus:@"请选择规格"];
         return;
     }
     
@@ -317,10 +320,23 @@
         [_loadV removeloadview];
         
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
-             [MBProgressHUD showError:responseObject[@"message"]];
-        }else{
+            [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
             
-            [MBProgressHUD showError:responseObject[@"message"]];
+        }else if([responseObject[@"code"] integerValue] == OVERDUE_CODE){
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+            
+            [UserModel defaultUser].loginstatus = NO;
+            [usermodelachivar achive];
+            
+            GLLoginController *loginVC = [[GLLoginController alloc] init];
+
+            BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginVC];
+            nav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            [self presentViewController:nav animated:YES completion:nil];
+            
+        }else{
+        
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
     } enError:^(NSError *error) {
@@ -335,7 +351,8 @@
 - (IBAction)toCart:(id)sender {
     
     if ([UserModel defaultUser].loginstatus == NO) {
-        [MBProgressHUD showError:@"请先登录"];
+
+        [SVProgressHUD showErrorWithStatus:@"请先登录"];
         return;
     }
     
@@ -349,7 +366,7 @@
 - (void)moreComment {
     
     if (self.model.comment_data.count == 0) {
-        [MBProgressHUD showError:@"没有更多评论了"];
+        [SVProgressHUD showErrorWithStatus:@"没有更多评论了"];
         return;
     }
     

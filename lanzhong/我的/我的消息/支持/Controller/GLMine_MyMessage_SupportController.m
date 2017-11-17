@@ -17,6 +17,7 @@
 @property (nonatomic, strong)LoadWaitView *loadV;
 @property (nonatomic, assign)NSInteger page;
 
+@property (nonatomic, strong)NodataView *nodataV;
 @end
 
 @implementation GLMine_MyMessage_SupportController
@@ -24,7 +25,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMine_MyMessageCell" bundle:nil] forCellReuseIdentifier:@"GLMine_MyMessageCell"];
-    
+    [self.tableView addSubview:self.nodataV];
+    self.nodataV.hidden = YES;
+
     __weak __typeof(self) weakSelf = self;
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
@@ -84,11 +87,17 @@
                     [self.models addObject:model];
                 }
             }
-        }else{
+        }else if ([responseObject[@"code"] integerValue]==PAGE_ERROR_CODE){
             
+            if (self.models.count != 0) {
+                
+                [MBProgressHUD showError:responseObject[@"message"]];
+            }
+            
+        }else{
             [MBProgressHUD showError:responseObject[@"message"]];
         }
-        
+
         [self.tableView reloadData];
         
     } enError:^(NSError *error) {
@@ -112,7 +121,11 @@
 
 #pragma mark - UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
+    if (self.models.count == 0) {
+        self.nodataV.hidden = NO;
+    }else{
+        self.nodataV.hidden = YES;
+    }
     return self.models.count;
 }
 
@@ -141,5 +154,14 @@
         _models = [NSMutableArray array];
     }
     return _models;
+}
+-(NodataView*)nodataV{
+    
+    if (!_nodataV) {
+        _nodataV=[[NSBundle mainBundle]loadNibNamed:@"NodataView" owner:self options:nil].firstObject;
+        _nodataV.frame = CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT-114);
+    }
+    return _nodataV;
+    
 }
 @end
