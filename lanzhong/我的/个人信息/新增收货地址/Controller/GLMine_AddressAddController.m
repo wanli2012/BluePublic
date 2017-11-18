@@ -82,6 +82,7 @@
     }
 }
 
+#pragma mark - 城市列表
 - (void)getPickerData {
     //城市列表
     _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:[UIApplication sharedApplication].keyWindow];
@@ -96,30 +97,8 @@
         [MBProgressHUD showError:error.localizedDescription];
         
     }];
+}
 
-}
--(void)initProvinceCityArea{
-    
-//    if (self.isEdit == YES) {
-//        self.navigationItem.title = @"修改收货地址";
-//        self.nameTf.text = [NSString stringWithFormat:@"%@",self.dataDic[@"collect_name"]];
-//        self.phoneTf.text = [NSString stringWithFormat:@"%@",self.dataDic[@"s_phone"]];
-//        self.provinceTf.text = [NSString stringWithFormat:@"%@",self.dataDic[@"areas"]];
-//        self.adressTf.text = [NSString stringWithFormat:@"%@",self.dataDic[@"s_address"]];
-//        
-//        if ([self.dataDic[@"is_default"] integerValue]==1) {
-//            self.isDefaultImage.image = [UIImage imageNamed:@"支付未选中"];
-//            self.isdeualtImageOne.image = [UIImage imageNamed:@"支付选中"];
-//            self.isdeualt = 1;
-//        }else{
-//            self.isDefaultImage.image = [UIImage imageNamed:@"支付选中"];
-//            self.isdeualtImageOne.image = [UIImage imageNamed:@"支付未选中"];
-//            self.isdeualt = 0;
-//            
-//        }
-//    }
-    
-}
 - (IBAction)setupEventNot:(id)sender {
     self.isdeualt = 0;
     self.isDefaultImage.image = [UIImage imageNamed:@"address_choice"];
@@ -131,9 +110,8 @@
     self.isdeualtImageOne.image = [UIImage imageNamed:@"address_choice"];
 }
 
-
 - (void)ensure{
-    NSLog(@"确定");
+
     if (self.nameTF.text.length <= 0) {
         [MBProgressHUD showError:@"请输入收货人姓名"];
         return;
@@ -214,7 +192,7 @@
     }
 }
 
-//省市区选择
+#pragma mark - 省市区选择
 - (IBAction)provincesChoose:(id)sender {
     
     LBMineCenterChooseAreaViewController *vc=[[LBMineCenterChooseAreaViewController alloc]init];
@@ -286,10 +264,8 @@
                 [toView removeFromSuperview];
                 [transitionContext completeTransition:YES]; //这个必须写,否则程序 认为动画还在执行中,会导致展示完界面后,无法处理用户的点击事件
             }
-            
         }];
-        
     }
-    
 }
+
 @end

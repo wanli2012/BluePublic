@@ -6,6 +6,8 @@
 //  Copyright © 2017年 三君科技有限公司. All rights reserved.
 //
 
+//城市二级选择 控制器
+
 #import "GLMutipleChooseController.h"
 
 @interface GLMutipleChooseController ()<UIPickerViewDelegate,UIPickerViewDataSource>
@@ -54,7 +56,7 @@
 -(void)getPickerData {
     
     self.cityArr = self.dataArr[0].city;
-
+    
     _provinceStrId = self.dataArr[0].province_code;
     _provinceStr = self.dataArr[0].province_name;
     _cityStrId = self.cityArr[0].city_code;
@@ -71,14 +73,15 @@
 
 #pragma mark - 确定
 - (IBAction)ensure:(id)sender {
+    
     if (_cityStrId.length<=0) {
+        
         _resultStrId = [NSString stringWithFormat:@"%@&%@&%@",_provinceStrId,_provinceStrId,_provinceStrId];
         _resultStr = [NSString stringWithFormat:@"%@",_provinceStr];
         _countryStrId =_provinceStrId;
         _cityStrId =_provinceStrId;
-    }
-    
-    else if (_countryStrId.length <= 0) {
+        
+    }else if (_countryStrId.length <= 0) {
         
         _resultStrId = [NSString stringWithFormat:@"%@&%@&%@",_provinceStrId,_cityStrId,_cityStrId];
         _resultStr = [NSString stringWithFormat:@"%@%@",_provinceStr,_cityStr];

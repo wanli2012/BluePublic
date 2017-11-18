@@ -36,8 +36,6 @@
 
 -(void)layoutSubviews{
     
-    NSLog(@"%s",__func__);
-    
     [super layoutSubviews];
     
     CGFloat barWidth = self.frame.size.width;
@@ -57,9 +55,9 @@
         if (![viewClass isEqualToString:@"UITabBarButton"]) continue;
 
         CGFloat buttonX = buttonIndex * buttonW;
-        if (buttonIndex >= 2) { // 右边2个按钮
-            buttonX += buttonW;
-        }
+//        if (buttonIndex >= 2) { // 右边2个按钮
+//            buttonX += buttonW;
+//        }
         
         view.frame = CGRectMake(buttonX, buttonY, buttonW, buttonH);
         

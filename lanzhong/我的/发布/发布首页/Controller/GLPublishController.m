@@ -82,8 +82,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationController.navigationBar.hidden = NO;
     self.automaticallyAdjustsScrollViewInsets = NO;
+    self.navigationItem.title = @"项目发布";
     
     self.contentViewWidth.constant = kSCREEN_WIDTH;
     self.contentViewHeight.constant = 820;
@@ -123,6 +123,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange:) name:UITextFieldTextDidChangeNotification object:self.titleTF];
     
 }
+
 #pragma mark - 获取分类
 - (void)postRequest_Category {
 
@@ -178,7 +179,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    self.navigationController.navigationBar.hidden = YES;
+    self.navigationController.navigationBar.hidden = NO;
 }
 #pragma mark -  行业选择
 - (IBAction)industryChoose:(id)sender {
@@ -206,6 +207,7 @@
         [SVProgressHUD showErrorWithStatus:@"行业分类暂无数据"];
     }
 }
+
 #pragma mark - 截止日期选择
 - (IBAction)endTimeChoose:(id)sender {
 

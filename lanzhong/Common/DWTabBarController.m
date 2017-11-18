@@ -12,6 +12,7 @@
 #import "GLBusinessCircleController.h"
 #import "GLMallController.h"
 #import "GLMineController.h"
+#import "GLTalentPoolController.h"
 
 #import "DWTabBar.h"
 //#import "LBSessionListViewController.h"
@@ -22,7 +23,6 @@
 @interface DWTabBarController ()<UITabBarControllerDelegate>
 
 @end
-
 
 @implementation DWTabBarController
 
@@ -55,8 +55,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(refreshInterface) name:@"refreshInterface" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(exitLogin) name:@"exitLogin" object:nil];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(caoxiang) name:@"middleItemNotification" object:nil];
 }
 
+- (void)caoxiang {
+    
+    self.selectedIndex = 2;
+    
+}
 //完善资料退出跳转登录
 -(void)exitLogin{
     
@@ -139,12 +145,15 @@
                           imageName:@"商圈未点中"
                   selectedImageName:@"商圈"];
     
+    [self addOneChildViewController:[[BaseNavigationViewController alloc]initWithRootViewController:[[GLTalentPoolController alloc] init]]
+                          WithTitle:@""
+                          imageName:@""
+                  selectedImageName:@""];
     
     [self addOneChildViewController:[[BaseNavigationViewController alloc]initWithRootViewController:[[GLMallController alloc] init]]
                           WithTitle:@"商城"
                           imageName:@"商城未点中"
                   selectedImageName:@"商城"];
-    
     
     [self addOneChildViewController:[[BaseNavigationViewController alloc]initWithRootViewController:[[GLMineController alloc] init]]
                           WithTitle:@"我的"
@@ -173,7 +182,6 @@
     [self addChildViewController:viewController];
     
 }
-
 
 //这个方法可以抽取到 UIImage 的分类中
 - (UIImage *)imageWithColor:(UIColor *)color

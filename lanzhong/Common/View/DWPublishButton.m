@@ -99,10 +99,12 @@
         return;
     }
     
-    GLPublishController * publishVC = [[GLPublishController alloc] init];
-    BaseNavigationViewController *publishNav = [[BaseNavigationViewController alloc] initWithRootViewController:publishVC];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"middleItemNotification" object:nil];
     
-    [[self topViewController] presentViewController:publishNav animated:YES completion:nil];
+//    GLPublishController * publishVC = [[GLPublishController alloc] init];
+//    BaseNavigationViewController *publishNav = [[BaseNavigationViewController alloc] initWithRootViewController:publishVC];
+//    
+//    [[self topViewController] presentViewController:publishNav animated:YES completion:nil];
     
 }
 

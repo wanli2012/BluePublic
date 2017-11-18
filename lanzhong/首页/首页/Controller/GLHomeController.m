@@ -159,6 +159,7 @@
     self.hidesBottomBarWhenPushed = NO;
     
 }
+
 #pragma mark - 公告
 - (IBAction)notice:(id)sender {
   

@@ -18,8 +18,9 @@
 #import "GLMine_ParticipateController.h"//我参与的项目
 #import "GLMine_EvaluateController.h"//我的评价
 #import "GLMine_ShareController.h"//分享权益
+#import "GLPublishController.h"//发布项目
+#import "GLMine_CurriculumVitaeController.h"//我的简历
 
-#import "GLMine_AddFundTrendController.h"//添加资金动向
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface GLMineController ()<UITableViewDelegate,UITableViewDataSource>
@@ -228,61 +229,70 @@
     
     return cell;
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     self.hidesBottomBarWhenPushed = YES;
     switch (indexPath.section) {
         case 0:
         {
-            GLMine_MyProjectController *myProjectVC = [[GLMine_MyProjectController alloc] initWithSignIndex:indexPath.row];
-
-            [self.navigationController pushViewController:myProjectVC animated:YES];
-        }
-            break;
-        case 1:
-        {
             switch (indexPath.row) {
-                case 0:
+                case 0://发布项目
                 {
-                    GLMine_ParticipateController *participateVC = [[GLMine_ParticipateController alloc] init];
-                    [self.navigationController pushViewController:participateVC animated:YES];
+                    GLPublishController *publishVC = [[GLPublishController alloc] init];
+                    [self.navigationController pushViewController:publishVC animated:YES];
                 }
                     break;
+                case 1://简历
+                {
+                    GLMine_CurriculumVitaeController *cv = [[GLMine_CurriculumVitaeController alloc] init];
+                    [self.navigationController pushViewController:cv animated:YES];
+                }
+                    break;
+                    
                 default:
                     break;
             }
         }
             break;
+        case 1:
+        {
+            GLMine_MyProjectController *myProjectVC = [[GLMine_MyProjectController alloc] initWithSignIndex:indexPath.row];
+            [self.navigationController pushViewController:myProjectVC animated:YES];
+        }
+            break;
         case 2:
+        {
+            GLMine_ParticipateController *participateVC = [[GLMine_ParticipateController alloc] init];
+            [self.navigationController pushViewController:participateVC animated:YES];
+             
+        }
+            break;
+        case 3:
         {
             switch (indexPath.row) {
                 case 0://购物车
                 {
                     GLShoppingCartController *cartVC = [[GLShoppingCartController alloc] init];
                     [self.navigationController pushViewController:cartVC animated:YES];
-                    
                 }
                     break;
                 case 1://我的评价
                 {
                     GLMine_EvaluateController *evaluateVC = [[GLMine_EvaluateController alloc] init];
                     [self.navigationController pushViewController:evaluateVC animated:YES];
-                    
                 }
                     break;
                 case 2://我的订单
                 {
-                  
                     GLMine_MyOrderController *cartVC = [[GLMine_MyOrderController alloc] init];
                     [self.navigationController pushViewController:cartVC animated:YES];
-                    
                 }
                     break;
                 case 3://钱包
                 {
-                    
                     GLMine_WalletController *walletVC = [[GLMine_WalletController alloc] init];
                     [self.navigationController pushViewController:walletVC animated:YES];
-
                 }
                     break;
                     
@@ -292,28 +302,19 @@
         }
             break;
             
-        case 3:{
-            switch (indexPath.row) {
-                case 0:
-                {
-                    NSLog(@"分享权益");
-                    GLMine_ShareController *shareVC = [[GLMine_ShareController alloc] init];
-                    [self.navigationController pushViewController:shareVC animated:YES];
-//                    GLMine_AddFundTrendController *addFundVC = [[GLMine_AddFundTrendController alloc] init];
-//                    [self.navigationController pushViewController:addFundVC animated:YES];
-                    
-                }
-                    break;
-                default:
-                    break;
-            }
+        case 4:
+        {
+            GLMine_ShareController *shareVC = [[GLMine_ShareController alloc] init];
+            [self.navigationController pushViewController:shareVC animated:YES];
         }
+            break;
             
         default:
             break;
     }
     self.hidesBottomBarWhenPushed = NO;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 44;
 }
@@ -327,13 +328,12 @@
     return 3;
 }
 
-
 #pragma mark - 懒加载
 - (NSMutableArray *)dataSource{
     if (!_dataSource) {
         _dataSource = [NSMutableArray array];
         
-        NSArray *arr = @[@{@"title":@"我的审核",@"image":@"zhang"},
+        NSArray *arr1 = @[@{@"title":@"我的审核",@"image":@"zhang"},
                          @{@"title":@"我的筹款",@"image":@"money"},
                          @{@"title":@"我的项目",@"image":@"myproject"}];
         
@@ -347,8 +347,12 @@
         
         NSArray *arr4 = @[@{@"title":@"分享权益",@"image":@"mine_share"}
                           ];
-        
-        [_dataSource addObject:arr];
+        NSArray *arr5 = @[@{@"title":@"我要发布",@"image":@"mine_share"},
+                          @{@"title":@"我的简历",@"image":@"mine_share"}
+                          ];
+
+        [_dataSource addObject:arr5];
+        [_dataSource addObject:arr1];
         [_dataSource addObject:arr2];
         [_dataSource addObject:arr3];
         [_dataSource addObject:arr4];
