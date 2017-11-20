@@ -118,7 +118,7 @@
     
     _isAgreeProtocol = NO;
     [self postRequest_Category];
-    [self postRequest_City];
+//    [self postRequest_City];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange:) name:UITextFieldTextDidChangeNotification object:self.titleTF];
     
@@ -149,32 +149,33 @@
     }];
     
 }
-#pragma mark - 获取城市列表
-- (void)postRequest_City {
-    
-    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:[UIApplication sharedApplication].keyWindow];
-    [NetworkManager requestPOSTWithURLStr:kCITYLIST_URL paramDic:@{} finish:^(id responseObject) {
-        [_loadV removeloadview];
-        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
-            if([responseObject[@"data"] count] != 0){
-                
-                [self.cityModels removeAllObjects];
-                for (NSDictionary *dic in responseObject[@"data"]) {
-                    
-                    GLPublish_CityModel *model = [GLPublish_CityModel mj_objectWithKeyValues:dic];
-                    [self.cityModels addObject:model];
-                }
-            }
-        }else{
 
-            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
-        }
-        
-    } enError:^(NSError *error) {
-        [_loadV removeloadview];
-    }];
-    
-}
+//#pragma mark - 获取城市列表
+//- (void)postRequest_City {
+//    
+//    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:[UIApplication sharedApplication].keyWindow];
+//    [NetworkManager requestPOSTWithURLStr:kCITYLIST_URL paramDic:@{} finish:^(id responseObject) {
+//        [_loadV removeloadview];
+//        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+//            if([responseObject[@"data"] count] != 0){
+//                
+//                [self.cityModels removeAllObjects];
+//                for (NSDictionary *dic in responseObject[@"data"]) {
+//                    
+//                    GLPublish_CityModel *model = [GLPublish_CityModel mj_objectWithKeyValues:dic];
+//                    [self.cityModels addObject:model];
+//                }
+//            }
+//        }else{
+//
+//            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+//        }
+//        
+//    } enError:^(NSError *error) {
+//        [_loadV removeloadview];
+//    }];
+//    
+//}
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -218,6 +219,38 @@
 
 #pragma mark - 省市选择
 - (IBAction)cityChoose:(id)sender {
+    
+    if(self.cityModels.count != 0){
+        [self popCityChoose];
+        return;
+    }
+    
+    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:[UIApplication sharedApplication].keyWindow];
+    [NetworkManager requestPOSTWithURLStr:kCITYLIST_URL paramDic:@{} finish:^(id responseObject) {
+        [_loadV removeloadview];
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+            if([responseObject[@"data"] count] != 0){
+                
+                [self.cityModels removeAllObjects];
+                for (NSDictionary *dic in responseObject[@"data"]) {
+                    
+                    GLPublish_CityModel *model = [GLPublish_CityModel mj_objectWithKeyValues:dic];
+                    [self.cityModels addObject:model];
+                }
+                [self popCityChoose];
+            }
+        }else{
+            
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+        }
+        
+    } enError:^(NSError *error) {
+        [_loadV removeloadview];
+    }];
+
+}
+
+- (void)popCityChoose{
     GLMutipleChooseController *vc=[[GLMutipleChooseController alloc]init];
     vc.dataArr = self.cityModels;
     vc.transitioningDelegate=self;
@@ -230,7 +263,7 @@
         weakself.addressLabel.text = str;
         weakself.provinceId = provinceid;
         weakself.cityId = cityd;
-
+        
     };
 }
 #pragma mark - 是否同意了协议

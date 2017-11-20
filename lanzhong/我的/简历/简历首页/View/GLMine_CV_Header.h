@@ -21,4 +21,8 @@ typedef void(^retrunshowsection)(NSInteger index);
 
 @property (nonatomic, strong)UIButton *editBtn;
 
+@property (nonatomic, strong)UIView *lineView;
+
+@property (nonatomic, strong)UIImageView *bgImageV;
+
 @end

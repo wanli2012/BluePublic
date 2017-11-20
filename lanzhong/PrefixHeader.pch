@@ -156,4 +156,9 @@
 #define kBANK_NAMELIST_URL @"Other/open_bank_list"//银行名列表
 #define kBANNER_LIST_URL @"Other/banner_list"//广告展示
 
+//简历模块
+#define kMODIFY_BASEINFO_URL @"Resume/save_info"//修改简历基本信息
+#define kCV_DETAIL_URL @"Resume/preview"//个人简历预览、详情
+#define kCV_ADD_WORKLIFE_URL @"Resume/save_work"//用户工作经历修改添加
+
 #endif /* PrefixHeader_pch */
