@@ -160,5 +160,14 @@
 #define kMODIFY_BASEINFO_URL @"Resume/save_info"//修改简历基本信息
 #define kCV_DETAIL_URL @"Resume/preview"//个人简历预览、详情
 #define kCV_ADD_WORKLIFE_URL @"Resume/save_work"//用户工作经历修改添加
+#define kCV_WORKLIST_URL @"Resume/live"//工作经历
+#define kCV_DEL_WORKLIFE_URL @"Resume/del_work"//删除工作经历
+#define kCV_MODIFY_EDU_URL @"Resume/i_teach"//添加修改教育经历
+#define kCV_SKILL_URL @"Resume/i_skill_look"//个人技能
+#define kCV_ADD_SKILL_URL @"Resume/i_skill"//个人技能评价添加修改
+#define kCV_CAREER_LIST_URL @"Resume/vocations"//期望工作职业返回
+#define kCV_MONEY_URL @"Resume/yue_money"//期望月薪返回
+#define kCV_WANT_WORK_URL @"Resume/i_want"//添加修改期望工作
+#define kCV_ADD_DES_URL @"Resume/i_info"//添加、修改自我描述
 
 #endif /* PrefixHeader_pch */

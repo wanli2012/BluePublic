@@ -45,6 +45,10 @@
                     <constraint firstItem="q30-9f-7ab" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="q1d-am-cXK"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="levelLabel" destination="pu6-6b-uVL" id="DYP-IY-D7I"/>
+                <outlet property="titleLabel" destination="q30-9f-7ab" id="DKn-aB-ANP"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>

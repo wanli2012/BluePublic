@@ -33,12 +33,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.navigationItem.title = @"添加工作经历";
     self.ensureBtn.layer.cornerRadius = 5.f;
     self.contentViewWidth.constant = kSCREEN_WIDTH;
     self.contentViewHeight.constant = 500;
 
 }
+
 
 - (IBAction)startTimeChoose:(id)sender {
     GLDatePickerController *vc=[[GLDatePickerController alloc]init];
@@ -67,6 +69,7 @@
     [self presentViewController:vc animated:YES completion:nil];
 
 }
+
 #pragma mark - 添加
 - (IBAction)submit:(id)sender {
     if(self.nameTF.text.length == 0){
@@ -127,7 +130,7 @@
         
     } enError:^(NSError *error) {
         [_loadV removeloadview];
-        
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
     }];
 }
 
@@ -165,9 +168,20 @@
 }
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+    
+    if ([textView.text isEqualToString:@"请输入工作内容"]) {
+        self.contentTV.text = @"";
+        self.contentTV.textColor = [UIColor blackColor];
+    }
+    
     return YES;
 }
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView{
+    if([[textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]length]==0) {
+        
+        self.contentTV.text = @"请输入工作内容";
+        self.contentTV.textColor = [UIColor lightGrayColor];
+    }
     return YES;
 }
 #pragma mark - 动画的代理

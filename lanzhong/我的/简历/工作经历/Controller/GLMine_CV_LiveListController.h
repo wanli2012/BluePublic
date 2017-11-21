@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GLMine_CV_DetailModel.h"
+
 
 @interface GLMine_CV_LiveListController : UIViewController
 
-@property (nonatomic, copy)NSArray <GLMine_CV_live *>*models;
+
 
 @end

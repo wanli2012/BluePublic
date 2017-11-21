@@ -35,6 +35,7 @@
 @property (nonatomic, strong)NSMutableArray *cityModels;//城市数据源
 @property (nonatomic, copy)NSString *provinceId;//省份id
 @property (nonatomic, copy)NSString *cityId;//城市id
+@property (nonatomic, assign)NSInteger sexID;//性别id
 
 @end
 
@@ -53,14 +54,24 @@
     if (self.basicModel) {
         
         self.nameTF.text = self.basicModel.name;
-        self.sexLabel.text = self.basicModel.sex;
         self.educationLabel.text = self.basicModel.education;
         self.workLifeLabel.text = self.basicModel.work;
         self.birthLabel.text = self.basicModel.birth_time;
         self.cityLabel.text = self.basicModel.city_name;
         self.phoneNumTF.text = self.basicModel.phone;
         self.emailTF.text = self.basicModel.email;
+        
+        if ([self.basicModel.sex integerValue] == 1) {
+            self.sexLabel.text = @"男";
+        }else{
+            self.sexLabel.text = @"女";
+        }
+        self.sexID = [self.basicModel.sex integerValue];
+        self.provinceId = self.basicModel.province_id;
+        self.cityId = self.basicModel.city_id;
+        
     }
+    
     self.contentViewWidth.constant = kSCREEN_WIDTH;
     self.contentViewHeight.constant = 500;
 }
@@ -73,11 +84,16 @@
     vc.dataSourceArr = dataArr;
     
     vc.titlestr = @"请选择性别";
-    __weak typeof(self)weakSelf = self;
+    __weak typeof(self)weakSelf = self;//性别 1男 2女
     vc.returnreslut = ^(NSInteger index){
         
         weakSelf.sexLabel.text = dataArr[index];
 
+        if (index == 0) {
+            self.sexID = 1;
+        }else{
+            self.sexID = 2;
+        }
     };
     
     vc.transitioningDelegate = self;
@@ -88,7 +104,7 @@
  
     GLSimpleSelectionPickerController *vc=[[GLSimpleSelectionPickerController alloc]init];
     
-    NSMutableArray *dataArr = [NSMutableArray arrayWithArray:@[@"高中",@"大专",@"本科",@"研究生"]];
+    NSMutableArray *dataArr = [NSMutableArray arrayWithArray:@[@"中专及以下",@"高中",@"大专",@"本科",@"硕士",@"博士"]];
     vc.dataSourceArr = dataArr;
     
     vc.titlestr = @"请选择学历";
@@ -230,7 +246,7 @@
     dic[@"token"] = [UserModel defaultUser].token;
     dic[@"uid"] = [UserModel defaultUser].uid;
     dic[@"name"] = self.nameTF.text;
-    dic[@"sex"] = self.sexLabel.text;
+    dic[@"sex"] = @(self.sexID);
     dic[@"education"] = self.educationLabel.text;
     dic[@"work"] = self.workLifeLabel.text;
     dic[@"birth_time"] = self.birthLabel.text;
@@ -256,7 +272,7 @@
         
     } enError:^(NSError *error) {
         [_loadV removeloadview];
-  
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
     }];
 
 }

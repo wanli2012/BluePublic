@@ -29,7 +29,12 @@
 - (void)setModel:(GLMine_CV_basic *)model{
     _model = model;
 
-    self.sexLabel.text = model.sex;
+    if ([model.sex integerValue] == 1) {
+        self.sexLabel.text = @"男";
+    }else{
+        self.sexLabel.text = @"女";
+    }
+    
     self.educationLabel.text = model.education;
     self.workLifeLabel.text = model.work;
     self.birthLabel.text = model.birth_time;

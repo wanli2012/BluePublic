@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D30" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GLMine_CV_SkillController">
+            <connections>
+                <outlet property="addBtn" destination="96V-S3-cEv" id="UEc-j5-pwt"/>
+                <outlet property="tableView" destination="fu2-oe-Vsn" id="K1F-8D-4m1"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="339" height="453"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fu2-oe-Vsn">
+                    <rect key="frame" x="0.0" y="0.0" width="339" height="453"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <view key="tableFooterView" contentMode="scaleToFill" id="luj-2L-iH2">
+                        <rect key="frame" x="0.0" y="328" width="339" height="125"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="96V-S3-cEv">
+                                <rect key="frame" x="30" y="30" width="279" height="40"/>
+                                <color key="backgroundColor" red="2.38126886e-05" green="0.49598097800000002" blue="0.99889487030000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Vsx-zL-UF9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="添加技能评价">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addSkill:" destination="-1" eventType="touchUpInside" id="Hoj-mR-dJk"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最多只能添加三项技能" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="553-lt-RgG">
+                                <rect key="frame" x="108" y="90" width="123" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ivI-ST-4TO">
+                                <rect key="frame" x="100" y="89" width="8" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="0.1015892991" blue="0.054391829209999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="96V-S3-cEv" firstAttribute="top" secondItem="luj-2L-iH2" secondAttribute="top" constant="30" id="1bd-66-Eqj"/>
+                            <constraint firstItem="553-lt-RgG" firstAttribute="leading" secondItem="ivI-ST-4TO" secondAttribute="trailing" id="1bw-Ts-OY7"/>
+                            <constraint firstAttribute="trailing" secondItem="96V-S3-cEv" secondAttribute="trailing" constant="30" id="57m-za-Lp7"/>
+                            <constraint firstItem="553-lt-RgG" firstAttribute="centerX" secondItem="luj-2L-iH2" secondAttribute="centerX" id="NyO-pp-bNx"/>
+                            <constraint firstItem="ivI-ST-4TO" firstAttribute="centerY" secondItem="553-lt-RgG" secondAttribute="centerY" id="Xq7-jz-b4S"/>
+                            <constraint firstItem="96V-S3-cEv" firstAttribute="leading" secondItem="luj-2L-iH2" secondAttribute="leading" constant="30" id="wPq-2c-kOf"/>
+                            <constraint firstItem="553-lt-RgG" firstAttribute="top" secondItem="96V-S3-cEv" secondAttribute="bottom" constant="20" id="yPp-cC-4ve"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="iTL-Ug-SbP"/>
+                        <outlet property="delegate" destination="-1" id="yMd-CC-H89"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fu2-oe-Vsn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="CHI-2Z-e5l"/>
+                <constraint firstItem="fu2-oe-Vsn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="DKS-pL-LoJ"/>
+                <constraint firstAttribute="bottom" secondItem="fu2-oe-Vsn" secondAttribute="bottom" id="bJP-qP-YRL"/>
+                <constraint firstAttribute="trailing" secondItem="fu2-oe-Vsn" secondAttribute="trailing" id="doe-E9-GYo"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-47.5" y="-11.5"/>
+        </view>
+    </objects>
+</document>

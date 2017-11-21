@@ -39,6 +39,10 @@
                     <constraint firstItem="Qoh-cG-JwQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="lFi-NV-rW1"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="detailLabel" destination="DhT-XL-RDM" id="oxK-97-7eb"/>
+                <outlet property="positionLabel" destination="Qoh-cG-JwQ" id="4SF-0Z-GCF"/>
+            </connections>
             <point key="canvasLocation" x="14" y="32"/>
         </tableViewCell>
     </objects>

@@ -361,6 +361,21 @@
 		4AF109F31F78E07A00CB51FA /* UILabel+UILabel_ChangeLineSpaceAndWordSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF109E61F78E07A00CB51FA /* UILabel+UILabel_ChangeLineSpaceAndWordSpace.m */; };
 		4AF109F41F78E07A00CB51FA /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF109E81F78E07A00CB51FA /* UIView+Extension.m */; };
 		4AF10A051F78E27C00CB51FA /* tabbar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AF10A041F78E27C00CB51FA /* tabbar.xcassets */; };
+		4AF481C91FC40185000E1925 /* GLMine_CV_EducationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF481C71FC40185000E1925 /* GLMine_CV_EducationController.m */; };
+		4AF481CA1FC40185000E1925 /* GLMine_CV_EducationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AF481C81FC40185000E1925 /* GLMine_CV_EducationController.xib */; };
+		4AF481D21FC4118F000E1925 /* GLMine_CV_SkillController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF481D01FC4118F000E1925 /* GLMine_CV_SkillController.m */; };
+		4AF481D31FC4118F000E1925 /* GLMine_CV_SkillController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AF481D11FC4118F000E1925 /* GLMine_CV_SkillController.xib */; };
+		4AF481D71FC41490000E1925 /* GLMine_CV_SkillDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF481D51FC41490000E1925 /* GLMine_CV_SkillDetailCell.m */; };
+		4AF481D81FC41490000E1925 /* GLMine_CV_SkillDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AF481D61FC41490000E1925 /* GLMine_CV_SkillDetailCell.xib */; };
+		4AF481DC1FC41E44000E1925 /* GLMine_CV_AddSkillController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF481DA1FC41E44000E1925 /* GLMine_CV_AddSkillController.m */; };
+		4AF481DD1FC41E44000E1925 /* GLMine_CV_AddSkillController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AF481DB1FC41E44000E1925 /* GLMine_CV_AddSkillController.xib */; };
+		4AF481E51FC43CEF000E1925 /* GLMine_CV_ElegantShowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF481E31FC43CEF000E1925 /* GLMine_CV_ElegantShowController.m */; };
+		4AF481E61FC43CEF000E1925 /* GLMine_CV_ElegantShowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AF481E41FC43CEF000E1925 /* GLMine_CV_ElegantShowController.xib */; };
+		4AF481F21FC4412D000E1925 /* GLMine_CV_ExpectedWorkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF481F01FC4412D000E1925 /* GLMine_CV_ExpectedWorkController.m */; };
+		4AF481F31FC4412D000E1925 /* GLMine_CV_ExpectedWorkController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AF481F11FC4412D000E1925 /* GLMine_CV_ExpectedWorkController.xib */; };
+		4AF481F61FC4452F000E1925 /* GLMine_CV_CareerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF481F51FC4452F000E1925 /* GLMine_CV_CareerModel.m */; };
+		4AF481FA1FC45638000E1925 /* GLMine_CV_SelfDescriptionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF481F81FC45638000E1925 /* GLMine_CV_SelfDescriptionController.m */; };
+		4AF481FB1FC45638000E1925 /* GLMine_CV_SelfDescriptionController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AF481F91FC45638000E1925 /* GLMine_CV_SelfDescriptionController.xib */; };
 		4AF563D31F9B2CA00041D13C /* GLMall_LogisticsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF563D21F9B2CA00041D13C /* GLMall_LogisticsModel.m */; };
 		4AF5B0271F9594A7000407A7 /* GLMine_Wallet_ExchangeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF5B0261F9594A7000407A7 /* GLMine_Wallet_ExchangeModel.m */; };
 		4AF5B02B1F95A353000407A7 /* GLMine_Wallet_RechargeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF5B0291F95A353000407A7 /* GLMine_Wallet_RechargeController.m */; };
@@ -999,6 +1014,29 @@
 		4AF109E71F78E07A00CB51FA /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		4AF109E81F78E07A00CB51FA /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		4AF10A041F78E27C00CB51FA /* tabbar.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = tabbar.xcassets; sourceTree = "<group>"; };
+		4AF481C61FC40185000E1925 /* GLMine_CV_EducationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_CV_EducationController.h; sourceTree = "<group>"; };
+		4AF481C71FC40185000E1925 /* GLMine_CV_EducationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_CV_EducationController.m; sourceTree = "<group>"; };
+		4AF481C81FC40185000E1925 /* GLMine_CV_EducationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMine_CV_EducationController.xib; sourceTree = "<group>"; };
+		4AF481CF1FC4118F000E1925 /* GLMine_CV_SkillController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_CV_SkillController.h; sourceTree = "<group>"; };
+		4AF481D01FC4118F000E1925 /* GLMine_CV_SkillController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_CV_SkillController.m; sourceTree = "<group>"; };
+		4AF481D11FC4118F000E1925 /* GLMine_CV_SkillController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMine_CV_SkillController.xib; sourceTree = "<group>"; };
+		4AF481D41FC41490000E1925 /* GLMine_CV_SkillDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_CV_SkillDetailCell.h; sourceTree = "<group>"; };
+		4AF481D51FC41490000E1925 /* GLMine_CV_SkillDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_CV_SkillDetailCell.m; sourceTree = "<group>"; };
+		4AF481D61FC41490000E1925 /* GLMine_CV_SkillDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMine_CV_SkillDetailCell.xib; sourceTree = "<group>"; };
+		4AF481D91FC41E44000E1925 /* GLMine_CV_AddSkillController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_CV_AddSkillController.h; sourceTree = "<group>"; };
+		4AF481DA1FC41E44000E1925 /* GLMine_CV_AddSkillController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_CV_AddSkillController.m; sourceTree = "<group>"; };
+		4AF481DB1FC41E44000E1925 /* GLMine_CV_AddSkillController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMine_CV_AddSkillController.xib; sourceTree = "<group>"; };
+		4AF481E21FC43CEF000E1925 /* GLMine_CV_ElegantShowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_CV_ElegantShowController.h; sourceTree = "<group>"; };
+		4AF481E31FC43CEF000E1925 /* GLMine_CV_ElegantShowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_CV_ElegantShowController.m; sourceTree = "<group>"; };
+		4AF481E41FC43CEF000E1925 /* GLMine_CV_ElegantShowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMine_CV_ElegantShowController.xib; sourceTree = "<group>"; };
+		4AF481EF1FC4412D000E1925 /* GLMine_CV_ExpectedWorkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_CV_ExpectedWorkController.h; sourceTree = "<group>"; };
+		4AF481F01FC4412D000E1925 /* GLMine_CV_ExpectedWorkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_CV_ExpectedWorkController.m; sourceTree = "<group>"; };
+		4AF481F11FC4412D000E1925 /* GLMine_CV_ExpectedWorkController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMine_CV_ExpectedWorkController.xib; sourceTree = "<group>"; };
+		4AF481F41FC4452F000E1925 /* GLMine_CV_CareerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_CV_CareerModel.h; sourceTree = "<group>"; };
+		4AF481F51FC4452F000E1925 /* GLMine_CV_CareerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_CV_CareerModel.m; sourceTree = "<group>"; };
+		4AF481F71FC45638000E1925 /* GLMine_CV_SelfDescriptionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_CV_SelfDescriptionController.h; sourceTree = "<group>"; };
+		4AF481F81FC45638000E1925 /* GLMine_CV_SelfDescriptionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMine_CV_SelfDescriptionController.m; sourceTree = "<group>"; };
+		4AF481F91FC45638000E1925 /* GLMine_CV_SelfDescriptionController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMine_CV_SelfDescriptionController.xib; sourceTree = "<group>"; };
 		4AF563D11F9B2CA00041D13C /* GLMall_LogisticsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMall_LogisticsModel.h; sourceTree = "<group>"; };
 		4AF563D21F9B2CA00041D13C /* GLMall_LogisticsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMall_LogisticsModel.m; sourceTree = "<group>"; };
 		4AF5B0251F9594A7000407A7 /* GLMine_Wallet_ExchangeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMine_Wallet_ExchangeModel.h; sourceTree = "<group>"; };
@@ -2932,6 +2970,11 @@
 				4AF9C56C1FC2A88C00FD8B19 /* 简历首页 */,
 				4AF9C5681FC2A88C00FD8B19 /* 基本信息修改 */,
 				4A5C2B941FC2F60D00665031 /* 工作经历 */,
+				4AF481C21FC4010F000E1925 /* 教育经历 */,
+				4AF481CB1FC4115E000E1925 /* 技能评价 */,
+				4AF481E71FC440F1000E1925 /* 期望工作 */,
+				4AF481DE1FC43CB2000E1925 /* 风采展示 */,
+				4AF481EB1FC440F1000E1925 /* 自我描述 */,
 			);
 			path = "简历";
 			sourceTree = "<group>";
@@ -3651,6 +3694,184 @@
 			path = "图片资源";
 			sourceTree = "<group>";
 		};
+		4AF481C21FC4010F000E1925 /* 教育经历 */ = {
+			isa = PBXGroup;
+			children = (
+				4AF481C31FC4010F000E1925 /* Controller */,
+				4AF481C41FC4010F000E1925 /* Model */,
+				4AF481C51FC4010F000E1925 /* View */,
+			);
+			path = "教育经历";
+			sourceTree = "<group>";
+		};
+		4AF481C31FC4010F000E1925 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4AF481C61FC40185000E1925 /* GLMine_CV_EducationController.h */,
+				4AF481C71FC40185000E1925 /* GLMine_CV_EducationController.m */,
+				4AF481C81FC40185000E1925 /* GLMine_CV_EducationController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		4AF481C41FC4010F000E1925 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4AF481C51FC4010F000E1925 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4AF481CB1FC4115E000E1925 /* 技能评价 */ = {
+			isa = PBXGroup;
+			children = (
+				4AF481CC1FC4115E000E1925 /* Controller */,
+				4AF481CD1FC4115E000E1925 /* Model */,
+				4AF481CE1FC4115E000E1925 /* View */,
+			);
+			path = "技能评价";
+			sourceTree = "<group>";
+		};
+		4AF481CC1FC4115E000E1925 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4AF481CF1FC4118F000E1925 /* GLMine_CV_SkillController.h */,
+				4AF481D01FC4118F000E1925 /* GLMine_CV_SkillController.m */,
+				4AF481D11FC4118F000E1925 /* GLMine_CV_SkillController.xib */,
+				4AF481D91FC41E44000E1925 /* GLMine_CV_AddSkillController.h */,
+				4AF481DA1FC41E44000E1925 /* GLMine_CV_AddSkillController.m */,
+				4AF481DB1FC41E44000E1925 /* GLMine_CV_AddSkillController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		4AF481CD1FC4115E000E1925 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4AF481CE1FC4115E000E1925 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4AF481D41FC41490000E1925 /* GLMine_CV_SkillDetailCell.h */,
+				4AF481D51FC41490000E1925 /* GLMine_CV_SkillDetailCell.m */,
+				4AF481D61FC41490000E1925 /* GLMine_CV_SkillDetailCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4AF481DE1FC43CB2000E1925 /* 风采展示 */ = {
+			isa = PBXGroup;
+			children = (
+				4AF481DF1FC43CB2000E1925 /* Controller */,
+				4AF481E01FC43CB2000E1925 /* Model */,
+				4AF481E11FC43CB2000E1925 /* View */,
+			);
+			path = "风采展示";
+			sourceTree = "<group>";
+		};
+		4AF481DF1FC43CB2000E1925 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4AF481E21FC43CEF000E1925 /* GLMine_CV_ElegantShowController.h */,
+				4AF481E31FC43CEF000E1925 /* GLMine_CV_ElegantShowController.m */,
+				4AF481E41FC43CEF000E1925 /* GLMine_CV_ElegantShowController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		4AF481E01FC43CB2000E1925 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4AF481E11FC43CB2000E1925 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4AF481E71FC440F1000E1925 /* 期望工作 */ = {
+			isa = PBXGroup;
+			children = (
+				4AF481E81FC440F1000E1925 /* Controller */,
+				4AF481E91FC440F1000E1925 /* Model */,
+				4AF481EA1FC440F1000E1925 /* View */,
+			);
+			path = "期望工作";
+			sourceTree = "<group>";
+		};
+		4AF481E81FC440F1000E1925 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4AF481EF1FC4412D000E1925 /* GLMine_CV_ExpectedWorkController.h */,
+				4AF481F01FC4412D000E1925 /* GLMine_CV_ExpectedWorkController.m */,
+				4AF481F11FC4412D000E1925 /* GLMine_CV_ExpectedWorkController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		4AF481E91FC440F1000E1925 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4AF481F41FC4452F000E1925 /* GLMine_CV_CareerModel.h */,
+				4AF481F51FC4452F000E1925 /* GLMine_CV_CareerModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4AF481EA1FC440F1000E1925 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4AF481EB1FC440F1000E1925 /* 自我描述 */ = {
+			isa = PBXGroup;
+			children = (
+				4AF481EC1FC440F1000E1925 /* Controller */,
+				4AF481ED1FC440F1000E1925 /* Model */,
+				4AF481EE1FC440F1000E1925 /* View */,
+			);
+			path = "自我描述";
+			sourceTree = "<group>";
+		};
+		4AF481EC1FC440F1000E1925 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4AF481F71FC45638000E1925 /* GLMine_CV_SelfDescriptionController.h */,
+				4AF481F81FC45638000E1925 /* GLMine_CV_SelfDescriptionController.m */,
+				4AF481F91FC45638000E1925 /* GLMine_CV_SelfDescriptionController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		4AF481ED1FC440F1000E1925 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4AF481EE1FC440F1000E1925 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		4AF563D01F9B2C840041D13C /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -3799,23 +4020,20 @@
 		4AF9C5721FC2A88C00FD8B19 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4AF9C5731FC2A88C00FD8B19 /* GLMine_CV_BaseCell.h */,
-				4AF9C5741FC2A88C00FD8B19 /* GLMine_CV_BaseCell.m */,
-				4AF9C5751FC2A88C00FD8B19 /* GLMine_CV_BaseCell.xib */,
-				4AF9C5761FC2A88C00FD8B19 /* GLMine_CV_DescriptionCell.h */,
-				4AF9C5771FC2A88C00FD8B19 /* GLMine_CV_DescriptionCell.m */,
-				4AF9C5781FC2A88C00FD8B19 /* GLMine_CV_DescriptionCell.xib */,
-				4AF9C5791FC2A88C00FD8B19 /* GLMine_CV_EducationCell.h */,
-				4AF9C57A1FC2A88C00FD8B19 /* GLMine_CV_EducationCell.m */,
-				4AF9C57B1FC2A88C00FD8B19 /* GLMine_CV_EducationCell.xib */,
-				4AF9C57C1FC2A88C00FD8B19 /* GLMine_CV_ExpectedJobCell.h */,
-				4AF9C57D1FC2A88C00FD8B19 /* GLMine_CV_ExpectedJobCell.m */,
-				4AF9C57E1FC2A88C00FD8B19 /* GLMine_CV_ExpectedJobCell.xib */,
 				4AF9C57F1FC2A88C00FD8B19 /* GLMine_CV_Header.h */,
 				4AF9C5801FC2A88C00FD8B19 /* GLMine_CV_Header.m */,
 				4AF9C5811FC2A88C00FD8B19 /* GLMine_CV_PlaceHolderCell.h */,
 				4AF9C5821FC2A88C00FD8B19 /* GLMine_CV_PlaceHolderCell.m */,
 				4AF9C5831FC2A88C00FD8B19 /* GLMine_CV_PlaceHolderCell.xib */,
+				4AF9C5731FC2A88C00FD8B19 /* GLMine_CV_BaseCell.h */,
+				4AF9C5741FC2A88C00FD8B19 /* GLMine_CV_BaseCell.m */,
+				4AF9C5751FC2A88C00FD8B19 /* GLMine_CV_BaseCell.xib */,
+				4AF9C58D1FC2A88C00FD8B19 /* GLMine_CV_WorkCell.h */,
+				4AF9C58E1FC2A88C00FD8B19 /* GLMine_CV_WorkCell.m */,
+				4AF9C58F1FC2A88C00FD8B19 /* GLMine_CV_WorkCell.xib */,
+				4AF9C5791FC2A88C00FD8B19 /* GLMine_CV_EducationCell.h */,
+				4AF9C57A1FC2A88C00FD8B19 /* GLMine_CV_EducationCell.m */,
+				4AF9C57B1FC2A88C00FD8B19 /* GLMine_CV_EducationCell.xib */,
 				4AF9C5841FC2A88C00FD8B19 /* GLMine_CV_SkillCell.h */,
 				4AF9C5851FC2A88C00FD8B19 /* GLMine_CV_SkillCell.m */,
 				4AF9C5861FC2A88C00FD8B19 /* GLMine_CV_SkillCell.xib */,
@@ -3825,9 +4043,12 @@
 				4AF9C58A1FC2A88C00FD8B19 /* GLMine_CV_StyleCollectionCell.h */,
 				4AF9C58B1FC2A88C00FD8B19 /* GLMine_CV_StyleCollectionCell.m */,
 				4AF9C58C1FC2A88C00FD8B19 /* GLMine_CV_StyleCollectionCell.xib */,
-				4AF9C58D1FC2A88C00FD8B19 /* GLMine_CV_WorkCell.h */,
-				4AF9C58E1FC2A88C00FD8B19 /* GLMine_CV_WorkCell.m */,
-				4AF9C58F1FC2A88C00FD8B19 /* GLMine_CV_WorkCell.xib */,
+				4AF9C57C1FC2A88C00FD8B19 /* GLMine_CV_ExpectedJobCell.h */,
+				4AF9C57D1FC2A88C00FD8B19 /* GLMine_CV_ExpectedJobCell.m */,
+				4AF9C57E1FC2A88C00FD8B19 /* GLMine_CV_ExpectedJobCell.xib */,
+				4AF9C5761FC2A88C00FD8B19 /* GLMine_CV_DescriptionCell.h */,
+				4AF9C5771FC2A88C00FD8B19 /* GLMine_CV_DescriptionCell.m */,
+				4AF9C5781FC2A88C00FD8B19 /* GLMine_CV_DescriptionCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4041,6 +4262,7 @@
 				4A16FF451F8F891A00064CE5 /* GLPublish_FundraisingCell.xib in Resources */,
 				4A18B9081F94A33400E9B387 /* GLSimpleSelectionPickerController.xib in Resources */,
 				4A6AD1E61F7F86D300E6084E /* GLBusiness_FundTrendCell.xib in Resources */,
+				4AF481F31FC4412D000E1925 /* GLMine_CV_ExpectedWorkController.xib in Resources */,
 				4A18B9031F94A31B00E9B387 /* NodataView.xib in Resources */,
 				4A6B9F531F7CF902009386C8 /* GLBusiness_LoveListController.xib in Resources */,
 				4AF9C59E1FC2A88C00FD8B19 /* GLMine_CV_SkillCell.xib in Resources */,
@@ -4056,6 +4278,7 @@
 				4AC41E001FA7158300221603 /* GLMall_MoreCommentController.xib in Resources */,
 				4A0B751F1F90F0840007788B /* GLConfirmOrderController.xib in Resources */,
 				4A6AD2381F7F953600E6084E /* GLPublish_ProjectCompletedController.xib in Resources */,
+				4AF481DD1FC41E44000E1925 /* GLMine_CV_AddSkillController.xib in Resources */,
 				4A53E84B1F7A4B5C0021D9E0 /* GLMall_DetailSelecteCell.xib in Resources */,
 				4A18B9131F94D81700E9B387 /* GLMine_Wallet_Exchange_SuccessController.xib in Resources */,
 				4A29054E1F97581D006903F1 /* GLMine_ShareRecordCell.xib in Resources */,
@@ -4064,6 +4287,7 @@
 				4A509BC01F8787ED00D794FB /* GLMine_Set_modifyPwdController.xib in Resources */,
 				4AF10A051F78E27C00CB51FA /* tabbar.xcassets in Resources */,
 				4A16FF231F8F696100064CE5 /* GLPublish_FundStopController.xib in Resources */,
+				4AF481E61FC43CEF000E1925 /* GLMine_CV_ElegantShowController.xib in Resources */,
 				4A18B8EC1F9441B800E9B387 /* LBMineCenterPayPagesTableViewCell.xib in Resources */,
 				4A18B9181F94D83200E9B387 /* GLMine_Wallet_Exchange_FailedController.xib in Resources */,
 				4A165C2A1F8620BB00D0C34B /* GLMine_WalletDetailHeaderView.xib in Resources */,
@@ -4113,6 +4337,7 @@
 				4A6B9F371F7CF100009386C8 /* GLBusiness_ProjectCollectionCell.xib in Resources */,
 				4AF5B0561F96142D000407A7 /* GLMine_AddFundTrendController.xib in Resources */,
 				4A16FF251F8F6BFC00064CE5 /* 我的.xcassets in Resources */,
+				4AF481FB1FC45638000E1925 /* GLMine_CV_SelfDescriptionController.xib in Resources */,
 				4A0511681FBAF5FA00E272D1 /* https.cer in Resources */,
 				4A509B6E1F8729DA00D794FB /* GLMine_MyMessageController.xib in Resources */,
 				4A6AD22E1F7F953600E6084E /* GLPublish_AuditFailureController.xib in Resources */,
@@ -4120,11 +4345,13 @@
 				4A2905441F97579E006903F1 /* GLMine_ShareController.xib in Resources */,
 				4A6AD22A1F7F953600E6084E /* GLPublish_InReviewController.xib in Resources */,
 				4A6FE1881F8E09D300860503 /* GLMall_DetailWebCell.xib in Resources */,
+				4AF481D81FC41490000E1925 /* GLMine_CV_SkillDetailCell.xib in Resources */,
 				4ADDD1921F88818D00C95F9C /* LBMineCenterChooseAreaViewController.xib in Resources */,
 				4A6AD1AA1F7F2E8800E6084E /* GLPay_CompletedController.xib in Resources */,
 				4A5A78601F7B9B0E004FB15A /* GLBusiniessCell.xib in Resources */,
 				F9BB80381F7A585000867514 /* GLShoppingCell.xib in Resources */,
 				4A94D8C31FA6F9570071B732 /* AlipaySDK.bundle in Resources */,
+				4AF481D31FC4118F000E1925 /* GLMine_CV_SkillController.xib in Resources */,
 				4A165C331F86241800D0C34B /* GLMine_AddCardController.xib in Resources */,
 				4A509BAF1F877C2B00D794FB /* GLForgetPasswordController.xib in Resources */,
 				4A6B9EFB1F7CC92E009386C8 /* GLMineController.xib in Resources */,
@@ -4140,6 +4367,7 @@
 				4A0EA9E41F86325D006A1CF5 /* GLMine_WalletCardChooseCell.xib in Resources */,
 				4AF9C5A41FC2A88C00FD8B19 /* GLMine_CV_WorkCell.xib in Resources */,
 				F9BB80271F7A447E00867514 /* 商城.xcassets in Resources */,
+				4AF481CA1FC40185000E1925 /* GLMine_CV_EducationController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4274,6 +4502,7 @@
 				4A18B9001F94A31B00E9B387 /* LoadWaitView.m in Sources */,
 				4A509B861F872BC200D794FB /* GLMine_MyMessage_SupportController.m in Sources */,
 				4AF1092B1F78DBB500CB51FA /* UINavigationController+WXSTransition.m in Sources */,
+				4AF481D21FC4118F000E1925 /* GLMine_CV_SkillController.m in Sources */,
 				4ADDD1A11F88A8C900C95F9C /* GLMall_LogisticsCell.m in Sources */,
 				4AA395E91F9A516000FAFA4F /* GLMine_RicePayModel.m in Sources */,
 				4A05EEA01F8C97380095DBCF /* HXPhotoViewCell.m in Sources */,
@@ -4327,6 +4556,7 @@
 				4A6AD2291F7F953600E6084E /* GLPublish_InReviewController.m in Sources */,
 				4AF5B0491F960078000407A7 /* MinePhoneAlertView.m in Sources */,
 				4AF109401F78DBB500CB51FA /* XBTagTitleCell.m in Sources */,
+				4AF481F61FC4452F000E1925 /* GLMine_CV_CareerModel.m in Sources */,
 				F9BB802F1F7A57C400867514 /* GLShoppingCartController.m in Sources */,
 				4A9F56EE1F91E60F00341A31 /* GLMine_CompletedOrderController.m in Sources */,
 				4AF9C5961FC2A88C00FD8B19 /* GLMine_CV_EducationCell.m in Sources */,
@@ -4335,6 +4565,7 @@
 				4A5C2B8F1FC2C90200665031 /* GLDatePickerController.m in Sources */,
 				4ADDD1B61F88D05600C95F9C /* GLMallModel.m in Sources */,
 				4A05EEA71F8C97380095DBCF /* NSBundle+HXWeiboPhotoPicker.m in Sources */,
+				4AF481FA1FC45638000E1925 /* GLMine_CV_SelfDescriptionController.m in Sources */,
 				4A53E83E1F7A3AEA0021D9E0 /* GLMall_DetailAddressCell.m in Sources */,
 				4AF109281F78DBB500CB51FA /* PopMenuTableViewCell.m in Sources */,
 				4AF9C5901FC2A88C00FD8B19 /* GLMine_CurriculumVitaeController.m in Sources */,
@@ -4347,6 +4578,7 @@
 				4AF5B02B1F95A353000407A7 /* GLMine_Wallet_RechargeController.m in Sources */,
 				4A18B8F01F9441F400E9B387 /* GLOrderPayView.m in Sources */,
 				4AF109BC1F78DBB500CB51FA /* DWTabBarController.m in Sources */,
+				4AF481E51FC43CEF000E1925 /* GLMine_CV_ElegantShowController.m in Sources */,
 				4A6B9F571F7D00CA009386C8 /* GLBusiness_LoveListCell.m in Sources */,
 				4A0E70291FA3725D00435871 /* JZAlbumViewController.m in Sources */,
 				4A05EEA41F8C97380095DBCF /* HXVideoPresentTransition.m in Sources */,
@@ -4355,6 +4587,7 @@
 				4A2905511F976BCC006903F1 /* GLMine_MyMessageModel.m in Sources */,
 				4A05EE8D1F8C97380095DBCF /* HXCameraPreviewViewController.m in Sources */,
 				4A72032E1FC01077004C4F3D /* GLMutipleChooseController.m in Sources */,
+				4AF481D71FC41490000E1925 /* GLMine_CV_SkillDetailCell.m in Sources */,
 				4A6AD22B1F7F953600E6084E /* GLPublish_ReviewCell.m in Sources */,
 				4A2905221F9726B9006903F1 /* GLMine_EvaluateController.m in Sources */,
 				4A5A785D1F7B9B0E004FB15A /* GLBusinessCircleController.m in Sources */,
@@ -4362,6 +4595,7 @@
 				4A16FF101F8F484600064CE5 /* GLBusiness_Detail_heartCommentController.m in Sources */,
 				4A05EE9D1F8C97380095DBCF /* HXPhotoTools.m in Sources */,
 				4AF107051F78D5AC00CB51FA /* main.m in Sources */,
+				4AF481DC1FC41E44000E1925 /* GLMine_CV_AddSkillController.m in Sources */,
 				4A6AD2391F7F953600E6084E /* GLPublish_ProjectPauseController.m in Sources */,
 				4A53E8531F7A59710021D9E0 /* GLMall_DetailFooterView.m in Sources */,
 				4A509BAE1F877C2B00D794FB /* GLForgetPasswordController.m in Sources */,
@@ -4415,9 +4649,11 @@
 				4AF9C59A1FC2A88C00FD8B19 /* GLMine_CV_Header.m in Sources */,
 				4A0B75211F90F0840007788B /* GLOrderGoodsCell.m in Sources */,
 				4A6B9F2E1F7CF100009386C8 /* GLBusiness_DetailController.m in Sources */,
+				4AF481F21FC4412D000E1925 /* GLMine_CV_ExpectedWorkController.m in Sources */,
 				4A0B74F81F90A8810007788B /* MHSheetFoot.m in Sources */,
 				4A6AD1E51F7F86D300E6084E /* GLBusiness_FundTrendCell.m in Sources */,
 				4A05EE931F8C97380095DBCF /* HXPhoto3DTouchViewController.m in Sources */,
+				4AF481C91FC40185000E1925 /* GLMine_CV_EducationController.m in Sources */,
 				4AF1093A1F78DBB500CB51FA /* WXSTransitionManager.m in Sources */,
 				4A05EE9E1F8C97380095DBCF /* HXPhotoUIManager.m in Sources */,
 				4A18B91C1F94D86300E9B387 /* GLMine_Wallet_Exchange_InReviewController.m in Sources */,

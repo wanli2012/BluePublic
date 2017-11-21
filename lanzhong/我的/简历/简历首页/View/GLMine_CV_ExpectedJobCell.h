@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GLMine_CV_DetailModel.h"
 
 @interface GLMine_CV_ExpectedJobCell : UITableViewCell
+
+@property (nonatomic, strong)GLMine_CV_want *model;
 
 @end

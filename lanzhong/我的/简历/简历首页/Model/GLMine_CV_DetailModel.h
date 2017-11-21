@@ -31,16 +31,13 @@
 @end
 
 @interface GLMine_CV_teach : NSObject
-
 @property (nonatomic, copy)NSString *education_leave;//毕业学历
 @property (nonatomic, copy)NSString *leave_time;//离校时间
 @property (nonatomic, copy)NSString *major;//教育经历 专业
 @property (nonatomic, copy)NSString *school;//教育经历 学校
-
-
 @end
-@interface GLMine_CV_want : NSObject
 
+@interface GLMine_CV_want : NSObject
 @property (nonatomic, copy)NSString *want_city_id;//期望工作城市id
 @property (nonatomic, copy)NSString *want_city_name;//期望工作城市
 @property (nonatomic, copy)NSString *want_duty;//期望 职业
@@ -48,6 +45,7 @@
 @property (nonatomic, copy)NSString *want_province_name;//期望工作省份
 @property (nonatomic, copy)NSString *want_wages;//期望薪资
 @end
+
 @interface GLMine_CV_skill : NSObject
 
 @property (nonatomic, copy)NSString *skill_id;//评价id
@@ -55,6 +53,7 @@
 @property (nonatomic, copy)NSString *mastery;//熟练度1了解 2掌握 3熟练 4精通 5专家
 
 @end
+
 @interface GLMine_CV_live : NSObject
 
 @property (nonatomic, copy)NSString *live_id;//工作经历id

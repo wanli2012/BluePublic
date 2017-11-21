@@ -15,18 +15,18 @@
             <rect key="frame" x="0.0" y="0.0" width="325" height="97"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="325" height="97"/>
+                <rect key="frame" x="0.0" y="0.0" width="325" height="96"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="va4-Oz-gVX">
                         <rect key="frame" x="15" y="10" width="300" height="77"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WeQ-v2-5na">
-                                <rect key="frame" x="77.5" y="28" width="20" height="20"/>
-                                <color key="backgroundColor" red="0.052515827119999997" green="0.36203587059999998" blue="0.90829825399999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add" translatesAutoresizingMaskIntoConstraints="NO" id="WeQ-v2-5na">
+                                <rect key="frame" x="82.5" y="30.5" width="15" height="15"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="gng-Wb-DTO"/>
-                                    <constraint firstAttribute="height" constant="20" id="qbS-DB-WgK"/>
+                                    <constraint firstAttribute="width" constant="15" id="gng-Wb-DTO"/>
+                                    <constraint firstAttribute="height" constant="15" id="qbS-DB-WgK"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="添加教育经历" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tF9-UJ-rHo">
@@ -52,7 +52,13 @@
                     <constraint firstAttribute="trailing" secondItem="va4-Oz-gVX" secondAttribute="trailing" constant="10" id="kWX-Ra-XeS"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="titleLabel" destination="tF9-UJ-rHo" id="L3o-J6-Ssa"/>
+            </connections>
             <point key="canvasLocation" x="27.5" y="78.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="add" width="15" height="15"/>
+    </resources>
 </document>

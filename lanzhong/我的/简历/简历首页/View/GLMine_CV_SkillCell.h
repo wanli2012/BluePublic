@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GLMine_CV_DetailModel.h"
 
 @interface GLMine_CV_SkillCell : UITableViewCell
+
+@property (nonatomic, strong) GLMine_CV_skill *model;
 
 @end

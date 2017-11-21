@@ -19,5 +19,6 @@
 @property (nonatomic, assign)NSInteger index;
 
 @property (nonatomic, weak)id <GLMine_CV_PlaceHolderCellDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 @end

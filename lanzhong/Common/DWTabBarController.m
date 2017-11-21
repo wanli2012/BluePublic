@@ -78,8 +78,8 @@
 }
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
-    
-    if (viewController == [tabBarController.viewControllers objectAtIndex:3] ) {
+    //[tabBarController.viewControllers objectAtIndex:4]
+    if (viewController == tabBarController.viewControllers.lastObject ) {
     
         if ([UserModel defaultUser].loginstatus == YES) {
             

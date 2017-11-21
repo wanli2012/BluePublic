@@ -21,8 +21,13 @@
 #import "GLMine_CV_PlaceHolderCell.h"//占位cell
 //#import "GLMine_CV_DetailModel.h"
 #import "GLMine_CV_LiveListController.h"//工作经历列表
+#import "GLMine_CV_EducationController.h"//教育经历
+#import "GLMine_CV_SkillController.h"//技能评价
+#import "GLMine_CV_ExpectedWorkController.h"//期望工作
+#import "GLMine_CV_ElegantShowController.h"//风采展示
+#import "GLMine_CV_SelfDescriptionController.h"//自我描述
 
-@interface GLMine_CurriculumVitaeController ()<UITableViewDelegate,UITableViewDataSource>
+@interface GLMine_CurriculumVitaeController ()<UITableViewDelegate,UITableViewDataSource,GLMine_CV_PlaceHolderCellDelegate>
 
 @property (nonatomic, strong)NSArray *titleArr;
 @property (nonatomic, assign)NSInteger seletecSection;//点中编辑是哪个组
@@ -32,6 +37,8 @@
 @property (weak, nonatomic) IBOutlet UIView *headerView;//头视图
 @property (weak, nonatomic) IBOutlet UIImageView *picImageV;//头像
 @property (weak, nonatomic) IBOutlet UIImageView *bgImageV;//背景图片
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *editImageV;
 
 @property (nonatomic, strong)LoadWaitView *loadV;
 @property (nonatomic, strong)GLMine_CV_DetailModel *model;
@@ -78,7 +85,7 @@
 }
 
 - (void)refresh{
-    
+    self.tableView.contentOffset = CGPointMake(0, 0);
     [self postRequest];
 }
 
@@ -99,6 +106,11 @@
             if([responseObject[@"data"] count] != 0){
                 
                 self.model = [GLMine_CV_DetailModel mj_objectWithKeyValues:responseObject[@"data"]];
+                
+                if (self.model.basic.name.length != 0) {
+                    self.titleLabel.text = self.model.basic.name;
+                    self.editImageV.hidden = YES;
+                }
             }
             
         }else{
@@ -117,10 +129,70 @@
 - (void)endRefresh {
     [self.tableView.mj_header endRefreshing];
 }
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBar.hidden = NO;
+}
+
+#pragma mark - GLMine_CV_PlaceHolderDelegate
+//从添加模块进入编辑界面
+- (void)edit:(NSInteger)index{
+    
+    self.hidesBottomBarWhenPushed = YES;
+    switch (index) {
+        case 0:
+        {
+            GLMine_CV_BaseInfoController *baseVC = [[GLMine_CV_BaseInfoController alloc] init];
+            baseVC.basicModel = self.model.basic;
+            [self.navigationController pushViewController:baseVC animated:YES];
+        }
+            break;
+        case 1://工作经历
+        {
+            GLMine_CV_LiveListController *liveListVC = [[GLMine_CV_LiveListController alloc] init];
+            [self.navigationController pushViewController:liveListVC animated:YES];
+        }
+            break;
+        case 2://教育经历
+        {
+            GLMine_CV_EducationController *educationVC = [[GLMine_CV_EducationController alloc] init];
+            educationVC.model = self.model.teach;
+            [self.navigationController pushViewController:educationVC animated:YES];
+            
+        }
+            break;
+        case 3://技能评价
+        {
+            GLMine_CV_SkillController *skillVC = [[GLMine_CV_SkillController alloc] init];
+            [self.navigationController pushViewController:skillVC animated:YES];
+        }
+            break;
+        case 4://期望工作
+        {
+            GLMine_CV_ExpectedWorkController *workVC = [[GLMine_CV_ExpectedWorkController alloc] init];
+            workVC.model = self.model.want;
+            [self.navigationController pushViewController:workVC animated:YES];
+        }
+            break;
+        case 5://自我风采
+        {
+            GLMine_CV_ElegantShowController *showVC = [[GLMine_CV_ElegantShowController alloc] init];
+            [self.navigationController pushViewController:showVC animated:YES];
+        }
+            break;
+        case 6://自我描述
+        {
+            GLMine_CV_SelfDescriptionController *desVC = [[GLMine_CV_SelfDescriptionController alloc] init];
+            desVC.i_info = self.model.basic.i_info;
+            [self.navigationController pushViewController:desVC animated:YES];
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 #pragma mark - 取消header的跟随效果
@@ -144,8 +216,10 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    if (section == 1) {
+    if (section == 1 && self.model.live.count > 0) {
         return self.model.live.count;
+    }else if(section == 3 && self.model.skill.count > 0){
+        return self.model.skill.count;
     }
     
     return 1;
@@ -155,17 +229,21 @@
 
     UITableViewCell *cell;
     switch (indexPath.section) {
-        case 0:
+        case 0://基本信息
         {
             GLMine_CV_BaseCell *baseCell = [tableView dequeueReusableCellWithIdentifier:@"GLMine_CV_BaseCell"];
             baseCell.model = self.model.basic;
             cell = baseCell;
         }
             break;
-        case 1:
+        case 1://工作经历
         {
             if (self.model.live.count == 0) {
                 GLMine_CV_PlaceHolderCell *placeHolderCell = [tableView dequeueReusableCellWithIdentifier:@"GLMine_CV_PlaceHolderCell"];
+                placeHolderCell.delegate = self;
+                placeHolderCell.index = indexPath.section;
+                placeHolderCell.titleLabel.text = @"添加工作经历";
+                placeHolderCell.selectionStyle = 0;
                 return placeHolderCell;
             }
             
@@ -174,59 +252,80 @@
             cell = c;
         }
             break;
-        case 2:
+        case 2://教育经历
         {
             if(self.model.teach.education_leave.length == 0 && self.model.teach.leave_time.length == 0 && self.model.teach.major.length == 0 && self.model.teach.school.length == 0){
                 GLMine_CV_PlaceHolderCell *placeHolderCell = [tableView dequeueReusableCellWithIdentifier:@"GLMine_CV_PlaceHolderCell"];
+                placeHolderCell.delegate = self;
+                placeHolderCell.index = indexPath.section;
+                placeHolderCell.titleLabel.text = @"添加教育经历";
+                placeHolderCell.selectionStyle = 0;
                 return placeHolderCell;
-
             }
             GLMine_CV_EducationCell *c = [tableView dequeueReusableCellWithIdentifier:@"GLMine_CV_EducationCell"];
+            c.model = self.model.teach;
            cell = c;
         }
             break;
-        case 3:
+        case 3://技能评价
         {
             if(self.model.skill.count == 0){
                 GLMine_CV_PlaceHolderCell *placeHolderCell = [tableView dequeueReusableCellWithIdentifier:@"GLMine_CV_PlaceHolderCell"];
+                placeHolderCell.delegate = self;
+                placeHolderCell.index = indexPath.section;
+                placeHolderCell.titleLabel.text = @"添加技能评价";
+                placeHolderCell.selectionStyle = 0;
                 return placeHolderCell;
-
             }
             GLMine_CV_SkillCell *c = [tableView dequeueReusableCellWithIdentifier:@"GLMine_CV_SkillCell"];
+            c.model = self.model.skill[indexPath.row];
             cell = c;
         }
             break;
-        case 4:
+        case 4://期望工作
         {
-            if (self.model.basic.show_photo.count) {
+            if (self.model.want.want_city_name.length == 0 && self.model.want.want_duty.length == 0) {
                 GLMine_CV_PlaceHolderCell *placeHolderCell = [tableView dequeueReusableCellWithIdentifier:@"GLMine_CV_PlaceHolderCell"];
+                placeHolderCell.delegate = self;
+                placeHolderCell.index = indexPath.section;
+                placeHolderCell.titleLabel.text = @"添加期望工作";
+                placeHolderCell.selectionStyle = 0;
+                return placeHolderCell;
+            }
+            GLMine_CV_ExpectedJobCell *c = [tableView dequeueReusableCellWithIdentifier:@"GLMine_CV_ExpectedJobCell"];
+            c.model = self.model.want;
+            cell = c;
+        }
+            break;
+        case 5://自我风采
+        {
+            if (self.model.basic.show_photo.count == 0) {
+                GLMine_CV_PlaceHolderCell *placeHolderCell = [tableView dequeueReusableCellWithIdentifier:@"GLMine_CV_PlaceHolderCell"];
+                placeHolderCell.delegate = self;
+                placeHolderCell.index = indexPath.section;
+                placeHolderCell.titleLabel.text = @"添加自我风采";
+                placeHolderCell.selectionStyle = 0;
                 return placeHolderCell;
             }
             GLMine_CV_StyleCell *c = [tableView dequeueReusableCellWithIdentifier:@"GLMine_CV_StyleCell"];
             cell = c;
         }
             break;
-        case 5:
-        {
-            if (self.model.want.want_city_name.length == 0 && self.model.want.want_duty.length == 0) {
-                GLMine_CV_PlaceHolderCell *placeHolderCell = [tableView dequeueReusableCellWithIdentifier:@"GLMine_CV_PlaceHolderCell"];
-                return placeHolderCell;
-            }
-            GLMine_CV_ExpectedJobCell *c = [tableView dequeueReusableCellWithIdentifier:@"GLMine_CV_ExpectedJobCell"];
-            cell = c;
-        }
-            break;
-        case 6:
+        case 6://自我描述
         {
             if (self.model.basic.i_info.length == 0) {
                 GLMine_CV_PlaceHolderCell *placeHolderCell = [tableView dequeueReusableCellWithIdentifier:@"GLMine_CV_PlaceHolderCell"];
+                placeHolderCell.delegate = self;
+                placeHolderCell.index = indexPath.section;
+                placeHolderCell.titleLabel.text = @"添加自我描述";
+                placeHolderCell.selectionStyle = 0;
                 return placeHolderCell;
             }
             GLMine_CV_DescriptionCell *c = [tableView dequeueReusableCellWithIdentifier:@"GLMine_CV_DescriptionCell"];
+            c.i_info = self.model.basic.i_info;
             cell = c;
         }
             break;
-            
         default:
         {
             GLMine_CV_DescriptionCell *c = [tableView dequeueReusableCellWithIdentifier:@"GLMine_CV_DescriptionCell"];
@@ -269,7 +368,6 @@
         {
             if(self.model.skill.count == 0){
                 return 100;
-                
             }
 
             return 40;
@@ -277,18 +375,18 @@
             break;
         case 4:
         {
-            if (self.model.basic.show_photo.count) {
-                return 100;
-            }
-            return 95;
-        }
-            break;
-        case 5:
-        {
             if (self.model.want.want_city_name.length == 0 && self.model.want.want_duty.length == 0) {
                 return 100;
             }
             return 62;
+        }
+            break;
+        case 5:
+        {
+            if (self.model.basic.show_photo.count == 0) {
+                return 100;
+            }
+            return 95;
         }
             break;
         case 6:
@@ -302,7 +400,6 @@
             return self.tableView.rowHeight;
         }
             break;
-            
         default:
             break;
     }
@@ -324,30 +421,19 @@
     headerView.index = section;
     [headerView.editBtn setTitle:@"编辑" forState:UIControlStateNormal];
     
+    if ((self.model.live.count == 0 && section == 1) ||
+        (self.model.teach.major.length == 0 && section == 2) ||
+        (self.model.skill.count == 0 && section == 3) ||
+        (self.model.want.want_duty.length == 0 && section == 4)||
+        (self.model.basic.show_photo.count == 0 && section == 5)||
+        (self.model.basic.i_info.length == 0 && section == 6)) {
+        headerView.editBtn.hidden = YES;
+    }else{
+        headerView.editBtn.hidden = NO;
+    }
     __weak typeof(self)weakSelf = self;
     headerView.block = ^(NSInteger index){
-        weakSelf.hidesBottomBarWhenPushed = YES;
-        switch (index) {
-            case 0:
-            {
-                
-                GLMine_CV_BaseInfoController *baseVC = [[GLMine_CV_BaseInfoController alloc] init];
-                baseVC.basicModel = weakSelf.model.basic;
-                [weakSelf.navigationController pushViewController:baseVC animated:YES];
-            }
-                break;
-            case 1:
-            {
-                
-                GLMine_CV_LiveListController *liveListVC = [[GLMine_CV_LiveListController alloc] init];
-                liveListVC.models = weakSelf.model.live;
-                [weakSelf.navigationController pushViewController:liveListVC animated:YES];
-            }
-                break;
-                
-            default:
-                break;
-        }
+        [weakSelf edit:index];
         
     };
     
@@ -361,7 +447,7 @@
 #pragma mark - 懒加载
 - (NSArray *)titleArr{
     if (!_titleArr) {
-        _titleArr = @[@"基本信息", @"工作经历",@"教育经历",@"技能评价",@"自我风采",@"期望工作",@"自我描述"];
+        _titleArr = @[@"基本信息", @"工作经历",@"教育经历",@"技能评价",@"期望工作",@"风采展示",@"自我描述"];
     }
     return _titleArr;
 }

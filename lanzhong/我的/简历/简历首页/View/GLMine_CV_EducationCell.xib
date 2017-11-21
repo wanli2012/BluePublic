@@ -56,6 +56,11 @@
                     <constraint firstItem="PlP-lC-POQ" firstAttribute="centerY" secondItem="OpX-0H-EXl" secondAttribute="centerY" id="n6a-Xv-X1Y"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="contentLabel" destination="PlP-lC-POQ" id="VRo-cJ-7uU"/>
+                <outlet property="schoolLabel" destination="OpX-0H-EXl" id="RgM-Vi-fAM"/>
+                <outlet property="timeLabel" destination="MCv-Qz-Wzy" id="iv1-wz-rdt"/>
+            </connections>
             <point key="canvasLocation" x="23" y="44"/>
         </tableViewCell>
     </objects>

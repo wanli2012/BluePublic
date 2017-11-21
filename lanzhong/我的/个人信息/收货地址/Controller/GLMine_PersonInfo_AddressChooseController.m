@@ -248,9 +248,9 @@
         }]];
 
         [self presentViewController:alertController animated:YES completion:nil];
-        
     }
 }
+
 //修改编辑按钮文字
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {

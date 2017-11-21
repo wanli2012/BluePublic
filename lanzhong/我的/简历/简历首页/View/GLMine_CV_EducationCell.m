@@ -8,17 +8,25 @@
 
 #import "GLMine_CV_EducationCell.h"
 
+@interface GLMine_CV_EducationCell ()
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *schoolLabel;
+@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+
+@end
+
 @implementation GLMine_CV_EducationCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
 }
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (void)setModel:(GLMine_CV_teach *)model{
+    _model = model;
+    self.timeLabel.text = model.leave_time;
+    self.schoolLabel.text = model.school;
+    self.contentLabel.text = [NSString stringWithFormat:@"%@/%@",model.education_leave,model.major];
 }
+
 
 @end
