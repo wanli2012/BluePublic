@@ -34,9 +34,29 @@
 }
 
 #pragma mark - UIWebViewDelegate
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+    NSString *requestString = [[[request URL] absoluteString]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSLog(@"requestString : %@",requestString);
+    
+    NSArray *components = [requestString componentsSeparatedByString:@"|"];
+    NSLog(@"=components=====%@",components);
+    
+    NSString *str1 = [components objectAtIndex:0];
+    NSLog(@"str1:::%@",str1);
+    
+    NSArray *array2 = [str1 componentsSeparatedByString:@"/"];
+    NSLog(@"array2:====%@",array2);
+    
+    NSInteger coun = array2.count;
+    NSString *method = array2[coun-1];
+    NSLog(@"method:===%@",method);
+    
+    return YES;
+}
 
 - (void)webViewDidStartLoad:(UIWebView *)webView{
 //    NSLog(@"kaishi jiazai le  ");
+    
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{

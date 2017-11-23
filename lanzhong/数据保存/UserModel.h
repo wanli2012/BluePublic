@@ -41,6 +41,7 @@
 @property (nonatomic, copy)NSString  *invest_count;//我参与项目数量统计
 @property (nonatomic, copy)NSString  *item_count;//我的项目数量统计
 @property (nonatomic, copy)NSString  *user_server;//客服电话
+@property (nonatomic, copy)NSString  *item_money;//我的筹款
 
 +(UserModel*)defaultUser;
 

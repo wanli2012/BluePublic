@@ -8,6 +8,10 @@
 
 #import "GLHomeModel.h"
 
+@implementation GLHome_adModel
+
+@end
+
 @implementation GLHome_groom_itemModel
 
 @end

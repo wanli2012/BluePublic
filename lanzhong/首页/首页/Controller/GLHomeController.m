@@ -8,17 +8,21 @@
 
 #import "GLHomeController.h"
 #import "GLHomeCell.h"
+#import <SDCycleScrollView/SDCycleScrollView.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #import "GLPay_ChooseController.h"//支付选择
 #import "GLHome_CasesController.h"//经典案例
 #import "GLHomeModel.h"//首页模型
 #import "GLMine_MyMessage_NoticeController.h"//公告列表
 #import "GLBusiness_DetailController.h"//项目详情
+#import "GLBusiness_CertificationController.h"//web广告页
 
-@interface GLHomeController ()<UITableViewDataSource,UITableViewDelegate>
+@interface GLHomeController ()<UITableViewDataSource,UITableViewDelegate,SDCycleScrollViewDelegate>
 {
     NSInteger _selectedSegmentIndex;//显示 0:创客 1:爱心
 }
+@property (weak, nonatomic) IBOutlet UIImageView *adImageV;
 
 @property (weak, nonatomic) IBOutlet UILabel *noticeLabel;
 
@@ -30,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
 @property (weak, nonatomic) IBOutlet UIView *middleView;
 @property (weak, nonatomic) IBOutlet UIView *middleViewLayerView;
+@property (nonatomic, strong)SDCycleScrollView *cycleScrollView;
 
 //切换要用到的控件
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -41,6 +46,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *label6;
 
 @property (nonatomic, strong)GLHomeModel *model;
+@property (nonatomic, strong)GLHome_adModel *adModel;//广告模型
 @property (nonatomic, strong)LoadWaitView *loadV;
 @property (nonatomic, strong)NodataView *nodataV;
 
@@ -57,13 +63,14 @@
     
     [self.tableView registerNib:[UINib nibWithNibName:@"GLHomeCell" bundle:nil] forCellReuseIdentifier:@"GLHomeCell"];
     
-    [self.tableView addSubview:self.nodataV];
-    self.nodataV.hidden = YES;
+//    [self.tableView addSubview:self.nodataV];
+//    self.nodataV.hidden = YES;
     
     __weak __typeof(self) weakSelf = self;
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         [weakSelf postRequest];
+        [weakSelf postAD];
         
     }];
     // 设置文字
@@ -76,6 +83,7 @@
     self.tableView.mj_header = header;
     
     [self postRequest];//请求数据
+    [self postAD];
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
     CFShow((__bridge CFTypeRef)(infoDictionary));
     // app版本
@@ -92,7 +100,7 @@
     self.navigationController.navigationBar.barTintColor = [UIColor clearColor];
     
     _selectedSegmentIndex = 0;
-    self.headerView.height = 280;
+    self.headerView.height = 390;
     self.segment.selectedSegmentIndex = 0;
     
     self.noticeView.layer.cornerRadius = 5.f;
@@ -137,7 +145,23 @@
         [SVProgressHUD showErrorWithStatus:error.localizedDescription];
         
     }];
+}
 
+#pragma mark - 请求广告数据
+- (void)postAD{
+    [NetworkManager requestPOSTWithURLStr:kHOME_BANNER_LIST_URL paramDic:@{} finish:^(id responseObject) {
+
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+            self.adModel = nil;
+            
+            self.adModel = [GLHome_adModel mj_objectWithKeyValues:responseObject[@"data"]];
+            [self.adImageV sd_setImageWithURL:[NSURL URLWithString:self.adModel.must_banner] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+        }
+
+    } enError:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+        
+    }];
 }
 
 - (void)endRefresh {
@@ -158,6 +182,18 @@
     [self.navigationController pushViewController:caseVC animated:YES];
     self.hidesBottomBarWhenPushed = NO;
     
+}
+
+#pragma mark - 广告
+- (IBAction)ad:(id)sender {
+    
+    self.hidesBottomBarWhenPushed = YES;
+    GLBusiness_CertificationController *cerVC = [[GLBusiness_CertificationController alloc] init];
+    cerVC.navTitle = @"详情";
+    cerVC.url = [NSString stringWithFormat:@"%@",Home_Banner_URL];
+    [self.navigationController pushViewController:cerVC animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
+
 }
 
 #pragma mark - 公告
@@ -279,11 +315,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    if (self.model.groom_item.count == 0) {
-        self.nodataV.hidden = NO;
-    }else{
-        self.nodataV.hidden = YES;
-    }
+//    if (self.model.groom_item.count == 0) {
+//        self.nodataV.hidden = NO;
+//    }else{
+//        self.nodataV.hidden = YES;
+//    }
     return self.model.groom_item.count;
 }
 
@@ -311,10 +347,34 @@
     self.hidesBottomBarWhenPushed = NO;
 }
 
-- (NodataView *)nodataV{
-    if (!_nodataV) {
-        _nodataV = [[NodataView alloc] initWithFrame:CGRectMake(0, 270, kSCREEN_WIDTH, kSCREEN_HEIGHT - 49 - 64)];
+- (SDCycleScrollView *)cycleScrollView{
+    
+    if (!_cycleScrollView) {
+        
+        _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 150)
+                                                              delegate:self
+                                                      placeholderImage:[UIImage imageNamed:LUNBO_PlaceHolder]];
+        
+        _cycleScrollView.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
+        _cycleScrollView.clipsToBounds = YES;
+        _cycleScrollView.autoScrollTimeInterval = 2;// 自动滚动时间间隔
+        _cycleScrollView.placeholderImageContentMode = UIViewContentModeScaleAspectFill;
+        _cycleScrollView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;// 翻页 右下角
+        _cycleScrollView.titleLabelBackgroundColor = [UIColor redColor];// 图片对应的标题的 背景色。（因为没有设标题）
+        _cycleScrollView.placeholderImage = [UIImage imageNamed:LUNBO_PlaceHolder];
+        _cycleScrollView.pageControlDotSize = CGSizeMake(10, 10);
+        
+        _cycleScrollView.localizationImageNamesGroup = @[LUNBO_PlaceHolder,LUNBO_PlaceHolder,LUNBO_PlaceHolder,LUNBO_PlaceHolder];
     }
-    return _nodataV;
+    
+    return _cycleScrollView;
 }
+
+//- (NodataView *)nodataV{
+//    if (!_nodataV) {
+//        _nodataV = [[NodataView alloc] initWithFrame:CGRectMake(0, 390, kSCREEN_WIDTH, kSCREEN_HEIGHT - 49 - 64)];
+//    }
+//    return _nodataV;
+//}
+
 @end

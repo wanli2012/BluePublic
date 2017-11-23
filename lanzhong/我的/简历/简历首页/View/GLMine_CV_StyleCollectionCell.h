@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface GLMine_CV_StyleCollectionCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *imageV;
 
 @end

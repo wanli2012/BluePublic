@@ -8,6 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+@interface GLHome_adModel : NSObject
+
+@property (nonatomic, copy)NSString *banner_id;//广告id
+@property (nonatomic, copy)NSString *banner_title;//广告名称
+@property (nonatomic, copy)NSString *must_banner;//广告展示图
+@property (nonatomic, copy)NSString *banner_info;//广告描述
+@property (nonatomic, copy)NSString *type;//类型1内部广告 2商品广告 3项目广告 4外部链接广告
+@property (nonatomic, copy)NSString *url;//外部广告url
+@property (nonatomic, copy)NSString *z_id;//商品id或者项目id
+
+@end
+
 @interface GLHome_groom_itemModel : NSObject
 
 @property (nonatomic, copy)NSString *uid;//发布人

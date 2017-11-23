@@ -8,6 +8,7 @@
 
 #import "GLMine_CV_BaseInfoController.h"
 
+#import "GLMine_CV_LifeModel.h"
 //单选picker 和动画
 #import "editorMaskPresentationController.h"
 #import "GLSimpleSelectionPickerController.h"//单项选择
@@ -31,7 +32,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *emailTF;//邮箱
 @property (weak, nonatomic) IBOutlet UIButton *ensureBtn;//确定
 
+@property (nonatomic, strong)NSMutableArray *lifeArr;
 @property (nonatomic, strong)LoadWaitView *loadV;
+@property (nonatomic, strong)NSMutableArray *lifeModels;//工作年限数据源
 @property (nonatomic, strong)NSMutableArray *cityModels;//城市数据源
 @property (nonatomic, copy)NSString *provinceId;//省份id
 @property (nonatomic, copy)NSString *cityId;//城市id
@@ -75,70 +78,100 @@
     self.contentViewWidth.constant = kSCREEN_WIDTH;
     self.contentViewHeight.constant = 500;
 }
-
+#pragma mark - 性别
 - (IBAction)sexChoose:(id)sender {
 
+    NSMutableArray *dataArr = [NSMutableArray arrayWithArray:@[@"男",@"女"]];
+    [self popLifeChooser:dataArr andTitle:@"请选择性别" type:1];
+
+}
+#pragma mark - 学历
+- (IBAction)educationChoose:(id)sender {
+    NSMutableArray *dataArr = [NSMutableArray arrayWithArray:@[@"中专及以下",@"高中",@"大专",@"本科",@"硕士",@"博士"]];
+ 
+    [self popLifeChooser:dataArr andTitle:@"请选择学历" type:2];
+
+}
+#pragma mark - 工作年限
+- (IBAction)workLifeChoose:(id)sender {
+    if (self.lifeModels.count != 0) {
+        
+        [self popLifeChooser:self.lifeArr andTitle:@"请选择工作年限" type:3];
+        return;
+    }
+    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:[UIApplication sharedApplication].keyWindow];
+    [NetworkManager requestPOSTWithURLStr:kCV_LIFE_URL paramDic:@{} finish:^(id responseObject) {
+        [_loadV removeloadview];
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+            if([responseObject[@"data"] count] != 0){
+                
+                [self.lifeModels removeAllObjects];
+                for (NSDictionary *dic in responseObject[@"data"]) {
+                    
+                    GLMine_CV_LifeModel *model = [GLMine_CV_LifeModel mj_objectWithKeyValues:dic];
+                    [self.lifeModels addObject:model];
+                }
+                
+                [self.lifeArr removeAllObjects];
+                for (GLMine_CV_LifeModel *model in self.lifeModels) {
+                    [self.lifeArr addObject:model.time];
+                }
+                [self popLifeChooser:self.lifeArr andTitle:@"请选择工作年限" type:3];
+            }
+        }else{
+            
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+        }
+        
+    } enError:^(NSError *error) {
+        [_loadV removeloadview];
+    }];
+}
+//type: 1:性别 2:学历 3:工作年限
+- (void)popLifeChooser:(NSMutableArray *)dataArr andTitle:(NSString *)title type:(NSInteger)type {
     GLSimpleSelectionPickerController *vc=[[GLSimpleSelectionPickerController alloc]init];
     
-    NSMutableArray *dataArr = [NSMutableArray arrayWithArray:@[@"男",@"女"]];
     vc.dataSourceArr = dataArr;
     
-    vc.titlestr = @"请选择性别";
-    __weak typeof(self)weakSelf = self;//性别 1男 2女
+    vc.titlestr = title;
+    __weak typeof(self)weakSelf = self;
     vc.returnreslut = ^(NSInteger index){
-        
-        weakSelf.sexLabel.text = dataArr[index];
-
-        if (index == 0) {
-            self.sexID = 1;
-        }else{
-            self.sexID = 2;
+        switch (type) {
+            case 1:
+            {
+                weakSelf.sexLabel.text = dataArr[index];
+                
+                if (index == 0) {
+                    self.sexID = 1;
+                }else{
+                    self.sexID = 2;
+                }
+            }
+                break;
+            case 2:
+            {
+                weakSelf.educationLabel.text = dataArr[index];
+            }
+                break;
+            case 3:
+            {
+                
+                weakSelf.workLifeLabel.text = dataArr[index];
+            }
+                break;
+                
+            default:
+                break;
         }
     };
     
     vc.transitioningDelegate = self;
     vc.modalPresentationStyle = UIModalPresentationCustom;
     [self presentViewController:vc animated:YES completion:nil];
-}
-- (IBAction)educationChoose:(id)sender {
- 
-    GLSimpleSelectionPickerController *vc=[[GLSimpleSelectionPickerController alloc]init];
-    
-    NSMutableArray *dataArr = [NSMutableArray arrayWithArray:@[@"中专及以下",@"高中",@"大专",@"本科",@"硕士",@"博士"]];
-    vc.dataSourceArr = dataArr;
-    
-    vc.titlestr = @"请选择学历";
-    __weak typeof(self)weakSelf = self;
-    vc.returnreslut = ^(NSInteger index){
-        
-        weakSelf.educationLabel.text = dataArr[index];
-        
-    };
-    
-    vc.transitioningDelegate = self;
-    vc.modalPresentationStyle = UIModalPresentationCustom;
-    [self presentViewController:vc animated:YES completion:nil];
-}
-- (IBAction)workLifeChoose:(id)sender {
-   
-    GLSimpleSelectionPickerController *vc=[[GLSimpleSelectionPickerController alloc]init];
-    
-    NSMutableArray *dataArr = [NSMutableArray arrayWithArray:@[@"1年",@"2年",@"10年以上"]];
-    vc.dataSourceArr = dataArr;
-    
-    vc.titlestr = @"请选择工作年限";
-    __weak typeof(self)weakSelf = self;
-    vc.returnreslut = ^(NSInteger index){
-        
-        weakSelf.workLifeLabel.text = dataArr[index];
-        
-    };
-    
-    vc.transitioningDelegate = self;
-    vc.modalPresentationStyle = UIModalPresentationCustom;
-    [self presentViewController:vc animated:YES completion:nil];
+
 }
 
+#pragma mark - 生日
 - (IBAction)birthChoose:(id)sender {
     
     GLDatePickerController *vc=[[GLDatePickerController alloc]init];
@@ -154,6 +187,7 @@
     
 }
 
+#pragma mark - 城市选择
 - (IBAction)cityChoose:(id)sender {
     
     if (self.cityModels.count != 0) {
@@ -185,7 +219,6 @@
     }];
 
 }
-
 - (void)popCityChoose{
     
     GLMutipleChooseController *vc=[[GLMutipleChooseController alloc]init];
@@ -277,7 +310,6 @@
 
 }
 
-
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     
@@ -288,11 +320,16 @@
     }else{
         [self.emailTF resignFirstResponder];
     }
+    
     return YES;
 }
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     if(textField == self.phoneNumTF){
        return [self validateNumber:string];
+    }
+    if (textField.text.length > 16) {
+        return NO;
     }
     return YES;
 }
@@ -384,5 +421,19 @@
         _cityModels = [NSMutableArray array];
     }
     return _cityModels;
+}//lifeModels
+
+- (NSMutableArray *)lifeModels{
+    if (!_lifeModels) {
+        _lifeModels = [NSMutableArray array];
+    }
+    return _lifeModels;
+}
+
+- (NSMutableArray *)lifeArr{
+    if (!_lifeArr) {
+        _lifeArr = [NSMutableArray array];
+    }
+    return _lifeArr;
 }
 @end

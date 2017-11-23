@@ -78,6 +78,8 @@
 #define Return_Goods_URL @"https://www.lzcke.com/protocol/return.html"
 //兑换须知
 #define Exchange_Info_URL @"https://www.lzcke.com/protocol/exchange.html"
+//首页广告
+#define Home_Banner_URL @"https://www.lzcke.com/Wx_lz/app/index_banner1.html"
 
 
 //获取appStore上的最新版本号地址
@@ -155,6 +157,7 @@
 #define kCITYLIST_URL @"Other/getCityList"//城市列表
 #define kBANK_NAMELIST_URL @"Other/open_bank_list"//银行名列表
 #define kBANNER_LIST_URL @"Other/banner_list"//广告展示
+#define kHOME_BANNER_LIST_URL @"Other/banner_list_index"//首页图片展示
 
 //简历模块
 #define kMODIFY_BASEINFO_URL @"Resume/save_info"//修改简历基本信息
@@ -169,5 +172,12 @@
 #define kCV_MONEY_URL @"Resume/yue_money"//期望月薪返回
 #define kCV_WANT_WORK_URL @"Resume/i_want"//添加修改期望工作
 #define kCV_ADD_DES_URL @"Resume/i_info"//添加、修改自我描述
+#define kCV_DES_SHOW_URL @"Resume/show"//风采展示添加、修改
+#define kCV_SHOW_CV_URL @"Resume/save_open"//修改简历开关状态
+#define kCV_MODIFY_PIC_URL @"Resume/save_head_pic"//修改简历头像照
+#define kCV_CLASSIFY_URL @"Resume/re_screen"//简历列表筛选条件
+#define kCV_LIST_URL @"Resume/select_re"//简历列表 Resume/life
+#define kCV_LIFE_URL @"Resume/life"//工作年限返回
+#define kCV_DEL_SKILL_URL @"Resume/del_skill"//个人技能评价删除
 
 #endif /* PrefixHeader_pch */

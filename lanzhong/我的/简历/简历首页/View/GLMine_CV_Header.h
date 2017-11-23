@@ -25,4 +25,6 @@ typedef void(^retrunshowsection)(NSInteger index);
 
 @property (nonatomic, strong)UIImageView *bgImageV;
 
+@property (nonatomic, strong)UILabel *mustLabel;
+
 @end

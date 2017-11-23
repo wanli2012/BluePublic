@@ -27,8 +27,8 @@
     _model = model;
     
     self.workTimeLabel.text = model.work_time;
-    self.workPlaceLabel.text = [NSString stringWithFormat:@"公司:%@",model.company_name];
-    self.positionLabel.text = [NSString stringWithFormat:@"职位:%@",model.career_name];
+    self.workPlaceLabel.text = [NSString stringWithFormat:@"公司: %@",model.company_name];
+    self.positionLabel.text = [NSString stringWithFormat:@"职位: %@",model.career_name];
     self.workContentLabel.text = model.work_content;
 }
 

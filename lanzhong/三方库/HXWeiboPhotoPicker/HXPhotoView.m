@@ -61,7 +61,7 @@ static NSString *HXPhotoSubViewCellId = @"photoSubViewCellId";
         if (self.manager.UIManager.photoViewAddImageName) {
             _addModel.thumbPhoto = [HXPhotoTools hx_imageNamed:self.manager.UIManager.photoViewAddImageName];
         }else {
-            _addModel.thumbPhoto = [HXPhotoTools hx_imageNamed:@"compose_pic_add@2x.png"];
+            _addModel.thumbPhoto = [HXPhotoTools hx_imageNamed:@"addphotograph"];
         }
     }
     return _addModel;

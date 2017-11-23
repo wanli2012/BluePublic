@@ -79,7 +79,7 @@
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
     //[tabBarController.viewControllers objectAtIndex:4]
-    if (viewController == tabBarController.viewControllers.lastObject ) {
+    if (viewController == [tabBarController.viewControllers objectAtIndex:4]) {
     
         if ([UserModel defaultUser].loginstatus == YES) {
             
@@ -140,15 +140,15 @@
                           imageName:@"首页未点中"
                   selectedImageName:@"首页"];
     
+    [self addOneChildViewController:[[BaseNavigationViewController alloc]initWithRootViewController:[[GLTalentPoolController alloc] init]]
+                          WithTitle:@"人才库"
+                          imageName:@"人才未点中"
+                  selectedImageName:@"人才"];
+    
     [self addOneChildViewController:[[BaseNavigationViewController alloc]initWithRootViewController:[[GLBusinessCircleController alloc] init]]
                           WithTitle:@"商圈"
                           imageName:@"商圈未点中"
                   selectedImageName:@"商圈"];
-    
-    [self addOneChildViewController:[[BaseNavigationViewController alloc]initWithRootViewController:[[GLTalentPoolController alloc] init]]
-                          WithTitle:@""
-                          imageName:@""
-                  selectedImageName:@""];
     
     [self addOneChildViewController:[[BaseNavigationViewController alloc]initWithRootViewController:[[GLMallController alloc] init]]
                           WithTitle:@"商城"

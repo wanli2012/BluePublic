@@ -19,4 +19,6 @@
 
 @property (nonatomic, copy)NSArray *dataArr;
 
+@property (nonatomic, assign)NSInteger type;//1:最大日期不能超过当前日期(例如:出生日期)
+
 @end

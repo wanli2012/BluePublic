@@ -10,4 +10,6 @@
 
 @interface GLMine_CV_ElegantShowController : UIViewController
 
+@property (nonatomic, copy)NSMutableArray *images;
+
 @end

@@ -19,16 +19,26 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="解放路卡萨解放路三六九等分类数据砥砺奋进酸辣粉吉林省大家发了时代峻峰哈了感觉萨拉很给力;地方那个可恶哈佛呢合法化服务经理我还发过来哈市就和我格外if好我foeof刚好我如违法立即" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HFC-Pf-nuU">
-                        <rect key="frame" x="15" y="10" width="302" height="51.5"/>
+                        <rect key="frame" x="15" y="10" width="302" height="66.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zbb-Ec-wWn">
+                        <rect key="frame" x="0.0" y="88.5" width="332" height="3"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="3" id="tcM-nI-6wT"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="HFC-Pf-nuU" secondAttribute="bottom" constant="30" id="8qk-ZQ-HZS"/>
+                    <constraint firstItem="Zbb-Ec-wWn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="7L5-jK-d53"/>
+                    <constraint firstAttribute="bottom" secondItem="HFC-Pf-nuU" secondAttribute="bottom" constant="15" id="8qk-ZQ-HZS"/>
                     <constraint firstItem="HFC-Pf-nuU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="ADk-06-l1X"/>
+                    <constraint firstAttribute="trailing" secondItem="Zbb-Ec-wWn" secondAttribute="trailing" id="OD7-cL-PTk"/>
                     <constraint firstItem="HFC-Pf-nuU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="i9r-4D-nqZ"/>
+                    <constraint firstAttribute="bottom" secondItem="Zbb-Ec-wWn" secondAttribute="bottom" id="oIn-ew-LgI"/>
                     <constraint firstAttribute="trailing" secondItem="HFC-Pf-nuU" secondAttribute="trailing" constant="15" id="zLd-22-GPo"/>
                 </constraints>
             </tableViewCellContentView>

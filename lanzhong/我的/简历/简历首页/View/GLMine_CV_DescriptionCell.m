@@ -9,7 +9,7 @@
 #import "GLMine_CV_DescriptionCell.h"
 
 @interface GLMine_CV_DescriptionCell ()
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
 
 @end
 
@@ -19,10 +19,4 @@
     [super awakeFromNib];
     // Initialization code
 }
-
-- (void)setI_info:(NSString *)i_info{
-    _i_info = i_info;
-    self.titleLabel.text = i_info;
-}
-
 @end

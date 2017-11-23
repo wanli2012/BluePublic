@@ -26,6 +26,7 @@
     
     [self addSubview:self.bgImageV];
     [self addSubview:self.titleLabel];
+    [self addSubview:self.mustLabel];
     [self addSubview:self.editBtn];
     [self addSubview:self.lineView];
     
@@ -33,8 +34,6 @@
         
         make.centerY.equalTo(self).offset(0);
         make.leading.equalTo(self).offset(10);
-//        make.top.equalTo(self).offset(10);
-//        make.bottom.equalTo(self).offset(-10);
         make.height.equalTo(@25);
         make.width.equalTo(@78);
     }];
@@ -44,8 +43,13 @@
         make.centerY.equalTo(self).offset(0);
         make.height.equalTo(@25);
         make.leading.equalTo(self).offset(15);
-//        make.top.equalTo(self).offset(10);
-//        make.bottom.equalTo(self).offset(-10);
+        make.width.equalTo(@80);
+    }];
+    [self.mustLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerY.equalTo(self).offset(0);
+        make.height.equalTo(@25);
+        make.leading.equalTo(self.bgImageV.mas_trailing).offset(5);
         make.width.equalTo(@80);
     }];
     
@@ -54,8 +58,6 @@
         make.centerY.equalTo(self).offset(0);
         make.height.equalTo(@25);
         make.trailing.equalTo(self).offset(10);
-//        make.top.equalTo(self).offset(10);
-//        make.bottom.equalTo(self).offset(-10);
         make.width.equalTo(@80);
     }];
     
@@ -102,11 +104,11 @@
         [_editBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         [_editBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
         [_editBtn setTitleColor:YYSRGBColor(22, 131, 251, 1) forState:UIControlStateNormal];
-//        [_editBtn setImage:[UIImage imageNamed:@"modify"] forState:UIControlStateNormal];
         
     }
     return _editBtn;
 }
+
 - (UIView *)lineView{
     if (!_lineView) {
         _lineView = [[UIView alloc] init];
@@ -114,6 +116,18 @@
         
     }
     return _lineView;
+}
+
+- (UILabel *)mustLabel{
+    if (!_mustLabel) {
+        _mustLabel = [[UILabel alloc] init];
+        _mustLabel.backgroundColor = [UIColor clearColor];
+        _mustLabel.textColor = [UIColor redColor];
+        _mustLabel.font = [UIFont systemFontOfSize:13];
+        _mustLabel.text = @"(*必填)";
+        _mustLabel.hidden = YES;
+    }
+    return _mustLabel;
 }
 
 @end

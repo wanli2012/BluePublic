@@ -9,6 +9,7 @@
 #import "GLMine_CV_BaseCell.h"
 
 @interface GLMine_CV_BaseCell()
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sexLabel;
 @property (weak, nonatomic) IBOutlet UILabel *educationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *workLifeLabel;
@@ -31,10 +32,13 @@
 
     if ([model.sex integerValue] == 1) {
         self.sexLabel.text = @"男";
-    }else{
+    }else if([model.sex integerValue] == 2){
         self.sexLabel.text = @"女";
+    }else{
+        self.sexLabel.text = @"";
     }
     
+    self.nameLabel.text = model.name;
     self.educationLabel.text = model.education;
     self.workLifeLabel.text = model.work;
     self.birthLabel.text = model.birth_time;

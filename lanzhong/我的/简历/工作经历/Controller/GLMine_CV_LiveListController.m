@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;
 @property (nonatomic, strong)LoadWaitView *loadV;
 @property (nonatomic, strong)NSMutableArray <GLMine_CV_live *>*models;
+@property (weak, nonatomic) IBOutlet UILabel *noticeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *signLabel;
 
 @end
 
@@ -51,6 +53,23 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"GLMine_CV_BaseInfoNotification" object:nil];
     
 }
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self isHiddenAddBtn];
+}
+- (void)isHiddenAddBtn{
+    if (self.models.count >= 3) {
+        self.addBtn.hidden = YES;
+        self.signLabel.hidden = YES;
+        self.noticeLabel.hidden = YES;
+    }else{
+        self.addBtn.hidden = NO;
+        self.signLabel.hidden = NO;
+        self.noticeLabel.hidden = NO;
+    }
+    
+}
 
 - (void)refresh{
     
@@ -78,7 +97,7 @@
                     GLMine_CV_live *model = [GLMine_CV_live mj_objectWithKeyValues:dic];
                     [self.models addObject:model];
                 }
-                [self.tableView reloadData];
+                [self isHiddenAddBtn];
             }
         }else{
             
@@ -93,6 +112,7 @@
         [self.tableView reloadData];
     }];
 }
+
 - (void)endRefresh {
     [self.tableView.mj_header endRefreshing];
 }
@@ -105,6 +125,7 @@
     
 }
 
+
 #pragma mark - UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.models.count;
@@ -113,6 +134,7 @@
     
     GLMine_CV_WorkCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMine_CV_WorkCell"];
     cell.model = self.models[indexPath.row];
+    cell.selectionStyle = 0;
     return cell;
 }
 
@@ -122,6 +144,13 @@
     self.tableView.estimatedRowHeight = 44;
     
     return self.tableView.rowHeight;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    self.hidesBottomBarWhenPushed = YES;
+    GLMine_CV_AddWorkLiveController *addVC = [[GLMine_CV_AddWorkLiveController alloc] init];
+    addVC.model = self.models[indexPath.row];
+    addVC.type = 1;
+    [self.navigationController pushViewController:addVC animated:YES];
 }
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {

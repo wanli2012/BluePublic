@@ -22,6 +22,8 @@
 #import "GLMine_CurriculumVitaeController.h"//我的简历
 
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "BaseNavigationViewController.h"
+#import "GLLoginController.h"
 
 @interface GLMineController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -119,13 +121,38 @@
             [UserModel defaultUser].uname = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"uname"]];
             [UserModel defaultUser].user_pic = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"user_pic"]];
             [UserModel defaultUser].user_server = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"user_server"]];
+            [UserModel defaultUser].item_money = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"item_money"]];
+
+            [self judgeNull];//判空
             
             [usermodelachivar achive];
             [self assignment];//为头视图赋值
+            
+        }else if([responseObject[@"code"] integerValue] == OVERDUE_CODE){
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+            
+            [UserModel defaultUser].loginstatus = NO;
+            [usermodelachivar achive];
+            
+            GLLoginController *loginVC = [[GLLoginController alloc] init];
+            loginVC.sign = 1;
+            BaseNavigationViewController *nav = [[BaseNavigationViewController alloc]initWithRootViewController:loginVC];
+            nav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            [self presentViewController:nav animated:YES completion:nil];
+            
+        }else{
+            
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
     } enError:^(NSError *error) {
     }];
+}
+//判空
+- (void)judgeNull {
+    if ([[UserModel defaultUser].item_money rangeOfString:@"null"].location != NSNotFound) {
+        [UserModel defaultUser].item_money = @"0";
+    }
 }
 
 #pragma mark - 头视图赋值
@@ -133,7 +160,7 @@
     
     self.participateLabel.text = [UserModel defaultUser].invest_count;
     self.publishLabel.text = [UserModel defaultUser].item_count;
-    self.banlanceLabel.text = [UserModel defaultUser].umoney;
+    self.banlanceLabel.text = [UserModel defaultUser].item_money;
     
     [self.imageV sd_setImageWithURL:[NSURL URLWithString:[UserModel defaultUser].user_pic] placeholderImage:[UIImage imageNamed:PicHolderImage]];
     
@@ -257,18 +284,30 @@
             break;
         case 1:
         {
-            GLMine_MyProjectController *myProjectVC = [[GLMine_MyProjectController alloc] initWithSignIndex:indexPath.row];
-            [self.navigationController pushViewController:myProjectVC animated:YES];
+            switch (indexPath.row) {
+                case 0 :case 1 :case 2://我的项目
+                {
+                    GLMine_MyProjectController *myProjectVC = [[GLMine_MyProjectController alloc] initWithSignIndex:indexPath.row];
+                    [self.navigationController pushViewController:myProjectVC animated:YES];
+                }
+                    break;
+                case 3://我帮助过
+                {
+                    GLMine_ParticipateController *participateVC = [[GLMine_ParticipateController alloc] init];
+                    [self.navigationController pushViewController:participateVC animated:YES];
+                }
+                case 4://我的钱包
+                {
+                    GLMine_WalletController *walletVC = [[GLMine_WalletController alloc] init];
+                    [self.navigationController pushViewController:walletVC animated:YES];
+                }
+                    break;
+                default:
+                    break;
+            }
         }
             break;
         case 2:
-        {
-            GLMine_ParticipateController *participateVC = [[GLMine_ParticipateController alloc] init];
-            [self.navigationController pushViewController:participateVC animated:YES];
-             
-        }
-            break;
-        case 3:
         {
             switch (indexPath.row) {
                 case 0://购物车
@@ -277,22 +316,22 @@
                     [self.navigationController pushViewController:cartVC animated:YES];
                 }
                     break;
-                case 1://我的评价
-                {
-                    GLMine_EvaluateController *evaluateVC = [[GLMine_EvaluateController alloc] init];
-                    [self.navigationController pushViewController:evaluateVC animated:YES];
-                }
-                    break;
-                case 2://我的订单
+                case 1://我的订单
                 {
                     GLMine_MyOrderController *cartVC = [[GLMine_MyOrderController alloc] init];
                     [self.navigationController pushViewController:cartVC animated:YES];
                 }
                     break;
-                case 3://钱包
+                case 2://我的评价
                 {
-                    GLMine_WalletController *walletVC = [[GLMine_WalletController alloc] init];
-                    [self.navigationController pushViewController:walletVC animated:YES];
+                    GLMine_EvaluateController *evaluateVC = [[GLMine_EvaluateController alloc] init];
+                    [self.navigationController pushViewController:evaluateVC animated:YES];
+                }
+                    break;
+                case 3://分享权益
+                {
+                    GLMine_ShareController *shareVC = [[GLMine_ShareController alloc] init];
+                    [self.navigationController pushViewController:shareVC animated:YES];
                 }
                     break;
                     
@@ -301,14 +340,7 @@
             }
         }
             break;
-            
-        case 4:
-        {
-            GLMine_ShareController *shareVC = [[GLMine_ShareController alloc] init];
-            [self.navigationController pushViewController:shareVC animated:YES];
-        }
-            break;
-            
+
         default:
             break;
     }
@@ -333,29 +365,26 @@
     if (!_dataSource) {
         _dataSource = [NSMutableArray array];
         
-        NSArray *arr1 = @[@{@"title":@"我的审核",@"image":@"zhang"},
-                         @{@"title":@"我的筹款",@"image":@"money"},
-                         @{@"title":@"我的项目",@"image":@"myproject"}];
-        
-        NSArray *arr2 = @[@{@"title":@"参与项目",@"image":@"participationproject"}];
-        
-        NSArray *arr3 = @[@{@"title":@"购物车",@"image":@"mine_shoppingcart"},
-                          @{@"title":@"商品评价",@"image":@"evaluate"},
-                          @{@"title":@"订单",@"image":@"order"},
-                          @{@"title":@"钱包",@"image":@"wallet"},
-                          ];
-        
-        NSArray *arr4 = @[@{@"title":@"分享权益",@"image":@"mine_share"}
-                          ];
         NSArray *arr5 = @[@{@"title":@"我要发布",@"image":@"mine_share"},
                           @{@"title":@"我的简历",@"image":@"mine_share"}
+                          ];
+        
+        NSArray *arr1 = @[@{@"title":@"谁帮助过我",@"image":@"zhang"},
+                          @{@"title":@"我的审核",@"image":@"zhang"},
+                          @{@"title":@"我的项目",@"image":@"zhang"},
+                          @{@"title":@"我帮助过",@"image":@"money"},
+                          @{@"title":@"我的钱包",@"image":@"myproject"}];
+    
+        NSArray *arr3 = @[@{@"title":@"购物车",@"image":@"mine_shoppingcart"},
+                          @{@"title":@"我的订单",@"image":@"evaluate"},
+                          @{@"title":@"我的评价",@"image":@"order"},
+                          @{@"title":@"分享权益",@"image":@"wallet"},
                           ];
 
         [_dataSource addObject:arr5];
         [_dataSource addObject:arr1];
-        [_dataSource addObject:arr2];
         [_dataSource addObject:arr3];
-        [_dataSource addObject:arr4];
+
         
     }
     return _dataSource;

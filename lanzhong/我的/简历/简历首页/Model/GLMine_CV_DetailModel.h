@@ -28,6 +28,7 @@
 @property (nonatomic, copy)NSString *uid;//用户id
 @property (nonatomic, copy)NSString *work;//工作时间
 
+
 @end
 
 @interface GLMine_CV_teach : NSObject

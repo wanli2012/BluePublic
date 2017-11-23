@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GLMine_CV_DetailModel.h"
 
 @interface GLMine_CV_AddWorkLiveController : UIViewController
+
+@property (nonatomic, strong)GLMine_CV_live *model;
+
+@property (nonatomic, assign)NSInteger type;
 
 @end

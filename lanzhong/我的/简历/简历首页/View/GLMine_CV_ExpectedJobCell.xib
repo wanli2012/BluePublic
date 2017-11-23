@@ -19,23 +19,23 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="产品经理/WEB端开发工程师" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qoh-cG-JwQ">
-                        <rect key="frame" x="10" y="10" width="301" height="16"/>
+                        <rect key="frame" x="15" y="10" width="296" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="北京/6K-10K" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DhT-XL-RDM">
-                        <rect key="frame" x="10" y="36" width="75" height="16"/>
+                        <rect key="frame" x="15" y="36" width="75" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="DhT-XL-RDM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="EZK-si-je2"/>
+                    <constraint firstItem="DhT-XL-RDM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="EZK-si-je2"/>
                     <constraint firstAttribute="trailing" secondItem="Qoh-cG-JwQ" secondAttribute="trailing" constant="10" id="IO4-3d-Ske"/>
                     <constraint firstItem="DhT-XL-RDM" firstAttribute="top" secondItem="Qoh-cG-JwQ" secondAttribute="bottom" constant="10" id="RbF-nM-56I"/>
-                    <constraint firstItem="Qoh-cG-JwQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="bhx-8s-ry7"/>
+                    <constraint firstItem="Qoh-cG-JwQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="bhx-8s-ry7"/>
                     <constraint firstItem="Qoh-cG-JwQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="lFi-NV-rW1"/>
                 </constraints>
             </tableViewCellContentView>

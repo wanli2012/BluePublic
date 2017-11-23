@@ -489,7 +489,7 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="33.5" y="18"/>
+            <point key="canvasLocation" x="29" y="-76"/>
         </view>
         <tapGestureRecognizer id="Cug-Dg-5sJ" userLabel="性别选择">
             <connections>

@@ -93,6 +93,7 @@
 - (IBAction)endTimeChoose:(id)sender {
     GLDatePickerController *vc=[[GLDatePickerController alloc]init];
     vc.titleLabel.text = @"请选择毕业日期";
+    vc.type = 1;
     __weak typeof(self)weakSelf = self;
     vc.returnreslut = ^(NSString *dateStr){
         weakSelf.endTimeLabel.text = dateStr;

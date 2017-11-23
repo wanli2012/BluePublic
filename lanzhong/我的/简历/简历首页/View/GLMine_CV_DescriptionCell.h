@@ -10,6 +10,6 @@
 
 @interface GLMine_CV_DescriptionCell : UITableViewCell
 
-@property (nonatomic, copy)NSString *i_info;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 @end

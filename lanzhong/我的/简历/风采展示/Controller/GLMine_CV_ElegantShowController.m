@@ -7,8 +7,12 @@
 //
 
 #import "GLMine_CV_ElegantShowController.h"
+#import "HXPhotoViewController.h"
+#import "HXPhotoView.h"
 
-@interface GLMine_CV_ElegantShowController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+static const CGFloat kPhotoViewMargin = 12.0;
+
+@interface GLMine_CV_ElegantShowController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,HXPhotoViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *ensureBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewHeight;
@@ -17,6 +21,13 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageV3;
 
 @property (nonatomic, strong)LoadWaitView *loadV;
+@property (nonatomic, assign)NSInteger picIndex;
+
+@property (nonatomic, strong)NSMutableArray *imageArr;
+@property (strong, nonatomic) HXPhotoManager *manager;
+@property (strong, nonatomic) HXPhotoView *photoView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollViewHeight;
 
 @end
 
@@ -24,122 +35,165 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"风采展示";
     
+    self.navigationItem.title = @"风采展示";
+    self.ensureBtn.layer.cornerRadius = 5.f;
+
+    if (self.images.count != 0) {
+        
+        self.manager.networkPhotoUrls = [NSMutableArray arrayWithArray:self.images];
+        self.manager.photoMaxNum = 3 - self.images.count;
+    }
+    self.photoView.manager = self.manager;
+    [self.scrollView addSubview:self.photoView];
+    
+    self.scrollViewHeight.constant = (kSCREEN_WIDTH - 12)/3;
+
 }
 
 - (IBAction)ensure:(id)sender {
     
-}
-
-- (IBAction)picChoose:(id)sender {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"token"] = [UserModel defaultUser].token;
+    dict[@"uid"] = [UserModel defaultUser].uid;
     
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"头像修改" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    UIAlertAction *picture = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        //    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        picker.delegate = self;
-        // 设置选择后的图片可以被编辑
-        
-        //1.获取媒体支持格式
-        NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
-        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-        picker.mediaTypes = @[mediaTypes[0]];
-        //5.其他配置
-        //allowsEditing是否允许编辑，如果值为no，选择照片之后就不会进入编辑界面
-        picker.allowsEditing = YES;
-        //6.推送
-        [self presentViewController:picker animated:YES completion:nil];
-        
-    }];
-    
-    UIAlertAction *camera = [UIAlertAction actionWithTitle:@"相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
-        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-            
-            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-            picker.delegate = self;
-            // 设置拍照后的图片可以被编辑
-            picker.allowsEditing = YES;
-            picker.sourceType = sourceType;
-            [self presentViewController:picker animated:YES completion:nil];
-        }else {
-            
-        }
-        
-    }];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-    
-    [alertVC addAction:picture];
-    [alertVC addAction:camera];
-    [alertVC addAction:cancel];
-    [self presentViewController:alertVC animated:YES completion:nil];
-}
-
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-    
-    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
-    if ([type isEqualToString:@"public.image"]) {
-        // 先把图片转成NSData
-        UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
-        NSData *data;
-        if (UIImagePNGRepresentation(image) == nil) {
-            
-            data = UIImageJPEGRepresentation(image, 0.2);
-        }else {
-            data = UIImageJPEGRepresentation(image, 0.2);
-        }
-        
-        UIImage *picImage = [UIImage imageWithData:data];
-        
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[@"token"] = [UserModel defaultUser].token;
-        dict[@"uid"] = [UserModel defaultUser].uid;
-        dict[@"type"] = @"1";
-        
-        _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
-        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-        manager.responseSerializer = [AFHTTPResponseSerializer serializer];//响应
-        manager.requestSerializer.timeoutInterval = 10;
-        // 加上这行代码，https ssl 验证。
-        [manager setSecurityPolicy:[NetworkManager customSecurityPolicy]];
-        [manager POST:[NSString stringWithFormat:@"%@%@",URL_Base,kUSER_INFO_SAVE_URL] parameters:dict  constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-            //将图片以表单形式上传
-            
-            if (picImage) {
-                
-                NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
-                formatter.dateFormat=@"yyyyMMddHHmmss";
-                NSString *str=[formatter stringFromDate:[NSDate date]];
-                NSString *fileName=[NSString stringWithFormat:@"%@.png",str];
-                NSData *data = UIImagePNGRepresentation(picImage);
-                [formData appendPartWithFileData:data name:@"pic" fileName:fileName mimeType:@"image/png"];
-            }
-            
-        }progress:^(NSProgress *uploadProgress){
-            
-        }success:^(NSURLSessionDataTask *task, id responseObject) {
-            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            
-            if ([dic[@"code"]integerValue] == SUCCESS_CODE) {
-                
-                self.imageV.image = [UIImage imageWithData:data];
-                
-                [SVProgressHUD showSuccessWithStatus:dic[@"message"]];
-                
-            }else{
-                [SVProgressHUD showErrorWithStatus:dic[@"message"]];
-            }
-            
-            [_loadV removeloadview];
-        } failure:^(NSURLSessionDataTask *task, NSError *error) {
-            [_loadV removeloadview];
-            
-            [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-        }];
-        
-        [picker dismissViewControllerAnimated:YES completion:nil];
+    for (int i = 0;  i < self.images.count; i ++) {
+        NSString *name = [NSString stringWithFormat:@"head_pic_url[%zd]",i];
+        dict[name] = self.images[i];
     }
+    
+    _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];//响应
+    manager.requestSerializer.timeoutInterval = 10;
+    // 加上这行代码，https ssl 验证。
+    [manager setSecurityPolicy:[NetworkManager customSecurityPolicy]];
+    [manager POST:[NSString stringWithFormat:@"%@%@",URL_Base,kCV_DES_SHOW_URL] parameters:dict  constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        //将图片以表单形式上传
+        for (int i = 0 ; i < self.imageArr.count ; i ++) {
+            
+            NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+            formatter.dateFormat=@"yyyyMMddHHmmss";
+            NSString *str=[formatter stringFromDate:[NSDate date]];
+            NSString *fileName=[NSString stringWithFormat:@"%@.png",str];
+            NSData *data;
+            if (UIImagePNGRepresentation(self.imageArr[i]) == nil) {
+                
+                data = UIImageJPEGRepresentation(self.imageArr[i], 0.2);
+            }else {
+                data = UIImageJPEGRepresentation(self.imageArr[i], 0.2);
+            }
+            
+            NSString *name = [NSString stringWithFormat:@"show_pic[%zd]",i];
+            [formData appendPartWithFileData:data name:name fileName:fileName mimeType:@"image/png"];
+        }
+     
+    }progress:^(NSProgress *uploadProgress){
+        
+    }success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        
+        if ([dic[@"code"]integerValue] == SUCCESS_CODE) {
+
+            [SVProgressHUD showSuccessWithStatus:dic[@"message"]];
+            [self.navigationController popViewControllerAnimated:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"GLMine_CV_BaseInfoNotification" object:nil];
+            
+        }else{
+            [SVProgressHUD showErrorWithStatus:dic[@"message"]];
+        }
+        
+        [_loadV removeloadview];
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [_loadV removeloadview];
+        
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+    }];
+}
+
+- (IBAction)picChoose:(UITapGestureRecognizer *)sender {
+    
+}
+
+#pragma mark - 照片选择器 代理
+- (void)photoView:(HXPhotoView *)photoView changeComplete:(NSArray<HXPhotoModel *> *)allList photos:(NSArray<HXPhotoModel *> *)photos videos:(NSArray<HXPhotoModel *> *)videos original:(BOOL)isOriginal {
+    
+    [self.imageArr removeAllObjects];
+    for (HXPhotoModel *photo in photos) {
+        PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+        options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+        
+        __weak typeof(self) weakself = self;
+        [[PHImageManager defaultManager] requestImageForAsset:photo.asset targetSize:[UIScreen mainScreen].bounds.size contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage *result, NSDictionary *info) {
+            //设置图片
+            if (photo.networkPhotoUrl.length == 0) {
+                
+                [weakself.imageArr insertObject:result atIndex:0];
+            }
+        }];
+    }
+}
+
+- (void)photoView:(HXPhotoView *)photoView deleteNetworkPhoto:(NSString *)networkPhotoUrl {
+
+    for (NSString *url in self.images) {
+        if ([url isEqualToString:networkPhotoUrl]) {
+            
+            [self.images removeObject:url];
+        }
+    }
+}
+
+/**  网络图片全部下载完成时调用  */
+- (void)photoViewAllNetworkingPhotoDownloadComplete:(HXPhotoView *)photoView{
+   
+}
+
+- (void)photoView:(HXPhotoView *)photoView updateFrame:(CGRect)frame {
+    
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, CGRectGetMaxY(frame) + kPhotoViewMargin);
+}
+
+#pragma mark - 懒加载
+- (NSMutableArray *)imageArr{
+    if (!_imageArr) {
+        _imageArr = [NSMutableArray array];
+    }
+    return _imageArr;
+}
+
+- (HXPhotoManager *)manager {
+    if (!_manager) {
+        _manager = [[HXPhotoManager alloc] initWithType:HXPhotoManagerSelectedTypePhotoAndVideo];
+        _manager.openCamera = YES;
+        _manager.cacheAlbum = YES;
+        _manager.lookLivePhoto = YES;
+        _manager.open3DTouchPreview = YES;
+        _manager.cameraType = HXPhotoManagerCameraTypeSystem;
+        _manager.photoMaxNum = 3;
+        _manager.videoMaxNum = 3;
+        _manager.maxNum = 18;
+        _manager.saveSystemAblum = NO;
+        
+    }
+    return _manager;
+}
+
+- (HXPhotoView *)photoView{
+    if (!_photoView) {
+        _photoView = [HXPhotoView photoManager:self.manager];;
+        _photoView.frame = CGRectMake(kPhotoViewMargin, 0, kSCREEN_WIDTH - kPhotoViewMargin * 2, 0);
+        _photoView.delegate = self;
+        _photoView.backgroundColor = [UIColor whiteColor];
+    }
+    return _photoView;
+}
+
+- (NSMutableArray *)images{
+    if (!_images) {
+        _images = [NSMutableArray arrayWithObjects:@"addphotograph", nil];
+    }
+    return _images;
 }
 
 @end

@@ -34,8 +34,27 @@
     self.navigationController.navigationBar.hidden = NO;
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    self.navigationItem.title = @"我的项目";
-    
+    switch (self.signIndex) {
+        case 0:
+        {
+            self.navigationItem.title = @"谁帮助过我";
+        }
+            break;
+        case 1:
+        {
+            self.navigationItem.title = @"我的审核";
+        }
+            break;
+        case 2:
+        {
+            self.navigationItem.title = @"我的项目";
+        }
+            break;
+            
+        default:
+            break;
+    }
+
     
     self.hidesBottomBarWhenPushed=YES;
     
@@ -96,18 +115,18 @@
     
     NSArray *titleArr;
     NSArray *classNamesArr;
-    
+
     switch (self.signIndex) {
         case 0:
         {
-            titleArr = @[titleArray[0],titleArray[1]];
-            classNamesArr = @[classNames[0],classNames[1]];
+            titleArr = @[titleArray[2],titleArray[3],titleArray[4],titleArray[5]];
+            classNamesArr = @[classNames[2],classNames[3],classNames[4],classNames[5]];
         }
             break;
         case 1:
         {
-            titleArr = @[titleArray[2],titleArray[3],titleArray[4],titleArray[5]];
-            classNamesArr = @[classNames[2],classNames[3],classNames[4],classNames[5]];
+            titleArr = @[titleArray[0],titleArray[1]];
+            classNamesArr = @[classNames[0],classNames[1]];
         }
             break;
         case 2:
@@ -121,7 +140,6 @@
         default:
             break;
     }
-    
     
     //设置自定义属性
     self.tagItemSize = CGSizeMake(kSCREEN_WIDTH / titleArr.count, 40);

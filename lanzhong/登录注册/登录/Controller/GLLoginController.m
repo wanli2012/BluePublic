@@ -128,8 +128,10 @@
             [UserModel defaultUser].user_server = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"user_server"]];
             [UserModel defaultUser].real_state = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"real_state"]];
             [UserModel defaultUser].nickname = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"nickname"]];
+            [UserModel defaultUser].item_money = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"item_money"]];
 
             [UserModel defaultUser].loginstatus = YES;
+         
             [usermodelachivar achive];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshInterface" object:nil];

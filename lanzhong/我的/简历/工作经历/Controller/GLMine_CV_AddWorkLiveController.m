@@ -25,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewHeight;
 
+@property (nonatomic, copy)NSString *live_id;
+
 @property (nonatomic, strong)LoadWaitView *loadV;
 
 @end
@@ -34,13 +36,38 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"添加工作经历";
+    if (self.type == 1) {
+        self.navigationItem.title = @"编辑工作经历";
+    }else{
+        
+        self.navigationItem.title = @"添加工作经历";
+    }
     self.ensureBtn.layer.cornerRadius = 5.f;
     self.contentViewWidth.constant = kSCREEN_WIDTH;
     self.contentViewHeight.constant = 500;
 
+
+    [self setOriginal];
 }
 
+- (void)setOriginal {
+    if(self.model){
+        
+        self.nameTF.text = self.model.company_name;
+        self.positionTF.text = self.model.career_name;
+        self.contentTV.text = self.model.work_content;
+        self.contentTV.textColor = [UIColor blackColor];
+        
+        NSArray *array;
+        if(self.model.work_time.length != 0){
+            array = [self.model.work_time componentsSeparatedByString:@"-"]; //从字符A中分隔成2个元素的数组
+        }
+        self.startTimeLabel.text = array.firstObject;
+        self.endTimeLabel.text = array.lastObject;
+        
+        self.live_id = self.model.live_id;
+    }
+}
 
 - (IBAction)startTimeChoose:(id)sender {
     GLDatePickerController *vc=[[GLDatePickerController alloc]init];
@@ -107,11 +134,16 @@
     
     dic[@"token"] = [UserModel defaultUser].token;
     dic[@"uid"] = [UserModel defaultUser].uid;
-    dic[@"live_id"] = @"0";
     dic[@"company_name"] = self.nameTF.text;
     dic[@"career_name"] = self.positionTF.text;
     dic[@"work_time"] = [NSString stringWithFormat:@"%@-%@",self.startTimeLabel.text,self.endTimeLabel.text];
     dic[@"work_content"] = self.contentTV.text;
+    if (self.live_id.length == 0) {
+        
+        dic[@"live_id"] = @"0";
+    }else{
+        dic[@"live_id"] = self.live_id;
+    }
     
     _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
     [NetworkManager requestPOSTWithURLStr:kCV_ADD_WORKLIFE_URL paramDic:dic finish:^(id responseObject) {

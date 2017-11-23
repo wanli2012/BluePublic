@@ -12,7 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *saveBtn;
 @property (weak, nonatomic) IBOutlet UITextField *nameTF;
-@property (nonatomic, copy)NSString * skill_id;
+@property (nonatomic, copy)NSString * mastery;
 
 @property (weak, nonatomic) IBOutlet UIImageView *levelImageV;
 @property (weak, nonatomic) IBOutlet UIImageView *levelImageV2;
@@ -31,21 +31,21 @@
     
     self.navigationItem.title = @"技能评价";
     self.saveBtn.layer.cornerRadius = 5.f;
-    
+    [self setOriginal];
 }
 
 - (void)setOriginal {
     
     if (self.model) {
         self.nameTF.text = self.model.skill_name;
-        self.skill_id = self.model.skill_id;
+        self.mastery = self.model.mastery;
     }
     
-    if (self.skill_id.length == 0) {
-        self.skill_id = @"0";
+    if (self.mastery.length == 0) {
+        self.mastery = @"0";
     }
     
-    [self setSelectImage:[self.skill_id integerValue]];
+    [self setSelectImage:[self.mastery integerValue]];
     
 }
 #pragma mark - 保存
@@ -54,7 +54,7 @@
         [SVProgressHUD showErrorWithStatus:@"请输入公司名称"];
         return;
     }
-    if(self.skill_id.length == 0){
+    if(self.mastery.length == 0){
         [SVProgressHUD showErrorWithStatus:@"请选择熟练程度"];
         return;
     }
@@ -65,7 +65,7 @@
     dic[@"uid"] = [UserModel defaultUser].uid;
     dic[@"skill_id"] = @(self.type);
     dic[@"skill_name"] = self.nameTF.text;
-    dic[@"mastery"] = self.skill_id;
+    dic[@"mastery"] = self.mastery;
    
     _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
     [NetworkManager requestPOSTWithURLStr:kCV_ADD_SKILL_URL paramDic:dic finish:^(id responseObject) {
@@ -96,7 +96,7 @@
     
     NSString *str = [NSString stringWithFormat:@"%zd",sender.view.tag - 10];
     
-    self.skill_id = str;
+    self.mastery = str;
     
 }
 

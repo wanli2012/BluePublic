@@ -18,9 +18,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="186" height="187"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SK7-4T-EBk">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SK7-4T-EBk">
                         <rect key="frame" x="0.0" y="0.0" width="186" height="187"/>
-                        <color key="backgroundColor" red="1" green="0.52198332550000004" blue="0.21075415610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </imageView>
                 </subviews>
             </view>
@@ -31,6 +31,9 @@
                 <constraint firstAttribute="trailing" secondItem="SK7-4T-EBk" secondAttribute="trailing" id="vBd-SF-nr7"/>
             </constraints>
             <size key="customSize" width="186" height="187"/>
+            <connections>
+                <outlet property="imageV" destination="SK7-4T-EBk" id="BEx-oS-HbF"/>
+            </connections>
             <point key="canvasLocation" x="9" y="-55.5"/>
         </collectionViewCell>
     </objects>

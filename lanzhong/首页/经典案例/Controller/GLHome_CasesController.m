@@ -9,6 +9,7 @@
 #import "GLHome_CasesController.h"
 #import "GLHomeCell.h"
 #import "GLHomeModel.h"
+#import "GLBusiness_DetailController.h"
 
 @interface GLHome_CasesController ()
 
@@ -137,7 +138,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    self.hidesBottomBarWhenPushed = YES;
+    GLHome_groom_itemModel *model = self.models[indexPath.row];
+    GLBusiness_DetailController *detailVC = [[GLBusiness_DetailController alloc] init];
+    detailVC.item_id = model.item_id;
+    [self.navigationController pushViewController:detailVC animated:YES];
     
+    self.hidesBottomBarWhenPushed = NO;
 }
 
 - (NSMutableArray *)models{
