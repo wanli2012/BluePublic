@@ -320,6 +320,7 @@
 //    }else{
 //        self.nodataV.hidden = YES;
 //    }
+    
     return self.model.groom_item.count;
 }
 

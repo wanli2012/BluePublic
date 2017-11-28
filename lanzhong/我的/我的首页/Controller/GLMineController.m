@@ -158,8 +158,8 @@
 #pragma mark - 头视图赋值
 - (void)assignment{
     
-    self.participateLabel.text = [UserModel defaultUser].invest_count;
-    self.publishLabel.text = [UserModel defaultUser].item_count;
+    self.participateLabel.text = [UserModel defaultUser].item_count;
+    self.publishLabel.text = [UserModel defaultUser].invest_count;
     self.banlanceLabel.text = [UserModel defaultUser].item_money;
     
     [self.imageV sd_setImageWithURL:[NSURL URLWithString:[UserModel defaultUser].user_pic] placeholderImage:[UIImage imageNamed:PicHolderImage]];
@@ -266,6 +266,14 @@
             switch (indexPath.row) {
                 case 0://发布项目
                 {
+                    if ([[UserModel defaultUser].real_state integerValue] == 0 || [[UserModel defaultUser].real_state integerValue] == 2) {
+                        [SVProgressHUD showErrorWithStatus:@"请前往个人中心实名认证"];
+                        return;
+                    }else if([[UserModel defaultUser].real_state integerValue] == 3){
+                        [SVProgressHUD showErrorWithStatus:@"实名认证审核中,请等待"];
+                        return;
+                    }
+
                     GLPublishController *publishVC = [[GLPublishController alloc] init];
                     [self.navigationController pushViewController:publishVC animated:YES];
                 }
@@ -296,6 +304,7 @@
                     GLMine_ParticipateController *participateVC = [[GLMine_ParticipateController alloc] init];
                     [self.navigationController pushViewController:participateVC animated:YES];
                 }
+                    break;
                 case 4://我的钱包
                 {
                     GLMine_WalletController *walletVC = [[GLMine_WalletController alloc] init];
@@ -365,27 +374,25 @@
     if (!_dataSource) {
         _dataSource = [NSMutableArray array];
         
-        NSArray *arr5 = @[@{@"title":@"我要发布",@"image":@"mine_share"},
-                          @{@"title":@"我的简历",@"image":@"mine_share"}
+        NSArray *arr5 = @[@{@"title":@"我要发布",@"image":@"我要发布"},
+                          @{@"title":@"我的简历",@"image":@"我的简历"}
                           ];
         
-        NSArray *arr1 = @[@{@"title":@"谁帮助过我",@"image":@"zhang"},
-                          @{@"title":@"我的审核",@"image":@"zhang"},
-                          @{@"title":@"我的项目",@"image":@"zhang"},
-                          @{@"title":@"我帮助过",@"image":@"money"},
-                          @{@"title":@"我的钱包",@"image":@"myproject"}];
+        NSArray *arr1 = @[@{@"title":@"谁帮助过我",@"image":@"谁帮助过我"},
+                          @{@"title":@"我的审核",@"image":@"我的审核"},
+                          @{@"title":@"我的项目",@"image":@"我的项目"},
+                          @{@"title":@"我帮助过",@"image":@"我帮助过"},
+                          @{@"title":@"我的钱包",@"image":@"我的钱包"}];
     
-        NSArray *arr3 = @[@{@"title":@"购物车",@"image":@"mine_shoppingcart"},
-                          @{@"title":@"我的订单",@"image":@"evaluate"},
-                          @{@"title":@"我的评价",@"image":@"order"},
-                          @{@"title":@"分享权益",@"image":@"wallet"},
+        NSArray *arr3 = @[@{@"title":@"购物车",@"image":@"购物车"},
+                          @{@"title":@"我的订单",@"image":@"我的订单"},
+                          @{@"title":@"我的评价",@"image":@"我的评价"},
+                          @{@"title":@"分享权益",@"image":@"分享权益"},
                           ];
 
         [_dataSource addObject:arr5];
         [_dataSource addObject:arr1];
         [_dataSource addObject:arr3];
-
-        
     }
     return _dataSource;
 }

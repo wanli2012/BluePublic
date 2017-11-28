@@ -45,6 +45,7 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"期望工作";
+    self.ensureBtn.layer.cornerRadius = 5.f;
     [self setOriginalValue];//赋初始值
 }
 
@@ -52,8 +53,28 @@
     
     if (self.model) {
         self.positionLabel.text = self.model.want_duty;
-        self.cityLabel.text = [NSString stringWithFormat:@"%@%@",self.model.want_province_name,self.model.want_city_name];
-        self.moneyLabel.text = self.model.want_wages;
+        if (self.model.want_province_name.length == 0) {
+            self.model.want_province_name = @"";
+        }
+
+        if (self.model.want_city_name.length == 0) {
+            self.model.want_city_name = @"";
+        }
+        
+        if (self.model.want_duty.length == 0) {
+            self.positionLabel.text = @"请选择职位";
+            self.cityLabel.text = @"请选择城市";
+            self.moneyLabel.text = @"请选择薪资";
+            self.positionLabel.textColor = [UIColor lightGrayColor];
+            self.moneyLabel.textColor = [UIColor lightGrayColor];
+            self.cityLabel.textColor = [UIColor lightGrayColor];
+            
+        }else{
+            
+            self.positionLabel.text = self.model.want_duty;
+            self.cityLabel.text = [NSString stringWithFormat:@"%@%@",self.model.want_province_name,self.model.want_city_name];
+            self.moneyLabel.text = self.model.want_wages;
+        }
         self.provinceId = self.model.want_province_id;
         self.cityId = self.model.want_city_id;
     }
@@ -214,9 +235,11 @@
         if (isCareer) {
             weakSelf.positionLabel.text = dataArr[index];
             weakSelf.career_id = self.careerModels[index].id;
+            weakSelf.positionLabel.textColor = [UIColor darkGrayColor];
         }else{
             weakSelf.moneyLabel.text = dataArr[index];
             weakSelf.money = dataArr[index];
+            weakSelf.moneyLabel.textColor = [UIColor darkGrayColor];
         }
     };
     
@@ -238,6 +261,8 @@
         weakself.cityLabel.text = str;
         weakself.provinceId = provinceid;
         weakself.cityId = cityd;
+        weakself.cityLabel.textColor = [UIColor darkGrayColor];
+
     };
 }
 #pragma mark - 动画的代理

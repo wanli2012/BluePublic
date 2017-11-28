@@ -70,6 +70,7 @@
 }
 
 - (IBAction)startTimeChoose:(id)sender {
+    [self.view endEditing:YES];
     GLDatePickerController *vc=[[GLDatePickerController alloc]init];
     vc.titleLabel.text = @"请选择入职日期";
     __weak typeof(self)weakSelf = self;
@@ -84,6 +85,7 @@
 }
 
 - (IBAction)endTimeChoose:(id)sender {
+    [self.view endEditing:YES];
     GLDatePickerController *vc=[[GLDatePickerController alloc]init];
     vc.titleLabel.text = @"请选择结束日期";
     __weak typeof(self)weakSelf = self;

@@ -22,6 +22,10 @@
 #import "GLMutipleChooseController.h"//省市选择
 #import "GLPublish_CityModel.h"//城市模型
 
+#import "HXPhotoViewController.h"
+#import "HXPhotoView.h"
+
+static const CGFloat kPhotoViewMargin = 12.0;
 
 @interface GLPublishController ()<UITextViewDelegate,HXPhotoViewDelegate,UIViewControllerTransitioningDelegate,UIViewControllerAnimatedTransitioning,HWCalendarDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
@@ -40,14 +44,8 @@
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UIButton *submitBtn;//提交
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+//@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
-@property (strong, nonatomic)HWCalendar *Calendar;
-@property (strong, nonatomic)UIView *CalendarView;
-
-@property (nonatomic, strong)GLCircle_item_screenModel *categoryModel;
-@property (nonatomic, strong)LoadWaitView *loadV;
-@property (nonatomic, strong)NSMutableArray *dataSourceArr;//行业数据源
 
 @property (weak, nonatomic) IBOutlet UILabel *industryLabel;//行业分类
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;//日期
@@ -58,6 +56,12 @@
 @property (weak, nonatomic) IBOutlet UITextView *infoTV;//项目说明
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 
+@property (strong, nonatomic)HWCalendar *Calendar;
+@property (strong, nonatomic)UIView *CalendarView;
+
+@property (nonatomic, strong)GLCircle_item_screenModel *categoryModel;
+@property (nonatomic, strong)LoadWaitView *loadV;
+@property (nonatomic, strong)NSMutableArray *dataSourceArr;//行业数据源
 @property (nonatomic, copy)NSString *trade_id;//行业id
 @property (nonatomic, copy)NSString *need_time;//截止日期
 
@@ -74,6 +78,11 @@
 @property (nonatomic, strong)NSMutableArray *cityModels;//城市数据源
 @property (nonatomic, copy)NSString *provinceId;//省份id
 @property (nonatomic, copy)NSString *cityId;//城市id
+
+@property (strong, nonatomic) HXPhotoManager *manager;
+@property (strong, nonatomic) HXPhotoView *photoView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollViewHeight;
 
 @end
 
@@ -118,10 +127,15 @@
     
     _isAgreeProtocol = NO;
     [self postRequest_Category];
-//    [self postRequest_City];
+
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange:) name:UITextFieldTextDidChangeNotification object:self.titleTF];
     
+    self.photoView.manager = self.manager;
+    [self.scrollView addSubview:self.photoView];
+    
+    self.scrollViewHeight.constant = (kSCREEN_WIDTH - 30)/3;
+
 }
 
 #pragma mark - 获取分类
@@ -150,33 +164,6 @@
     
 }
 
-//#pragma mark - 获取城市列表
-//- (void)postRequest_City {
-//    
-//    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:[UIApplication sharedApplication].keyWindow];
-//    [NetworkManager requestPOSTWithURLStr:kCITYLIST_URL paramDic:@{} finish:^(id responseObject) {
-//        [_loadV removeloadview];
-//        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
-//            if([responseObject[@"data"] count] != 0){
-//                
-//                [self.cityModels removeAllObjects];
-//                for (NSDictionary *dic in responseObject[@"data"]) {
-//                    
-//                    GLPublish_CityModel *model = [GLPublish_CityModel mj_objectWithKeyValues:dic];
-//                    [self.cityModels addObject:model];
-//                }
-//            }
-//        }else{
-//
-//            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
-//        }
-//        
-//    } enError:^(NSError *error) {
-//        [_loadV removeloadview];
-//    }];
-//    
-//}
-
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
@@ -184,7 +171,7 @@
 }
 #pragma mark -  行业选择
 - (IBAction)industryChoose:(id)sender {
-
+    [self.view endEditing:YES];
     GLSimpleSelectionPickerController *vc=[[GLSimpleSelectionPickerController alloc]init];
     
     if (self.dataSourceArr.count) {
@@ -251,6 +238,7 @@
 }
 
 - (void)popCityChoose{
+    [self.view endEditing:YES];
     GLMutipleChooseController *vc=[[GLMutipleChooseController alloc]init];
     vc.dataArr = self.cityModels;
     vc.transitioningDelegate=self;
@@ -263,6 +251,7 @@
         weakself.addressLabel.text = str;
         weakself.provinceId = provinceid;
         weakself.cityId = cityd;
+        [weakself.view endEditing:YES];
         
     };
 }
@@ -294,130 +283,36 @@
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-#pragma mark - 图片选择
-- (IBAction)getPicture:(UITapGestureRecognizer *)sender {
+#pragma mark - 照片选择器 代理
+- (void)photoView:(HXPhotoView *)photoView changeComplete:(NSArray<HXPhotoModel *> *)allList photos:(NSArray<HXPhotoModel *> *)photos videos:(NSArray<HXPhotoModel *> *)videos original:(BOOL)isOriginal {
     
-    switch (sender.view.tag) {
-        case 11:
-        {
-            self.picIndex = 1;
-        }
-            break;
-        case 22:
-        {
-            self.picIndex = 2;
-        }
-            break;
-        case 33:
-        {
-            self.picIndex = 3;
-        }
-            break;
-        default:
-            break;
+    [self.imageArr removeAllObjects];
+    for (HXPhotoModel *photo in photos) {
+        PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+        options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+        
+        __weak typeof(self) weakself = self;
+        [[PHImageManager defaultManager] requestImageForAsset:photo.asset targetSize:[UIScreen mainScreen].bounds.size contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage *result, NSDictionary *info) {
+            //设置图片
+            [weakself.imageArr insertObject:result atIndex:0];
+            
+        }];
     }
-    
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"项目图片" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    UIAlertAction *picture = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        //    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        picker.delegate = self;
-        //    // 设置选择后的图片可以被编辑
-        //    picker.allowsEditing = YES;
-        //    [self presentViewController:picker animated:YES completion:nil];
-        //1.获取媒体支持格式
-        NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
-        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-        picker.mediaTypes = @[mediaTypes[0]];
-        //5.其他配置
-        //allowsEditing是否允许编辑，如果值为no，选择照片之后就不会进入编辑界面
-        picker.allowsEditing = YES;
-        //6.推送
-        [self presentViewController:picker animated:YES completion:nil];
-        
-    }];
-    
-    UIAlertAction *camera = [UIAlertAction actionWithTitle:@"相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
-        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-            
-            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-            picker.delegate = self;
-            // 设置拍照后的图片可以被编辑
-            picker.allowsEditing = YES;
-            picker.sourceType = sourceType;
-            [self presentViewController:picker animated:YES completion:nil];
-        }else {
-            
-        }
-        
-    }];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
-    
-    [alertVC addAction:picture];
-    [alertVC addAction:camera];
-    [alertVC addAction:cancel];
-    [self presentViewController:alertVC animated:YES completion:nil];
-
 }
 
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+- (void)photoView:(HXPhotoView *)photoView deleteNetworkPhoto:(NSString *)networkPhotoUrl {
     
-    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
-    if ([type isEqualToString:@"public.image"]) {
-        // 先把图片转成NSData
-        UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
-        
-        NSData *data;
-        if (UIImagePNGRepresentation(image) == nil) {
-            data = UIImageJPEGRepresentation(image, 0.2);
-        }else {
-            data = UIImageJPEGRepresentation(image, 0.2);
-        }
-        
-        UIImage *picImage = [UIImage imageWithData:data];
+   
+}
 
-        [picker dismissViewControllerAnimated:YES completion:nil];
-        
-        UIImage *placeImage = [UIImage imageNamed:@"addphotograph"];
-        
-        switch (self.picIndex) {
-            case 1:
-            {
-                if (![UIImagePNGRepresentation(placeImage) isEqual:UIImagePNGRepresentation(picImage)]){
-                    
-                    self.pic1.image = picImage;
-                    _picIndex1 = 1;
-                }
-            }
-                break;
-            case 2:
-            {
-                if (![UIImagePNGRepresentation(placeImage) isEqual:UIImagePNGRepresentation(picImage)]){
-                    
-                    self.pic2.image = picImage;
-                    _picIndex2 = 1;
-                }
+/**  网络图片全部下载完成时调用  */
+- (void)photoViewAllNetworkingPhotoDownloadComplete:(HXPhotoView *)photoView{
+    
+}
 
-            }
-                break;
-            case 3:
-            {
-                if (![UIImagePNGRepresentation(placeImage) isEqual:UIImagePNGRepresentation(picImage)]){
-                    
-                    self.pic3.image = picImage;
-                    _picIndex3 = 1;
-                }
-
-            }
-                break;
-            default:
-                break;
-        }
-    }
+- (void)photoView:(HXPhotoView *)photoView updateFrame:(CGRect)frame {
+    
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, CGRectGetMaxY(frame) + kPhotoViewMargin);
 }
 
 #pragma mark - 提交
@@ -480,24 +375,11 @@
         [SVProgressHUD showErrorWithStatus:@"未选择地区"];
         return;
     }
-    
-    [self.imageArr removeAllObjects];//每次判定的时候都清空数组,保证不会重复添加图片
-    
-    if(_picIndex1 == 1){
-        [self.imageArr addObject:self.pic1.image];
-    }
-    if(_picIndex2 == 1){
-        [self.imageArr addObject:self.pic2.image];
-    }
-    if(_picIndex3 == 1){
-        [self.imageArr addObject:self.pic3.image];
-    }
-
+ 
     if (self.imageArr.count <= 0) {
         [SVProgressHUD showErrorWithStatus:@"至少上传一张项目图片"];
         return;
     }
-    
     
     self.submitBtn.userInteractionEnabled = NO;
     self.submitBtn.backgroundColor = [UIColor lightGrayColor];
@@ -531,8 +413,14 @@
             NSString *fileName=[NSString stringWithFormat:@"%@%d.png",str,i];
             NSString *title = [NSString stringWithFormat:@"photo[%zd]",i];
       
-            NSData *data = UIImagePNGRepresentation(self.imageArr[i]);
-            
+            NSData *data;
+            if (UIImagePNGRepresentation(self.imageArr[i]) == nil) {
+                
+                data = UIImageJPEGRepresentation(self.imageArr[i], 0.2);
+            }else {
+                data = UIImageJPEGRepresentation(self.imageArr[i], 0.2);
+            }
+
             [formData appendPartWithFileData:data name:title fileName:fileName mimeType:@"image/png"];
         }
         
@@ -544,6 +432,7 @@
             [SVProgressHUD dismiss];
         
         }
+        [self.navigationController popViewControllerAnimated:YES];
         
     }success:^(NSURLSessionDataTask *task, id responseObject) {
         
@@ -739,6 +628,7 @@
     NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[now timeIntervalSince1970]];
     
     self.need_time = timeSp;
+    [self.view endEditing:YES];
 }
 
 #pragma mark - 时间比较大小
@@ -865,6 +755,34 @@
         _cityModels = [NSMutableArray array];
     }
     return _cityModels;
+}
+
+
+- (HXPhotoManager *)manager {
+    if (!_manager) {
+        _manager = [[HXPhotoManager alloc] initWithType:HXPhotoManagerSelectedTypePhotoAndVideo];
+        _manager.openCamera = YES;
+        _manager.cacheAlbum = YES;
+        _manager.lookLivePhoto = YES;
+        _manager.open3DTouchPreview = YES;
+        _manager.cameraType = HXPhotoManagerCameraTypeSystem;
+        _manager.photoMaxNum = 3;
+        _manager.videoMaxNum = 3;
+        _manager.maxNum = 18;
+        _manager.saveSystemAblum = NO;
+        
+    }
+    return _manager;
+}
+
+- (HXPhotoView *)photoView{
+    if (!_photoView) {
+        _photoView = [HXPhotoView photoManager:self.manager];;
+        _photoView.frame = CGRectMake(kPhotoViewMargin, 0, kSCREEN_WIDTH - kPhotoViewMargin * 2, 0);
+        _photoView.delegate = self;
+        _photoView.backgroundColor = [UIColor whiteColor];
+    }
+    return _photoView;
 }
 
 @end

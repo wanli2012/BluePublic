@@ -80,12 +80,12 @@
             break;
         case 2:
         {
-            self.examineLabel.text = @"审核失";
+            self.examineLabel.text = @"审核失败";
         }
             break;
         case 3:
         {
-            self.examineLabel.text = @"审核成功";
+            self.examineLabel.text = @"筹款中";
         }
             break;
         case 4:

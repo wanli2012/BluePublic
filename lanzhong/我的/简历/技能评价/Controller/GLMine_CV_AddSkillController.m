@@ -40,14 +40,13 @@
         self.nameTF.text = self.model.skill_name;
         self.mastery = self.model.mastery;
     }
-    
     if (self.mastery.length == 0) {
         self.mastery = @"0";
     }
     
     [self setSelectImage:[self.mastery integerValue]];
-    
 }
+
 #pragma mark - 保存
 - (IBAction)save:(id)sender {
     if(self.nameTF.text.length == 0){
@@ -71,7 +70,6 @@
     [NetworkManager requestPOSTWithURLStr:kCV_ADD_SKILL_URL paramDic:dic finish:^(id responseObject) {
         
         [_loadV removeloadview];
-        
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             
             [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
@@ -86,18 +84,14 @@
         [_loadV removeloadview];
         [SVProgressHUD showErrorWithStatus:error.localizedDescription];
     }];
-
 }
 
 //设置熟练程度
 - (IBAction)selecteLevel:(UITapGestureRecognizer *)sender {
 
     [self setSelectImage:sender.view.tag-10];
-    
     NSString *str = [NSString stringWithFormat:@"%zd",sender.view.tag - 10];
-    
     self.mastery = str;
-    
 }
 
 - (void)setSelectImage:(NSInteger)index
@@ -117,32 +111,26 @@
         case 2:
         {
             self.levelImageV2.image = [UIImage imageNamed:@"address_choice"];
-            
         }
             break;
         case 3:
         {
             self.levelImageV3.image = [UIImage imageNamed:@"address_choice"];
-            
         }
             break;
         case 4:
         {
             self.levelImageV4.image = [UIImage imageNamed:@"address_choice"];
-            
         }
             break;
         case 5:
         {
             self.levelImageV5.image = [UIImage imageNamed:@"address_choice"];
-            
         }
             break;
-            
         default:
             break;
     }
 }
-
 
 @end

@@ -30,6 +30,13 @@
 
 - (void)setModel:(GLTalent_CVModel *)model{
     _model = model;
+    
+    NSString *imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/100/h/100",model.head_pic];
+    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    if (self.picImageV.image == nil) {
+        self.picImageV.image = [UIImage imageNamed:PlaceHolderImage];
+    }
+
     [self.picImageV sd_setImageWithURL:[NSURL URLWithString:model.head_pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     self.nameLabel.text = model.name;
     self.educationLabel.text = model.education;
@@ -37,7 +44,6 @@
     self.jobLabel.text = model.duty;
     
     if ([model.sex integerValue] == 1) {
-        
         self.sexLabel.text = @"男";
     }else{
         self.sexLabel.text = @"女";

@@ -50,25 +50,51 @@
     self.navigationItem.title = @"基本信息";
     self.ensureBtn.layer.cornerRadius = 5.f;
     [self setOriginalValue];
+    [self.nameTF addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
 }
 
 - (void)setOriginalValue{
     if (self.basicModel) {
         
-        self.nameTF.text = self.basicModel.name;
-        self.educationLabel.text = self.basicModel.education;
-        self.workLifeLabel.text = self.basicModel.work;
-        self.birthLabel.text = self.basicModel.birth_time;
-        self.cityLabel.text = self.basicModel.city_name;
-        self.phoneNumTF.text = self.basicModel.phone;
-        self.emailTF.text = self.basicModel.email;
-        
-        if ([self.basicModel.sex integerValue] == 1) {
-            self.sexLabel.text = @"男";
+        if (self.basicModel.name == 0) {
+
+            self.cityLabel.text = @"请选择城市";
+            self.educationLabel.text = @"请选择学历";
+            self.workLifeLabel.text = @"请选择工作年限";
+            self.birthLabel.text = @"请选择生日";
+            self.sexLabel.text = @"请选择性别";
         }else{
-            self.sexLabel.text = @"女";
+           
+            self.nameTF.text = self.basicModel.name;
+            self.educationLabel.text = self.basicModel.education;
+            self.workLifeLabel.text = self.basicModel.work;
+            self.birthLabel.text = self.basicModel.birth_time;
+            self.cityLabel.text = self.basicModel.city_name;
+            
+            self.sexLabel.textColor = [UIColor darkGrayColor];
+            self.educationLabel.textColor = [UIColor darkGrayColor];
+            self.workLifeLabel.textColor = [UIColor darkGrayColor];
+            self.birthLabel.textColor = [UIColor darkGrayColor];
+            self.cityLabel.textColor = [UIColor darkGrayColor];
+            
+            self.emailTF.text = self.basicModel.email;
+            if ([self.basicModel.sex integerValue] == 1) {
+                self.sexLabel.text = @"男";
+            }else if([self.basicModel.sex integerValue] == 2){
+                self.sexLabel.text = @"女";
+            }else{
+                self.sexLabel.text = @"";
+            }
         }
+        
+        if ([self.basicModel.phone integerValue] == 0) {
+            self.phoneNumTF.text = @"";
+        }else{
+            
+            self.phoneNumTF.text = self.basicModel.phone;
+        }
+        
         self.sexID = [self.basicModel.sex integerValue];
         self.provinceId = self.basicModel.province_id;
         self.cityId = self.basicModel.city_id;
@@ -129,18 +155,21 @@
 }
 //type: 1:性别 2:学历 3:工作年限
 - (void)popLifeChooser:(NSMutableArray *)dataArr andTitle:(NSString *)title type:(NSInteger)type {
+    [self.view endEditing:YES];
     GLSimpleSelectionPickerController *vc=[[GLSimpleSelectionPickerController alloc]init];
     
     vc.dataSourceArr = dataArr;
     
     vc.titlestr = title;
+    
     __weak typeof(self)weakSelf = self;
     vc.returnreslut = ^(NSInteger index){
+        
         switch (type) {
             case 1:
             {
                 weakSelf.sexLabel.text = dataArr[index];
-                
+                weakSelf.sexLabel.textColor = [UIColor darkGrayColor];
                 if (index == 0) {
                     self.sexID = 1;
                 }else{
@@ -151,12 +180,14 @@
             case 2:
             {
                 weakSelf.educationLabel.text = dataArr[index];
+                weakSelf.educationLabel.textColor = [UIColor darkGrayColor];
             }
                 break;
             case 3:
             {
                 
                 weakSelf.workLifeLabel.text = dataArr[index];
+                weakSelf.workLifeLabel.textColor = [UIColor darkGrayColor];
             }
                 break;
                 
@@ -173,12 +204,14 @@
 
 #pragma mark - 生日
 - (IBAction)birthChoose:(id)sender {
+    [self.view endEditing:YES];
     
     GLDatePickerController *vc=[[GLDatePickerController alloc]init];
     vc.titleLabel.text = @"请选择日期";
     __weak typeof(self)weakSelf = self;
     vc.returnreslut = ^(NSString *dateStr){
         weakSelf.birthLabel.text = dateStr;
+       weakSelf.birthLabel.textColor = [UIColor darkGrayColor];
     };
 
     vc.transitioningDelegate = self;
@@ -221,6 +254,7 @@
 }
 - (void)popCityChoose{
     
+    [self.view endEditing:YES];
     GLMutipleChooseController *vc=[[GLMutipleChooseController alloc]init];
     vc.dataArr = self.cityModels;
     vc.transitioningDelegate=self;
@@ -229,10 +263,10 @@
     [self presentViewController:vc animated:YES completion:nil];
     __weak typeof(self) weakself = self;
     vc.returnreslut = ^(NSString *str,NSString *strid,NSString *provinceid,NSString *cityd,NSString *areaid){
-        //                weakself.cityLabel.textColor = [UIColor darkGrayColor];
         weakself.cityLabel.text = str;
         weakself.provinceId = provinceid;
         weakself.cityId = cityd;
+        weakself.cityLabel.textColor = [UIColor darkGrayColor];
     };
 }
 
@@ -324,14 +358,13 @@
     return YES;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if(textField == self.phoneNumTF){
-       return [self validateNumber:string];
+- (void)textFieldDidChange:(UITextField *)textField
+{
+    if (textField == self.nameTF) {
+        if (textField.text.length > 16) {
+            textField.text = [textField.text substringToIndex:16];
+        }
     }
-    if (textField.text.length > 16) {
-        return NO;
-    }
-    return YES;
 }
 
 - (BOOL)validateNumber:(NSString*)number {

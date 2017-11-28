@@ -25,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.navigationItem.title = @"经典案例";
     [self.tableView registerNib:[UINib nibWithNibName:@"GLHomeCell" bundle:nil] forCellReuseIdentifier:@"GLHomeCell"];
     [self.tableView addSubview:self.nodataV];
@@ -87,9 +87,15 @@
                     [self.models addObject:model];
                 }
             }
+           
+        }else if ([responseObject[@"code"] integerValue]==PAGE_ERROR_CODE){
             
+            if (self.models.count != 0) {
+                
+                [MBProgressHUD showError:responseObject[@"message"]];
+            }
         }else{
-
+            
             [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         

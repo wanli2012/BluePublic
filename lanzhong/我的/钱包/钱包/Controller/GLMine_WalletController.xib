@@ -298,8 +298,8 @@
                                         <constraint firstAttribute="trailing" secondItem="ihb-1Q-W8z" secondAttribute="trailing" constant="50" id="dLc-UA-ud3"/>
                                     </constraints>
                                 </view>
-                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ryV-wt-pVO" userLabel="rechargeView">
-                                    <rect key="frame" x="0.0" y="238" width="353" height="380"/>
+                                <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ryV-wt-pVO" userLabel="rechargeView">
+                                    <rect key="frame" x="0.0" y="388" width="353" height="230"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jwx-Hu-nxK">
                                             <rect key="frame" x="50" y="0.0" width="253" height="40"/>

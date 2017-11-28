@@ -20,7 +20,7 @@
 #import "GLMine_CV_DescriptionCell.h"//自我描述
 
 #import "GLMine_CV_BaseInfoController.h"//基本信息修改界面
-//#import "GLMine_CV_PlaceHolderCell.h"//占位cell
+
 #import "GLMine_CV_LiveListController.h"//工作经历列表
 #import "GLMine_CV_EducationController.h"//教育经历
 #import "GLMine_CV_SkillController.h"//技能评价
@@ -28,7 +28,7 @@
 #import "GLMine_CV_ElegantShowController.h"//风采展示
 #import "GLMine_CV_SelfDescriptionController.h"//自我描述
 
-@interface GLMine_CV_PreviewController ()<UITableViewDelegate,UITableViewDataSource,GLMine_CV_StyleCellDelegate>
+@interface GLMine_CV_PreviewController ()<UITableViewDelegate,UITableViewDataSource,GLMine_CV_StyleCellDelegate,GLMine_CV_BaseCellDelegate>
 
 @property (nonatomic, strong)NSMutableArray *titleArr;
 @property (nonatomic, assign)NSInteger seletecSection;//点中编辑是哪个组
@@ -114,11 +114,6 @@
             if([responseObject[@"data"] count] != 0){
                 
                 self.model = [GLMine_CV_DetailModel mj_objectWithKeyValues:responseObject[@"data"]];
-                
-                if (self.model.basic.name.length != 0) {
-                    self.titleLabel.text = self.model.basic.name;
-                    self.editImageV.hidden = YES;
-                }
                 [self.picImageV sd_setImageWithURL:[NSURL URLWithString:self.model.basic.head_pic] placeholderImage:[UIImage imageNamed:@"touxiang2"]];
                 [self.titleArr removeAllObjects];
                 [self.titleArr addObjectsFromArray:@[@"基本信息",@"工作经历",@"教育经历",@"技能评价",@"期望工作",@"风采展示",@"自我描述"]];
@@ -145,6 +140,25 @@
     
     self.navigationController.navigationBar.hidden = NO;
 }
+#pragma mark - 查看头像大图
+- (IBAction)checkBigPic:(id)sender {
+    self.HideNavagation = YES;
+    JZAlbumViewController *jzAlbumVC = [[JZAlbumViewController alloc]init];
+    jzAlbumVC.currentIndex = 0;//这个参数表示当前图片的index，默认是0
+
+    NSString *str = self.model.basic.head_pic;
+    jzAlbumVC.imgArr = [NSMutableArray arrayWithObject:str];//图片数组，可以是url，也可以是UIImage
+    [self presentViewController:jzAlbumVC animated:NO completion:nil];
+    
+}
+#pragma mark - 打电话
+- (void)callThePerson:(NSString *)phoneNum{
+
+    NSString *tel = [NSString stringWithFormat:@"tel://%@",phoneNum];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:tel]];
+
+}
+
 #pragma mark - 查看大图
 - (void)toSeeBigPic:(NSInteger)index{
     self.HideNavagation = YES;
@@ -181,14 +195,61 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
-    if (section == 1 && self.model.live.count > 0) {
-        return self.model.live.count;
-    }else if(section == 3 && self.model.skill.count > 0){
-        return self.model.skill.count;
+
+    switch (section) {
+        case 1:
+        {
+            return self.model.live.count;
+        }
+            break;
+        case 2:
+        {
+            if(self.model.teach.school.length == 0){
+                return 0;
+            }else{
+                return 1;
+            }
+        }
+            break;
+        case 3:
+        {
+            return self.model.skill.count;
+        }
+            break;
+        case 4:
+        {
+            if (self.model.want.want_duty.length == 0) {
+                return 0;
+            }else{
+                return 1;
+            }
+        }
+            break;
+        case 5:
+        {
+            if (self.model.basic.show_photo.count == 0) {
+                return 0;
+            }else{
+                return 1;
+            }
+        }
+            break;
+        case 6:
+        {
+            if (self.model.basic.i_info.length == 0) {
+                return 0;
+            }else{
+                return 1;
+            }
+        }
+            break;
+            
+        default:
+        {
+            return 1;
+        }
+            break;
     }
-    
-    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -199,13 +260,19 @@
         {
             GLMine_CV_BaseCell *baseCell = [tableView dequeueReusableCellWithIdentifier:@"GLMine_CV_BaseCell"];
             baseCell.model = self.model.basic;
+            baseCell.delegate = self;
+            baseCell.callBtn.hidden = NO;
             cell = baseCell;
+            
         }
             break;
         case 1://工作经历
         {
             GLMine_CV_WorkCell *c = [tableView dequeueReusableCellWithIdentifier:@"GLMine_CV_WorkCell"];
-            c.model = self.model.live[indexPath.row];
+            if (self.model.live.count > 0) {
+                
+                c.model = self.model.live[indexPath.row];
+            }
             cell = c;
         }
             break;
@@ -219,7 +286,11 @@
         case 3://技能评价
         {
             GLMine_CV_SkillCell *c = [tableView dequeueReusableCellWithIdentifier:@"GLMine_CV_SkillCell"];
-            c.model = self.model.skill[indexPath.row];
+
+            if (self.model.skill.count > 0) {
+                
+                c.model = self.model.skill[indexPath.row];
+            }
             cell = c;
         }
             break;
@@ -261,7 +332,7 @@
     switch (indexPath.section) {
         case 0:
         {
-            return 315;
+            return 370;
         }
             break;
         case 1:

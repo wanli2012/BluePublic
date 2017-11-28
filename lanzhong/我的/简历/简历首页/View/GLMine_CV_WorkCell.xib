@@ -37,13 +37,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xuz-6K-atN">
-                        <rect key="frame" x="49" y="73" width="267" height="52"/>
+                        <rect key="frame" x="49" y="73" width="267" height="51"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="18c-S9-BbG">
-                        <rect key="frame" x="15" y="134" width="311" height="1"/>
+                        <rect key="frame" x="15" y="133" width="311" height="1"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="Mq5-ns-lnO"/>
@@ -55,6 +55,13 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="return2" translatesAutoresizingMaskIntoConstraints="NO" id="8rT-pX-PSc">
+                        <rect key="frame" x="308" y="48" width="8" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="8e5-3Y-mKC"/>
+                            <constraint firstAttribute="width" constant="8" id="Zdo-Z0-Oky"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="o2z-Fm-B4m" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="3po-z5-5JK"/>
@@ -72,10 +79,13 @@
                     <constraint firstAttribute="trailing" secondItem="xuz-6K-atN" secondAttribute="trailing" constant="10" id="eLc-kg-sb4"/>
                     <constraint firstAttribute="trailing" secondItem="18c-S9-BbG" secondAttribute="trailing" id="gfm-cq-gNq"/>
                     <constraint firstItem="XbX-h7-O3O" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="hhI-NL-IpV"/>
+                    <constraint firstItem="8rT-pX-PSc" firstAttribute="centerY" secondItem="o2z-Fm-B4m" secondAttribute="centerY" id="kbB-Dc-IAe"/>
                     <constraint firstItem="xuz-6K-atN" firstAttribute="top" secondItem="o2z-Fm-B4m" secondAttribute="bottom" constant="10" id="uWX-1G-Ene"/>
+                    <constraint firstAttribute="trailing" secondItem="8rT-pX-PSc" secondAttribute="trailing" constant="10" id="x5L-KQ-6t2"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="arrowImageV" destination="8rT-pX-PSc" id="2fN-7S-nZw"/>
                 <outlet property="positionLabel" destination="o2z-Fm-B4m" id="gZi-UP-ljB"/>
                 <outlet property="workContentLabel" destination="xuz-6K-atN" id="fMv-FM-qth"/>
                 <outlet property="workPlaceLabel" destination="IFK-lF-1df" id="dCS-EW-mm6"/>
@@ -84,4 +94,7 @@
             <point key="canvasLocation" x="31" y="-32"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="return2" width="8" height="15"/>
+    </resources>
 </document>

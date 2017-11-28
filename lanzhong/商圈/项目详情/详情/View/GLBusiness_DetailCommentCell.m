@@ -45,7 +45,7 @@
     
     NSString *imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/100/h/100",model.must_user_pic];
     [self.picImageV sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
-    self.priceLabel.text = [NSString stringWithFormat:@"支持了 %@",model.money];
+    self.priceLabel.text = [NSString stringWithFormat:@"支持了¥ %@",model.money];
     self.commentLabel.text = model.comment;
     self.dateLabel.text = [formattime formateTimeOfDate:model.addtime];
     

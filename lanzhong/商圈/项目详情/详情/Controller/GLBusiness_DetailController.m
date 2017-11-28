@@ -35,29 +35,22 @@
 @property (weak, nonatomic) IBOutlet UILabel *raisedLabel;//已筹金额
 @property (weak, nonatomic) IBOutlet UIView *bgProgressView;//进度条背景
 @property (weak, nonatomic) IBOutlet UIView *progressView;//进度条
-
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *progressLeftConstrait;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *progressViewWidth;
-
 @property (weak, nonatomic) IBOutlet UIView *progressSignView;//百分比 球
 @property (weak, nonatomic) IBOutlet UILabel *listNumLabel;//榜单人数
 @property (weak, nonatomic) IBOutlet UILabel *progressLabel;//百分比
-
 @property (weak, nonatomic) IBOutlet UILabel *needTimeLabel;
-
 @property (weak, nonatomic) IBOutlet UIButton *supportBtn;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
-
 @property (weak, nonatomic) IBOutlet UIView *middleView;
 @property (weak, nonatomic) IBOutlet UIView *middleViewLayerView;
-
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageV;
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageV2;
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageV3;
 
 @property (nonatomic, strong)GLBusiness_DetailModel *model;
 @property (nonatomic, strong)LoadWaitView *loadV;
-
 
 @property (nonatomic, assign)BOOL  HideNavagation;//是否需要恢复自定义导航栏
 
@@ -80,6 +73,7 @@
         [weakSelf postRequest:YES];
         
     }];
+    
     // 设置文字
     [header setTitle:@"快扯我，快点" forState:MJRefreshStateIdle];
     
@@ -92,7 +86,6 @@
     [self postRequest:YES];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"supportNotification" object:nil];
-    
 }
 
 -(void)refresh{
@@ -100,6 +93,7 @@
     [self postRequest:YES];
 }
 
+#pragma mark - 请求数据
 - (void)postRequest:(BOOL)isRefresh{
 
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
@@ -151,16 +145,23 @@
     if (self.model.invest_10.count >= 1) {
         
         NSString *imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/100/h/100",self.model.invest_10[0].must_user_pic];
-        [self.iconImageV3 sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
-        
+        [self.iconImageV sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+        self.iconImageV.hidden = NO;
+        self.iconImageV2.hidden = YES;
+        self.iconImageV3.hidden = YES;
         if (self.model.invest_10.count >= 2) {
             
             NSString *imageStr1 = [NSString stringWithFormat:@"%@?imageView2/1/w/100/h/100",self.model.invest_10[1].must_user_pic];
             [self.iconImageV2 sd_setImageWithURL:[NSURL URLWithString:imageStr1] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
-            
+            self.iconImageV.hidden = NO;
+            self.iconImageV2.hidden = NO;
+            self.iconImageV3.hidden = YES;
             if (self.model.invest_10.count >= 3) {
                 NSString *imageStr2 = [NSString stringWithFormat:@"%@?imageView2/1/w/100/h/100",self.model.invest_10[2].must_user_pic];
-                [self.iconImageV sd_setImageWithURL:[NSURL URLWithString:imageStr2] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+                [self.iconImageV3 sd_setImageWithURL:[NSURL URLWithString:imageStr2] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+                self.iconImageV.hidden = NO;
+                self.iconImageV2.hidden = NO;
+                self.iconImageV3.hidden = NO;
             }
         }
     }
@@ -174,7 +175,12 @@
 
     self.progressViewWidth.constant = self.bgProgressView.width * ratio;
     self.progressLeftConstrait.constant = self.bgProgressView.width * ratio;
-    self.progressLabel.text = [NSString stringWithFormat:@"%.2f%%",ratio * 100];
+    if (ratio == 1.0) {
+        self.progressLabel.text = [NSString stringWithFormat:@"%.0f%%",ratio * 100];
+    }else{
+        
+        self.progressLabel.text = [NSString stringWithFormat:@"%.2f%%",ratio * 100];
+    }
 
     //获取当前日期0点0分的时间戳
     NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
@@ -239,7 +245,7 @@
         return -1;
     }
     
-    NSInteger dayCount = (end - begin)/(24 * 60 * 60);
+    NSInteger dayCount = (end - begin)/(24 * 60 * 60) + 1;
     
     return dayCount;
 }
@@ -318,6 +324,10 @@
 
 #pragma mark - 爱心贡献榜
 - (IBAction)contributionList:(id)sender {
+    if(self.model.invest_10.count == 0){
+        [SVProgressHUD showErrorWithStatus:@"暂无人支持"];
+        return;
+    }
     
     self.hidesBottomBarWhenPushed = YES;
     GLBusiness_LoveListController *lovelistVC = [[GLBusiness_LoveListController alloc] init];
@@ -462,13 +472,13 @@
             break;
         case 1:
         {
-            if (self.model.invest_list.count <= 2) {
+            if (self.model.invest_list.count <= 10) {
                 
                 return self.model.invest_list.count;
                 
             }else{
                 
-                return 2;
+                return 10;
             }
         }
             break;

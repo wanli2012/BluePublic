@@ -275,18 +275,28 @@
     }
 }
 
+- (void)judgeSwithIsOn{
+    if ([self.model.basic.is_open integerValue] == 1) {
+        [self.showSwitch setOn:YES];
+    }else if([self.model.basic.is_open integerValue] == 2){
+        [self.showSwitch setOn:NO];
+    }
+
+}
 #pragma mark - 设置时候展示简历
 - (IBAction)isShowCV:(UISwitch *)sender {
     if (self.model.basic.name.length == 0) {
         [SVProgressHUD showErrorWithStatus:@"请先完善基本信息"];
+        [self judgeSwithIsOn];
         return;
     }
     if (self.model.basic.head_pic.length == 0) {
         [SVProgressHUD showErrorWithStatus:@"请先上传头像"];
+        [self judgeSwithIsOn];
         return;
     }
     if (self.model.want.want_duty.length == 0 || self.model.want.want_wages.length == 0 || self.model.want.want_province_name.length == 0 || self.model.want.want_city_name.length == 0) {
-        [SVProgressHUD showErrorWithStatus:@"请先补全期望工作"];
+        [self judgeSwithIsOn];
         return;
     }
     
@@ -310,11 +320,7 @@
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
         }else{
-            if ([is_open integerValue] == 1) {
-                [self.showSwitch setOn:NO];
-            }else{
-                [self.showSwitch setOn:YES];
-            }
+           [self judgeSwithIsOn];
             [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         

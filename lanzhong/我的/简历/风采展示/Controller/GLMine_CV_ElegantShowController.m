@@ -136,11 +136,16 @@ static const CGFloat kPhotoViewMargin = 12.0;
 
 - (void)photoView:(HXPhotoView *)photoView deleteNetworkPhoto:(NSString *)networkPhotoUrl {
 
+    BOOL isDel = NO;
     for (NSString *url in self.images) {
         if ([url isEqualToString:networkPhotoUrl]) {
-            
-            [self.images removeObject:url];
+
+            isDel = YES;
         }
+    }
+    
+    if(isDel){
+        [self.images removeObject:networkPhotoUrl];
     }
 }
 
@@ -157,7 +162,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
 #pragma mark - 懒加载
 - (NSMutableArray *)imageArr{
     if (!_imageArr) {
-        _imageArr = [NSMutableArray array];
+        _imageArr = [NSMutableArray arrayWithObjects:@"addphotograph", nil];
     }
     return _imageArr;
 }
@@ -191,7 +196,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
 
 - (NSMutableArray *)images{
     if (!_images) {
-        _images = [NSMutableArray arrayWithObjects:@"addphotograph", nil];
+        _images = [NSMutableArray array];
     }
     return _images;
 }

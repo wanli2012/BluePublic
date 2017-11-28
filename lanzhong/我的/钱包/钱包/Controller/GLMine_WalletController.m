@@ -478,6 +478,10 @@
 #pragma mark - 选择银行卡
 - (IBAction)chooseCard:(id)sender {
     
+    if(self.addImageV.hidden == NO){
+        return;
+    }
+    
     self.hidesBottomBarWhenPushed = YES;
     GLMine_WalletCardChooseController *cardChooseVC = [[GLMine_WalletCardChooseController alloc] init];
     

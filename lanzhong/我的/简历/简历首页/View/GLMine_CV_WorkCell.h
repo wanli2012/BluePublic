@@ -13,5 +13,6 @@
 @interface GLMine_CV_WorkCell : UITableViewCell
 
 @property (nonatomic, strong)GLMine_CV_live *model;
+@property (weak, nonatomic) IBOutlet UIImageView *arrowImageV;
 
 @end

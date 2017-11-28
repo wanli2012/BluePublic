@@ -398,7 +398,7 @@
 -(GLBusinessCircle_MenuScreeningView*)menuScreeningView{
     
     if (!_menuScreeningView) {
-        _menuScreeningView = [[GLBusinessCircle_MenuScreeningView alloc] initWithFrame:CGRectMake(0, 20,kSCREEN_WIDTH , 50) WithTitles:@[@"城市",@"行业",@"官方发布",@"筹款中"]];
+        _menuScreeningView = [[GLBusinessCircle_MenuScreeningView alloc] initWithFrame:CGRectMake(0, 20,kSCREEN_WIDTH , 50) WithTitles:@[@"城市",@"行业",@"项目类型",@"筹款中"]];
 //        _menuScreeningView.isHaveSecond = YES;
         _menuScreeningView.backgroundColor = [UIColor whiteColor];
     }

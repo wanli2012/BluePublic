@@ -53,11 +53,16 @@
         default:
             break;
     }
+
+    if([model.uid integerValue] == 0){
+        self.publishLabel.text = @"官方发布";
+    }else{
+        self.publishLabel.text = @"个人发布";
+    }
     
     NSString *imageStr = [NSString stringWithFormat:@"%@?imageView2/1/w/414/h/200",model.sev_photo];
     [self.picImageV sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     self.titleLabel.text = model.title;
-    self.publishLabel.text = model.uid;
     self.moneyLabel.text = [NSString stringWithFormat:@"%@元",model.admin_money];
     self.personNumLabel.text = [NSString stringWithFormat:@"%@人", model.invest_count];
 }

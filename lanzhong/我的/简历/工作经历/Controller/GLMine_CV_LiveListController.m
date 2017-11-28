@@ -135,6 +135,7 @@
     GLMine_CV_WorkCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMine_CV_WorkCell"];
     cell.model = self.models[indexPath.row];
     cell.selectionStyle = 0;
+    cell.arrowImageV.hidden = NO;
     return cell;
 }
 

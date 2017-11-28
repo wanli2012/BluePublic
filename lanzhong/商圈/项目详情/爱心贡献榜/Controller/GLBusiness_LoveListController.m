@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *firstBtn;
 @property (weak, nonatomic) IBOutlet UIButton *secondBtn;
 @property (weak, nonatomic) IBOutlet UIButton *thirdBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *secondSignImageV;
+@property (weak, nonatomic) IBOutlet UIImageView *thirdSignImageV;
 
 @property (weak, nonatomic) IBOutlet UILabel *firstMoneyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *secondMoneyLabel;
@@ -64,17 +66,26 @@
         self.firstNameLabel.text = model.uname;
         self.firstMoneyLabel.attributedText = [self attributedTextWithString:model.money];
         [self.firstBtn sd_setImageWithURL:[NSURL URLWithString:model.must_user_pic] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
-    
+        self.secondSignImageV.hidden = YES;
+        self.thirdSignImageV.hidden = YES;
+        self.secondBtn.hidden = YES;
+        self.thirdBtn.hidden = YES;
         if (self.dataSourceArr.count >= 2) {
             
+            self.secondSignImageV.hidden = NO;
+            self.thirdSignImageV.hidden = YES;
+            self.secondBtn.hidden = NO;
+            self.thirdBtn.hidden = YES;
             GLBusiness_HeartModel *model1 = self.dataSourceArr[1];
-            
             self.secondNameLabel.text = model1.uname;
             self.secondMoneyLabel.attributedText = [self attributedTextWithString:model1.money];
             [self.secondBtn sd_setImageWithURL:[NSURL URLWithString:model1.must_user_pic] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
             
             if (self.dataSourceArr.count >= 3) {
-                
+                self.secondSignImageV.hidden = NO;
+                self.thirdSignImageV.hidden = NO;
+                self.secondBtn.hidden = NO;
+                self.thirdBtn.hidden = NO;
                 GLBusiness_HeartModel *model2 = self.dataSourceArr[2];
                 
                 self.thirdNameLabel.text = model2.uname;

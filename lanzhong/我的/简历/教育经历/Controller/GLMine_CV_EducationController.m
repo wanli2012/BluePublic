@@ -56,6 +56,7 @@
 
 #pragma mark - 学历选择
 - (IBAction)educationChoose:(id)sender {
+    [self.view endEditing:YES];
     GLSimpleSelectionPickerController *vc=[[GLSimpleSelectionPickerController alloc]init];
     
     NSMutableArray *dataArr = [NSMutableArray arrayWithArray:@[@"中专及以下",@"高中",@"大专",@"本科",@"硕士",@"博士"]];
@@ -76,6 +77,7 @@
 
 #pragma mark - 入学时间选择
 - (IBAction)startTimeChoose:(id)sender {
+    [self.view endEditing:YES];
     GLDatePickerController *vc=[[GLDatePickerController alloc]init];
     vc.titleLabel.text = @"请选择入学日期";
     __weak typeof(self)weakSelf = self;
@@ -91,6 +93,7 @@
 
 #pragma mark - 毕业时间选择
 - (IBAction)endTimeChoose:(id)sender {
+    [self.view endEditing:YES];
     GLDatePickerController *vc=[[GLDatePickerController alloc]init];
     vc.titleLabel.text = @"请选择毕业日期";
     vc.type = 1;

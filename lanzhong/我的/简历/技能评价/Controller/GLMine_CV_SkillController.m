@@ -44,7 +44,7 @@
 }
 
 - (void)isHiddenAddBtn{
-    if (self.models.count >= 3) {
+    if (self.models.count >= 5) {
         self.addBtn.hidden = YES;
         self.noticeLabel.hidden = YES;
         self.signLabel.hidden = YES;

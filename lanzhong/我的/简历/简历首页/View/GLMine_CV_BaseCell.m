@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
 @property (weak, nonatomic) IBOutlet UILabel *emailLabel;
 
+
 @end
 
 @implementation GLMine_CV_BaseCell
@@ -37,14 +38,23 @@
     }else{
         self.sexLabel.text = @"";
     }
+    if ([model.phone integerValue] == 0) {
+        self.phoneLabel.text = @"";
+    }else{
+        self.phoneLabel.text = model.phone;
+    }
     
     self.nameLabel.text = model.name;
     self.educationLabel.text = model.education;
     self.workLifeLabel.text = model.work;
     self.birthLabel.text = model.birth_time;
     self.cityLabel.text = model.city_name;
-    self.phoneLabel.text = model.phone;
     self.emailLabel.text = model.email;
+}
+- (IBAction)callClick:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(callThePerson:)]) {
+        [self.delegate callThePerson:self.phoneLabel.text];
+    }
 }
 
 @end
