@@ -30,10 +30,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.navigationController.navigationBar.hidden = NO;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
+    self.hidesBottomBarWhenPushed=YES;
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = NO;
     switch (self.signIndex) {
         case 0:
         {
@@ -54,16 +57,6 @@
         default:
             break;
     }
-
-    
-    self.hidesBottomBarWhenPushed=YES;
-    
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
-    self.navigationController.navigationBar.hidden = NO;
 }
 
 //返回
@@ -95,7 +88,6 @@
                             @"项目完成",
                             @"项目失败"
                             ];
-    
     NSArray *classNames = @[
                             [GLPublish_InReviewController class],
                             [GLPublish_AuditFailureController class],
@@ -108,7 +100,6 @@
                             [GLPublish_ProjectCompletedController class],
                             [GLPublish_FailedController class]
                             ];
-    
     self.normalTitleColor = [UIColor darkGrayColor];
     self.selectedTitleColor = YYSRGBColor(0, 126, 255, 1);
     self.selectedIndicatorColor = YYSRGBColor(0, 126, 255, 1);
@@ -136,17 +127,12 @@
 
         }
             break;
-            
         default:
             break;
     }
-    
     //设置自定义属性
     self.tagItemSize = CGSizeMake(kSCREEN_WIDTH / titleArr.count, 40);
-    
     [self reloadDataWith:titleArr andSubViewdisplayClasses:classNamesArr withParams:nil];
-    
 }
-
 
 @end

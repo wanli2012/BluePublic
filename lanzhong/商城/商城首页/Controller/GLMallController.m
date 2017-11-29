@@ -28,6 +28,7 @@
 @property (nonatomic, copy)NSString *cate_id;
 @property (nonatomic, copy)NSString *order_money;
 @property (nonatomic, copy)NSString *order_salenum;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewConstrait;
 
 @end
 
@@ -100,6 +101,19 @@ static NSString *ID = @"GLClassifyCell";
     
     [self postRequest:YES];
     [self postRequest_Category];
+
+    if (@available(iOS 11.0, *)) {
+        self.collectioview.contentInsetAdjustmentBehavior = UIApplicationBackgroundFetchIntervalNever;
+        
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = false;
+        // Fallback on earlier versions
+    }
+    if(kSCREEN_HEIGHT == 812){
+        self.collectionViewConstrait.constant = 94;
+    }else{
+        self.collectionViewConstrait.constant = 70;
+    }
     
 }
 
@@ -249,7 +263,13 @@ static NSString *ID = @"GLClassifyCell";
 -(MenuScreeningView*)menuScreeningView{
 
     if (!_menuScreeningView) {
-        _menuScreeningView = [[MenuScreeningView alloc] initWithFrame:CGRectMake(0, 20,kSCREEN_WIDTH , 50) WithTitles:@[@"类型",@"金额",@"销量"]];
+        CGFloat y = 0.0f;
+        if(kSCREEN_HEIGHT == 812){
+            y = 44;
+        }else{
+            y = 20;
+        }
+        _menuScreeningView = [[MenuScreeningView alloc] initWithFrame:CGRectMake(0, y,kSCREEN_WIDTH , 50) WithTitles:@[@"类型",@"金额",@"销量"]];
          _menuScreeningView.backgroundColor = [UIColor whiteColor];
         
     }

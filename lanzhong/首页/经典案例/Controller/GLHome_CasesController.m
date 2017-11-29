@@ -26,6 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationController.navigationBar.hidden = NO;
     self.navigationItem.title = @"经典案例";
     [self.tableView registerNib:[UINib nibWithNibName:@"GLHomeCell" bundle:nil] forCellReuseIdentifier:@"GLHomeCell"];
     [self.tableView addSubview:self.nodataV];
@@ -118,8 +119,6 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    self.navigationController.navigationBar.hidden = NO;
-    
 }
 #pragma mark - UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -149,8 +148,7 @@
     GLBusiness_DetailController *detailVC = [[GLBusiness_DetailController alloc] init];
     detailVC.item_id = model.item_id;
     [self.navigationController pushViewController:detailVC animated:YES];
-    
-    self.hidesBottomBarWhenPushed = NO;
+
 }
 
 - (NSMutableArray *)models{

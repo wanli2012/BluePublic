@@ -149,7 +149,6 @@
 #pragma mark - UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (self.models.count== 0) {
-        
         self.nodataV.hidden = NO;
     }else{
         self.nodataV.hidden = YES;
@@ -162,7 +161,6 @@
     GLPublish_FundraisingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLPublish_FundraisingCell"];
     cell.model = self.models[indexPath.row];
     cell.suportListBtn.hidden = NO;
-    
     cell.index = indexPath.row;
     cell.delegate = self;
     

@@ -157,8 +157,12 @@
 - (IBAction)back:(id)sender {
     
     if(self.sign == 1){
+        [UserModel defaultUser].loginstatus = NO;
+        [usermodelachivar achive];
         [self dismissViewControllerAnimated:YES completion:nil];
-        [UIApplication sharedApplication].keyWindow.rootViewController = [[DWTabBarController alloc] init];
+        DWTabBarController *tabVC = [[DWTabBarController alloc] init];
+        tabVC.selectedIndex = 0;
+        [UIApplication sharedApplication].keyWindow.rootViewController = tabVC;
     }else{
         
         [self dismissViewControllerAnimated:YES completion:nil];

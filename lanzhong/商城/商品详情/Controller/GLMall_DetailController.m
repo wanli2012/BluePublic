@@ -97,7 +97,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.navigationController.navigationBar.hidden = YES;
+    self.navigationItem.title = @"商品详情";
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -105,9 +106,10 @@
     
     // 加载图文详情
     NSString *urlStr = [NSString stringWithFormat:@"%@%@",Goods_Info_URL,self.goods_id];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        [self.detailWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]]];
-    });
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+//    });
+    
+    [self.detailWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlStr]]];
     self.detailWebView.scrollView.delegate = self;
     
     _bottomMsgLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, -END_DRAG_SHOW_HEIGHT, kSCREEN_WIDTH, END_DRAG_SHOW_HEIGHT)];
@@ -222,7 +224,6 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    self.navigationController.navigationBar.hidden = YES;
 }
 
 #pragma mark - 重写返回键

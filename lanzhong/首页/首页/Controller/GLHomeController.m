@@ -51,6 +51,7 @@
 @property (nonatomic, strong)NodataView *nodataV;
 
 @property (strong, nonatomic)  NSString *app_Version;//当前版本号
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopConstrait;//tableview顶部约束
 
 @end
 
@@ -90,6 +91,18 @@
     _app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
 
     [self Postpath:GET_VERSION];
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIApplicationBackgroundFetchIntervalNever;
+        
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = false;
+        // Fallback on earlier versions
+    }
+    if(kSCREEN_HEIGHT == 812){
+        self.tableViewTopConstrait.constant = 44;
+    }else{
+        self.tableViewTopConstrait.constant = 20;
+    }
 }
 
 #pragma mark - 界面设置

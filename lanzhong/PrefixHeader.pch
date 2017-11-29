@@ -34,6 +34,10 @@
 
 #define FONT(s) [UIFont systemFontOfSize:s]
 
+/// 高度系数 812.0 是iPhoneX的高度尺寸，667.0表示是iPhone 8 的高度，如果你觉的它会变化，那我也很无奈
+//#define kWJHeightCoefficient (kSCREEN_HEIGHT == 812.0 ? 667.0/667.0 : kWJScreenHeight/667.0)
+
+
 //占位图
 #define PlaceHolderImage @"商城占位图"
 

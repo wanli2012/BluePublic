@@ -20,7 +20,6 @@
 
 #import "GLMine_CV_BaseInfoController.h"//基本信息修改界面
 #import "GLMine_CV_PlaceHolderCell.h"//占位cell
-//#import "GLMine_CV_DetailModel.h"
 #import "GLMine_CV_LiveListController.h"//工作经历列表
 #import "GLMine_CV_EducationController.h"//教育经历
 #import "GLMine_CV_SkillController.h"//技能评价

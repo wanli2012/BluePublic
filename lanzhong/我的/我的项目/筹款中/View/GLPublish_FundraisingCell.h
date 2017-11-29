@@ -11,6 +11,7 @@
 
 @protocol GLPublish_FundraisingCellDelegate <NSObject>
 
+@optional
 - (void)surportList:(NSInteger)index;
 
 @end

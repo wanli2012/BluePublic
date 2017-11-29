@@ -48,20 +48,17 @@
     
     //去除 TabBar 自带的顶部阴影
     [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
-    
     //设置导航控制器颜色为黄色
     [[UINavigationBar appearance] setBackgroundImage:[self imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];
     
     [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(refreshInterface) name:@"refreshInterface" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(exitLogin) name:@"exitLogin" object:nil];
-
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(caoxiang) name:@"middleItemNotification" object:nil];
 }
 
 - (void)caoxiang {
     
     self.selectedIndex = 2;
-    
 }
 //完善资料退出跳转登录
 -(void)exitLogin{
@@ -79,7 +76,7 @@
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
     //[tabBarController.viewControllers objectAtIndex:4]
-    if (viewController == [tabBarController.viewControllers objectAtIndex:4]) {
+    if (viewController == [tabBarController.viewControllers objectAtIndex:4] ||viewController == [tabBarController.viewControllers objectAtIndex:1]) {
     
         if ([UserModel defaultUser].loginstatus == YES) {
             

@@ -41,6 +41,8 @@
 
 @property (nonatomic, strong)NSMutableArray *dataSource;//显示数据_数据源
 @property (nonatomic, strong)LoadWaitView *loadV;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bgImageVTopConstrait;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopConstrait;
 
 @end
 
@@ -50,20 +52,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     [self setUI];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMineCell" bundle:nil] forCellReuseIdentifier:@"GLMineCell"];
+
+    if (@available(iOS 11.0, *)) {
+
+        self.bgImageVTopConstrait.constant = -20;
+    } else {
+        self.bgImageVTopConstrait.constant = 0;
+        self.automaticallyAdjustsScrollViewInsets = false;
+    }
+    
+    if(kSCREEN_HEIGHT == 812){
+        self.bgImageVTopConstrait.constant = -44;
+    }else{
+        self.bgImageVTopConstrait.constant = 0;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-    
     self.navigationController.navigationBar.hidden = YES;
-    
     [self postRequest];
 }
+
 #pragma mark - 设置界面
 - (void)setUI {
     
@@ -122,17 +137,18 @@
             [UserModel defaultUser].user_pic = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"user_pic"]];
             [UserModel defaultUser].user_server = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"user_server"]];
             [UserModel defaultUser].item_money = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"item_money"]];
-
+            
             [self judgeNull];//判空
             
             [usermodelachivar achive];
             [self assignment];//为头视图赋值
             
         }else if([responseObject[@"code"] integerValue] == OVERDUE_CODE){
-            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
             
-            [UserModel defaultUser].loginstatus = NO;
-            [usermodelachivar achive];
+            if ([UserModel defaultUser].loginstatus) {
+                
+                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+            }
             
             GLLoginController *loginVC = [[GLLoginController alloc] init];
             loginVC.sign = 1;
@@ -215,7 +231,6 @@
     self.hidesBottomBarWhenPushed = NO;
     
 }
-
 #pragma mark - UIScrollViewDelegate 下拉放大图片
 //scrollView的方法视图滑动时 实时调用
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -224,23 +239,19 @@
     // 图片宽度
     CGFloat yOffset = scrollView.contentOffset.y;
     // 偏移的y值
-    
     if(yOffset < 0){
-        
         CGFloat totalOffset = kHEIGHT + ABS(yOffset);
         CGFloat f = totalOffset / kHEIGHT;
         //拉伸后的图片的frame应该是同比例缩放。
         self.bgimageV.frame =  CGRectMake(- (width *f-width) / 2, yOffset, width * f, totalOffset);
     }
 }
-
 #pragma mark - UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return self.dataSource.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
     return [self.dataSource[section] count];
 }
 
@@ -249,11 +260,9 @@
     cell.selectionStyle = 0;
     
     NSArray *arr = self.dataSource[indexPath.section];
-    
     cell.titleLabel.text = arr[indexPath.row][@"title"];
     cell.picImageV.image = [UIImage imageNamed:arr[indexPath.row][@"image"]];
     cell.status = 3;
-    
     return cell;
 }
 
@@ -355,11 +364,9 @@
     }
     self.hidesBottomBarWhenPushed = NO;
 }
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 44;
 }
-
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 5)];
     header.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -368,7 +375,6 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 3;
 }
-
 #pragma mark - 懒加载
 - (NSMutableArray *)dataSource{
     if (!_dataSource) {

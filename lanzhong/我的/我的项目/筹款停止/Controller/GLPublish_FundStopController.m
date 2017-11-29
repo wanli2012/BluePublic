@@ -9,7 +9,8 @@
 #import "GLPublish_FundStopController.h"
 #import "GLPublish_FundraisingCell.h"
 #import "GLPublish_InReViewModel.h"
-
+//#import "GLMine_MyProjectController.h"
+//#import "GLBusiness_Detail_heartCommentController.h"
 @interface GLPublish_FundStopController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -114,7 +115,34 @@
     [self.tableView.mj_header endRefreshing];
     [self.tableView.mj_footer endRefreshing];
 }
-
+//#pragma mark - GLPublish_FundraisingCellDelegate
+//- (void)surportList:(NSInteger)index{
+//
+//    GLPublish_InReViewModel *model = self.models[index];
+//
+//    [self viewController].hidesBottomBarWhenPushed = YES;
+//
+//    GLBusiness_Detail_heartCommentController *listVC = [[GLBusiness_Detail_heartCommentController alloc] init];
+//    listVC.item_id = model.item_id;
+//    listVC.signIndex = 1;
+//
+//    [[self viewController].navigationController pushViewController:listVC animated:YES];
+//}
+///**
+// *  获取父视图的控制器
+// *
+// *  @return 父视图的控制器
+// */
+//- (GLMine_MyProjectController *)viewController
+//{
+//    for (UIView* next = [self.view superview]; next; next = next.superview) {
+//        UIResponder *nextResponder = [next nextResponder];
+//        if ([nextResponder isKindOfClass:[GLMine_MyProjectController class]]) {
+//            return (GLMine_MyProjectController *)nextResponder;
+//        }
+//    }
+//    return nil;
+//}
 #pragma mark - UITableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (self.models.count== 0) {
@@ -130,13 +158,15 @@
     
     GLPublish_FundraisingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLPublish_FundraisingCell"];
     cell.model = self.models[indexPath.row];
-    
     cell.selectionStyle = 0;
-    
+//    cell.suportListBtn.hidden = NO;
+//    cell.index = indexPath.row;
+//    cell.delegate = self;
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return 165;
     return 130;
 }
 

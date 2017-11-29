@@ -34,6 +34,7 @@
 @property (nonatomic, copy)NSString *money;//期望薪资
 @property (nonatomic, copy)NSString *duty;//期望职业
 @property (nonatomic, copy)NSString *work;//期望工作年限
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopConstrait;
 
 @end
 
@@ -112,6 +113,19 @@
     [self postCategory];
     [self postCityList];
     [self postCV_List:YES];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"supportNotification" object:nil];
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIApplicationBackgroundFetchIntervalNever;
+        
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = false;
+        // Fallback on earlier versions
+    }
+    if(kSCREEN_HEIGHT == 812){
+        self.tableViewTopConstrait.constant = 94;
+    }else{
+        self.tableViewTopConstrait.constant = 70;
+    }
 
 }
 
@@ -314,7 +328,13 @@
 -(GLBusinessCircle_MenuScreeningView*)menuScreeningView{
     
     if (!_menuScreeningView) {
-        _menuScreeningView = [[GLBusinessCircle_MenuScreeningView alloc] initWithFrame:CGRectMake(0, 20,kSCREEN_WIDTH , 50) WithTitles:@[@"城市",@"年限",@"薪资",@"行业"]];
+        CGFloat y = 0.0f;
+        if(kSCREEN_HEIGHT == 812){
+            y = 44;
+        }else{
+            y = 20;
+        }
+        _menuScreeningView = [[GLBusinessCircle_MenuScreeningView alloc] initWithFrame:CGRectMake(0, y,kSCREEN_WIDTH , 50) WithTitles:@[@"城市",@"年限",@"薪资",@"行业"]];
         _menuScreeningView.backgroundColor = [UIColor whiteColor];
     }
     

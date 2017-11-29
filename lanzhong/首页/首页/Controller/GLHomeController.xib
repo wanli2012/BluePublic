@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D30" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,6 +27,7 @@
                 <outlet property="noticeView" destination="dXE-lE-CSX" id="cST-Hn-BdS"/>
                 <outlet property="segment" destination="sLU-lN-hsa" id="S47-3J-HK2"/>
                 <outlet property="tableView" destination="cx8-N2-zus" id="SOP-Pk-bLR"/>
+                <outlet property="tableViewTopConstrait" destination="Ccy-7g-tiU" id="tAQ-Rh-tas"/>
                 <outlet property="titleLabel" destination="KHI-nD-Op5" id="b59-U2-yNH"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -37,7 +38,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cx8-N2-zus">
-                    <rect key="frame" x="0.0" y="20" width="357" height="796"/>
+                    <rect key="frame" x="0.0" y="44" width="357" height="772"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <view key="tableHeaderView" contentMode="scaleToFill" id="lwi-4H-eXl">
                         <rect key="frame" x="0.0" y="0.0" width="357" height="390"/>
@@ -324,23 +325,21 @@
                         <outlet property="delegate" destination="-1" id="ghb-L5-Rwm"/>
                     </connections>
                 </tableView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aLw-5m-3JL">
-                    <rect key="frame" x="0.0" y="0.0" width="357" height="20"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B54-uu-bdD">
+                    <rect key="frame" x="0.0" y="0.0" width="357" height="44"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="20" id="gyR-Xu-7eG"/>
-                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="B54-uu-bdD" secondAttribute="trailing" id="8lu-Aw-bv0"/>
                 <constraint firstAttribute="trailing" secondItem="cx8-N2-zus" secondAttribute="trailing" id="CHc-TT-Yzh"/>
-                <constraint firstItem="cx8-N2-zus" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="Ccy-7g-tiU"/>
+                <constraint firstItem="cx8-N2-zus" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="44" id="Ccy-7g-tiU"/>
+                <constraint firstItem="B54-uu-bdD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="I23-Fa-cJp"/>
                 <constraint firstItem="cx8-N2-zus" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="UFS-jx-NBm"/>
-                <constraint firstAttribute="trailing" secondItem="aLw-5m-3JL" secondAttribute="trailing" id="gxh-9M-4yN"/>
-                <constraint firstItem="aLw-5m-3JL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="kSJ-xA-hS2"/>
+                <constraint firstItem="cx8-N2-zus" firstAttribute="top" secondItem="B54-uu-bdD" secondAttribute="bottom" id="sxn-gW-Kf3"/>
                 <constraint firstAttribute="bottom" secondItem="cx8-N2-zus" secondAttribute="bottom" id="vyz-L8-dRL"/>
-                <constraint firstItem="aLw-5m-3JL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="xMO-GJ-6n0"/>
+                <constraint firstItem="B54-uu-bdD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ycM-nN-59V"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

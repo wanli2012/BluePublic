@@ -23,10 +23,14 @@
 
 }
 
-- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     
     [super pushViewController:viewController animated:animated];
     
+    // 修改tabBar的frame
+    CGRect frame = self.tabBarController.tabBar.frame;
+    frame.origin.y = [UIScreen mainScreen].bounds.size.height - frame.size.height;
+    self.tabBarController.tabBar.frame = frame;
     [self.visibleViewController.navigationItem setHidesBackButton:YES];
     
     UIButton *button=[[UIButton alloc]initWithFrame:CGRectMake( 0, 0, 60, 44)];

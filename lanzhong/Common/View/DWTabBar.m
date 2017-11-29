@@ -16,7 +16,7 @@
 @interface DWTabBar ()
 
 @property (nonatomic, strong) DWPublishButton *publishButton;/**< 发布按钮 */
-
+ @property (nonatomic,assign)UIEdgeInsets oldSafeAreaInsets;
 @end
 
 @implementation DWTabBar
@@ -30,8 +30,28 @@
 //        self.publishButton = button;
         
     }
-    
     return self;
+}
+
+- (void) safeAreaInsetsDidChange {
+    [super safeAreaInsetsDidChange];
+    if(self.oldSafeAreaInsets.left != self.safeAreaInsets.left || self.oldSafeAreaInsets.right != self.safeAreaInsets.right || self.oldSafeAreaInsets.top != self.safeAreaInsets.top || self.oldSafeAreaInsets.bottom != self.safeAreaInsets.bottom) {
+        self.oldSafeAreaInsets = self.safeAreaInsets;
+        [self invalidateIntrinsicContentSize];
+        [self.superview setNeedsLayout];
+        [self.superview layoutSubviews];
+    }
+}
+
+- (CGSize) sizeThatFits:(CGSize) size {
+    CGSize s = [super sizeThatFits:size];
+    if(@available(iOS 11.0, *)) {
+        CGFloat bottomInset = self.safeAreaInsets.bottom;
+        if( bottomInset > 0 && s.height < 50) {
+            s.height += bottomInset;
+        }
+    }
+    return s;
 }
 
 -(void)layoutSubviews{
@@ -58,15 +78,13 @@
 //        if (buttonIndex >= 2) { // 右边2个按钮
 //            buttonX += buttonW;
 //        }
-        
+        if(kSCREEN_HEIGHT == 812){
+            buttonH = 50;
+        }
         view.frame = CGRectMake(buttonX, buttonY, buttonW, buttonH);
         
-        
         buttonIndex ++;
-        
-        
     }
 }
-
 
 @end

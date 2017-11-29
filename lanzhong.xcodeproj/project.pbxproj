@@ -2437,7 +2437,6 @@
 			isa = PBXGroup;
 			children = (
 				4A6AD1B61F7F73AD00E6084E /* Controller */,
-				4A6AD1B81F7F73AD00E6084E /* View */,
 			);
 			path = "经典案例";
 			sourceTree = "<group>";
@@ -2450,13 +2449,6 @@
 				4A6AD1C91F7F73EE00E6084E /* GLHome_CasesController.xib */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		4A6AD1B81F7F73AD00E6084E /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		4A6AD1B91F7F73AD00E6084E /* 首页 */ = {
@@ -2577,7 +2569,6 @@
 			isa = PBXGroup;
 			children = (
 				4A6AD20B1F7F953500E6084E /* Controller */,
-				4A6AD2101F7F953500E6084E /* View */,
 			);
 			path = "筹款成功";
 			sourceTree = "<group>";
@@ -2588,24 +2579,8 @@
 				4A6AD20C1F7F953500E6084E /* GLPublish_FundraisingSuccessController.h */,
 				4A6AD20D1F7F953500E6084E /* GLPublish_FundraisingSuccessController.m */,
 				4A6AD20E1F7F953500E6084E /* GLPublish_FundraisingSuccessController.xib */,
-				4A6AD20F1F7F953500E6084E /* Model */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		4A6AD20F1F7F953500E6084E /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Model;
-			path = ../Model;
-			sourceTree = "<group>";
-		};
-		4A6AD2101F7F953500E6084E /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		4A6AD2111F7F953500E6084E /* 项目已完成 */ = {
@@ -2704,7 +2679,6 @@
 			isa = PBXGroup;
 			children = (
 				4A6B9EF11F7CC92E009386C8 /* Controller */,
-				4A6B9EF51F7CC92E009386C8 /* Model */,
 				4A6B9EF61F7CC92E009386C8 /* View */,
 			);
 			path = "我的首页";
@@ -2718,13 +2692,6 @@
 				4A6B9EF41F7CC92E009386C8 /* GLMineController.xib */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		4A6B9EF51F7CC92E009386C8 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		4A6B9EF61F7CC92E009386C8 /* View */ = {
@@ -4222,7 +4189,7 @@
 					4AF106FF1F78D5AC00CB51FA = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = MSWMY8ZT7D;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -4791,8 +4758,9 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Guizhou Lanzhong Investment Management Co., Ltd. (MSWMY8ZT7D)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MSWMY8ZT7D;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4812,8 +4780,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sanjun.lanzhong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b4dfc53d-bba8-459e-bb16-8ce97762203d";
-				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: com.sanjun.lanzhong";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = AdHoc;
@@ -4914,8 +4882,9 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Guizhou Lanzhong Investment Management Co., Ltd. (MSWMY8ZT7D)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MSWMY8ZT7D;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4935,8 +4904,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sanjun.lanzhong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b4dfc53d-bba8-459e-bb16-8ce97762203d";
-				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: com.sanjun.lanzhong";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -4947,8 +4916,9 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Guizhou Lanzhong Investment Management Co., Ltd. (MSWMY8ZT7D)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MSWMY8ZT7D;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4968,8 +4938,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sanjun.lanzhong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b4dfc53d-bba8-459e-bb16-8ce97762203d";
-				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: com.sanjun.lanzhong";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

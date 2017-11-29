@@ -42,6 +42,7 @@
 @property (nonatomic, strong)NSMutableArray <GLPublish_CityModel *>*cityModels;//城市数据源
 @property (nonatomic, copy)NSString *provinceId;//省份id
 @property (nonatomic, copy)NSString *cityId;//城市id
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopConstrait;//tableview顶部约束
 
 @end
 
@@ -121,6 +122,18 @@
     [self postRequest_CityList];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"supportNotification" object:nil];
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIApplicationBackgroundFetchIntervalNever;
+        
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = false;
+        // Fallback on earlier versions
+    }
+    if(kSCREEN_HEIGHT == 812){
+        self.tableViewTopConstrait.constant = 94;
+    }else{
+        self.tableViewTopConstrait.constant = 70;
+    }
 }
 
 - (void)refresh{
@@ -398,7 +411,13 @@
 -(GLBusinessCircle_MenuScreeningView*)menuScreeningView{
     
     if (!_menuScreeningView) {
-        _menuScreeningView = [[GLBusinessCircle_MenuScreeningView alloc] initWithFrame:CGRectMake(0, 20,kSCREEN_WIDTH , 50) WithTitles:@[@"城市",@"行业",@"项目类型",@"筹款中"]];
+        CGFloat y = 0.0f;
+        if(kSCREEN_HEIGHT == 812){
+            y = 44;
+        }else{
+            y = 20;
+        }
+        _menuScreeningView = [[GLBusinessCircle_MenuScreeningView alloc] initWithFrame:CGRectMake(0, y,kSCREEN_WIDTH , 50) WithTitles:@[@"城市",@"行业",@"项目类型",@"筹款中"]];
 //        _menuScreeningView.isHaveSecond = YES;
         _menuScreeningView.backgroundColor = [UIColor whiteColor];
     }

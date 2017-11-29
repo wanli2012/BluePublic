@@ -25,8 +25,8 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
-        [self.view addSubview:self.scrollView];
-        //[self.view addSubview:self.pagecontroll];
+    [self.view addSubview:self.scrollView];
+    //[self.view addSubview:self.pagecontroll];
         
         for (int i=0; i<3; i++) {
             UIImageView  *image=[[UIImageView alloc]initWithFrame:CGRectMake(kSCREEN_WIDTH*i, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT)];
@@ -54,7 +54,6 @@
     [super viewWillAppear:animated];
     
 }
-
 #pragma mark - getter
 -(UIScrollView*)scrollView{
    
@@ -79,7 +78,6 @@
         }
     
     return _scrollView;
-    
 }
 
 -(UIPageControl *)pagecontroll{
