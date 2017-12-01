@@ -261,10 +261,10 @@
     }];
     
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-    
+    __block typeof(self) weakself = self;
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        if(self.moneyTF.text.length == 0){
+        if(weakself.moneyTF.text.length == 0){
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
       
                 [SVProgressHUD showErrorWithStatus:@"请输入支持金额"];
@@ -274,25 +274,26 @@
         }
         NSString *encryptsecret = [RSAEncryptor encryptString:alertVC.textFields.lastObject.text publicKey:public_RSA];
         dict[@"upwd"] = encryptsecret;
-        _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+        _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:weakself.view];
         [NetworkManager requestPOSTWithURLStr:kSUPPORT_URL paramDic:dict finish:^(id responseObject) {
             
             [_loadV removeloadview];
             if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
                 
-                self.hidesBottomBarWhenPushed = YES;
+                weakself.hidesBottomBarWhenPushed = YES;
                 GLPay_CompletedController *completeVC = [[GLPay_CompletedController alloc] init];
-                completeVC.item_id = self.item_id;
+                completeVC.item_id = weakself.item_id;
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"supportNotification" object:nil];
-                [self.navigationController pushViewController:completeVC animated:YES];
+                
+                [weakself.navigationController pushViewController:completeVC animated:YES];
                 
             }else if([responseObject[@"code"] integerValue] == OVERDUE_CODE){
                 [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
 
                 [UserModel defaultUser].loginstatus = NO;
                 [usermodelachivar achive];
-                [self.navigationController popToRootViewControllerAnimated:YES];
+                [weakself.navigationController popToRootViewControllerAnimated:YES];
                 
             }else{
                 [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];

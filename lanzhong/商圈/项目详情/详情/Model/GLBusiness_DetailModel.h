@@ -19,6 +19,7 @@
 @property (nonatomic, copy)NSString *nickname;//项目id
 
 @end
+
 @interface GLBusiness_CommentModel : NSObject
 
 @property (nonatomic, copy)NSString *id;//评论id

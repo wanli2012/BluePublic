@@ -21,7 +21,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *ensureBtn;
 
 @property (strong, nonatomic)LoadWaitView *loadV;
-
 @property (weak, nonatomic) IBOutlet UILabel *serviceNumLabel;//客服电话Label
 
 @end
@@ -152,22 +151,22 @@
         [_loadV removeloadview];
         [SVProgressHUD showErrorWithStatus:error.localizedDescription];
     }];
-
 }
+
 - (IBAction)back:(id)sender {
     
     if(self.sign == 1){
         [UserModel defaultUser].loginstatus = NO;
+        [UserModel defaultUser].token = nil;
+        [UserModel defaultUser].uid = nil;
         [usermodelachivar achive];
         [self dismissViewControllerAnimated:YES completion:nil];
         DWTabBarController *tabVC = [[DWTabBarController alloc] init];
-        tabVC.selectedIndex = 0;
         [UIApplication sharedApplication].keyWindow.rootViewController = tabVC;
+        [tabVC setSelectedIndex:0];
     }else{
-        
         [self dismissViewControllerAnimated:YES completion:nil];
     }
-    
 }
 
 @end

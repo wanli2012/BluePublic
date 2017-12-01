@@ -113,7 +113,7 @@
     [self postCategory];
     [self postCityList];
     [self postCV_List:YES];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"supportNotification" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"supportNotification" object:nil];
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIApplicationBackgroundFetchIntervalNever;
         

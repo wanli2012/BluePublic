@@ -257,6 +257,7 @@
 		4A7203341FC01077004C4F3D /* HWOptionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A72032D1FC01077004C4F3D /* HWOptionButton.m */; };
 		4A7203441FC016B4004C4F3D /* GLTalentPoolController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A7203421FC016B4004C4F3D /* GLTalentPoolController.m */; };
 		4A7203451FC016B4004C4F3D /* GLTalentPoolController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A7203431FC016B4004C4F3D /* GLTalentPoolController.xib */; };
+		4A732FFC1FD1564300EF9B9A /* GLMineHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A732FFB1FD1564300EF9B9A /* GLMineHeader.m */; };
 		4A8385791FA0716D00F3A30C /* 加载动画.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A8385781FA0716D00F3A30C /* 加载动画.xcassets */; };
 		4A890AD51F8F397400ED6E36 /* GLBusiness_FundTrendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A890AD41F8F397400ED6E36 /* GLBusiness_FundTrendModel.m */; };
 		4A94D8C11FA6F9480071B732 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A94D8C01FA6F9480071B732 /* AlipaySDK.framework */; };
@@ -843,6 +844,8 @@
 		4A7203411FC016B4004C4F3D /* GLTalentPoolController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLTalentPoolController.h; sourceTree = "<group>"; };
 		4A7203421FC016B4004C4F3D /* GLTalentPoolController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLTalentPoolController.m; sourceTree = "<group>"; };
 		4A7203431FC016B4004C4F3D /* GLTalentPoolController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLTalentPoolController.xib; sourceTree = "<group>"; };
+		4A732FFA1FD1564300EF9B9A /* GLMineHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLMineHeader.h; sourceTree = "<group>"; };
+		4A732FFB1FD1564300EF9B9A /* GLMineHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLMineHeader.m; sourceTree = "<group>"; };
 		4A8385781FA0716D00F3A30C /* 加载动画.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "加载动画.xcassets"; sourceTree = "<group>"; };
 		4A890AD31F8F397400ED6E36 /* GLBusiness_FundTrendModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLBusiness_FundTrendModel.h; sourceTree = "<group>"; };
 		4A890AD41F8F397400ED6E36 /* GLBusiness_FundTrendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLBusiness_FundTrendModel.m; sourceTree = "<group>"; };
@@ -2203,8 +2206,6 @@
 			isa = PBXGroup;
 			children = (
 				4A509BB11F87870500D794FB /* Controller */,
-				4A509BB21F87870500D794FB /* Model */,
-				4A509BB31F87870500D794FB /* View */,
 			);
 			path = "密码修改";
 			sourceTree = "<group>";
@@ -2217,20 +2218,6 @@
 				4A509BBE1F8787ED00D794FB /* GLMine_Set_modifyPwdController.xib */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		4A509BB21F87870500D794FB /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		4A509BB31F87870500D794FB /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		4A509BB41F87870500D794FB /* 设置 */ = {
@@ -2700,6 +2687,8 @@
 				4A6B9EF71F7CC92E009386C8 /* GLMineCell.h */,
 				4A6B9EF81F7CC92E009386C8 /* GLMineCell.m */,
 				4A6B9EF91F7CC92E009386C8 /* GLMineCell.xib */,
+				4A732FFA1FD1564300EF9B9A /* GLMineHeader.h */,
+				4A732FFB1FD1564300EF9B9A /* GLMineHeader.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3119,7 +3108,6 @@
 			isa = PBXGroup;
 			children = (
 				4ADDD1701F886F4D00C95F9C /* Controller */,
-				4ADDD1741F886F4D00C95F9C /* View */,
 			);
 			path = "个人信息首页";
 			sourceTree = "<group>";
@@ -3132,13 +3120,6 @@
 				4ADDD1731F886F4D00C95F9C /* GLMine_PersonInfoController.xib */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		4ADDD1741F886F4D00C95F9C /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		4ADDD1751F886F4D00C95F9C /* 收货地址 */ = {
@@ -4612,6 +4593,7 @@
 				4AF109ED1F78E07A00CB51FA /* LWLabel.m in Sources */,
 				4A9F56F31F91E63800341A31 /* GLMine_PendingPayOrderController.m in Sources */,
 				4A9F57181F920B0800341A31 /* LBMyOrdersHeaderView.m in Sources */,
+				4A732FFC1FD1564300EF9B9A /* GLMineHeader.m in Sources */,
 				F9BB80331F7A584800867514 /* GLShoppingCartModel.m in Sources */,
 				4A53E82B1F7A23AD0021D9E0 /* GLMallController.m in Sources */,
 				4A6B9EFA1F7CC92E009386C8 /* GLMineController.m in Sources */,

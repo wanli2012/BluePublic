@@ -58,10 +58,8 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMineCell" bundle:nil] forCellReuseIdentifier:@"GLMineCell"];
 
     if (@available(iOS 11.0, *)) {
-
-        self.bgImageVTopConstrait.constant = -20;
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     } else {
-        self.bgImageVTopConstrait.constant = 0;
         self.automaticallyAdjustsScrollViewInsets = false;
     }
     
@@ -70,6 +68,9 @@
     }else{
         self.bgImageVTopConstrait.constant = 0;
     }
+    
+//    self.tableView.contentInset = UIEdgeInsetsMake(kHEIGHT, 0, 0, 0);
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -99,11 +100,17 @@
     GLMine_PersonInfoController *personVC = [[GLMine_PersonInfoController alloc] init];
     [self.navigationController pushViewController:personVC animated:YES];
     self.hidesBottomBarWhenPushed = NO;
-    
 }
 
 #pragma mark - 请求数据
 -(void)postRequest {
+    
+    if ([UserModel defaultUser].token.length == 0) {
+        return;
+    }
+    if ([UserModel defaultUser].uid.length == 0) {
+        return;
+    }
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"token"] = [UserModel defaultUser].token;
@@ -235,6 +242,7 @@
 //scrollView的方法视图滑动时 实时调用
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+
     CGFloat width = self.view.frame.size.width;
     // 图片宽度
     CGFloat yOffset = scrollView.contentOffset.y;
@@ -243,9 +251,22 @@
         CGFloat totalOffset = kHEIGHT + ABS(yOffset);
         CGFloat f = totalOffset / kHEIGHT;
         //拉伸后的图片的frame应该是同比例缩放。
+
+        if (@available(iOS 11.0, *)) {
+
+            BOOL first = NO;
+            if(!first){
+                self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAlways;
+                self.bgImageVTopConstrait.constant = -20;
+                first = YES;
+            }
+        }
+
         self.bgimageV.frame =  CGRectMake(- (width *f-width) / 2, yOffset, width * f, totalOffset);
     }
+
 }
+
 #pragma mark - UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return self.dataSource.count;

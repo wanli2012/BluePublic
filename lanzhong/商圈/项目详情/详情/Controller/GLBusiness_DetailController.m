@@ -196,7 +196,7 @@
     switch ([self.model.state integerValue]) {
         case 3:
         {
-            if(dayCount > -1){
+            if(dayCount != -1){
                 self.needTimeLabel.text = [NSString stringWithFormat:@"剩余时间%zd天",dayCount];
             }else{
                 self.needTimeLabel.text = [NSString stringWithFormat:@"筹款已截止"];
@@ -223,7 +223,7 @@
             break;
     }
 
-    if([self.model.state integerValue] == 3 && dayCount > -1){
+    if([self.model.state integerValue] == 3 && dayCount != -1 && ratio < 1.0){
         
         self.supportBtn.enabled = YES;
         self.supportBtn.backgroundColor = MAIN_COLOR;
@@ -241,11 +241,14 @@
     NSTimeInterval begin = [beginDate doubleValue];
     NSTimeInterval end = [endDate doubleValue];
     
-    if (begin > end) {
+    if (begin >= end) {
         return -1;
     }
     
-    NSInteger dayCount = (end - begin)/(24 * 60 * 60) + 1;
+    NSInteger dayCount = (end - begin)/(24 * 60 * 60);
+    if(dayCount == 0){
+        return -1;
+    }
     
     return dayCount;
 }
@@ -272,7 +275,6 @@
     self.progressSignView.layer.borderWidth = 0.5f;
     
     self.middleView.layer.cornerRadius = 5.f;
-    
     self.middleViewLayerView.layer.cornerRadius = 5.f;
     self.middleViewLayerView.layer.shadowOpacity = 0.1f;
     self.middleViewLayerView.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);

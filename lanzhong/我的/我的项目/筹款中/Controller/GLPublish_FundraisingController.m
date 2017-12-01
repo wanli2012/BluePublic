@@ -131,6 +131,7 @@
     
     [[self viewController].navigationController pushViewController:listVC animated:YES];
 }
+
 /**
  *  获取父视图的控制器
  *
