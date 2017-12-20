@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D30" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -40,7 +40,7 @@
                         <action selector="ensure:" destination="-1" eventType="touchUpInside" id="qsS-6g-WKN"/>
                     </connections>
                 </button>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5hK-8h-614">
+                <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5hK-8h-614">
                     <rect key="frame" x="0.0" y="48" width="398" height="120"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="120" id="Hep-De-aZ8"/>
@@ -62,20 +62,5 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="59" y="-75"/>
         </view>
-        <tapGestureRecognizer id="vRe-oe-HZb" userLabel="pic">
-            <connections>
-                <action selector="picChoose:" destination="-1" id="Hv4-Ca-5Jk"/>
-            </connections>
-        </tapGestureRecognizer>
-        <tapGestureRecognizer id="QgZ-hd-xKF" userLabel="pic2">
-            <connections>
-                <action selector="picChoose:" destination="-1" id="O7U-Oo-TC2"/>
-            </connections>
-        </tapGestureRecognizer>
-        <tapGestureRecognizer id="Qya-vy-H7B" userLabel="pic3">
-            <connections>
-                <action selector="picChoose:" destination="-1" id="qtU-gJ-pY1"/>
-            </connections>
-        </tapGestureRecognizer>
     </objects>
 </document>

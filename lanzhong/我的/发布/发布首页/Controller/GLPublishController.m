@@ -283,6 +283,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 #pragma mark - 照片选择器 代理
 - (void)photoView:(HXPhotoView *)photoView changeComplete:(NSArray<HXPhotoModel *> *)allList photos:(NSArray<HXPhotoModel *> *)photos videos:(NSArray<HXPhotoModel *> *)videos original:(BOOL)isOriginal {
     
@@ -471,9 +472,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
     if (bytes > 10){
         //超出字节数，还是原来的内容
         self.titleTF.text = self.lastTextContent;
-        
     }else{
-        
         self.lastTextContent = self.titleTF.text;
     }
 }
@@ -498,7 +497,6 @@ static const CGFloat kPhotoViewMargin = 12.0;
 #pragma mark - UITextFieldDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     
-
     if (textField == self.moneyTF) {
         /*
          * 不能输入.0-9以外的字符。

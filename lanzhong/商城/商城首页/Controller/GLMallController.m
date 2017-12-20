@@ -77,7 +77,7 @@ static NSString *ID = @"GLClassifyCell";
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         [weakSelf postRequest:YES];
-        [self postRequest_Category];
+        [weakSelf postRequest_Category];
         
     }];
     MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
@@ -107,7 +107,7 @@ static NSString *ID = @"GLClassifyCell";
         
     } else {
         self.automaticallyAdjustsScrollViewInsets = false;
-        // Fallback on earlier versions
+        
     }
     if(kSCREEN_HEIGHT == 812){
         self.collectionViewConstrait.constant = 94;

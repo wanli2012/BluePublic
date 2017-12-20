@@ -31,9 +31,13 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return self.images.count;
 }
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
     GLMine_CV_StyleCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GLMine_CV_StyleCollectionCell" forIndexPath:indexPath];
+    
     [cell.imageV sd_setImageWithURL:[NSURL URLWithString:self.images[indexPath.row]] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    
     return cell;
 }
 
@@ -43,7 +47,7 @@
 
 //定义每个UICollectionViewCell 的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake((kSCREEN_WIDTH - 40)/3, 150);
+    return CGSizeMake((kSCREEN_WIDTH - 41)/3, 150);
 }
 
 //每个item之间的间距

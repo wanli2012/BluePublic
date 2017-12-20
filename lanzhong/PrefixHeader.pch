@@ -37,7 +37,6 @@
 /// 高度系数 812.0 是iPhoneX的高度尺寸，667.0表示是iPhone 8 的高度，如果你觉的它会变化，那我也很无奈
 //#define kWJHeightCoefficient (kSCREEN_HEIGHT == 812.0 ? 667.0/667.0 : kWJScreenHeight/667.0)
 
-
 //占位图
 #define PlaceHolderImage @"商城占位图"
 
@@ -96,7 +95,7 @@
 //#define URL_Base @"http://192.168.0.163/Raise/index.php/Api/"
 #define URL_Base @"https://www.lzcke.com/index.php/Api/"
 
-
+//商城
 #define kGETCODE_URL @"Common/sms"//获取验证码
 #define kMALL_HOME_URL @"Shop/shop_index"//商城首页
 #define kMALL_FITER_URL @"Shop/term"//商城筛选
@@ -116,6 +115,7 @@
 #define kRECIPIENT_URL @"Shop/recipient"//确认订单收货
 #define kGOODS_COMMENT_URL @"Shop/goods_comment_data"//我的评论
 
+//用户
 #define kREGISTER_URL @"User/user_enroll"//注册
 #define kLOGIN_URL @"User/user_login"//登录
 #define kFORGET_PWD_URL @"User/forget_pwd"//找回密码
@@ -139,7 +139,7 @@
 #define kRECHARGE_URL @"User/recharge"//充值操作
 #define kUSER_INFO_SAVE_URL @"User/user_info_save"//实名认证,修改头像
 
-
+//商圈
 #define kHOME_URL @"Item/index"//首页
 #define kHOME_ALL_CLASSIC_URL @"Item/more_item"//所有经典项目
 #define kADD_TREND_URL @"Item/item_dynamic_add"//新增项目动态
@@ -183,5 +183,6 @@
 #define kCV_LIST_URL @"Resume/select_re"//简历列表 Resume/life
 #define kCV_LIFE_URL @"Resume/life"//工作年限返回
 #define kCV_DEL_SKILL_URL @"Resume/del_skill"//个人技能评价删除
+
 
 #endif /* PrefixHeader_pch */

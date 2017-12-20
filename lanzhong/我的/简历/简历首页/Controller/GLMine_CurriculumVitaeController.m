@@ -280,8 +280,8 @@
     }else if([self.model.basic.is_open integerValue] == 2){
         [self.showSwitch setOn:NO];
     }
-
 }
+
 #pragma mark - 设置时候展示简历
 - (IBAction)isShowCV:(UISwitch *)sender {
     if (self.model.basic.name.length == 0) {
@@ -318,6 +318,7 @@
         
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"GLMine_CVNotification" object:nil];
         }else{
            [self judgeSwithIsOn];
             [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];

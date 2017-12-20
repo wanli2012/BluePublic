@@ -65,6 +65,7 @@
                 break;
                 
             default:
+                finish(responseObject);
                 break;
         }
         

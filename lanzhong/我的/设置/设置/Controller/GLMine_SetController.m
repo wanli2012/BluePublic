@@ -37,7 +37,7 @@
     self.exitBtn.layer.borderColor = YYSRGBColor(0, 125, 254, 1).CGColor;
     self.exitBtn.layer.borderWidth = 1.f;
     self.exitBtn.layer.cornerRadius = 5.f;
-
+    
     self.memory = [NSString stringWithFormat:@"%.2fM", [self filePath]];
     self.phonestr = [UserModel defaultUser].user_server;
     

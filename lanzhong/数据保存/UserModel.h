@@ -17,7 +17,7 @@
 @property (nonatomic, copy)NSString  *address;//详细地址
 @property (nonatomic, copy)NSString  *area;//区id
 @property (nonatomic, copy)NSString  *city;//市id
-@property (nonatomic, copy)NSString  *del;// 禁用账号   1确定   0否
+@property (nonatomic, copy)NSString  *del;// 禁用账号 1确定   0否
 @property (nonatomic, copy)NSString  *face_pic;//身份证正反面照片（序列化）  不用管  不用
 @property (nonatomic, copy)NSString  *g_id;//分享注册人id
 @property (nonatomic, copy)NSString  *g_name;//推荐人姓名

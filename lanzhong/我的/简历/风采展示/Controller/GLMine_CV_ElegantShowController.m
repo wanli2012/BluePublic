@@ -94,7 +94,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         
         if ([dic[@"code"]integerValue] == SUCCESS_CODE) {
-
+            
             [SVProgressHUD showSuccessWithStatus:dic[@"message"]];
             [self.navigationController popViewControllerAnimated:YES];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"GLMine_CV_BaseInfoNotification" object:nil];
@@ -109,10 +109,6 @@ static const CGFloat kPhotoViewMargin = 12.0;
         
         [SVProgressHUD showErrorWithStatus:error.localizedDescription];
     }];
-}
-
-- (IBAction)picChoose:(UITapGestureRecognizer *)sender {
-    
 }
 
 #pragma mark - 照片选择器 代理

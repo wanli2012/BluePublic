@@ -22,10 +22,9 @@
 {
     NSInteger _selectedSegmentIndex;//显示 0:创客 1:爱心
 }
+
 @property (weak, nonatomic) IBOutlet UIImageView *adImageV;
-
 @property (weak, nonatomic) IBOutlet UILabel *noticeLabel;
-
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UIView *noticeView;
@@ -50,8 +49,9 @@
 @property (nonatomic, strong)LoadWaitView *loadV;
 @property (nonatomic, strong)NodataView *nodataV;
 
-@property (strong, nonatomic)  NSString *app_Version;//当前版本号
+@property (strong, nonatomic)NSString *app_Version;//当前版本号
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopConstrait;//tableview顶部约束
+@property (nonatomic, assign)NSInteger typeIndex;//类型 1创客经典案列 2爱心经典案列
 
 @end
 
@@ -63,10 +63,7 @@
     [self setUI];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"GLHomeCell" bundle:nil] forCellReuseIdentifier:@"GLHomeCell"];
-    
-//    [self.tableView addSubview:self.nodataV];
-//    self.nodataV.hidden = YES;
-    
+
     __weak __typeof(self) weakSelf = self;
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
@@ -76,13 +73,12 @@
     }];
     // 设置文字
     [header setTitle:@"快扯我，快点" forState:MJRefreshStateIdle];
-    
     [header setTitle:@"数据要来啦" forState:MJRefreshStatePulling];
-    
     [header setTitle:@"服务器正在狂奔..." forState:MJRefreshStateRefreshing];
     
     self.tableView.mj_header = header;
     
+    self.typeIndex = 1;
     [self postRequest];//请求数据
     [self postAD];
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
@@ -133,15 +129,17 @@
 #pragma mark - 请求数据
 - (void)postRequest{
     
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"typess"] = @(self.typeIndex);
     _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
-    [NetworkManager requestPOSTWithURLStr:kHOME_URL paramDic:@{} finish:^(id responseObject) {
+    [NetworkManager requestPOSTWithURLStr:kHOME_URL paramDic:dict finish:^(id responseObject) {
         
         [_loadV removeloadview];
         [self endRefresh];
         
         self.model = nil;
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
-  
+            
             self.model = [GLHomeModel mj_objectWithKeyValues:responseObject[@"data"]];
             
             self.noticeLabel.text = self.model.new_notice.title;
@@ -187,6 +185,7 @@
     
     self.navigationController.navigationBar.hidden = YES;
 }
+
 #pragma mark - 查看更多
 - (IBAction)more:(id)sender {
 
@@ -223,23 +222,25 @@
 - (IBAction)switchSelected:(id)sender {
     
     UISegmentedControl* control = (UISegmentedControl*)sender;
-    
     _selectedSegmentIndex = control.selectedSegmentIndex;
-    
     [self swithToHidden:_selectedSegmentIndex];
-
+    self.typeIndex = 0;
+    self.typeIndex = _selectedSegmentIndex + 1;
+    [self postRequest];
 }
+
 - (void)swithToHidden:(NSInteger)index {
     
     switch (index) {
         case 0:
         {
+
             double c_over_num = [self.model.c_over_num doubleValue];
             
             self.titleLabel.text = @"创客大数据";
             self.label.text = @"创客";
             self.label2.text = @"创客项目";
-            self.label3.text = @"创客资金";
+            self.label3.text = @"创客基金";
             self.label4.text = [NSString stringWithFormat:@"%@人",self.model.c_man_num];
             self.label5.text = [NSString stringWithFormat:@"%@个",self.model.c_item_num];
             self.label6.text = [NSString stringWithFormat:@"%.2f元",c_over_num];
@@ -248,6 +249,7 @@
             break;
         case 1:
         {
+
             double ai_over_num = [self.model.ai_over_num doubleValue];
             self.titleLabel.text = @"爱心大数据";
             self.label.text = @"互助人数";
@@ -258,11 +260,10 @@
             self.label6.text = [NSString stringWithFormat:@"%.2f元",ai_over_num ];
         }
             break;
-            
         default:
-            
             break;
     }
+    
 }
 
 #pragma mark - 检查是否有更新
@@ -327,13 +328,7 @@
 #pragma mark - UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
-//    if (self.model.groom_item.count == 0) {
-//        self.nodataV.hidden = NO;
-//    }else{
-//        self.nodataV.hidden = YES;
-//    }
-    
+
     return self.model.groom_item.count;
 }
 
@@ -383,12 +378,5 @@
     
     return _cycleScrollView;
 }
-
-//- (NodataView *)nodataV{
-//    if (!_nodataV) {
-//        _nodataV = [[NodataView alloc] initWithFrame:CGRectMake(0, 390, kSCREEN_WIDTH, kSCREEN_HEIGHT - 49 - 64)];
-//    }
-//    return _nodataV;
-//}
 
 @end

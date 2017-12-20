@@ -91,11 +91,13 @@
         
         [weakSelf postCV_List:YES];
     };
+    
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         [self postCategory];
         [self postCityList];
         [self postCV_List:YES];
+        [self postRefreshRequest];
     }];
     
     MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
@@ -113,13 +115,14 @@
     [self postCategory];
     [self postCityList];
     [self postCV_List:YES];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"supportNotification" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"GLMine_CVNotification" object:nil];
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIApplicationBackgroundFetchIntervalNever;
         
     } else {
         self.automaticallyAdjustsScrollViewInsets = false;
-        // Fallback on earlier versions
+       
     }
     if(kSCREEN_HEIGHT == 812){
         self.tableViewTopConstrait.constant = 94;
@@ -129,6 +132,64 @@
 
 }
 
+- (void)refresh{
+    
+    [self postCV_List:YES];
+
+}
+#pragma mark - 刷新状态
+-(void)postRefreshRequest {
+    
+//    if ([UserModel defaultUser].token.length == 0) {
+//        return;
+//    }
+//    if ([UserModel defaultUser].uid.length == 0) {
+//        return;
+//    }
+//
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"token"] = [UserModel defaultUser].token;
+    dict[@"uid"] = [UserModel defaultUser].uid;
+    
+    [NetworkManager requestPOSTWithURLStr:kREFRESH_URL paramDic:dict finish:^(id responseObject) {
+        
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+            
+            [UserModel defaultUser].address = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"address"]];
+            [UserModel defaultUser].area = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"area"]];
+            [UserModel defaultUser].city = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"city"]];
+            [UserModel defaultUser].del = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"del"]];
+            [UserModel defaultUser].g_id = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"g_id"]];
+            [UserModel defaultUser].g_name = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"g_name"]];
+            [UserModel defaultUser].idcard = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"idcard"]];
+            [UserModel defaultUser].invest_count = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"invest_count"]];
+            [UserModel defaultUser].is_help = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"is_help"]];
+            [UserModel defaultUser].item_count = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"item_count"]];
+            [UserModel defaultUser].nickname = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"nickname"]];
+            [UserModel defaultUser].phone = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"phone"]];
+            [UserModel defaultUser].province = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"province"]];
+            [UserModel defaultUser].real_state = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"real_state"]];
+            [UserModel defaultUser].real_time = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"real_time"]];
+            [UserModel defaultUser].token = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"token"]];
+            [UserModel defaultUser].truename = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"truename"]];
+            [UserModel defaultUser].uid = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"uid"]];
+            [UserModel defaultUser].umark = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"umark"]];
+            [UserModel defaultUser].umoney = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"umoney"]];
+            [UserModel defaultUser].uname = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"uname"]];
+            [UserModel defaultUser].user_pic = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"user_pic"]];
+            [UserModel defaultUser].user_server = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"user_server"]];
+            [UserModel defaultUser].item_money = [NSString stringWithFormat:@"%@", responseObject[@"data"][@"item_money"]];
+     
+            [usermodelachivar achive];
+  
+        }else{
+            
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+        }
+        
+    } enError:^(NSError *error) {
+    }];
+}
 #pragma mark - 请求简历列表
 - (void)postCV_List:(BOOL)status {
     
@@ -173,19 +234,15 @@
                     [self.cvModels addObject:model];
                 }
             }
-            
         }else if ([responseObject[@"code"] integerValue]==PAGE_ERROR_CODE){
             
             if (self.cvModels.count != 0) {
-                
                 [MBProgressHUD showError:responseObject[@"message"]];
             }
             
         }else{
-            
             [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
-        
         [self.tableView reloadData];
         
     } enError:^(NSError *error) {
@@ -193,7 +250,6 @@
         [self endRefresh];
 
     }];
-
 }
 #pragma mark - 请求城市
 - (void)postCityList {
@@ -288,6 +344,8 @@
     
     self.navigationController.navigationBar.hidden = YES;
     
+    [self postRefreshRequest];//刷新状态
+    
 }
 
 #pragma mark - UITableViewDelegate
@@ -316,6 +374,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if ([[UserModel defaultUser].is_help integerValue] == 0) {//是否已捐助  0否  1是
+        [SVProgressHUD showErrorWithStatus:@"你还未支持过任何项目,不能查看简历详情"];
+        return;
+    }
+    
     self.hidesBottomBarWhenPushed = YES;
     GLMine_CV_PreviewController *previewVC = [[GLMine_CV_PreviewController alloc] init];
     GLTalent_CVModel *model = self.cvModels[indexPath.row];

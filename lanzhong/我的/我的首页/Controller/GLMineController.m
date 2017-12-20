@@ -44,6 +44,11 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bgImageVTopConstrait;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopConstrait;
 
+
+@property(nonatomic,strong)UIImageView *backgroundImgV;
+@property(nonatomic,assign)float backImgHeight;
+@property(nonatomic,assign)float backImgWidth;
+
 @end
 
 #define kHEIGHT 170
@@ -53,6 +58,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    [self.view insertSubview:self.backgroundImgV belowSubview:self.tableView];
     [self setUI];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMineCell" bundle:nil] forCellReuseIdentifier:@"GLMineCell"];
@@ -69,8 +75,19 @@
         self.bgImageVTopConstrait.constant = 0;
     }
     
-//    self.tableView.contentInset = UIEdgeInsetsMake(kHEIGHT, 0, 0, 0);
-    
+}
+
+- (UIImageView *)backgroundImgV{
+    if (!_backgroundImgV) {
+        _backgroundImgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 170)];
+        _backgroundImgV.contentMode = UIViewContentModeScaleAspectFill;
+        UIImage *image=[UIImage imageNamed:@"blackground"];
+        _backgroundImgV.image=image;
+        _backgroundImgV.userInteractionEnabled=YES;
+        _backImgHeight=_backgroundImgV.frame.size.height;
+        _backImgWidth=_backgroundImgV.frame.size.width;
+    }
+    return _backgroundImgV;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -220,6 +237,23 @@
     }
     self.statusLabel.text = [NSString stringWithFormat:@"实名认证:%@",str];
 }
+
+#pragma mark - 我的审核 我的项目 我的筹款
+- (IBAction)myExamine:(id)sender {
+    GLMine_MyProjectController *myExamineVC = [[GLMine_MyProjectController alloc] initWithSignIndex:1];
+    [self.navigationController pushViewController:myExamineVC animated:YES];
+}
+
+- (IBAction)myProject:(id)sender {
+    GLMine_MyProjectController *myProjectVC = [[GLMine_MyProjectController alloc] initWithSignIndex:2];
+    [self.navigationController pushViewController:myProjectVC animated:YES];
+}
+
+- (IBAction)myFundraising:(id)sender {
+    GLMine_MyProjectController *myFundraisingVC = [[GLMine_MyProjectController alloc] initWithSignIndex:0];
+    [self.navigationController pushViewController:myFundraisingVC animated:YES];
+}
+
 #pragma mark - 设置
 - (IBAction)set:(id)sender {
     
@@ -229,6 +263,7 @@
     self.hidesBottomBarWhenPushed = NO;
     
 }
+
 #pragma mark - 消息
 - (IBAction)message:(id)sender {
     
@@ -243,27 +278,43 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
 
-    CGFloat width = self.view.frame.size.width;
+//    CGFloat width = self.view.frame.size.width;
     // 图片宽度
     CGFloat yOffset = scrollView.contentOffset.y;
-    // 偏移的y值
-    if(yOffset < 0){
-        CGFloat totalOffset = kHEIGHT + ABS(yOffset);
-        CGFloat f = totalOffset / kHEIGHT;
-        //拉伸后的图片的frame应该是同比例缩放。
-
-        if (@available(iOS 11.0, *)) {
-
-            BOOL first = NO;
-            if(!first){
-                self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAlways;
-                self.bgImageVTopConstrait.constant = -20;
-                first = YES;
-            }
-        }
-
-        self.bgimageV.frame =  CGRectMake(- (width *f-width) / 2, yOffset, width * f, totalOffset);
+    
+    if (yOffset<0) {
+        CGRect rect = _backgroundImgV.frame;
+        rect.size.height = _backImgHeight-yOffset;
+        rect.size.width = _backImgWidth* (_backImgHeight-yOffset)/_backImgHeight;
+        rect.origin.x =  -(rect.size.width-_backImgWidth)/2;
+        rect.origin.y = 0;
+        _backgroundImgV.frame = rect;
+    }else{
+        CGRect rect = _backgroundImgV.frame;
+        rect.size.height = _backImgHeight;
+        rect.size.width = _backImgWidth;
+        rect.origin.x = 0;
+        rect.origin.y = -yOffset;
+        _backgroundImgV.frame = rect;
+        
     }
+    // 偏移的y值
+//    if(yOffset < 0){
+    
+//        CGFloat totalOffset = kHEIGHT + ABS(yOffset);
+//        CGFloat f = totalOffset / kHEIGHT;
+//        //拉伸后的图片的frame应该是同比例缩放。
+//        if (@available(iOS 11.0, *)) {
+//            BOOL first = YES;
+//            if(first){
+//                self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAlways;
+//                self.bgImageVTopConstrait.constant = -20;
+//                first = NO;
+//            }
+//        }
+//
+//        self.bgimageV.frame =  CGRectMake(- (width *f-width) / 2, yOffset, width * f, totalOffset);
+//    }
 
 }
 
@@ -323,19 +374,19 @@
         case 1:
         {
             switch (indexPath.row) {
-                case 0 :case 1 :case 2://我的项目
-                {
-                    GLMine_MyProjectController *myProjectVC = [[GLMine_MyProjectController alloc] initWithSignIndex:indexPath.row];
-                    [self.navigationController pushViewController:myProjectVC animated:YES];
-                }
-                    break;
-                case 3://我帮助过
+//                case 0 :case 1 :case 2://我的项目
+//                {
+//                    GLMine_MyProjectController *myProjectVC = [[GLMine_MyProjectController alloc] initWithSignIndex:indexPath.row];
+//                    [self.navigationController pushViewController:myProjectVC animated:YES];
+//                }
+//                    break;
+                case 0://我帮助过
                 {
                     GLMine_ParticipateController *participateVC = [[GLMine_ParticipateController alloc] init];
                     [self.navigationController pushViewController:participateVC animated:YES];
                 }
                     break;
-                case 4://我的钱包
+                case 1://我的钱包
                 {
                     GLMine_WalletController *walletVC = [[GLMine_WalletController alloc] init];
                     [self.navigationController pushViewController:walletVC animated:YES];
@@ -405,9 +456,7 @@
                           @{@"title":@"我的简历",@"image":@"我的简历"}
                           ];
         
-        NSArray *arr1 = @[@{@"title":@"谁帮助过我",@"image":@"谁帮助过我"},
-                          @{@"title":@"我的审核",@"image":@"我的审核"},
-                          @{@"title":@"我的项目",@"image":@"我的项目"},
+        NSArray *arr1 = @[
                           @{@"title":@"我帮助过",@"image":@"我帮助过"},
                           @{@"title":@"我的钱包",@"image":@"我的钱包"}];
     

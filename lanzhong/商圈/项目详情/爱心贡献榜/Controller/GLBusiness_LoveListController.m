@@ -39,7 +39,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.navigationItem.title = @"爱心排行行";
+    self.navigationItem.title = @"爱心排行榜";
     [self.tableView registerNib:[UINib nibWithNibName:@"GLBusiness_LoveListCell" bundle:nil] forCellReuseIdentifier:@"GLBusiness_LoveListCell"];
     [self.tableView addSubview:self.nodataV];
     self.nodataV.hidden = YES;

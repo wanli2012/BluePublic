@@ -35,12 +35,12 @@
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eFT-yX-YIB">
                     <rect key="frame" x="0.0" y="0.0" width="350" height="385"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <view key="tableHeaderView" contentMode="scaleToFill" id="Ly6-oP-tl2">
                         <rect key="frame" x="0.0" y="0.0" width="350" height="235"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blackground" translatesAutoresizingMaskIntoConstraints="NO" id="HKf-Ub-1BB">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HKf-Ub-1BB">
                                 <rect key="frame" x="0.0" y="0.0" width="350" height="170"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I3d-mg-Ztg">
@@ -116,20 +116,29 @@
                                     <outletCollection property="gestureRecognizers" destination="G0s-Uc-tMj" appends="YES" id="rlx-hE-Lwi"/>
                                 </connections>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxb-or-1zZ">
+                                <rect key="frame" x="0.0" y="170" width="350" height="65"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T9W-Sy-uZz">
                                 <rect key="frame" x="10" y="160" width="330" height="70"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k3q-Rh-J8T">
                                         <rect key="frame" x="10" y="0.0" width="310" height="70"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的项目" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tHA-VB-Iua">
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的项目" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tHA-VB-Iua">
                                                 <rect key="frame" x="104.5" y="10" width="103" height="20"/>
+                                                <gestureRecognizers/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="3k7-Y9-xD3" appends="YES" id="UW3-lX-y0u"/>
+                                                </connections>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的审核" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAm-jY-bKd">
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的审核" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAm-jY-bKd">
                                                 <rect key="frame" x="0.0" y="10" width="103.5" height="20"/>
+                                                <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="J0u-PR-qhm"/>
                                                     <constraint firstAttribute="height" constant="20" id="UTj-1H-uEo"/>
@@ -137,9 +146,13 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="j6J-35-Dnv" appends="YES" id="iQQ-h5-zZA"/>
+                                                </connections>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4rk-q9-xQ6">
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4rk-q9-xQ6">
                                                 <rect key="frame" x="0.0" y="30" width="103.5" height="40"/>
+                                                <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="OnC-As-ucF"/>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="SRG-0x-1a5"/>
@@ -147,12 +160,19 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="0.99961632490158081" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="MzG-YT-blL" appends="YES" id="7uA-70-rzr"/>
+                                                </connections>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eU3-zn-4yA">
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eU3-zn-4yA">
                                                 <rect key="frame" x="206.5" y="30" width="103.5" height="40"/>
+                                                <gestureRecognizers/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="0.99961632489999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="daX-gf-tC8" appends="YES" id="m8j-O2-94j"/>
+                                                </connections>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ocE-IX-Ssv">
                                                 <rect key="frame" x="103.5" y="13" width="1" height="15"/>
@@ -168,20 +188,28 @@
                                                     <constraint firstAttribute="width" constant="1" id="cIo-0K-zYE"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的筹款" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dh-C8-XXy">
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的筹款" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dh-C8-XXy">
                                                 <rect key="frame" x="208.5" y="10" width="101.5" height="20"/>
+                                                <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="2kk-Ef-nNE"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="g9M-bO-hYn" appends="YES" id="ULf-KB-b0u"/>
+                                                </connections>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="myx-1I-nJt">
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="myx-1I-nJt">
                                                 <rect key="frame" x="103.5" y="30" width="103" height="40"/>
+                                                <gestureRecognizers/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="0.99961632489999996" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="e2H-5r-OOR" appends="YES" id="MaB-Vn-ApT"/>
+                                                </connections>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -226,10 +254,12 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="HKf-Ub-1BB" secondAttribute="trailing" id="5km-iW-J3B"/>
                             <constraint firstItem="HKf-Ub-1BB" firstAttribute="top" secondItem="Ly6-oP-tl2" secondAttribute="top" id="7DZ-h9-Pi3"/>
+                            <constraint firstItem="fxb-or-1zZ" firstAttribute="leading" secondItem="Ly6-oP-tl2" secondAttribute="leading" id="98p-kg-Jn3"/>
+                            <constraint firstItem="fxb-or-1zZ" firstAttribute="top" secondItem="HKf-Ub-1BB" secondAttribute="bottom" id="FAH-bC-PQD"/>
                             <constraint firstItem="T9W-Sy-uZz" firstAttribute="leading" secondItem="Ly6-oP-tl2" secondAttribute="leading" constant="10" id="P2N-nU-Vog"/>
                             <constraint firstItem="HKf-Ub-1BB" firstAttribute="leading" secondItem="Ly6-oP-tl2" secondAttribute="leading" id="Uu9-TK-d25"/>
                             <constraint firstAttribute="bottom" secondItem="T9W-Sy-uZz" secondAttribute="bottom" constant="5" id="Vx3-Mp-HQz"/>
@@ -237,6 +267,8 @@
                             <constraint firstItem="I3d-mg-Ztg" firstAttribute="leading" secondItem="HKf-Ub-1BB" secondAttribute="leading" id="cng-CA-uxw"/>
                             <constraint firstItem="I3d-mg-Ztg" firstAttribute="top" secondItem="HKf-Ub-1BB" secondAttribute="top" id="fDS-M6-nGA"/>
                             <constraint firstAttribute="bottom" secondItem="HKf-Ub-1BB" secondAttribute="bottom" constant="65" id="ftk-Is-jpi"/>
+                            <constraint firstAttribute="bottom" secondItem="fxb-or-1zZ" secondAttribute="bottom" id="uqM-yP-7SZ"/>
+                            <constraint firstAttribute="trailing" secondItem="fxb-or-1zZ" secondAttribute="trailing" id="xbq-hQ-Avd"/>
                             <constraint firstItem="I3d-mg-Ztg" firstAttribute="trailing" secondItem="HKf-Ub-1BB" secondAttribute="trailing" id="xhH-XV-KkA"/>
                             <constraint firstAttribute="trailing" secondItem="T9W-Sy-uZz" secondAttribute="trailing" constant="10" id="zKR-dG-PZD"/>
                         </constraints>
@@ -263,9 +295,38 @@
                 <action selector="personInfo:" destination="-1" id="gh9-20-gU3"/>
             </connections>
         </tapGestureRecognizer>
+        <tapGestureRecognizer id="j6J-35-Dnv" userLabel="我的审核">
+            <connections>
+                <action selector="myExamine:" destination="-1" id="S1p-xd-3nf"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="3k7-Y9-xD3" userLabel="我的项目">
+            <connections>
+                <action selector="myProject:" destination="-1" id="sQK-x5-skD"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="g9M-bO-hYn" userLabel="我的筹款">
+            <connections>
+                <action selector="myFundraising:" destination="-1" id="haM-dK-Bbd"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="MzG-YT-blL" userLabel="我的审核1">
+            <connections>
+                <action selector="myExamine:" destination="-1" id="DRv-qB-5SH"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="e2H-5r-OOR" userLabel="我的项目1">
+            <connections>
+                <action selector="myProject:" destination="-1" id="mxe-RE-NFh"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="daX-gf-tC8" userLabel="我的筹款1">
+            <connections>
+                <action selector="myFundraising:" destination="-1" id="H7o-11-iFo"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="blackground" width="375" height="158"/>
         <image name="into" width="10" height="18"/>
         <image name="message-1" width="17" height="18"/>
         <image name="set-1" width="18" height="18"/>

@@ -32,7 +32,12 @@
     [self.imageV sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     self.nameLabel.text = model.goods_name;
     self.priceLabel.text = [NSString stringWithFormat:@"¥%@",model.goods_discount];
-    self.countLabel.text = [NSString stringWithFormat:@"已售:%@",model.salenum];
+    if ([model.salenum integerValue] > 10000) {
+        self.countLabel.text = [NSString stringWithFormat:@"已售:%.2f万",[model.salenum floatValue]/ 10000.0];
+    }else{
+        self.countLabel.text = [NSString stringWithFormat:@"已售:%@",model.salenum];
+        
+    }
 }
 
 @end

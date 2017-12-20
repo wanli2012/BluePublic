@@ -110,13 +110,15 @@
     }else if (view == self.twoLinkageDropMenu){
         
         [self.twoLinkageButton setTitle:str forState:UIControlStateNormal];
-        
         [self buttonEdgeInsets:self.twoLinkageButton];
+        [self.threeLinkageButton setTitle:self.titles[2] forState:UIControlStateNormal];
+        
         self.block(1,firstSelectIndex,selectIndex);
+        
     }else if (view == self.threeLinkageDropMenu){
         
         [self.threeLinkageButton setTitle:str forState:UIControlStateNormal];
-        
+        [self.twoLinkageButton setTitle:self.titles[1] forState:UIControlStateNormal];
         [self buttonEdgeInsets:self.threeLinkageButton];
         self.block(2,firstSelectIndex,selectIndex);
     }

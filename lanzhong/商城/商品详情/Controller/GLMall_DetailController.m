@@ -42,7 +42,7 @@
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIView *headerView;//透视图
+@property (weak, nonatomic) IBOutlet UIView *headerView;//头视图
 @property (weak, nonatomic) IBOutlet UIView *navView;//导航栏View
 
 @property (nonatomic, strong)NSMutableArray *dataSource;//数据源
@@ -65,6 +65,7 @@
 
 @property (nonatomic, copy)NSString *spec_id;//规格id
 @property (nonatomic, assign)NSInteger sum;//购买数量
+@property (weak, nonatomic) IBOutlet UILabel *goodsNameLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;//价格label
 @property (weak, nonatomic) IBOutlet UILabel *saleNumLabel;//销量
@@ -97,7 +98,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBar.hidden = YES;
+    
     self.navigationItem.title = @"商品详情";
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
@@ -223,6 +224,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = YES;
     
 }
 
@@ -246,7 +248,13 @@
     
     self.priceLabel.text = [NSString stringWithFormat:@"%@",self.goods_infoDic[@"goods_discount"]];
     self.saleNumLabel.text = [NSString stringWithFormat:@"总销量:%@件",self.goods_infoDic[@"salenum"]];
+    self.goodsNameLabel.text = [NSString stringWithFormat:@"%@",self.goods_infoDic[@"goods_name"]];
     self.infoLabel.text = [NSString stringWithFormat:@"%@",self.goods_infoDic[@"goods_info"]];
+    
+    CGRect rect = [self.goods_infoDic[@"goods_info"] boundingRectWithSize:CGSizeMake(kSCREEN_WIDTH - 30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil];
+    CGRect nameRect = [self.goods_infoDic[@"goods_name"] boundingRectWithSize:CGSizeMake(kSCREEN_WIDTH - 30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:15]} context:nil];
+    
+    self.headerView.height = 402 + rect.size.height + nameRect.size.height;
     
 }
 

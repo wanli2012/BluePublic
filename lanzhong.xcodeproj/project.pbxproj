@@ -4749,6 +4749,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lanzhong",
 				);
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/lanzhong/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
@@ -4873,6 +4874,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lanzhong",
 				);
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/lanzhong/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
@@ -4907,6 +4909,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/lanzhong",
 				);
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/lanzhong/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (

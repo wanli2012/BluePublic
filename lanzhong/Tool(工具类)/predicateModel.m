@@ -17,40 +17,30 @@
     
     return [pred evaluateWithObject:url];
 }
+
 //判断手机号码格式是否正确
 + (BOOL)valiMobile:(NSString *)mobile
 {
-    mobile = [mobile stringByReplacingOccurrencesOfString:@" " withString:@""];
-    if (mobile.length != 11)
-    {
-        return NO;
-    }else{
-        /**
-         * 移动号段正则表达式
-         */
-        NSString *CM_NUM = @"^((13[4-9])|(147)|(15[0-2,7-9])|(178)|(18[2-4,7-8]))\\d{8}|(1705)\\d{7}$";
-        /**
-         * 联通号段正则表达式
-         */
-        NSString *CU_NUM = @"^((13[0-2])|(145)|(15[5-6])|(176)|(18[5,6]))\\d{8}|(1709)\\d{7}$";
-        /**
-         * 电信号段正则表达式
-         */
-        NSString *CT_NUM = @"^((133)|(153)|(17[0,7])|(18[0,1,9]))\\d{8}$";
-        NSPredicate *pred1 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM_NUM];
-        BOOL isMatch1 = [pred1 evaluateWithObject:mobile];
-        NSPredicate *pred2 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU_NUM];
-        BOOL isMatch2 = [pred2 evaluateWithObject:mobile];
-        NSPredicate *pred3 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CT_NUM];
-        BOOL isMatch3 = [pred3 evaluateWithObject:mobile];
-        
-        if (isMatch1 || isMatch2 || isMatch3) {
-            return YES;
-        }else{
-            return NO;
+    if (mobile.length == 11) {       // 判断是不是11位
+        for (int i = 0; i < mobile.length; i++) {
+            
+            char c = [mobile characterAtIndex:i]; // 从NSString中获取单个字符
+            if (c > 57 || c < 48) { // 判断是否是纯数字，比较ASCII码。0~9 对应ASCII范围 48 ~ 57
+                return NO;
+            } else {                    // 判断第一位是不是 1
+                if (i == 0 && c != '1') {
+                    return NO;
+                }                // 判断第二位是不是 3 4 5 7 8 这些数字
+                else if(i == 1 && c != '3' && c != '4' && c != '5' && c != '7' && c != '8') {
+                    return NO;
+                }
+            }
         }
+        return YES;
     }
+    return NO;
 }
+
 //判断邮箱格式是否正确
 +(BOOL)isValidateEmail:(NSString *)email
 {

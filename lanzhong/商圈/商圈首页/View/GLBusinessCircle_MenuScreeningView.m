@@ -87,7 +87,6 @@
         
         [self.oneLinkageDropMenu creatDropView:self withShowTableNum:2 withData:self.dataArr1];
 
-        
     }else if (button == self.twoLinkageButton){
         
         [self.oneLinkageDropMenu dismiss];
