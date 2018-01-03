@@ -7,7 +7,6 @@
 //
 
 #import "GLMine_PendingEvaluateCell.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface GLMine_PendingEvaluateCell()
 

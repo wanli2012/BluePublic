@@ -7,7 +7,6 @@
 //
 
 #import "GLMine_CurriculumVitaeController.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 #import "GLMine_CV_Header.h"//头视图
 #import "GLMine_CV_BaseCell.h"//基础信心cell

@@ -7,8 +7,7 @@
 //
 
 #import "GLMall_DetailCommentCell.h"
-#import "formattime.h"
-#import <SDWebImage/UIImageView+WebCache.h>
+
 
 @interface GLMall_DetailCommentCell ()
 

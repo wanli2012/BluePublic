@@ -14,7 +14,7 @@
 #import "GLBusiness_LoveListController.h"
 #import "GLBusiness_FundTrendController.h"//资金动向
 #import "GLBusiness_DetailModel.h"
-#import <SDWebImage/UIImageView+WebCache.h>
+
 #import "GLBusiness_Detail_heartCommentController.h"//更多评论
 
 #import "GLPay_ChooseController.h"//选择支付界面

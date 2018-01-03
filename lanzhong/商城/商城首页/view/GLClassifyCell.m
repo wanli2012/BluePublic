@@ -7,7 +7,6 @@
 //
 
 #import "GLClassifyCell.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface GLClassifyCell()
 

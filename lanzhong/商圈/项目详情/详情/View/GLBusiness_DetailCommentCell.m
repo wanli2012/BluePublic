@@ -7,8 +7,6 @@
 //
 
 #import "GLBusiness_DetailCommentCell.h"
-#import <SDWebImage/UIImageView+WebCache.h>
-#import "formattime.h"
 #import "LWLabel.h"
 
 @interface GLBusiness_DetailCommentCell ()

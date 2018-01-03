@@ -7,7 +7,7 @@
 //
 
 #import "GLMine_CV_ElegantShowController.h"
-#import "HXPhotoViewController.h"
+//#import "HXPhotoViewController.h"
 #import "HXPhotoView.h"
 
 static const CGFloat kPhotoViewMargin = 12.0;
@@ -41,8 +41,8 @@ static const CGFloat kPhotoViewMargin = 12.0;
 
     if (self.images.count != 0) {
         
-        self.manager.networkPhotoUrls = [NSMutableArray arrayWithArray:self.images];
-        self.manager.photoMaxNum = 3 - self.images.count;
+//        self.manager.networkPhotoUrls = [NSMutableArray arrayWithArray:self.images];
+//        self.manager.photoMaxNum = 3 - self.images.count;
     }
     self.photoView.manager = self.manager;
     [self.scrollView addSubview:self.photoView];
@@ -114,6 +114,8 @@ static const CGFloat kPhotoViewMargin = 12.0;
 #pragma mark - 照片选择器 代理
 - (void)photoView:(HXPhotoView *)photoView changeComplete:(NSArray<HXPhotoModel *> *)allList photos:(NSArray<HXPhotoModel *> *)photos videos:(NSArray<HXPhotoModel *> *)videos original:(BOOL)isOriginal {
     
+    NSSLog(@"%@",allList);
+    
     [self.imageArr removeAllObjects];
     for (HXPhotoModel *photo in photos) {
         PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
@@ -122,38 +124,59 @@ static const CGFloat kPhotoViewMargin = 12.0;
         __weak typeof(self) weakself = self;
         [[PHImageManager defaultManager] requestImageForAsset:photo.asset targetSize:[UIScreen mainScreen].bounds.size contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage *result, NSDictionary *info) {
             //设置图片
-            if (photo.networkPhotoUrl.length == 0) {
-                
-                [weakself.imageArr insertObject:result atIndex:0];
-            }
+            [weakself.imageArr insertObject:result atIndex:0];
+            
         }];
     }
 }
 
-- (void)photoView:(HXPhotoView *)photoView deleteNetworkPhoto:(NSString *)networkPhotoUrl {
-
-    BOOL isDel = NO;
-    for (NSString *url in self.images) {
-        if ([url isEqualToString:networkPhotoUrl]) {
-
-            isDel = YES;
-        }
-    }
-    
-    if(isDel){
-        [self.images removeObject:networkPhotoUrl];
-    }
-}
-
-/**  网络图片全部下载完成时调用  */
-- (void)photoViewAllNetworkingPhotoDownloadComplete:(HXPhotoView *)photoView{
-   
-}
-
 - (void)photoView:(HXPhotoView *)photoView updateFrame:(CGRect)frame {
-    
+    NSSLog(@"%@",NSStringFromCGRect(frame));
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, CGRectGetMaxY(frame) + kPhotoViewMargin);
+    
 }
+//- (void)photoView:(HXPhotoView *)photoView changeComplete:(NSArray<HXPhotoModel *> *)allList photos:(NSArray<HXPhotoModel *> *)photos videos:(NSArray<HXPhotoModel *> *)videos original:(BOOL)isOriginal {
+//
+//    [self.imageArr removeAllObjects];
+//    for (HXPhotoModel *photo in photos) {
+//        PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+//        options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+//
+//        __weak typeof(self) weakself = self;
+//        [[PHImageManager defaultManager] requestImageForAsset:photo.asset targetSize:[UIScreen mainScreen].bounds.size contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage *result, NSDictionary *info) {
+//            //设置图片
+//            if (photo.networkPhotoUrl.length == 0) {
+//
+//                [weakself.imageArr insertObject:result atIndex:0];
+//            }
+//        }];
+//    }
+//}
+//
+//- (void)photoView:(HXPhotoView *)photoView deleteNetworkPhoto:(NSString *)networkPhotoUrl {
+//
+//    BOOL isDel = NO;
+//    for (NSString *url in self.images) {
+//        if ([url isEqualToString:networkPhotoUrl]) {
+//
+//            isDel = YES;
+//        }
+//    }
+//
+//    if(isDel){
+//        [self.images removeObject:networkPhotoUrl];
+//    }
+//}
+//
+///**  网络图片全部下载完成时调用  */
+//- (void)photoViewAllNetworkingPhotoDownloadComplete:(HXPhotoView *)photoView{
+//
+//}
+//
+//- (void)photoView:(HXPhotoView *)photoView updateFrame:(CGRect)frame {
+//
+//    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, CGRectGetMaxY(frame) + kPhotoViewMargin);
+//}
 
 #pragma mark - 懒加载
 - (NSMutableArray *)imageArr{
@@ -163,23 +186,32 @@ static const CGFloat kPhotoViewMargin = 12.0;
     return _imageArr;
 }
 
+//- (HXPhotoManager *)manager {
+//    if (!_manager) {
+//        _manager = [[HXPhotoManager alloc] initWithType:HXPhotoManagerSelectedTypePhotoAndVideo];
+//        _manager.openCamera = YES;
+//        _manager.cacheAlbum = YES;
+//        _manager.lookLivePhoto = YES;
+//        _manager.open3DTouchPreview = YES;
+//        _manager.cameraType = HXPhotoManagerCameraTypeSystem;
+//        _manager.photoMaxNum = 3;
+//        _manager.videoMaxNum = 3;
+//        _manager.maxNum = 18;
+//        _manager.saveSystemAblum = NO;
+//
+//    }
+//    return _manager;
+//}
 - (HXPhotoManager *)manager {
     if (!_manager) {
         _manager = [[HXPhotoManager alloc] initWithType:HXPhotoManagerSelectedTypePhotoAndVideo];
-        _manager.openCamera = YES;
-        _manager.cacheAlbum = YES;
-        _manager.lookLivePhoto = YES;
-        _manager.open3DTouchPreview = YES;
-        _manager.cameraType = HXPhotoManagerCameraTypeSystem;
-        _manager.photoMaxNum = 3;
-        _manager.videoMaxNum = 3;
-        _manager.maxNum = 18;
-        _manager.saveSystemAblum = NO;
-        
+        _manager.configuration.openCamera = YES;
+        _manager.configuration.photoMaxNum = 9;
+        _manager.configuration.videoMaxNum = 9;
+        _manager.configuration.maxNum = 18;
     }
     return _manager;
 }
-
 - (HXPhotoView *)photoView{
     if (!_photoView) {
         _photoView = [HXPhotoView photoManager:self.manager];;

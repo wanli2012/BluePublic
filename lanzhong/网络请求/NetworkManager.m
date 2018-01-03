@@ -33,47 +33,26 @@
 + (void)requestPOSTWithURLStr:(NSString *)urlStr paramDic:(NSDictionary *)paramDic finish:(void(^)(id responseObject)) finish enError:(void(^)(NSError *error))enError {
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
+    AFJSONResponseSerializer *response = [AFJSONResponseSerializer serializer];
+    response.removesKeysWithNullValues = YES;//去除空值
+
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"text/html",@"application/json",nil];
-    
-    manager.requestSerializer.timeoutInterval=10;
-    // 加上这行代码，https ssl 验证。
+    manager.responseSerializer = response;//申明返回的结果是json类
+   
+    manager.requestSerializer.timeoutInterval = 10;
+    // 加上这行代码，https ssl 验证。   ***这里不懂,为什么注视了就好了,   不用读证书???
     [manager setSecurityPolicy:[self customSecurityPolicy]];
     
     NSString *urlStr1 = [NSString stringWithFormat:@"%@%@",URL_Base,urlStr];
     
     [manager POST:urlStr1 parameters:paramDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        switch ([responseObject[@"code"] integerValue]) {
-            case SUCCESS_CODE:
-                finish(responseObject);
-                break;
-            case PAGE_ERROR_CODE:
-                finish(responseObject);
-//                [MBProgressHUD showError:@"没有更多数据了"];
-                break;
-            case ERROR_CODE:
-//                [MBProgressHUD showSuccess:@"token错误"];
-                finish(responseObject);
-                break;
-            case LOGIC_ERROR_CODE:
-                finish(responseObject);
-                break;
-            case OVERDUE_CODE:
-//                [MBProgressHUD showSuccess:@"未登录请登录账户返回"];
-                finish(responseObject);
-                break;
-                
-            default:
-                finish(responseObject);
-                break;
-        }
+        finish(responseObject);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         enError(error);
     }];
-    
 }
 
 //没有延迟时间

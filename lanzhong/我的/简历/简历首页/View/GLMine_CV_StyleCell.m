@@ -8,7 +8,6 @@
 
 #import "GLMine_CV_StyleCell.h"
 #import "GLMine_CV_StyleCollectionCell.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface GLMine_CV_StyleCell()<UICollectionViewDelegate,UICollectionViewDataSource>
 

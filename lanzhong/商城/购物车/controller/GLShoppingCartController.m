@@ -100,7 +100,6 @@ static NSString *ID = @"GLShoppingCell";
             nav.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             [self presentViewController:nav animated:YES completion:nil];
             
-            
         }else{
             
             [MBProgressHUD showError:responseObject[@"message"]];
@@ -344,7 +343,7 @@ static NSString *ID = @"GLShoppingCell";
                         }
                     }
                     
-                    if (b == YES) {
+                    if (b == NO) {
                         
                         self.seleteAllBtn.selected = NO;
                         [self.seleteAllBtn setImage:[UIImage imageNamed:@"nochoice1"] forState:UIControlStateNormal];

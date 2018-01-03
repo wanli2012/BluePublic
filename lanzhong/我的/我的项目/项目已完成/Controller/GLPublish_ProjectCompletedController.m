@@ -8,7 +8,6 @@
 
 #import "GLPublish_ProjectCompletedController.h"
 #import "GLPublish_ProjectCell.h"
-#import "formattime.h"
 #import "GLBusiness_Detail_heartCommentController.h"
 
 @interface GLPublish_ProjectCompletedController ()<GLPublish_ProjectCellDelegate>

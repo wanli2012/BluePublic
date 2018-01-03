@@ -8,7 +8,7 @@
 
 #import "GLBusiness_DetailProjectCell.h"
 #import "GLBusiness_ProjectCollectionCell.h"
-#import <SDWebImage/UIImageView+WebCache.h>
+
 
 
 @interface GLBusiness_DetailProjectCell ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>

@@ -7,7 +7,6 @@
 //
 
 #import "GLMine_ReturnGoodsCell.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface GLMine_ReturnGoodsCell ()
 

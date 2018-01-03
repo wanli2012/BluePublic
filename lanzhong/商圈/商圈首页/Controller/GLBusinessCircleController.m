@@ -124,11 +124,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"supportNotification" object:nil];
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIApplicationBackgroundFetchIntervalNever;
-        
     } else {
         self.automaticallyAdjustsScrollViewInsets = false;
-        // Fallback on earlier versions
     }
+    
     if(kSCREEN_HEIGHT == 812){
         self.tableViewTopConstrait.constant = 94;
     }else{
@@ -292,7 +291,7 @@
         
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             if([responseObject[@"data"] count] != 0){
-                
+       
                 [self.adModels removeAllObjects];
                 
                 NSMutableArray *arrM = [NSMutableArray array];
@@ -310,11 +309,14 @@
                 self.cycleScrollView.imageURLStringsGroup = arrM;
             }
         }else{
+            self.cycleScrollView.localizationImageNamesGroup = @[LUNBO_PlaceHolder];
             [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
-    } enError:^(NSError *error) {
+        [self.tableView reloadData];
         
+    } enError:^(NSError *error) {
+        self.cycleScrollView.localizationImageNamesGroup = @[LUNBO_PlaceHolder];
     }];
 }
 
@@ -422,7 +424,6 @@
     }
     
     return _menuScreeningView;
-    
 }
 
 - (SDCycleScrollView *)cycleScrollView{
@@ -442,7 +443,7 @@
         _cycleScrollView.placeholderImage = [UIImage imageNamed:LUNBO_PlaceHolder];
         _cycleScrollView.pageControlDotSize = CGSizeMake(10, 10);
         
-        _cycleScrollView.localizationImageNamesGroup = @[LUNBO_PlaceHolder,LUNBO_PlaceHolder,LUNBO_PlaceHolder,LUNBO_PlaceHolder];
+
     }
     
     return _cycleScrollView;

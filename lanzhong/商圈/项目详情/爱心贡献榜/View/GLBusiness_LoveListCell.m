@@ -7,8 +7,7 @@
 //
 
 #import "GLBusiness_LoveListCell.h"
-#import <SDWebImage/UIImageView+WebCache.h>
-#import "formattime.h"
+
 
 @interface GLBusiness_LoveListCell ()
 

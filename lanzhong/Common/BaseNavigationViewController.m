@@ -40,7 +40,7 @@
     // 让返回按钮内容继续向左边偏移10
     button.contentEdgeInsets = UIEdgeInsetsMake(0, -17, 0, 0);
     
-    button.backgroundColor=[UIColor clearColor];
+    button.backgroundColor = [UIColor clearColor];
     [button addTarget:self action:@selector(popself) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *ba=[[UIBarButtonItem alloc]initWithCustomView:button];

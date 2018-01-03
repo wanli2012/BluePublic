@@ -7,7 +7,6 @@
 //
 
 #import "GLTalentPoolCell.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface GLTalentPoolCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *picImageV;

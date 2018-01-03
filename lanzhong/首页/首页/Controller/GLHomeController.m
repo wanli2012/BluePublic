@@ -9,7 +9,6 @@
 #import "GLHomeController.h"
 #import "GLHomeCell.h"
 #import <SDCycleScrollView/SDCycleScrollView.h>
-#import <SDWebImage/UIImageView+WebCache.h>
 
 #import "GLPay_ChooseController.h"//支付选择
 #import "GLHome_CasesController.h"//经典案例
@@ -17,6 +16,7 @@
 #import "GLMine_MyMessage_NoticeController.h"//公告列表
 #import "GLBusiness_DetailController.h"//项目详情
 #import "GLBusiness_CertificationController.h"//web广告页
+#import "GLTrainListController.h"
 
 @interface GLHomeController ()<UITableViewDataSource,UITableViewDelegate,SDCycleScrollViewDelegate>
 {
@@ -94,6 +94,7 @@
         self.automaticallyAdjustsScrollViewInsets = false;
         // Fallback on earlier versions
     }
+    
     if(kSCREEN_HEIGHT == 812){
         self.tableViewTopConstrait.constant = 44;
     }else{
@@ -109,7 +110,7 @@
     self.navigationController.navigationBar.barTintColor = [UIColor clearColor];
     
     _selectedSegmentIndex = 0;
-    self.headerView.height = 390;
+    self.headerView.height = 520;
     self.segment.selectedSegmentIndex = 0;
     
     self.noticeView.layer.cornerRadius = 5.f;
@@ -218,6 +219,16 @@
     self.hidesBottomBarWhenPushed = NO;
 }
 
+#pragma mark - 培训
+- (IBAction)train:(id)sender {
+    
+    self.hidesBottomBarWhenPushed = YES;
+    GLTrainListController *trainVC = [[GLTrainListController alloc] init];
+    [self.navigationController pushViewController:trainVC animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
+    
+}
+
 #pragma mark - 切换数据显示
 - (IBAction)switchSelected:(id)sender {
     
@@ -231,16 +242,36 @@
 
 - (void)swithToHidden:(NSInteger)index {
     
+    if(self.model.c_man_num.length == 0){
+        self.model.c_man_num = @"0";
+    }
+    if(self.model.c_item_num.length == 0){
+        self.model.c_item_num = @"0";
+    }
+    if(self.model.c_over_num.length == 0){
+        self.model.c_over_num = @"0";
+    }
+    if(self.model.ai_over_num.length == 0){
+        self.model.ai_over_num = @"0";
+    }
+    if(self.model.ai_man_num.length == 0){
+        self.model.ai_man_num = @"0";
+    }
+    if(self.model.ai_item_num.length == 0){
+        self.model.ai_item_num = @"0";
+    }
+    
+    
     switch (index) {
         case 0:
         {
-
             double c_over_num = [self.model.c_over_num doubleValue];
             
             self.titleLabel.text = @"创客大数据";
             self.label.text = @"创客";
             self.label2.text = @"创客项目";
             self.label3.text = @"创客基金";
+            
             self.label4.text = [NSString stringWithFormat:@"%@人",self.model.c_man_num];
             self.label5.text = [NSString stringWithFormat:@"%@个",self.model.c_item_num];
             self.label6.text = [NSString stringWithFormat:@"%.2f元",c_over_num];
@@ -377,6 +408,13 @@
     }
     
     return _cycleScrollView;
+}
+
+- (GLHomeModel *)model{
+    if (!_model) {
+        _model = [[GLHomeModel alloc] init];
+    }
+    return _model;
 }
 
 @end

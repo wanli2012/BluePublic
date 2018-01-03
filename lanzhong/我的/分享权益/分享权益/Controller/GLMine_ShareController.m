@@ -12,11 +12,20 @@
 
 @interface GLMine_ShareController ()
 
+@property (weak, nonatomic) IBOutlet UIView *contentView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
 @property (weak, nonatomic) IBOutlet UIView *bgLayerView;
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *picImageV;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *noticeLabel;
+@property (nonatomic, strong)LoadWaitView *loadV;
+@property (nonatomic, copy)NSString *noticeStr;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewWidth;
 
 @end
 
@@ -26,6 +35,9 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"分享权益";
+    
+    self.contentViewWidth.constant = kSCREEN_WIDTH;
+    self.contentViewHeight.constant = kSCREEN_HEIGHT;
     
     self.bgLayerView.layer.cornerRadius = 5.f;
     self.bgView.layer.cornerRadius = 5.f;
@@ -53,6 +65,44 @@
     
     [self logoQrCode];
     
+    [self requestPost];
+    
+    if (@available(iOS 11.0, *)) {
+        self.scrollView.contentInsetAdjustmentBehavior = UIApplicationBackgroundFetchIntervalNever;
+        
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = false;
+    }
+    
+}
+
+- (void)requestPost{
+   
+    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+    [NetworkManager requestPOSTWithURLStr:kPlat_Info_URL paramDic:@{} finish:^(id responseObject) {
+        
+        [_loadV removeloadview];
+        
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+            if ([responseObject[@"data"] count] != 0) {
+                
+                self.noticeStr = responseObject[@"data"][@"content"];
+                self.noticeLabel.text = self.noticeStr;
+                
+                CGRect rect = [self.noticeStr boundingRectWithSize:CGSizeMake(kSCREEN_WIDTH - 30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]} context:nil];
+                self.contentViewHeight.constant = 360 + rect.size.height;
+  
+            }
+        
+        }else{
+            [MBProgressHUD showError:responseObject[@"message"]];
+        }
+    
+    } enError:^(NSError *error) {
+        
+        [_loadV removeloadview];
+        
+    }];
 }
 
 //分享到社交圈

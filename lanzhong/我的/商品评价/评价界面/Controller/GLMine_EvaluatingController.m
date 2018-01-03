@@ -7,7 +7,6 @@
 //
 
 #import "GLMine_EvaluatingController.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface GLMine_EvaluatingController ()<UITextViewDelegate>
 

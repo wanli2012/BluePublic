@@ -7,7 +7,6 @@
 //
 
 #import "LBMyOrderListTableViewCell.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface LBMyOrderListTableViewCell ()
 

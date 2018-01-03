@@ -62,7 +62,6 @@
     
     if (isRefresh) {
         self.page = 1;
-        [self.models removeAllObjects];
     }else{
         self.page++;
     }
@@ -78,6 +77,11 @@
         [self endRefresh];
         
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+            
+            if (isRefresh) {
+                [self.models removeAllObjects];
+            }
+            
             if([responseObject[@"data"] count] != 0){
                 
                 for (NSDictionary *dic in responseObject[@"data"]) {
@@ -86,7 +90,8 @@
                     [self.models addObject:model];
                 }
             }
-        }else if ([responseObject[@"code"] integerValue]==PAGE_ERROR_CODE){
+            
+        }else if ([responseObject[@"code"] integerValue] == PAGE_ERROR_CODE){
             
             if (self.models.count != 0) {
                 
@@ -97,7 +102,6 @@
             [MBProgressHUD showError:responseObject[@"message"]];
         }
 
-        
         [self.tableView reloadData];
         
     } enError:^(NSError *error) {

@@ -7,7 +7,6 @@
 //
 
 #import "GLMine_MyMessageCell.h"
-#import "formattime.h"
 
 @interface GLMine_MyMessageCell ()
 

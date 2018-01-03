@@ -21,6 +21,8 @@
 #import <MJRefresh/MJRefresh.h>
 #import <MJExtension/MJExtension.h>
 #import "UIButton+SetEdgeInsets.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "formattime.h"
 
 #define YYSRGBColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
 
@@ -183,6 +185,10 @@
 #define kCV_LIST_URL @"Resume/select_re"//简历列表 Resume/life
 #define kCV_LIFE_URL @"Resume/life"//工作年限返回
 #define kCV_DEL_SKILL_URL @"Resume/del_skill"//个人技能评价删除
-
+#define kPlat_Info_URL @"Other/datas"//平台信息
+#define kTrain_URL @"Train/train_index"//培训列表
+#define kTrain_Detail_URL @"Train/train"//培训信息
+#define kTrain_Enroll_URL @"Train/enroll"//培训报名
+#define kTrain_MyEnroll_URL @"Train/my_enroll"//我的培训
 
 #endif /* PrefixHeader_pch */

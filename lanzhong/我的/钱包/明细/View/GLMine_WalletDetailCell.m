@@ -7,7 +7,6 @@
 //
 
 #import "GLMine_WalletDetailCell.h"
-#import "formattime.h"
 
 @interface GLMine_WalletDetailCell()
 

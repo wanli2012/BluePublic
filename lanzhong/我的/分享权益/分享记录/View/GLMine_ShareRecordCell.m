@@ -7,8 +7,6 @@
 //
 
 #import "GLMine_ShareRecordCell.h"
-#import <SDWebImage/UIImageView+WebCache.h>
-#import "formattime.h"
 
 @interface GLMine_ShareRecordCell ()
 

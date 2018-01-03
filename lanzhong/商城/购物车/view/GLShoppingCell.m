@@ -7,7 +7,6 @@
 //
 
 #import "GLShoppingCell.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface GLShoppingCell ()
 @property (weak, nonatomic) IBOutlet UIView *bgViewLayerView;

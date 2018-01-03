@@ -48,7 +48,6 @@
     
     self.messageTextV.layer.borderColor = [UIColor groupTableViewBackgroundColor].CGColor;
     self.messageTextV.layer.borderWidth = 1.f;
-
     
     [self.tableView registerNib:[UINib nibWithNibName:@"LBMineCenterPayPagesTableViewCell" bundle:nil] forCellReuseIdentifier:@"LBMineCenterPayPagesTableViewCell"];
 
@@ -60,6 +59,7 @@
     
     [self isShowPayInterface];
 }
+
 - (void)popScrectView{
     
     //弹出密码输入框
@@ -242,6 +242,7 @@
         }
     } enError:^(NSError *error) {
         [_loadV removeloadview];
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
     }];
 }
 
@@ -301,7 +302,7 @@
             
         } enError:^(NSError *error) {
             [_loadV removeloadview];
-            
+            [SVProgressHUD showErrorWithStatus:error.localizedDescription];
         }];
     }];
     
@@ -364,7 +365,6 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     return 50;
-    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -8,7 +8,6 @@
 
 #import "LBMyOrdersHeaderView.h"
 #import <Masonry/Masonry.h>
-#import "formattime.h"
 
 @implementation LBMyOrdersHeaderView
 

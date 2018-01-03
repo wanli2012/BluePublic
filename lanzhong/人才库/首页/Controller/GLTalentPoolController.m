@@ -117,6 +117,8 @@
     [self postCV_List:YES];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"GLMine_CVNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postRefreshRequest) name:@"supportNotification" object:nil];
+    
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIApplicationBackgroundFetchIntervalNever;
         
@@ -135,18 +137,11 @@
 - (void)refresh{
     
     [self postCV_List:YES];
-
 }
+
 #pragma mark - 刷新状态
 -(void)postRefreshRequest {
-    
-//    if ([UserModel defaultUser].token.length == 0) {
-//        return;
-//    }
-//    if ([UserModel defaultUser].uid.length == 0) {
-//        return;
-//    }
-//
+
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"token"] = [UserModel defaultUser].token;
     dict[@"uid"] = [UserModel defaultUser].uid;
@@ -201,7 +196,7 @@
     }
     
     if ([self.money isEqualToString:@"不限"]) {
-        self.money = @"";
+        self.money = @"";  
     }
     if ([self.duty isEqualToString:@"不限"]) {
         self.duty = @"";

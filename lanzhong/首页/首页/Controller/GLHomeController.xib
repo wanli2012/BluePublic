@@ -41,7 +41,7 @@
                     <rect key="frame" x="0.0" y="44" width="357" height="772"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <view key="tableHeaderView" contentMode="scaleToFill" id="lwi-4H-eXl">
-                        <rect key="frame" x="0.0" y="0.0" width="357" height="390"/>
+                        <rect key="frame" x="0.0" y="0.0" width="357" height="520"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OEw-SQ-OVZ">
@@ -237,7 +237,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wT5-eq-ZmU">
-                                <rect key="frame" x="0.0" y="350" width="357" height="40"/>
+                                <rect key="frame" x="0.0" y="480" width="357" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="经典案例" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5O-3S-fB9">
                                         <rect key="frame" x="15" y="12" width="57.5" height="17"/>
@@ -295,6 +295,16 @@
                                     <outletCollection property="gestureRecognizers" destination="2bw-o8-TR4" appends="YES" id="Xmj-HM-FOI"/>
                                 </connections>
                             </imageView>
+                            <imageView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="矩形20" translatesAutoresizingMaskIntoConstraints="NO" id="dD2-GB-R4w">
+                                <rect key="frame" x="15" y="360" width="327" height="120"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="aBJ-id-6j3"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="h6e-8w-bLf" appends="YES" id="GdI-a2-6v9"/>
+                                </connections>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
@@ -302,6 +312,7 @@
                             <constraint firstAttribute="trailing" secondItem="wT5-eq-ZmU" secondAttribute="trailing" id="Dl7-qS-qkg"/>
                             <constraint firstItem="BkJ-Sh-GXf" firstAttribute="leading" secondItem="lwi-4H-eXl" secondAttribute="leading" constant="15" id="F1z-e6-0Y9"/>
                             <constraint firstAttribute="bottom" secondItem="wT5-eq-ZmU" secondAttribute="bottom" id="FBh-51-HNk"/>
+                            <constraint firstItem="dD2-GB-R4w" firstAttribute="top" secondItem="BkJ-Sh-GXf" secondAttribute="bottom" constant="10" id="Iqp-8h-jGk"/>
                             <constraint firstItem="OEw-SQ-OVZ" firstAttribute="top" secondItem="dXE-lE-CSX" secondAttribute="top" id="JzA-Ly-I92"/>
                             <constraint firstItem="wT5-eq-ZmU" firstAttribute="leading" secondItem="lwi-4H-eXl" secondAttribute="leading" id="K94-XT-fKi"/>
                             <constraint firstAttribute="trailing" secondItem="BkJ-Sh-GXf" secondAttribute="trailing" constant="15" id="Q9j-gi-8W3"/>
@@ -310,11 +321,13 @@
                             <constraint firstItem="a0i-0n-gL9" firstAttribute="top" secondItem="cZf-aA-U0J" secondAttribute="top" id="c4x-VO-0Nj"/>
                             <constraint firstItem="OEw-SQ-OVZ" firstAttribute="bottom" secondItem="dXE-lE-CSX" secondAttribute="bottom" id="c5U-Qb-T1u"/>
                             <constraint firstItem="a0i-0n-gL9" firstAttribute="bottom" secondItem="cZf-aA-U0J" secondAttribute="bottom" id="ebf-UN-LgC"/>
+                            <constraint firstItem="dD2-GB-R4w" firstAttribute="leading" secondItem="lwi-4H-eXl" secondAttribute="leading" constant="15" id="j3p-e8-Adf"/>
                             <constraint firstAttribute="trailing" secondItem="cZf-aA-U0J" secondAttribute="trailing" constant="15" id="kzO-p8-16k"/>
                             <constraint firstItem="a0i-0n-gL9" firstAttribute="trailing" secondItem="cZf-aA-U0J" secondAttribute="trailing" id="lwM-bU-BTF"/>
                             <constraint firstItem="a0i-0n-gL9" firstAttribute="leading" secondItem="cZf-aA-U0J" secondAttribute="leading" id="nq8-LJ-xnw"/>
                             <constraint firstItem="cZf-aA-U0J" firstAttribute="top" secondItem="dXE-lE-CSX" secondAttribute="bottom" constant="10" id="o1K-6X-hLQ"/>
                             <constraint firstItem="cZf-aA-U0J" firstAttribute="leading" secondItem="lwi-4H-eXl" secondAttribute="leading" constant="15" id="sJJ-t5-jUi"/>
+                            <constraint firstAttribute="trailing" secondItem="dD2-GB-R4w" secondAttribute="trailing" constant="15" id="sZ6-7j-erw"/>
                             <constraint firstAttribute="trailing" secondItem="dXE-lE-CSX" secondAttribute="trailing" constant="15" id="wPI-a8-EC0"/>
                             <constraint firstItem="BkJ-Sh-GXf" firstAttribute="top" secondItem="cZf-aA-U0J" secondAttribute="bottom" constant="10" id="xcB-Rr-c0d"/>
                             <constraint firstItem="OEw-SQ-OVZ" firstAttribute="trailing" secondItem="dXE-lE-CSX" secondAttribute="trailing" id="yfO-IQ-UVt"/>
@@ -358,6 +371,11 @@
         <tapGestureRecognizer id="2bw-o8-TR4" userLabel="广告">
             <connections>
                 <action selector="ad:" destination="-1" id="g2K-li-MoQ"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="h6e-8w-bLf" userLabel="培训">
+            <connections>
+                <action selector="train:" destination="-1" id="4z1-dG-XjF"/>
             </connections>
         </tapGestureRecognizer>
     </objects>

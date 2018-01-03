@@ -7,7 +7,6 @@
 //
 
 #import "GLMine_CV_PreviewController.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 #import "JZAlbumViewController.h"
 
 #import "GLMine_CV_Header.h"//头视图

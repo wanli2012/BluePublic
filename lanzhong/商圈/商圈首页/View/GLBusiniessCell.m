@@ -7,8 +7,7 @@
 //
 
 #import "GLBusiniessCell.h"
-#import <SDWebImage/UIImageView+WebCache.h>
-#import "formattime.h"
+
 
 @interface GLBusiniessCell ()
 

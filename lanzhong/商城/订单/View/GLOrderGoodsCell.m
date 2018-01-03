@@ -7,7 +7,6 @@
 //
 
 #import "GLOrderGoodsCell.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface GLOrderGoodsCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageV;

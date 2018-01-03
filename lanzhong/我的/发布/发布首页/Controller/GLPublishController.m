@@ -11,7 +11,6 @@
 #import "GLBusiness_CertificationController.h"//webview的VC
 
 //照片选择
-#import "HXPhotoViewController.h"
 #import "HXPhotoView.h"
 
 //单选picker 和动画
@@ -22,8 +21,7 @@
 #import "GLMutipleChooseController.h"//省市选择
 #import "GLPublish_CityModel.h"//城市模型
 
-#import "HXPhotoViewController.h"
-#import "HXPhotoView.h"
+#import "GLPublish_UploadController.h"
 
 static const CGFloat kPhotoViewMargin = 12.0;
 
@@ -286,182 +284,214 @@ static const CGFloat kPhotoViewMargin = 12.0;
 
 #pragma mark - 照片选择器 代理
 - (void)photoView:(HXPhotoView *)photoView changeComplete:(NSArray<HXPhotoModel *> *)allList photos:(NSArray<HXPhotoModel *> *)photos videos:(NSArray<HXPhotoModel *> *)videos original:(BOOL)isOriginal {
-    
+
     [self.imageArr removeAllObjects];
+    
+    __weak typeof(self) weakself = self;
+    
     for (HXPhotoModel *photo in photos) {
-        PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
-        options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
-        
-        __weak typeof(self) weakself = self;
-        [[PHImageManager defaultManager] requestImageForAsset:photo.asset targetSize:[UIScreen mainScreen].bounds.size contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage *result, NSDictionary *info) {
-            //设置图片
-            [weakself.imageArr insertObject:result atIndex:0];
+        if (photo.type == HXPhotoModelMediaTypeCameraPhoto) {
+ 
+            [weakself.imageArr insertObject:photo.previewPhoto atIndex:0];
+        }else{
+
+            PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+            options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
             
-        }];
+            [[PHImageManager defaultManager] requestImageForAsset:photo.asset targetSize:[UIScreen mainScreen].bounds.size contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage *result, NSDictionary *info) {
+                //设置图片
+                [weakself.imageArr insertObject:result atIndex:0];
+                
+            }];
+        }
     }
 }
 
-- (void)photoView:(HXPhotoView *)photoView deleteNetworkPhoto:(NSString *)networkPhotoUrl {
-    
-   
-}
-
-/**  网络图片全部下载完成时调用  */
-- (void)photoViewAllNetworkingPhotoDownloadComplete:(HXPhotoView *)photoView{
-    
-}
-
 - (void)photoView:(HXPhotoView *)photoView updateFrame:(CGRect)frame {
-    
+
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, CGRectGetMaxY(frame) + kPhotoViewMargin);
+    
 }
+
+//- (void)photoView:(HXPhotoView *)photoView changeComplete:(NSArray<HXPhotoModel *> *)allList photos:(NSArray<HXPhotoModel *> *)photos videos:(NSArray<HXPhotoModel *> *)videos original:(BOOL)isOriginal {
+//
+//    [self.imageArr removeAllObjects];
+//    for (HXPhotoModel *photo in photos) {
+//        PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+//        options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+//
+//        __weak typeof(self) weakself = self;
+//        [[PHImageManager defaultManager] requestImageForAsset:photo.asset targetSize:[UIScreen mainScreen].bounds.size contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage *result, NSDictionary *info) {
+//            //设置图片
+//            [weakself.imageArr insertObject:result atIndex:0];
+//
+//        }];
+//    }
+//}
+//
+//- (void)photoView:(HXPhotoView *)photoView deleteNetworkPhoto:(NSString *)networkPhotoUrl {
+//
+//}
+//
+///**  网络图片全部下载完成时调用  */
+//- (void)photoViewAllNetworkingPhotoDownloadComplete:(HXPhotoView *)photoView{
+//
+//}
+//
+//- (void)photoView:(HXPhotoView *)photoView updateFrame:(CGRect)frame {
+//
+//    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, CGRectGetMaxY(frame) + kPhotoViewMargin);
+//}
 
 #pragma mark - 提交
 - (IBAction)submit:(id)sender {
     
-    if (self.moneyTF.text.length == 0) {
-
-        [SVProgressHUD showErrorWithStatus:@"请输入目标金额"];
-        return;
-    }else if([self.moneyTF.text floatValue] <= 0){
-
-        [SVProgressHUD showErrorWithStatus:@"金额必须大于0"];
-        return;
-    }
-    if (self.titleTF.text.length == 0) {
-
-        [SVProgressHUD showErrorWithStatus:@"请输入标题"];
-        return;
-    }
-    if ([self.industryLabel.text isEqualToString:@"请选择"] || self.trade_id.length == 0) {
-
-        [SVProgressHUD showErrorWithStatus:@"请选择行业"];
-        return;
-    }
+    self.hidesBottomBarWhenPushed = YES;
+    GLPublish_UploadController *uploadVC = [[GLPublish_UploadController alloc] init];
+    [self.navigationController pushViewController:uploadVC animated:YES];
     
-    if ([self.dateLabel.text isEqualToString:@"筹款截止日期"]) {
-     
-        [SVProgressHUD showErrorWithStatus:@"请选择截止日期"];
-        return;
-    }
-    
-    if ([self.infoTV.text isEqualToString:@"  请填写项目说明（限制150字以内）"]|| [self.infoTV.text isEqualToString:@""]) {
-       
-        [SVProgressHUD showErrorWithStatus:@"请输入项目说明"];
-        return;
-    }
-    if ([self.addressLabel.text isEqualToString:@"请选择"]) {
-    
-        [SVProgressHUD showErrorWithStatus:@"请选择地址"];
-        return;
-    }
-    
-    if (!_isAgreeProtocol) {
-        [SVProgressHUD showErrorWithStatus:@"请先同意发布协议"];
-        return;
-    }
-    
-    NSTimeInterval time = [self.need_time doubleValue];
-    NSDate *detaildate = [NSDate dateWithTimeIntervalSince1970:time];
-    
-    NSInteger kk = [self compareOneDay:detaildate withAnotherDay:[NSDate date]];
-    if(kk != 1){
-  
-        [SVProgressHUD showErrorWithStatus:@"截止日期需大于当前日期"];
-        return;
-    }
-    
-    if (self.provinceId.length <= 0 || self.cityId.length == 0) {
-    
-        [SVProgressHUD showErrorWithStatus:@"未选择地区"];
-        return;
-    }
- 
-    if (self.imageArr.count <= 0) {
-        [SVProgressHUD showErrorWithStatus:@"至少上传一张项目图片"];
-        return;
-    }
-    
-    self.submitBtn.userInteractionEnabled = NO;
-    self.submitBtn.backgroundColor = [UIColor lightGrayColor];
-    
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    
-    dic[@"token"] = [UserModel defaultUser].token;
-    dic[@"uid"] = [UserModel defaultUser].uid;
-    dic[@"title"] = self.titleTF.text;
-    dic[@"budget_money"] = self.moneyTF.text;
-    dic[@"info"] = self.infoTV.text;
-    dic[@"trade_id"] = self.trade_id;
-    dic[@"need_time"] = self.need_time;
-    
-    dic[@"province"] = self.provinceId;
-    dic[@"city"] = self.cityId;
-    
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];//响应
-    manager.requestSerializer.timeoutInterval = 20;
-    // 加上这行代码，https ssl 验证。
-    [manager setSecurityPolicy:[NetworkManager customSecurityPolicy]];
-    [manager POST:[NSString stringWithFormat:@"%@%@",URL_Base,kPUBLISH_PROJECT_URL] parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        //将图片以表单形式上传
-        
-        for (int i = 0; i < self.imageArr.count; i ++) {
-            
-            NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
-            formatter.dateFormat=@"yyyyMMddHHmmss";
-            NSString *str=[formatter stringFromDate:[NSDate date]];
-            NSString *fileName=[NSString stringWithFormat:@"%@%d.png",str,i];
-            NSString *title = [NSString stringWithFormat:@"photo[%zd]",i];
-      
-            NSData *data;
-            if (UIImagePNGRepresentation(self.imageArr[i]) == nil) {
-                
-                data = UIImageJPEGRepresentation(self.imageArr[i], 0.2);
-            }else {
-                data = UIImageJPEGRepresentation(self.imageArr[i], 0.2);
-            }
-
-            [formData appendPartWithFileData:data name:title fileName:fileName mimeType:@"image/png"];
-        }
-        
-    }progress:^(NSProgress *uploadProgress){
-
-        [SVProgressHUD showProgress:uploadProgress.fractionCompleted status:[NSString stringWithFormat:@"上传中%.0f%%",(uploadProgress.fractionCompleted * 100)]];
-        
-        if (uploadProgress.fractionCompleted == 0.5) {
-            [SVProgressHUD dismiss];
-        
-        }
-        [self.navigationController popViewControllerAnimated:YES];
-        
-    }success:^(NSURLSessionDataTask *task, id responseObject) {
-        
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-    
-        
-        if ([dic[@"code"] integerValue] == SUCCESS_CODE) {
-
-            [SVProgressHUD showSuccessWithStatus:dic[@"message"]];
-            [self dismissViewControllerAnimated:YES completion:nil];
-            
-        }else{
-            
-            [SVProgressHUD showErrorWithStatus:dic[@"message"]];
-
-        }
-        
-        self.submitBtn.userInteractionEnabled = YES;
-        self.submitBtn.backgroundColor = MAIN_COLOR;
-        [_loadV removeloadview];
-        
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        self.submitBtn.userInteractionEnabled = YES;
-        self.submitBtn.backgroundColor = MAIN_COLOR;
-
-        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-        
-    }];
+//    if (self.moneyTF.text.length == 0) {
+//
+//        [SVProgressHUD showErrorWithStatus:@"请输入目标金额"];
+//        return;
+//    }else if([self.moneyTF.text floatValue] <= 0){
+//
+//        [SVProgressHUD showErrorWithStatus:@"金额必须大于0"];
+//        return;
+//    }
+//    if (self.titleTF.text.length == 0) {
+//
+//        [SVProgressHUD showErrorWithStatus:@"请输入标题"];
+//        return;
+//    }
+//    if ([self.industryLabel.text isEqualToString:@"请选择"] || self.trade_id.length == 0) {
+//
+//        [SVProgressHUD showErrorWithStatus:@"请选择行业"];
+//        return;
+//    }
+//
+//    if ([self.dateLabel.text isEqualToString:@"筹款截止日期"]) {
+//
+//        [SVProgressHUD showErrorWithStatus:@"请选择截止日期"];
+//        return;
+//    }
+//
+//    if ([self.infoTV.text isEqualToString:@"  请填写项目说明（限制150字以内）"]|| [self.infoTV.text isEqualToString:@""]) {
+//
+//        [SVProgressHUD showErrorWithStatus:@"请输入项目说明"];
+//        return;
+//    }
+//    if ([self.addressLabel.text isEqualToString:@"请选择"]) {
+//
+//        [SVProgressHUD showErrorWithStatus:@"请选择地址"];
+//        return;
+//    }
+//
+//    if (!_isAgreeProtocol) {
+//        [SVProgressHUD showErrorWithStatus:@"请先同意发布协议"];
+//        return;
+//    }
+//
+//    NSTimeInterval time = [self.need_time doubleValue];
+//    NSDate *detaildate = [NSDate dateWithTimeIntervalSince1970:time];
+//
+//    NSInteger kk = [self compareOneDay:detaildate withAnotherDay:[NSDate date]];
+//    if(kk != 1){
+//
+//        [SVProgressHUD showErrorWithStatus:@"截止日期需大于当前日期"];
+//        return;
+//    }
+//
+//    if (self.provinceId.length <= 0 || self.cityId.length == 0) {
+//
+//        [SVProgressHUD showErrorWithStatus:@"未选择地区"];
+//        return;
+//    }
+//
+//    if (self.imageArr.count <= 0) {
+//        [SVProgressHUD showErrorWithStatus:@"至少上传一张项目图片"];
+//        return;
+//    }
+//
+//    self.submitBtn.userInteractionEnabled = NO;
+//    self.submitBtn.backgroundColor = [UIColor lightGrayColor];
+//
+//    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+//
+//    dic[@"token"] = [UserModel defaultUser].token;
+//    dic[@"uid"] = [UserModel defaultUser].uid;
+//    dic[@"title"] = self.titleTF.text;
+//    dic[@"budget_money"] = self.moneyTF.text;
+//    dic[@"info"] = self.infoTV.text;
+//    dic[@"trade_id"] = self.trade_id;
+//    dic[@"need_time"] = self.need_time;
+//
+//    dic[@"province"] = self.provinceId;
+//    dic[@"city"] = self.cityId;
+//
+//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];//响应
+//    manager.requestSerializer.timeoutInterval = 20;
+//    // 加上这行代码，https ssl 验证。
+////    [manager setSecurityPolicy:[NetworkManager customSecurityPolicy]];
+//    [manager POST:[NSString stringWithFormat:@"%@%@",URL_Base,kPUBLISH_PROJECT_URL] parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+//        //将图片以表单形式上传
+//
+//        for (int i = 0; i < self.imageArr.count; i ++) {
+//
+//            NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+//            formatter.dateFormat=@"yyyyMMddHHmmss";
+//            NSString *str=[formatter stringFromDate:[NSDate date]];
+//            NSString *fileName=[NSString stringWithFormat:@"%@%d.png",str,i];
+//            NSString *title = [NSString stringWithFormat:@"photo[%zd]",i];
+//
+//            NSData *data;
+//            if (UIImagePNGRepresentation(self.imageArr[i]) == nil) {
+//
+//                data = UIImageJPEGRepresentation(self.imageArr[i], 0.2);
+//            }else {
+//                data = UIImageJPEGRepresentation(self.imageArr[i], 0.2);
+//            }
+//
+//            [formData appendPartWithFileData:data name:title fileName:fileName mimeType:@"image/png"];
+//        }
+//
+//    }progress:^(NSProgress *uploadProgress){
+//
+//        [SVProgressHUD showProgress:uploadProgress.fractionCompleted status:[NSString stringWithFormat:@"上传中%.0f%%",(uploadProgress.fractionCompleted * 100)]];
+//
+//        if (uploadProgress.fractionCompleted == 0.5) {
+//            [SVProgressHUD dismiss];
+//
+//        }
+//
+//    }success:^(NSURLSessionDataTask *task, id responseObject) {
+//
+//        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+//
+//        if ([dic[@"code"] integerValue] == SUCCESS_CODE) {
+//
+//            [SVProgressHUD showSuccessWithStatus:dic[@"message"]];
+//
+//            [self.navigationController popViewControllerAnimated:YES];
+//
+//        }else{
+//
+//            [SVProgressHUD showErrorWithStatus:dic[@"message"]];
+//
+//        }
+//
+//        self.submitBtn.userInteractionEnabled = YES;
+//        self.submitBtn.backgroundColor = MAIN_COLOR;
+//        [_loadV removeloadview];
+//
+//    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//        self.submitBtn.userInteractionEnabled = YES;
+//        self.submitBtn.backgroundColor = MAIN_COLOR;
+//
+//        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+//
+//    }];
 
 }
 
@@ -756,23 +786,35 @@ static const CGFloat kPhotoViewMargin = 12.0;
 }
 
 
+//- (HXPhotoManager *)manager {
+//    if (!_manager) {
+//        _manager = [[HXPhotoManager alloc] initWithType:HXPhotoManagerSelectedTypePhotoAndVideo];
+//        _manager.openCamera = YES;
+//        _manager.cacheAlbum = YES;
+//        _manager.lookLivePhoto = YES;
+//        _manager.open3DTouchPreview = YES;
+//        _manager.cameraType = HXPhotoManagerCameraTypeSystem;
+//        _manager.photoMaxNum = 3;
+//        _manager.videoMaxNum = 3;
+//        _manager.maxNum = 18;
+//        _manager.saveSystemAblum = YES;
+//        _manager.selectPhoto = YES;
+//
+//    }
+//    return _manager;
+//}
+
 - (HXPhotoManager *)manager {
     if (!_manager) {
         _manager = [[HXPhotoManager alloc] initWithType:HXPhotoManagerSelectedTypePhotoAndVideo];
-        _manager.openCamera = YES;
-        _manager.cacheAlbum = YES;
-        _manager.lookLivePhoto = YES;
-        _manager.open3DTouchPreview = YES;
-        _manager.cameraType = HXPhotoManagerCameraTypeSystem;
-        _manager.photoMaxNum = 3;
-        _manager.videoMaxNum = 3;
-        _manager.maxNum = 18;
-        _manager.saveSystemAblum = NO;
-        
+        _manager.configuration.openCamera = YES;
+        _manager.configuration.photoMaxNum = 3;
+        _manager.configuration.videoMaxNum = 3;
+        _manager.configuration.maxNum = 3;
+        _manager.configuration.saveSystemAblum = YES;
     }
     return _manager;
 }
-
 - (HXPhotoView *)photoView{
     if (!_photoView) {
         _photoView = [HXPhotoView photoManager:self.manager];;

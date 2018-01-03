@@ -7,7 +7,7 @@
 //
 
 #import "GLHomeCell.h"
-#import <SDWebImage/UIImageView+WebCache.h>
+
 
 @interface GLHomeCell ()
 

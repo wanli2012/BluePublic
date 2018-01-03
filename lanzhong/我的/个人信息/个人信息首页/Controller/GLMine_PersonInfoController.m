@@ -8,7 +8,6 @@
 
 #import "GLMine_PersonInfoController.h"
 #import "GLMine_PersonInfo_AddressChooseController.h"//地址选择
-#import <SDWebImage/UIImageView+WebCache.h>
 
 
 @interface GLMine_PersonInfoController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>

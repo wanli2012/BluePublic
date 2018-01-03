@@ -7,7 +7,7 @@
 //
 
 #import "GLBusiness_FundTrendCell.h"
-#import "formattime.h"
+
 
 @interface GLBusiness_FundTrendCell ()
 

@@ -7,8 +7,6 @@
 //
 
 #import "GLPublish_FundraisingCell.h"
-#import "formattime.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface GLPublish_FundraisingCell ()
 

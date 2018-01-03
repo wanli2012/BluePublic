@@ -7,7 +7,6 @@
 //
 
 #import "GLPublish_ReviewCell.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface GLPublish_ReviewCell ()
 

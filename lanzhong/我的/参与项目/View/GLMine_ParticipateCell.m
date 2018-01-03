@@ -7,7 +7,6 @@
 //
 
 #import "GLMine_ParticipateCell.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface GLMine_ParticipateCell ()
 
