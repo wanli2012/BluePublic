@@ -36,7 +36,6 @@
     [super viewDidLoad];
     [self setNav];
     
-    self.type = 0;
     self.view.backgroundColor = [UIColor whiteColor];
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMine_BillCell" bundle:nil] forCellReuseIdentifier:@"GLMine_BillCell"];
     [self.tableView addSubview:self.nodataV];
@@ -44,16 +43,16 @@
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"GLMine_BillCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"GLMine_BillCollectionCell"];
     
-    //    __weak __typeof(self) weakSelf = self;
+    __weak __typeof(self) weakSelf = self;
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
-        //        [weakSelf postRequest:YES];
+        [weakSelf postRequest:YES];
         
     }];
     
     MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         
-        //        [weakSelf postRequest:NO];
+        [weakSelf postRequest:NO];
         
     }];
     
@@ -69,7 +68,10 @@
     
     self.page = 1;
     self.filterBtn.selected = NO;
-    //    [self postRequest:YES];
+    [self postRequest:YES];
+
+    self.type = 0;
+    
     
 }
 
@@ -89,7 +91,9 @@
     UIButton *button=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 80, 44)];
     button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;//左对齐
     [button setImage:[UIImage imageNamed:@"downarr"] forState:UIControlStateNormal];
-    [button setTitle:@"筛选" forState:UIControlStateNormal];
+    
+    GLMine_Bill_FilterModel *model = self.filterModels[0];
+    [button setTitle:model.name forState:UIControlStateNormal];
     [button setTitleColor:MAIN_COLOR forState:UIControlStateNormal];
     [button.titleLabel setFont:[UIFont systemFontOfSize:13]];
     
@@ -100,6 +104,7 @@
     
     self.filterBtn = button;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:self.filterBtn];
+
 }
 
 #pragma mark - 筛选
@@ -114,10 +119,19 @@
     if (self.filterBtn.isSelected) {
         [self.view addSubview:self.maskView];
         [self.view addSubview:self.filterView];
+        weakSelf.maskView.alpha = 1;
         weakSelf.filterBtn.imageView.transform = CGAffineTransformMakeRotation(M_PI);
+        
         [UIView animateWithDuration:0.3 animations:^{
-            weakSelf.filterView.frame = CGRectMake(0, 0, kSCREEN_WIDTH, 150);
-            weakSelf.collectionView.frame = CGRectMake(0, 0, kSCREEN_WIDTH, 150);
+            if(self.filterModels.count > 0){
+                
+                weakSelf.filterView.frame = CGRectMake(0, 0, kSCREEN_WIDTH, ((self.filterModels.count - 1)/4 + 1) * 50 + 20);
+                weakSelf.collectionView.frame = CGRectMake(0, 0, kSCREEN_WIDTH, ((self.filterModels.count - 1)/4 + 1) * 50 + 20);
+            }else{
+                
+                weakSelf.filterView.frame = CGRectMake(0, 0, kSCREEN_WIDTH, 50);
+                weakSelf.collectionView.frame = CGRectMake(0, 0, kSCREEN_WIDTH, 50);
+            }
 
         }];
         
@@ -128,12 +142,19 @@
             weakSelf.filterView.frame = CGRectMake(0, 0, kSCREEN_WIDTH, 0);
             weakSelf.collectionView.frame = CGRectMake(0, 0, kSCREEN_WIDTH, 0);
 
+            weakSelf.maskView.alpha = 0;
+            
         }completion:^(BOOL finished) {
 
             [weakSelf.filterView removeFromSuperview];
             [weakSelf.maskView removeFromSuperview];
         }];
     }
+
+        GLMine_Bill_FilterModel *model = self.filterModels[self.type];
+        [self.filterBtn setTitle:model.name forState:UIControlStateNormal];
+        [self.filterBtn horizontalCenterTitleAndImage:5];
+
     
 }
 
@@ -149,48 +170,48 @@
     }else{
         self.page ++ ;
     }
-    
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    
-    dic[@"token"] = [UserModel defaultUser].token;
-    dic[@"uid"] = [UserModel defaultUser].uid;
-    dic[@"state"] = @"1";//项目运行状态 1待审核(审核中) 2审核失败 3审核成功（审核成功认定为筹款中）4筹款停止 5筹款失败 6筹款完成 7项目进行 8项目暂停 9项目失败 10项目完成
-    dic[@"page"] = @(self.page);
-    
-    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
-    [NetworkManager requestPOSTWithURLStr:kMINE_MYPROJECT_URL paramDic:dic finish:^(id responseObject) {
-        
-        [_loadV removeloadview];
-        [self endRefresh];
-        
-        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
-            if([responseObject[@"data"] count] != 0){
-                
-                //                for (NSDictionary *dic in responseObject[@"data"]) {
-                //                    GLMine_IntegralModel * model = [GLMine_IntegralModel mj_objectWithKeyValues:dic];
-                //
-                //                    [self.models addObject:model];
-                //                }
-            }
-        }else if ([responseObject[@"code"] integerValue]==PAGE_ERROR_CODE){
-            
-            if (self.models.count != 0) {
-                
-                [MBProgressHUD showError:responseObject[@"message"]];
-            }
-            
-        }else{
-            [MBProgressHUD showError:responseObject[@"message"]];
-        }
-        
-        
-        [self.tableView reloadData];
-        
-    } enError:^(NSError *error) {
-        [_loadV removeloadview];
-        [self endRefresh];
-        [self.tableView reloadData];
-    }];
+    [self models];
+//    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+//
+//    dic[@"token"] = [UserModel defaultUser].token;
+//    dic[@"uid"] = [UserModel defaultUser].uid;
+//    dic[@"state"] = @"1";//项目运行状态 1待审核(审核中) 2审核失败 3审核成功（审核成功认定为筹款中）4筹款停止 5筹款失败 6筹款完成 7项目进行 8项目暂停 9项目失败 10项目完成
+//    dic[@"page"] = @(self.page);
+//
+//    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+//    [NetworkManager requestPOSTWithURLStr:kMINE_MYPROJECT_URL paramDic:dic finish:^(id responseObject) {
+//
+//        [_loadV removeloadview];
+//        [self endRefresh];
+//
+//        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+//            if([responseObject[@"data"] count] != 0){
+//
+//                //                for (NSDictionary *dic in responseObject[@"data"]) {
+//                //                    GLMine_IntegralModel * model = [GLMine_IntegralModel mj_objectWithKeyValues:dic];
+//                //
+//                //                    [self.models addObject:model];
+//                //                }
+//            }
+//        }else if ([responseObject[@"code"] integerValue]==PAGE_ERROR_CODE){
+//
+//            if (self.models.count != 0) {
+//
+//                [MBProgressHUD showError:responseObject[@"message"]];
+//            }
+//
+//        }else{
+//            [MBProgressHUD showError:responseObject[@"message"]];
+//        }
+//
+//
+//        [self.tableView reloadData];
+//
+//    } enError:^(NSError *error) {
+//        [_loadV removeloadview];
+//        [self endRefresh];
+//        [self.tableView reloadData];
+//    }];
 }
 
 - (void)endRefresh {
@@ -228,10 +249,12 @@
     
     return 80;
 }
+
 #pragma mark - UICollectionViewDelegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return self.filterModels.count;
 }
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     GLMine_BillCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GLMine_BillCollectionCell" forIndexPath:indexPath];
     
@@ -239,10 +262,12 @@
     
     return cell;
 }
+
 //定义每个UICollectionViewCell 的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake((kSCREEN_WIDTH - 20)/4, 50);
 }
+
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     return UIEdgeInsetsMake(10, 10, 10, 10);
 }
@@ -260,11 +285,12 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
     for (int i = 0 ;i < self.filterModels.count ; i ++) {
+        
         GLMine_Bill_FilterModel *model = self.filterModels[i];
         if(i == indexPath.row){
             
-            model.isSelect = !model.isSelect;
-            
+            model.isSelect = YES;
+            self.type = indexPath.row;
         }else{
             
             model.isSelect = NO;
@@ -272,7 +298,9 @@
         
     }
     
+    
     [self.collectionView reloadData];
+    [self filter];
 }
 
 #pragma mark - 懒加载
@@ -291,14 +319,20 @@
     }
     return _models;
 }
+
 - (NSMutableArray *)filterModels{
     if (!_filterModels) {
         _filterModels = [NSMutableArray array];
         
+        NSArray *arr = @[@"商品购买",@"项目赔付",@"项目收益",@"项目转让",@"筹款赔付",@"兑换",@"充值"];
         for (int i = 0; i < 7; i ++) {
             GLMine_Bill_FilterModel *model = [[GLMine_Bill_FilterModel alloc] init];
-            model.name = [NSString stringWithFormat:@"项目%d",i];
-            model.isSelect = NO;
+            model.name = arr[i];
+            if (i == 0) {
+                model.isSelect = YES;
+            }else{
+                model.isSelect = NO;
+            }
             
             [_filterModels addObject:model];
         }

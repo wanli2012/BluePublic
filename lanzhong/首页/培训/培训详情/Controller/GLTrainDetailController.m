@@ -38,8 +38,7 @@
     self.contentViewWidth.constant = kSCREEN_WIDTH;
     self.contentViewHeight.constant = 700;
     
-//    [self.webView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
-    
+//    self.webView.scrollView.backgroundColor = YYSRGBColor(250, 250, 250, 1);
     
     [self postRequest];
 }

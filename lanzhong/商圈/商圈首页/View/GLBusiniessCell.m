@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *participationLabel;//参与人数
 @property (weak, nonatomic) IBOutlet UILabel *raisedMoneyLabel;//已筹金额
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;//日期
+@property (weak, nonatomic) IBOutlet UILabel *ensureLabel;//保障状态
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *progressViewWidth;
 

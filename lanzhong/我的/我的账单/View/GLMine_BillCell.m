@@ -28,7 +28,7 @@
     
     self.nameabel.text = model.name;
     self.dateLabel.text = model.date;
-    self.incomeLabel.text = model.income;
+    self.incomeLabel.text = [NSString stringWithFormat:@"+ %@",model.income];
 }
 
 @end

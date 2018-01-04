@@ -144,7 +144,6 @@
     
     if (isRefresh) {
         self.page = 1;
-        
     }else{
         self.page ++;
     }

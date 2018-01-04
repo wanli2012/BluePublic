@@ -14,6 +14,8 @@
 #import "GLBusiness_LoveListController.h"
 #import "GLBusiness_FundTrendController.h"//资金动向
 #import "GLBusiness_DetailModel.h"
+#import "GLBusiness_RelevalteFileController.h"//相关文件
+#import "GLBusiness_CertificationController.h"//webView
 
 #import "GLBusiness_Detail_heartCommentController.h"//更多评论
 
@@ -88,12 +90,21 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"supportNotification" object:nil];
 }
 
+/**
+ 接到通知刷新数据
+ */
 -(void)refresh{
     
     [self postRequest:YES];
 }
 
 #pragma mark - 请求数据
+
+/**
+ 请求数据
+
+ @param isRefresh 是否是下拉刷新
+ */
 - (void)postRequest:(BOOL)isRefresh{
 
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
@@ -126,7 +137,9 @@
     }];
 }
 
-//为头视图赋值
+/**
+ 为头视图赋值
+ */
 - (void)headerViewFuzhi {
     
     if (self.model.user_info_pic.length == 0) {
@@ -448,16 +461,34 @@
             [self.navigationController pushViewController:commentVC animated:YES];
         }
             break;
+        case 3:
+        {
+            
+            GLBusiness_CertificationController *ensureVC = [[GLBusiness_CertificationController alloc] init];
+            ensureVC.url = @"https://www.baidu.com";
+            ensureVC.navTitle = @"关于保障";
+            [self.navigationController pushViewController:ensureVC animated:YES];
+            
+        }
+            break;
+        case 4:
+        {
+            GLBusiness_RelevalteFileController *fileVC = [[GLBusiness_RelevalteFileController alloc] init];
+            fileVC.item_id = self.item_id;
+            
+            [self.navigationController pushViewController:fileVC animated:YES];
+        }
+            break;
             
         default:
             break;
     }
 }
+
 #pragma mark - GLBusiness_DetailCommentCellDelegate
 - (void)personInfo{
     
     NSLog(@"个人信息");
-    
 }
 
 #pragma mark - UITableViewDelegate
@@ -539,7 +570,7 @@
     if(indexPath.section == 0){
         if(indexPath.row == 1){
          
-            return 180;
+            return 280;
         }else{
             
             tableView.rowHeight = UITableViewAutomaticDimension;
@@ -549,7 +580,6 @@
     }
     
       return self.model.invest_list[indexPath.row].cellHeight;
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -558,7 +588,7 @@
 //    GLBusiness_DetailController *detailVC = [[GLBusiness_DetailController alloc] init];
 //    [self.navigationController pushViewController:detailVC animated:YES];
 //    self.hidesBottomBarWhenPushed = NO;
+    
 }
-
 
 @end

@@ -391,7 +391,7 @@
     if (!_dataSource) {
         _dataSource = [NSMutableArray array];
         
-        NSArray *arr = @[@"密码修改",@"内存清理",@"关于公司"];
+        NSArray *arr = @[@"密码修改",@"清理缓存",@"关于公司"];
         NSArray *arr2 = @[@"联系客服",@"帮助中心",@"版本更新"];
     
         [_dataSource addObject:arr];

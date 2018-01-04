@@ -36,10 +36,35 @@
     _isAgreeProtocol = NO;
     
 }
+//设置字体颜色
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleDefault;//白色
+}
+
+//设置状态栏颜色
+- (void)setStatusBarBackgroundColor:(UIColor *)color {
+    
+    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+    if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
+        statusBar.backgroundColor = color;
+    }
+}
+
+//！！！重点在viewWillAppear方法里调用下面两个方法
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [self preferredStatusBarStyle];
+    
+    [self setStatusBarBackgroundColor:[UIColor clearColor]];
+    
+    self.navigationController.navigationBar.hidden = NO;
+}
 
 #pragma mark - 跳转到协议
 - (IBAction)toProtocol:(id)sender {
+    
 }
+
 #pragma mark - 是否同意协议
 - (IBAction)isAgreeProtocol:(id)sender {
     _isAgreeProtocol = !_isAgreeProtocol;

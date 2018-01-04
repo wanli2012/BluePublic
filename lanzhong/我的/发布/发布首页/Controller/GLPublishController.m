@@ -20,6 +20,7 @@
 #import "HWCalendar.h"//日期选择
 #import "GLMutipleChooseController.h"//省市选择
 #import "GLPublish_CityModel.h"//城市模型
+#import "GLPublish_WebsiteController.h"//上传文件
 
 #import "GLPublish_UploadController.h"
 
@@ -82,18 +83,24 @@ static const CGFloat kPhotoViewMargin = 12.0;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollViewHeight;
 
+@property (weak, nonatomic) IBOutlet UIImageView *noInsureImageV;
+@property (weak, nonatomic) IBOutlet UIImageView *selfInsureImageV;
+@property (weak, nonatomic) IBOutlet UIImageView *projectInsreImageV;
+@property (weak, nonatomic) IBOutlet UIView *uploadView;
+
 @end
 
 @implementation GLPublishController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.title = @"项目发布";
     
     self.contentViewWidth.constant = kSCREEN_WIDTH;
-    self.contentViewHeight.constant = 820;
+    self.contentViewHeight.constant = 1150;
 
     self.bgView.layer.cornerRadius = 5.f;
     self.bgView.layer.shadowOpacity = 0.2f;
@@ -134,6 +141,8 @@ static const CGFloat kPhotoViewMargin = 12.0;
     
     self.scrollViewHeight.constant = (kSCREEN_WIDTH - 30)/3;
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hiddenTheUploadView) name:@"UploadFileNotification" object:nil];
+    
 }
 
 #pragma mark - 获取分类
@@ -157,15 +166,41 @@ static const CGFloat kPhotoViewMargin = 12.0;
         }
         
     } enError:^(NSError *error) {
-
+        
     }];
     
 }
+//设置字体颜色
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleDefault;
+}
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+//设置状态栏颜色
+- (void)setStatusBarBackgroundColor:(UIColor *)color {
+    
+    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+    if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
+        statusBar.backgroundColor = color;
+    }
+}
+
+//！！！重点在viewWillAppear方法里调用下面两个方法
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [self preferredStatusBarStyle];
+    
+    [self setStatusBarBackgroundColor:[UIColor clearColor]];
     
     self.navigationController.navigationBar.hidden = NO;
+}
+
+/**
+ 显示出文件,隐藏上传View
+ */
+- (void)hiddenTheUploadView {
+    
+    self.uploadView.hidden = YES;
+    
 }
 #pragma mark -  行业选择
 - (IBAction)industryChoose:(id)sender {
@@ -312,6 +347,56 @@ static const CGFloat kPhotoViewMargin = 12.0;
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, CGRectGetMaxY(frame) + kPhotoViewMargin);
     
 }
+
+
+#pragma mark - 上传文件
+/**
+ 上传文件
+
+ */
+- (IBAction)uploadFile:(id)sender {
+    
+    GLPublish_WebsiteController *websiteVC= [[GLPublish_WebsiteController alloc] init];
+    [self presentViewController:websiteVC  animated:YES completion:nil];
+    
+}
+
+#pragma mark - 保险选择
+/**
+ 保险选择
+
+ @param tap 手势
+ */
+- (IBAction)insureChoose:(UITapGestureRecognizer *)tap {
+    self.noInsureImageV.image = [UIImage imageNamed:@"nochoice_grey"];
+    self.selfInsureImageV.image = [UIImage imageNamed:@"nochoice_grey"];
+    self.projectInsreImageV.image = [UIImage imageNamed:@"nochoice_grey"];
+    
+    switch (tap.view.tag) {
+        case 11:
+        {
+            self.noInsureImageV.image = [UIImage imageNamed:@"mine_choice"];
+            
+        }
+            break;
+        case 12:
+        {
+            self.selfInsureImageV.image = [UIImage imageNamed:@"mine_choice"];
+        }
+            break;
+        case 13:
+        {
+            self.projectInsreImageV.image = [UIImage imageNamed:@"mine_choice"];
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+}
+
+
 
 //- (void)photoView:(HXPhotoView *)photoView changeComplete:(NSArray<HXPhotoModel *> *)allList photos:(NSArray<HXPhotoModel *> *)photos videos:(NSArray<HXPhotoModel *> *)videos original:(BOOL)isOriginal {
 //
@@ -699,11 +784,13 @@ static const CGFloat kPhotoViewMargin = 12.0;
     _ishidecotr=NO;
     return self;
 }
+
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext{
     
     return 0.5;
     
 }
+
 -(void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext{
     
   
@@ -711,6 +798,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
     
     
 }
+
 -(void)chooseindustry:(id <UIViewControllerContextTransitioning>)transitionContext{
     
     if (_ishidecotr==YES) {
@@ -784,7 +872,6 @@ static const CGFloat kPhotoViewMargin = 12.0;
     }
     return _cityModels;
 }
-
 
 //- (HXPhotoManager *)manager {
 //    if (!_manager) {
