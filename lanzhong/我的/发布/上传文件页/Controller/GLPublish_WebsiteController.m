@@ -26,7 +26,7 @@
     [super viewDidLoad];
 
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.contentHeight.constant = kSCREEN_HEIGHT - 64;
+    self.contentHeight.constant = 650;
     self.contentViewWidth.constant = kSCREEN_WIDTH;
     
     self.linkCopyBtn.layer.cornerRadius = 5.f;
@@ -62,7 +62,7 @@
 //！！！重点在viewWillAppear方法里调用下面两个方法
 -(void)viewWillAppear:(BOOL)animated{
     [self preferredStatusBarStyle];
-    [self setStatusBarBackgroundColor:MAIN_COLOR];
+//    [self setStatusBarBackgroundColor:MAIN_COLOR];
     self.navigationController.navigationBar.hidden = NO;
 }
 

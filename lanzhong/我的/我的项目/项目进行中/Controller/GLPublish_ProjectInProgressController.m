@@ -61,6 +61,11 @@
     
 }
 
+/**
+ 请求数据
+
+ @param isRefresh 是否是下拉刷新状态
+ */
 - (void)postRequest:(BOOL)isRefresh{
     
     if (isRefresh) {
@@ -119,6 +124,11 @@
 }
 
 #pragma mark - GLPublish_ProjectCellDelegate
+/**
+ 支持列表
+
+ @param index 项目索引
+ */
 - (void)surportList:(NSInteger)index{
     
     GLPublish_InReViewModel *model = self.models[index];
@@ -130,6 +140,11 @@
 
 }
 
+/**
+ 资金动向
+
+ @param index 项目索引
+ */
 - (void)fundList:(NSInteger)index{
     
     GLPublish_InReViewModel *model = self.models[index];
@@ -138,6 +153,25 @@
     fundVC.signIndex = 1;
     fundVC.item_id = model.item_id;
     [[self viewController].navigationController pushViewController:fundVC animated:YES];
+}
+
+/**
+ 破产申请
+
+ @param index 项目索引
+ */
+-(void)broke:(NSInteger)index{
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"破产申请" message:@"你确定要申请破产" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    
+        [SVProgressHUD showSuccessWithStatus:@"ok,你的申请已受理"];
+    }];
+    
+    [alertVC addAction:cancel];
+    [alertVC addAction:ok];
+    
+    [self presentViewController:alertVC animated:YES completion:nil];
 }
 
 /**
@@ -181,6 +215,7 @@
     return 145;
 }
 
+#pragma mark - 懒加载
 - (NSMutableArray *)models{
     if (!_models) {
         _models = [NSMutableArray array];

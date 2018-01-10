@@ -15,7 +15,7 @@
 #import "GLMine_MyMessageController.h"//我的消息
 #import "GLMine_WalletController.h"//钱包
 #import "GLMine_MyOrderController.h"//我的订单
-#import "GLMine_ParticipateController.h"//我参与的项目
+#import "GLMine_SellListController.h"//我帮助过
 #import "GLMine_EvaluateController.h"//我的评价
 #import "GLMine_ShareController.h"//分享权益
 #import "GLPublishController.h"//发布项目
@@ -363,7 +363,7 @@
                     break;
                 case 1://我帮助过
                 {
-                    GLMine_ParticipateController *participateVC = [[GLMine_ParticipateController alloc] init];
+                    GLMine_SellListController *participateVC = [[GLMine_SellListController alloc] init];
                     [self.navigationController pushViewController:participateVC animated:YES];
                 }
                     break;

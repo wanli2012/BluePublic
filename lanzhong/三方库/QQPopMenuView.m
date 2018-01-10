@@ -104,6 +104,7 @@ static CGFloat const kCellHeight = 44;
 }
 
 - (void)hide {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"QQPopMenuNotification" object:nil];
     [UIView animateWithDuration:0.2 animations:^{
         self.alpha = 0;
         _tableView.transform = CGAffineTransformMakeScale(0.0001, 0.0001);

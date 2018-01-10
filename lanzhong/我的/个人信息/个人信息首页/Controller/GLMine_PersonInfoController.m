@@ -117,6 +117,7 @@
      
         [SVProgressHUD showErrorWithStatus:@"真实姓名至少有一个字"];
         return;
+        
     }else if(![predicateModel IsChinese:self.trueNameTF.text]){
        
         [SVProgressHUD showErrorWithStatus:@"真实姓名应该是汉字"];
@@ -127,7 +128,6 @@
  
         [SVProgressHUD showErrorWithStatus:@"请输入身份证号"];
         return;
-
     }else if(![predicateModel validateIdentityCard:self.IDCardNumTF.text]){
   
         [SVProgressHUD showErrorWithStatus:@"身份证号输入不合法"];

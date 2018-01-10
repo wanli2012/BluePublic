@@ -13,6 +13,7 @@
 
 - (void)surportList:(NSInteger)index;
 - (void)fundList:(NSInteger)index;
+- (void)broke:(NSInteger)index;
 
 @end
 

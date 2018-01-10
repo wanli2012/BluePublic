@@ -18,17 +18,40 @@
 @property (weak, nonatomic) IBOutlet UILabel *infoLabel;
 @property (weak, nonatomic) IBOutlet UILabel *moneyLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *saleBtn;//出售
+
 @end
 
 @implementation GLMine_ParticipateCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    
     self.bgView.layer.cornerRadius = 5.f;
+    
+    self.saleBtn.layer.cornerRadius = 3.f;
+    self.saleBtn.layer.borderColor = MAIN_COLOR.CGColor;
+    self.saleBtn.layer.borderWidth = 1.f;
     
 }
 
+/**
+ 出售
+
+ */
+- (IBAction)sell:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(sell:)]) {
+        [self.delegate sell:self.index];
+    }
+    
+}
+
+
+/**
+ 模型赋值
+
+ @param model 传入的模型
+ */
 - (void)setModel:(GLMine_ParticpateModel *)model{
     _model = model;
     

@@ -16,6 +16,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *detailLabel;
 
+@property (weak, nonatomic) IBOutlet UIView *applyBrokeView;
+@property (weak, nonatomic) IBOutlet UILabel *brokeLabel;
+@property (weak, nonatomic) IBOutlet UIView *brokeLineView;
+
+@property (weak, nonatomic) IBOutlet UIView *insureView;
+@property (weak, nonatomic) IBOutlet UILabel *insureLabel;
+
 @end
 
 @implementation GLPublish_ProjectCell
@@ -31,9 +38,33 @@
     self.numberLabel.hidden = YES;
     self.suportListBtn.layer.cornerRadius = 5.f;
     
+    //切单个圆角
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.insureView.bounds byRoundingCorners:UIRectCornerTopLeft cornerRadii:CGSizeMake(5, 5)];
+    
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = self.insureView.bounds;
+    maskLayer.path = maskPath.CGPath;
+    
+    self.insureView.layer.mask = maskLayer;
+    
+    //破产申请 添加手势
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(broke)];
+    [self.applyBrokeView addGestureRecognizer:tap];
+    
 }
 
-//资金动向
+/**
+ 申请破产 调代理方法
+ */
+- (void)broke{
+    if ([self.delegate respondsToSelector:@selector(broke:)]) {
+        [self.delegate broke:self.index];
+    }
+}
+/**
+ 资金动向
+ 
+ */
 - (IBAction)fundTrend:(id)sender {
    
     if ([self.delegate respondsToSelector:@selector(fundList:)]) {
@@ -41,6 +72,11 @@
     }
     
 }
+
+/**
+ 支持列表
+
+ */
 - (IBAction)clici:(id)sender {
     
     if ([self.delegate respondsToSelector:@selector(surportList:)]) {
@@ -48,6 +84,11 @@
     }
 }
 
+/**
+ 模型赋值
+
+ @param model 传入的模型
+ */
 - (void)setModel:(GLPublish_InReViewModel *)model{
     _model = model;
     
@@ -55,6 +96,8 @@
     [self.picImageV sd_setImageWithURL:[NSURL URLWithString:imageStr] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     self.titleLabel.text = model.title;
     self.detailLabel.text = model.info;
+    
+    ///这里是写保障方的赋值  接口还没做好
     
     switch ([model.state integerValue]) {
         case 6:
@@ -126,7 +169,6 @@
     [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:range];
     // 为label添加Attributed
     [self.numberLabel setAttributedText:noteStr];
-    
     
 }
 

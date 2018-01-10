@@ -7,16 +7,15 @@
 //
 
 #import "DWTabBar.h"
-
 #import "DWPublishButton.h"
 
 #define ButtonNumber 5
 
-
 @interface DWTabBar ()
 
 @property (nonatomic, strong) DWPublishButton *publishButton;/**< 发布按钮 */
- @property (nonatomic,assign)UIEdgeInsets oldSafeAreaInsets;
+@property (nonatomic,assign)UIEdgeInsets oldSafeAreaInsets;
+
 @end
 
 @implementation DWTabBar
@@ -30,6 +29,7 @@
 //        self.publishButton = button;
         
     }
+    
     return self;
 }
 

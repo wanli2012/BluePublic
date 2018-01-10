@@ -27,6 +27,7 @@
 
 @property (nonatomic, strong)UIButton *filterBtn;
 @property (nonatomic, assign)NSInteger type;//筛选类型
+@property (nonatomic, strong)NSArray *modelsNew;
 
 @end
 
@@ -72,7 +73,7 @@
 
     self.type = 0;
     
-    
+    [self analyseHDCData];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -154,8 +155,6 @@
         GLMine_Bill_FilterModel *model = self.filterModels[self.type];
         [self.filterBtn setTitle:model.name forState:UIControlStateNormal];
         [self.filterBtn horizontalCenterTitleAndImage:5];
-
-    
 }
 
 /**
@@ -170,7 +169,8 @@
     }else{
         self.page ++ ;
     }
-    [self models];
+
+    [self endRefresh];
 //    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
 //
 //    dic[@"token"] = [UserModel defaultUser].token;
@@ -214,6 +214,53 @@
 //    }];
 }
 
+#pragma mark - 判断分组数，并且按上传时间和检查时间降序排列
+-(void)analyseHDCData{
+    
+    //1.数组内部元素排序
+    NSArray *sortDesc = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO]];
+    NSArray *sortedArr = [self.models sortedArrayUsingDescriptors:sortDesc];
+    
+    //2.对数组进行分组，按date,创建组数组,组数组中的每一个元素是一个数组
+    NSMutableArray *groupArray = [NSMutableArray array];
+    NSMutableArray *currentArray = [NSMutableArray array];
+    
+    //因为肯定有一个元素返回,先添加一个
+    [currentArray addObject:sortedArr[0]];
+    [groupArray addObject:currentArray];
+    
+    //如果不止一个,才要动态添加
+    if(sortedArr.count >1){
+        for (int i =1; i < sortedArr.count; i++) {
+            
+            // 先取出组数组中，上一个数组的第一个元素
+            NSMutableArray *preModelArr = [groupArray objectAtIndex:groupArray.count - 1];
+            GLMine_BillModel *model = [preModelArr objectAtIndex:0];
+            
+            //取出当前元素,根据date比较,如果相同则添加到同一个组中;如果不相同,说明不是同一个组的
+            GLMine_BillModel *currentModel = [sortedArr objectAtIndex:i];
+            
+            NSString *lastMonth = [model.date substringToIndex:7];
+            NSString *month = [currentModel.date substringToIndex:7];
+            
+            if ([month isEqualToString:lastMonth]) {
+                [currentArray addObject:currentModel];
+            }else{
+                // 如果不相同,说明有新的一组,那么创建一个元素数组,并添加到组数组groupArr
+                currentArray = [NSMutableArray array];
+                [currentArray addObject:currentModel];
+                [groupArray addObject:currentArray];
+            }
+        }
+    }
+    
+    // 3、遍历对每一组进行排序
+    
+    self.modelsNew = [NSArray arrayWithArray:groupArray];
+    [self.tableView reloadData];
+    
+}
+
 - (void)endRefresh {
     
     [self.tableView.mj_header endRefreshing];
@@ -222,22 +269,29 @@
 }
 
 #pragma mark - UITableViewDelegate
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (self.models.count== 0) {
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    if (self.modelsNew.count== 0) {
         
         self.nodataV.hidden = NO;
     }else{
         self.nodataV.hidden = YES;
     }
     
-    return self.models.count;
+    return self.modelsNew.count;
 }
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    NSArray *arr = self.modelsNew[section];
     
+    return arr.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+  
     GLMine_BillCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMine_BillCell"];
     
-    GLMine_BillModel *model = self.models[indexPath.row];
-    
+    NSArray *arr = self.modelsNew[indexPath.section];
+    GLMine_BillModel *model = arr[indexPath.row];
     cell.model = model;
     
     cell.selectionStyle = 0;
@@ -248,6 +302,40 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     return 80;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *headerV;
+    GLMine_BillModel *model = self.modelsNew[section][0];
+    
+    CGFloat headerHeight = 50;
+    
+    if (headerV == nil) {
+        headerV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 50)];
+        headerV.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        
+        UIImageView *picImageV = [[UIImageView alloc] initWithFrame:CGRectMake(10, (headerHeight - 17)/2, 17, 17)];
+        picImageV.image = [UIImage imageNamed:@"nochoicecalendar"];
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(picImageV.frame) + 10, 0, 100, headerHeight)];
+        label.textColor = [UIColor darkGrayColor];
+        label.font = [UIFont systemFontOfSize:14];
+        label.text = [model.date substringToIndex:7];
+        
+        UIView *lineV = [[UIView alloc] initWithFrame:CGRectMake(0, headerHeight, kSCREEN_WIDTH, 1)];
+        lineV.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        
+        [headerV addSubview:picImageV];
+        [headerV addSubview:label];
+        [headerV addSubview:lineV];
+    }
+    return headerV;
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    return 50;
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -298,7 +386,6 @@
         
     }
     
-    
     [self.collectionView reloadData];
     [self filter];
 }
@@ -313,6 +400,22 @@
             model.name = [NSString stringWithFormat:@"项目%d",i];
             model.date = [NSString stringWithFormat:@"2017-09-0%d",i];
             model.income = [NSString stringWithFormat:@"20%d",i];
+            
+            [_models addObject:model];
+        }
+        for (int i = 0; i < 8; i ++) {
+            GLMine_BillModel *model = [[GLMine_BillModel alloc] init];
+            model.name = [NSString stringWithFormat:@"项目%d",i];
+            model.date = [NSString stringWithFormat:@"2017-10-0%d",i];
+            model.income = [NSString stringWithFormat:@"20%d",i];
+            
+            [_models addObject:model];
+        }
+        for (int i = 0; i < 8; i ++) {
+            GLMine_BillModel *model = [[GLMine_BillModel alloc] init];
+            model.name = [NSString stringWithFormat:@"项目%d",i];
+            model.date = [NSString stringWithFormat:@"2017-11-0%d",i];
+            model.income = [NSString stringWithFormat:@"12%d",i];
             
             [_models addObject:model];
         }

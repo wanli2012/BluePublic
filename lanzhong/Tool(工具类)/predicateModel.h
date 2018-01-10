@@ -26,6 +26,13 @@
 //判断字符串是否包含数字，字母，或混合
 +(int)checkIsHaveNumAndLetter:(NSString*)password;
 
-
-
+//textfield 输入判断
+//只能输入字母或数字;
++(BOOL)inputShouldLetterOrNum:(NSString *)inputString;
+//只能输入字母
++(BOOL)inputShouldLetter:(NSString *)inputString;
+//只能输入数字
++(BOOL)inputShouldNumber:(NSString *)inputString;
+//只能输入汉字
++(BOOL)inputShouldChinese:(NSString *)inputString;
 @end

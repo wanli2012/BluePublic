@@ -10,7 +10,8 @@
 #import "GLMine_ParticipateCell.h"
 #import "GLMine_ParticpateModel.h"
 
-@interface GLMine_ParticipateController ()
+
+@interface GLMine_ParticipateController ()<GLMine_ParticipateCellDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -25,8 +26,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.navigationItem.title = @"我帮助过";
     
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMine_ParticipateCell" bundle:nil] forCellReuseIdentifier:@"GLMine_ParticipateCell"];
     [self.tableView addSubview:self.nodataV];
@@ -58,6 +57,9 @@
     
 }
 
+/**
+ 结束刷新动画
+ */
 - (void)endRefresh {
     
     [self.tableView.mj_footer endRefreshing];
@@ -65,6 +67,11 @@
     
 }
 
+/**
+ 更新数据
+
+ @param status 是否是下拉刷新状态
+ */
 - (void)updateData:(BOOL)status {
     
     if (status) {
@@ -114,10 +121,22 @@
     }];
     
 }
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = NO;
 }
+
+#pragma mark - GLMine_ParticipateCellDelegate
+//- (void)sell:(NSInteger)index{
+//    GLMine_ParticpateModel *model = self.models[index];
+//    self.hidesBottomBarWhenPushed = YES;
+//
+//    GLMine_SalePublishController *sellVC = [[GLMine_SalePublishController alloc] init];
+//    sellVC.item_id = model.item_id;
+//    [self.navigationController pushViewController:sellVC animated:YES];
+//
+//}
 
 #pragma  UITableviewDatasource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -136,6 +155,7 @@
     GLMine_ParticipateCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMine_ParticipateCell"];
     cell.model = self.models[indexPath.row];
 
+    cell.delegate = self;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -143,6 +163,16 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 90;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+//    self.hidesBottomBarWhenPushed = YES;
+//    GLBusiness_DetailForSaleController *detailVC = [[GLBusiness_DetailForSaleController alloc] init];
+//    [self.navigationController pushViewController:detailVC animated:YES];
+    
+}
+
+#pragma mark - 懒加载
 
 - (NSMutableArray *)models{
     if (!_models) {
@@ -160,4 +190,7 @@
     }
     return _nodataV;
 }
+
+
 @end
+

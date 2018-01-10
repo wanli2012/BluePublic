@@ -160,5 +160,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>请允许我们使用你的视频拍摄</string>
 </dict>
 </plist>
