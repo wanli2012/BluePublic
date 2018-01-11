@@ -16,11 +16,8 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewHeight;
-@property (weak, nonatomic) IBOutlet UIButton *submitBtn;
-@property (weak, nonatomic) IBOutlet UIImageView *noInsureImageV;
-@property (weak, nonatomic) IBOutlet UIImageView *selfInsureImageV;
-@property (weak, nonatomic) IBOutlet UIImageView *projectInsreImageV;
-@property (weak, nonatomic) IBOutlet UIImageView *isAgreeImageV;
+
+@property (weak, nonatomic) IBOutlet UILabel *noticeLabel;
 
 @end
 
@@ -29,13 +26,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.submitBtn.layer.cornerRadius = 5.f;
-    
     self.contentViewWidth.constant = kSCREEN_WIDTH;
     self.contentViewHeight.constant = 600;
     _isAgreeProtocol = NO;
     
+    self.navigationItem.title = @"上传文件";
+    
+    self.noticeLabel.text = @"1、项目提交成功后由此页面提交相关文件；2、上传文件包括《个人承诺书》、《项目计划书》、《项目回馈计划书》、《项目资金使用计划书》；3、必须保证所有文件的真实性；4、文件最终解释权归发布者所有；";    
 }
+
 //设置字体颜色
 - (UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleDefault;//白色
@@ -60,91 +59,20 @@
     self.navigationController.navigationBar.hidden = NO;
 }
 
-#pragma mark - 跳转到协议
-- (IBAction)toProtocol:(id)sender {
-    
-}
 
-#pragma mark - 是否同意协议
-- (IBAction)isAgreeProtocol:(id)sender {
-    _isAgreeProtocol = !_isAgreeProtocol;
-    
-    if (_isAgreeProtocol) {
-        
-        self.isAgreeImageV.image = [UIImage imageNamed:@"publish_choice"];
-    }else{
-        self.isAgreeImageV.image = [UIImage imageNamed:@"publish_nochoice"];
-    }
-}
-
-#pragma mark - 提交
-- (IBAction)submit:(id)sender {
-    
-}
-
-#pragma mark - 投保方式选择
-- (IBAction)insureChoose:(UITapGestureRecognizer *)tap {
-    
-    self.noInsureImageV.image = [UIImage imageNamed:@"nochoice_grey"];
-    self.selfInsureImageV.image = [UIImage imageNamed:@"nochoice_grey"];
-    self.projectInsreImageV.image = [UIImage imageNamed:@"nochoice_grey"];
-    
-    switch (tap.view.tag) {
-        case 11:
-        {
-            self.noInsureImageV.image = [UIImage imageNamed:@"mine_choice"];
-            
-        }
-            break;
-        case 12:
-        {
-            self.selfInsureImageV.image = [UIImage imageNamed:@"mine_choice"];
-        }
-            break;
-        case 13:
-        {
-            self.projectInsreImageV.image = [UIImage imageNamed:@"mine_choice"];
-        }
-            break;
-            
-        default:
-            break;
-    }
-}
-
-#pragma mark - 上传项目承诺书
-- (IBAction)uploadProjectCommitment:(id)sender {
-    
-    GLPublish_WebsiteController *websiteVC= [[GLPublish_WebsiteController alloc] init];
-    [self presentViewController:websiteVC  animated:YES completion:nil];
-    
-//    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"dd" message:@"haha" preferredStyle:UIAlertControllerStyleAlert];
-//
-//    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-//    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//        NSLog(@"打的费");
-//    }];
-//
-//    [alertVC addAction:ok];
-//    [alertVC addAction:cancel];
-//    [self presentViewController:alertVC animated:YES completion:nil];
-    
-}
-#pragma mark - 上传项目回馈计划书
-
+#pragma mark - 上传文件
 /**
- 上传项目回馈计划书
- @param sender 没有使用
- 
+ 上传文件
+
  */
-- (IBAction)uploadProjectFeedback:(id)sender {
+- (IBAction)uploadFile:(id)sender {
+    
+    self.hidesBottomBarWhenPushed = YES;
+    GLPublish_WebsiteController *websiteVC= [[GLPublish_WebsiteController alloc] init];
+    websiteVC.item_id = self.item_id;
+    [self.navigationController pushViewController:websiteVC animated:YES];
+    
 }
-#pragma mark - 上传项目计划书
-- (IBAction)uploadProjectPlan:(id)sender {
-}
-#pragma mark - 上传项目资金使用计划书
-- (IBAction)uploadProjectFundUsing:(id)sender {
-}
+
 
 @end
-

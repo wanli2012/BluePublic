@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GLBusiness_ForSaleModel.h"
+#import "GLBusinessCircleModel.h"
 
 @interface GLBusiness_ForSaleCell : UITableViewCell
 
-@property (nonatomic, strong)GLBusiness_ForSaleModel *model;
+@property (nonatomic, strong)GLCircle_item_dataModel *model;
 
 @end

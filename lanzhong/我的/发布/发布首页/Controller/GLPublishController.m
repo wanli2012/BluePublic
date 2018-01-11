@@ -20,9 +20,9 @@
 #import "HWCalendar.h"//日期选择
 #import "GLMutipleChooseController.h"//省市选择
 #import "GLPublish_CityModel.h"//城市模型
-#import "GLPublish_WebsiteController.h"//上传文件
+//#import "GLPublish_WebsiteController.h"//上传文件
 
-#import "GLPublish_UploadController.h"
+#import "GLPublish_UploadController.h"//上传文件页
 
 static const CGFloat kPhotoViewMargin = 12.0;
 
@@ -88,6 +88,8 @@ static const CGFloat kPhotoViewMargin = 12.0;
 @property (weak, nonatomic) IBOutlet UIImageView *projectInsreImageV;
 @property (weak, nonatomic) IBOutlet UIView *uploadView;
 
+@property (nonatomic, assign)NSInteger ensure_type;//投保类型
+
 @end
 
 @implementation GLPublishController
@@ -142,6 +144,8 @@ static const CGFloat kPhotoViewMargin = 12.0;
     self.scrollViewHeight.constant = (kSCREEN_WIDTH - 30)/3;
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hiddenTheUploadView) name:@"UploadFileNotification" object:nil];
+    
+    self.ensure_type = 1;
     
 }
 
@@ -352,19 +356,17 @@ static const CGFloat kPhotoViewMargin = 12.0;
 #pragma mark - 上传文件
 /**
  上传文件
-
  */
 - (IBAction)uploadFile:(id)sender {
     
-    GLPublish_WebsiteController *websiteVC= [[GLPublish_WebsiteController alloc] init];
-    [self presentViewController:websiteVC  animated:YES completion:nil];
+//    GLPublish_WebsiteController *websiteVC= [[GLPublish_WebsiteController alloc] init];
+//    [self presentViewController:websiteVC  animated:YES completion:nil];
     
 }
 
 #pragma mark - 保险选择
 /**
  保险选择
-
  @param tap 手势
  */
 - (IBAction)insureChoose:(UITapGestureRecognizer *)tap {
@@ -376,6 +378,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
         case 11:
         {
             self.noInsureImageV.image = [UIImage imageNamed:@"mine_choice"];
+        
             
         }
             break;
@@ -394,9 +397,19 @@ static const CGFloat kPhotoViewMargin = 12.0;
             break;
     }
     
+    self.ensure_type = tap.view.tag - 10;
+    
 }
 
+//自行资金投保 说明
+- (IBAction)insureSelfDetail:(id)sender {
+    NSLog(@"自行资金投保");
+}
 
+//项目资金投保 说明
+- (IBAction)insureProjectDetail:(id)sender {
+    NSLog(@"项目资金投保");
+}
 
 //- (void)photoView:(HXPhotoView *)photoView changeComplete:(NSArray<HXPhotoModel *> *)allList photos:(NSArray<HXPhotoModel *> *)photos videos:(NSArray<HXPhotoModel *> *)videos original:(BOOL)isOriginal {
 //
@@ -431,10 +444,6 @@ static const CGFloat kPhotoViewMargin = 12.0;
 #pragma mark - 提交
 - (IBAction)submit:(id)sender {
     
-    self.hidesBottomBarWhenPushed = YES;
-//    GLPublish_UploadController *uploadVC = [[GLPublish_UploadController alloc] init];
-//    [self.navigationController pushViewController:uploadVC animated:YES];
-    
     if (self.moneyTF.text.length == 0) {
 
         [SVProgressHUD showErrorWithStatus:@"请输入目标金额"];
@@ -444,11 +453,13 @@ static const CGFloat kPhotoViewMargin = 12.0;
         [SVProgressHUD showErrorWithStatus:@"金额必须大于0"];
         return;
     }
+    
     if (self.titleTF.text.length == 0) {
 
         [SVProgressHUD showErrorWithStatus:@"请输入标题"];
         return;
     }
+    
     if ([self.industryLabel.text isEqualToString:@"请选择"] || self.trade_id.length == 0) {
 
         [SVProgressHUD showErrorWithStatus:@"请选择行业"];
@@ -513,6 +524,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
 
     dic[@"province"] = self.provinceId;
     dic[@"city"] = self.cityId;
+    dic[@"ensure_type"] = @(self.ensure_type);
 
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];//响应
@@ -556,9 +568,12 @@ static const CGFloat kPhotoViewMargin = 12.0;
 
         if ([dic[@"code"] integerValue] == SUCCESS_CODE) {
 
+//            [SVProgressHUD dismiss];
             [SVProgressHUD showSuccessWithStatus:dic[@"message"]];
-
-            [self.navigationController popViewControllerAnimated:YES];
+            self.hidesBottomBarWhenPushed = YES;
+            GLPublish_UploadController *uploadVC = [[GLPublish_UploadController alloc] init];
+            uploadVC.item_id = dic[@"data"][@"item_id"];
+            [self.navigationController pushViewController:uploadVC animated:YES];
 
         }else{
 

@@ -127,16 +127,19 @@
     self.navigationController.navigationBar.hidden = NO;
 }
 
+
 #pragma mark - GLMine_ParticipateCellDelegate
-//- (void)sell:(NSInteger)index{
+
+- (void)sell:(NSInteger)index{
+    
 //    GLMine_ParticpateModel *model = self.models[index];
 //    self.hidesBottomBarWhenPushed = YES;
 //
 //    GLMine_SalePublishController *sellVC = [[GLMine_SalePublishController alloc] init];
 //    sellVC.item_id = model.item_id;
 //    [self.navigationController pushViewController:sellVC animated:YES];
-//
-//}
+
+}
 
 #pragma  UITableviewDatasource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -166,7 +169,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-//    self.hidesBottomBarWhenPushed = YES;
+    self.hidesBottomBarWhenPushed = YES;
 //    GLBusiness_DetailForSaleController *detailVC = [[GLBusiness_DetailForSaleController alloc] init];
 //    [self.navigationController pushViewController:detailVC animated:YES];
     

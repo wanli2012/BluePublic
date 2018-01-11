@@ -14,7 +14,7 @@
                 <outlet property="bonusDateLabel" destination="RA9-b9-lNb" id="si5-8d-TVI"/>
                 <outlet property="briefLabel" destination="f1S-6q-e3n" id="GMK-FA-6Rw"/>
                 <outlet property="buyNowBtn" destination="1yg-55-9Lu" id="hME-pm-vsN"/>
-                <outlet property="contentViewHeight" destination="bsG-Is-Mq8" id="wBp-0D-Py5"/>
+                <outlet property="contentViewHeight" destination="a9r-uB-dj1" id="TFr-Db-TpX"/>
                 <outlet property="contentViewWidth" destination="tCc-ir-a5J" id="w9U-oY-N0O"/>
                 <outlet property="futureMoneyLabel" destination="WaG-cK-IRo" id="fTq-pL-gAh"/>
                 <outlet property="insureLabel" destination="xUi-9P-3tV" id="8ph-7O-e8t"/>
@@ -33,7 +33,7 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+        <view autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="351" height="1096"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -41,7 +41,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="351" height="1096"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bUj-r9-hnE">
-                            <rect key="frame" x="0.0" y="0.0" width="351" height="1047"/>
+                            <rect key="frame" x="0.0" y="0.0" width="351" height="947"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dD2-fM-dA0">
                                     <rect key="frame" x="0.0" y="0.0" width="351" height="114"/>
@@ -440,7 +440,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9xx-sj-6De" userLabel="inensureView">
-                                    <rect key="frame" x="0.0" y="560" width="351" height="150"/>
+                                    <rect key="frame" x="0.0" y="560" width="351" height="50"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l3m-G8-x3X">
                                             <rect key="frame" x="0.0" y="0.0" width="351" height="50"/>
@@ -477,86 +477,21 @@
                                                 <constraint firstItem="O7g-mW-Kl3" firstAttribute="leading" secondItem="l3m-G8-x3X" secondAttribute="leading" constant="10" id="kyE-wS-ZL3"/>
                                                 <constraint firstItem="O7g-mW-Kl3" firstAttribute="centerY" secondItem="l3m-G8-x3X" secondAttribute="centerY" id="nUv-S7-RSn"/>
                                             </constraints>
-                                        </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cnp-EC-n9A">
-                                            <rect key="frame" x="0.0" y="50" width="351" height="50"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="保障内容" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rev-a0-yz7">
-                                                    <rect key="frame" x="10" y="16.5" width="57.5" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NCz-Yw-fxa">
-                                                    <rect key="frame" x="0.0" y="49" width="351" height="1"/>
-                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="Ovb-2J-Ljh"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <gestureRecognizers/>
-                                            <constraints>
-                                                <constraint firstItem="NCz-Yw-fxa" firstAttribute="leading" secondItem="cnp-EC-n9A" secondAttribute="leading" id="CC8-Qd-0fP"/>
-                                                <constraint firstAttribute="trailing" secondItem="NCz-Yw-fxa" secondAttribute="trailing" id="F21-D7-ksp"/>
-                                                <constraint firstItem="rev-a0-yz7" firstAttribute="leading" secondItem="cnp-EC-n9A" secondAttribute="leading" constant="10" id="ZZa-Sw-3NS"/>
-                                                <constraint firstAttribute="height" constant="50" id="blP-yc-Ib7"/>
-                                                <constraint firstItem="rev-a0-yz7" firstAttribute="centerY" secondItem="cnp-EC-n9A" secondAttribute="centerY" id="rCy-cE-Yhs"/>
-                                                <constraint firstAttribute="bottom" secondItem="NCz-Yw-fxa" secondAttribute="bottom" id="txh-Hx-lWo"/>
-                                            </constraints>
                                             <connections>
-                                                <outletCollection property="gestureRecognizers" destination="Osy-4M-bDZ" appends="YES" id="cLw-3C-IoF"/>
-                                            </connections>
-                                        </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YBS-2M-nuA">
-                                            <rect key="frame" x="0.0" y="100" width="351" height="50"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="理赔流程" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5nN-ac-Rfv">
-                                                    <rect key="frame" x="10" y="16.5" width="57.5" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N2b-tg-hHv">
-                                                    <rect key="frame" x="0.0" y="49" width="351" height="1"/>
-                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="dlo-1V-0pE"/>
-                                                    </constraints>
-                                                </view>
-                                            </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <gestureRecognizers/>
-                                            <constraints>
-                                                <constraint firstItem="N2b-tg-hHv" firstAttribute="leading" secondItem="YBS-2M-nuA" secondAttribute="leading" id="0vf-By-AcC"/>
-                                                <constraint firstAttribute="trailing" secondItem="N2b-tg-hHv" secondAttribute="trailing" id="Ahg-sA-0r8"/>
-                                                <constraint firstAttribute="bottom" secondItem="N2b-tg-hHv" secondAttribute="bottom" id="D7h-Gk-3OM"/>
-                                                <constraint firstItem="5nN-ac-Rfv" firstAttribute="centerY" secondItem="YBS-2M-nuA" secondAttribute="centerY" id="KOu-7f-dlb"/>
-                                                <constraint firstItem="5nN-ac-Rfv" firstAttribute="leading" secondItem="YBS-2M-nuA" secondAttribute="leading" constant="10" id="OEx-QZ-gh8"/>
-                                                <constraint firstAttribute="height" constant="50" id="zKf-vO-G7G"/>
-                                            </constraints>
-                                            <connections>
-                                                <outletCollection property="gestureRecognizers" destination="hl9-Dn-3w0" appends="YES" id="Thk-hP-O27"/>
+                                                <outletCollection property="gestureRecognizers" destination="Osy-4M-bDZ" appends="YES" id="dr2-Ez-OIr"/>
                                             </connections>
                                         </view>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="l3m-G8-x3X" firstAttribute="top" secondItem="9xx-sj-6De" secondAttribute="top" id="2HQ-I4-s5k"/>
-                                        <constraint firstItem="cnp-EC-n9A" firstAttribute="top" secondItem="l3m-G8-x3X" secondAttribute="bottom" id="2OP-KS-K3g"/>
-                                        <constraint firstAttribute="trailing" secondItem="cnp-EC-n9A" secondAttribute="trailing" id="IFf-D1-TQd"/>
-                                        <constraint firstAttribute="trailing" secondItem="YBS-2M-nuA" secondAttribute="trailing" id="SEa-Sz-1p8"/>
-                                        <constraint firstAttribute="height" constant="150" id="WWd-Ut-mgI"/>
-                                        <constraint firstItem="YBS-2M-nuA" firstAttribute="top" secondItem="cnp-EC-n9A" secondAttribute="bottom" id="WxB-Re-tcN"/>
+                                        <constraint firstAttribute="height" constant="50" id="WWd-Ut-mgI"/>
                                         <constraint firstItem="l3m-G8-x3X" firstAttribute="leading" secondItem="9xx-sj-6De" secondAttribute="leading" id="YGh-y1-ugL"/>
-                                        <constraint firstItem="YBS-2M-nuA" firstAttribute="leading" secondItem="9xx-sj-6De" secondAttribute="leading" id="ZVZ-j8-dyb"/>
-                                        <constraint firstItem="cnp-EC-n9A" firstAttribute="leading" secondItem="9xx-sj-6De" secondAttribute="leading" id="fu5-FE-YIa"/>
                                         <constraint firstAttribute="trailing" secondItem="l3m-G8-x3X" secondAttribute="trailing" id="vK8-Cl-PHu"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gax-PA-0S7" userLabel="inensureView">
-                                    <rect key="frame" x="0.0" y="710" width="351" height="255"/>
+                                    <rect key="frame" x="0.0" y="610" width="351" height="255"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j0w-Gx-PQn">
                                             <rect key="frame" x="0.0" y="5" width="351" height="50"/>
@@ -751,7 +686,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k9I-0d-mWx">
-                                    <rect key="frame" x="0.0" y="965" width="351" height="82"/>
+                                    <rect key="frame" x="0.0" y="865" width="351" height="82"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cZT-9u-nxs">
                                             <rect key="frame" x="0.0" y="20" width="351" height="2"/>
@@ -877,9 +812,9 @@
                                 <constraint firstAttribute="trailing" secondItem="dD2-fM-dA0" secondAttribute="trailing" id="U34-5v-xwj"/>
                                 <constraint firstItem="GVq-a6-0hx" firstAttribute="leading" secondItem="bUj-r9-hnE" secondAttribute="leading" id="WXt-BD-LlU"/>
                                 <constraint firstAttribute="trailing" secondItem="8lN-mW-juH" secondAttribute="trailing" id="ZT8-O8-cg3"/>
+                                <constraint firstAttribute="height" constant="947" id="a9r-uB-dj1"/>
                                 <constraint firstAttribute="trailing" secondItem="tlm-z9-5r5" secondAttribute="trailing" id="an0-Mm-Snx"/>
                                 <constraint firstItem="fWp-9H-8Xe" firstAttribute="leading" secondItem="bUj-r9-hnE" secondAttribute="leading" constant="10" id="bQB-VR-QmC"/>
-                                <constraint firstAttribute="height" constant="1047" id="bsG-Is-Mq8"/>
                                 <constraint firstItem="4tR-C4-eim" firstAttribute="top" secondItem="8lN-mW-juH" secondAttribute="bottom" id="dT8-PE-OhO"/>
                                 <constraint firstItem="gVl-7L-Daa" firstAttribute="top" secondItem="dD2-fM-dA0" secondAttribute="bottom" id="e2f-ig-uvT"/>
                                 <constraint firstItem="dD2-fM-dA0" firstAttribute="top" secondItem="bUj-r9-hnE" secondAttribute="top" id="eWE-sv-Xb4"/>
@@ -923,11 +858,6 @@
         <tapGestureRecognizer id="Osy-4M-bDZ" userLabel="保障内容">
             <connections>
                 <action selector="ensureContent:" destination="-1" id="bNx-Ok-t5x"/>
-            </connections>
-        </tapGestureRecognizer>
-        <tapGestureRecognizer id="hl9-Dn-3w0" userLabel="理赔流程">
-            <connections>
-                <action selector="claimProcess:" destination="-1" id="hie-cb-dYU"/>
             </connections>
         </tapGestureRecognizer>
         <tapGestureRecognizer id="OOe-rV-y1J" userLabel="承诺书">

@@ -18,6 +18,8 @@
 #import "GLPublish_CityModel.h"//城市模型
 #import "GLBusiness_DetailController.h"//项目详情
 #import "GLMall_DetailController.h"//商品详情
+#import "GLBusiness_ForSaleCell.h"//可收购项目
+#import "GLBusiness_DetailForSaleController.h"//可收购项目详情
 
 @interface GLBusinessCircleController ()<SDCycleScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -56,6 +58,7 @@
     
     self.headerView.height = 150;
     [self.tableView registerNib:[UINib nibWithNibName:@"GLBusiniessCell" bundle:nil] forCellReuseIdentifier:@"GLBusiniessCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"GLBusiness_ForSaleCell" bundle:nil] forCellReuseIdentifier:@"GLBusiness_ForSaleCell"];
     [self.tableView addSubview:self.nodataV];
     self.nodataV.hidden = YES;
     
@@ -170,7 +173,6 @@
         
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             if([responseObject[@"data"] count] != 0){
-                
                 
                 for (NSDictionary *dict in responseObject[@"data"]) {
                     GLCircle_item_dataModel *model = [GLCircle_item_dataModel mj_objectWithKeyValues:dict];
@@ -385,26 +387,52 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    GLBusiniessCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLBusiniessCell"];
-    cell.selectionStyle = 0;
-    cell.model = self.models[indexPath.row];
-    
-    return cell;
+    if([self.stop isEqualToString:@"12"]){
+        GLBusiness_ForSaleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLBusiness_ForSaleCell"];
+        cell.selectionStyle = 0;
+        cell.model = self.models[indexPath.row];
+        
+        return cell;
+    }else{
+        
+        GLBusiniessCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLBusiniessCell"];
+        cell.selectionStyle = 0;
+        cell.model = self.models[indexPath.row];
+        return cell;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 155;
+    if([self.stop isEqualToString:@"12"]){
+        
+        return 135;
+    }else{
+        
+        return 155;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    GLCircle_item_dataModel *model = self.models[indexPath.row];
-    self.hidesBottomBarWhenPushed = YES;
-    GLBusiness_DetailController *detailVC = [[GLBusiness_DetailController alloc] init];
-    detailVC.item_id = model.item_id;
-    [self.navigationController pushViewController:detailVC animated:YES];
-    self.hidesBottomBarWhenPushed = NO;
+    if([self.stop isEqualToString:@"12"]){
+        
+        GLCircle_item_dataModel *model = self.models[indexPath.row];
+        self.hidesBottomBarWhenPushed = YES;
+        GLBusiness_DetailForSaleController *detailVC = [[GLBusiness_DetailForSaleController alloc] init];
+        detailVC.item_id = model.item_id;
+        [self.navigationController pushViewController:detailVC animated:YES];
+        self.hidesBottomBarWhenPushed = NO;
+        
+    }else{
+        
+        GLCircle_item_dataModel *model = self.models[indexPath.row];
+        self.hidesBottomBarWhenPushed = YES;
+        GLBusiness_DetailController *detailVC = [[GLBusiness_DetailController alloc] init];
+        detailVC.item_id = model.item_id;
+        [self.navigationController pushViewController:detailVC animated:YES];
+        self.hidesBottomBarWhenPushed = NO;
+    }
     
 }
 
@@ -442,7 +470,6 @@
         _cycleScrollView.placeholderImage = [UIImage imageNamed:LUNBO_PlaceHolder];
         _cycleScrollView.pageControlDotSize = CGSizeMake(10, 10);
         
-
     }
     
     return _cycleScrollView;

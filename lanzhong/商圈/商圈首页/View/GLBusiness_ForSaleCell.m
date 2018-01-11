@@ -11,6 +11,7 @@
 @interface GLBusiness_ForSaleCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *picImageV;
 @property (weak, nonatomic) IBOutlet UILabel *ensureLabel;
+@property (weak, nonatomic) IBOutlet UIView *bgView;
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *owerLabel;
@@ -27,35 +28,38 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
+    self.bgView.layer.cornerRadius = 5.f;
 }
 
-- (void)setModel:(GLBusiness_ForSaleModel *)model{
+- (void)setModel:(GLCircle_item_dataModel *)model{
     _model = model;
     
     self.titleLabel.text = model.title;
-    self.owerLabel.text = model.contactMan;
-    self.dateLabel.text = model.date;
-    self.detailLabel.text = model.detail;
-    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:model.pic] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    self.owerLabel.text = model.nickname;
+//    self.dateLabel.text = model.addtime;
+    self.dateLabel.text = [formattime formateTimeOfDate4:model.addtime];
+    self.detailLabel.text = model.info;
+    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:model.sev_photo] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
     
-    if ([model.ensure integerValue] == 1) {
-        
-        self.ensureLabel.text = @"官方保障";
-    }else{
+    if ([model.ensure_type integerValue] == 1) {
+        self.ensureLabel.text = @"无保障计划";
+    }else if([model.ensure_type integerValue] == 2){
         self.ensureLabel.text = @"个人保障";
+    }else{
+        self.ensureLabel.text = @"官方保障";
     }
+
     
-    
-    NSMutableAttributedString *cost = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"耗资:%@",model.cost]];
-    [cost addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(3,model.cost.length)];
+    NSMutableAttributedString *cost = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"耗资:%@",model.admin_money]];
+    [cost addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(3,model.admin_money.length)];
     self.costLabel.attributedText = cost;
     
-    NSMutableAttributedString *part = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"参与人数:%@",model.canyu]];
-    [part addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(3,model.canyu.length)];
-    self.costLabel.attributedText = part;
+//    NSMutableAttributedString *part = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"参与人数:%@",model.canyu]];
+//    [part addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(3,model.canyu.length)];
+//    self.costLabel.attributedText = part;
     
-    NSMutableAttributedString *price = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"估价:%@",model.gujia]];
-    [price addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(3,model.gujia.length)];
+    NSMutableAttributedString *price = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"估价:%@",model.attorn_money]];
+    [price addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(3,model.attorn_money.length)];
     self.costLabel.attributedText = price;
     
 }

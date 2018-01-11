@@ -36,6 +36,16 @@
 @property (nonatomic, copy)NSString *invest_count;//参与人数
 @property (nonatomic, copy)NSString *issue;//发布方
 
+@property (nonatomic, copy)NSString *attorn_id;//转让id
+@property (nonatomic, copy)NSString *invest_id;//项目权益id
+@property (nonatomic, copy)NSString *addtime;//转让发布时间
+@property (nonatomic, copy)NSString *attorn_phone;//转让人电话
+@property (nonatomic, copy)NSString *info;//项目简介
+@property (nonatomic, copy)NSString *nickname;//发布人昵称
+@property (nonatomic, copy)NSString *ensure_type;//百万保障类型 1无保障计划 2项目发布人自保 3项目出保
+@property (nonatomic, copy)NSString *uname;//发布人用户名
+@property (nonatomic, copy)NSString *attorn_money;//预估价
+
 @end
 
 @interface GLBusinessCircleModel : NSObject

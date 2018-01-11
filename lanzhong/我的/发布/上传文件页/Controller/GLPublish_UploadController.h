@@ -10,4 +10,6 @@
 
 @interface GLPublish_UploadController : UIViewController
 
+@property (nonatomic, copy)NSString *item_id;
+
 @end
