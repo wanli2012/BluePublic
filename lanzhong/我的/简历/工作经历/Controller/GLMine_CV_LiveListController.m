@@ -196,7 +196,7 @@
                     
                     [self.models removeObjectAtIndex:indexPath.row];
                     
-                    [MBProgressHUD showError:responseObject[@"message"]];
+                    [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
                     
                     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
                     
@@ -204,7 +204,7 @@
                     
                 }else{
                     
-                    [MBProgressHUD showError:responseObject[@"message"]];
+                    [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
                 }
                 
             } enError:^(NSError *error) {

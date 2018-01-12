@@ -41,9 +41,11 @@
     [self startTime];//获取倒计时
     [NetworkManager requestPOSTWithURLStr:kGETCODE_URL paramDic:@{@"phone":[UserModel defaultUser].phone} finish:^(id responseObject) {
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
-            [MBProgressHUD showSuccess:@"发送成功"];
+
+            [SVProgressHUD showSuccessWithStatus:@"发送成功"];
         }else{
-            [MBProgressHUD showSuccess:responseObject[@"message"]];
+
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
     } enError:^(NSError *error) {
         [MBProgressHUD showSuccess:error.localizedDescription];
@@ -88,33 +90,34 @@
 - (IBAction)submit:(id)sender {
     
     if (self.pwdTF.text.length <= 0) {
-        [MBProgressHUD showError:@"密码不能为空"];
+
+        [SVProgressHUD showErrorWithStatus:@"密码不能为空"];
         return;
     }
     
     if (self.pwdTF.text.length < 6 || self.pwdTF.text.length > 12) {
-        [MBProgressHUD showError:@"请输入6-12位密码"];
+        [SVProgressHUD showErrorWithStatus:@"请输入6-12位密码"];
         return;
     }
     
     if ([predicateModel checkIsHaveNumAndLetter:self.pwdTF.text] != 3) {
         
-        [MBProgressHUD showError:@"密码须包含数字和字母"];
+        [SVProgressHUD showErrorWithStatus:@"密码须包含数字和字母"];
         return;
     }
     
     if (self.ensurePasswordTF.text.length <= 0) {
-        [MBProgressHUD showError:@"请输入确认密码"];
+        [SVProgressHUD showErrorWithStatus:@"请输入确认密码"];
         return;
     }
     
     if (![self.pwdTF.text isEqualToString:self.ensurePasswordTF.text]) {
-        [MBProgressHUD showError:@"两次输入的密码不一致"];
+        [SVProgressHUD showErrorWithStatus:@"两次输入的密码不一致"];
         return;
     }
     
     if (self.codeTF.text.length <= 0) {
-        [MBProgressHUD showError:@"请输入验证码"];
+        [SVProgressHUD showErrorWithStatus:@"请输入验证码"];
         return;
     }
     
@@ -133,17 +136,17 @@
         [_loadV removeloadview];
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
             
-            [MBProgressHUD showSuccess:responseObject[@"message"]];
+            [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
             [self.navigationController popViewControllerAnimated:YES];
             
         }else{
             
-            [MBProgressHUD showError:responseObject[@"message"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
     } enError:^(NSError *error) {
         [_loadV removeloadview];
-        [MBProgressHUD showError:error.localizedDescription];
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
     }];
 
 }

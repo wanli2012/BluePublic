@@ -154,7 +154,7 @@
 - (void)callThePerson:(NSString *)phoneNum{
 
     NSString *tel = [NSString stringWithFormat:@"tel://%@",phoneNum];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:tel]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:tel] options:@{} completionHandler:nil];
 
 }
 

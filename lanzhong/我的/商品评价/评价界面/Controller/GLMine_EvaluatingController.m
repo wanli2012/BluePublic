@@ -46,7 +46,7 @@
 - (IBAction)submit:(id)sender {
     
     if([self.textV.text isEqualToString:@"请留下您的真实感受"] || self.textV.text.length == 0){
-        [MBProgressHUD showError:@"请填写评论"];
+        [SVProgressHUD showErrorWithStatus:@"请填写评论"];
         return ;
     }
     
@@ -63,12 +63,13 @@
         [_loadV removeloadview];
         
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
-            [MBProgressHUD showSuccess:responseObject[@"message"]];
+            [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
             self.block();
             [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
-        
-        [MBProgressHUD showError:responseObject[@"message"]];
 
     } enError:^(NSError *error) {
         [_loadV removeloadview];

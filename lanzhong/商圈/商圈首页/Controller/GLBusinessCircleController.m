@@ -184,7 +184,7 @@
             
             if (self.models.count != 0) {
                 
-                [MBProgressHUD showError:responseObject[@"message"]];
+                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
             }
             
         }else{
@@ -361,10 +361,8 @@
         [self.navigationController pushViewController:detailVC animated:YES];
         
     }else{
-//        adVC.navTitle = adModel.banner_title;
-//        adVC.url = [NSString stringWithFormat:@"%@",adModel.url];
-//        [self.navigationController pushViewController:adVC animated:YES];
-         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:adModel.url]];
+
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:adModel.url] options:@{} completionHandler:nil];
     }
     
     self.hidesBottomBarWhenPushed = NO;
@@ -420,7 +418,7 @@
         GLCircle_item_dataModel *model = self.models[indexPath.row];
         self.hidesBottomBarWhenPushed = YES;
         GLBusiness_DetailForSaleController *detailVC = [[GLBusiness_DetailForSaleController alloc] init];
-        detailVC.item_id = model.item_id;
+        detailVC.attorn_id = model.attorn_id;
         [self.navigationController pushViewController:detailVC animated:YES];
         self.hidesBottomBarWhenPushed = NO;
         

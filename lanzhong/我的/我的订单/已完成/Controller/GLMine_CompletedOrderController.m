@@ -106,18 +106,18 @@
             
             if (self.dataarr.count != 0) {
                 
-                [MBProgressHUD showError:responseObject[@"message"]];
+                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
             }
             
         }else{
             
-            [MBProgressHUD showError:responseObject[@"message"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
     } enError:^(NSError *error) {
         [_loadV removeloadview];
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
-        [MBProgressHUD showError:error.localizedDescription];
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
         
     }];
     
@@ -188,19 +188,19 @@
             [_loadV removeloadview];
             if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
                 
-                [MBProgressHUD showError:responseObject[@"message"]];
+                [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
                 sectionModel.order_goods[self.returnGoodsIndex].refunds_state = @"1";
                 NSIndexSet *set = [NSIndexSet indexSetWithIndex:self.returnGoodsIndex];
                 [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationFade];
                 
             }else{
-                [MBProgressHUD showError:responseObject[@"message"]];
+                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
             }
         } enError:^(NSError *error) {
             [_loadV removeloadview];
             [weakSelf.tableView.mj_header endRefreshing];
             [weakSelf.tableView.mj_footer endRefreshing];
-            [MBProgressHUD showError:error.localizedDescription];
+            [SVProgressHUD showErrorWithStatus:error.localizedDescription];
         }];
         
     }];
@@ -354,7 +354,7 @@
                 
                 if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
                     
-                    [MBProgressHUD showError:responseObject[@"message"]];
+                    [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
                     
                     if(weakSelf.dataarr.count <= 0){
                         [weakSelf.tableView reloadData];
@@ -365,13 +365,13 @@
                     [tableView reloadData];
                     
                 }else{
-                    [MBProgressHUD showError:responseObject[@"message"]];
+                    [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
                 }
             } enError:^(NSError *error) {
                 [_loadV removeloadview];
                 [weakSelf.tableView.mj_header endRefreshing];
                 [weakSelf.tableView.mj_footer endRefreshing];
-                [MBProgressHUD showError:error.localizedDescription];
+                [SVProgressHUD showErrorWithStatus:error.localizedDescription];
                 
             }];
 

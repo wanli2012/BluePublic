@@ -283,7 +283,7 @@
             switch (index) {
                 case 2://微信
                 {
-                    [MBProgressHUD showError:responseObject[@"message"]];
+//                    [MBProgressHUD showError:responseObject[@"message"]];
                     
                     //调起微信支付
                     PayReq* req = [[PayReq alloc] init];
@@ -333,7 +333,7 @@
                                 default:
                                     break;
                             }
-                            [MBProgressHUD showError:returnStr];
+                            [SVProgressHUD showErrorWithStatus:returnStr];
                         }
                     }];
                 }
@@ -342,7 +342,8 @@
                     break;
             }
         }
-        [MBProgressHUD showError:responseObject[@"message"]];
+
+        [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
     } enError:^(NSError *error) {
         [_loadV removeloadview];
         
@@ -367,8 +368,8 @@
         
         if (alertVC.textFields.lastObject.text.length == 0) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                
-                [MBProgressHUD showError:@"请输入密码"];
+    
+                 [SVProgressHUD showErrorWithStatus:@"请输入密码"];
             });
             
             return;
@@ -392,7 +393,8 @@
                 }
                 
             }
-            [MBProgressHUD showError:responseObject[@"message"]];
+
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         } enError:^(NSError *error) {
             [_loadV removeloadview];
             

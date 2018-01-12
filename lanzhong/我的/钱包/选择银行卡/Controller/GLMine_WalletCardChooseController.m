@@ -159,22 +159,18 @@
                 
                 [weakSelf.models removeObjectAtIndex:indexPath.row];
                 
-//                NSIndexPath *indexPath = [NSIndexPath indexPathWithIndex:index];
-                
                 [weakSelf.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-                [MBProgressHUD showSuccess:@"删除银行卡成功!"];
+                [SVProgressHUD showSuccessWithStatus:@"删除银行卡成功!"];
             }else{
-                [MBProgressHUD showError:responseObject[@"message"]];
+                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
             }
             
-//            [weakSelf.tableView reloadData];
+
         } enError:^(NSError *error) {
             [_loadV removeloadview];
             
         }];
 
-        
-        
     }];
     
     return @[action1];
@@ -199,9 +195,9 @@
             
             NSIndexPath *indexPath = [NSIndexPath indexPathWithIndex:index];
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            [MBProgressHUD showSuccess:@"删除银行卡成功!"];
+            [SVProgressHUD showSuccessWithStatus:@"删除银行卡成功!"];
         }else{
-            [MBProgressHUD showError:responseObject[@"message"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
         [self.tableView reloadData];

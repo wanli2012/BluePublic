@@ -94,11 +94,11 @@
             
             if (self.models.count != 0) {
                 
-                [MBProgressHUD showError:responseObject[@"message"]];
+                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
             }
             
         }else{
-            [MBProgressHUD showError:responseObject[@"message"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
         [self.tableView reloadData];
@@ -150,20 +150,20 @@
             [_loadV removeloadview];
             if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
                 
-                [MBProgressHUD showError:responseObject[@"message"]];
+                [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
                 model.refunds_state = @"4";
                 
                 [self.tableView reloadData];
                 
             }else{
                 
-                [MBProgressHUD showError:responseObject[@"message"]];
+                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
             }
         } enError:^(NSError *error) {
             [_loadV removeloadview];
             [weakSelf.tableView.mj_header endRefreshing];
             [weakSelf.tableView.mj_footer endRefreshing];
-            [MBProgressHUD showError:error.localizedDescription];
+            [SVProgressHUD showErrorWithStatus:error.localizedDescription];
         }];
         
     }];

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A0082422008ACDB0073A27E /* GLMall_IntegralDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A00823F2008ACDB0073A27E /* GLMall_IntegralDetailController.m */; };
+		4A0082432008ACDB0073A27E /* GLMall_IntegralDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A0082412008ACDB0073A27E /* GLMall_IntegralDetailController.xib */; };
 		4A024E6A1FBC2A5000B3F484 /* GLHomePageNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A024E681FBC2A5000B3F484 /* GLHomePageNoticeView.m */; };
 		4A024E6B1FBC2A5000B3F484 /* GLHomePageNoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A024E691FBC2A5000B3F484 /* GLHomePageNoticeView.xib */; };
 		4A0511681FBAF5FA00E272D1 /* https.cer in Resources */ = {isa = PBXBuildFile; fileRef = 4A0511671FBAF5FA00E272D1 /* https.cer */; };
@@ -503,6 +505,9 @@
 
 /* Begin PBXFileReference section */
 		19A11FB975C44A94E569750A /* Pods_lanzhong.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lanzhong.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A00823F2008ACDB0073A27E /* GLMall_IntegralDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLMall_IntegralDetailController.m; sourceTree = "<group>"; };
+		4A0082402008ACDB0073A27E /* GLMall_IntegralDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLMall_IntegralDetailController.h; sourceTree = "<group>"; };
+		4A0082412008ACDB0073A27E /* GLMall_IntegralDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLMall_IntegralDetailController.xib; sourceTree = "<group>"; };
 		4A024E671FBC2A5000B3F484 /* GLHomePageNoticeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLHomePageNoticeView.h; sourceTree = "<group>"; };
 		4A024E681FBC2A5000B3F484 /* GLHomePageNoticeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLHomePageNoticeView.m; sourceTree = "<group>"; };
 		4A024E691FBC2A5000B3F484 /* GLHomePageNoticeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLHomePageNoticeView.xib; sourceTree = "<group>"; };
@@ -1331,6 +1336,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A0082362008AC0D0073A27E /* 积分商品详情 */ = {
+			isa = PBXGroup;
+			children = (
+				4A0082372008AC0D0073A27E /* Controller */,
+				4A0082382008AC0D0073A27E /* Model */,
+				4A0082392008AC0D0073A27E /* View */,
+			);
+			path = "积分商品详情";
+			sourceTree = "<group>";
+		};
+		4A0082372008AC0D0073A27E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4A0082402008ACDB0073A27E /* GLMall_IntegralDetailController.h */,
+				4A00823F2008ACDB0073A27E /* GLMall_IntegralDetailController.m */,
+				4A0082412008ACDB0073A27E /* GLMall_IntegralDetailController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		4A0082382008AC0D0073A27E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4A0082392008AC0D0073A27E /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		4A0B74DF1F908A550007788B /* ChooseView */ = {
 			isa = PBXGroup;
 			children = (
@@ -4039,6 +4078,7 @@
 			children = (
 				4A53E8241F7A23AD0021D9E0 /* 商城首页 */,
 				4A53E82D1F7A23D50021D9E0 /* 商品详情 */,
+				4A0082362008AC0D0073A27E /* 积分商品详情 */,
 				F9BB80281F7A568D00867514 /* 购物车 */,
 				4A0B75121F90F0830007788B /* 订单 */,
 				4ADDD1961F88A75E00C95F9C /* 物流跟踪 */,
@@ -5004,6 +5044,7 @@
 				4AF481D31FC4118F000E1925 /* GLMine_CV_SkillController.xib in Resources */,
 				4A165C331F86241800D0C34B /* GLMine_AddCardController.xib in Resources */,
 				4A509BAF1F877C2B00D794FB /* GLForgetPasswordController.xib in Resources */,
+				4A0082432008ACDB0073A27E /* GLMall_IntegralDetailController.xib in Resources */,
 				4A6B9EFB1F7CC92E009386C8 /* GLMineController.xib in Resources */,
 				4A18B8F11F9441F400E9B387 /* GLOrderPayView.xib in Resources */,
 				4A509BBB1F87870500D794FB /* GLMine_SetController.xib in Resources */,
@@ -5132,6 +5173,7 @@
 				4ACD53301FF3AF220080CC22 /* HXCustomNavigationController.m in Sources */,
 				4ACDB4D82005ED4F00780B7E /* GLMine_ParticipateController.m in Sources */,
 				4AF1073A1F78DA6F00CB51FA /* yindaotuViewController.m in Sources */,
+				4A0082422008ACDB0073A27E /* GLMall_IntegralDetailController.m in Sources */,
 				4A6AD23B1F7F953600E6084E /* GLPublish_ProjectInProgressController.m in Sources */,
 				4A8954DF1FFCCE9F007B5F50 /* GLMine_IntegralCell.m in Sources */,
 				4AF109F31F78E07A00CB51FA /* UILabel+UILabel_ChangeLineSpaceAndWordSpace.m in Sources */,

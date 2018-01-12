@@ -102,7 +102,7 @@ static NSString *ID = @"GLShoppingCell";
             
         }else{
             
-            [MBProgressHUD showError:responseObject[@"message"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
         [self.tableView reloadData];
@@ -138,7 +138,8 @@ static NSString *ID = @"GLShoppingCell";
     }
     
     if (tempArr.count == 0) {
-        [MBProgressHUD showError:@"还未选择商品"];
+
+        [SVProgressHUD showErrorWithStatus:@"还未选择商品"];
         return;
     }
     
@@ -353,13 +354,14 @@ static NSString *ID = @"GLShoppingCell";
                         [self.seleteAllBtn setImage:[UIImage imageNamed:@"mine_choice"] forState:UIControlStateNormal];
                     }
                     
-                    [MBProgressHUD showError:responseObject[@"message"]];
+        
+                    [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
                     self.totalPriceLabel.text = [NSString stringWithFormat:@"总计:¥ %.2f",num];
                     
                     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
                 }else{
-                    
-                    [MBProgressHUD showError:responseObject[@"message"]];
+      
+                    [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
                 }
                 
             } enError:^(NSError *error) {

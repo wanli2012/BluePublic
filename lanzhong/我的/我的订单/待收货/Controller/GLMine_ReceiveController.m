@@ -99,18 +99,18 @@
             
             if (self.dataarr.count != 0) {
                 
-                [MBProgressHUD showError:responseObject[@"message"]];
+                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
             }
             
         }else{
-            [MBProgressHUD showError:responseObject[@"message"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         [self.tableView reloadData];
     } enError:^(NSError *error) {
         [_loadV removeloadview];
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
-        [MBProgressHUD showError:error.localizedDescription];
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
         
     }];
     

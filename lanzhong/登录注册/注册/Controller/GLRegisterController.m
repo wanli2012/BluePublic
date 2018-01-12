@@ -94,47 +94,47 @@
 - (IBAction)register:(id)sender {
     
     if (self.phoneTF.text.length <=0 ) {
-        [MBProgressHUD showError:@"请输入手机号码"];
+        [SVProgressHUD showErrorWithStatus:@"请输入手机号码"];
         return;
     }else{
         if (![predicateModel valiMobile:self.phoneTF.text]) {
-            [MBProgressHUD showError:@"手机号格式不对"];
+            [SVProgressHUD showErrorWithStatus:@"手机号格式不对"];
             return;
         }
     }
     
     if (self.passwordTF.text.length <= 0) {
-        [MBProgressHUD showError:@"密码不能为空"];
+        [SVProgressHUD showErrorWithStatus:@"密码不能为空"];
         return;
     }
     if (self.passwordTF.text.length < 6 || self.passwordTF.text.length > 12) {
-        [MBProgressHUD showError:@"请输入6-12位密码"];
+        [SVProgressHUD showErrorWithStatus:@"请输入6-12位密码"];
         return;
     }
     
     if ([predicateModel checkIsHaveNumAndLetter:self.passwordTF.text] != 3) {
         
-        [MBProgressHUD showError:@"密码须包含数字和字母"];
+        [SVProgressHUD showErrorWithStatus:@"密码须包含数字和字母"];
         return;
     }
     
     if (self.ensurePwdTF.text.length <= 0) {
-        [MBProgressHUD showError:@"请输入确认密码"];
+        [SVProgressHUD showErrorWithStatus:@"请输入确认密码"];
         return;
     }
     
     if (![self.passwordTF.text isEqualToString:self.ensurePwdTF.text]) {
-        [MBProgressHUD showError:@"两次输入的密码不一致"];
+        [SVProgressHUD showErrorWithStatus:@"两次输入的密码不一致"];
         return;
     }
     
     if (self.codeTF.text.length <= 0) {
-        [MBProgressHUD showError:@"请输入验证码"];
+        [SVProgressHUD showErrorWithStatus:@"请输入验证码"];
         return;
     }
     
     if(!_isAgreeProtocol){
-        [MBProgressHUD showError:@"请先同意注册协议"];
+        [SVProgressHUD showErrorWithStatus:@"请先同意注册协议"];
         return;
     }
     
@@ -150,7 +150,7 @@
         [_loadV removeloadview];
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
             
-            [MBProgressHUD showSuccess:@"注册成功"];
+            [SVProgressHUD showSuccessWithStatus:@"注册成功"];
             
             [UIView animateWithDuration:0.3 animations:^{
                 
@@ -158,12 +158,12 @@
             }];
             
         }else{
-            [MBProgressHUD showError:responseObject[@"message"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
     } enError:^(NSError *error) {
         [_loadV removeloadview];
-        [MBProgressHUD showError:error.localizedDescription];
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
         
     }];
 }
@@ -177,11 +177,11 @@
 - (IBAction)getCode:(id)sender {
     
     if (self.phoneTF.text.length <=0 ) {
-        [MBProgressHUD showError:@"请输入手机号码"];
+        [SVProgressHUD showErrorWithStatus:@"请输入手机号码"];
         return;
     }else{
         if (![predicateModel valiMobile:self.phoneTF.text]) {
-            [MBProgressHUD showError:@"手机号格式不对"];
+            [SVProgressHUD showErrorWithStatus:@"手机号格式不对"];
             return;
         }
     }

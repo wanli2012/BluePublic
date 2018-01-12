@@ -21,4 +21,6 @@
 
 @property (nonatomic, copy)NSString * goods_spec;
 
+@property (nonatomic, assign)NSInteger goods_type;//1:普通商品  2:积分商品
+
 @end

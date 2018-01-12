@@ -88,7 +88,7 @@
             [self.navigationController popViewControllerAnimated:YES];
             
         }else{
-            [MBProgressHUD showError:responseObject[@"message"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
     } enError:^(NSError *error) {

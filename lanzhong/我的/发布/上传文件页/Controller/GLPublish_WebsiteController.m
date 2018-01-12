@@ -85,7 +85,7 @@
             
         }else if ([responseObject[@"code"] integerValue]==PAGE_ERROR_CODE){
             
-            [MBProgressHUD showError:responseObject[@"message"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
     } enError:^(NSError *error) {

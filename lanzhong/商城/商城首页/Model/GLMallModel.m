@@ -18,7 +18,9 @@
     
     return @{@"money":@"GLmall_goods_detailsModel",
              @"salenum":@"GLmall_goods_detailsModel",
-             @"cate":@"GLmall_goods_detailsModel"};
+             @"cate":@"GLmall_goods_detailsModel",
+             @"goods_type":@"GLmall_goods_detailsModel"
+             };
 }
 @end
 

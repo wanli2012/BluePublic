@@ -90,11 +90,11 @@
         
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             
-            [MBProgressHUD showError:responseObject[@"message"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
             
         }else{
             
-            [MBProgressHUD showError:responseObject[@"message"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
 
     } enError:^(NSError *error) {

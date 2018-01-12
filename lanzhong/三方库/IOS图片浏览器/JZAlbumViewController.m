@@ -108,7 +108,7 @@
     }
     
     if (!imagev.image) {
-        [MBProgressHUD showError:@"图片未加载出来"];
+        [SVProgressHUD showErrorWithStatus:@"图片未加载出来"];
         return;
     }
     

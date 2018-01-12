@@ -95,7 +95,7 @@
             }
         
         }else{
-            [MBProgressHUD showError:responseObject[@"message"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
     
     } enError:^(NSError *error) {

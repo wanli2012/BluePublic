@@ -45,6 +45,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *remarkTextV;
 
 @property (nonatomic, copy)NSString *address_id;
+//@property (nonatomic, strong)UITextField *passwordTF;
 
 @end
 
@@ -228,53 +229,111 @@ static NSString *ID = @"GLOrderGoodsCell";
         return;
     }
     
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[@"token"] = [UserModel defaultUser].token;
-    dict[@"uid"] = [UserModel defaultUser].uid;
-    dict[@"goods_id"] = self.goods_id;
-    dict[@"num"] = self.goods_count;
-    dict[@"address_id"] = self.address_id;
-    dict[@"order_remark"] = self.remarkTextV.text;
-    dict[@"total"] = [NSString stringWithFormat:@"%.4f",_sumNum];
-    dict[@"c_type"] = @(self.orderType);
-    dict[@"spec_id"] = self.goods_spec;
-    
-    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
-    [NetworkManager requestPOSTWithURLStr:kSUBMIT_ORDER_URL paramDic:dict finish:^(id responseObject) {
+    if (self.goods_type == 2) {//积分商品
         
-        [_loadV removeloadview];
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
         
-        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请输入密码" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        
+        [alertVC addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+            textField.placeholder = @"请输入登录密码";
+        }];
+        
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        
+        UIAlertAction *ok = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshCartNotification" object:nil];
-            
-            self.hidesBottomBarWhenPushed = YES;
-            
-            GLMine_RicePayController *riceVC = [[GLMine_RicePayController alloc] init];
-            
-            riceVC.orderPrice = [NSString stringWithFormat:@"%f",_sumNum];
-            riceVC.order_id = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"order_id"]];
-            riceVC.order_sn = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"order_num"]];
-            riceVC.orders_Price = responseObject[@"data"][@"order_money"];
-            
-            if (self.orderType == 0) {
-                riceVC.signIndex = 0;
-            }else{
-                riceVC.signIndex = 2;
+            if (alertVC.textFields.lastObject.text.length == 0) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [SVProgressHUD showErrorWithStatus:@"未输入密码"];
+                });
+                return;
             }
             
-            [self.navigationController pushViewController:riceVC animated:YES];
+            NSString *encryptsecret = [RSAEncryptor encryptString:alertVC.textFields.lastObject.text publicKey:public_RSA];
+            dict[@"upwd"] = encryptsecret;
+            dict[@"uid"] = [UserModel defaultUser].uid;
+            dict[@"token"] = [UserModel defaultUser].token;
+            dict[@"goods_id"] = self.goods_id;
+            dict[@"address_id"] = self.address_id;
+            dict[@"spec_id"] = self.goods_spec;
+            dict[@"num"] = self.goods_count;
+            dict[@"total_money"] = [NSString stringWithFormat:@"%f",_sumNum];
+            dict[@"order_remark"] = self.remarkTextV.text;
             
-        }else{
-            
-            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
-        }
-        
-    } enError:^(NSError *error) {
-        [_loadV removeloadview];
+            _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+            [NetworkManager requestPOSTWithURLStr:kMark_Pay_URL paramDic:dict finish:^(id responseObject) {
 
-        [SVProgressHUD showErrorWithStatus:@"请求失败"];
-    }];
+                [_loadV removeloadview];
+                if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+                    
+                    [SVProgressHUD showSuccessWithStatus:@"支付成功"];
+                }else{
+                    
+                    [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+                }
+
+            } enError:^(NSError *error) {
+                [_loadV removeloadview];
+
+            }];
+            
+        }];
+        
+        [alertVC addAction:cancel];
+        [alertVC addAction:ok];
+        
+        [self presentViewController:alertVC animated:YES completion:nil];
+    }else{//普通商品
+        
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        dict[@"token"] = [UserModel defaultUser].token;
+        dict[@"uid"] = [UserModel defaultUser].uid;
+        dict[@"goods_id"] = self.goods_id;
+        dict[@"num"] = self.goods_count;
+        dict[@"address_id"] = self.address_id;
+        dict[@"order_remark"] = self.remarkTextV.text;
+        dict[@"total"] = [NSString stringWithFormat:@"%.4f",_sumNum];
+        dict[@"c_type"] = @(self.orderType);
+        dict[@"spec_id"] = self.goods_spec;
+        
+        _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+        [NetworkManager requestPOSTWithURLStr:kSUBMIT_ORDER_URL paramDic:dict finish:^(id responseObject) {
+            
+            [_loadV removeloadview];
+            
+            if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshCartNotification" object:nil];
+                
+                self.hidesBottomBarWhenPushed = YES;
+                
+                GLMine_RicePayController *riceVC = [[GLMine_RicePayController alloc] init];
+                
+                riceVC.orderPrice = [NSString stringWithFormat:@"%f",_sumNum];
+                riceVC.order_id = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"order_id"]];
+                riceVC.order_sn = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"order_num"]];
+                riceVC.orders_Price = responseObject[@"data"][@"order_money"];
+                
+                if (self.orderType == 0) {
+                    riceVC.signIndex = 0;
+                }else{
+                    riceVC.signIndex = 2;
+                }
+                
+                [self.navigationController pushViewController:riceVC animated:YES];
+                
+            }else{
+                
+                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+            }
+            
+        } enError:^(NSError *error) {
+            [_loadV removeloadview];
+            
+            [SVProgressHUD showErrorWithStatus:@"请求失败"];
+        }];
+    }
     
 }
 

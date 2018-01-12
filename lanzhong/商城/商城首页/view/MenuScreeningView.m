@@ -14,13 +14,8 @@
 
 @interface MenuScreeningView ()<DropMenuViewDelegate>
 
-@property (nonatomic, strong) UIButton *oneLinkageButton;
-@property (nonatomic, strong) UIButton *twoLinkageButton;
-@property (nonatomic, strong) UIButton *threeLinkageButton;
-
-@property (nonatomic, strong) DropMenuView *oneLinkageDropMenu;
-@property (nonatomic, strong) DropMenuView *twoLinkageDropMenu;
-@property (nonatomic, strong) DropMenuView *threeLinkageDropMenu;
+@property (nonatomic, strong)NSMutableArray *linkBtnArr;
+@property (nonatomic, strong)NSMutableArray *dropMenuArr;
 
 @end
 
@@ -31,30 +26,20 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.titles = titles;
-        
-        self.oneLinkageButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.oneLinkageButton.frame = CGRectMake(0, 0, kWidth/3, 50);
-        [self setUpButton:self.oneLinkageButton withText:titles[0]];
-        
-        self.oneLinkageDropMenu = [[DropMenuView alloc] init];
-        self.oneLinkageDropMenu.arrowView = self.oneLinkageButton.imageView;
-        self.oneLinkageDropMenu.delegate = self;
-        
-        self.twoLinkageButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.twoLinkageButton.frame = CGRectMake(kWidth/3, 0, kWidth/3, 50);
-        [self setUpButton:self.twoLinkageButton withText:titles[1]];
-        
-        self.twoLinkageDropMenu = [[DropMenuView alloc] init];
-        self.twoLinkageDropMenu.arrowView = self.twoLinkageButton.imageView;
-        self.twoLinkageDropMenu.delegate = self;
-        
-        self.threeLinkageButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.threeLinkageButton.frame = CGRectMake(2 * kWidth/3, 0,  kWidth/3, 50);
-        [self setUpButton:self.threeLinkageButton withText:titles[2]];
-        
-        self.threeLinkageDropMenu = [[DropMenuView alloc] init];
-        self.threeLinkageDropMenu.arrowView = self.threeLinkageButton.imageView;
-        self.threeLinkageDropMenu.delegate = self;
+
+        for (int i = 0 ; i < titles.count; i ++) {
+            
+            UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+            btn.frame = CGRectMake(i * kWidth/titles.count, 0,  kWidth/titles.count, 50);
+            [self setUpButton:btn withText:titles[i]];
+            
+            DropMenuView *menuV = [[DropMenuView alloc] init];
+            menuV.arrowView = btn.imageView;
+            menuV.delegate = self;
+            
+            [self.linkBtnArr addObject:btn];
+            [self.dropMenuArr addObject:menuV];
+        }
         
         /** 最下面横线 */
         UIView *horizontalLine = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 0.6, kWidth, 0.6)];
@@ -67,61 +52,49 @@
 
 #pragma mark - 按钮点击推出菜单 (并且其他的菜单收起)
 -(void)clickButton:(UIButton *)button{
-   
-    if (button == self.oneLinkageButton) {
-        
-        [self.twoLinkageDropMenu dismiss];
-        [self.threeLinkageDropMenu dismiss];
-        
-        [self.oneLinkageDropMenu creatDropView:self withShowTableNum:1 withData:self.dataArr1];
-        
-    }else if (button == self.twoLinkageButton){
-        
-        [self.oneLinkageDropMenu dismiss];
-        [self.threeLinkageDropMenu dismiss];
     
-        [self.twoLinkageDropMenu creatDropView:self withShowTableNum:1 withData:self.dataArr2];
-    
-    }else if (button == self.threeLinkageButton){
-        
-        [self.oneLinkageDropMenu dismiss];
-        [self.twoLinkageDropMenu dismiss];
-        
-        [self.threeLinkageDropMenu creatDropView:self withShowTableNum:1 withData:self.dataArr3];
+    NSInteger index = -1;
+
+    for (int i = 0 ; i < self.linkBtnArr.count; i ++) {
+        if (button == self.linkBtnArr[i]) {
+            index = i;
+            
+        }
     }
+    
+    for (int i = 0 ; i < self.dropMenuArr.count ; i++ ) {
+        DropMenuView *menuV = self.dropMenuArr[i];
+        
+        if (i != index) {
+            [menuV dismiss];
+        }else {
+            [menuV creatDropView:self withShowTableNum:1 withData:self.dataArr[i]];
+        }
+        
+    }
+
 }
 
 #pragma mark - 筛选菜单消失
 -(void)menuScreeningViewDismiss{
-    
-    [self.oneLinkageDropMenu dismiss];
-    [self.twoLinkageDropMenu dismiss];
-    [self.threeLinkageDropMenu dismiss];
+
+    for (DropMenuView *menuV in self.dropMenuArr) {
+        [menuV dismiss];
+    }
 }
 
 #pragma mark - 协议实现
 - (void)dropMenuView:(DropMenuView *)view didSelectName:(NSString *)str firstSelectIndex:(NSInteger)firstSelectIndex selectIndex:(NSInteger)selectIndex{
-    if (view == self.oneLinkageDropMenu) {
-        
-        [self.oneLinkageButton setTitle:str forState:UIControlStateNormal];
-        [self buttonEdgeInsets:self.oneLinkageButton];
-        self.block(0,firstSelectIndex,selectIndex);
-        
-    }else if (view == self.twoLinkageDropMenu){
-        
-        [self.twoLinkageButton setTitle:str forState:UIControlStateNormal];
-        [self buttonEdgeInsets:self.twoLinkageButton];
-        [self.threeLinkageButton setTitle:self.titles[2] forState:UIControlStateNormal];
-        
-        self.block(1,firstSelectIndex,selectIndex);
-        
-    }else if (view == self.threeLinkageDropMenu){
-        
-        [self.threeLinkageButton setTitle:str forState:UIControlStateNormal];
-        [self.twoLinkageButton setTitle:self.titles[1] forState:UIControlStateNormal];
-        [self buttonEdgeInsets:self.threeLinkageButton];
-        self.block(2,firstSelectIndex,selectIndex);
+
+    NSInteger index = -1;
+    
+    for (int i = 0 ; i < self.dropMenuArr.count; i ++) {
+        if (view == self.dropMenuArr[i]) {
+            index = i;
+            self.block(i,firstSelectIndex,selectIndex);
+        }
     }
+
 }
 
 #pragma mark - 设置Button
@@ -150,6 +123,19 @@
     
 }
 
+#pragma mark - 懒加载
+- (NSMutableArray *)linkBtnArr{
+    if (!_linkBtnArr) {
+        _linkBtnArr = [NSMutableArray array];
+    }
+    return _linkBtnArr;
+}
 
+- (NSMutableArray *)dropMenuArr{
+    if (!_dropMenuArr) {
+        _dropMenuArr = [NSMutableArray array];
+    }
+    return _dropMenuArr;
+}
 
 @end

@@ -67,13 +67,13 @@
        
         }else{
             
-            [MBProgressHUD showError:responseObject[@"message"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
     } enError:^(NSError *error) {
         
         [_loadV removeloadview];
-        [MBProgressHUD showError:error.localizedDescription];
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
         
     }];
 
@@ -105,7 +105,7 @@
         vc.modalPresentationStyle=UIModalPresentationCustom;
         [self presentViewController:vc animated:YES completion:nil];
     }else{
-        [MBProgressHUD showError:@"暂无数据"];
+        [SVProgressHUD showErrorWithStatus:@"暂无数据"];
     }
 
     
@@ -125,11 +125,11 @@
 - (IBAction)ensure:(id)sender {
     
     if (self.cardNumTF.text.length < 14 || self.cardNumTF.text.length > 21){
-        [MBProgressHUD showError:@"银行卡输入不合法"];
+        [SVProgressHUD showErrorWithStatus:@"银行卡输入不合法"];
         return;
     }
     if ([predicateModel checkIsHaveNumAndLetter:self.cardNumTF.text] != 1) {
-        [MBProgressHUD showError:@"银行卡号只能是数字"];
+        [SVProgressHUD showErrorWithStatus:@"银行卡号只能是数字"];
         return;
     }
     
@@ -148,17 +148,18 @@
         [_loadV removeloadview];
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
             
-            [MBProgressHUD showError:responseObject[@"message"]];
+            [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"addCardNotification" object:nil];
             [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
-        
-        [MBProgressHUD showError:responseObject[@"message"]];
-        
+            
     } enError:^(NSError *error) {
         
         [_loadV removeloadview];
-        [MBProgressHUD showError:error.localizedDescription];
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
         
     }];
     

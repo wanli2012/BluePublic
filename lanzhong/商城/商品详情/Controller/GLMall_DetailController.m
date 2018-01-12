@@ -282,21 +282,22 @@
     self.hidesBottomBarWhenPushed = YES;
    
     if ([UserModel defaultUser].loginstatus == NO) {
-
         [SVProgressHUD showErrorWithStatus:@"请先登录"];
         return;
     }
     
     if (self.spec_id.length <= 0) {
-
         [SVProgressHUD showErrorWithStatus:@"还未选择规格"];
         return;
     }
+    
     GLConfirmOrderController *vc=[[GLConfirmOrderController alloc]init];
     vc.goods_id = self.goods_id;
     vc.goods_count = self.countTF.text;
     vc.orderType = 1; //订单类型 1:商品详情页购买 2:购物车购买
     vc.goods_spec = self.spec_id;
+    
+    vc.goods_type = 1;//1:普通商品  2:积分商品
     [self.navigationController pushViewController:vc animated:YES];
     
 }

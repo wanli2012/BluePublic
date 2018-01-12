@@ -23,6 +23,7 @@
 #import "UIButton+SetEdgeInsets.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "formattime.h"
+#import "RSAEncryptor.h"
 
 #define YYSRGBColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
 
@@ -192,6 +193,8 @@
 #define kTrain_MyEnroll_URL @"Train/my_enroll"//我的培训
 #define kUpload_URL @"Item/url_item"//上传文档url
 #define kAttorm_Item_URL @"Item/item_attorn_data"//转让项目详情
-
+#define kInenure_Person_URL @"Other/ensure"//个人保障规则
+#define kInenure_Project_URL @"Other/lose"//筹款保障规则
+#define kMark_Pay_URL @"Shop/mark_goods_pay"//积分商品支付
 
 #endif /* PrefixHeader_pch */

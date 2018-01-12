@@ -20,6 +20,7 @@
 @property (nonatomic, copy)NSArray <GLmall_goods_detailsModel *>* money;
 @property (nonatomic, copy)NSArray <GLmall_goods_detailsModel *>* salenum;
 @property (nonatomic, copy)NSArray <GLmall_goods_detailsModel *>* cate;
+@property (nonatomic, copy)NSArray <GLmall_goods_detailsModel *>* goods_type;
 
 @end
 

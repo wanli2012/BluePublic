@@ -12,9 +12,7 @@ typedef void(^MenuScreeningViewBlock)(NSInteger itemIndex,NSInteger firstIndex,N
 
 @interface MenuScreeningView : UIView
 
-@property (nonatomic, copy)NSArray *dataArr1;
-@property (nonatomic, copy)NSArray *dataArr2;
-@property (nonatomic, copy)NSArray *dataArr3;
+@property (nonatomic, copy)NSArray *dataArr;
 
 @property (nonatomic, copy)NSArray *titles;
 

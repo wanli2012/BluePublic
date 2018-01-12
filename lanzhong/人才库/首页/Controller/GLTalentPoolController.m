@@ -232,7 +232,7 @@
         }else if ([responseObject[@"code"] integerValue]==PAGE_ERROR_CODE){
             
             if (self.cvModels.count != 0) {
-                [MBProgressHUD showError:responseObject[@"message"]];
+                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
             }
             
         }else{

@@ -12,6 +12,7 @@
 #import "LBSetFillet.h"
 #import "MenuScreeningView.h"
 #import "GLShoppingCartController.h"
+#import "GLMall_IntegralDetailController.h"
 
 
 #define sizeScaleimageH  (285.0/349.0)
@@ -28,6 +29,8 @@
 @property (nonatomic, copy)NSString *cate_id;
 @property (nonatomic, copy)NSString *order_money;
 @property (nonatomic, copy)NSString *order_salenum;
+@property (nonatomic, copy)NSString *goods_type;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewConstrait;
 
 @end
@@ -64,6 +67,11 @@ static NSString *ID = @"GLClassifyCell";
             {
                 weakSelf.order_salenum = weakSelf.categoryModel.salenum[firstIndex].cate_id;
                 weakSelf.order_money = nil;
+            }
+                break;
+            case 3:
+            {
+                weakSelf.goods_type = weakSelf.categoryModel.goods_type[firstIndex].cate_id;
             }
                 break;
                 
@@ -132,6 +140,7 @@ static NSString *ID = @"GLClassifyCell";
     
     dic[@"order_money"] = self.order_money;
     dic[@"order_salenum"] = self.order_salenum;
+    dic[@"goods_type"] = self.goods_type;
     
     _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
     [NetworkManager requestPOSTWithURLStr:kMALL_HOME_URL paramDic:dic finish:^(id responseObject) {
@@ -156,7 +165,7 @@ static NSString *ID = @"GLClassifyCell";
             
         }else{
             
-            [MBProgressHUD showError:responseObject[@"message"]];
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
         [self.collectioview reloadData];
@@ -177,9 +186,11 @@ static NSString *ID = @"GLClassifyCell";
                 
                 self.categoryModel = [GLMall_categoryModel mj_objectWithKeyValues:responseObject[@"data"]];
                 
+                NSMutableArray *dataArr = [NSMutableArray array];
                 NSMutableArray *arrM = [NSMutableArray array];
                 NSMutableArray *arrM2 = [NSMutableArray array];
                 NSMutableArray *arrM3 = [NSMutableArray array];
+                NSMutableArray *arrM4 = [NSMutableArray array];
                 
                 for (GLmall_goods_detailsModel *cate in self.categoryModel.cate) {
                     [arrM addObject:cate.catename];
@@ -190,15 +201,21 @@ static NSString *ID = @"GLClassifyCell";
                 for (GLmall_goods_detailsModel *sale in self.categoryModel.salenum) {
                     [arrM3 addObject:sale.catename];
                 }
+                for (GLmall_goods_detailsModel *goods_type in self.categoryModel.goods_type) {
+                    [arrM4 addObject:goods_type.catename];
+                }
                 
-                self.menuScreeningView.dataArr1 = arrM;
-                self.menuScreeningView.dataArr2 = arrM2;
-                self.menuScreeningView.dataArr3 = arrM3;
+                [dataArr addObject:arrM];
+                [dataArr addObject:arrM2];
+                [dataArr addObject:arrM3];
+                [dataArr addObject:arrM4];
+                
+                self.menuScreeningView.dataArr = dataArr;
             }
             
         }else{
             
-            [MBProgressHUD showError:responseObject[@"message"]];
+           [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
         
         [self.collectioview reloadData];
@@ -237,9 +254,17 @@ static NSString *ID = @"GLClassifyCell";
     GLMallModel *model = self.models[indexPath.row];
     
     self.hidesBottomBarWhenPushed = YES;
-    GLMall_DetailController *vc =[[GLMall_DetailController alloc]init];
-    vc.goods_id = model.goods_id;
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    if([self.goods_type integerValue] == 2){
+        GLMall_IntegralDetailController *vc =[[GLMall_IntegralDetailController alloc]init];
+        vc.goods_id = model.goods_id;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        GLMall_DetailController *vc =[[GLMall_DetailController alloc]init];
+        vc.goods_id = model.goods_id;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }
     self.hidesBottomBarWhenPushed = NO;
     
 }
@@ -260,6 +285,8 @@ static NSString *ID = @"GLClassifyCell";
     self.navigationController.navigationBar.hidden = YES;
 }
 
+#pragma mark - 懒加载
+
 -(MenuScreeningView*)menuScreeningView{
 
     if (!_menuScreeningView) {
@@ -269,7 +296,8 @@ static NSString *ID = @"GLClassifyCell";
         }else{
             y = 20;
         }
-        _menuScreeningView = [[MenuScreeningView alloc] initWithFrame:CGRectMake(0, y,kSCREEN_WIDTH , 50) WithTitles:@[@"类型",@"金额",@"销量"]];
+        
+        _menuScreeningView = [[MenuScreeningView alloc] initWithFrame:CGRectMake(0, y,kSCREEN_WIDTH , 50) WithTitles:@[@"分类",@"金额",@"销量",@"商品类型"]];
          _menuScreeningView.backgroundColor = [UIColor whiteColor];
         
     }

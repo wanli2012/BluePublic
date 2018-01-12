@@ -306,7 +306,7 @@
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     if (buttonIndex == 1) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:DOWNLOAD_URL]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:DOWNLOAD_URL] options:@{} completionHandler:nil];
     }
     
 }
@@ -416,6 +416,7 @@
 }
 
 -(void)cancelbutton{
+    
     [UIView animateWithDuration:0.3 animations:^{
         _phoneView.transform=CGAffineTransformMakeScale(0.000001, 0.000001);
         
@@ -430,7 +431,8 @@
 
 -(void)surebuttonE{
     
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",self.phonestr]]]; //拨号
+    NSString *url = [NSString stringWithFormat:@"tel://%@",self.phonestr];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:@{} completionHandler:nil]; //拨号
 
 }
 

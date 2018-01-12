@@ -94,7 +94,7 @@
         
     } enError:^(NSError *error) {
         [_loadV removeloadview];
-        [MBProgressHUD showError:error.localizedDescription];
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
         
     }];
 }
@@ -113,23 +113,23 @@
 - (void)ensure{
 
     if (self.nameTF.text.length <= 0) {
-        [MBProgressHUD showError:@"请输入收货人姓名"];
+        [SVProgressHUD showErrorWithStatus:@"请输入收货人姓名"];
         return;
     }
     if (self.phoneTF.text.length <= 0) {
-        [MBProgressHUD showError:@"请输入电话号码"];
+        [SVProgressHUD showErrorWithStatus:@"请输入电话号码"];
         return;
     }
     if (![predicateModel valiMobile:self.phoneTF.text]) {
-        [MBProgressHUD showError:@"请输入正确的电话号码"];
+        [SVProgressHUD showErrorWithStatus:@"请输入正确的电话号码"];
         return;
     }
     if (self.addressTF.text.length <= 0) {
-        [MBProgressHUD showError:@"请输入省市区"];
+       [SVProgressHUD showErrorWithStatus:@"请输入省市区"];
         return;
     }
     if (self.detailAddressTF.text.length <= 0) {
-        [MBProgressHUD showError:@"请输入详细地址"];
+        [SVProgressHUD showErrorWithStatus:@"请输入详细地址"];
         return;
     }
     
@@ -155,17 +155,17 @@
             if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
                 
                 [[NSNotificationCenter defaultCenter]postNotificationName:@"refreshReceivingAddress" object:nil];
-                [MBProgressHUD showError:responseObject[@"message"]];
+                [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
                 [self.navigationController popViewControllerAnimated:YES];
                 
             }else{
                 
-                [MBProgressHUD showError:responseObject[@"message"]];
+                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
                 
             }
         } enError:^(NSError *error) {
             [_loadV removeloadview];
-            [MBProgressHUD showError:error.localizedDescription];
+            [SVProgressHUD showErrorWithStatus:error.localizedDescription];
             
         }];
         
@@ -177,16 +177,16 @@
             if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
                 
                 [[NSNotificationCenter defaultCenter]postNotificationName:@"refreshReceivingAddress" object:nil];
-                [MBProgressHUD showError:responseObject[@"message"]];
+                [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
                 [self.navigationController popViewControllerAnimated:YES];
                 
             }else{
-                [MBProgressHUD showError:responseObject[@"message"]];
+                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
                 
             }
         } enError:^(NSError *error) {
             [_loadV removeloadview];
-            [MBProgressHUD showError:error.localizedDescription];
+            [SVProgressHUD showErrorWithStatus:error.localizedDescription];
             
         }];
     }
