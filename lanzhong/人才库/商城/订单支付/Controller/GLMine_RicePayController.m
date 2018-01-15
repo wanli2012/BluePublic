@@ -392,12 +392,14 @@
                     [self.navigationController popToRootViewControllerAnimated:YES];
                 }
                 
+                [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
+            }else{
+                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
             }
 
-            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         } enError:^(NSError *error) {
             [_loadV removeloadview];
-            
+            [SVProgressHUD showErrorWithStatus:error.localizedDescription];
         }];
         
     }];

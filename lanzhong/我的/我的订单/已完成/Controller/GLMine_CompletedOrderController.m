@@ -189,8 +189,10 @@
             if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
                 
                 [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
+                
                 sectionModel.order_goods[self.returnGoodsIndex].refunds_state = @"1";
-                NSIndexSet *set = [NSIndexSet indexSetWithIndex:self.returnGoodsIndex];
+                
+                NSIndexSet *set = [NSIndexSet indexSetWithIndex:self.returnGoodsSectionIndex];
                 [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationFade];
                 
             }else{
@@ -209,8 +211,8 @@
     [alertVC addAction:ok];
     [weakSelf presentViewController:alertVC animated:YES completion:nil];
     
-
 }
+
 #pragma mark ----公告
 -(void)initInterDataSorceinfomessage{
     

@@ -86,6 +86,10 @@
 #define Exchange_Info_URL @"https://www.lzcke.com/protocol/exchange.html"
 //首页广告
 #define Home_Banner_URL @"https://www.lzcke.com/Wx_lz/app/index_banner1.html"
+//转让须知
+#define Transfer_URL @"http://192.168.0.130/Raise/protocol/attorn.html"
+//购买须知
+#define Buy_Notice_URL @"http://192.168.0.130/Raise/protocol/buy.html"
 
 
 //获取appStore上的最新版本号地址
@@ -196,5 +200,11 @@
 #define kInenure_Person_URL @"Other/ensure"//个人保障规则
 #define kInenure_Project_URL @"Other/lose"//筹款保障规则
 #define kMark_Pay_URL @"Shop/mark_goods_pay"//积分商品支付
+
+#define kMine_MarkList_URL @"Newitem/user_mark_list"//我的积分
+#define kMine_BillList_URL @"Newitem/user_bill"//我的账单
+#define kMine_HelpList @"Newitem/my_help_list"//我帮助过得项目(已出售，未出售)
+#define kProject_Release_URL @"Newitem/item_sale_release"//项目出售发布
+#define kProject_Edit_URL @"Newitem/item_sale_update"//编辑出售中的项目
 
 #endif /* PrefixHeader_pch */

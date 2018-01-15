@@ -8,8 +8,10 @@
 
 #import "GLMine_ParticipateController.h"
 #import "GLMine_ParticipateCell.h"
+#import "GLMine_SalePublishController.h"
+#import "GLBusiness_DetailForSaleController.h"
 #import "GLMine_ParticpateModel.h"
-
+#import "GLBusiness_DetailController.h"
 
 @interface GLMine_ParticipateController ()<GLMine_ParticipateCellDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -35,7 +37,6 @@
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         [weakSelf updateData:YES];
-        
     }];
     
     MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
@@ -55,6 +56,15 @@
     
     [self updateData:YES];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"Sale_PublishNotification" object:nil];
+    
+}
+
+/**
+ 刷新数据
+ */
+- (void)refresh{
+    [self updateData:YES];
 }
 
 /**
@@ -69,15 +79,12 @@
 
 /**
  更新数据
-
  @param status 是否是下拉刷新状态
  */
 - (void)updateData:(BOOL)status {
     
     if (status) {
         _page = 1;
-        [self.models removeAllObjects];
-        
     }else{
         _page ++;
     }
@@ -85,19 +92,24 @@
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"token"] = [UserModel defaultUser].token;
     dict[@"uid"] = [UserModel defaultUser].uid;
+    dict[@"type"] = @"0";
     dict[@"page"] = [NSString stringWithFormat:@"%ld",(long)_page];
     
     _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
-    [NetworkManager requestPOSTWithURLStr:kIN_ITEM_LIST_URL paramDic:dict finish:^(id responseObject) {
+    [NetworkManager requestPOSTWithURLStr:kMine_HelpList paramDic:dict finish:^(id responseObject) {
         
         [_loadV removeloadview];
         [self endRefresh];
         
+        if (status) {
+            [self.models removeAllObjects];
+        }
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
             
             for (NSDictionary *dic in responseObject[@"data"] ) {
                 
                 GLMine_ParticpateModel *model = [GLMine_ParticpateModel mj_objectWithKeyValues:dic];
+                model.type = @"0";
                 [self.models addObject:model];
             }
             
@@ -109,7 +121,6 @@
             [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
 
-        
         [self.tableView reloadData];
         
     } enError:^(NSError *error) {
@@ -119,7 +130,6 @@
         [self.tableView reloadData];
         
     }];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -127,17 +137,16 @@
     self.navigationController.navigationBar.hidden = NO;
 }
 
-
-#pragma mark - GLMine_ParticipateCellDelegate
+#pragma mark - GLMine_ParticipateCellDelegate 出售
 
 - (void)sell:(NSInteger)index{
     
-//    GLMine_ParticpateModel *model = self.models[index];
-//    self.hidesBottomBarWhenPushed = YES;
-//
-//    GLMine_SalePublishController *sellVC = [[GLMine_SalePublishController alloc] init];
-//    sellVC.item_id = model.item_id;
-//    [self.navigationController pushViewController:sellVC animated:YES];
+    GLMine_ParticpateModel *model = self.models[index];
+    self.hidesBottomBarWhenPushed = YES;
+    GLMine_SalePublishController *sellVC = [[GLMine_SalePublishController alloc] init];
+    sellVC.model = model;
+    sellVC.type = 1;
+    [self.navigationController pushViewController:sellVC animated:YES];
 
 }
 
@@ -159,6 +168,7 @@
     cell.model = self.models[indexPath.row];
 
     cell.delegate = self;
+    cell.index = indexPath.row;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -168,10 +178,11 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    GLMine_ParticpateModel *model = self.models[indexPath.row];
     self.hidesBottomBarWhenPushed = YES;
-//    GLBusiness_DetailForSaleController *detailVC = [[GLBusiness_DetailForSaleController alloc] init];
-//    [self.navigationController pushViewController:detailVC animated:YES];
+    GLBusiness_DetailController *detailVC = [[GLBusiness_DetailController alloc] init];
+    detailVC.item_id = model.item_id;
+    [self.navigationController pushViewController:detailVC animated:YES];
     
 }
 
@@ -193,7 +204,6 @@
     }
     return _nodataV;
 }
-
 
 @end
 

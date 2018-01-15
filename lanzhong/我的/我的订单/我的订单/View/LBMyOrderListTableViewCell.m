@@ -9,6 +9,7 @@
 #import "LBMyOrderListTableViewCell.h"
 
 @interface LBMyOrderListTableViewCell ()
+@property (weak, nonatomic) IBOutlet UIImageView *signImageV;
 
 
 @end
@@ -37,6 +38,26 @@
     self.priceLb.text = [NSString stringWithFormat:@"价格: %@",myorderlistModel.goods_discount];
     self.specLabel.text = [NSString stringWithFormat:@"规格:%@",myorderlistModel.title];
     //退货状态  0无申请  1申请退货  2管理员同意  3管理员拒绝  4用户已提交退货信息   5管理员审核确定退货退款操作
+    
+    switch ([myorderlistModel.goods_type integerValue]) {//商品类型  1普通商品  2积分商品
+        case 1:
+        {
+            self.applyReturnBtn.hidden = NO;
+            self.signImageV.hidden = YES;
+            
+        }
+            break;
+        case 2:
+        {
+            self.applyReturnBtn.hidden = YES;
+            self.signImageV.hidden = NO;
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
     NSString *string;
     switch ([myorderlistModel.refunds_state integerValue]) {
         case 0://0无申请
@@ -82,6 +103,8 @@
             break;
     }
     [self.applyReturnBtn setTitle:string forState:UIControlStateNormal];
+    
+  
     
 }
 

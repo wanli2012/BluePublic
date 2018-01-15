@@ -11,6 +11,7 @@
 		4A0082432008ACDB0073A27E /* GLMall_IntegralDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A0082412008ACDB0073A27E /* GLMall_IntegralDetailController.xib */; };
 		4A024E6A1FBC2A5000B3F484 /* GLHomePageNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A024E681FBC2A5000B3F484 /* GLHomePageNoticeView.m */; };
 		4A024E6B1FBC2A5000B3F484 /* GLHomePageNoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A024E691FBC2A5000B3F484 /* GLHomePageNoticeView.xib */; };
+		4A03A7302009A661009B2B1F /* 我的功能块.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A03A72F2009A661009B2B1F /* 我的功能块.xcassets */; };
 		4A0511681FBAF5FA00E272D1 /* https.cer in Resources */ = {isa = PBXBuildFile; fileRef = 4A0511671FBAF5FA00E272D1 /* https.cer */; };
 		4A05EDEA1F8C5E780095DBCF /* 发布.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A05EDE91F8C5E780095DBCF /* 发布.xcassets */; };
 		4A0B74E41F908A550007788B /* ChooseRank.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A0B74E11F908A550007788B /* ChooseRank.m */; };
@@ -511,6 +512,7 @@
 		4A024E671FBC2A5000B3F484 /* GLHomePageNoticeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLHomePageNoticeView.h; sourceTree = "<group>"; };
 		4A024E681FBC2A5000B3F484 /* GLHomePageNoticeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLHomePageNoticeView.m; sourceTree = "<group>"; };
 		4A024E691FBC2A5000B3F484 /* GLHomePageNoticeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GLHomePageNoticeView.xib; sourceTree = "<group>"; };
+		4A03A72F2009A661009B2B1F /* 我的功能块.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "我的功能块.xcassets"; sourceTree = "<group>"; };
 		4A0511671FBAF5FA00E272D1 /* https.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = https.cer; sourceTree = "<group>"; };
 		4A05EDE91F8C5E780095DBCF /* 发布.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "发布.xcassets"; sourceTree = "<group>"; };
 		4A0B74E01F908A550007788B /* ChooseRank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseRank.h; sourceTree = "<group>"; };
@@ -3261,6 +3263,7 @@
 		4A7203101FBFFE1E004C4F3D /* 人才库 */ = {
 			isa = PBXGroup;
 			children = (
+				4AF1073B1F78DB0D00CB51FA /* 商城 */,
 				4A7203151FBFFE1E004C4F3D /* 首页 */,
 				4A7203111FBFFE1E004C4F3D /* 详情 */,
 			);
@@ -4039,7 +4042,6 @@
 				4AF107431F78DB0D00CB51FA /* 首页 */,
 				4AF1073F1F78DB0D00CB51FA /* 商圈 */,
 				4A7203101FBFFE1E004C4F3D /* 人才库 */,
-				4AF1073B1F78DB0D00CB51FA /* 商城 */,
 				4AF107471F78DB0D00CB51FA /* 我的 */,
 				4AF1074B1F78DBB400CB51FA /* 登录注册 */,
 				4ADEBB5B1F7E481D00C50087 /* 支付 */,
@@ -4386,6 +4388,7 @@
 				4A05EDE91F8C5E780095DBCF /* 发布.xcassets */,
 				4A6FE1891F8E2D9B00860503 /* 商圈.xcassets */,
 				4A16FF241F8F6BFC00064CE5 /* 我的.xcassets */,
+				4A03A72F2009A661009B2B1F /* 我的功能块.xcassets */,
 				4AF9C5661FC29DEC00FD8B19 /* 简历部分.xcassets */,
 				4A8385781FA0716D00F3A30C /* 加载动画.xcassets */,
 				4A2A2F8B1FA1B64200DF0329 /* 占位图.xcassets */,
@@ -4902,6 +4905,7 @@
 				4A0B74FD1F90A8810007788B /* MHSheetView.xib in Resources */,
 				4A0B74F71F90A8810007788B /* MHSheetCell.xib in Resources */,
 				4A18B8E71F943FC000E9B387 /* GLMine_RicePayController.xib in Resources */,
+				4A03A7302009A661009B2B1F /* 我的功能块.xcassets in Resources */,
 				4A5C2B9C1FC2F94300665031 /* GLMine_CV_LiveListController.xib in Resources */,
 				4A0B74FB1F90A8810007788B /* MHSheetHead.xib in Resources */,
 				4ADDD17E1F886F4D00C95F9C /* GLMine_PersonInfoController.xib in Resources */,

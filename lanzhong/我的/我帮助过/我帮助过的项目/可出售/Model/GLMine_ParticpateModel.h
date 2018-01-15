@@ -12,21 +12,21 @@
 
 @property (nonatomic, copy)NSString *title;//项目标题
 @property (nonatomic, copy)NSString *info;//描述
-@property (nonatomic, copy)NSString *state;// 项目审核发布状态 0审核中  1通过  2失败
+@property (nonatomic, copy)NSString *state;//  项目运行状态 1待审核(审核中) 2审核失败 3审核成功（审核成功认定为筹款中）4筹款停止 5筹款失败  6筹款完成 7项目进行 8项目暂停 9项目失败 10项目完成 11项目结束'
 @property (nonatomic, copy)NSString *sev_photo;//图片
-@property (nonatomic, copy)NSString *i_money;//我支持的金额
-
-@property (nonatomic, copy)NSString *id;//支持id
-@property (nonatomic, copy)NSString *uid;// uid
+@property (nonatomic, copy)NSString *admin_money;//完成的资金
 @property (nonatomic, copy)NSString *item_id;//项目id
-@property (nonatomic, copy)NSString *addtime;// 支持时间
-@property (nonatomic, copy)NSString *comment;// 评论
-@property (nonatomic, copy)NSString *c_time;//评论时间
-@property (nonatomic, copy)NSString *reply;// 回复
-@property (nonatomic, copy)NSString *reply_time;//回复时间
-@property (nonatomic, copy)NSString *classify;// 项目类型  1:爱心项目  2:创客项目
-@property (nonatomic, copy)NSString *admin_money;//后台评估金额
-@property (nonatomic, copy)NSString *draw_money;// 已完成金额
+@property (nonatomic, copy)NSString *time;//出售时间，没有出售就不管
+@property (nonatomic, copy)NSString *user_count;//参与人数
+@property (nonatomic, copy)NSString *is_sale;//是否是购买来的 1是 0否
+@property (nonatomic, copy)NSString *ensure_type; //1无保障计划  2项目发布人自保  3项目出保
+@property (nonatomic, copy)NSString *s_time;//项目开始时间
+@property (nonatomic, copy)NSString *need_time;//项目结束时间
+@property (nonatomic, copy)NSString *invest_id;//项目权益id
+@property (nonatomic, copy)NSString *attorn_phone;//转让人电话
+@property (nonatomic, copy)NSString *attorn_money;//转让金额
+
+@property (nonatomic, copy)NSString *type;//类型:0可出售 1不可出售 2出售中
 
 
 @end

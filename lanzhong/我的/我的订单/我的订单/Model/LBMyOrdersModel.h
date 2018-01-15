@@ -23,6 +23,7 @@
 @property (copy, nonatomic)NSString *title;//规格名称
 @property (copy, nonatomic)NSString *total_price;//商品总价refunds_state
 @property (copy, nonatomic)NSString *refunds_state;//退货状态  0无申请  1申请退货  2管理员同意  3管理员拒绝  4用户已提交退货信息   5管理员审核确定退货退款操作
+@property (copy, nonatomic)NSString *goods_type;//商品类型  1普通商品  2积分商品
 
 @end
 

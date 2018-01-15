@@ -9,6 +9,7 @@
 #import "GLBusiness_DetailForSaleController.h"
 #import "GLBusiness_DetailForSaleModel.h"
 #import "GLBusiness_CertificationController.h"
+#import "GLHomePageNoticeView.h"
 
 @interface GLBusiness_DetailForSaleController ()
 
@@ -35,6 +36,9 @@
 @property (nonatomic, strong)LoadWaitView *loadV;
 @property (nonatomic, strong)GLBusiness_DetailForSaleModel *model;
 @property (nonatomic, assign)BOOL  HideNavagation;//是否需要恢复自定义导航栏
+
+@property (nonatomic, strong)UIView  *maskV;//遮罩
+@property (nonatomic, strong)GLHomePageNoticeView *noticeView;//
 
 @end
 
@@ -120,15 +124,18 @@
     if ([self.model.admin_money floatValue] == 0) {
         radio = 0;
     }else{
-        
         radio = [self.model.money floatValue] / [self.model.admin_money floatValue];
-        
     }
     
     self.investRatioLabel.text = [NSString stringWithFormat:@"%.2f%%",radio * 100];
     self.investMoneyLabel.text = [NSString stringWithFormat:@"¥ %@",self.model.money];;
     self.investProfitLabel.text = [NSString stringWithFormat:@"¥ %@",self.model.item_get_money];
-    self.lastBonusDateLabel.text = [formattime formateTime:self.model.item_get_time];
+    
+    if (self.model.item_get_time.length == 0) {
+        self.lastBonusDateLabel.text = @"";
+    }else{
+        self.lastBonusDateLabel.text = [formattime formateTime:self.model.item_get_time];
+    }
     self.lastBonusProfitLabel.text = [NSString stringWithFormat:@"¥ %@",self.model.item_get_money_sum];
     self.phoneLabel.text = self.model.attorn_phone;
     
@@ -213,7 +220,6 @@
 
 /**
  承诺书
-
  */
 - (IBAction)commitLetter:(id)sender {
    self.hidesBottomBarWhenPushed = YES;
@@ -221,7 +227,6 @@
     webVC.url = self.model.promise_word;
     webVC.navTitle = @"个人承诺书";
     [self.navigationController pushViewController:webVC animated:YES];
-    
     
 }
 
@@ -241,10 +246,152 @@
 
 /**
  立即收购
-
  */
 - (IBAction)buyNow:(id)sender {
     NSLog(@"立即收购");
+    [self initInterDataSorceinfomessage];//弹出退货须知
+
+}
+
+- (void)sureReturnGoods{
+    [self dismiss];
+
+    __weak __typeof(self) weakSelf = self;
+    
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"你确定要购买此产品吗?" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertVC addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"请输入登录密码";
+    }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"提交" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        if(alertVC.textFields.lastObject.text.length == 0){
+            [SVProgressHUD showErrorWithStatus:@"请登录密码"];
+            return ;
+        }
+        
+        if(alertVC.textFields.lastObject.text.length > 20){
+            [SVProgressHUD showErrorWithStatus:@"你输入的内容太长了"];
+            return ;
+        }
+        
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        dic[@"token"] = [UserModel defaultUser].token;
+        dic[@"uid"] = [UserModel defaultUser].uid;
+//        dic[@"goods_id"] = sectionModel.order_goods[self.returnGoodsIndex].goods_id;
+//        dic[@"order_id"] = sectionModel.order_id;
+//        dic[@"og_id"] = sectionModel.order_goods[self.returnGoodsIndex].og_id;
+//        dic[@"refunds_reason"] = alertVC.textFields.lastObject.text;
+        
+        _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:[UIApplication sharedApplication].keyWindow];
+        [NetworkManager requestPOSTWithURLStr:kAPPLY_RETURN_URL paramDic:dic finish:^(id responseObject) {
+            [_loadV removeloadview];
+            if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+                
+                [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
+               
+                
+            }else{
+                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+            }
+            
+        } enError:^(NSError *error) {
+            [_loadV removeloadview];
+           
+            [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+        }];
+        
+    }];
+    
+    [alertVC addAction:cancel];
+    [alertVC addAction:ok];
+    [weakSelf presentViewController:alertVC animated:YES completion:nil];
+    
+}
+
+#pragma mark ----公告
+-(void)initInterDataSorceinfomessage{
+    
+    CGFloat contentViewH = kSCREEN_HEIGHT / 2;
+    CGFloat contentViewW = kSCREEN_WIDTH - 40;
+    CGFloat contentViewX = 20;
+    
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    [window addSubview:self.maskV];
+    [window addSubview:self.noticeView];
+    
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:Buy_Notice_URL]];
+    [self.noticeView.webView loadRequest:request];
+    self.noticeView.frame = CGRectMake(contentViewX, (kSCREEN_HEIGHT - contentViewH)/2, contentViewW, contentViewH);
+    //缩放
+    self.noticeView.transform=CGAffineTransformMakeScale(0.01f, 0.01f);
+    self.noticeView.alpha = 0;
+    [UIView animateWithDuration:0.2 animations:^{
+        
+        self.noticeView.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
+        self.noticeView.alpha = 1;
+    }];
+    
+}
+
+- (void)dismiss{
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        
+        self.noticeView.transform = CGAffineTransformMakeScale(0.01, 0.01);
+        self.noticeView.alpha = 0;
+        self.maskV.alpha = 0;
+    } completion:^(BOOL finished) {
+        self.noticeView.center = CGPointMake(kSCREEN_WIDTH - 30,30);
+        [self.noticeView removeFromSuperview];
+        [self.maskV removeFromSuperview];
+        self.noticeView = nil;
+        self.maskV = nil;
+        
+    }];
+    
+}
+
+- (GLHomePageNoticeView *)noticeView{
+    if (!_noticeView) {
+        
+        _noticeView = [[NSBundle mainBundle] loadNibNamed:@"GLHomePageNoticeView" owner:nil options:nil].lastObject;
+        
+        _noticeView.contentViewW.constant = kSCREEN_WIDTH - 40;
+        _noticeView.contentViewH.constant = kSCREEN_HEIGHT / 2 - 40;
+        _noticeView.layer.cornerRadius = 5;
+        _noticeView.layer.masksToBounds = YES;
+        [_noticeView.cancelBtn addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+        [_noticeView.sureBtn addTarget:self action:@selector(sureReturnGoods) forControlEvents:UIControlEventTouchUpInside];
+        
+        _noticeView.titleLabel.text = @"购买须知";
+        //设置webView
+        _noticeView.webView.scrollView.contentSize = CGSizeMake(kSCREEN_WIDTH - 40, 0);
+        _noticeView.webView.scalesPageToFit = YES;
+        _noticeView.webView.autoresizesSubviews = NO;
+        _noticeView.webView.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
+        _noticeView.webView.scrollView.bounces = NO;
+        
+        _noticeView.webView.backgroundColor = [UIColor clearColor];
+        _noticeView.webView.opaque = NO;
+        
+    }
+    return _noticeView;
+}
+- (UIView *)maskV{
+    if (!_maskV) {
+        _maskV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT)];
+        _maskV.backgroundColor = [UIColor blackColor];
+        _maskV.alpha = 0.3;
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(dismiss)];
+        [_maskV addGestureRecognizer:tap];
+        
+    }
+    return _maskV;
 }
 
 @end

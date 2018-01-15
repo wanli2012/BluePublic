@@ -10,9 +10,10 @@
 
 @interface GLMine_BillModel : NSObject
 
-@property (nonatomic, copy)NSString *name;
-@property (nonatomic, copy)NSString *date;
-@property (nonatomic, copy)NSString *income;
+@property (nonatomic, copy)NSString *title;
+@property (nonatomic, copy)NSString *time;
+@property (nonatomic, copy)NSString *money;
+
 @property (nonatomic, copy)NSString *type;
 
 @end

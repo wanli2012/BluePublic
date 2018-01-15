@@ -7,11 +7,13 @@
 //
 
 #import "GLMine_SalePublishController.h"
+#import "GLBusiness_CertificationController.h"
 
 @interface GLMine_SalePublishController ()<UITextFieldDelegate>
 {
     BOOL _isAgreeProtocol;
 }
+@property (weak, nonatomic) IBOutlet UIView *bgView;
 
 @property (weak, nonatomic) IBOutlet UIButton *submitBtn;
 @property (weak, nonatomic) IBOutlet UILabel *noticeLabel;
@@ -20,15 +22,17 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *projectNameLabel;//项目名字
 @property (weak, nonatomic) IBOutlet UILabel *detailLabel;//描述
-
+@property (weak, nonatomic) IBOutlet UILabel *priceLabel;//耗资label
 @property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;//总耗资
-@property (weak, nonatomic) IBOutlet UILabel *totalPartnerLabel;//总参与人数
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;//日期label
-@property (weak, nonatomic) IBOutlet UIImageView *picImageV;
+@property (weak, nonatomic) IBOutlet UIImageView *picImageV;//项目图片
+@property (weak, nonatomic) IBOutlet UIView *dateView;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewHeight;
 @property (weak, nonatomic) IBOutlet UIImageView *signImageV;
+
+@property (nonatomic, strong)LoadWaitView *loadV;
 
 @end
 
@@ -44,14 +48,41 @@
     
     self.navigationItem.title = @"出售发布";
     
+    self.bgView.layer.cornerRadius = 5.f;
     self.submitBtn.layer.cornerRadius = 5.f;
     _isAgreeProtocol = NO;
     
+    [self.picImageV sd_setImageWithURL:[NSURL URLWithString:self.model.sev_photo] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+    self.detailLabel.text = self.model.info;
+    self.totalPriceLabel.text = self.model.admin_money;
+    self.projectNameLabel.text = self.model.title;
+    
+    if (self.model.s_time.length == 0 || self.model.need_time.length == 0) {
+        self.dateView.hidden = YES;
+        self.dateLabel.hidden = YES;
+    }else{
+        self.dateView.hidden = NO;
+        self.dateLabel.hidden = NO;
+    }
+    
+    NSString *startDate = [formattime formateTimeOfDate4:self.model.s_time];
+    NSString *endDate = [[formattime formateTimeOfDate4:self.model.need_time] substringFromIndex:5];
+    NSString *date = [NSString stringWithFormat:@"%@-%@",startDate,endDate];
+    self.dateLabel.text = date;
+    
+    if (self.type == 2) {
+        self.phoneTF.text = self.model.attorn_phone;
+        self.priceTF.text = self.model.attorn_money;
+    }else{
+        self.phoneTF.text = @"";
+        self.priceTF.text = @"";
+    }
+
 }
+
 
 /**
  是否同意协议
-
  */
 - (IBAction)isAgreeProtocol:(id)sender {
     _isAgreeProtocol = !_isAgreeProtocol;
@@ -67,11 +98,14 @@
 
 /**
  跳转到协议
-
  */
 - (IBAction)toProtocol:(id)sender {
-    
-    NSLog(@"跳转到转让协议");
+
+    self.hidesBottomBarWhenPushed = YES;
+    GLBusiness_CertificationController *webVC = [GLBusiness_CertificationController new];
+    webVC.url = Transfer_URL;
+    webVC.navTitle = @"转让须知";
+    [self.navigationController pushViewController:webVC animated:YES];
 }
 
 /**
@@ -79,6 +113,49 @@
  */
 - (IBAction)submit:(id)sender {
     
+    if(self.priceTF.text.length == 0){
+        [SVProgressHUD showErrorWithStatus:@"请输入价格"];
+        return;
+    }
+    
+    if (![predicateModel valiMobile:self.phoneTF.text]) {
+        [SVProgressHUD showErrorWithStatus:@"手机号不正确"];
+        return;
+    }
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"token"] = [UserModel defaultUser].token;
+    dict[@"uid"] = [UserModel defaultUser].uid;
+    dict[@"invest_id"] = self.model.invest_id;
+    dict[@"price"] = self.priceTF.text;
+    dict[@"phone"] = self.phoneTF.text;
+    
+    NSString *url;
+    if(self.type == 1){ //1:出售 2:编辑
+        url = kProject_Release_URL;
+    }else{
+        url = kProject_Edit_URL;
+    }
+    
+    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+    [NetworkManager requestPOSTWithURLStr:url paramDic:dict finish:^(id responseObject) {
+        
+        [_loadV removeloadview];
+        
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+            
+            [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
+            [self.navigationController popViewControllerAnimated:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"Sale_PublishNotification" object:nil];
+        }else{
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+        }
+        
+    } enError:^(NSError *error) {
+        
+        [_loadV removeloadview];
+        
+    }];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -112,4 +189,6 @@
     return YES;
 }
 
+
 @end
+

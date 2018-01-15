@@ -15,13 +15,11 @@
 #import "GLMine_SalePublishController.h"//出售发布
 #import "GLBusiness_DetailForSaleController.h"//可卖的项目详情
 
-
 @interface GLMine_SellListController ()
 
 @end
 
 @implementation GLMine_SellListController
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -64,26 +62,8 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = NO;
-//    switch (self.signIndex) {
-//        case 0:
-//        {
-            self.navigationItem.title = @"谁帮助过我";
-//        }
-//            break;
-//        case 1:
-//        {
-//            self.navigationItem.title = @"我的审核";
-//        }
-//            break;
-//        case 2:
-//        {
-//            self.navigationItem.title = @"我的项目";
-//        }
-//            break;
-//
-//        default:
-//            break;
-//    }
+    self.navigationItem.title = @"我帮助过";
+
 }
 
 
@@ -119,29 +99,6 @@
     NSArray *titleArr = titleArray;
     NSArray *classNamesArr = classNames;
     
-//    switch (self.signIndex) {
-//        case 0:
-//        {
-//            titleArr = @[titleArray[2],titleArray[3],titleArray[4],titleArray[5]];
-//            classNamesArr = @[classNames[2],classNames[3],classNames[4],classNames[5]];
-//        }
-//            break;
-//        case 1:
-//        {
-//            titleArr = @[titleArray[0],titleArray[1]];
-//            classNamesArr = @[classNames[0],classNames[1]];
-//        }
-//            break;
-//        case 2:
-//        {
-//            titleArr = @[titleArray[6],titleArray[7],titleArray[8],titleArray[9]];
-//            classNamesArr = @[classNames[6],classNames[7],classNames[8],classNames[9]];
-//
-//        }
-//            break;
-//        default:
-//            break;
-//    }
     //设置自定义属性
     self.tagItemSize = CGSizeMake(kSCREEN_WIDTH / titleArr.count, 40);
     [self reloadDataWith:titleArr andSubViewdisplayClasses:classNamesArr withParams:nil];

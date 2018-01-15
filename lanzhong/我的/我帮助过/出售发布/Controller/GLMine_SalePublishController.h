@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GLMine_ParticpateModel.h"
 
 @interface GLMine_SalePublishController : UIViewController
 
 @property (nonatomic, copy)NSString *item_id;
+
+@property (nonatomic, strong)GLMine_ParticpateModel *model;
+
+@property (nonatomic, assign)NSInteger type;//1:出售 2:编辑
 
 @end

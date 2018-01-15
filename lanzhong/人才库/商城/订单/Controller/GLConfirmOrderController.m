@@ -120,7 +120,7 @@ static NSString *ID = @"GLOrderGoodsCell";
             }
         }
         
-    } enError:^(NSError *error) {
+    }enError:^(NSError *error) {
         [_loadV removeloadview];
     }];
 }
@@ -268,6 +268,8 @@ static NSString *ID = @"GLOrderGoodsCell";
                 if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
                     
                     [SVProgressHUD showSuccessWithStatus:@"支付成功"];
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    
                 }else{
                     
                     [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];

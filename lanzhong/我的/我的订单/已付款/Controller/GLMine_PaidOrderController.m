@@ -11,10 +11,10 @@
 
 #import "LBMyOrdersHeaderView.h"
 #import "LBMyOrdersModel.h"
+#import "GLHomePageNoticeView.h"
 
 
-
-@interface GLMine_PaidOrderController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
+@interface GLMine_PaidOrderController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate,LBMyOrderListTableViewCellDelegete>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -25,6 +25,12 @@
 @property (strong, nonatomic)NodataView *nodataV;
 
 @property (assign, nonatomic)NSInteger deleteRow;//删除下标
+
+@property (nonatomic, strong)UIView  *maskV;//遮罩
+@property (nonatomic, strong)GLHomePageNoticeView *noticeView;//
+
+@property (nonatomic, assign)NSInteger returnGoodsIndex;
+@property (nonatomic, assign)NSInteger returnGoodsSectionIndex;
 
 @end
 
@@ -134,6 +140,126 @@
     
     [self initdatasource];
 }
+
+#pragma mark - LBMyOrderListTableViewCellDelegete
+- (void)applyForReturn:(NSInteger)index section:(NSInteger)section{
+    
+    [self initInterDataSorceinfomessage];//弹出退货须知
+    
+    self.returnGoodsIndex = index;
+    self.returnGoodsSectionIndex = section;
+    
+}
+
+- (void)sureReturnGoods{
+    [self dismiss];
+    
+    LBMyOrdersModel *sectionModel = self.dataarr[self.returnGoodsSectionIndex];
+    __weak __typeof(self) weakSelf = self;
+    
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"退货理由" message:@"你确定要申请退款吗?" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertVC addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"请输入退货原因(50字内)";
+    }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"提交" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        if(alertVC.textFields.lastObject.text.length == 0){
+            [SVProgressHUD showErrorWithStatus:@"请输入退货原因"];
+            return ;
+        }
+        
+        if(alertVC.textFields.lastObject.text.length >50){
+            [SVProgressHUD showErrorWithStatus:@"退货原因需要50字内"];
+            return ;
+        }
+        
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        dic[@"token"] = [UserModel defaultUser].token;
+        dic[@"uid"] = [UserModel defaultUser].uid;
+        dic[@"goods_id"] = sectionModel.order_goods[self.returnGoodsIndex].goods_id;
+        dic[@"order_id"] = sectionModel.order_id;
+        dic[@"og_id"] = sectionModel.order_goods[self.returnGoodsIndex].og_id;
+        dic[@"refunds_reason"] = alertVC.textFields.lastObject.text;
+        
+        _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:[UIApplication sharedApplication].keyWindow];
+        [NetworkManager requestPOSTWithURLStr:kAPPLY_RETURN_URL paramDic:dic finish:^(id responseObject) {
+            [_loadV removeloadview];
+            if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+                
+                [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
+                sectionModel.order_goods[self.returnGoodsIndex].refunds_state = @"1";
+                
+                NSIndexSet *set = [NSIndexSet indexSetWithIndex:self.returnGoodsSectionIndex];
+                [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationFade];
+                
+            }else{
+                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+            }
+            
+        } enError:^(NSError *error) {
+            [_loadV removeloadview];
+            [weakSelf.tableView.mj_header endRefreshing];
+            [weakSelf.tableView.mj_footer endRefreshing];
+            [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+        }];
+        
+    }];
+    
+    [alertVC addAction:cancel];
+    [alertVC addAction:ok];
+    [weakSelf presentViewController:alertVC animated:YES completion:nil];
+    
+    
+}
+#pragma mark ----公告
+-(void)initInterDataSorceinfomessage{
+    
+    CGFloat contentViewH = kSCREEN_HEIGHT / 2;
+    CGFloat contentViewW = kSCREEN_WIDTH - 40;
+    CGFloat contentViewX = 20;
+    
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    [window addSubview:self.maskV];
+    [window addSubview:self.noticeView];
+    
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:Return_Goods_URL]];
+    [self.noticeView.webView loadRequest:request];
+    self.noticeView.frame = CGRectMake(contentViewX, (kSCREEN_HEIGHT - contentViewH)/2, contentViewW, contentViewH);
+    //缩放
+    self.noticeView.transform=CGAffineTransformMakeScale(0.01f, 0.01f);
+    self.noticeView.alpha = 0;
+    [UIView animateWithDuration:0.2 animations:^{
+        
+        self.noticeView.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
+        self.noticeView.alpha = 1;
+    }];
+    
+}
+
+- (void)dismiss{
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        
+        self.noticeView.transform = CGAffineTransformMakeScale(0.01, 0.01);
+        self.noticeView.alpha = 0;
+        self.maskV.alpha = 0;
+    } completion:^(BOOL finished) {
+        self.noticeView.center = CGPointMake(kSCREEN_WIDTH - 30,30);
+        [self.noticeView removeFromSuperview];
+        [self.maskV removeFromSuperview];
+        self.noticeView = nil;
+        self.maskV = nil;
+        
+    }];
+}
+
+
+#pragma mark - UITableViewDelegate
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if (self.dataarr.count > 0 ) {
         
@@ -144,7 +270,6 @@
     }
     
     return self.dataarr.count;
-    
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -156,7 +281,6 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     return 110;
-    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -165,6 +289,9 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
     cell.index = indexPath.row;
+    cell.section = indexPath.section;
+    
+    cell.delegete = self;
     
     LBMyOrdersModel *model= (LBMyOrdersModel*)self.dataarr[indexPath.section];
     
@@ -182,7 +309,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-        return 100;
+    return 70;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -202,8 +329,8 @@
         [tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationAutomatic];
     };
     
-    headerview.statusLabel.hidden = NO;
-    headerview.statusLabel.text = @"等待发货...";
+    headerview.statusLabel.hidden = YES;
+//    headerview.statusLabel.text = @"等待发货...";
 
     return headerview;
     
@@ -227,5 +354,43 @@
     return _nodataV;
     
 }
+- (UIView *)maskV{
+    if (!_maskV) {
+        _maskV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT)];
+        _maskV.backgroundColor = [UIColor blackColor];
+        _maskV.alpha = 0.3;
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(dismiss)];
+        [_maskV addGestureRecognizer:tap];
+        
+    }
+    return _maskV;
+}
 
+- (GLHomePageNoticeView *)noticeView{
+    if (!_noticeView) {
+        
+        _noticeView = [[NSBundle mainBundle] loadNibNamed:@"GLHomePageNoticeView" owner:nil options:nil].lastObject;
+        
+        _noticeView.contentViewW.constant = kSCREEN_WIDTH - 40;
+        _noticeView.contentViewH.constant = kSCREEN_HEIGHT / 2 - 40;
+        _noticeView.layer.cornerRadius = 5;
+        _noticeView.layer.masksToBounds = YES;
+        [_noticeView.cancelBtn addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+        [_noticeView.sureBtn addTarget:self action:@selector(sureReturnGoods) forControlEvents:UIControlEventTouchUpInside];
+        
+        _noticeView.titleLabel.text = @"兑换须知";
+        //设置webView
+        _noticeView.webView.scrollView.contentSize = CGSizeMake(kSCREEN_WIDTH - 40, 0);
+        _noticeView.webView.scalesPageToFit = YES;
+        _noticeView.webView.autoresizesSubviews = NO;
+        _noticeView.webView.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
+        _noticeView.webView.scrollView.bounces = NO;
+        
+        _noticeView.webView.backgroundColor = [UIColor clearColor];
+        _noticeView.webView.opaque = NO;
+        
+    }
+    return _noticeView;
+}
 @end

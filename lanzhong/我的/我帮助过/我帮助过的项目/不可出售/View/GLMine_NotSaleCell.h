@@ -9,8 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "GLMine_NotSaleModel.h"
 
+@protocol GLMine_NotSaleCellDelegate <NSObject>
+
+- (void)moneyDetail:(NSInteger)index;
+
+@end
+
 @interface GLMine_NotSaleCell : UITableViewCell
 
 @property (nonatomic, strong)GLMine_NotSaleModel *model;
+
+@property (nonatomic, weak)id <GLMine_NotSaleCellDelegate> delegate;
+
+@property (nonatomic, assign)NSInteger index;
 
 @end

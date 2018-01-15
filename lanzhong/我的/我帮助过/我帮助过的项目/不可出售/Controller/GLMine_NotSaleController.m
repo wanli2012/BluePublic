@@ -9,8 +9,10 @@
 #import "GLMine_NotSaleController.h"
 #import "GLMine_NotSaleCell.h"
 #import "GLMine_NotSaleModel.h"
+#import "GLMine_ParticpateModel.h"
+#import "GLBusiness_DetailController.h"
 
-@interface GLMine_NotSaleController ()<UITableViewDataSource,UITableViewDelegate>
+@interface GLMine_NotSaleController ()<UITableViewDataSource,UITableViewDelegate,GLMine_NotSaleCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -28,6 +30,115 @@
     
     [self.tableView registerNib:[UINib nibWithNibName:@"GLMine_NotSaleCell" bundle:nil] forCellReuseIdentifier:@"GLMine_NotSaleCell"];
     
+    [self.tableView addSubview:self.nodataV];
+    self.nodataV.hidden = YES;
+    
+    __weak __typeof(self) weakSelf = self;
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [weakSelf updateData:YES];
+    }];
+    
+    MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [weakSelf updateData:NO];
+        
+    }];
+    
+    // 设置文字
+    [header setTitle:@"快扯我，快点" forState:MJRefreshStateIdle];
+    [header setTitle:@"数据要来啦" forState:MJRefreshStatePulling];
+    [header setTitle:@"服务器正在狂奔 ..." forState:MJRefreshStateRefreshing];
+    
+    self.tableView.mj_header = header;
+    self.tableView.mj_footer = footer;
+    
+    [self updateData:YES];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"Sale_PublishNotification" object:nil];
+    
+}
+
+/**
+ 刷新数据
+ */
+- (void)refresh{
+    [self updateData:YES];
+}
+
+/**
+ 结束刷新动画
+ */
+- (void)endRefresh {
+
+    [self.tableView.mj_footer endRefreshing];
+    [self.tableView.mj_header endRefreshing];
+
+}
+
+/**
+ 更新数据
+ 
+ @param status 是否是下拉刷新状态
+ */
+- (void)updateData:(BOOL)status {
+
+    if (status) {
+        _page = 1;
+    }else{
+        _page ++;
+    }
+
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"token"] = [UserModel defaultUser].token;
+    dict[@"uid"] = [UserModel defaultUser].uid;
+    dict[@"type"] = @"1";
+    dict[@"page"] = [NSString stringWithFormat:@"%ld",(long)_page];
+
+    _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
+    [NetworkManager requestPOSTWithURLStr:kMine_HelpList paramDic:dict finish:^(id responseObject) {
+
+        [_loadV removeloadview];
+        [self endRefresh];
+
+        if (status) {
+            [self.models removeAllObjects];
+        }
+
+        if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
+
+            for (NSDictionary *dic in responseObject[@"data"] ) {
+                GLMine_NotSaleModel *model = [GLMine_NotSaleModel mj_objectWithKeyValues:dic];
+
+                [self.models addObject:model];
+            }
+
+        }else if ([responseObject[@"code"] integerValue] == PAGE_ERROR_CODE){
+            if (self.models.count != 0) {
+                [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+            }
+        }else{
+            [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
+        }
+
+        [self.tableView reloadData];
+
+    } enError:^(NSError *error) {
+
+        [_loadV removeloadview];
+        [self endRefresh];
+        [self.tableView reloadData];
+
+    }];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = NO;
+}
+
+#pragma mark - GLMine_NotSaleCellDelegate  资金明细
+- (void)moneyDetail:(NSInteger)index{
+    NSLog(@"资金明细");
 }
 
 #pragma mark - UITableViewDelegate
@@ -36,36 +147,30 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    GLMine_NotSaleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMine_NotSaleCell"];
+    GLMine_NotSaleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GLMine_NotSaleCell" forIndexPath:indexPath];
     
     cell.selectionStyle = 0;
     cell.model = self.models[indexPath.row];
+    cell.delegate = self;
     
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 115;
+    return 90;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    GLMine_ParticpateModel *model = self.models[indexPath.row];
+    self.hidesBottomBarWhenPushed = YES;
+    GLBusiness_DetailController *detailVC = [[GLBusiness_DetailController alloc] init];
+    detailVC.item_id = model.item_id;
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 #pragma mark - 懒加载
 - (NSMutableArray *)models{
     if (!_models) {
         _models = [NSMutableArray array];
-        
-        for (int i = 0; i < 9; i ++ ) {
-            GLMine_NotSaleModel *model = [[GLMine_NotSaleModel alloc] init];
-            model.picName = [NSString stringWithFormat:@"dd%zd",i];
-            model.projectName = [NSString stringWithFormat:@"项目名称%zd",i];
-            model.detail = [NSString stringWithFormat:@"项目详情,前景非常好哦%zd",i];
-            model.raise = [NSString stringWithFormat:@"12%zd万",i];
-            model.insure = [NSString stringWithFormat:@"%zd",i % 2];
-            model.date = [NSString stringWithFormat:@"2017-09-0%zd",i];
-            model.cost = [NSString stringWithFormat:@"12%zd万",i];
-            model.partners = [NSString stringWithFormat:@"1%zd万人",i];
-            model.status = [NSString stringWithFormat:@"%zd",i];
-            [_models addObject:model];
-        }
     }
     
     return _models;
@@ -79,5 +184,6 @@
     }
     return _nodataV;
 }
+
 
 @end

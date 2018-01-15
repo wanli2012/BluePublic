@@ -26,9 +26,26 @@
 - (void)setModel:(GLMine_BillModel *)model{
     _model = model;
     
-    self.nameabel.text = model.name;
-    self.dateLabel.text = model.date;
-    self.incomeLabel.text = [NSString stringWithFormat:@"+ %@",model.income];
+    self.nameabel.text = model.title;
+    self.dateLabel.text = [formattime formateTimeOfDate4:model.time];
+    
+    switch ([model.type integerValue]) {//类型 1商品购买 2项目赔付 3项目收益 4项目转让 5.兑换 6.充值
+        case 1: case 5:
+        {
+            self.incomeLabel.text = [NSString stringWithFormat:@"- %@",model.money];
+            
+        }
+            break;
+        case 2:case 3:case 4:case 6:
+        {
+            self.incomeLabel.text = [NSString stringWithFormat:@"+ %@",model.money];
+            
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 @end

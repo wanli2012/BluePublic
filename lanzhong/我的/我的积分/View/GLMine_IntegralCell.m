@@ -27,10 +27,10 @@
 - (void)setModel:(GLMine_IntegralModel *)model{
     _model = model;
     
-    self.nameLabel.text = model.name;
-    self.detailLabel.text = model.detail;
-    self.dateLabel.text = model.date;
-    self.integralLabel.text = [NSString stringWithFormat:@"+%@",model.integral];
+    self.nameLabel.text = model.title;
+    self.detailLabel.text = model.info;
+    self.dateLabel.text = [formattime formateTimeOfDate4:model.time];
+    self.integralLabel.text = [NSString stringWithFormat:@"%@",model.money];
     
 }
 

@@ -9,8 +9,9 @@
 #import "GLMine_ForSaleController.h"
 #import "GLMine_ParticipateCell.h"
 #import "GLMine_ParticpateModel.h"
+#import "GLMine_SalePublishController.h"
 
-@interface GLMine_ForSaleController ()
+@interface GLMine_ForSaleController ()<GLMine_ParticipateCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -34,7 +35,6 @@
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         [weakSelf updateData:YES];
-        
     }];
     
     MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
@@ -54,6 +54,15 @@
     
     [self updateData:YES];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"Sale_PublishNotification" object:nil];
+    
+}
+
+/**
+ 刷新数据
+ */
+- (void)refresh{
+    [self updateData:YES];
 }
 
 /**
@@ -84,10 +93,11 @@
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"token"] = [UserModel defaultUser].token;
     dict[@"uid"] = [UserModel defaultUser].uid;
+    dict[@"type"] = @"2";
     dict[@"page"] = [NSString stringWithFormat:@"%ld",(long)_page];
     
     _loadV = [LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:self.view];
-    [NetworkManager requestPOSTWithURLStr:kIN_ITEM_LIST_URL paramDic:dict finish:^(id responseObject) {
+    [NetworkManager requestPOSTWithURLStr:kMine_HelpList paramDic:dict finish:^(id responseObject) {
         
         [_loadV removeloadview];
         [self endRefresh];
@@ -97,10 +107,13 @@
             for (NSDictionary *dic in responseObject[@"data"] ) {
                 
                 GLMine_ParticpateModel *model = [GLMine_ParticpateModel mj_objectWithKeyValues:dic];
+                model.type = @"2";
                 [self.models addObject:model];
             }
             
-        }else if ([responseObject[@"code"] integerValue]==PAGE_ERROR_CODE){
+            
+            
+        }else if ([responseObject[@"code"] integerValue] == PAGE_ERROR_CODE){
             if (self.models.count != 0) {
                 [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
             }
@@ -126,16 +139,17 @@
     self.navigationController.navigationBar.hidden = NO;
 }
 
-#pragma mark - GLMine_ParticipateCellDelegate
-//- (void)sell:(NSInteger)index{
-//    GLMine_ParticpateModel *model = self.models[index];
-//    self.hidesBottomBarWhenPushed = YES;
-//
-//    GLMine_SalePublishController *sellVC = [[GLMine_SalePublishController alloc] init];
-//    sellVC.item_id = model.item_id;
-//    [self.navigationController pushViewController:sellVC animated:YES];
-//
-//}
+#pragma mark - GLMine_ParticipateCellDelegate 操作
+- (void)sell:(NSInteger)index{
+    GLMine_ParticpateModel *model = self.models[index];
+    self.hidesBottomBarWhenPushed = YES;
+
+    GLMine_SalePublishController *sellVC = [[GLMine_SalePublishController alloc] init];
+    sellVC.model = model;
+    sellVC.type = 2;
+    [self.navigationController pushViewController:sellVC animated:YES];
+
+}
 
 #pragma  UITableviewDatasource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -155,6 +169,7 @@
     cell.model = self.models[indexPath.row];
     
     cell.delegate = self;
+    cell.index = indexPath.row;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }

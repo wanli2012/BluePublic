@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="120" id="KGk-i7-Jjw" customClass="GLMine_NotSaleCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GLMine_NotSaleCell" rowHeight="120" id="KGk-i7-Jjw" customClass="GLMine_NotSaleCell">
             <rect key="frame" x="0.0" y="0.0" width="315" height="115"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -125,7 +125,7 @@
                         <color key="textColor" red="1" green="0.1015892991" blue="0.054391829209999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QSK-9l-ToA">
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QSK-9l-ToA">
                         <rect key="frame" x="245" y="87" width="70" height="20"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="into-orange" translatesAutoresizingMaskIntoConstraints="NO" id="e1v-Qd-vRT">
@@ -155,7 +155,7 @@
                             <constraint firstAttribute="bottom" secondItem="QFx-zy-oJW" secondAttribute="bottom" id="yH5-tf-Xej"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQ9-dK-GS4">
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQ9-dK-GS4">
                         <rect key="frame" x="245" y="84.5" width="60" height="20"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -165,12 +165,6 @@
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <state key="normal" title="已出售"/>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="耗资 12345元" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DRE-sD-qs6">
-                        <rect key="frame" x="140" y="70" width="165" height="14.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="TW0-Xh-J12" firstAttribute="leading" secondItem="HnE-Fz-QQ0" secondAttribute="trailing" constant="10" id="3SS-uS-hag"/>
@@ -181,13 +175,10 @@
                     <constraint firstAttribute="trailing" secondItem="aQ9-dK-GS4" secondAttribute="trailing" constant="10" id="Eqm-rW-Nb0"/>
                     <constraint firstAttribute="bottom" secondItem="HnE-Fz-QQ0" secondAttribute="bottom" constant="10" id="G1U-GY-jMa"/>
                     <constraint firstItem="TW0-Xh-J12" firstAttribute="top" secondItem="2g6-ug-O5c" secondAttribute="top" id="L6j-fX-NxZ"/>
-                    <constraint firstAttribute="trailing" secondItem="DRE-sD-qs6" secondAttribute="trailing" constant="10" id="Lqv-dK-bho"/>
                     <constraint firstItem="mPs-js-Hlj" firstAttribute="leading" secondItem="HnE-Fz-QQ0" secondAttribute="trailing" constant="10" id="QVP-03-1r2"/>
                     <constraint firstItem="HnE-Fz-QQ0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="XGY-0K-VNI"/>
                     <constraint firstItem="ow1-tW-w0b" firstAttribute="leading" secondItem="HnE-Fz-QQ0" secondAttribute="trailing" constant="10" id="bA4-3Z-6IZ"/>
-                    <constraint firstItem="DRE-sD-qs6" firstAttribute="leading" secondItem="HnE-Fz-QQ0" secondAttribute="trailing" constant="10" id="m9P-sQ-DL8"/>
                     <constraint firstItem="QSK-9l-ToA" firstAttribute="centerY" secondItem="mPs-js-Hlj" secondAttribute="centerY" id="ohx-3b-DJW"/>
-                    <constraint firstItem="mPs-js-Hlj" firstAttribute="top" secondItem="DRE-sD-qs6" secondAttribute="bottom" constant="5" id="r4j-CK-Is8"/>
                     <constraint firstItem="HnE-Fz-QQ0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="r8Y-R0-nSa"/>
                     <constraint firstAttribute="trailing" secondItem="ow1-tW-w0b" secondAttribute="trailing" constant="10" id="sm2-La-OSS"/>
                     <constraint firstAttribute="trailing" secondItem="TW0-Xh-J12" secondAttribute="trailing" constant="10" id="wh1-an-Vxe"/>
@@ -196,7 +187,6 @@
             <connections>
                 <outlet property="bgView" destination="HnE-Fz-QQ0" id="Rhw-fd-j33"/>
                 <outlet property="bottomView" destination="ikG-qh-NWt" id="n0J-p2-ilu"/>
-                <outlet property="costLabel" destination="DRE-sD-qs6" id="5m5-d7-evS"/>
                 <outlet property="dateLabel" destination="bBn-2O-pZj" id="veU-4z-Hhr"/>
                 <outlet property="insureLabel" destination="t7U-0c-ZmV" id="ow6-KK-IMz"/>
                 <outlet property="insureView" destination="daV-aT-ZlS" id="uHG-2U-grJ"/>
@@ -209,7 +199,7 @@
                 <outlet property="statusLabel" destination="Rph-NA-hoB" id="lnF-tY-G3E"/>
                 <outlet property="totalMoneyLabel" destination="mPs-js-Hlj" id="0m9-K1-uVf"/>
             </connections>
-            <point key="canvasLocation" x="44.5" y="-66"/>
+            <point key="canvasLocation" x="48" y="-84"/>
         </tableViewCell>
     </objects>
     <resources>

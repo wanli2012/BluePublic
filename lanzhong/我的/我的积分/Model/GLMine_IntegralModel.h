@@ -10,12 +10,9 @@
 
 @interface GLMine_IntegralModel : NSObject
 
-@property (nonatomic, copy)NSString *name;
-@property (nonatomic, copy)NSString *detail;
-@property (nonatomic, copy)NSString *date;
-@property (nonatomic, copy)NSString *integral;
-
-@property (nonatomic, copy)NSString *keyong;
-@property (nonatomic, copy)NSString *dongjie;
+@property (nonatomic, copy)NSString *title;//标题
+@property (nonatomic, copy)NSString *info;//描述 如果是项目这里就是项目描述
+@property (nonatomic, copy)NSString *time;//时间
+@property (nonatomic, copy)NSString *money;//用掉的积分 这里是负数  其他地方是正数
 
 @end
