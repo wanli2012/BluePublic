@@ -206,5 +206,6 @@
 #define kMine_HelpList @"Newitem/my_help_list"//我帮助过得项目(已出售，未出售)
 #define kProject_Release_URL @"Newitem/item_sale_release"//项目出售发布
 #define kProject_Edit_URL @"Newitem/item_sale_update"//编辑出售中的项目
-
+#define kBuy_Item_URL @"Newitem/buy_item"//购买转让中的项目
+#define kBuy_History_URL @"Newitem/sale_history_list"//出售记录
 #endif /* PrefixHeader_pch */

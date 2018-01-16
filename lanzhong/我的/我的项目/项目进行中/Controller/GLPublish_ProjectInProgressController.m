@@ -126,7 +126,6 @@
 #pragma mark - GLPublish_ProjectCellDelegate
 /**
  支持列表
-
  @param index 项目索引
  */
 - (void)surportList:(NSInteger)index{

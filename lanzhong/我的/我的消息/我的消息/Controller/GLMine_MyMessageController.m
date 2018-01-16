@@ -13,6 +13,7 @@
 #import "GLMine_MyMessage_RechargeController.h"//充值
 #import "GLMine_MyMessage_DonationController.h"//捐赠
 #import "GLMine_MyMessage_SupportController.h"//支持
+#import "GLMine_MyMessage_OtherController.h"//其他
 
 
 @interface GLMine_MyMessageController ()
@@ -59,14 +60,15 @@
 -(void)addviewcontrol{
     
     //设置自定义属性
-    self.tagItemSize = CGSizeMake(kSCREEN_WIDTH / 5, 40);
+    self.tagItemSize = CGSizeMake(kSCREEN_WIDTH / 6, 40);
     
     NSArray *titleArray = @[
                             @"公告",
                             @"兑换",
                             @"充值",
                             @"爱心",
-                            @"支持"
+                            @"支持",
+                            @"其他"
                             ];
     
     NSArray *classNames = @[
@@ -75,6 +77,7 @@
                             [GLMine_MyMessage_RechargeController class],
                             [GLMine_MyMessage_DonationController class],
                             [GLMine_MyMessage_SupportController class],
+                            [GLMine_MyMessage_OtherController class]
                             ];
     
     self.normalTitleColor = [UIColor darkGrayColor];

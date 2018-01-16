@@ -22,16 +22,30 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
    
-    
 }
 
 - (void)setModel:(GLMine_SaleRecordModel *)model{
     _model = model;
     
     self.nameLabel.text = model.title;
-    self.personLabel.text = model.person;
-    self.incomeLabel.text = model.income;
-    self.dateLabel.text = model.date;
+    self.personLabel.text = model.name;
+    self.dateLabel.text = [formattime formateTimeOfDate4:model.time];
+    
+    switch (model.type) {
+        case 2:
+        {
+            self.incomeLabel.text = [NSString stringWithFormat:@"+ %@",model.money];
+        }
+            break;
+        case 3:
+        {
+             self.incomeLabel.text = [NSString stringWithFormat:@"- %@",model.money];
+        }
+            break;
+            
+        default:
+            break;
+    }
     
 }
 

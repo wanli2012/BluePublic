@@ -15,6 +15,6 @@
 
 @property (nonatomic, strong)GLMine_ParticpateModel *model;
 
-@property (nonatomic, assign)NSInteger type;//1:出售 2:编辑
+@property (nonatomic, assign)NSInteger type;//1:出售(可出售) 2:编辑(售卖中)
 
 @end

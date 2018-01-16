@@ -53,14 +53,11 @@
     NSMutableAttributedString *cost = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"耗资:%@",model.admin_money]];
     [cost addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(3,model.admin_money.length)];
     self.costLabel.attributedText = cost;
-    
-//    NSMutableAttributedString *part = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"参与人数:%@",model.canyu]];
-//    [part addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(3,model.canyu.length)];
-//    self.costLabel.attributedText = part;
+
     
     NSMutableAttributedString *price = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"估价:%@",model.attorn_money]];
     [price addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(3,model.attorn_money.length)];
-    self.costLabel.attributedText = price;
+    self.priceLabel.attributedText = price;
     
 }
 

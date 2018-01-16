@@ -10,6 +10,7 @@
 #import "GLMine_ParticipateCell.h"
 #import "GLMine_ParticpateModel.h"
 #import "GLMine_SalePublishController.h"
+#import "GLBusiness_DetailForSaleController.h"
 
 @interface GLMine_ForSaleController ()<GLMine_ParticipateCellDelegate>
 
@@ -111,8 +112,6 @@
                 [self.models addObject:model];
             }
             
-            
-            
         }else if ([responseObject[@"code"] integerValue] == PAGE_ERROR_CODE){
             if (self.models.count != 0) {
                 [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
@@ -120,7 +119,6 @@
         }else{
             [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
         }
-        
         
         [self.tableView reloadData];
         
@@ -131,7 +129,6 @@
         [self.tableView reloadData];
         
     }];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -180,9 +177,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    //    self.hidesBottomBarWhenPushed = YES;
-    //    GLBusiness_DetailForSaleController *detailVC = [[GLBusiness_DetailForSaleController alloc] init];
-    //    [self.navigationController pushViewController:detailVC animated:YES];
+    self.hidesBottomBarWhenPushed = YES;
+    GLMine_ParticpateModel *model = self.models[indexPath.row];
+    GLBusiness_DetailForSaleController *detailVC = [[GLBusiness_DetailForSaleController alloc] init];
+    detailVC.attorn_id = model.invest_id;
+    [self.navigationController pushViewController:detailVC animated:YES];
     
 }
 

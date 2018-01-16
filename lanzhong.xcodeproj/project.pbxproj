@@ -389,6 +389,8 @@
 		4ADEBB661F7E487200C50087 /* GLPay_ChooseController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4ADEBB641F7E487200C50087 /* GLPay_ChooseController.xib */; };
 		4AEA23641F8B1216002A73D4 /* GLBusinessCircle_MenuScreeningView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AEA23631F8B1216002A73D4 /* GLBusinessCircle_MenuScreeningView.m */; };
 		4AEA23671F8B75E5002A73D4 /* GLBusiness_DetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AEA23661F8B75E5002A73D4 /* GLBusiness_DetailModel.m */; };
+		4AF05DE3200D95D90009D1C6 /* GLMine_MyMessage_OtherController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF05DE1200D95D90009D1C6 /* GLMine_MyMessage_OtherController.m */; };
+		4AF05DE4200D95D90009D1C6 /* GLMine_MyMessage_OtherController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AF05DE2200D95D90009D1C6 /* GLMine_MyMessage_OtherController.xib */; };
 		4AF107051F78D5AC00CB51FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF107041F78D5AC00CB51FA /* main.m */; };
 		4AF107081F78D5AC00CB51FA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF107071F78D5AC00CB51FA /* AppDelegate.m */; };
 		4AF1070B1F78D5AC00CB51FA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AF1070A1F78D5AC00CB51FA /* ViewController.m */; };
@@ -1114,6 +1116,9 @@
 		4AEA23631F8B1216002A73D4 /* GLBusinessCircle_MenuScreeningView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLBusinessCircle_MenuScreeningView.m; sourceTree = "<group>"; };
 		4AEA23651F8B75E5002A73D4 /* GLBusiness_DetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLBusiness_DetailModel.h; sourceTree = "<group>"; };
 		4AEA23661F8B75E5002A73D4 /* GLBusiness_DetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLBusiness_DetailModel.m; sourceTree = "<group>"; };
+		4AF05DE0200D95D90009D1C6 /* GLMine_MyMessage_OtherController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLMine_MyMessage_OtherController.h; sourceTree = "<group>"; };
+		4AF05DE1200D95D90009D1C6 /* GLMine_MyMessage_OtherController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLMine_MyMessage_OtherController.m; sourceTree = "<group>"; };
+		4AF05DE2200D95D90009D1C6 /* GLMine_MyMessage_OtherController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GLMine_MyMessage_OtherController.xib; sourceTree = "<group>"; };
 		4AF107001F78D5AC00CB51FA /* lanzhong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lanzhong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AF107041F78D5AC00CB51FA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4AF107061F78D5AC00CB51FA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1793,6 +1798,7 @@
 				4A509B5E1F8728BD00D794FB /* 公告 */,
 				4A509B561F8728BD00D794FB /* 捐赠 */,
 				4A509B621F8728BD00D794FB /* 支持 */,
+				4AF05DDF200D95B30009D1C6 /* 其他 */,
 			);
 			path = "我的消息";
 			sourceTree = "<group>";
@@ -2390,8 +2396,6 @@
 			isa = PBXGroup;
 			children = (
 				4A509B531F8728BD00D794FB /* Controller */,
-				4A509B541F8728BD00D794FB /* Model */,
-				4A509B551F8728BD00D794FB /* View */,
 			);
 			path = "兑换";
 			sourceTree = "<group>";
@@ -2404,20 +2408,6 @@
 				4A509B8A1F872C6300D794FB /* GLMine_MyMessage_ExchangeController.xib */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		4A509B541F8728BD00D794FB /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		4A509B551F8728BD00D794FB /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		4A509B561F8728BD00D794FB /* 捐赠 */ = {
@@ -4014,6 +4004,16 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		4AF05DDF200D95B30009D1C6 /* 其他 */ = {
+			isa = PBXGroup;
+			children = (
+				4AF05DE0200D95D90009D1C6 /* GLMine_MyMessage_OtherController.h */,
+				4AF05DE1200D95D90009D1C6 /* GLMine_MyMessage_OtherController.m */,
+				4AF05DE2200D95D90009D1C6 /* GLMine_MyMessage_OtherController.xib */,
+			);
+			path = "其他";
+			sourceTree = "<group>";
+		};
 		4AF106F71F78D5AC00CB51FA = {
 			isa = PBXGroup;
 			children = (
@@ -5032,6 +5032,7 @@
 				4AF481FB1FC45638000E1925 /* GLMine_CV_SelfDescriptionController.xib in Resources */,
 				4A0511681FBAF5FA00E272D1 /* https.cer in Resources */,
 				4A509B6E1F8729DA00D794FB /* GLMine_MyMessageController.xib in Resources */,
+				4AF05DE4200D95D90009D1C6 /* GLMine_MyMessage_OtherController.xib in Resources */,
 				4A6AD22E1F7F953600E6084E /* GLPublish_AuditFailureController.xib in Resources */,
 				4A2905241F9726B9006903F1 /* GLMine_EvaluatedController.xib in Resources */,
 				4A10B9E81FFDD62B00B10B62 /* GLBusiness_ForSaleCell.xib in Resources */,
@@ -5351,6 +5352,7 @@
 				4A6B9F381F7CF100009386C8 /* GLBusiness_tradeSubCell.m in Sources */,
 				4A53E8341F7A240F0021D9E0 /* GLMall_DetailController.m in Sources */,
 				4AF109411F78DBB500CB51FA /* XBConst.m in Sources */,
+				4AF05DE3200D95D90009D1C6 /* GLMine_MyMessage_OtherController.m in Sources */,
 				4AA395E61F9A2DE000FAFA4F /* GLPay_CompletedModel.m in Sources */,
 				4AF109301F78DBB500CB51FA /* WXSTransitionManager+BrickAnimation.m in Sources */,
 				4ACD533B1FF3AF220080CC22 /* HXDownloadProgressView.m in Sources */,

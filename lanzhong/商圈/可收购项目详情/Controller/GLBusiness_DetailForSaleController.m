@@ -89,11 +89,10 @@
         [_loadV removeloadview];
         
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
-            if([responseObject[@"data"] count] != 0){
-                
-                self.model = [GLBusiness_DetailForSaleModel mj_objectWithKeyValues:responseObject[@"data"]];
-                [self headerViewFuzhi];
-            }
+            
+            self.model = [GLBusiness_DetailForSaleModel mj_objectWithKeyValues:responseObject[@"data"]];
+            [self headerViewFuzhi];
+            
             
         }else{
             
@@ -105,6 +104,7 @@
         
     }];
 }
+
 #pragma mark - 页面赋值
 /**
  为页面赋值
@@ -253,6 +253,9 @@
 
 }
 
+/**
+ 确定购买
+ */
 - (void)sureReturnGoods{
     [self dismiss];
 
@@ -281,18 +284,16 @@
         NSMutableDictionary *dic = [NSMutableDictionary dictionary];
         dic[@"token"] = [UserModel defaultUser].token;
         dic[@"uid"] = [UserModel defaultUser].uid;
-//        dic[@"goods_id"] = sectionModel.order_goods[self.returnGoodsIndex].goods_id;
-//        dic[@"order_id"] = sectionModel.order_id;
-//        dic[@"og_id"] = sectionModel.order_goods[self.returnGoodsIndex].og_id;
-//        dic[@"refunds_reason"] = alertVC.textFields.lastObject.text;
-        
+        dic[@"upwd"] = alertVC.textFields.lastObject.text;
+        dic[@"attorn_id"] = self.attorn_id;
+ 
         _loadV=[LoadWaitView addloadview:[UIScreen mainScreen].bounds tagert:[UIApplication sharedApplication].keyWindow];
-        [NetworkManager requestPOSTWithURLStr:kAPPLY_RETURN_URL paramDic:dic finish:^(id responseObject) {
+        [NetworkManager requestPOSTWithURLStr:kBuy_Item_URL paramDic:dic finish:^(id responseObject) {
             [_loadV removeloadview];
             if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
                 
                 [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
-               
+                [self.navigationController popViewControllerAnimated:YES];
                 
             }else{
                 [SVProgressHUD showErrorWithStatus:responseObject[@"message"]];
@@ -337,6 +338,9 @@
     
 }
 
+/**
+ 遮罩消失
+ */
 - (void)dismiss{
     
     [UIView animateWithDuration:0.3 animations:^{
@@ -354,6 +358,8 @@
     }];
     
 }
+
+#pragma mark - 懒加载
 
 - (GLHomePageNoticeView *)noticeView{
     if (!_noticeView) {
