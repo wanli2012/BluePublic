@@ -12,7 +12,7 @@
 #import "RSAEncryptor.h"
 #import "DWTabBarController.h"
 
-@interface GLLoginController ()
+@interface GLLoginController ()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImageV;
@@ -167,6 +167,34 @@
     }else{
         [self dismissViewControllerAnimated:YES completion:nil];
     }
+}
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if (textField == self.accountTF) {
+        [self.passwordTF becomeFirstResponder];
+    }else if(textField == self.passwordTF){
+        [self.view endEditing:YES];
+    }
+    
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    if (textField == self.accountTF) {
+        if (range.length == 1 && string.length == 0) {
+            
+            return YES;
+            
+        }
+        if(![predicateModel inputShouldNumber:string]){
+            [SVProgressHUD showErrorWithStatus:@"此处只能输入数字"];
+            return NO;
+        }
+    }
+    
+    return YES;
 }
 
 @end

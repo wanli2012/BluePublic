@@ -356,6 +356,11 @@
                         [SVProgressHUD showErrorWithStatus:@"实名认证审核中,请等待"];
                         return;
                     }
+                    
+                    if([[UserModel defaultUser].is_help integerValue] == 0){
+                        [SVProgressHUD showErrorWithStatus:@"还未支持过其他项目"];
+                        return;
+                    }
 
                     GLPublishController *publishVC = [[GLPublishController alloc] init];
                     [self.navigationController pushViewController:publishVC animated:YES];

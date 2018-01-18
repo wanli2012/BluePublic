@@ -140,6 +140,8 @@
                 }else{
                     [self.showSwitch setOn:NO];
                 }
+            }else{
+                
             }
         }else{
 

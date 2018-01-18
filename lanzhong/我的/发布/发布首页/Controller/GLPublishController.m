@@ -222,6 +222,11 @@ static const CGFloat kPhotoViewMargin = 12.0;
             weakSelf.industryLabel.text = weakSelf.categoryModel.trade[index].trade_name;
             weakSelf.trade_id = weakSelf.categoryModel.trade[index].trade_id;
             weakSelf.industryLabel.textColor = [UIColor darkGrayColor];
+            
+            if(self.trade_id.length == 0){
+                [SVProgressHUD showErrorWithStatus:@"不限不能提交,请重新选择"];
+                weakSelf.industryLabel.text = @"";
+            }
         };
         
         vc.transitioningDelegate = self;
@@ -460,9 +465,14 @@ static const CGFloat kPhotoViewMargin = 12.0;
         return;
     }
     
-    if ([self.industryLabel.text isEqualToString:@"请选择"] || self.trade_id.length == 0) {
+    if ([self.industryLabel.text isEqualToString:@"请选择"]) {
 
         [SVProgressHUD showErrorWithStatus:@"请选择行业"];
+        return;
+    }
+    if ( self.trade_id.length == 0) {
+        
+        [SVProgressHUD showErrorWithStatus:@"不限不能提交,请重新选择行业"];
         return;
     }
 
@@ -624,8 +634,18 @@ static const CGFloat kPhotoViewMargin = 12.0;
     }
     return (strlength+1)/2;
 }
+
 #pragma mark - UITextFieldDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    if(textField == self.titleTF){
+        NSString *tem = [[string componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]componentsJoinedByString:@""];
+        if (![string isEqualToString:tem]) {
+            [SVProgressHUD showErrorWithStatus:@"标题中不能包含空格"];
+            return NO;
+            
+        }
+    }
     
     if (textField == self.moneyTF) {
         /*
@@ -714,13 +734,17 @@ static const CGFloat kPhotoViewMargin = 12.0;
     return YES;
 }
 
-#pragma mark - UITextViewDelegate
 
+#pragma mark - UITextViewDelegate
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
     
     self.textView.textAlignment = NSTextAlignmentLeft;
     self.textView.textColor = [UIColor darkTextColor];
+    
+    if([[textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]length] == 0 || [self.textView.text isEqualToString:@"  请填写项目说明（限制150字以内）"]) {
     self.textView.text = @"";
+        
+    }
     
     return YES;
 }
@@ -732,6 +756,22 @@ static const CGFloat kPhotoViewMargin = 12.0;
         self.textView.textAlignment = NSTextAlignmentCenter;
         self.textView.textColor = [UIColor lightGrayColor];
         self.textView.text = @"  请填写项目说明（限制150字以内）";
+    }
+    
+    return YES;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    
+    if (range.length == 1 && text.length == 0) {
+        
+        return YES;
+        
+    }else if (textView.text.length > 149) {
+        
+        textView.text = [textView.text substringToIndex:150];
+        [SVProgressHUD showErrorWithStatus:@"请限制在150字以内"];
+        return NO;
     }
     
     return YES;

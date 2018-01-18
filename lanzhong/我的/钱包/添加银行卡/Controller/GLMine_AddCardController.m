@@ -165,6 +165,45 @@
     
 }
 
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    if (textField == self.nameTF) {
+        [self.cardNumTF becomeFirstResponder];
+    }else if(textField == self.cardNumTF){
+        [self.addressTF becomeFirstResponder];
+    }else if(textField == self.addressTF){
+        [self.view endEditing:YES];
+    }
+    
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+
+    if (textField == self.cardNumTF) {
+
+        if (range.length == 1 && string.length == 0) {
+            
+            return YES;
+            
+        }else if (![predicateModel inputShouldNumber:string]) {
+            
+            [SVProgressHUD showErrorWithStatus:@"银行卡号只能输入数字"];
+            return NO;
+            
+        }
+    }
+  
+    if (textField.text.length > 23) {
+        
+        textField.text = [textField.text substringToIndex:24];
+        [SVProgressHUD showErrorWithStatus:@"你输入的内容太长了"];
+        return NO;
+    }
+    return YES;
+}
+
 #pragma mark - 动画代理
 - (nullable UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(UIViewController *)presenting sourceViewController:(UIViewController *)source{
     
