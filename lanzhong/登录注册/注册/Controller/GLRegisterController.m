@@ -86,9 +86,7 @@
     }else{
         self.protocolImageV.image = [UIImage imageNamed:@"publish_nochoice"];
     }
-    
 }
-
 
 //注册
 - (IBAction)register:(id)sender {
@@ -176,7 +174,6 @@
 
 - (IBAction)getCode:(id)sender {
     
-    
     if (self.phoneTF.text.length <=0 ) {
         [SVProgressHUD showErrorWithStatus:@"请输入手机号码"];
         return;
@@ -236,6 +233,7 @@
 }
 
 #pragma mark - UITextFieldDelegate
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     
     if (textField == self.phoneTF) {
@@ -251,18 +249,21 @@
     return YES;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+- (void)textFieldDidEndEditing:(UITextField *)textField{
     
     if(self.phoneTF.text.length == 0){
-        self.getCodeBtn.titleLabel.textColor = [UIColor darkGrayColor];
+        
+        [self.getCodeBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        self.getCodeBtn.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
         self.getCodeBtn.enabled = NO;
+        
     }else{
-        self.getCodeBtn.titleLabel.textColor = YYSRGBColor(0, 126, 255, 1);
+        
+        [self.getCodeBtn setTitleColor:YYSRGBColor(0, 126, 255, 1) forState:UIControlStateNormal];
+        self.getCodeBtn.layer.backgroundColor = YYSRGBColor(0, 126, 255, 1).CGColor;
         self.getCodeBtn.enabled = YES;
+        
     }
-    
-    return YES;
 }
-
 
 @end
