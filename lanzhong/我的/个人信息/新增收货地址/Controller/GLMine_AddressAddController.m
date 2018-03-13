@@ -203,6 +203,7 @@
     
     [self presentViewController:vc animated:YES completion:nil];
     __weak typeof(self) weakself = self;
+    
     vc.returnreslut = ^(NSString *str,NSString *strid,NSString *provinceid,NSString *cityd,NSString *areaid){
         weakself.adressID = strid;
         weakself.addressTF.text = str;

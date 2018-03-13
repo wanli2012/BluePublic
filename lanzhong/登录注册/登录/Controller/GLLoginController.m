@@ -96,7 +96,7 @@
         
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
 
-            [SVProgressHUD showSuccessWithStatus:responseObject[@"message"]];
+            [SVProgressHUD showSuccessWithStatus:@"登录成功"];
            
             [UserModel defaultUser].address = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"address"]];
             [UserModel defaultUser].area = [NSString stringWithFormat:@"%@",responseObject[@"data"][@"area"]];

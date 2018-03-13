@@ -18,11 +18,11 @@
 @property (nonatomic, strong)NSMutableArray *dataSource;
 @property (weak, nonatomic) IBOutlet UIButton *exitBtn;
 
-@property (nonatomic, copy)NSString *memory;//内存
 @property(nonatomic ,strong)MinePhoneAlertView  *phoneView;
 @property(nonatomic ,strong)NSString  *phonestr;//服务热线
 
 @property (weak, nonatomic) IBOutlet UILabel *copyrightLabel;
+@property (nonatomic, copy)NSString *memory;//内存
 @property (strong, nonatomic)  NSString *app_Version;//当前版本号
 
 @end

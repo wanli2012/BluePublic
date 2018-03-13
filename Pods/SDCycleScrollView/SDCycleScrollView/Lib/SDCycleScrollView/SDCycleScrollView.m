@@ -92,6 +92,7 @@ NSString * const ID = @"SDCycleScrollViewCell";
     _currentPageDotColor = [UIColor whiteColor];
     _pageDotColor = [UIColor lightGrayColor];
     _bannerImageViewContentMode = UIViewContentModeScaleToFill;
+    _placeholderImageContentMode = UIViewContentModeScaleAspectFill;
     
     self.backgroundColor = [UIColor lightGrayColor];
     
@@ -159,6 +160,8 @@ NSString * const ID = @"SDCycleScrollViewCell";
     
     if ([self.delegate respondsToSelector:@selector(customCollectionViewCellClassForCycleScrollView:)] && [self.delegate customCollectionViewCellClassForCycleScrollView:self]) {
         [self.mainView registerClass:[self.delegate customCollectionViewCellClassForCycleScrollView:self] forCellWithReuseIdentifier:ID];
+    }else if ([self.delegate respondsToSelector:@selector(customCollectionViewCellNibForCycleScrollView:)] && [self.delegate customCollectionViewCellNibForCycleScrollView:self]) {
+        [self.mainView registerNib:[self.delegate customCollectionViewCellNibForCycleScrollView:self] forCellWithReuseIdentifier:ID];
     }
 }
 
@@ -170,8 +173,6 @@ NSString * const ID = @"SDCycleScrollViewCell";
         UIImageView *bgImageView = [UIImageView new];
         bgImageView.contentMode = UIViewContentModeScaleAspectFit;
         [self insertSubview:bgImageView belowSubview:self.mainView];
-        self.backgroundImageView.contentMode = self.placeholderImageContentMode;
-        
         self.backgroundImageView = bgImageView;
     }
     
@@ -307,7 +308,7 @@ NSString * const ID = @"SDCycleScrollViewCell";
         [self setAutoScroll:self.autoScroll];
     } else {
         self.mainView.scrollEnabled = NO;
-        [self setAutoScroll:NO];
+        [self invalidateTimer];
     }
     
     [self setupPageControl];
@@ -573,8 +574,11 @@ NSString * const ID = @"SDCycleScrollViewCell";
     long itemIndex = [self pageControlIndexWithCurrentCellIndex:indexPath.item];
     
     if ([self.delegate respondsToSelector:@selector(setupCustomCell:forIndex:cycleScrollView:)] &&
-        [self.delegate respondsToSelector:@selector(customCollectionViewCellClassForCycleScrollView:)] &&
-        [self.delegate customCollectionViewCellClassForCycleScrollView:self]) {
+        [self.delegate respondsToSelector:@selector(customCollectionViewCellClassForCycleScrollView:)] && [self.delegate customCollectionViewCellClassForCycleScrollView:self]) {
+        [self.delegate setupCustomCell:cell forIndex:itemIndex cycleScrollView:self];
+        return cell;
+    }else if ([self.delegate respondsToSelector:@selector(setupCustomCell:forIndex:cycleScrollView:)] &&
+              [self.delegate respondsToSelector:@selector(customCollectionViewCellNibForCycleScrollView:)] && [self.delegate customCollectionViewCellNibForCycleScrollView:self]) {
         [self.delegate setupCustomCell:cell forIndex:itemIndex cycleScrollView:self];
         return cell;
     }
@@ -587,7 +591,7 @@ NSString * const ID = @"SDCycleScrollViewCell";
         } else {
             UIImage *image = [UIImage imageNamed:imagePath];
             if (!image) {
-                [UIImage imageWithContentsOfFile:imagePath];
+                image = [UIImage imageWithContentsOfFile:imagePath];
             }
             cell.imageView.image = image;
         }
@@ -674,5 +678,17 @@ NSString * const ID = @"SDCycleScrollViewCell";
     }
 }
 
+- (void)makeScrollViewScrollToIndex:(NSInteger)index{
+    if (self.autoScroll) {
+        [self invalidateTimer];
+    }
+    if (0 == _totalItemsCount) return;
+    
+    [self scrollToIndex:(int)(_totalItemsCount * 0.5 + index)];
+    
+    if (self.autoScroll) {
+        [self setupTimer];
+    }
+}
 
 @end

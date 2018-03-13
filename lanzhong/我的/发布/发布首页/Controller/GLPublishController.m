@@ -940,6 +940,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
     }
     return _manager;
 }
+
 - (HXPhotoView *)photoView{
     if (!_photoView) {
         _photoView = [HXPhotoView photoManager:self.manager];;

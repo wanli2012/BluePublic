@@ -11,7 +11,7 @@
 
 @interface LoadWaitView  ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageV;
+//@property (weak, nonatomic) IBOutlet UIImageView *imageV;
 
 @end
 
@@ -34,25 +34,6 @@
         
         self.isTap = NO;
 
-//        NSString *path = [[NSBundle mainBundle] pathForResource:@"9e32602be585527e120aa99beb0d666f" ofType:@"gif"];
-//        NSData *data = [NSData dataWithContentsOfFile:path];
-////        UIImage *image = [UIImage sd_animatedGIFWithData:data];
-//        UIImage *image = [UIImage sd_animatedGIFWithData:data];
-//        self.imageV.image = image;
-        
-//        // 读取gif图片数据
-//        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(50,100,200,200)];
-//        [self addSubview:webView];
-//        
-//        NSString *path = [[NSBundle mainBundle] pathForResource:@"9e32602be585527e120aa99beb0d666f" ofType:@"gif"];
-        /*
-         NSData *data = [NSData dataWithContentsOfFile:path];
-         使用loadData:MIMEType:textEncodingName: 则有警告
-         [webView loadData:data MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
-         */
-//        NSURL *url = [NSURL URLWithString:path];
-//        [webView loadRequest:[NSURLRequest requestWithURL:url]];
-
     }
     return self;
 }
@@ -63,7 +44,6 @@
     [tagert addSubview:loadview];
     
     return loadview;
-
 }
 
 - (void)removeloadview{

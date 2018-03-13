@@ -99,8 +99,8 @@
 
 //http://lz.51dztg.com
 //http://www.lzcke.com
-#define URL_Base @"http://192.168.0.130/Raise/index.php/Api/"
-//#define URL_Base @"https://www.lzcke.com/index.php/Api/"
+//#define URL_Base @"http://192.168.0.130/Raise/index.php/Api/"
+#define URL_Base @"https://www.lzcke.com/index.php/Api/"
 
 //商城
 #define kGETCODE_URL @"Common/sms"//获取验证码
@@ -208,4 +208,5 @@
 #define kProject_Edit_URL @"Newitem/item_sale_update"//编辑出售中的项目
 #define kBuy_Item_URL @"Newitem/buy_item"//购买转让中的项目
 #define kBuy_History_URL @"Newitem/sale_history_list"//出售记录
+
 #endif /* PrefixHeader_pch */

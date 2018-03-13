@@ -105,7 +105,6 @@
     [self setValue:[[DWTabBar alloc] init] forKey:@"tabBar"];
 }
 
-
 /**
  *  tabBarItem 的选中和不选中文字属性
  */

@@ -187,6 +187,7 @@
     }
     
     [self startTime];//获取倒计时
+    
     [NetworkManager requestPOSTWithURLStr:kGETCODE_URL paramDic:@{@"phone":self.phoneTF.text} finish:^(id responseObject) {
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE) {
             

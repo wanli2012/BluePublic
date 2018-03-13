@@ -15,7 +15,7 @@
 
 + (void)requestGETWithURLStr:(NSString *)urlStr paramDic:(NSDictionary *)paramDic finish:(void(^)(id responseObject)) finish enError:(void(^)(NSError *error))enError {
     // 创建一个SessionManager管理对象
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager manager] initWithBaseURL:[NSURL URLWithString:URL_Base]];
     // 加上这行代码，https ssl 验证。
     [manager setSecurityPolicy:[self customSecurityPolicy]];
     
@@ -30,9 +30,11 @@
     
 }
 
+///正在使用的请求
 + (void)requestPOSTWithURLStr:(NSString *)urlStr paramDic:(NSDictionary *)paramDic finish:(void(^)(id responseObject)) finish enError:(void(^)(NSError *error))enError {
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager manager] initWithBaseURL:[NSURL URLWithString:URL_Base]];
+
     AFJSONResponseSerializer *response = [AFJSONResponseSerializer serializer];
     response.removesKeysWithNullValues = YES;//去除空值
 
@@ -40,8 +42,12 @@
     manager.responseSerializer = response;//申明返回的结果是json类
    
     manager.requestSerializer.timeoutInterval = 10;
+    
     // 加上这行代码，https ssl 验证。   ***这里不懂,为什么注视了就好了,   不用读证书???
-    [manager setSecurityPolicy:[self customSecurityPolicy]];
+    if ([URL_Base containsString:@"https"]) {
+        
+//        [manager setSecurityPolicy:[self customSecurityPolicy]];
+    }
     
     NSString *urlStr1 = [NSString stringWithFormat:@"%@%@",URL_Base,urlStr];
     
@@ -58,7 +64,7 @@
 //没有延迟时间
 + (void)requestPOSTWithURLStrundelay:(NSString *)urlStr paramDic:(NSDictionary *)paramDic finish:(void(^)(id responseObject)) finish enError:(void(^)(NSError *error))enError {
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager manager] initWithBaseURL:[NSURL URLWithString:URL_Base]];
     
     // 加上这行代码，https ssl 验证。
     [manager setSecurityPolicy:[self customSecurityPolicy]];
@@ -68,7 +74,6 @@
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"text/html",@"application/json",nil];
     
     NSString *urlStr1 = [NSString stringWithFormat:@"%@%@",URL_Base,urlStr];
-    
     
     [manager POST:urlStr1 parameters:paramDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         finish(responseObject);
@@ -80,7 +85,7 @@
 
 + (NSURLSessionDataTask*)requestGETWithURLStrReture:(NSString *)urlStr paramDic:(NSDictionary *)paramDic finish:(void(^)(id responseObject)) finish enError:(void(^)(NSError *error))enError {
     // 创建一个SessionManager管理对象
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager manager] initWithBaseURL:[NSURL URLWithString:URL_Base]];
     // 加上这行代码，https ssl 验证。
     [manager setSecurityPolicy:[self customSecurityPolicy]];
     // 指定我们能够解析的数据类型包含html.支持返回类型
@@ -96,7 +101,7 @@
 
 + (NSURLSessionDataTask*)requestPOSTWithURLStrReture:(NSString *)urlStr paramDic:(NSDictionary *)paramDic finish:(void(^)(id responseObject)) finish enError:(void(^)(NSError *error))enError {
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager manager] initWithBaseURL:[NSURL URLWithString:URL_Base]];
     // 加上这行代码，https ssl 验证。
     [manager setSecurityPolicy:[self customSecurityPolicy]];
     
@@ -114,13 +119,12 @@
 
 + (AFSecurityPolicy*)customSecurityPolicy
 {
-    // /先导入证书//www.lzcke.com
-    NSString *cerPath = [[NSBundle mainBundle] pathForResource:@"https" ofType:@"cer"];//证书的路径
+    // /先导入证书
+    NSString *cerPath = [[NSBundle mainBundle] pathForResource:@"GLhttps" ofType:@"cer"];//证书的路径
     NSData *certData = [NSData dataWithContentsOfFile:cerPath];
-    
     // AFSSLPinningModeCertificate 使用证书验证模式
     AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
-    
+
     // allowInvalidCertificates 是否允许无效证书（也就是自建的证书），默认为NO
     // 如果是需要验证自建证书，需要设置为YES
     securityPolicy.allowInvalidCertificates = YES;
