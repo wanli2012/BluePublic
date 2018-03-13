@@ -35,11 +35,11 @@
     
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager manager] initWithBaseURL:[NSURL URLWithString:URL_Base]];
 
-    AFJSONResponseSerializer *response = [AFJSONResponseSerializer serializer];
-    response.removesKeysWithNullValues = YES;//去除空值
+//    AFJSONResponseSerializer *response = [AFJSONResponseSerializer serializer];
+//    response.removesKeysWithNullValues = YES;//去除空值
 
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"text/html",@"application/json",nil];
-    manager.responseSerializer = response;//申明返回的结果是json类
+//    manager.responseSerializer = response;//申明返回的结果是json类
    
     manager.requestSerializer.timeoutInterval = 10;
     
@@ -65,7 +65,7 @@
 + (void)requestPOSTWithURLStrundelay:(NSString *)urlStr paramDic:(NSDictionary *)paramDic finish:(void(^)(id responseObject)) finish enError:(void(^)(NSError *error))enError {
     
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager manager] initWithBaseURL:[NSURL URLWithString:URL_Base]];
-    
+     
     // 加上这行代码，https ssl 验证。
     [manager setSecurityPolicy:[self customSecurityPolicy]];
     
