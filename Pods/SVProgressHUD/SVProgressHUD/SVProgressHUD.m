@@ -1160,15 +1160,12 @@ static const CGFloat SVProgressHUDLabelSpacing = 8.0f;
 }
 
 #pragma mark - Utilities
-
 + (BOOL)isVisible {
     // Checking one alpha value is sufficient as they are all the same
     return [self sharedView].backgroundView.alpha > 0.0f;
 }
 
-
 #pragma mark - Getters
-
 + (NSTimeInterval)displayDurationForString:(NSString*)string {
     CGFloat minimum = MIN((CGFloat)string.length * 0.06 + 0.5, [self sharedView].minimumDismissTimeInterval);
     return MIN(minimum, [self sharedView].maximumDismissTimeInterval);
