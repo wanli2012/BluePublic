@@ -176,6 +176,7 @@
 
 - (IBAction)getCode:(id)sender {
     
+    
     if (self.phoneTF.text.length <=0 ) {
         [SVProgressHUD showErrorWithStatus:@"请输入手机号码"];
         return;
@@ -232,8 +233,8 @@
         }
     });
     dispatch_resume(_timer);
-    
 }
+
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     
@@ -245,6 +246,19 @@
         [self.codeTF becomeFirstResponder];
     }else{
         [self.codeTF resignFirstResponder];
+    }
+    
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    if(self.phoneTF.text.length == 0){
+        self.getCodeBtn.titleLabel.textColor = [UIColor darkGrayColor];
+        self.getCodeBtn.enabled = NO;
+    }else{
+        self.getCodeBtn.titleLabel.textColor = YYSRGBColor(0, 126, 255, 1);
+        self.getCodeBtn.enabled = YES;
     }
     
     return YES;

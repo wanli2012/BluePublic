@@ -65,7 +65,7 @@
 + (void)requestPOSTWithURLStrundelay:(NSString *)urlStr paramDic:(NSDictionary *)paramDic finish:(void(^)(id responseObject)) finish enError:(void(^)(NSError *error))enError {
     
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager manager] initWithBaseURL:[NSURL URLWithString:URL_Base]];
-     
+    
     // 加上这行代码，https ssl 验证。
     [manager setSecurityPolicy:[self customSecurityPolicy]];
     
@@ -135,7 +135,8 @@
     //如置为NO，建议自己添加对应域名的校验逻辑。
     securityPolicy.validatesDomainName = NO;
     
-    NSSet *set = [[NSSet alloc] initWithObjects:certData, nil];
+//    NSSet *set = [[NSSet alloc] initWithObjects:certData, nil];
+    NSSet *set = [[NSSet alloc] initWithArray:@[certData]];
     securityPolicy.pinnedCertificates = set;
     
     return securityPolicy;

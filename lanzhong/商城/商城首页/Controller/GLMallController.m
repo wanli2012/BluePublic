@@ -55,6 +55,10 @@ static NSString *ID = @"GLClassifyCell";
             {
                 weakSelf.cate_id = weakSelf.categoryModel.cate[firstIndex].cate_id;
                 
+//                NSString *cateName = weakSelf.categoryModel.cate[firstIndex].catename;
+//                weakSelf.menuScreeningView.titles = @[];
+                
+                
             }
                 break;
             case 1:
@@ -304,6 +308,7 @@ static NSString *ID = @"GLClassifyCell";
     
     return _menuScreeningView;
 }
+
 
 - (NSMutableArray *)models{
     if (!_models) {
