@@ -41,11 +41,10 @@
     self.contentHeight.constant = 570;
     
     self.getCodeBtn.layer.borderWidth = 1.f;
-    self.getCodeBtn.layer.borderColor = YYSRGBColor(0, 126, 255, 1).CGColor;
+    self.getCodeBtn.layer.borderColor = [UIColor darkGrayColor].CGColor;
     self.getCodeBtn.layer.cornerRadius = 5.f;
     
     self.imageV.layer.cornerRadius = self.imageV.height/2;
-    
     self.bgView.layer.cornerRadius = 5.f;
     self.bgView.layer.shadowOpacity = 0.2f;
     self.bgView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
@@ -254,13 +253,13 @@
     if(self.phoneTF.text.length == 0){
         
         [self.getCodeBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-        self.getCodeBtn.layer.backgroundColor = [UIColor darkGrayColor].CGColor;
+        self.getCodeBtn.layer.borderColor = [UIColor darkGrayColor].CGColor;
         self.getCodeBtn.enabled = NO;
         
     }else{
         
         [self.getCodeBtn setTitleColor:YYSRGBColor(0, 126, 255, 1) forState:UIControlStateNormal];
-        self.getCodeBtn.layer.backgroundColor = YYSRGBColor(0, 126, 255, 1).CGColor;
+        self.getCodeBtn.layer.borderColor = YYSRGBColor(0, 126, 255, 1).CGColor;
         self.getCodeBtn.enabled = YES;
         
     }
