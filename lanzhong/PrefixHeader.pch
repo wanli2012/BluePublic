@@ -99,8 +99,8 @@
 
 //http://lz.51dztg.com
 //http://www.lzcke.com
-#define URL_Base @"http://192.168.0.120/Raise/index.php/Api/"
-//#define URL_Base @"https://www.lzcke.com/index.php/Api/"
+//#define URL_Base @"http://192.168.0.120/Raise/index.php/Api/"
+#define URL_Base @"https://www.lzcke.com/index.php/Api/"
 
 //商城
 #define kGETCODE_URL @"Common/sms"//获取验证码
