@@ -16,6 +16,7 @@
 
 @property (nonatomic, strong)NSMutableArray *linkBtnArr;
 @property (nonatomic, strong)NSMutableArray *dropMenuArr;
+@property (nonatomic, strong)UIButton *currentBt;
 
 @end
 
@@ -52,7 +53,7 @@
 
 #pragma mark - 按钮点击推出菜单 (并且其他的菜单收起)
 -(void)clickButton:(UIButton *)button{
-    
+    self.currentBt = button;
     NSInteger index = -1;
 
     for (int i = 0 ; i < self.linkBtnArr.count; i ++) {
@@ -85,12 +86,13 @@
 
 #pragma mark - 协议实现
 - (void)dropMenuView:(DropMenuView *)view didSelectName:(NSString *)str firstSelectIndex:(NSInteger)firstSelectIndex selectIndex:(NSInteger)selectIndex{
-
     NSInteger index = -1;
     
     for (int i = 0 ; i < self.dropMenuArr.count; i ++) {
         if (view == self.dropMenuArr[i]) {
             index = i;
+            [self.currentBt setTitle:str forState:UIControlStateNormal];
+            [self buttonEdgeInsets:self.currentBt];
             self.block(i,firstSelectIndex,selectIndex);
         }
     }

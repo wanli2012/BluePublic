@@ -463,11 +463,20 @@
             break;
         case 3:
         {
-            
-            GLBusiness_CertificationController *ensureVC = [[GLBusiness_CertificationController alloc] init];
-            ensureVC.url = @"https://www.baidu.com";
-            ensureVC.navTitle = @"关于保障";
-            [self.navigationController pushViewController:ensureVC animated:YES];
+            if ([self.model.ensure_type integerValue] == 1) {
+                [SVProgressHUD showErrorWithStatus:@"无保障计划"];
+                return;
+            }else if ([self.model.ensure_type integerValue] == 2){
+                GLBusiness_CertificationController *ensureVC = [[GLBusiness_CertificationController alloc] init];
+                ensureVC.url = Other_ensure_URL;
+                ensureVC.navTitle = @"关于保障";
+                [self.navigationController pushViewController:ensureVC animated:YES];
+            }else if ([self.model.ensure_type integerValue] == 3){
+                GLBusiness_CertificationController *ensureVC = [[GLBusiness_CertificationController alloc] init];
+                ensureVC.url = Other_lose_URL;
+                ensureVC.navTitle = @"关于保障";
+                [self.navigationController pushViewController:ensureVC animated:YES];
+            }
             
         }
             break;

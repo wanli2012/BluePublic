@@ -18,7 +18,7 @@
 #import "GLMine_SellListController.h"//我帮助过
 #import "GLMine_EvaluateController.h"//我的评价
 #import "GLMine_ShareController.h"//分享权益
-#import "GLPublishController.h"//发布项目
+#import "GLMallController.h"//发布项目
 #import "GLMine_CurriculumVitaeController.h"//我的简历
 #import "GLMine_TrainController.h"//我的培训
 #import "GLMine_IntegralController.h"//我的积分
@@ -349,20 +349,20 @@
             switch (indexPath.row) {
                 case 0://发布项目
                 {
-                    if ([[UserModel defaultUser].real_state integerValue] == 0 || [[UserModel defaultUser].real_state integerValue] == 2) {
-                        [SVProgressHUD showErrorWithStatus:@"请前往个人中心实名认证"];
-                        return;
-                    }else if([[UserModel defaultUser].real_state integerValue] == 3){
-                        [SVProgressHUD showErrorWithStatus:@"实名认证审核中,请等待"];
-                        return;
-                    }
-                    
-                    if([[UserModel defaultUser].is_help integerValue] == 0){
-                        [SVProgressHUD showErrorWithStatus:@"还未支持过其他项目"];
-                        return;
-                    }
+//                    if ([[UserModel defaultUser].real_state integerValue] == 0 || [[UserModel defaultUser].real_state integerValue] == 2) {
+//                        [SVProgressHUD showErrorWithStatus:@"请前往个人中心实名认证"];
+//                        return;
+//                    }else if([[UserModel defaultUser].real_state integerValue] == 3){
+//                        [SVProgressHUD showErrorWithStatus:@"实名认证审核中,请等待"];
+//                        return;
+//                    }
+//
+//                    if([[UserModel defaultUser].is_help integerValue] == 0){
+//                        [SVProgressHUD showErrorWithStatus:@"还未支持过其他项目"];
+//                        return;
+//                    }
 
-                    GLPublishController *publishVC = [[GLPublishController alloc] init];
+                    GLMallController *publishVC = [[GLMallController alloc] init];
                     [self.navigationController pushViewController:publishVC animated:YES];
                 }
                     break;
@@ -479,7 +479,7 @@
     if (!_dataSource) {
         _dataSource = [NSMutableArray array];
         
-        NSArray *arr1 = @[@{@"title":@"项目发布",@"image":@"我要发布"},
+        NSArray *arr1 = @[@{@"title":@"商城",@"image":@"商城未点中"},
                           @{@"title":@"我帮助过",@"image":@"我帮助过"},
                           @{@"title":@"我的简历",@"image":@"我的简历"},
                           @{@"title":@"我的培训",@"image":@"我的培训"}

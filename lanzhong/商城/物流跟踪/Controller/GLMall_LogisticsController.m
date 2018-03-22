@@ -60,7 +60,7 @@
     manager.requestSerializer.timeoutInterval = 20;
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"application/json",nil];
     // 加上这行代码，https ssl 验证。
-    [manager setSecurityPolicy:[NetworkManager customSecurityPolicy]];
+//    [manager setSecurityPolicy:[NetworkManager customSecurityPolicy]];
     
     NSDictionary  *dic =  @{@"type":@"auto",@"number":self.order_id};
     

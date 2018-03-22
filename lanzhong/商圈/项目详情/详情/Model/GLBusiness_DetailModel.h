@@ -42,7 +42,7 @@
 @end
 
 @interface GLBusiness_DetailModel : NSObject
-
+@property (nonatomic, copy)NSString *ensure_type;//保障类型
 @property (nonatomic, copy)NSString *item_id;//项目id
 @property (nonatomic, copy)NSString *uid;//用户id
 @property (nonatomic, copy)NSString *trade_id;//行业id

@@ -30,7 +30,7 @@
 @property (nonatomic, copy)NSString *order_money;
 @property (nonatomic, copy)NSString *order_salenum;
 @property (nonatomic, copy)NSString *goods_type;
-
+@property (nonatomic, copy)NSString *goods_typeName;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewConstrait;
 
 @end
@@ -42,7 +42,8 @@ static NSString *ID = @"GLClassifyCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
      self.view.backgroundColor = [UIColor whiteColor];
-    
+    self.navigationItem.title = @"商城";
+    self.goods_typeName = @"";
     [self initializationCollection];//初始化
     [self.collectioview registerNib:[UINib nibWithNibName:ID bundle:nil] forCellWithReuseIdentifier:ID];
     
@@ -76,6 +77,7 @@ static NSString *ID = @"GLClassifyCell";
             case 3:
             {
                 weakSelf.goods_type = weakSelf.categoryModel.goods_type[firstIndex].cate_id;
+                weakSelf.goods_typeName = weakSelf.categoryModel.goods_type[firstIndex].catename;
             }
                 break;
                 
@@ -121,12 +123,9 @@ static NSString *ID = @"GLClassifyCell";
         self.automaticallyAdjustsScrollViewInsets = false;
         
     }
-    if(kSCREEN_HEIGHT == 812){
-        self.collectionViewConstrait.constant = 94;
-    }else{
-        self.collectionViewConstrait.constant = 70;
-    }
-    
+
+    self.collectionViewConstrait.constant = CGRectGetMaxY(self.menuScreeningView.frame);
+   
 }
 
 - (void)postRequest:(BOOL)isRefresh{
@@ -248,7 +247,7 @@ static NSString *ID = @"GLClassifyCell";
     
     GLClassifyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ID forIndexPath:indexPath];
     cell.layer.mask = [LBSetFillet setFilletRoundedRect:cell.bounds cornerRadii:CGSizeMake(4, 4)];
-    
+    cell.goods_typeName = self.goods_typeName;
     cell.model = self.models[indexPath.row];
     return cell;
 }
@@ -286,7 +285,7 @@ static NSString *ID = @"GLClassifyCell";
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    self.navigationController.navigationBar.hidden = YES;
+    self.navigationController.navigationBar.hidden = NO;
 }
 
 #pragma mark - 懒加载
@@ -294,14 +293,8 @@ static NSString *ID = @"GLClassifyCell";
 -(MenuScreeningView*)menuScreeningView{
 
     if (!_menuScreeningView) {
-        CGFloat y = 0.0f;
-        if(kSCREEN_HEIGHT == 812){
-            y = 44;
-        }else{
-            y = 20;
-        }
         
-        _menuScreeningView = [[MenuScreeningView alloc] initWithFrame:CGRectMake(0, y,kSCREEN_WIDTH , 50) WithTitles:@[@"分类",@"金额",@"销量",@"商品类型"]];
+        _menuScreeningView = [[MenuScreeningView alloc] initWithFrame:CGRectMake(0, 0,kSCREEN_WIDTH , 50) WithTitles:@[@"分类",@"金额",@"销量",@"商品类型"]];
          _menuScreeningView.backgroundColor = [UIColor whiteColor];
         
     }

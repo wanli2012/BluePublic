@@ -24,9 +24,9 @@
     
     if (self = [super initWithFrame:frame]) {
         
-//        DWPublishButton *button = [DWPublishButton publishButton];
-//        [self addSubview:button];
-//        self.publishButton = button;
+        DWPublishButton *button = [DWPublishButton publishButton];
+        [self addSubview:button];
+        self.publishButton = button;
         
     }
     

@@ -67,7 +67,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];//响应
     manager.requestSerializer.timeoutInterval = 10;
     // 加上这行代码，https ssl 验证。
-    [manager setSecurityPolicy:[NetworkManager customSecurityPolicy]];
+//    [manager setSecurityPolicy:[NetworkManager customSecurityPolicy]];
     [manager POST:[NSString stringWithFormat:@"%@%@",URL_Base,kCV_DES_SHOW_URL] parameters:dict  constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         //将图片以表单形式上传
         for (int i = 0 ; i < self.imageArr.count ; i ++) {

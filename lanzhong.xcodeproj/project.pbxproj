@@ -4860,7 +4860,7 @@
 				TargetAttributes = {
 					4AF106FF1F78D5AC00CB51FA = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = MSWMY8ZT7D;
+						DevelopmentTeam = GCU762TQ3E;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -5498,7 +5498,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Guizhou Lanzhong Investment Management Co., Ltd. (MSWMY8ZT7D)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MSWMY8ZT7D;
+				DEVELOPMENT_TEAM = GCU762TQ3E;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5623,7 +5623,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Guizhou Lanzhong Investment Management Co., Ltd. (MSWMY8ZT7D)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MSWMY8ZT7D;
+				DEVELOPMENT_TEAM = GCU762TQ3E;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5658,7 +5658,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Guizhou Lanzhong Investment Management Co., Ltd. (MSWMY8ZT7D)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MSWMY8ZT7D;
+				DEVELOPMENT_TEAM = GCU762TQ3E;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

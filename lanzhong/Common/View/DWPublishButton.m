@@ -84,7 +84,6 @@
 - (void)clickPublish {
     
     if ([UserModel defaultUser].loginstatus == NO) {
-       
         [SVProgressHUD showErrorWithStatus:@"请先登录"];
         return;
     }
@@ -99,12 +98,10 @@
         return;
     }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"middleItemNotification" object:nil];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"middleItemNotification" object:nil];
     
-//    GLPublishController * publishVC = [[GLPublishController alloc] init];
-//    BaseNavigationViewController *publishNav = [[BaseNavigationViewController alloc] initWithRootViewController:publishVC];
-//    
-//    [[self topViewController] presentViewController:publishNav animated:YES completion:nil];
+    GLPublishController * publishVC = [[GLPublishController alloc] init];
+    [self.window.rootViewController presentViewController:publishVC animated:YES completion:nil];
     
 }
 

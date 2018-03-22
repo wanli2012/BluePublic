@@ -13,7 +13,7 @@
 #import "GLMallController.h"
 #import "GLMineController.h"
 #import "GLTalentPoolController.h"
-
+#import "GLPublishController.h"
 #import "DWTabBar.h"
 //#import "LBSessionListViewController.h"
 #import "GLLoginController.h"
@@ -53,7 +53,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(refreshInterface) name:@"refreshInterface" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self  selector:@selector(exitLogin) name:@"exitLogin" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(caoxiang) name:@"middleItemNotification" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(caoxiang) name:@"middleItemNotification" object:nil];
 }
 
 - (void)caoxiang {
@@ -89,6 +89,26 @@
         [self presentViewController:nav animated:YES completion:nil];
         return NO;
         
+    }else if (viewController == [tabBarController.viewControllers objectAtIndex:2]){
+        if ([UserModel defaultUser].loginstatus == NO) {
+            
+            [SVProgressHUD showErrorWithStatus:@"请先登录"];
+            return NO;
+        }
+        
+        if ([[UserModel defaultUser].real_state integerValue] == 0 || [[UserModel defaultUser].real_state integerValue] == 2) {
+            
+            [SVProgressHUD showErrorWithStatus:@"请前往个人中心实名认证"];
+            return NO;
+        }else if([[UserModel defaultUser].real_state integerValue] == 3){
+            
+            [SVProgressHUD showErrorWithStatus:@"实名认证审核中,请等待"];
+            return NO;
+        }
+        GLPublishController * publishVC = [[GLPublishController alloc] init];
+        BaseNavigationViewController *publishnav = [[BaseNavigationViewController alloc]initWithRootViewController:publishVC];
+        [self presentViewController:publishnav animated:YES completion:nil];
+        return NO;
     }
 
     return YES;
@@ -141,15 +161,22 @@
                           imageName:@"人才未点中"
                   selectedImageName:@"人才"];
     
+    //    [self addOneChildViewController:[[BaseNavigationViewController alloc]initWithRootViewController:[[GLMallController alloc] init]]
+    //                          WithTitle:@"商城"
+    //                          imageName:@"商城未点中"
+    //                  selectedImageName:@"商城"];
+    
+        [self addOneChildViewController:[[BaseNavigationViewController alloc]initWithRootViewController:[[UIViewController alloc] init]]
+                              WithTitle:@""
+                              imageName:@""
+                      selectedImageName:@""];
+    
+    
     [self addOneChildViewController:[[BaseNavigationViewController alloc]initWithRootViewController:[[GLBusinessCircleController alloc] init]]
                           WithTitle:@"商圈"
                           imageName:@"商圈未点中"
                   selectedImageName:@"商圈"];
     
-    [self addOneChildViewController:[[BaseNavigationViewController alloc]initWithRootViewController:[[GLMallController alloc] init]]
-                          WithTitle:@"商城"
-                          imageName:@"商城未点中"
-                  selectedImageName:@"商城"];
     
     [self addOneChildViewController:[[BaseNavigationViewController alloc]initWithRootViewController:[[GLMineController alloc] init]]
                           WithTitle:@"我的"

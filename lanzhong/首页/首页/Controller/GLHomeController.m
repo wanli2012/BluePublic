@@ -110,7 +110,7 @@
     self.navigationController.navigationBar.barTintColor = [UIColor clearColor];
     
     _selectedSegmentIndex = 0;
-    self.headerView.height = 520;
+    self.headerView.height = 400;
     self.segment.selectedSegmentIndex = 0;
     
     self.noticeView.layer.cornerRadius = 5.f;

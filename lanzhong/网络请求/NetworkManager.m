@@ -17,7 +17,7 @@
     // 创建一个SessionManager管理对象
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager manager] initWithBaseURL:[NSURL URLWithString:URL_Base]];
     // 加上这行代码，https ssl 验证。
-    [manager setSecurityPolicy:[self customSecurityPolicy]];
+//    [manager setSecurityPolicy:[self customSecurityPolicy]];
     
     // 指定我们能够解析的数据类型包含html.支持返回类型
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"application/json",nil];
@@ -67,7 +67,7 @@
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager manager] initWithBaseURL:[NSURL URLWithString:URL_Base]];
     
     // 加上这行代码，https ssl 验证。
-    [manager setSecurityPolicy:[self customSecurityPolicy]];
+//    [manager setSecurityPolicy:[self customSecurityPolicy]];
     
     manager.requestSerializer.timeoutInterval=10;
     
@@ -87,7 +87,7 @@
     // 创建一个SessionManager管理对象
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager manager] initWithBaseURL:[NSURL URLWithString:URL_Base]];
     // 加上这行代码，https ssl 验证。
-    [manager setSecurityPolicy:[self customSecurityPolicy]];
+//    [manager setSecurityPolicy:[self customSecurityPolicy]];
     // 指定我们能够解析的数据类型包含html.支持返回类型
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"application/json",nil];
     // AFNetworking请求结果回调时,failure方法会在两种情况下回调:1.请求服务器失败,服务器返回失败信息;2.服务器返回数据成功,AFN解析返回的数据失败.
@@ -103,7 +103,7 @@
     
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager manager] initWithBaseURL:[NSURL URLWithString:URL_Base]];
     // 加上这行代码，https ssl 验证。
-    [manager setSecurityPolicy:[self customSecurityPolicy]];
+//    [manager setSecurityPolicy:[self customSecurityPolicy]];
     
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"text/html",@"application/json",nil];
     manager.requestSerializer.timeoutInterval=10;

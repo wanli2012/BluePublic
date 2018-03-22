@@ -90,7 +90,10 @@
 #define Transfer_URL @"http://192.168.0.130/Raise/protocol/attorn.html"
 //购买须知
 #define Buy_Notice_URL @"http://192.168.0.130/Raise/protocol/buy.html"
-
+//个人保障规则
+#define Other_ensure_URL @"https://www.lzcke.com/index.php/Api/Other/ensure"
+//项目保障规则
+#define Other_lose_URL @"https://www.lzcke.com/index.php/Api/Other/lose"
 
 //获取appStore上的最新版本号地址
 #define GET_VERSION  @"https://itunes.apple.com/lookup?id=1300026210"

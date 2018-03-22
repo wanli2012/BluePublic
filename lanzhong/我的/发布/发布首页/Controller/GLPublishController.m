@@ -100,9 +100,9 @@ static const CGFloat kPhotoViewMargin = 12.0;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.title = @"项目发布";
-    
+    [self addleftItem];
     self.contentViewWidth.constant = kSCREEN_WIDTH;
-    self.contentViewHeight.constant = 1150;
+    self.contentViewHeight.constant = 1000;
 
     self.bgView.layer.cornerRadius = 5.f;
     self.bgView.layer.shadowOpacity = 0.2f;
@@ -147,6 +147,25 @@ static const CGFloat kPhotoViewMargin = 12.0;
     
     self.ensure_type = 1;
     
+}
+
+-(void)addleftItem{
+    UIButton *button=[[UIButton alloc]initWithFrame:CGRectMake( 0, 0, 60, 44)];
+    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;//左对齐
+    [button setImage:[UIImage imageNamed:@"return"] forState:UIControlStateNormal];
+    [button setImageEdgeInsets:UIEdgeInsetsMake(0 ,10, 0, 0)];
+    // 让返回按钮内容继续向左边偏移10
+    button.contentEdgeInsets = UIEdgeInsetsMake(0, -17, 0, 0);
+    
+    button.backgroundColor = [UIColor clearColor];
+    [button addTarget:self action:@selector(popself) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *ba=[[UIBarButtonItem alloc]initWithCustomView:button];
+    
+    self.navigationItem.leftBarButtonItem = ba;
+}
+-(void)popself{
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - 获取分类
@@ -408,12 +427,22 @@ static const CGFloat kPhotoViewMargin = 12.0;
 
 //自行资金投保 说明
 - (IBAction)insureSelfDetail:(id)sender {
-    NSLog(@"自行资金投保");
+
+    self.hidesBottomBarWhenPushed = YES;
+    GLBusiness_CertificationController *aboutVC = [[GLBusiness_CertificationController alloc] init];
+    aboutVC.url = Other_ensure_URL;
+    aboutVC.navTitle = @"自行资金投保";
+    [self.navigationController pushViewController:aboutVC animated:YES];
 }
 
 //项目资金投保 说明
 - (IBAction)insureProjectDetail:(id)sender {
-    NSLog(@"项目资金投保");
+
+    self.hidesBottomBarWhenPushed = YES;
+    GLBusiness_CertificationController *aboutVC = [[GLBusiness_CertificationController alloc] init];
+    aboutVC.url = Other_lose_URL;
+    aboutVC.navTitle = @"项目资金投保";
+    [self.navigationController pushViewController:aboutVC animated:YES];
 }
 
 //- (void)photoView:(HXPhotoView *)photoView changeComplete:(NSArray<HXPhotoModel *> *)allList photos:(NSArray<HXPhotoModel *> *)photos videos:(NSArray<HXPhotoModel *> *)videos original:(BOOL)isOriginal {

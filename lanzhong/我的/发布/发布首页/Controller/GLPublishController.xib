@@ -457,10 +457,11 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1iR-rQ-hKX">
-                                                    <rect key="frame" x="100" y="0.0" width="30" height="40"/>
+                                                    <rect key="frame" x="100" y="0.0" width="40" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="CY0-dx-owB"/>
+                                                        <constraint firstAttribute="width" constant="40" id="CY0-dx-owB"/>
                                                     </constraints>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                     <state key="normal" image="jieshi"/>
                                                     <connections>
                                                         <action selector="insureProjectDetail:" destination="-1" eventType="touchUpInside" id="Jak-du-CMh"/>
@@ -502,10 +503,11 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4uF-77-jeR">
-                                                    <rect key="frame" x="100" y="0.0" width="30" height="40"/>
+                                                    <rect key="frame" x="100" y="0.0" width="40" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="kSS-9V-0Xo"/>
+                                                        <constraint firstAttribute="width" constant="40" id="kSS-9V-0Xo"/>
                                                     </constraints>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                                     <state key="normal" image="jieshi"/>
                                                     <connections>
                                                         <action selector="insureSelfDetail:" destination="-1" eventType="touchUpInside" id="O7A-WN-gxp"/>

@@ -11,6 +11,7 @@
 
 @interface GLClassifyCell : UICollectionViewCell
 
+@property (nonatomic, strong)NSString *goods_typeName;
 @property (nonatomic, strong)GLMallModel *model;
 
 @end
