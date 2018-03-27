@@ -67,6 +67,9 @@
 
 @property (nonatomic, copy)NSString *user_info_pic;//头像
 @property (nonatomic, copy)NSString *invest_count;//榜单人数
+@property (nonatomic, copy)NSString *promise_word;//承诺书
+@property (nonatomic, copy)NSString *money_use_word;//资金使用计划书
+@property (nonatomic, copy)NSString *rights_word;//项目权益分配计划书
 
 @property (nonatomic, copy)NSArray <GLBusiness_HeartModel *>*invest_10;//爱心排行榜
 @property (nonatomic, copy)NSArray <GLBusiness_CommentModel *>*invest_list;//支持评论列表

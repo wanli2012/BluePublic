@@ -484,6 +484,9 @@
         {
             GLBusiness_RelevalteFileController *fileVC = [[GLBusiness_RelevalteFileController alloc] init];
             fileVC.item_id = self.item_id;
+            fileVC.money_use_word = self.model.money_use_word;
+            fileVC.promise_word = self.model.promise_word;
+            fileVC.rights_word = self.model.rights_word;
             
             [self.navigationController pushViewController:fileVC animated:YES];
         }

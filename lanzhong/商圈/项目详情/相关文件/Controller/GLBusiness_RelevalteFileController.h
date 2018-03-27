@@ -12,4 +12,8 @@
 
 @property (nonatomic, copy)NSString *item_id;
 
+@property (nonatomic, copy)NSString *promise_word;
+@property (nonatomic, copy)NSString *money_use_word;
+@property (nonatomic, copy)NSString *rights_word;
+
 @end
