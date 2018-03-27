@@ -26,6 +26,7 @@
                 <outlet property="noticeLayerView" destination="OEw-SQ-OVZ" id="b3S-Wf-VxB"/>
                 <outlet property="noticeView" destination="dXE-lE-CSX" id="cST-Hn-BdS"/>
                 <outlet property="segment" destination="sLU-lN-hsa" id="S47-3J-HK2"/>
+                <outlet property="supportTypeSegment" destination="lln-kG-2ZH" id="6Rz-Bm-2FF"/>
                 <outlet property="tableView" destination="cx8-N2-zus" id="SOP-Pk-bLR"/>
                 <outlet property="tableViewTopConstrait" destination="Ccy-7g-tiU" id="tAQ-Rh-tas"/>
                 <outlet property="titleLabel" destination="KHI-nD-Op5" id="b59-U2-yNH"/>
@@ -41,7 +42,7 @@
                     <rect key="frame" x="0.0" y="44" width="357" height="772"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <view key="tableHeaderView" contentMode="scaleToFill" id="lwi-4H-eXl">
-                        <rect key="frame" x="0.0" y="0.0" width="357" height="400"/>
+                        <rect key="frame" x="0.0" y="0.0" width="357" height="450"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OEw-SQ-OVZ">
@@ -305,17 +306,29 @@
                                     <outletCollection property="gestureRecognizers" destination="h6e-8w-bLf" appends="YES" id="GdI-a2-6v9"/>
                                 </connections>
                             </imageView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="lln-kG-2ZH">
+                                <rect key="frame" x="78.5" y="410" width="200" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="Ftu-rh-COE"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="平台众筹"/>
+                                    <segment title="公司扶持"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="OEw-SQ-OVZ" firstAttribute="leading" secondItem="dXE-lE-CSX" secondAttribute="leading" id="2Lb-H1-gKI"/>
                             <constraint firstAttribute="trailing" secondItem="wT5-eq-ZmU" secondAttribute="trailing" id="Dl7-qS-qkg"/>
                             <constraint firstItem="BkJ-Sh-GXf" firstAttribute="leading" secondItem="lwi-4H-eXl" secondAttribute="leading" constant="15" id="F1z-e6-0Y9"/>
-                            <constraint firstAttribute="bottom" secondItem="wT5-eq-ZmU" secondAttribute="bottom" id="FBh-51-HNk"/>
+                            <constraint firstItem="lln-kG-2ZH" firstAttribute="centerX" secondItem="lwi-4H-eXl" secondAttribute="centerX" id="H3x-hK-Ilo"/>
                             <constraint firstItem="dD2-GB-R4w" firstAttribute="top" secondItem="BkJ-Sh-GXf" secondAttribute="bottom" id="Iqp-8h-jGk"/>
                             <constraint firstItem="OEw-SQ-OVZ" firstAttribute="top" secondItem="dXE-lE-CSX" secondAttribute="top" id="JzA-Ly-I92"/>
                             <constraint firstItem="wT5-eq-ZmU" firstAttribute="leading" secondItem="lwi-4H-eXl" secondAttribute="leading" id="K94-XT-fKi"/>
+                            <constraint firstItem="wT5-eq-ZmU" firstAttribute="top" secondItem="dD2-GB-R4w" secondAttribute="bottom" constant="10" id="N1q-Ik-pN4"/>
                             <constraint firstAttribute="trailing" secondItem="BkJ-Sh-GXf" secondAttribute="trailing" constant="15" id="Q9j-gi-8W3"/>
+                            <constraint firstItem="lln-kG-2ZH" firstAttribute="top" secondItem="wT5-eq-ZmU" secondAttribute="bottom" constant="10" id="QSd-ij-r83"/>
                             <constraint firstItem="dXE-lE-CSX" firstAttribute="leading" secondItem="lwi-4H-eXl" secondAttribute="leading" constant="15" id="SM5-wn-hz1"/>
                             <constraint firstItem="dXE-lE-CSX" firstAttribute="top" secondItem="lwi-4H-eXl" secondAttribute="top" constant="10" id="bHd-w5-3u1"/>
                             <constraint firstItem="a0i-0n-gL9" firstAttribute="top" secondItem="cZf-aA-U0J" secondAttribute="top" id="c4x-VO-0Nj"/>

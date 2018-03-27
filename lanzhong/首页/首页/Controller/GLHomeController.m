@@ -30,7 +30,9 @@
 @property (weak, nonatomic) IBOutlet UIView *noticeView;
 @property (weak, nonatomic) IBOutlet UIView *noticeLayerView;
 
-@property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segment;//项目类型选择
+@property (weak, nonatomic) IBOutlet UISegmentedControl *supportTypeSegment;//扶持类型选择
+
 @property (weak, nonatomic) IBOutlet UIView *middleView;
 @property (weak, nonatomic) IBOutlet UIView *middleViewLayerView;
 @property (nonatomic, strong)SDCycleScrollView *cycleScrollView;
@@ -110,7 +112,7 @@
     self.navigationController.navigationBar.barTintColor = [UIColor clearColor];
     
     _selectedSegmentIndex = 0;
-    self.headerView.height = 400;
+    self.headerView.height = 450;
     self.segment.selectedSegmentIndex = 0;
     
     self.noticeView.layer.cornerRadius = 5.f;
@@ -128,6 +130,7 @@
 }
 
 #pragma mark - 请求数据
+//- (void)postRequestWithTyep:(NSInteger)type andSupportType:(NSInteger)supprotType{
 - (void)postRequest{
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -261,7 +264,6 @@
         self.model.ai_item_num = @"0";
     }
     
-    
     switch (index) {
         case 0:
         {
@@ -276,6 +278,9 @@
             self.label5.text = [NSString stringWithFormat:@"%@个",self.model.c_item_num];
             self.label6.text = [NSString stringWithFormat:@"%.2f元",c_over_num];
             
+            self.supportTypeSegment.hidden = NO;
+            self.headerView.height = 450;
+            
         }
             break;
         case 1:
@@ -289,6 +294,10 @@
             self.label4.text = [NSString stringWithFormat:@"%@人",self.model.ai_man_num];
             self.label5.text = [NSString stringWithFormat:@"%@个",self.model.ai_item_num ];
             self.label6.text = [NSString stringWithFormat:@"%.2f元",ai_over_num ];
+            
+            self.supportTypeSegment.hidden = YES;
+            self.headerView.height = 400;
+            
         }
             break;
         default:
