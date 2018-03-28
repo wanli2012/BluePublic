@@ -603,7 +603,7 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="134" y="337"/>
+            <point key="canvasLocation" x="34" y="304"/>
         </view>
         <tapGestureRecognizer id="rpr-32-GuP" userLabel="同意协议">
             <connections>

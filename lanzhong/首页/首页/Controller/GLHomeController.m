@@ -48,6 +48,7 @@
 
 @property (nonatomic, strong)GLHomeModel *model;
 @property (nonatomic, strong)GLHome_adModel *adModel;//广告模型
+@property (nonatomic, strong) NSMutableArray *bannerArr;//banner模型数组
 @property (nonatomic, strong)LoadWaitView *loadV;
 @property (nonatomic, strong)NodataView *nodataV;
 
@@ -64,6 +65,8 @@
     [super viewDidLoad];
     [self setUI];
     
+    
+    [self.headerView addSubview:self.cycleScrollView];
     [self.tableView registerNib:[UINib nibWithNibName:@"GLHomeCell" bundle:nil] forCellReuseIdentifier:@"GLHomeCell"];
 
     __weak __typeof(self) weakSelf = self;
@@ -94,7 +97,7 @@
         
     } else {
         self.automaticallyAdjustsScrollViewInsets = false;
-        // Fallback on earlier versions
+
     }
     
     if(kSCREEN_HEIGHT == 812){
@@ -164,14 +167,35 @@
 
 #pragma mark - 请求广告数据
 - (void)postAD{
-    [NetworkManager requestPOSTWithURLStr:kHOME_BANNER_LIST_URL paramDic:@{} finish:^(id responseObject) {
+    
+    [NetworkManager requestPOSTWithURLStr:kindex_banner paramDic:@{} finish:^(id responseObject) {
 
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
-            self.adModel = nil;
+            if([responseObject[@"data"] count] != 0){
+                
+                [self.bannerArr removeAllObjects];
+                
+                NSMutableArray *arrM = [NSMutableArray array];
+                for (NSDictionary *dic in responseObject[@"data"]) {
+                    
+                    GLHome_bannerModel *model = [GLHome_bannerModel mj_objectWithKeyValues:dic];
+                    [self.bannerArr addObject:model];
+                    
+                    NSString *s = [NSString stringWithFormat:@"%.0f",kSCREEN_WIDTH - 30];
+                    NSInteger w = [s integerValue];
+                    
+                    NSString *imageurl = [NSString stringWithFormat:@"%@?imageView2/1/w/%zd/h/120",model.banner,w];
+                    [arrM addObject:imageurl];
+                }
+                self.cycleScrollView.imageURLStringsGroup = arrM;
+            }
             
-            self.adModel = [GLHome_adModel mj_objectWithKeyValues:responseObject[@"data"]];
-            [self.adImageV sd_setImageWithURL:[NSURL URLWithString:self.adModel.must_banner] placeholderImage:[UIImage imageNamed:PlaceHolderImage]];
+        }else{
+            self.cycleScrollView.localizationImageNamesGroup = @[LUNBO_PlaceHolder];
+            
         }
+     
+     [self.tableView reloadData];
 
     } enError:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:error.localizedDescription];
@@ -200,17 +224,17 @@
     
 }
 
-#pragma mark - 广告
-- (IBAction)ad:(id)sender {
-    
-    self.hidesBottomBarWhenPushed = YES;
-    GLBusiness_CertificationController *cerVC = [[GLBusiness_CertificationController alloc] init];
-    cerVC.navTitle = @"详情";
-    cerVC.url = [NSString stringWithFormat:@"%@",Home_Banner_URL];
-    [self.navigationController pushViewController:cerVC animated:YES];
-    self.hidesBottomBarWhenPushed = NO;
-
-}
+//#pragma mark - 广告
+//- (IBAction)ad:(id)sender {
+//
+//    self.hidesBottomBarWhenPushed = YES;
+//    GLBusiness_CertificationController *cerVC = [[GLBusiness_CertificationController alloc] init];
+//    cerVC.navTitle = @"详情";
+//    cerVC.url = [NSString stringWithFormat:@"%@",Home_Banner_URL];
+//    [self.navigationController pushViewController:cerVC animated:YES];
+//    self.hidesBottomBarWhenPushed = NO;
+//
+//}
 
 #pragma mark - 公告
 - (IBAction)notice:(id)sender {
@@ -303,6 +327,25 @@
         default:
             break;
     }
+}
+
+#pragma mark - SDCycleScrollViewDelegate 点击看大图
+/** 点击图片回调 */
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
+    
+    self.hidesBottomBarWhenPushed = YES;
+    GLBusiness_CertificationController *aboutVC = [[GLBusiness_CertificationController alloc] init];
+    GLHome_bannerModel *model = self.bannerArr[index];
+    NSString *url = [NSString stringWithFormat:@"%@%@",Banner_data_URL,model.type];
+    aboutVC.url = url;
+    aboutVC.navTitle = model.banner_title;
+    [self.navigationController pushViewController:aboutVC animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
+    
+}
+
+/** 图片滚动回调 */
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didScrollToIndex:(NSInteger)index{
     
 }
 
@@ -402,7 +445,7 @@
     
     if (!_cycleScrollView) {
         
-        _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, 150)
+        _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(15, 230, kSCREEN_WIDTH - 15 * 2, 120)
                                                               delegate:self
                                                       placeholderImage:[UIImage imageNamed:LUNBO_PlaceHolder]];
         
@@ -415,7 +458,9 @@
         _cycleScrollView.placeholderImage = [UIImage imageNamed:LUNBO_PlaceHolder];
         _cycleScrollView.pageControlDotSize = CGSizeMake(10, 10);
         
-        _cycleScrollView.localizationImageNamesGroup = @[LUNBO_PlaceHolder,LUNBO_PlaceHolder,LUNBO_PlaceHolder,LUNBO_PlaceHolder];
+        _cycleScrollView.localizationImageNamesGroup = @[LUNBO_PlaceHolder,LUNBO_PlaceHolder];
+        _cycleScrollView.layer.cornerRadius = 5.f;
+        _cycleScrollView.clipsToBounds = YES;
     }
     
     return _cycleScrollView;
@@ -426,6 +471,13 @@
         _model = [[GLHomeModel alloc] init];
     }
     return _model;
+}
+
+- (NSMutableArray *)bannerArr{
+    if (!_bannerArr) {
+        _bannerArr = [NSMutableArray array];
+    }
+    return _bannerArr;
 }
 
 @end

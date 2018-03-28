@@ -95,6 +95,11 @@
 //项目保障规则
 #define Other_lose_URL @"https://www.lzcke.com/index.php/Api/Other/lose"
 
+///新增的
+//首页banner详情
+#define Banner_data_URL @"http://www.lzcke.com/index.php/Api/Other/banner_data?banner_id="
+
+
 //获取appStore上的最新版本号地址
 #define GET_VERSION  @"https://itunes.apple.com/lookup?id=1300026210"
 //下载地址
@@ -155,6 +160,7 @@
 #define kADD_TREND_URL @"Item/item_dynamic_add"//新增项目动态
 #define kCIRCLE_HOME_URL @"Item/item_pen"//商圈首页
 #define kCIRCLE_FITER_URL @"Item/item_screen"//商圈筛选条件
+#define kItem_type_data @"Item/item_type_data"//商圈筛选条件(新)
 #define kCIRCLE_DETAIL_URL @"Item/myitem_details"//商圈_项目详情
 #define kCIRCLE_FUNDTREND_URL @"Item/item_dynamic"//商圈_资金动向
 #define kCIRCLE_MORECOMMENT_URL @"Item/more_comment"//商圈_更多评论
@@ -173,6 +179,8 @@
 #define kBANNER_LIST_URL @"Other/banner_list"//广告展示
 #define kHOME_BANNER_LIST_URL @"Other/banner_list_index"//首页图片展示
 
+#define kHOME_BANNER_LIST_URL @"Other/banner_list_index"//首页图片展示
+#define kindex_banner @"Other/index_banner"//首页banner
 //简历模块
 #define kMODIFY_BASEINFO_URL @"Resume/save_info"//修改简历基本信息
 #define kCV_DETAIL_URL @"Resume/preview"//个人简历预览、详情

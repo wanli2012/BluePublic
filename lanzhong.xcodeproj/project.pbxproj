@@ -499,6 +499,7 @@
 		4AFF4FA71F8A191A00CE6D79 /* 首页.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AFF4FA61F8A191A00CE6D79 /* 首页.xcassets */; };
 		4AFF4FAD1F8A30C700CE6D79 /* GLBusinessCircleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AFF4FAC1F8A30C700CE6D79 /* GLBusinessCircleModel.m */; };
 		6982E3A60C2A1ECE784BC35D /* Pods_lanzhong.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19A11FB975C44A94E569750A /* Pods_lanzhong.framework */; };
+		B95BE144206B922C00389FE1 /* GLPublishCategoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B95BE143206B922C00389FE1 /* GLPublishCategoryModel.m */; };
 		F9BB80151F7A38A000867514 /* LBSetFillet.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BB80141F7A38A000867514 /* LBSetFillet.m */; };
 		F9BB801D1F7A3F2C00867514 /* NSTimer+addition.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BB80181F7A3F2C00867514 /* NSTimer+addition.m */; };
 		F9BB801E1F7A3F2C00867514 /* TGWebProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F9BB801A1F7A3F2C00867514 /* TGWebProgressLayer.m */; };
@@ -1308,6 +1309,8 @@
 		4AFF4FAC1F8A30C700CE6D79 /* GLBusinessCircleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLBusinessCircleModel.m; sourceTree = "<group>"; };
 		7451D5B0290BCE80E2B11756 /* Pods-lanzhong.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lanzhong.debug.xcconfig"; path = "Pods/Target Support Files/Pods-lanzhong/Pods-lanzhong.debug.xcconfig"; sourceTree = "<group>"; };
 		7E1335C25F5CFECF8860A26A /* Pods-lanzhong.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lanzhong.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-lanzhong/Pods-lanzhong.adhoc.xcconfig"; sourceTree = "<group>"; };
+		B95BE142206B922C00389FE1 /* GLPublishCategoryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLPublishCategoryModel.h; sourceTree = "<group>"; };
+		B95BE143206B922C00389FE1 /* GLPublishCategoryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLPublishCategoryModel.m; sourceTree = "<group>"; };
 		DC90251775A1E99EE4FC964D /* Pods-lanzhong.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lanzhong.release.xcconfig"; path = "Pods/Target Support Files/Pods-lanzhong/Pods-lanzhong.release.xcconfig"; sourceTree = "<group>"; };
 		F9BB80131F7A38A000867514 /* LBSetFillet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBSetFillet.h; sourceTree = "<group>"; };
 		F9BB80141F7A38A000867514 /* LBSetFillet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBSetFillet.m; sourceTree = "<group>"; };
@@ -3459,6 +3462,7 @@
 		4A72031F1FC01077004C4F3D /* 发布首页 */ = {
 			isa = PBXGroup;
 			children = (
+				B95BE141206B921000389FE1 /* Model */,
 				4A7203201FC01077004C4F3D /* Controller */,
 				4A7203291FC01077004C4F3D /* View */,
 			);
@@ -4794,6 +4798,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		B95BE141206B921000389FE1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B95BE142206B922C00389FE1 /* GLPublishCategoryModel.h */,
+				B95BE143206B922C00389FE1 /* GLPublishCategoryModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		BBF1CC57678E9E178E929D0C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -5373,6 +5386,7 @@
 				4A40C82C1FFB56120094FD8A /* GLPublish_WebsiteController.m in Sources */,
 				4A024E6A1FBC2A5000B3F484 /* GLHomePageNoticeView.m in Sources */,
 				4A7203341FC01077004C4F3D /* HWOptionButton.m in Sources */,
+				B95BE144206B922C00389FE1 /* GLPublishCategoryModel.m in Sources */,
 				4A18B90E1F94D71C00E9B387 /* GLMine_Wallet_ExchangeController.m in Sources */,
 				4A7203441FC016B4004C4F3D /* GLTalentPoolController.m in Sources */,
 				4AF9C59A1FC2A88C00FD8B19 /* GLMine_CV_Header.m in Sources */,

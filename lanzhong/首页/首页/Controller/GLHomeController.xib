@@ -296,7 +296,7 @@
                                     <outletCollection property="gestureRecognizers" destination="2bw-o8-TR4" appends="YES" id="Xmj-HM-FOI"/>
                                 </connections>
                             </imageView>
-                            <imageView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="矩形20" translatesAutoresizingMaskIntoConstraints="NO" id="dD2-GB-R4w">
+                            <imageView hidden="YES" autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="矩形20" translatesAutoresizingMaskIntoConstraints="NO" id="dD2-GB-R4w">
                                 <rect key="frame" x="15" y="230" width="327" height="120"/>
                                 <gestureRecognizers/>
                                 <constraints>

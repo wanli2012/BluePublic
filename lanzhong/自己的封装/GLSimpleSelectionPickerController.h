@@ -10,8 +10,8 @@
 
 @interface GLSimpleSelectionPickerController : UIViewController
 
-@property (nonatomic , copy)void(^returnreslut)(NSInteger selectIndex);
-@property (nonatomic, strong)NSString *titlestr;
-@property (nonatomic, strong)NSMutableArray *dataSourceArr;
+@property (nonatomic, copy)void(^returnreslut)(NSInteger selectIndex);
+@property (nonatomic, copy)NSString *titlestr;
+@property (nonatomic, copy)NSArray *dataSourceArr;
 
 @end

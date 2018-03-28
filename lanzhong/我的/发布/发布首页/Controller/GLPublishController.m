@@ -21,6 +21,7 @@
 #import "GLMutipleChooseController.h"//省市选择
 #import "GLPublish_CityModel.h"//城市模型
 //#import "GLPublish_WebsiteController.h"//上传文件
+#import "GLPublishCategoryModel.h"//分类模型
 
 #import "GLPublish_UploadController.h"//上传文件页
 
@@ -58,10 +59,12 @@ static const CGFloat kPhotoViewMargin = 12.0;
 @property (strong, nonatomic)HWCalendar *Calendar;
 @property (strong, nonatomic)UIView *CalendarView;
 
-@property (nonatomic, strong)GLCircle_item_screenModel *categoryModel;
+//@property (nonatomic, strong)GLCircle_item_screenModel *categoryModel;
 @property (nonatomic, strong)LoadWaitView *loadV;
-@property (nonatomic, strong)NSMutableArray *dataSourceArr;//行业数据源
-@property (nonatomic, copy)NSString *trade_id;//行业id
+//@property (nonatomic, strong)NSMutableArray *dataSourceArr;//行业数据源
+@property (nonatomic, strong) GLPublishCategoryModel *categoryModel;//行业模型
+@property (nonatomic, copy) NSString *trade_id_first;//行业一级id
+@property (nonatomic, copy)NSString *trade_id;//行业id(二级)
 @property (nonatomic, copy)NSString *need_time;//截止日期
 
 @property (nonatomic, assign)BOOL isHaveDian;
@@ -171,17 +174,14 @@ static const CGFloat kPhotoViewMargin = 12.0;
 #pragma mark - 获取分类
 - (void)postRequest_Category {
 
-    [NetworkManager requestPOSTWithURLStr:kCIRCLE_FITER_URL paramDic:@{} finish:^(id responseObject) {
+    [NetworkManager requestPOSTWithURLStr:kItem_type_data paramDic:@{} finish:^(id responseObject) {
 
         if ([responseObject[@"code"] integerValue] == SUCCESS_CODE){
             if([responseObject[@"data"] count] != 0){
                 
-                [self.dataSourceArr removeAllObjects];
-                self.categoryModel = [GLCircle_item_screenModel mj_objectWithKeyValues:responseObject[@"data"]];
-                
-                for (GLCircle_itemScreen_manModel *manModel in self.categoryModel.trade) {
-                    [self.dataSourceArr addObject:manModel.trade_name];
-                }
+                self.categoryModel = nil;
+                self.categoryModel = [GLPublishCategoryModel mj_objectWithKeyValues:responseObject[@"data"]];
+
             }
         }else{
             
@@ -230,22 +230,25 @@ static const CGFloat kPhotoViewMargin = 12.0;
     [self.view endEditing:YES];
     GLSimpleSelectionPickerController *vc=[[GLSimpleSelectionPickerController alloc]init];
     
-    if (self.dataSourceArr.count) {
+    if (self.categoryModel) {
 
-        vc.dataSourceArr = self.dataSourceArr;
-
+        NSMutableArray *arrM = [NSMutableArray array];
+        for (GLPublishCategoryModel *model in self.categoryModel.son) {
+            [arrM addObject:model.type_name];
+        }
+        vc.dataSourceArr = arrM;
         vc.titlestr = @"请选择行业分类";
         __weak typeof(self)weakSelf = self;
         vc.returnreslut = ^(NSInteger index){
             
-            weakSelf.industryLabel.text = weakSelf.categoryModel.trade[index].trade_name;
-            weakSelf.trade_id = weakSelf.categoryModel.trade[index].trade_id;
+            weakSelf.industryLabel.text = weakSelf.categoryModel.son[index].type_name;
+            weakSelf.trade_id = weakSelf.categoryModel.son[index].type_id;
             weakSelf.industryLabel.textColor = [UIColor darkGrayColor];
-            
-            if(self.trade_id.length == 0){
-                [SVProgressHUD showErrorWithStatus:@"不限不能提交,请重新选择"];
-                weakSelf.industryLabel.text = @"";
-            }
+            weakSelf.trade_id_first = weakSelf.categoryModel.type_id;
+//            if(self.trade_id.length == 0){
+//                [SVProgressHUD showErrorWithStatus:@"不限不能提交,请重新选择"];
+//                weakSelf.industryLabel.text = @"";
+//            }
         };
         
         vc.transitioningDelegate = self;
@@ -445,36 +448,6 @@ static const CGFloat kPhotoViewMargin = 12.0;
     [self.navigationController pushViewController:aboutVC animated:YES];
 }
 
-//- (void)photoView:(HXPhotoView *)photoView changeComplete:(NSArray<HXPhotoModel *> *)allList photos:(NSArray<HXPhotoModel *> *)photos videos:(NSArray<HXPhotoModel *> *)videos original:(BOOL)isOriginal {
-//
-//    [self.imageArr removeAllObjects];
-//    for (HXPhotoModel *photo in photos) {
-//        PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
-//        options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
-//
-//        __weak typeof(self) weakself = self;
-//        [[PHImageManager defaultManager] requestImageForAsset:photo.asset targetSize:[UIScreen mainScreen].bounds.size contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage *result, NSDictionary *info) {
-//            //设置图片
-//            [weakself.imageArr insertObject:result atIndex:0];
-//
-//        }];
-//    }
-//}
-//
-//- (void)photoView:(HXPhotoView *)photoView deleteNetworkPhoto:(NSString *)networkPhotoUrl {
-//
-//}
-//
-///**  网络图片全部下载完成时调用  */
-//- (void)photoViewAllNetworkingPhotoDownloadComplete:(HXPhotoView *)photoView{
-//
-//}
-//
-//- (void)photoView:(HXPhotoView *)photoView updateFrame:(CGRect)frame {
-//
-//    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, CGRectGetMaxY(frame) + kPhotoViewMargin);
-//}
-
 #pragma mark - 提交
 - (IBAction)submit:(id)sender {
     
@@ -499,6 +472,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
         [SVProgressHUD showErrorWithStatus:@"请选择行业"];
         return;
     }
+    
     if ( self.trade_id.length == 0) {
         
         [SVProgressHUD showErrorWithStatus:@"不限不能提交,请重新选择行业"];
@@ -564,6 +538,9 @@ static const CGFloat kPhotoViewMargin = 12.0;
     dic[@"province"] = self.provinceId;
     dic[@"city"] = self.cityId;
     dic[@"ensure_type"] = @(self.ensure_type);
+    
+    dic[@"one_type"] = self.trade_id;
+    dic[@"two_type"] = self.trade_id_first;
 
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];//响应
@@ -936,14 +913,14 @@ static const CGFloat kPhotoViewMargin = 12.0;
     return _CalendarView;
 }
 
-- (NSMutableArray *)dataSourceArr{
-    
-    if (!_dataSourceArr) {
-        _dataSourceArr = [NSMutableArray array];
-    }
-    
-    return _dataSourceArr;
-}
+//- (NSMutableArray *)dataSourceArr{
+//
+//    if (!_dataSourceArr) {
+//        _dataSourceArr = [NSMutableArray array];
+//    }
+//
+//    return _dataSourceArr;
+//}
 - (NSMutableArray *)imageArr{
     if (!_imageArr) {
         _imageArr = [NSMutableArray array];

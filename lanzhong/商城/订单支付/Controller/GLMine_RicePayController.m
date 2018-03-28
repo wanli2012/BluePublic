@@ -189,6 +189,7 @@
     
     return cell;
 }
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
     [self choosePayType:indexPath.row];
@@ -284,7 +285,6 @@
                 case 2://微信
                 {
 //                    [MBProgressHUD showError:responseObject[@"message"]];
-                    
                     //调起微信支付
                     PayReq* req = [[PayReq alloc] init];
                     req.openID=responseObject[@"data"][@"wxinpay"][@"appid"];
@@ -300,7 +300,7 @@
                     break;
                 case 1://支付宝
                 {
-                    [[AlipaySDK defaultService]payOrder:responseObject[@"data"][@"alipay"] fromScheme:@"lanzhongAlipay" callback:^(NSDictionary *resultDic) {
+                    [[AlipaySDK defaultService] payOrder:responseObject[@"data"][@"alipay"] fromScheme:@"lanzhongAlipay" callback:^(NSDictionary *resultDic) {
                         
                         NSInteger orderState = [resultDic[@"resultStatus"] integerValue];
                         if (orderState == 9000) {
@@ -348,7 +348,6 @@
         [_loadV removeloadview];
         
     }];
-
 }
 
 //余额支付
